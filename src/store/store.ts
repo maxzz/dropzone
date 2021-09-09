@@ -5,7 +5,7 @@ export type FileUs = {
     name: string;
     modified: number; // last modified
     size: number;
-    //cnt?: string;
+    cnt?: string;
     file?: File;
 };
 
@@ -14,10 +14,10 @@ export type FileCache = {
     cnt: string;
 };
 
-interface Combined extends FileUs {
-    cnt: string;
-};
-// export type Combined = Record< FileUs & FileCache>;
+// interface Combined extends FileUs {
+//     cnt: string;
+// };
+export type Combined = FileUs & FileCache;
 
 export const filesAtom = atom<FileUs[]>([]);
 
