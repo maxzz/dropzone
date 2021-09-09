@@ -4,6 +4,7 @@ export type FileUs = {
     id: string;
     name: string;
     modified: number; // last modified
+    size: number;
     cnt?: string;
 }
 
