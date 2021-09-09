@@ -1,6 +1,26 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React, { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+
 import './App.css';
+
+function DropzoneComp() {
+    const onDrop = useCallback((accepterFiles: File[]) => {
+        console.log('files', accepterFiles);
+    }, []);
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+    return (
+        <div className="" {...getRootProps()}>
+            <input className="" {...getInputProps()} />
+            {
+                isDragActive ?
+                    <p>Drop the files here ...</p> :
+                    <p>Drag 'n' drop some files here, or click to select files</p>
+            }
+        </div>
+    );
+}
 
 function App() {
     const [count, setCount] = useState(0);
@@ -8,7 +28,9 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+
+                <DropzoneComp />
+
                 <p>Hello Vite + React!</p>
                 <p>
                     <button type="button" onClick={() => setCount((count) => count + 1)}>
