@@ -7,9 +7,12 @@
         "serve": "vite preview"
     },
     "dependencies": {
+        "autoprefixer": "^10.3.4",
+        "postcss": "^8.3.6",
         "react": "^17.0.0",
         "react-dom": "^17.0.0",
-        "react-dropzone": "^11.3.4"
+        "react-dropzone": "^11.3.4",
+        "tailwindcss": "^2.2.14"
     },
     "devDependencies": {
         "@types/react": "^17.0.0",
