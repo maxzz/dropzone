@@ -2,10 +2,10 @@ import { Atom, useAtom } from 'jotai';
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
-import { cacheAtom, filesAtom, FileUs } from './store/store';
+import { cacheAtom, FileCache, filesAtom, FileUs } from './store/store';
 import uuid from './utils/uuid';
 
-function fileReader(file: File): Promise<string> {
+function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         const aborted = () => reject(`file (${file.name}) reading was aborted`);
@@ -16,23 +16,16 @@ function fileReader(file: File): Promise<string> {
     });
 }
 
-async function laodCache(acceptedFiles: FileUs[], atom: typeof cacheAtom) {
-    const [cache, setCache] = useAtom(atom);
+async function laodCache(acceptedFiles: FileUs[]) {
+    const cache: FileCache[] = [];
     for (let file of acceptedFiles) {
-        if (!file.file) {
-            return;
-        }
         try {
-            const cnt = await fileReader(file.file);
-            setCache([...cache, {
-                id: file.id,
-                cnt: cnt,
-            }])
-            // console.log('cnt', cnt);
+            file.file && cache.push({ id: file.id, cnt: await textFileReader(file.file), });
         } catch (error) {
             console.log('error', error);
         }
     }
+    return cache;
 }
 
 function nameLengthValidator(file: File) {
@@ -61,7 +54,11 @@ function DropzoneComp() {
             file: file,
         }));
         setFiles(dropped);
-        laodCache(dropped, cacheAtom);
+
+        async function createCache() {
+            setCache(await laodCache(dropped));
+        }
+        createCache();
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });
