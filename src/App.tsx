@@ -1,5 +1,6 @@
-import { Atom, useAtom } from 'jotai';
 import React, { useCallback, useState } from 'react';
+import { useAtom } from 'jotai';
+import { useUpdateAtom } from "jotai/utils";
 import { useDropzone } from 'react-dropzone';
 import './App.css';
 import { cacheAtom, FileCache, filesAtom, FileUs } from './store/store';
@@ -41,7 +42,7 @@ function nameLengthValidator(file: File) {
 
 function DropzoneComp() {
     const [files, setFiles] = useAtom(filesAtom);
-    const [cache, setCache] = useAtom(cacheAtom);
+    const setCache = useUpdateAtom(cacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
         console.log('accepterFiles', accepterFiles);
@@ -79,6 +80,7 @@ function DropzoneComp() {
 
 function App() {
     const [files] = useAtom(filesAtom);
+    const [cache] = useAtom(cacheAtom);
     return (
         <div className="min-h-screen flex-col bg-green-200">
             <header className="">
@@ -92,6 +94,17 @@ function App() {
             </div>
             <div className="">
                 {files.map((item) => <div className="" key={item.id}>{item.name} {item.size} bytes</div>)}
+            </div>
+            <div className="">
+                {cache.map((item) => (
+                    <React.Fragment key={item.id}>
+                        <hr className="h-4 bg-[rebeccapurple]"/>
+                        <pre className="text-xs">
+                            {item.id}
+                            <br/>
+                            {item.cnt} bytes</pre>
+                    </React.Fragment>
+                ))}
             </div>
         </div>
     );
