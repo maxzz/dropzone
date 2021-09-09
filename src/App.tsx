@@ -5,21 +5,45 @@ import './App.css';
 import { filesAtom, FileUs } from './store/store';
 import uuid from './utils/uuid';
 
+function fileReader(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onabort = () => reject('file reading was aborted');
+        reader.onerror = () => reject('file reading has failed');
+        reader.onload = () => {
+            resolve(reader.result?.toString() || '');
+
+            // const binaryStr = reader.result;
+            // console.log(binaryStr);
+        };
+        reader.readAsText(file);
+    });
+}
+
 async function laodCache(acceptedFiles: FileUs[]) {
-    acceptedFiles.forEach((file) => {
+
+    for (let file of acceptedFiles) {
         if (!file.file) {
             return;
         }
-        const reader = new FileReader();
-        reader.onabort = () => console.log('file reading was aborted');
-        reader.onerror = () => console.log('file reading has failed');
-        reader.onload = () => {
-            // Do whatever you want with the file contents
-            const binaryStr = reader.result;
-            console.log(binaryStr);
-        };
-        reader.readAsArrayBuffer(file.file);
-    });
+        const cnt = await fileReader(file.file);
+        console.log('cnt', cnt);
+    }
+
+    // acceptedFiles.forEach((file) => {
+    //     if (!file.file) {
+    //         return;
+    //     }
+    //     const reader = new FileReader();
+    //     reader.onabort = () => console.log('file reading was aborted');
+    //     reader.onerror = () => console.log('file reading has failed');
+    //     reader.onload = () => {
+    //         // Do whatever you want with the file contents
+    //         const binaryStr = reader.result;
+    //         console.log(binaryStr);
+    //     };
+    //     reader.readAsArrayBuffer(file.file);
+    // });
 }
 
 function nameLengthValidator(file: File) {
@@ -47,6 +71,7 @@ function DropzoneComp() {
             file: file,
         }));
         setFiles(dropped);
+        laodCache(dropped);
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });
