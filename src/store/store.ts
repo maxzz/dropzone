@@ -6,6 +6,7 @@ export type FileUs = {
     modified: number; // last modified
     size: number;
     cnt?: string;
+    file?: File;
 }
 
 export const filesAtom = atom<FileUs[]>([]);
