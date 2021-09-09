@@ -92,16 +92,21 @@ function App() {
                     <DropzoneComp />
                 </div>
             </div>
-            <div className="">
-                {files.map((item) => <div className="" key={item.id}>{item.name} {item.size} bytes</div>)}
+            <div className="grid grid-cols-[auto,1fr] gap-x-4 text-xs">
+                {files.map((item) => (
+                    <React.Fragment key={item.id}>
+                        <div className="">{item.name}</div>
+                        <div className="">{item.size} bytes</div>
+                    </React.Fragment>
+                ))}
             </div>
             <div className="">
                 {cache.map((item) => (
                     <React.Fragment key={item.id}>
-                        <hr className="h-4 bg-[rebeccapurple]"/>
+                        <hr className="h-4 bg-[rebeccapurple]" />
                         <pre className="text-xs">
                             {item.id}
-                            <br/>
+                            <br />
                             {item.cnt} bytes</pre>
                     </React.Fragment>
                 ))}
