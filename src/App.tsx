@@ -1,49 +1,38 @@
-import { useAtom } from 'jotai';
+import { Atom, useAtom } from 'jotai';
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
-import { filesAtom, FileUs } from './store/store';
+import { cacheAtom, filesAtom, FileUs } from './store/store';
 import uuid from './utils/uuid';
 
 function fileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onabort = () => reject('file reading was aborted');
-        reader.onerror = () => reject('file reading has failed');
-        reader.onload = () => {
-            resolve(reader.result?.toString() || '');
-
-            // const binaryStr = reader.result;
-            // console.log(binaryStr);
-        };
+        const aborted = () => reject(`file (${file.name}) reading was aborted`);
+        reader.onabort = aborted;
+        reader.onerror = aborted;
+        reader.onload = () => resolve(reader.result?.toString() || '');
         reader.readAsText(file);
     });
 }
 
-async function laodCache(acceptedFiles: FileUs[]) {
-
+async function laodCache(acceptedFiles: FileUs[], atom: typeof cacheAtom) {
+    const [cache, setCache] = useAtom(atom);
     for (let file of acceptedFiles) {
         if (!file.file) {
             return;
         }
-        const cnt = await fileReader(file.file);
-        console.log('cnt', cnt);
+        try {
+            const cnt = await fileReader(file.file);
+            setCache([...cache, {
+                id: file.id,
+                cnt: cnt,
+            }])
+            // console.log('cnt', cnt);
+        } catch (error) {
+            console.log('error', error);
+        }
     }
-
-    // acceptedFiles.forEach((file) => {
-    //     if (!file.file) {
-    //         return;
-    //     }
-    //     const reader = new FileReader();
-    //     reader.onabort = () => console.log('file reading was aborted');
-    //     reader.onerror = () => console.log('file reading has failed');
-    //     reader.onload = () => {
-    //         // Do whatever you want with the file contents
-    //         const binaryStr = reader.result;
-    //         console.log(binaryStr);
-    //     };
-    //     reader.readAsArrayBuffer(file.file);
-    // });
 }
 
 function nameLengthValidator(file: File) {
@@ -59,10 +48,11 @@ function nameLengthValidator(file: File) {
 
 function DropzoneComp() {
     const [files, setFiles] = useAtom(filesAtom);
+    const [cache, setCache] = useAtom(cacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
         console.log('accepterFiles', accepterFiles);
-        
+
         const dropped: FileUs[] = accepterFiles.map((file) => ({
             id: uuid(),
             name: file.name,
@@ -71,7 +61,7 @@ function DropzoneComp() {
             file: file,
         }));
         setFiles(dropped);
-        laodCache(dropped);
+        laodCache(dropped, cacheAtom);
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });

@@ -9,5 +9,11 @@ export type FileUs = {
     file?: File;
 }
 
+export type FileCache = {
+    id: string;
+    cnt: string;
+};
+
 export const filesAtom = atom<FileUs[]>([]);
 
+export const cacheAtom = atom<FileCache[]>([]);
