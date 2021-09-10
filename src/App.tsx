@@ -64,12 +64,26 @@ function IconManualMode() {
     );
 }
 
+function IconAutoMode() {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <path d="m10.8 12.5.3.1a.5.5 0 0 1-.6 0ZM8.3 12.5l.3.1a.5.5 0 0 1-.6 0ZM15.4 12.5h.5c-.2.3-.4.3-.5 0ZM13.5 12.7H13l.1-.2c.1 0 .3 0 .4.2Z" />
+            <path d="m2.2 17-.4-.8a6.6 6.6 0 0 1-.3-2.5 3.1 3.1 0 0 1 .8-1.8 3 3 0 0 1 1.5-.7M21.8 17l.4-.8a6.6 6.6 0 0 0 .3-2.5 3.1 3.1 0 0 0-.8-1.8 3 3 0 0 0-1.5-.7" />
+            <path d="M4.9 16H3A1 1 0 0 1 2 15a8 8 0 0 1 0-1.4c0-.5.2-.6.7-.7h2.2a1.5 1.5 0 0 1 1.1.3 1.2 1.2 0 0 0 .9.3h10.4a1.2 1.2 0 0 0 .8-.3 1.4 1.4 0 0 1 1-.4h2.4a.6.6 0 0 1 .5.5 3.8 3.8 0 0 1 0 2 1 1 0 0 1-.9.6h-2.5a.8.8 0 0 1-.4-.2 1.8 1.8 0 0 0-1.3-.5H7.2a1.8 1.8 0 0 0-1.3.5 1 1 0 0 1-.5.2Z" />
+            <path d="M4.1 13.2A1.2 1.2 0 0 0 3 14.3a1.2 1.2 0 0 0 .3.9 1.2 1.2 0 0 0 .9.3 1.2 1.2 0 0 0 0-2.4ZM20 13.2a1.2 1.2 0 0 0 0 2.3 1.2 1.2 0 0 0 0-2.3ZM6.4 13.9h11.3M6.3 14.3h11.5M6.4 14.7h11.3M6 10.4l-.4-.1.1-.6.6-1.3.2-.6a1.2 1.2 0 0 1 1-.7 16.9 16.9 0 0 1 3.7-.4h.4l3.3.1a10.2 10.2 0 0 1 1.4.2l.6.1a.8.8 0 0 1 .7.6l1 2.3a.3.3 0 0 1 0 .3.3.3 0 0 1-.2 0h-1.9l-3.6-.1h-.2l-5 .1-1.3.1ZM3.7 17.3h-.2a.3.3 0 0 1-.3-.3s0 0 0-.1v-.5H4.9a1.8 1.8 0 0 1 .1.6c0 .2-.2.3-.3.3h-1ZM20.4 17.3h.2a.3.3 0 0 0 .3-.3.2.2 0 0 1 0-.1v-.5l-.5-.1h-.9l-.4.1a1.6 1.6 0 0 0 0 .6c0 .2.1.2.2.2h1Z" />
+        </svg>
+    );
+}
+
 function GridRow({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     return (
         <React.Fragment key={fileUs.id}>
             <div className="w-4 h-4">
                 {fileUs.cnt && <IconManualMode />}
+            </div>
+            <div className="w-4 h-4">
+                {fileUs.cnt && <IconAutoMode />}
             </div>
             <div className="">{fileUs.name}</div>
             <div className="">{fileUs.size} bytes</div>
@@ -92,7 +106,7 @@ function App() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-[auto,1fr,auto] items-center gap-x-4 text-xs">
+            <div className="p-4 grid grid-cols-[auto,auto,1fr,auto] items-center gap-x-1 text-xs">
                 {files.map((atom) =>
                     <GridRow atom={atom} key={`${atom}`} />
                 )}
