@@ -48,7 +48,7 @@ function DropzoneComp() {
         console.log('accepterFiles', accepterFiles);
 
         const dropped: FileUsAtom[] = accepterFiles.map((file) => {
-            return atom({
+            return atom<FileUs>({
                 id: uuid(),
                 name: file.name,
                 modified: file.lastModified,
@@ -86,6 +86,7 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
         <React.Fragment key={fileUs.id}>
             <div className="">{fileUs.name}</div>
             <div className="">{fileUs.size} bytes</div>
+            <div className="">{fileUs.cnt}</div>
         </React.Fragment>
     );
 }
@@ -105,9 +106,9 @@ function App() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-[auto,1fr] gap-x-4 text-xs">
+            <div className="grid grid-cols-[auto,1fr,auto] gap-x-4 text-xs">
                 {files.map((atom) =>
-                    <GridRow atom={atom} key={atom.toString()} />
+                    <GridRow atom={atom} key={`${atom}`} />
                 )}
             </div>
 

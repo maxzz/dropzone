@@ -66,10 +66,14 @@ const updateCacheAtom = atom(
 
                 if (file.file && !file.cnt) {
                     const cnt = await textFileReader(file.file);
-                    const newAtom = atom<FileUsAtom>({
+                    const newAtom = {
                         ...file,
                         cnt,
-                    });
+                    };
+                    // const newAtom = atom<FileUs>({
+                    //     ...file,
+                    //     cnt,
+                    // });
                     set(fileAtom, newAtom);
                 }
 
