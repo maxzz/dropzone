@@ -9,37 +9,6 @@ export type FileUs = {
     file?: File;
 };
 
-export type FileCache = {
-    id: string;
-    cnt: string;
-};
-
-// export type Combined = FileUs & FileCache;
-
-// export const filesAtom = atom<FileUs[]>([]);
-
-// export const cacheAtom = atom<FileCache[]>([]);
-
-// export const combined = atom<Combined[]>((get) => {
-//     const files = get(filesAtom);
-//     const cache = get(cacheAtom);
-//     const combined: Combined[] = files.map((fileUs: FileUs) => {
-//         const cnt = cache.find(item => item.id === fileUs.id);
-//         return {
-//             ...fileUs,
-//             cnt: cnt ? cnt.cnt : '',
-//         }
-//     });
-//     return combined;
-// });
-
-//export type FileUsAtom = WritableAtom<FileUs, (atom: Atom<FileUs>) => void>;
-//export type FileUsAtom = WritableAtom<FileUs, <Value, Update>(atom: WritableAtom<Value, Update>, update: Update) => void>;
-// export type FileUsAtom = Atom<FileUsAtom[]> & {
-//     write: Write<SetStateAction<FileUsAtom[]>>;
-//     onMount?: OnMount<SetStateAction<FileUsAtom[]>> | undefined;
-// };
-// export type FileUsAtom = WritableAtom<FileUs, <Value, Update>(atom: WritableAtom<Value, Update>, update: Update) => void>;
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
 
 export const filesAtom = atom<FileUsAtom[]>([]);
@@ -55,11 +24,7 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-function delay(ms: number) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms)
-    })
-}
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const updateCacheAtom = atom(
     null,
@@ -76,34 +41,12 @@ export const updateCacheAtom = atom(
                         ...file,
                         cnt,
                     };
-                    // const newAtom = atom<FileUs>({
-                    //     ...file,
-                    //     cnt,
-                    // });
                     set(fileAtom, newAtom);
                     await delay(1000);
                 }
-
-                // file.file && cache.push(
-                //     { id: file.id, cnt: await textFileReader(file.file), }
-                // );
             } catch (error) {
                 console.log('error', error);
             }
         }
-
-
     }
 );
-
-async function laodCache(acceptedFiles: FileUs[]) {
-    const cache: FileCache[] = [];
-    for (let file of acceptedFiles) {
-        try {
-            file.file && cache.push({ id: file.id, cnt: await textFileReader(file.file), });
-        } catch (error) {
-            console.log('error', error);
-        }
-    }
-    return cache;
-}

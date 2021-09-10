@@ -1,33 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { atom, useAtom } from 'jotai';
-import { useAtomValue, useUpdateAtom } from "jotai/utils";
+import { useUpdateAtom } from "jotai/utils";
 import { useDropzone } from 'react-dropzone';
 import './App.css';
-import { FileCache, filesAtom, FileUs, FileUsAtom, updateCacheAtom } from './store/store';
+import { filesAtom, FileUs, FileUsAtom, updateCacheAtom } from './store/store';
 import uuid from './utils/uuid';
-
-function textFileReader(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        const aborted = () => reject(`file (${file.name}) reading was aborted`);
-        reader.onabort = aborted;
-        reader.onerror = aborted;
-        reader.onload = () => resolve(reader.result?.toString() || '');
-        reader.readAsText(file);
-    });
-}
-
-async function laodCache(acceptedFiles: FileUs[]) {
-    const cache: FileCache[] = [];
-    for (let file of acceptedFiles) {
-        try {
-            file.file && cache.push({ id: file.id, cnt: await textFileReader(file.file), });
-        } catch (error) {
-            console.log('error', error);
-        }
-    }
-    return cache;
-}
 
 function nameLengthValidator(file: File) {
     const maxLength = 30000;
@@ -42,7 +19,6 @@ function nameLengthValidator(file: File) {
 
 function DropzoneComp() {
     const setFiles = useUpdateAtom(filesAtom);
-    //const setCache = useUpdateAtom(cacheAtom);
     const updateCache = useUpdateAtom(updateCacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
@@ -59,11 +35,6 @@ function DropzoneComp() {
         });
         setFiles(dropped);
         updateCache();
-
-        // async function createCache() {
-        //     setCache(await laodCache(dropped));
-        // }
-        // createCache();
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });
@@ -95,7 +66,6 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
 
 function App() {
     const [files] = useAtom(filesAtom);
-    //const [cache] = useAtom(cacheAtom);
     return (
         <div className="min-h-screen flex-col bg-green-200">
             <header className="">
@@ -113,27 +83,6 @@ function App() {
                     <GridRow atom={atom} key={`${atom}`} />
                 )}
             </div>
-
-            {/* <div className="grid grid-cols-[auto,1fr] gap-x-4 text-xs">
-                {files.map((item) => (
-                    <React.Fragment key={item.id}>
-                        <div className="">{item.name}</div>
-                        <div className="">{item.size} bytes</div>
-                    </React.Fragment>
-                ))}
-            </div>
-            <div className="">
-                {cache.map((item) => (
-                    <React.Fragment key={item.id}>
-                        <hr className="h-4 bg-[rebeccapurple]" />
-                        <pre className="text-xs">
-                            {item.id}
-                            <br />
-                            {item.cnt} bytes</pre>
-                    </React.Fragment>
-                ))}
-            </div>
- */}
         </div>
     );
 }
