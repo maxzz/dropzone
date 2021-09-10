@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useUpdateAtom } from "jotai/utils";
 import { useDropzone } from 'react-dropzone';
 import './App.css';
-import { cacheAtom, FileCache, filesAtom, FileUs } from './store/store';
+import { FileCache, filesAtom, FileUs } from './store/store';
 import uuid from './utils/uuid';
 
 function textFileReader(file: File): Promise<string> {
@@ -42,7 +42,7 @@ function nameLengthValidator(file: File) {
 
 function DropzoneComp() {
     const [files, setFiles] = useAtom(filesAtom);
-    const setCache = useUpdateAtom(cacheAtom);
+    //const setCache = useUpdateAtom(cacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
         console.log('accepterFiles', accepterFiles);
@@ -54,12 +54,12 @@ function DropzoneComp() {
             size: file.size,
             file: file,
         }));
-        setFiles(dropped);
+        //setFiles(dropped);
 
-        async function createCache() {
-            setCache(await laodCache(dropped));
-        }
-        createCache();
+        // async function createCache() {
+        //     setCache(await laodCache(dropped));
+        // }
+        // createCache();
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });
@@ -80,7 +80,7 @@ function DropzoneComp() {
 
 function App() {
     const [files] = useAtom(filesAtom);
-    const [cache] = useAtom(cacheAtom);
+    //const [cache] = useAtom(cacheAtom);
     return (
         <div className="min-h-screen flex-col bg-green-200">
             <header className="">
@@ -92,7 +92,17 @@ function App() {
                     <DropzoneComp />
                 </div>
             </div>
-            <div className="grid grid-cols-[auto,1fr] gap-x-4 text-xs">
+
+            {/* <div className="grid grid-cols-[auto,1fr] gap-x-4 text-xs">
+                {files.map((item) => (
+                    <React.Fragment key={item.id}>
+                        <div className="">{item.name}</div>
+                        <div className="">{item.size} bytes</div>
+                    </React.Fragment>
+                ))}
+            </div> */}
+            
+            {/* <div className="grid grid-cols-[auto,1fr] gap-x-4 text-xs">
                 {files.map((item) => (
                     <React.Fragment key={item.id}>
                         <div className="">{item.name}</div>
@@ -111,6 +121,7 @@ function App() {
                     </React.Fragment>
                 ))}
             </div>
+ */}
         </div>
     );
 }
