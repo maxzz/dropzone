@@ -39,7 +39,8 @@ export type FileCache = {
 //     write: Write<SetStateAction<FileUsAtom[]>>;
 //     onMount?: OnMount<SetStateAction<FileUsAtom[]>> | undefined;
 // };
-export type FileUsAtom = WritableAtom<FileUs, <Value, Update>(atom: WritableAtom<Value, Update>, update: Update) => void>;
+// export type FileUsAtom = WritableAtom<FileUs, <Value, Update>(atom: WritableAtom<Value, Update>, update: Update) => void>;
+export type FileUsAtom = WritableAtom<FileUs, FileUs>;
 
 export const filesAtom = atom<FileUsAtom[]>([]);
 
@@ -65,16 +66,16 @@ const updateCacheAtom = atom(
 
                 if (file.file && !file.cnt) {
                     const cnt = await textFileReader(file.file);
-                    const newAtom = atom({
+                    const newAtom = atom<FileUsAtom>({
                         ...file,
                         cnt,
                     });
                     set(fileAtom, newAtom);
                 }
 
-                file.file && cache.push(
-                    { id: file.id, cnt: await textFileReader(file.file), }
-                );
+                // file.file && cache.push(
+                //     { id: file.id, cnt: await textFileReader(file.file), }
+                // );
             } catch (error) {
                 console.log('error', error);
             }
