@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { atom, useAtom } from 'jotai';
-import { useUpdateAtom } from "jotai/utils";
+import { useAtomValue, useUpdateAtom } from "jotai/utils";
 import { useDropzone } from 'react-dropzone';
 import './App.css';
-import { FileCache, filesAtom, FileUs, FileUsAtom } from './store/store';
+import { FileCache, filesAtom, FileUs, FileUsAtom, updateCacheAtom } from './store/store';
 import uuid from './utils/uuid';
 
 function textFileReader(file: File): Promise<string> {
@@ -41,8 +41,9 @@ function nameLengthValidator(file: File) {
 }
 
 function DropzoneComp() {
-    const [files, setFiles] = useAtom(filesAtom);
+    const setFiles = useUpdateAtom(filesAtom);
     //const setCache = useUpdateAtom(cacheAtom);
+    const updateCache = useUpdateAtom(updateCacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
         console.log('accepterFiles', accepterFiles);
@@ -57,6 +58,7 @@ function DropzoneComp() {
             });
         });
         setFiles(dropped);
+        updateCache();
 
         // async function createCache() {
         //     setCache(await laodCache(dropped));

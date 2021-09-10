@@ -55,7 +55,13 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-const updateCacheAtom = atom(
+function delay(ms: number) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms)
+    })
+}
+
+export const updateCacheAtom = atom(
     null,
     async (get, set) => {
         const files = get(filesAtom);
@@ -75,6 +81,7 @@ const updateCacheAtom = atom(
                     //     cnt,
                     // });
                     set(fileAtom, newAtom);
+                    await delay(1000);
                 }
 
                 // file.file && cache.push(
