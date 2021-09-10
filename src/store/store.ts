@@ -1,4 +1,4 @@
-import { Atom, atom } from 'jotai';
+import { Atom, atom, SetStateAction, WritableAtom } from 'jotai';
 
 export type FileUs = {
     id: string;
@@ -33,7 +33,13 @@ export type FileCache = {
 //     return combined;
 // });
 
-export type FileUsAtom = Atom<FileUs>;
+//export type FileUsAtom = WritableAtom<FileUs, (atom: Atom<FileUs>) => void>;
+//export type FileUsAtom = WritableAtom<FileUs, <Value, Update>(atom: WritableAtom<Value, Update>, update: Update) => void>;
+// export type FileUsAtom = Atom<FileUsAtom[]> & {
+//     write: Write<SetStateAction<FileUsAtom[]>>;
+//     onMount?: OnMount<SetStateAction<FileUsAtom[]>> | undefined;
+// };
+export type FileUsAtom = WritableAtom<FileUs, <Value, Update>(atom: WritableAtom<Value, Update>, update: Update) => void>;
 
 export const filesAtom = atom<FileUsAtom[]>([]);
 
@@ -59,11 +65,11 @@ const updateCacheAtom = atom(
 
                 if (file.file && !file.cnt) {
                     const cnt = await textFileReader(file.file);
-                    const newAtom = {
+                    const newAtom = atom({
                         ...file,
                         cnt,
-                    }
-                    set(fileAtom, atom(newAtom));
+                    });
+                    set(fileAtom, newAtom);
                 }
 
                 file.file && cache.push(
