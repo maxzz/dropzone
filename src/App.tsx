@@ -1,59 +1,10 @@
-import React, { useCallback } from 'react';
-import { atom, useAtom } from 'jotai';
-import { useUpdateAtom } from "jotai/utils";
-import { useDropzone } from 'react-dropzone';
+import React from 'react';
+import { useAtom } from 'jotai';
 import './App.css';
-import { filesAtom, FileUs, FileUsAtom, updateCacheAtom } from './store/store';
-import uuid from './utils/uuid';
+import { filesAtom, FileUsAtom } from './store/store';
 import { IconAppLogo, IconAutoMode, IconManualMode } from './components/Icons';
 import toast, { Toaster } from 'react-hot-toast';
-
-function nameLengthValidator(file: File) {
-    const maxLength = 30000;
-    if (file.name.length > maxLength) {
-        return {
-            code: "name-too-large",
-            message: `Name is larger than ${maxLength} characters`
-        };
-    }
-    return null;
-}
-
-function DropzoneComp() {
-    const setFiles = useUpdateAtom(filesAtom);
-    const updateCache = useUpdateAtom(updateCacheAtom);
-
-    const onDrop = useCallback((accepterFiles: File[]) => {
-        console.log('accepterFiles', accepterFiles);
-
-        const dropped: FileUsAtom[] = accepterFiles.map((file) => {
-            return atom<FileUs>({
-                id: uuid(),
-                name: file.name,
-                modified: file.lastModified,
-                size: file.size,
-                file: file,
-            });
-        });
-        setFiles(dropped);
-        updateCache();
-    }, []);
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });
-
-    return (
-        <div {...getRootProps()} className="px-4 py-3 bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
-            <input {...getInputProps()} className="" />
-            <div className="">
-                {
-                    isDragActive ?
-                        <p>Drop the files here ...</p> :
-                        <p>Drag 'n' drop some files here, or click to select files</p>
-                }
-            </div>
-        </div>
-    );
-}
+import { DropzoneComp } from './components/Dropzone';
 
 function GridRow({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
