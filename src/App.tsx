@@ -111,31 +111,45 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
             <div className="w-4 h-4">
                 {fileUs.cnt && <IconAutoMode />}
             </div>
-            <div className="">{fileUs.name}</div>
-            <div className="">{fileUs.size} bytes</div>
+            <div className="">
+                <div className="">{fileUs.name}</div>
+                <div className="">{fileUs.name}</div>
+                <div className="">{fileUs.size} bytes</div>
+            </div>
             {/* <div className="">{fileUs.cnt}</div> */}
         </React.Fragment>
     );
 }
 
-function App() {
+function GridFiles() {
     const [files] = useAtom(filesAtom);
     return (
-        <div className="min-h-screen flex-col bg-green-200">
-            <header className="">
-                Drop files
+        <div className="p-4 border border-green-700 grid grid-cols-[auto,auto,1fr] items-center gap-x-1 gap-y-2 text-xs">
+            {files.map((atom) =>
+                <GridRow atom={atom} key={`${atom}`} />
+            )}
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div className="min-h-screen flex flex-col justify-between bg-green-200">
+            <header className="flex justify-between">
+                <div className="">
+                    Drop files
+                </div>
+                <div className="flex items-center justify-center bg-green-100">
+                    <div className="">
+                        <DropzoneComp />
+                    </div>
+                </div>
+
             </header>
 
-            <div className="flex-1 flex items-center justify-center bg-green-100">
-                <div className="">
-                    <DropzoneComp />
-                </div>
-            </div>
-
-            <div className="p-4 grid grid-cols-[auto,auto,1fr,auto] items-center gap-x-1 text-xs">
-                {files.map((atom) =>
-                    <GridRow atom={atom} key={`${atom}`} />
-                )}
+            <div className="flex-1 mt-4 mx-4">
+                <GridFiles />
             </div>
         </div>
     );
