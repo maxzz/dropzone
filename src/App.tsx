@@ -53,13 +53,27 @@ function DropzoneComp() {
     );
 }
 
+function IconManualMode() {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="18.1" cy="8.8" r="2" />
+            <circle cx="10.9" cy="5.6" r="2" />
+            <path d="M1.6 10.1h2.8v9.2H1.6zM4.5 11.4c2.3-.5 3-.2 5.2 1 3.8-.1 6.1.9 6.2 3.7H7.7" />
+            <path d="M15.3 14h4a4.2 4.2 0 0 1 3 2c-5.8 5.8-11.8 5.4-17.8 1.8" />
+        </svg>
+    );
+}
+
 function GridRow({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     return (
         <React.Fragment key={fileUs.id}>
+            <div className="w-4 h-4">
+                {fileUs.cnt && <IconManualMode />}
+            </div>
             <div className="">{fileUs.name}</div>
             <div className="">{fileUs.size} bytes</div>
-            <div className="">{fileUs.cnt}</div>
+            {/* <div className="">{fileUs.cnt}</div> */}
         </React.Fragment>
     );
 }
@@ -78,7 +92,7 @@ function App() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-[auto,1fr,auto] gap-x-4 text-xs">
+            <div className="grid grid-cols-[auto,1fr,auto] items-center gap-x-4 text-xs">
                 {files.map((atom) =>
                     <GridRow atom={atom} key={`${atom}`} />
                 )}
