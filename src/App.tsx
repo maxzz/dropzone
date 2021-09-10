@@ -6,6 +6,7 @@ import './App.css';
 import { filesAtom, FileUs, FileUsAtom, updateCacheAtom } from './store/store';
 import uuid from './utils/uuid';
 import { IconAppLogo, IconAutoMode, IconManualMode } from './components/Icons';
+import toast, { Toaster } from 'react-hot-toast';
 
 function nameLengthValidator(file: File) {
     const maxLength = 30000;
@@ -86,22 +87,25 @@ function GridFiles() {
 }
 
 function App() {
-
     return (
-        <div className="min-h-screen flex flex-col justify-between bg-green-900 text-green-100">
-            <header className="p-4 grid grid-cols-[1fr,auto] gap-x-2 items-center">
-                <div className="">
-                    <DropzoneComp />
+        <React.Fragment>
+            <div className="min-h-screen flex flex-col justify-between bg-green-900 text-green-100">
+                <header className="p-4 grid grid-cols-[1fr,auto] gap-x-2 items-center">
+                    <div className="">
+                        <DropzoneComp />
+                    </div>
+                    <div className="w-6 h-6 text-green-500" onClick={() => toast('again')}>
+                        <IconAppLogo />
+                    </div>
+                </header>
+                <div className="flex-1 mt-4 mx-4">
+                    <GridFiles />
                 </div>
-                <div className="w-6 h-6 text-green-500">
-                    <IconAppLogo />
-                </div>
-            </header>
-
-            <div className="flex-1 mt-4 mx-4">
-                <GridFiles />
             </div>
-        </div>
+            <div className="">
+                <Toaster />
+            </div>
+        </React.Fragment>
     );
 }
 
