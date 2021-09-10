@@ -33,4 +33,6 @@ export type FileCache = {
 //     return combined;
 // });
 
-export const filesAtom = atom<Atom<FileUs>[]>([]);
+export type FileUsAtom = Atom<FileUs>;
+
+export const filesAtom = atom<FileUsAtom[]>([]);
