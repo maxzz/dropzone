@@ -1,17 +1,20 @@
 import { useAtom } from 'jotai';
 import React from 'react';
 import { filesAtom, FileUsAtom } from '../store/store';
-import { IconAutoMode, IconManualMode } from './Icons';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconManualMode } from './Icons';
 
 function GridRow({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     return (
         <React.Fragment key={fileUs.id}>
             <div className="w-4 h-4">
-                {fileUs.cnt && <IconManualMode />}
+                {/* {fileUs.cnt && <IconAppWindows />} */}
+                {fileUs.cnt && <IconAppWebIE />}
+                {/* {fileUs.cnt && <IconManualMode />} */}
             </div>
             <div className="w-4 h-4">
-                {fileUs.cnt && <IconAutoMode />}
+                {fileUs.cnt && <IconAppWebChrome strokeWidth={.9} />}
+                {/* {fileUs.cnt && <IconAutoMode />} */}
             </div>
             <div className="">
                 <div className="">{fileUs.name}</div>
