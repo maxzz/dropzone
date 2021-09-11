@@ -1,6 +1,6 @@
 import { atom, WritableAtom } from 'jotai';
 import uuid from '../utils/uuid';
-import { loadByText } from './manifest/mani-io';
+//import { loadByText } from './manifest/mani-io';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -61,14 +61,15 @@ const updateCacheAtom = atom(
 
                 if (file.file && !file.raw) {
                     const cnt = await textFileReader(file.file);
-                    console.log('cnt', cnt);
+                    //console.log('cnt', cnt);
 
                     //const mani: Manifest = loadByText(cnt);
+                    const mani: Manifest | undefined = getManifest(cnt);
 
                     const newAtom = {
                         ...file,
                         raw: cnt,
-                        //mani: mani,
+                        mani: mani,
                     };
                     set(fileAtom, newAtom);
                     //await delay(1000);
@@ -82,34 +83,38 @@ const updateCacheAtom = atom(
 
 import textData from '../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 import { parse } from 'fast-xml-parser';
+import { beautifyXMLManifest } from './manifest/mani-io';
 
-function test() {
+// function test() {
+//     var options = {
+//         attributeNamePrefix: "",
+//         attrNodeName: "_attributes",
+//         ignoreAttributes: false,
+//         allowBooleanAttributes: true,
+//     };
+
+//     const res = parse(textData, options);
+//     console.log('test', res);
+// }
+// test();
+
+function getManifest(cnt: string): Manifest | undefined {
     var options = {
-        //attributeNamePrefix : "@_",
-        attributeNamePrefix : "",
-        attrNodeName: "attr", //default is 'false'
-        textNodeName : "#text",
-        ignoreAttributes : false,
-        ignoreNameSpace : false,
-        allowBooleanAttributes : false,
-        parseNodeValue : true,
-        parseAttributeValue : false,
-        trimValues: true,
-        cdataTagName: "__cdata", //default is 'false'
-        cdataPositionChar: "\\c",
-        parseTrueNumberOnly: false,
-        numParseOptions:{
-          hex: true,
-          leadingZeros: true,
-          skipLike: /\+[0-9]{10}/
-        }
-        //arrayMode: false, //"strict"
-        //attrValueProcessor: (val, attrName) => he.decode(val, {isAttributeValue: true}),//default is a=>a
-        //tagValueProcessor : (val, tagName) => he.decode(val), //default is a=>a
-        //stopNodes: ["parse-me-as-string"]
+        attributeNamePrefix: "",
+        attrNodeName: "_attributes",
+        ignoreAttributes: false,
+        allowBooleanAttributes: true,
     };
 
-    const res = parse(textData, options);
-    console.log('test', res);
+    try {
+        const obj = parse(cnt, options);
+        console.log('%craw', 'color: red', obj);
+        //const res = obj.manifest;
+        const res = beautifyXMLManifest(obj.manifest);
+        console.log('%ctm', 'color: red', res);
+        return res;
+    } catch (error) {
+        console.log('%ctm error', 'color: red', error);
+    }
 }
-test();
+

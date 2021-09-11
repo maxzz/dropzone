@@ -1,8 +1,8 @@
-import { xml2json } from 'xml-js';
+//import { xml2json } from 'xml-js';
 
-import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
+//import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
-function beautifyXMLManifest(manifest: Manifest): Manifest {
+export function beautifyXMLManifest(manifest: Manifest): Manifest {
     // 0. convert XML .dpm object to manifest format.
 
     manifest.descriptor = (manifest.descriptor as any)._attributes || {};
@@ -53,14 +53,14 @@ function beautifyXMLManifest(manifest: Manifest): Manifest {
 //     return manifest;
 // }
 
-export function loadByText(text: string): Manifest {
-    var result: string = xml2json(text, {compact: true, spaces: 4});
+// export function loadByText(text: string): Manifest {
+//     var result: string = xml2json(text, {compact: true, spaces: 4});
 
-    let json = JSON.parse(result);
-    let manifest = beautifyXMLManifest(json.manifest);
+//     let json = JSON.parse(result);
+//     let manifest = beautifyXMLManifest(json.manifest);
 
-    return manifest;
-}
+//     return manifest;
+// }
 
 // export async function loadByUrl(url: string): Promise<Manifest> {
 //     let res = await fetch(url);
