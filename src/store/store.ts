@@ -81,9 +81,10 @@ const updateCacheAtom = atom(
 );
 
 import textData from '../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
+import { parse } from 'fast-xml-parser';
 
 function test() {
-    // const res = ltx.parse(textData);
-    // console.log('test', test);
+    const res = parse(textData);
+    console.log('test', res);
 }
 test();
