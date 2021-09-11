@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useUpdateAtom } from 'jotai/utils';
-import { SetFilesAtom, updateCacheAtom } from '../store/store';
+import { SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
 
 function nameLengthValidator(file: File) {
@@ -16,11 +16,9 @@ function nameLengthValidator(file: File) {
 
 export function DropzoneArea() {
     const setFiles = useUpdateAtom(SetFilesAtom);
-    const updateCache = useUpdateAtom(updateCacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
         setFiles(accepterFiles);
-        updateCache();
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({

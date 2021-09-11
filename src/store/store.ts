@@ -31,6 +31,7 @@ export const SetFilesAtom = atom(
             });
         });
         set(filesAtom, dropped);
+        set(updateCacheAtom);
     }
 )
 
@@ -47,7 +48,7 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export const updateCacheAtom = atom(
+const updateCacheAtom = atom(
     null,
     async (get, set) => {
         const files = get(filesAtom);
@@ -63,7 +64,7 @@ export const updateCacheAtom = atom(
                         raw: cnt,
                     };
                     set(fileAtom, newAtom);
-                    //await delay(1000);
+                    await delay(1000);
                 }
             } catch (error) {
                 console.log('error', error);
