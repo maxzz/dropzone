@@ -16,7 +16,7 @@ function nameLengthValidator(file: File) {
     return null;
 }
 
-export function DropzoneComp() {
+export function DropzoneArea() {
     const setFiles = useUpdateAtom(filesAtom);
     const updateCache = useUpdateAtom(updateCacheAtom);
 

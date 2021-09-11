@@ -4,7 +4,7 @@ import './App.css';
 import { filesAtom, FileUsAtom } from './store/store';
 import { IconAppLogo, IconAutoMode, IconManualMode } from './components/Icons';
 import toast, { Toaster } from 'react-hot-toast';
-import { DropzoneComp } from './components/Dropzone';
+import { DropzoneArea } from './components/Dropzone';
 
 function GridRow({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
@@ -43,7 +43,7 @@ function App() {
             <div className="min-h-screen flex flex-col justify-between bg-green-900 text-green-100">
                 <header className="p-4 grid grid-cols-[1fr,auto] gap-x-2 items-center">
                     <div className="">
-                        <DropzoneComp />
+                        <DropzoneArea />
                     </div>
                     <div className="w-6 h-6 text-green-500" onClick={() => toast('again')}>
                         <IconAppLogo />
@@ -53,8 +53,31 @@ function App() {
                     <GridFiles />
                 </div>
             </div>
-            <div className="">
-                <Toaster />
+            <div className="toaser">
+                <Toaster
+                    position="bottom-right"
+                    reverseOrder={false}
+                    gutter={8}
+                    containerClassName=""
+                    containerStyle={{}}
+                    toastOptions={{
+                        // Define default options
+                        className: '',
+                        duration: 5000,
+                        style: {
+                            background: '#363636',
+                            color: '#fff',
+                        },
+                        // Default options for specific types
+                        success: {
+                            duration: 3000,
+                            theme: {
+                                primary: 'green',
+                                secondary: 'black',
+                            },
+                        },
+                    }}
+                />
             </div>
         </React.Fragment>
     );
