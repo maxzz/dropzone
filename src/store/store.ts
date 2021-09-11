@@ -1,5 +1,6 @@
 import { atom, WritableAtom } from 'jotai';
 import uuid from '../utils/uuid';
+import { loadByText } from './manifest/mani-io';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -9,6 +10,7 @@ export type FileUs = {
     modified: number; // last modified
     size: number;
     raw?: string;
+    mani?: Manifest;
     file?: File;
 };
 
@@ -59,9 +61,14 @@ const updateCacheAtom = atom(
 
                 if (file.file && !file.raw) {
                     const cnt = await textFileReader(file.file);
+                    console.log('cnt', cnt);
+
+                    //const mani: Manifest = loadByText(cnt);
+
                     const newAtom = {
                         ...file,
                         raw: cnt,
+                        //mani: mani,
                     };
                     set(fileAtom, newAtom);
                     //await delay(1000);
@@ -72,3 +79,12 @@ const updateCacheAtom = atom(
         }
     }
 );
+
+import textData from '../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
+import { parse } from 'ltx';
+
+function test() {
+    const res = parse(textData);
+    console.log('test', test);
+}
+test();
