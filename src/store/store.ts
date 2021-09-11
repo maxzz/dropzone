@@ -35,7 +35,7 @@ export const SetFilesAtom = atom(
         set(filesAtom, dropped);
         set(updateCacheAtom);
     }
-)
+);
 
 // Cache
 
@@ -84,7 +84,32 @@ import textData from '../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 import { parse } from 'fast-xml-parser';
 
 function test() {
-    const res = parse(textData);
+    var options = {
+        //attributeNamePrefix : "@_",
+        attributeNamePrefix : "",
+        attrNodeName: "attr", //default is 'false'
+        textNodeName : "#text",
+        ignoreAttributes : false,
+        ignoreNameSpace : false,
+        allowBooleanAttributes : false,
+        parseNodeValue : true,
+        parseAttributeValue : false,
+        trimValues: true,
+        cdataTagName: "__cdata", //default is 'false'
+        cdataPositionChar: "\\c",
+        parseTrueNumberOnly: false,
+        numParseOptions:{
+          hex: true,
+          leadingZeros: true,
+          skipLike: /\+[0-9]{10}/
+        }
+        //arrayMode: false, //"strict"
+        //attrValueProcessor: (val, attrName) => he.decode(val, {isAttributeValue: true}),//default is a=>a
+        //tagValueProcessor : (val, tagName) => he.decode(val), //default is a=>a
+        //stopNodes: ["parse-me-as-string"]
+    };
+
+    const res = parse(textData, options);
     console.log('test', res);
 }
 test();
