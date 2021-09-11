@@ -44,14 +44,14 @@ function beautifyXMLManifest(manifest: Manifest): Manifest {
     return manifest as Manifest;
 }
 
-export function loadTest(): Manifest {
-    var result: string = xml2json(test, {compact: true, spaces: 4});
+// export function loadTest(): Manifest {
+//     var result: string = xml2json(test, {compact: true, spaces: 4});
 
-    let json = JSON.parse(result);
-    let manifest = beautifyXMLManifest(json.manifest);
+//     let json = JSON.parse(result);
+//     let manifest = beautifyXMLManifest(json.manifest);
 
-    return manifest;
-}
+//     return manifest;
+// }
 
 export function loadByText(text: string): Manifest {
     var result: string = xml2json(text, {compact: true, spaces: 4});
@@ -62,14 +62,14 @@ export function loadByText(text: string): Manifest {
     return manifest;
 }
 
-export async function loadByUrl(url: string): Promise<Manifest> {
-    let res = await fetch(url);
-    let text = await res.text();
+// export async function loadByUrl(url: string): Promise<Manifest> {
+//     let res = await fetch(url);
+//     let text = await res.text();
 
-    var result: string = xml2json(text, {compact: true, spaces: 4});
-    let json = JSON.parse(result);
+//     var result: string = xml2json(text, {compact: true, spaces: 4});
+//     let json = JSON.parse(result);
 
-    let manifest = beautifyXMLManifest(json.manifest);
+//     let manifest = beautifyXMLManifest(json.manifest);
 
-    return manifest;
-}
+//     return manifest;
+// }
