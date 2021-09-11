@@ -1,17 +1,40 @@
-import { Atom, atom, SetStateAction, WritableAtom } from 'jotai';
+import { atom, WritableAtom } from 'jotai';
+import uuid from '../utils/uuid';
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export type FileUs = {
     id: string;
     name: string;
     modified: number; // last modified
     size: number;
-    cnt?: string;
+    raw?: string;
     file?: File;
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
 
+// Files
+
 export const filesAtom = atom<FileUsAtom[]>([]);
+
+export const SetFilesAtom = atom(
+    null,
+    (get, set, accepterFiles: File[]) => {
+        const dropped: FileUsAtom[] = accepterFiles.map((file) => {
+            return atom<FileUs>({
+                id: uuid(),
+                name: file.name,
+                modified: file.lastModified,
+                size: file.size,
+                file: file,
+            });
+        });
+        set(filesAtom, dropped);
+    }
+)
+
+// Cache
 
 function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -24,8 +47,6 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const updateCacheAtom = atom(
     null,
     async (get, set) => {
@@ -35,11 +56,11 @@ export const updateCacheAtom = atom(
             try {
                 const file = get(fileAtom);
 
-                if (file.file && !file.cnt) {
+                if (file.file && !file.raw) {
                     const cnt = await textFileReader(file.file);
                     const newAtom = {
                         ...file,
-                        cnt,
+                        raw: cnt,
                     };
                     set(fileAtom, newAtom);
                     //await delay(1000);

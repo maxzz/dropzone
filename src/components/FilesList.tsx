@@ -9,11 +9,11 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
         <React.Fragment key={fileUs.id}>
             <div className="w-4 h-4">
                 {/* {fileUs.cnt && <IconAppWindows />} */}
-                {fileUs.cnt && <IconAppWebIE />}
+                {fileUs.raw && <IconAppWebIE />}
                 {/* {fileUs.cnt && <IconManualMode />} */}
             </div>
             <div className="w-4 h-4">
-                {fileUs.cnt && <IconAppWebChrome strokeWidth={.9} />}
+                {fileUs.raw && <IconAppWebChrome strokeWidth={.9} />}
                 {/* {fileUs.cnt && <IconAutoMode />} */}
             </div>
             <div className="">

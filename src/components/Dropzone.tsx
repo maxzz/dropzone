@@ -1,9 +1,7 @@
-import { atom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
 import React, { useCallback } from 'react';
+import { useUpdateAtom } from 'jotai/utils';
+import { SetFilesAtom, updateCacheAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
-import { filesAtom, FileUs, FileUsAtom, updateCacheAtom } from '../store/store';
-import uuid from '../utils/uuid';
 
 function nameLengthValidator(file: File) {
     const maxLength = 30000;
@@ -17,26 +15,18 @@ function nameLengthValidator(file: File) {
 }
 
 export function DropzoneArea() {
-    const setFiles = useUpdateAtom(filesAtom);
+    const setFiles = useUpdateAtom(SetFilesAtom);
     const updateCache = useUpdateAtom(updateCacheAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
-        console.log('accepterFiles', accepterFiles);
-
-        const dropped: FileUsAtom[] = accepterFiles.map((file) => {
-            return atom<FileUs>({
-                id: uuid(),
-                name: file.name,
-                modified: file.lastModified,
-                size: file.size,
-                file: file,
-            });
-        });
-        setFiles(dropped);
+        setFiles(accepterFiles);
         updateCache();
     }, []);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, validator: nameLengthValidator });
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        validator: nameLengthValidator,
+    });
 
     return (
         <div {...getRootProps()} className="px-4 py-3 bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
