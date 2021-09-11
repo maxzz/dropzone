@@ -17,7 +17,17 @@ export function beautifyXMLManifest(manifest: Manifest): Manifest {
         form.fcontext && (form.fcontext = (form.fcontext as any)._attributes);
         form.detection && (form.detection = (form.detection as any)._attributes);
         form.options && (form.options = (form.options as any)._attributes);
-        form.fields && (form.fields = (form.fields as any).field);
+        
+        console.log('form.fields 0', JSON.stringify(form.fields, null, 4));
+        //form.fields && (form.fields = (form.fields as any).field);
+        if (form.fields) {
+            let fields = (form.fields as any).field as Field[];
+            if (Array.isArray(fields)) {
+                form.fields = fields;
+            } else {
+                form.fields = [fields];
+            }
+        }
 
         // Perform typecast
         if (form.fcontext) {
@@ -30,6 +40,7 @@ export function beautifyXMLManifest(manifest: Manifest): Manifest {
             form.options.usequicklink !== undefined && (form.options.usequicklink = +form.options.usequicklink);
         }
         if (form.fields) {
+            console.log('form.fields', form.fields);
             form.fields = form.fields.map(field => (field as any)._attributes);
 
             form.fields.forEach((field: Field) => {
@@ -48,19 +59,19 @@ const parseOptions = {
     attributeNamePrefix: "",
     attrNodeName: "_attributes",
     ignoreAttributes: false,
+    // tagValueProcessor: (a, ...rest) => {
+    //     console.log(`a: "${a}"`, rest);
+    //     return a;
+    // },
     allowBooleanAttributes: true,
 };
 
 export function parseManifest(cnt: string): Manifest | undefined {
-    try {
-        const obj = parse(cnt, parseOptions);
-        //console.log('%craw', 'color: red', obj);
-        
-        const res = beautifyXMLManifest(obj.manifest);
-        //console.log('%ctm', 'color: red', res);
-        
-        return res;
-    } catch (error) {
-        console.log('%ctm error', 'color: red', error);
-    }
+    const obj = parse(cnt, parseOptions);
+    console.log('%craw', 'color: red', obj);
+
+    const res = beautifyXMLManifest(obj.manifest);
+    // //console.log('%ctm', 'color: red', res);
+
+    return res;
 }

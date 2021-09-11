@@ -63,8 +63,12 @@ const updateCacheAtom = atom(
                     const cnt = await textFileReader(file.file);
                     //console.log('cnt', cnt);
 
-                    //const mani: Manifest = loadByText(cnt);
-                    const mani: Manifest | undefined = parseManifest(cnt);
+                    let mani: Manifest | undefined;
+                    try {
+                        mani = parseManifest(cnt);
+                    } catch (error) {
+                        console.log('%ctm error', 'color: red', error, '\n', file.name, cnt);
+                    }
 
                     const newAtom = {
                         ...file,
