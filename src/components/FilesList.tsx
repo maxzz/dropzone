@@ -19,7 +19,10 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
     }
 
     return (
-        <React.Fragment key={fileUs.id}>
+        <div className="rounded shadow-md border border-green-700 grid grid-rows-[auto,1fr] grid-cols-[auto,auto,1fr] items-center">
+
+            <div className="p-2 col-span-full bg-green-800">{loginTitle || 'No title'}</div>
+
             <div className="w-4 h-4">
                 {/* {fileUs.cnt && <IconAppWindows />} */}
                 {fileUs.raw && <IconAppWebIE />}
@@ -29,14 +32,15 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
                 {fileUs.raw && <IconAppWebChrome strokeWidth={.9} />}
                 {/* {fileUs.cnt && <IconAutoMode />} */}
             </div>
+
             <div className="grid">
                 <div className="">{loginTitle}</div>
                 <div className="">{fileUs.name}</div>
-                <div className="mt-2 ml-4">
+                <div className="mt-2 ml-4 overflow-hidden">
                     {loginForms && loginForms.map((f, idx) => (
-                        <div className="flex">
-                            <div className="w-4 h-4">
-                            {idx === 0 ? <IconFormLogin /> : <IconFormChangePsw />}
+                        <div className="flex overflow-x-auto smallscroll">
+                            <div className="flex-none w-4 h-4 p-0.5 mr-1">
+                                {idx === 0 ? <IconFormLogin /> : <IconFormChangePsw />}
                             </div>
                             {f}
                         </div>)
@@ -45,14 +49,14 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
                 {/* <div className="">{fileUs.size} bytes</div> */}
             </div>
             {/* <div className="">{fileUs.cnt}</div> */}
-        </React.Fragment>
+        </div>
     );
 }
 
 function FilesList() {
     const [files] = useAtom(filesAtom);
     return (
-        <div className="p-4 border border-green-700 grid grid-cols-[auto,auto,1fr] items-center gap-x-1 gap-y-2 text-xs">
+        <div className="p-4 grid  gap-x-1 gap-y-2 text-xs">
             {files.map((atom) =>
                 <GridRow atom={atom} key={`${atom}`} />
             )}
