@@ -64,7 +64,7 @@ const updateCacheAtom = atom(
                         raw: cnt,
                     };
                     set(fileAtom, newAtom);
-                    await delay(1000);
+                    //await delay(1000);
                 }
             } catch (error) {
                 console.log('error', error);

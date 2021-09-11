@@ -17,9 +17,7 @@ function nameLengthValidator(file: File) {
 export function DropzoneArea() {
     const setFiles = useUpdateAtom(SetFilesAtom);
 
-    const onDrop = useCallback((accepterFiles: File[]) => {
-        setFiles(accepterFiles);
-    }, []);
+    const onDrop = useCallback((accepterFiles: File[]) => setFiles(accepterFiles), []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
