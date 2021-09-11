@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { IconAppLogo } from './components/Icons';
 import { DropzoneArea } from './components/Dropzone';
 import toast from 'react-hot-toast';
