@@ -1,0 +1,19 @@
+/* Firefox scrollbars */
+.smallscroll {
+    --sb-width: 6px;
+    --sb-clr: #c1c1c178; /* #666b7a */
+    --sb-bkg: #30303080; /* transparent */
+    scrollbar-color: var(--sb-clr) var(--sb-bkg);
+    scrollbar-width: thin;
+}
+
+/* Chrome scrollbars */
+.smallscroll::-webkit-scrollbar {
+    width: var(--sb-width);
+    height: var(--sb-width);
+    background-color: var(--sb-bkg);
+}
+
+.smallscroll::-webkit-scrollbar-thumb {
+    background-color: var(--sb-clr);
+}
