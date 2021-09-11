@@ -38,11 +38,11 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
                 <div className="">{fileUs.name}</div>
                 <div className="mt-2 ml-4 overflow-hidden">
                     {loginForms && loginForms.map((f, idx) => (
-                        <div className="flex overflow-x-auto smallscroll">
-                            <div className="flex-none w-4 h-4 p-0.5 mr-1">
+                        <div className="flex mr-4">
+                            <div className="w-4 h-4 p-0.5 mr-1 flex-none">
                                 {idx === 0 ? <IconFormLogin /> : <IconFormChangePsw />}
                             </div>
-                            {f}
+                            <div className="overflow-x-auto smallscroll">{f}</div>
                         </div>)
                     )}
                 </div>
