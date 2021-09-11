@@ -3,8 +3,9 @@ import { useAtom } from 'jotai';
 import './App.css';
 import { filesAtom, FileUsAtom } from './store/store';
 import { IconAppLogo, IconAutoMode, IconManualMode } from './components/Icons';
-import toast, { Toaster } from 'react-hot-toast';
 import { DropzoneArea } from './components/Dropzone';
+import toast from 'react-hot-toast';
+import Toaster from './components/Toaster';
 
 function GridRow({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
@@ -53,32 +54,7 @@ function App() {
                     <GridFiles />
                 </div>
             </div>
-            <div className="toaser">
-                <Toaster
-                    position="bottom-right"
-                    reverseOrder={false}
-                    gutter={8}
-                    containerClassName=""
-                    containerStyle={{}}
-                    toastOptions={{
-                        // Define default options
-                        className: '',
-                        duration: 5000,
-                        style: {
-                            background: '#363636',
-                            color: '#fff',
-                        },
-                        // Default options for specific types
-                        success: {
-                            duration: 3000,
-                            theme: {
-                                primary: 'green',
-                                secondary: 'black',
-                            },
-                        },
-                    }}
-                />
-            </div>
+            <Toaster />
         </React.Fragment>
     );
 }
