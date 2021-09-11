@@ -1,4 +1,4 @@
-//import { xml2json } from 'xml-js';
+import { parse } from 'fast-xml-parser';
 
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
@@ -44,32 +44,23 @@ export function beautifyXMLManifest(manifest: Manifest): Manifest {
     return manifest as Manifest;
 }
 
-// export function loadTest(): Manifest {
-//     var result: string = xml2json(test, {compact: true, spaces: 4});
+const parseOptions = {
+    attributeNamePrefix: "",
+    attrNodeName: "_attributes",
+    ignoreAttributes: false,
+    allowBooleanAttributes: true,
+};
 
-//     let json = JSON.parse(result);
-//     let manifest = beautifyXMLManifest(json.manifest);
-
-//     return manifest;
-// }
-
-// export function loadByText(text: string): Manifest {
-//     var result: string = xml2json(text, {compact: true, spaces: 4});
-
-//     let json = JSON.parse(result);
-//     let manifest = beautifyXMLManifest(json.manifest);
-
-//     return manifest;
-// }
-
-// export async function loadByUrl(url: string): Promise<Manifest> {
-//     let res = await fetch(url);
-//     let text = await res.text();
-
-//     var result: string = xml2json(text, {compact: true, spaces: 4});
-//     let json = JSON.parse(result);
-
-//     let manifest = beautifyXMLManifest(json.manifest);
-
-//     return manifest;
-// }
+export function parseManifest(cnt: string): Manifest | undefined {
+    try {
+        const obj = parse(cnt, parseOptions);
+        //console.log('%craw', 'color: red', obj);
+        
+        const res = beautifyXMLManifest(obj.manifest);
+        //console.log('%ctm', 'color: red', res);
+        
+        return res;
+    } catch (error) {
+        console.log('%ctm error', 'color: red', error);
+    }
+}

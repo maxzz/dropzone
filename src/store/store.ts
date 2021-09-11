@@ -1,6 +1,6 @@
 import { atom, WritableAtom } from 'jotai';
 import uuid from '../utils/uuid';
-//import { loadByText } from './manifest/mani-io';
+import { parseManifest } from './manifest/mani-io';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -64,7 +64,7 @@ const updateCacheAtom = atom(
                     //console.log('cnt', cnt);
 
                     //const mani: Manifest = loadByText(cnt);
-                    const mani: Manifest | undefined = getManifest(cnt);
+                    const mani: Manifest | undefined = parseManifest(cnt);
 
                     const newAtom = {
                         ...file,
@@ -80,41 +80,3 @@ const updateCacheAtom = atom(
         }
     }
 );
-
-import textData from '../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
-import { parse } from 'fast-xml-parser';
-import { beautifyXMLManifest } from './manifest/mani-io';
-
-// function test() {
-//     var options = {
-//         attributeNamePrefix: "",
-//         attrNodeName: "_attributes",
-//         ignoreAttributes: false,
-//         allowBooleanAttributes: true,
-//     };
-
-//     const res = parse(textData, options);
-//     console.log('test', res);
-// }
-// test();
-
-function getManifest(cnt: string): Manifest | undefined {
-    var options = {
-        attributeNamePrefix: "",
-        attrNodeName: "_attributes",
-        ignoreAttributes: false,
-        allowBooleanAttributes: true,
-    };
-
-    try {
-        const obj = parse(cnt, options);
-        console.log('%craw', 'color: red', obj);
-        //const res = obj.manifest;
-        const res = beautifyXMLManifest(obj.manifest);
-        console.log('%ctm', 'color: red', res);
-        return res;
-    } catch (error) {
-        console.log('%ctm error', 'color: red', error);
-    }
-}
-
