@@ -2,6 +2,8 @@ import React, { useCallback } from 'react';
 import { useUpdateAtom } from 'jotai/utils';
 import { SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
+import { IconAppLogo } from './Icons';
+import toast from 'react-hot-toast';
 
 function nameLengthValidator(file: File) {
     const maxLength = 30000;
@@ -27,12 +29,19 @@ export function DropzoneArea() {
     return (
         <div {...getRootProps()} className="px-4 py-3 bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
             <input {...getInputProps()} className="" />
-            <div className="">
+            <div className="flex justify-between">
                 {
                     isDragActive ?
                         <p>Drop the files here ...</p> :
                         <p>Drag 'n' drop some files here, or click to select files</p>
                 }
+                    <div className="w-7 h-7" onClick={(event) => {
+                        event.stopPropagation();
+                        toast('again');
+                    }}>
+                        <IconAppLogo />
+                    </div>
+
             </div>
         </div>
     );
