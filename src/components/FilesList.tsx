@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
-import { filesAtom, FileUsAtom } from '../store/store';
+import { filesAtom, FileUs, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
 
 type CardForm = {
@@ -11,23 +11,27 @@ type CardForm = {
 };
 
 type CardLogin = {
+    fname: string;      // manifest filename
     title?: string;     // title by user
     hasCpass?: boolean; // has change password
     login: CardForm;    // login form
     cpass: CardForm;    // change password form
 };
 
-function repackManifest(m?: Mani.Manifest): CardLogin {
+function repackManifest(fileUs: FileUs): CardLogin {
     let login: CardLogin = {
+        fname: '',
         login: {
         },
         cpass: {
         },
     };
-    if (!m) {
+    if (!fileUs.mani) {
         return login;
     }
+    const m: Mani.Manifest = fileUs.mani;
 
+    login.fname = fileUs.fname;
     login.title = m.forms[0]?.detection?.caption;
     login.hasCpass = m.forms?.length > 1;
 
@@ -65,22 +69,77 @@ function TitleSecondRow({ login }: { login: CardLogin; }) {
     return (1);
 }
 
-function ManifestCard({ atom }: { atom: FileUsAtom; }) {
-    const [fileUs] = useAtom(atom);
-    const login: CardLogin = repackManifest(fileUs.mani);
+function Title({ login }: { login: CardLogin; }) {
+    const [open, setOpen] = React.useState(false);
     return (
-        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md">
-
-            {/* Card title */}
-            <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <div className="absolute top-3 right-2 w-6 h-6 opacity-50 hover:opacity-100"><IconInfo /></div>
-                <div className="">
-                    <TitleFirstRow login={login} />
-                    <div className="text-sm opacity-50 overflow-hidden whitespace-nowrap overflow-ellipsis">
-                        {login.title || 'No title'}
-                    </div>
+        <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <div className="absolute top-3 right-2 w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                <IconInfo />
+            </div>
+            <div className="">
+                <TitleFirstRow login={login} />
+                <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
+                    {login.fname}
+                </div>
+                <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
+                    {login.title || 'No title'}
                 </div>
             </div>
+            {open && <div className="">
+                <div className="">detection</div>
+            </div>}
+
+        </div>
+    );
+}
+
+function FormLogin({ login }: { login: CardLogin; }) {
+    return (
+        <div className="">
+            <div className="">detection</div>
+            <div className="">options</div>
+            <div className="">fields</div>
+        </div>
+    );
+}
+
+function FormCpass({ login }: { login: CardLogin; }) {
+    return (
+        <div className="">
+            <div className="">detection</div>
+            <div className="">options</div>
+            <div className="">fields</div>
+        </div>
+    );
+}
+
+function CardBody({ login }: { login: CardLogin; }) {
+    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    return (
+        <div className="flex items-center text-xs">
+            <div className="p-2 border border-gray-700 rounded" onClick={() => setOpen1((v) => !v)}>
+                Login form
+            </div>
+            {login.hasCpass &&
+                <div className="p-2 border border-gray-700 rounded ml-2" onClick={() => setOpen2((v) => !v)}>
+                    Password change form
+                </div>
+            }
+            {open1 && (<FormLogin login={login} />)}
+            {open2 && (<FormCpass login={login} />)}
+        </div>
+    );
+}
+
+function ManifestCard({ atom }: { atom: FileUsAtom; }) {
+    const [fileUs] = useAtom(atom);
+    const login: CardLogin = repackManifest(fileUs);
+    return (
+        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md select-none">
+
+            {/* Card title */}
+            <Title login={login} />
 
             {/* Card body */}
             <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800">
@@ -99,21 +158,12 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                 </div>
 
                 {/* Card body 2nd col */}
-                <div className="grid gap-y-2">
+                <div className="">
                     {/* Card body 2nd col: filename */}
-                    <div className="">{fileUs.name}</div>
+                    {/* <div className="">{fileUs.fname}</div> */}
 
                     {/* Card body 2nd col: forms */}
-                    <div className="flex text-xs">
-                        <div className="px-2 py-1 border border-gray-700 rounded">
-                            Login form
-                        </div>
-                        {login.hasCpass && 
-                        <div className="px-2 py-1 border border-gray-700 rounded ml-2">
-                            Password change form
-                        </div>
-                        }
-                    </div>
+                    <CardBody login={login} />
 
                     {/* <div className="overflow-hidden">
                         {login.forms && login.forms.map((f, idx) => (

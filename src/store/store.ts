@@ -6,7 +6,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export type FileUs = {
     id: string;
-    name: string;
+    fname: string;
     modified: number; // last modified
     size: number;
     raw?: string;
@@ -26,7 +26,7 @@ export const SetFilesAtom = atom(
         const dropped: FileUsAtom[] = accepterFiles.map((file) => {
             return atom<FileUs>({
                 id: uuid(),
-                name: file.name,
+                fname: file.name,
                 modified: file.lastModified,
                 size: file.size,
                 file: file,
@@ -67,7 +67,7 @@ const updateCacheAtom = atom(
                     try {
                         mani = parseManifest(cnt);
                     } catch (error) {
-                        console.log('%ctm error', 'color: red', error, '\n', file.name, cnt);
+                        console.log('%ctm error', 'color: red', error, '\n', file.fname, cnt);
                     }
 
                     const newAtom = {
