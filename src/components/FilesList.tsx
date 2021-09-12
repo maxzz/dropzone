@@ -96,6 +96,7 @@ function Title({ login }: { login: CardLogin; }) {
 function FormLogin({ login }: { login: CardLogin; }) {
     return (
         <div className="">
+            <div className="pt-2 font-bold border-b border-gray-500">Login form</div>
             <div className="">detection</div>
             <div className="">options</div>
             <div className="">fields</div>
@@ -106,6 +107,7 @@ function FormLogin({ login }: { login: CardLogin; }) {
 function FormCpass({ login }: { login: CardLogin; }) {
     return (
         <div className="">
+            <div className="pt-2 font-bold border-b border-gray-500">Password change form</div>
             <div className="">detection</div>
             <div className="">options</div>
             <div className="">fields</div>
@@ -117,17 +119,26 @@ function CardBody({ login }: { login: CardLogin; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     return (
-        <div className="flex items-center text-xs">
-            <div className="p-2 border border-gray-700 rounded" onClick={() => setOpen1((v) => !v)}>
-                Login form
+        <div className="p-2 bg-gray-200 text-gray-800">
+            <div className="flex items-center space-x-2 text-sm">
+                <button 
+                    className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
+                    onClick={() => setOpen1((v) => !v)}
+                >
+                    <span className={`${open1 ? 'text-gray-900' : ''}`}>Login form</span>
+                    <IconAppWindows className="w-5 h-5 ml-2 opacity-75" />
+                </button>
+                {login.hasCpass && <button 
+                    className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
+                    onClick={() => setOpen2((v) => !v)}
+                >
+                    <span className={`${open2 ? 'text-gray-900' : ''}`}>Password change form </span>
+                    <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} />
+                </button>}
             </div>
-            {login.hasCpass &&
-                <div className="p-2 border border-gray-700 rounded ml-2" onClick={() => setOpen2((v) => !v)}>
-                    Password change form
-                </div>
-            }
             {open1 && (<FormLogin login={login} />)}
             {open2 && (<FormCpass login={login} />)}
+
         </div>
     );
 }
@@ -142,30 +153,30 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
             <Title login={login} />
 
             {/* Card body */}
-            <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800">
+            <div className="">
 
                 {/* Card body 1st col */}
-                <div className="flex flex-col items-center">
+                {/* <div className="flex flex-col items-center">
                     <div className="w-5 h-5">
-                        {/* {fileUs.cnt && <IconAppWindows />} */}
+                        {/* {fileUs.cnt && <IconAppWindows />} * /}
                         {fileUs.raw && <IconAppWebIE />}
-                        {/* {fileUs.cnt && <IconManualMode />} */}
+                        {/* {fileUs.cnt && <IconManualMode />} * /}
                     </div>
                     <div className="w-4 h-4">
                         {fileUs.raw && <IconAppWebChrome strokeWidth={.9} />}
-                        {/* {fileUs.cnt && <IconAutoMode />} */}
+                        {/* {fileUs.cnt && <IconAutoMode />} * /}
                     </div>
-                </div>
+                </div> */}
 
                 {/* Card body 2nd col */}
-                <div className="">
-                    {/* Card body 2nd col: filename */}
-                    {/* <div className="">{fileUs.fname}</div> */}
+                {/* <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800"> */}
+                {/* Card body 2nd col: filename */}
+                {/* <div className="">{fileUs.fname}</div> */}
 
-                    {/* Card body 2nd col: forms */}
-                    <CardBody login={login} />
+                {/* Card body 2nd col: forms */}
+                <CardBody login={login} />
 
-                    {/* <div className="overflow-hidden">
+                {/* <div className="overflow-hidden">
                         {login.forms && login.forms.map((f, idx) => (
                             <div className="flex" key={idx}>
                                 <div className="w-4 h-4 p-0.5 mr-1 flex-none">
@@ -177,9 +188,11 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                     </div>
                      */}
 
-                    {/* <div className="">{fileUs.size} bytes</div> */}
-                </div>
+                {/* <div className="">{fileUs.size} bytes</div> */}
+                {/* </div> */}
                 {/* <div className="">{fileUs.cnt}</div> */}
+
+
             </div>
         </div>
     );
