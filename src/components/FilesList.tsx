@@ -34,7 +34,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
     const m: Mani.Manifest = fileUs.mani;
 
     login.fname = fileUs.fname;
-    login.title = m.forms[0]?.detection?.caption;
+    login.title = m.forms[0]?.options.choosename;
     login.hasCpass = m.forms?.length > 1;
 
     m.forms?.forEach((mform, idx) => {
@@ -95,6 +95,10 @@ function Title({ login }: { login: CardLogin; }) {
     );
 }
 
+function isObject(value: any): boolean {
+    return value && typeof value === 'object';
+}
+
 function ObjectTable({ obj = {} }: { obj?: any; }) {
     const values = Object.entries(obj);
     return (
@@ -102,31 +106,60 @@ function ObjectTable({ obj = {} }: { obj?: any; }) {
             {values.map((pair) => {
                 return (<React.Fragment key={pair[0]}>
                     <div className="">{pair[0]}</div>
-                    <div className="border-l border-red-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
+                    <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
                 </React.Fragment>)
             })}
         </div>
     );
 }
 
+// Form parts
+
 function PartFormDetection({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
     const form = login.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
-            <div className="pt-2 font-bold border-b border-gray-500">detection</div>
-            <div className="">{JSON.stringify(form?.detection, null, 4)}</div>
-            <div className="pt-2 font-bold border-b border-gray-500">-------</div>
+            <div className="pt-2">detection</div>
+            <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.detection} />
+            <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
 }
+
+function PartFormOptions({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
+    const form = login.fileUs.mani?.forms[formIndex];
+    return (
+        <div className="">
+            <div className="">options</div>
+            <div className="font-bold border-b border-gray-500"></div>
+            <ObjectTable obj={form?.options} />
+            <div className="font-bold border-t border-gray-500"></div>
+        </div>
+    );
+}
+
+function PartFormFields({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
+    const form = login.fileUs.mani?.forms[formIndex];
+    return (
+        <div className="">
+            <div className="">fields</div>
+            <div className="font-bold border-b border-gray-500"></div>
+            <ObjectTable obj={form?.fields} />
+            <div className="font-bold border-t border-gray-500"></div>
+        </div>
+    );
+}
+
+// Forms
 
 function FormLogin({ login }: { login: CardLogin; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Login form</div>
             <PartFormDetection login={login} formIndex={0} />
-            <div className="">options</div>
+            <PartFormOptions login={login} formIndex={0} />
+            <PartFormFields login={login} formIndex={0} />
             <div className="">fields</div>
         </div>
     );
@@ -136,8 +169,9 @@ function FormCpass({ login }: { login: CardLogin; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Password change form</div>
-            <div className="">detection</div>
-            <div className="">options</div>
+            <PartFormDetection login={login} formIndex={1} />
+            <PartFormOptions login={login} formIndex={1} />
+            <PartFormFields login={login} formIndex={1} />
             <div className="">fields</div>
         </div>
     );
