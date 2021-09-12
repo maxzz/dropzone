@@ -5,31 +5,38 @@ import { filesAtom, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
 
 type CardForm = {
-
+    domain?: string;    // domain if web app
+    isIE?: boolean;     // was trained with IE or Chrome
+    isManual?: boolean; // is manual mode
 };
 
 type CardLogin = {
     title?: string;     // title by user
-    domain?: string;    // domain if web app
-    forms?: string[];   //
+    hasCpass?: boolean; // has change password
     login: CardForm;    // login form
     cpass: CardForm;    // change password form
 };
 
 function repackManifest(m?: Mani.Manifest): CardLogin {
     let login: CardLogin = {
-        login: {},
-        cpass: {},
+        login: {
+        },
+        cpass: {
+        },
     };
     if (!m) {
         return login;
     }
 
     login.title = m.forms[0]?.detection?.caption;
+    login.hasCpass = m.forms?.length > 1;
 
-    login.forms = m.forms?.map((form, idx) => {
-        login.domain = urlDomain(removeQuery(form.detection?.web_ourl));
-        return `Form ${idx}: ${login.domain}`;
+    m.forms?.forEach((mform, idx) => {
+        const form = idx === 0 ? login.login : idx === 1 ? login.cpass : undefined;
+        if (!form) {
+            return;
+        }
+        form.domain = urlDomain(removeQuery(mform.detection?.web_ourl));
     });
 
     return login;
@@ -40,11 +47,11 @@ function CardInfo({ login }: { login: CardLogin; }) {
 }
 
 function TitleFirstRow({ login }: { login: CardLogin; }) {
-    const icon = login.domain
+    const icon = login.login.domain
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
-    const text = login.domain
-        ? <span className="ml-2 uppercase">{login.domain}</span>
+    const text = login.login.domain
+        ? <span className="ml-2 uppercase">{login.login.domain}</span>
         : <span className="ml-2 uppercase">Windows application</span>;
     return (
         <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -52,6 +59,10 @@ function TitleFirstRow({ login }: { login: CardLogin; }) {
             {text}
         </div>
     );
+}
+
+function TitleSecondRow({ login }: { login: CardLogin; }) {
+    return (1);
 }
 
 function ManifestCard({ atom }: { atom: FileUsAtom; }) {
@@ -62,10 +73,10 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
 
             {/* Card title */}
             <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <div className="absolute top-3 right-2 w-6 h-6"><IconInfo /></div>
+                <div className="absolute top-3 right-2 w-6 h-6 opacity-50 hover:opacity-100"><IconInfo /></div>
                 <div className="">
                     <TitleFirstRow login={login} />
-                    <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
+                    <div className="text-sm opacity-50 overflow-hidden whitespace-nowrap overflow-ellipsis">
                         {login.title || 'No title'}
                     </div>
                 </div>
@@ -91,8 +102,20 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                 <div className="grid gap-y-2">
                     {/* Card body 2nd col: filename */}
                     <div className="">{fileUs.name}</div>
+
                     {/* Card body 2nd col: forms */}
-                    <div className="overflow-hidden">
+                    <div className="flex text-xs">
+                        <div className="px-2 py-1 border border-gray-700 rounded">
+                            Login form
+                        </div>
+                        {login.hasCpass && 
+                        <div className="px-2 py-1 border border-gray-700 rounded ml-2">
+                            Password change form
+                        </div>
+                        }
+                    </div>
+
+                    {/* <div className="overflow-hidden">
                         {login.forms && login.forms.map((f, idx) => (
                             <div className="flex" key={idx}>
                                 <div className="w-4 h-4 p-0.5 mr-1 flex-none">
@@ -102,6 +125,8 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                             </div>)
                         )}
                     </div>
+                     */}
+
                     {/* <div className="">{fileUs.size} bytes</div> */}
                 </div>
                 {/* <div className="">{fileUs.cnt}</div> */}
