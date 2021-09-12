@@ -7,7 +7,7 @@ function debugUrl(url: string | undefined): string {
     return (url || '').split('?')[0];
 }
 
-function GridRow({ atom }: { atom: FileUsAtom; }) {
+function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
 
     let loginTitle;
@@ -23,19 +23,19 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
     }
 
     return (
-        <div className="grid grid-rows-[auto,1fr] border border-green-700 rounded shadow-md">
+        <div className="max-w-[500px] grid grid-rows-[auto,1fr] ring-1 ring-gray-400 overflow-hidden rounded shadow-md">
 
             {/* Card title */}
-            <div className="p-2 bg-green-800">
+            <div className="p-2 bg-gray-800 text-gray-100">
                 {loginTitle || 'No title'}
             </div>
 
             {/* Card body */}
-            <div className="p-2 grid grid-cols-[auto,1fr] gap-2">
+            <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800">
 
                 {/* 1st col */}
-                <div className="flex flex-col">
-                    <div className="w-4 h-4">
+                <div className="flex flex-col items-center">
+                    <div className="w-5 h-5">
                         {/* {fileUs.cnt && <IconAppWindows />} */}
                         {fileUs.raw && <IconAppWebIE />}
                         {/* {fileUs.cnt && <IconManualMode />} */}
@@ -70,9 +70,9 @@ function GridRow({ atom }: { atom: FileUsAtom; }) {
 function FilesList() {
     const [files] = useAtom(filesAtom);
     return (
-        <div className="p-4 grid  gap-x-1 gap-y-2 text-xs">
+        <div className="grid auto-cols-auto gap-4 text-sm">
             {files.map((atom) =>
-                <GridRow atom={atom} key={`${atom}`} />
+                <ManifestCard atom={atom} key={`${atom}`} />
             )}
         </div>
     );
