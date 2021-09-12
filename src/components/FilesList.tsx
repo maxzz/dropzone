@@ -95,12 +95,28 @@ function Title({ login }: { login: CardLogin; }) {
     );
 }
 
-function PartFormDetection({ login, formIndex }: { login: CardLogin; formIndex: number }) {
+function ObjectTable({ obj = {} }: { obj?: any; }) {
+    const values = Object.entries(obj);
+    return (
+        <div className="grid grid-cols-[auto,1fr] gap-x-1 text-xs">
+            {values.map((pair) => {
+                return (<React.Fragment key={pair[0]}>
+                    <div className="">{pair[0]}</div>
+                    <div className="border-l border-red-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
+                </React.Fragment>)
+            })}
+        </div>
+    );
+}
+
+function PartFormDetection({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
     const form = login.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">detection</div>
             <div className="">{JSON.stringify(form?.detection, null, 4)}</div>
+            <div className="pt-2 font-bold border-b border-gray-500">-------</div>
+            <ObjectTable obj={form?.detection} />
         </div>
     );
 }
@@ -134,7 +150,7 @@ function CardBody({ login }: { login: CardLogin; }) {
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
                 {/* Login form button */}
-                <button 
+                <button
                     className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
                     onClick={() => setOpen1((v) => !v)}
                 >
@@ -142,7 +158,7 @@ function CardBody({ login }: { login: CardLogin; }) {
                     <IconAppWindows className="w-5 h-5 ml-2 opacity-75" />
                 </button>
                 {/* Cpass form button */}
-                {login.hasCpass && <button 
+                {login.hasCpass && <button
                     className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
                     onClick={() => setOpen2((v) => !v)}
                 >
@@ -169,8 +185,8 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
             {/* Card body */}
             {/* <div className=""> */}
 
-                {/* Card body 1st col */}
-                {/* <div className="flex flex-col items-center">
+            {/* Card body 1st col */}
+            {/* <div className="flex flex-col items-center">
                     <div className="w-5 h-5">
                         {/* {fileUs.cnt && <IconAppWindows />} * /}
                         {fileUs.raw && <IconAppWebIE />}
@@ -182,15 +198,15 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                     </div>
                 </div> */}
 
-                {/* Card body 2nd col */}
-                {/* <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800"> */}
-                {/* Card body 2nd col: filename */}
-                {/* <div className="">{fileUs.fname}</div> */}
+            {/* Card body 2nd col */}
+            {/* <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800"> */}
+            {/* Card body 2nd col: filename */}
+            {/* <div className="">{fileUs.fname}</div> */}
 
-                {/* Card body 2nd col: forms */}
-                <CardBody login={login} />
+            {/* Card body 2nd col: forms */}
+            <CardBody login={login} />
 
-                {/* <div className="overflow-hidden">
+            {/* <div className="overflow-hidden">
                         {login.forms && login.forms.map((f, idx) => (
                             <div className="flex" key={idx}>
                                 <div className="w-4 h-4 p-0.5 mr-1 flex-none">
@@ -202,9 +218,9 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                     </div>
                      */}
 
-                {/* <div className="">{fileUs.size} bytes</div> */}
-                {/* </div> */}
-                {/* <div className="">{fileUs.cnt}</div> */}
+            {/* <div className="">{fileUs.size} bytes</div> */}
+            {/* </div> */}
+            {/* <div className="">{fileUs.cnt}</div> */}
             {/* </div> */}
         </div>
     );
