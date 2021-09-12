@@ -1,41 +1,54 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { urlDomain } from '../store/manifest/url';
+import { removeQuery, urlDomain } from '../store/manifest/url';
 import { filesAtom, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from './Icons';
 
-function removeQuery(url: string | undefined): string {
-    return (url || '').split('?')[0].split('#')[0];
+type CardForm = {
+
+};
+
+type CardLogin = {
+    title?: string;     // title by user
+    domain?: string;    // domain if web app
+    forms?: string[];   //
+    login: CardForm;    // login form
+    cpass: CardForm;    // change password form
+};
+
+function repackManifest(m?: Mani.Manifest): CardLogin {
+    let login: CardLogin = {
+        login: {},
+        cpass: {},
+    };
+    if (!m) {
+        return login;
+    }
+
+    login.title = m.forms[0]?.detection?.caption;
+
+    login.forms = m.forms?.map((form, idx) => {
+        login.domain = urlDomain(removeQuery(form.detection?.web_ourl));
+        return `Form ${idx}: ${login.domain}`;
+    });
+
+    return login;
 }
 
 function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
-
-    let loginTitle;
-    let loginDomain;
-    let loginForms;
-
-    if (fileUs.mani) {
-        const mani = fileUs.mani;
-        loginTitle = mani.forms[0]?.detection?.caption;
-
-        loginForms = mani.forms?.map((form, idx) => {
-            loginDomain = urlDomain(removeQuery(form.detection?.web_ourl));
-            return `Form ${idx}: ${loginDomain}`;
-        });
-    }
-
+    const login: CardLogin = repackManifest(fileUs.mani);
     return (
-        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-1 ring-gray-400 overflow-hidden rounded shadow-md">
+        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md">
 
             {/* Card title */}
-            <div className="p-2 bg-gray-800 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <div className="p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <div className="">
                     <div className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis">
-                        {loginDomain || 'Windows application'}
+                        {login.domain || 'Windows application'}
                     </div>
                     <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
-                        {loginTitle || 'No title'}
+                        {login.title || 'No title'}
                     </div>
                 </div>
             </div>
@@ -62,7 +75,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                     <div className="">{fileUs.name}</div>
                     {/* Card body 2nd col: forms */}
                     <div className="overflow-hidden">
-                        {loginForms && loginForms.map((f, idx) => (
+                        {login.forms && login.forms.map((f, idx) => (
                             <div className="flex" key={idx}>
                                 <div className="w-4 h-4 p-0.5 mr-1 flex-none">
                                     {idx === 0 ? <IconFormLogin /> : <IconFormChangePsw />}
