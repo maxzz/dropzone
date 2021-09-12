@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import React from 'react';
+import { urlDomain } from '../store/manifest/url';
 import { filesAtom, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from './Icons';
 
@@ -11,6 +12,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
 
     let loginTitle;
+    let loginDomain;
     let loginForms;
 
     if (fileUs.mani) {
@@ -18,7 +20,8 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
         loginTitle = mani.forms[0]?.detection?.caption;
 
         loginForms = mani.forms?.map((form, idx) => {
-            return `Form ${idx}: ${removeQuery(form.detection?.web_ourl)}`;
+            loginDomain = urlDomain(removeQuery(form.detection?.web_ourl));
+            return `Form ${idx}: ${loginDomain}`;
         });
     }
 
@@ -26,8 +29,15 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
         <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-1 ring-gray-400 overflow-hidden rounded shadow-md">
 
             {/* Card title */}
-            <div className="p-2 bg-gray-800 text-gray-100">
-                {loginTitle || 'No title'}
+            <div className="p-2 bg-gray-800 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+                <div className="">
+                    <div className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis">
+                        {loginDomain || 'Windows application'}
+                    </div>
+                    <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
+                        {loginTitle || 'No title'}
+                    </div>
+                </div>
             </div>
 
             {/* Card body */}
