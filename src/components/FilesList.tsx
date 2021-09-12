@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
 import { filesAtom, FileUsAtom } from '../store/store';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from './Icons';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
 
 type CardForm = {
 
@@ -35,6 +35,25 @@ function repackManifest(m?: Mani.Manifest): CardLogin {
     return login;
 }
 
+function CardInfo({ login }: { login: CardLogin; }) {
+    return (1);
+}
+
+function TitleFirstRow({ login }: { login: CardLogin; }) {
+    const icon = login.domain
+        ? <IconAppWebIE className="w-6 h-6" />
+        : <IconAppWindows className="w-6 h-6" />;
+    const text = login.domain
+        ? <span className="ml-2 uppercase">{login.domain}</span>
+        : <span className="ml-2 uppercase">Windows application</span>;
+    return (
+        <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+            {icon}
+            {text}
+        </div>
+    );
+}
+
 function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     const login: CardLogin = repackManifest(fileUs.mani);
@@ -42,11 +61,10 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
         <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md">
 
             {/* Card title */}
-            <div className="p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+                <div className="absolute top-3 right-2 w-6 h-6"><IconInfo /></div>
                 <div className="">
-                    <div className="text-lg overflow-hidden whitespace-nowrap overflow-ellipsis">
-                        {login.domain || 'Windows application'}
-                    </div>
+                    <TitleFirstRow login={login} />
                     <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
                         {login.title || 'No title'}
                     </div>
