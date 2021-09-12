@@ -11,6 +11,7 @@ type CardForm = {
 };
 
 type CardLogin = {
+    fileUs: FileUs;     // raw data
     fname: string;      // manifest filename
     title?: string;     // title by user
     hasCpass?: boolean; // has change password
@@ -20,6 +21,7 @@ type CardLogin = {
 
 function repackManifest(fileUs: FileUs): CardLogin {
     let login: CardLogin = {
+        fileUs,
         fname: '',
         login: {
         },
@@ -93,11 +95,21 @@ function Title({ login }: { login: CardLogin; }) {
     );
 }
 
+function PartFormDetection({ login, formIndex }: { login: CardLogin; formIndex: number }) {
+    const form = login.fileUs.mani?.forms[formIndex];
+    return (
+        <div className="">
+            <div className="pt-2 font-bold border-b border-gray-500">detection</div>
+            <div className="">{JSON.stringify(form?.detection, null, 4)}</div>
+        </div>
+    );
+}
+
 function FormLogin({ login }: { login: CardLogin; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Login form</div>
-            <div className="">detection</div>
+            <PartFormDetection login={login} formIndex={0} />
             <div className="">options</div>
             <div className="">fields</div>
         </div>
@@ -121,6 +133,7 @@ function CardBody({ login }: { login: CardLogin; }) {
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
+                {/* Login form button */}
                 <button 
                     className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
                     onClick={() => setOpen1((v) => !v)}
@@ -128,6 +141,7 @@ function CardBody({ login }: { login: CardLogin; }) {
                     <span className={`${open1 ? 'text-gray-900' : ''}`}>Login form</span>
                     <IconAppWindows className="w-5 h-5 ml-2 opacity-75" />
                 </button>
+                {/* Cpass form button */}
                 {login.hasCpass && <button 
                     className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
                     onClick={() => setOpen2((v) => !v)}
@@ -153,7 +167,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
             <Title login={login} />
 
             {/* Card body */}
-            <div className="">
+            {/* <div className=""> */}
 
                 {/* Card body 1st col */}
                 {/* <div className="flex flex-col items-center">
@@ -191,9 +205,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                 {/* <div className="">{fileUs.size} bytes</div> */}
                 {/* </div> */}
                 {/* <div className="">{fileUs.cnt}</div> */}
-
-
-            </div>
+            {/* </div> */}
         </div>
     );
 }

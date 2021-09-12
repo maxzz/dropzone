@@ -19,7 +19,7 @@
 }
 
 body {
-    background-image: linear-gradient(to right, var(--tm-primary-300, #c191917d), var(--tm-primary-300, #607b9894)),
+    background-image: linear-gradient(to right, var(--tm-primary-300, #607b9894), var(--tm-primary-300, #c191917d)),
         url("./assets/background-bw.jpg") /*http://higeom.math.msu.su/history/delone_r.html*/;
     background-blend-mode: multiply;
 }
