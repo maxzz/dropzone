@@ -10,7 +10,7 @@ export type FileUs = {
     modified: number; // last modified
     size: number;
     raw?: string;
-    mani?: Manifest;
+    mani?: Mani.Manifest;
     file?: File;
 };
 
@@ -63,7 +63,7 @@ const updateCacheAtom = atom(
                     const cnt = await textFileReader(file.file);
                     //console.log('cnt', cnt);
 
-                    let mani: Manifest | undefined;
+                    let mani: Mani.Manifest | undefined;
                     try {
                         mani = parseManifest(cnt);
                     } catch (error) {

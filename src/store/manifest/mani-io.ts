@@ -2,7 +2,7 @@ import { parse } from 'fast-xml-parser';
 
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
-export function beautifyXMLManifest(manifest: Manifest): Manifest {
+export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
     // 0. convert XML .dpm object to manifest format.
 
     manifest.descriptor = (manifest.descriptor as any)._attributes || {};
@@ -12,14 +12,14 @@ export function beautifyXMLManifest(manifest: Manifest): Manifest {
         manifest.forms = [manifest.forms];
     }
 
-    manifest.forms.forEach((form: Form) => {
+    manifest.forms.forEach((form: Mani.Form) => {
         // Remove _attributes
         form.fcontext && (form.fcontext = (form.fcontext as any)._attributes);
         form.detection && (form.detection = (form.detection as any)._attributes);
         form.options && (form.options = (form.options as any)._attributes);
 
         if (form.fields) {
-            let fields = (form.fields as any).field as Field[];
+            let fields = (form.fields as any).field as Mani.Field[];
             form.fields = Array.isArray(fields) ? fields : [fields];
         }
 
@@ -36,7 +36,7 @@ export function beautifyXMLManifest(manifest: Manifest): Manifest {
         if (form.fields) {
             form.fields = form.fields.map(field => (field as any)._attributes);
 
-            form.fields.forEach((field: Field) => {
+            form.fields.forEach((field: Mani.Field) => {
                 field.password && (field.password = !!field.password);
                 field.useit && (field.useit = !!field.useit);
 
@@ -45,7 +45,7 @@ export function beautifyXMLManifest(manifest: Manifest): Manifest {
         }
     });
 
-    return manifest as Manifest;
+    return manifest as Mani.Manifest;
 }
 
 const parseOptions = {
@@ -55,7 +55,7 @@ const parseOptions = {
     allowBooleanAttributes: true,
 };
 
-export function parseManifest(cnt: string): Manifest | undefined {
+export function parseManifest(cnt: string): Mani.Manifest | undefined {
     const obj = parse(cnt, parseOptions);
     //console.log('%craw', 'color: red', obj);
 

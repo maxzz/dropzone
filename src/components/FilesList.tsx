@@ -3,8 +3,8 @@ import React from 'react';
 import { filesAtom, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from './Icons';
 
-function debugUrl(url: string | undefined): string {
-    return (url || '').split('?')[0];
+function removeQuery(url: string | undefined): string {
+    return (url || '').split('?')[0].split('#')[0];
 }
 
 function ManifestCard({ atom }: { atom: FileUsAtom; }) {
@@ -18,12 +18,12 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
         loginTitle = mani.forms[0]?.detection?.caption;
 
         loginForms = mani.forms?.map((form, idx) => {
-            return `Form ${idx}: ${debugUrl(form.detection?.web_ourl)}`;
+            return `Form ${idx}: ${removeQuery(form.detection?.web_ourl)}`;
         });
     }
 
     return (
-        <div className="max-w-[500px] grid grid-rows-[auto,1fr] ring-1 ring-gray-400 overflow-hidden rounded shadow-md">
+        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-1 ring-gray-400 overflow-hidden rounded shadow-md">
 
             {/* Card title */}
             <div className="p-2 bg-gray-800 text-gray-100">
@@ -33,7 +33,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
             {/* Card body */}
             <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800">
 
-                {/* 1st col */}
+                {/* Card body 1st col */}
                 <div className="flex flex-col items-center">
                     <div className="w-5 h-5">
                         {/* {fileUs.cnt && <IconAppWindows />} */}
@@ -46,9 +46,11 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
                     </div>
                 </div>
 
-                {/* 2nd col */}
+                {/* Card body 2nd col */}
                 <div className="grid gap-y-2">
+                    {/* Card body 2nd col: filename */}
                     <div className="">{fileUs.name}</div>
+                    {/* Card body 2nd col: forms */}
                     <div className="overflow-hidden">
                         {loginForms && loginForms.map((f, idx) => (
                             <div className="flex" key={idx}>

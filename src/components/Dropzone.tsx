@@ -33,7 +33,7 @@ export function DropzoneArea() {
                 {
                     isDragActive ?
                         <p>Drop the files here ...</p> :
-                        <p>Drag 'n' drop some files here, or click to select files</p>
+                        <p>Drag 'n' drop files here, or click to select files</p>
                 }
                     <div className="w-7 h-7" onClick={(event) => {
                         event.stopPropagation();
