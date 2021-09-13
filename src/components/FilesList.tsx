@@ -3,6 +3,7 @@ import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
 import { filesAtom, FileUs, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
+import TextareaAutosize from 'react-textarea-autosize';
 
 type CardForm = {
     domain?: string;    // domain if web app
@@ -54,7 +55,13 @@ function CardInfo({ login }: { login: CardLogin; }) {
         <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
         {/* <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800  border-4 border-gray-800 shadow-md">  */}
             {/* h-[70vh] opacity-50 */}
-            <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea>
+
+            {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
+            {/* <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" /> */}
+            <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" />
+
+            {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
+
             {/* <pre>{login.fileUs.raw}</pre> */}
         </div>
     );
