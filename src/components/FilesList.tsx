@@ -51,7 +51,8 @@ function repackManifest(fileUs: FileUs): CardLogin {
 
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
-        <div className="h-96 overflow-auto">
+        <div className="h-[70vh] m-2 p-2 overflow-auto smallscroll text-xs bg-gray-800 border border-gray-600 border-l-gray-300 border-t-gray-300 shadow-md">
+        {/* <div className="h-[70vh] m-2 p-2 overflow-auto smallscroll text-xs bg-gray-800 border-2 border-gray-600 border-r-gray-300 border-b-gray-300 shadow-md"> */}
             <pre>{login.fileUs.raw}</pre>
         </div>
     );
@@ -79,7 +80,8 @@ function TitleSecondRow({ login }: { login: CardLogin; }) {
 function Title({ login }: { login: CardLogin; }) {
     const [open, setOpen] = React.useState(false);
     return (
-        <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
+        {/* <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis"> */}
             <div className="absolute top-3 right-2 w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
                 <IconInfo />
             </div>
@@ -98,6 +100,8 @@ function Title({ login }: { login: CardLogin; }) {
         </div>
     );
 }
+
+// Form parts utils
 
 function isObject(value: any): boolean {
     return value && typeof value === 'object';
