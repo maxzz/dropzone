@@ -107,12 +107,13 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
                 if (isObject(pair[1])) {
                     return (<React.Fragment key={pair[0]}>
                         <div className="">field {pair[0]}</div>
-                        {ObjectTable({obj: pair[1]})}
+                        {/* <div className="">field2</div> */}
+                        {ObjectTable({obj: pair[1]})} {/* TODO: we don't need to add grid */}
                     </React.Fragment>);
                 } else {
                     return (<React.Fragment key={pair[0]}>
                         <div className="">{pair[0]}</div>
-                        <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
+                        <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
                     </React.Fragment>);
                 }
             })}
@@ -167,7 +168,6 @@ function FormLogin({ login }: { login: CardLogin; }) {
             <PartFormDetection login={login} formIndex={0} />
             <PartFormOptions login={login} formIndex={0} />
             <PartFormFields login={login} formIndex={0} />
-            <div className="">fields</div>
         </div>
     );
 }
@@ -179,7 +179,6 @@ function FormCpass({ login }: { login: CardLogin; }) {
             <PartFormDetection login={login} formIndex={1} />
             <PartFormOptions login={login} formIndex={1} />
             <PartFormFields login={login} formIndex={1} />
-            <div className="">fields</div>
         </div>
     );
 }
