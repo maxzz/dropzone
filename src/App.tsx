@@ -7,11 +7,12 @@ import FilesList from './components/FilesList';
 function App() {
     return (
         <React.Fragment>
-            <div className="p-4 flex flex-col justify-between h-screen overflow-hidden">
+            <div className="p-4 grid grid-rows-[auto,1fr] h-screen">
+            {/* <div className="p-4 flex flex-col justify-between h-screen"> */}
                 <header className="pb-0">
                     <DropzoneArea />
                 </header>
-                <div className="flex-1 -mr-2 mt-4 overflow-y-auto smallscroll smallscroll-light">
+                <div className="mt-4 -mr-2 max-h-full overflow-y-hidden">
                     <FilesList />
                 </div>
             </div>

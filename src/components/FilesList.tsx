@@ -53,7 +53,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
         // <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
-        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800  border-4 border-gray-800 shadow-md"> 
+        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md"> 
             {/* h-[70vh] opacity-50 */}
 
             {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
@@ -242,7 +242,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     const login: CardLogin = repackManifest(fileUs);
     return (
-        <div className="mr-2 min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
+        <div className="mr-2 min-w-[450px] max-w-[560px] grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
 
             {/* Card title */}
             <Title login={login} />
@@ -294,10 +294,13 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
 function FilesList() {
     const [files] = useAtom(filesAtom);
     return (
-        <div className="grid auto-cols-auto gap-4 text-sm">
-            {files.map((atom) =>
-                <ManifestCard atom={atom} key={`${atom}`} />
-            )}
+        <div className="h-full overflow-y-auto">
+            <div className="flex flex-col gap-4 grid-rows-[min-content] text-sm">
+                {/* smallscroll smallscroll-light */}
+                {files.map((atom) =>
+                    <ManifestCard atom={atom} key={`${atom}`} />
+                )}
+            </div>
         </div>
     );
 }
