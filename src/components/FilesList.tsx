@@ -58,7 +58,11 @@ function CardInfo({ login }: { login: CardLogin; }) {
 
             {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
             {/* <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" /> */}
+            
             <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" />
+            {/* Problems: it will recalculate on every character */}
+            {/* Problems: attacheched to the doc root */}
+            {/* Problems: does not respect whitespace-pre */}
 
             {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
 
