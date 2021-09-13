@@ -51,7 +51,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
 
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
-        <div className="">
+        <div className="h-96 overflow-auto">
             <pre>{login.fileUs.raw}</pre>
         </div>
     );
