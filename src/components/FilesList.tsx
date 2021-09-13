@@ -32,6 +32,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
         return login;
     }
     const m: Mani.Manifest = fileUs.mani;
+    console.log('raw', fileUs.raw);
 
     login.fname = fileUs.fname;
     login.title = m.forms[0]?.options.choosename;
@@ -49,7 +50,11 @@ function repackManifest(fileUs: FileUs): CardLogin {
 }
 
 function CardInfo({ login }: { login: CardLogin; }) {
-    return (1);
+    return (
+        <div className="">
+            <pre>{login.fileUs.raw}</pre>
+        </div>
+    );
 }
 
 function TitleFirstRow({ login }: { login: CardLogin; }) {
@@ -88,9 +93,8 @@ function Title({ login }: { login: CardLogin; }) {
                 </div>
             </div>
             {open && <div className="">
-                <div className="">detection</div>
+                <CardInfo login={login} />
             </div>}
-
         </div>
     );
 }
@@ -108,14 +112,14 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
                     return (<React.Fragment key={pair[0]}>
                         <div className="">field {pair[0]}</div>
                         {/* <div className="">field2</div> */}
-                        {ObjectTable({obj: pair[1]})} {/* TODO: we don't need to add grid */}
+                        {ObjectTable({ obj: pair[1] })} {/* TODO: we don't need to add grid */}
                     </React.Fragment>);
                 } else {
                     return (<React.Fragment key={pair[0]}>
                         <div className="">{pair[0]}</div>
                         {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
                         {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-                        <div className="border-l border-gray-500 pl-1 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
+                        <div className="border-l border-gray-500 pl-1 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
                     </React.Fragment>);
                 }
             })}
@@ -219,7 +223,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     const login: CardLogin = repackManifest(fileUs);
     return (
-        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md select-none">
+        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md">{/* select-none */}
 
             {/* Card title */}
             <Title login={login} />
