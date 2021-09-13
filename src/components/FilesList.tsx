@@ -51,8 +51,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
 
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
-        <div className="h-[70vh] m-2 p-2 overflow-auto smallscroll text-xs bg-gray-800 border border-gray-600 border-l-gray-300 border-t-gray-300 shadow-md">
-        {/* <div className="h-[70vh] m-2 p-2 overflow-auto smallscroll text-xs bg-gray-800 border-2 border-gray-600 border-r-gray-300 border-b-gray-300 shadow-md"> */}
+        <div className="h-[70vh] my-2 overflow-auto smallscroll text-xs bg-gray-800 border-4 border-gray-800 shadow-md">
             <pre>{login.fileUs.raw}</pre>
         </div>
     );
