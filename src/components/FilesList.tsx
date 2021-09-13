@@ -113,7 +113,9 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
                 } else {
                     return (<React.Fragment key={pair[0]}>
                         <div className="">{pair[0]}</div>
-                        <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
+                        {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
+                        {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
+                        <div className="border-l border-gray-500 pl-1 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div>
                     </React.Fragment>);
                 }
             })}

@@ -5,7 +5,11 @@ module.exports = {
     purge: ['./index.html', './src/**/*.{tsx,ts,jsx,js}'],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            // 'sbColor': (theme) => ({
+            //     ...theme('colors')
+            // })
+        },
     },
     variants: {
         extend: {},

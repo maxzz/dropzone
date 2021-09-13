@@ -7,6 +7,12 @@
     scrollbar-width: thin;
 }
 
+.smallscroll-light {
+    --sb-width: 6px;
+    --sb-clr: #30303080; /* #666b7a */
+    --sb-bkg: #c1c1c178; /* transparent */
+}
+
 /* Chrome scrollbars */
 .smallscroll::-webkit-scrollbar {
     width: var(--sb-width);
