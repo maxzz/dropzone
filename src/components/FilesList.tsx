@@ -51,8 +51,11 @@ function repackManifest(fileUs: FileUs): CardLogin {
 
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
-        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md"> {/* h-[70vh] */}
-            <pre>{login.fileUs.raw}</pre>
+        <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
+        {/* <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800  border-4 border-gray-800 shadow-md">  */}
+            {/* h-[70vh] opacity-50 */}
+            <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea>
+            {/* <pre>{login.fileUs.raw}</pre> */}
         </div>
     );
 }
