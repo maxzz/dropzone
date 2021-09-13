@@ -294,8 +294,8 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
 function FilesList() {
     const [files] = useAtom(filesAtom);
     return (
-        <div className="h-full overflow-y-auto">
-            <div className="flex flex-col gap-4 grid-rows-[min-content] text-sm">
+        <div className="h-full overflow-y-auto mx-auto">
+            <div className="flex flex-row flex-wrap gap-4 grid-rows-[min-content] text-sm">
                 {/* smallscroll smallscroll-light */}
                 {files.map((atom) =>
                     <ManifestCard atom={atom} key={`${atom}`} />
