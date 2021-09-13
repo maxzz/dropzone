@@ -52,21 +52,23 @@ function repackManifest(fileUs: FileUs): CardLogin {
 
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
-        <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
-        {/* <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800  border-4 border-gray-800 shadow-md">  */}
+        // <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
+        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800  border-4 border-gray-800 shadow-md"> 
             {/* h-[70vh] opacity-50 */}
 
             {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
             {/* <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" /> */}
             
-            <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" />
+            {/* Final */}
+            {/* <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" /> */}
+
             {/* Problems: it will recalculate on every character */}
             {/* Problems: attacheched to the doc root */}
             {/* Problems: does not respect whitespace-pre */}
 
             {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
 
-            {/* <pre>{login.fileUs.raw}</pre> */}
+            <pre>{login.fileUs.raw}</pre>
         </div>
     );
 }
