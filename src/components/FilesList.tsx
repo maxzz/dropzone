@@ -51,7 +51,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
 
 function CardInfo({ login }: { login: CardLogin; }) {
     return (
-        <div className="h-[70vh] my-2 overflow-auto smallscroll text-xs bg-gray-800 border-4 border-gray-800 shadow-md">
+        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md"> {/* h-[70vh] */}
             <pre>{login.fileUs.raw}</pre>
         </div>
     );
@@ -79,8 +79,8 @@ function TitleSecondRow({ login }: { login: CardLogin; }) {
 function Title({ login }: { login: CardLogin; }) {
     const [open, setOpen] = React.useState(false);
     return (
-        <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
-        {/* <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis"> */}
+        // <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
+        <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
             <div className="absolute top-3 right-2 w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
                 <IconInfo />
             </div>
@@ -226,7 +226,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     const login: CardLogin = repackManifest(fileUs);
     return (
-        <div className="min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-2 ring-gray-500 overflow-hidden rounded shadow-md">{/* select-none */}
+        <div className="mr-2 min-w-[450px] max-w-[560px] grid grid-rows-[auto,1fr] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
 
             {/* Card title */}
             <Title login={login} />
