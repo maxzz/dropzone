@@ -295,7 +295,9 @@ function FilesList() {
     const [files] = useAtom(filesAtom);
     return (
         <div className="h-full overflow-y-auto mx-auto">
-            <div className="flex flex-row flex-wrap gap-4 grid-rows-[min-content] text-sm">
+            <div className="grid grid-flow-row gap-4 text-sm"
+            // style={{gridTemplateColumns: 'repeat(auto-fit, minmax(0,1fr))'}}
+            >
                 {/* smallscroll smallscroll-light */}
                 {files.map((atom) =>
                     <ManifestCard atom={atom} key={`${atom}`} />
