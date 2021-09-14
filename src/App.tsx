@@ -5,14 +5,17 @@ import Toaster from './components/Toaster';
 import FilesList from './components/FilesList';
 import LabeledSwitch from './components/Switch';
 import { useAtom } from 'jotai';
-import { showManualManiAtom, showNormalManiAtom } from './store/store';
+import { showManualManiAtom, showNormalManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store/store';
 
 function AppFilters() {
     const [showNormalMani, setShowNormalMani] = useAtom(showNormalManiAtom);
     const [showManualMani, setShowManualMani] = useAtom(showManualManiAtom);
+
+    const [totalNormalMani] = useAtom(totalNormalManiAtom);
+    const [totalManualMani] = useAtom(totalManualManiAtom);
     return (<>
-        <LabeledSwitch label="Normal" value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} />
-        <LabeledSwitch label="Manual" value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} />
+        <LabeledSwitch label={`Normal (${totalNormalMani})`} value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} />
+        <LabeledSwitch label={`Manual (${totalManualMani})`} value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} />
     </>);
 }
 

@@ -82,6 +82,9 @@ const updateCacheAtom = atom(
                 console.log('error', error);
             }
         }
+
+        set(totalManualManiAtom, files.length);
+        set(totalNormalManiAtom, files.length);
     }
 );
 
@@ -89,3 +92,6 @@ const updateCacheAtom = atom(
 
 export const showNormalManiAtom = atom(false);
 export const showManualManiAtom = atom(false);
+
+export const totalManualManiAtom = atom(0);
+export const totalNormalManiAtom = atom(0);
