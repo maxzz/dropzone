@@ -84,3 +84,8 @@ const updateCacheAtom = atom(
         }
     }
 );
+
+// Filers
+
+export const showNormalManiAtom = atom(false);
+export const showManualManiAtom = atom(false);

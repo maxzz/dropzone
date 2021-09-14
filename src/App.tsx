@@ -4,6 +4,17 @@ import { DropzoneArea } from './components/Dropzone';
 import Toaster from './components/Toaster';
 import FilesList from './components/FilesList';
 import LabeledSwitch from './components/Switch';
+import { useAtom } from 'jotai';
+import { showManualManiAtom, showNormalManiAtom } from './store/store';
+
+function AppFilters() {
+    const [showNormalMani, setShowNormalMani] = useAtom(showNormalManiAtom);
+    const [showManualMani, setShowManualMani] = useAtom(showManualManiAtom);
+    return (<>
+        <LabeledSwitch label="Normal" value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} />
+        <LabeledSwitch label="Manual" value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} />
+    </>);
+}
 
 function App() {
     return (
@@ -12,9 +23,8 @@ function App() {
             <div className="p-4 flex flex-col justify-between h-screen">
                 <header className="pb-0">
                     <DropzoneArea>
-                        <div className="mr-4 flex items-center space-x-2">
-                            <LabeledSwitch label="Normal" />
-                            <LabeledSwitch label="Manual" />
+                        <div className="mr-8 flex items-center space-x-2">
+                            <AppFilters />
                         </div>
                     </DropzoneArea>
                 </header>
