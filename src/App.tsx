@@ -14,7 +14,13 @@ function AppFilters() {
     const [totalNormalMani] = useAtom(totalNormalManiAtom);
     const [totalManualMani] = useAtom(totalManualManiAtom);
     return (<>
-        <LabeledSwitch label={`Normal (${totalNormalMani})`} value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} />
+        <LabeledSwitch label={
+            <div className="flex items-center">
+                <div className="inline-block">Normal</div>
+                <div className="inline-block ml-1 pb-3">{totalNormalMani}</div>
+            </div>
+        }
+            value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} />
         <LabeledSwitch label={`Manual (${totalManualMani})`} value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} />
     </>);
 }
