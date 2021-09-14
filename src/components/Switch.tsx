@@ -11,13 +11,13 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     //all: 'unset',
     // width: 42,
     // height: 25,
-    backgroundColor: blackA.blackA9,
-    borderRadius: '9999px',
-    position: 'relative',
-    boxShadow: `0 2px 10px ${blackA.blackA7}`,
+    //backgroundColor: blackA.blackA9,
+    //borderRadius: '9999px',
+    //position: 'relative',
+    //boxShadow: `0 2px 10px ${blackA.blackA7}`,
     WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-    '&:focus': { boxShadow: `0 0 0 2px black` },
-    '&[data-state="checked"]': { backgroundColor: 'black' },
+    //'&:focus': { boxShadow: `0 0 0 2px black` },
+    '&[data-state="checked"]': { backgroundColor: 'rgb(156, 163, 175)' }, //bg-gray-400
 });
 
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
@@ -57,12 +57,13 @@ const SwitchThumb = StyledThumb;
 //         </Switch>
 //     </Flex>
 // );
-
-function LabeledSwitch() {
+//#7b899d
+function LabeledSwitch({ label }: { label: string; }) {
     return (
         <label className="flex items-center">
-            Auto2
-            <Switch className="w-24 h-6 flex items-center">
+            {label}
+            <Switch className="ml-2 w-[46px] h-[28px] flex items-center bg-gray-700 rounded-full relative shadow border-2 ring-gray-400 focus:ring-gray-900">
+            {/* <Switch className="ml-2 w-[42px] h-6 flex items-center bg-gray-700 rounded-full relative shadow ☻ring-2 ring-gray-400 focus:ring-gray-900"> */}
                 <SwitchThumb className="mb-px w-5 h-5" />
             </Switch>
         </label>
