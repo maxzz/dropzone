@@ -2,15 +2,15 @@ import React from 'react';
 import { styled } from '../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 
-const blackA ={
-    blackA7: 'blue',
+const blackA = {
+    blackA7: '#00000080',
     blackA9: 'red',
-}
+};
 
 const StyledSwitch = styled(SwitchPrimitive.Root, {
-    all: 'unset',
-    width: 42,
-    height: 25,
+    //all: 'unset',
+    // width: 42,
+    // height: 25,
     backgroundColor: blackA.blackA9,
     borderRadius: '9999px',
     position: 'relative',
@@ -22,15 +22,16 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
 
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
     display: 'block',
-    width: 21,
-    height: 21,
+    // width: 21,
+    // height: 21,
     backgroundColor: 'white',
     borderRadius: '9999px',
     boxShadow: `0 2px 2px ${blackA.blackA7}`,
     transition: 'transform 100ms',
     transform: 'translateX(2px)',
     willChange: 'transform',
-    '&[data-state="checked"]': { transform: 'translateX(19px)' },
+    '&[data-state="checked"]': { transform: 'translateX(100%)' },
+    // '&[data-state="checked"]': { transform: 'translateX(19px)' },
 });
 
 // Exports
@@ -38,23 +39,34 @@ const Switch = StyledSwitch;
 const SwitchThumb = StyledThumb;
 
 // Your app...
-const Flex = styled('div', { display: 'flex' });
-const Label = styled('label', {
-    color: 'white',
-    fontSize: 15,
-    lineHeight: 1,
-    userSelect: 'none',
-});
+// const Flex = styled('div', { display: 'flex' });
+// const Label = styled('label', {
+//     color: 'white',
+//     fontSize: 15,
+//     lineHeight: 1,
+//     userSelect: 'none',
+// });
 
-const LabeledSwitch = () => (
-    <Flex css={{ alignItems: 'center' }}>
-        <Label htmlFor="s1" css={{ paddingRight: 15 }}>
-            Auto
-        </Label>
-        <Switch defaultChecked id="s1">
-            <SwitchThumb />
-        </Switch>
-    </Flex>
-);
+// const LabeledSwitch = () => (
+//     <Flex css={{ alignItems: 'center' }}>
+//         <Label htmlFor="s1" css={{ paddingRight: 15 }}>
+//             Auto
+//         </Label>
+//         <Switch defaultChecked id="s1">
+//             <SwitchThumb />
+//         </Switch>
+//     </Flex>
+// );
+
+function LabeledSwitch() {
+    return (
+        <label className="flex items-center">
+            Auto2
+            <Switch className="w-24 h-6 flex items-center">
+                <SwitchThumb className="mb-px w-5 h-5" />
+            </Switch>
+        </label>
+    );
+}
 
 export default LabeledSwitch;
