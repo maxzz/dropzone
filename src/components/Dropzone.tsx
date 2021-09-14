@@ -16,7 +16,7 @@ function nameLengthValidator(file: File) {
     return null;
 }
 
-export function DropzoneBase({className, children}: React.HTMLAttributes<HTMLDivElement>) {
+export function DropzoneBase({className, classNameActive, children}: React.HTMLAttributes<HTMLDivElement> & {classNameActive?: string}) {
     const setFiles = useUpdateAtom(SetFilesAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => setFiles(accepterFiles), []);
@@ -27,7 +27,7 @@ export function DropzoneBase({className, children}: React.HTMLAttributes<HTMLDiv
     });
 
     return (
-        <div {...getRootProps()} className={`${className} ${isDragActive ? 'bg-green-600' : ''}`}>
+        <div {...getRootProps()} className={`${className} ${isDragActive ? classNameActive : ''}`}>
             <input {...getInputProps()} />
             {children}
         </div>
@@ -35,20 +35,11 @@ export function DropzoneBase({className, children}: React.HTMLAttributes<HTMLDiv
 }
 
 export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
-    const setFiles = useUpdateAtom(SetFilesAtom);
-
-    const onDrop = useCallback((accepterFiles: File[]) => setFiles(accepterFiles), []);
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        validator: nameLengthValidator,
-    });
-
     return (
         <div className="flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
-            <DropzoneBase className="px-4 py-2 my-1 mr-4 rounded bg-gray-900 ml-4">
+            <DropzoneBase className="px-4 py-2 my-1 mr-4 rounded bg-gray-900 ml-4" classNameActive="bg-green-600"> {/* TODO: classNameActive is not good fot tailwind parser */}
                 <div>
-                    <p>Drag 'n' drop files here, or click to select files</p>
+                    Drag 'n' drop files here, or click to select files
                 </div>
             </DropzoneBase>
             <div className="flex items-center justify-between">
