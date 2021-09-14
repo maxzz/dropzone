@@ -44,7 +44,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
             </DropzoneBase>
             <div className="flex items-center justify-between">
                 {children}
-                <div className="w-7 h-7 mr-8" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
+                <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
                     <IconAppLogo />
                 </div>
             </div>
