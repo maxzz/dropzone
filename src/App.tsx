@@ -23,7 +23,7 @@ function App() {
             <div className="p-4 flex flex-col justify-between h-screen">
                 <header className="pb-0">
                     <DropzoneArea>
-                        <div className="mr-8 flex items-center space-x-2">
+                        <div className="mr-8 flex flex-col sm:flex-row items-end sm:items-center space-x-2 space-y-2 sm:space-y-0 text-sm text-gray-200">
                             <AppFilters />
                         </div>
                     </DropzoneArea>
