@@ -3,6 +3,7 @@ import './App.scss';
 import { DropzoneArea } from './components/Dropzone';
 import Toaster from './components/Toaster';
 import FilesList from './components/FilesList';
+import LabeledSwitch from './components/Switch';
 
 function Button({children, ...rest}: {children?: React.ReactNode, rest?: React.HtmlHTMLAttributes<HTMLElement>}) {
     return (
@@ -17,6 +18,8 @@ function Button({children, ...rest}: {children?: React.ReactNode, rest?: React.H
     );
 }
 
+
+
 function App() {
     return (
         <React.Fragment>
@@ -26,6 +29,7 @@ function App() {
                     <DropzoneArea>
                         <div className="mr-4 flex items-center space-x-2">
                             <Button>Auto</Button>
+                            <LabeledSwitch />
                             <button className="h-8 p-2 flex items-center rounded border shadow-inner"
                             style={{
                                 boxShadow: '#0000005e 1px 1px 4px 0px inset, #bcbcbc99 -1px -1px 2px 0px inset',
