@@ -90,7 +90,7 @@ const updateCacheAtom = atom(
 
 // Filers
 
-export const showNormalManiAtom = atom(false);
+export const showNormalManiAtom = atom(true);
 export const showManualManiAtom = atom(false);
 
 export const totalManualManiAtom = atom(0);
