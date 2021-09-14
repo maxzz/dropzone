@@ -3,7 +3,7 @@ import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
 import { filesAtom, FileUs, FileUsAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
-import TextareaAutosize from 'react-textarea-autosize';
+//import TextareaAutosize from 'react-textarea-autosize';
 
 type CardForm = {
     domain?: string;    // domain if web app
