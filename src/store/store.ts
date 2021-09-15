@@ -56,7 +56,12 @@ function countManifestTypes(get: Getter) {
     const files = get(filesAtom);
     const res = files.reduce((acc, cur) => {
         const m: FileUs = get(cur);
-        
+        const isManual = m.meta?.some((form) => form.disp.isScript);
+        if (isManual) {
+            acc.manual++;
+        } else {
+            acc.normal++;
+        }
         return acc;
     }, { normal: 0, manual: 0 });
     return res;

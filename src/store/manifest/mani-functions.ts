@@ -183,21 +183,25 @@ export function fieldPathItems(pool: string[], path: string): Meta.Path {
 }
 
 export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
-    return !mani || !mani.forms || !mani.forms.length
-        ? []
-        : mani.forms.map((form: Mani.Form): Meta.Form => {
-            const pool = getPool(form) || [];
-            return {
-                mani: form,
-                disp: {
-                    isScript: false,
-                },
-                pool: pool,
-                rects: buildFormLocations(form) || [],
-                fields: (form.fields || []).map((field: Mani.Field) => ({
-                    mani: field,
-                    path: fieldPathItems(pool, field.path_ext || ''),
-                })),
-            };
-        });
+    const isScript = (fields: Meta.Field[]): boolean => {
+        console.log('path', fields.some(({path}: {path: Meta.Path}) => path.sn));
+        return fields.some(({path}: {path: Meta.Path}) => path.sn);
+    };
+    const buildMetaForm = (form: Mani.Form): Meta.Form => {
+        const pool = getPool(form) || [];
+        const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field) => ({
+            mani: field,
+            path: fieldPathItems(pool, field.path_ext || ''),
+        }));
+        return {
+            mani: form,
+            disp: {
+                isScript: isScript(fields),
+            },
+            pool: pool,
+            rects: buildFormLocations(form) || [],
+            fields,
+        };
+    };
+    return !mani || !mani.forms || !mani.forms.length ? [] : mani.forms.map(buildMetaForm);
 }
