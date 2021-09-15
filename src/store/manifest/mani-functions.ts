@@ -7,7 +7,7 @@
    **/
 export function fileTimeToDate(fileTime: number | string): Date {
     if (typeof fileTime === 'string') {
-        fileTime = Number('0x'+fileTime.split(' ').join('')); // dwHighDateTime + ' ' + dwLowDateTime 
+        fileTime = Number('0x' + fileTime.split(' ').join('')); // dwHighDateTime + ' ' + dwLowDateTime 
     }
     return new Date(fileTime / 10000 - 11644473600000);
 }
@@ -21,7 +21,7 @@ function removeEscapeChars(s: string, escapeChar: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
 }
 
-function cpp_restore(s: string): string {
+export function cpp_restore(s: string): string {
     if (!s) {
         return '';
     }
@@ -30,7 +30,7 @@ function cpp_restore(s: string): string {
         [/\^at;/g, "@"],
         [/\^dot;/g, "."],
         [/\^2dot;/g, ":"],
-        [/\^escape;/g, ''+0x1b],
+        [/\^escape;/g, '' + 0x1b],
 
         [/%0d/gi, "\r"],
         [/%0a/g, "\n"],
@@ -52,9 +52,9 @@ export function poolName(pool: string[], index: string): string {
     return '????????????';
 }
 
-function pathItem_p4a(pool: string[], s: string): Mani.PathItem_p4a {
+function pathItem_p4a(pool: string[], s: string): MPath.PathItem_p4a {
     let ss = s.split('.');
-    let rv: Mani.PathItem_p4a = {
+    let rv: MPath.PathItem_p4a = {
         rnumber: 0,
         roleString: poolName(pool, ss[1]),
         className: cpp_restore(poolName(pool, ss[2])),
@@ -63,7 +63,7 @@ function pathItem_p4a(pool: string[], s: string): Mani.PathItem_p4a {
     return rv;
 }
 
-function pathItem_sid(pool: string[], v: string): Mani.PathItem_sid {
+function pathItem_sid(pool: string[], v: string): MPath.PathItem_sid {
     let sid = {} as any;
     v.split('.').forEach((_, index) => {
         let s = cpp_restore(poolName(pool, _));
@@ -88,22 +88,22 @@ function pathItem_loc_removePool(pool: string[], v: string): string {
     return rv;
 }
 
-function str2loc(str: string): Mani.PathItem_loc {
+function str2loc(str: string): MPath.PathItem_loc {
     let s = str.split(' ').map(_ => +_);
     return { x: s[0], y: s[1], w: s[2] - s[0], h: s[3] - s[1], f: s[4] || 0, i: s[5] || 0 };
 }
 
-function loc2str(loc: Mani.PathItem_loc): string {
+function loc2str(loc: MPath.PathItem_loc): string {
     let s = `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
     return s;
 }
 
-export function pathItem_loc2items(v: string): Mani.PathItem_loc[] {
+export function pathItem_loc2items(v: string): MPath.PathItem_loc[] {
     let rv = dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
     return rv;
 }
 
-export function buildFormLocations(form: Mani.Form): Mani.PathItem_loc[] {
+export function buildFormLocations(form: Mani.Form): MPath.PathItem_loc[] {
     let pool: string[] = getPool(form);
     let uni = new Set<string>();
 
@@ -124,8 +124,7 @@ export function buildFormLocations(form: Mani.Form): Mani.PathItem_loc[] {
 }
 
 function pathItems(path: string): [string, string][] {
-    let rv: [string, string][] = path.split('[').filter(Boolean)
-        .map<[string, string]>((val) => val.split(']') as [string, string]);
+    let rv: [string, string][] = path.split('[').filter(Boolean).map<[string, string]>((val) => val.split(']') as [string, string]);
     return rv;
 }
 
@@ -133,8 +132,8 @@ export function getPool(form: Mani.Form): string[] {
     return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
 }
 
-export function fieldPathItems(pool: string[], path: string): Mani.FieldPath {
-    let rv: Mani.FieldPath = {};
+export function fieldPathItems(pool: string[], path: string): MPath.FieldPath {
+    let rv: MPath.FieldPath = {};
 
     let items: [string, string][] = pathItems(path);
 
@@ -143,20 +142,20 @@ export function fieldPathItems(pool: string[], path: string): Mani.FieldPath {
             case 'p4a':
             case 'p4': {
                 rv.p4a = _[1].split('|').map(_ => pathItem_p4a(pool, _));
+                break;
             }
-            break;
             case 'loc': {
                 rv.loc = pathItem_loc_removePool(pool, _[1]);
+                break;
             }
-            break;
             case 'sid': {
                 rv.sid = pathItem_sid(pool, _[1]);
+                break;
             }
-            break;
             case 'did2': {
                 rv.did2 = _[1];
+                break;
             }
-            break;
             case 'sn': {
                 rv.sn = {
                     total: 0,
@@ -173,9 +172,9 @@ export function fieldPathItems(pool: string[], path: string): Mani.FieldPath {
                     }
                     rv.sn.parts = ss.filter(Boolean);
                 }
+                break;
             }
-            break;
-            default: 
+            default:
                 console.log('??????path??????');
         }
     });

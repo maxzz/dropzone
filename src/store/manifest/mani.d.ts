@@ -53,7 +53,10 @@ declare module Mani {
         descriptor: Descriptor;
         forms: Form[];
     }
+
+} //declare module Mani
     
+declare module MPath { // Manifest path
     /* Path */
     
     interface PathItem_p4a { // from: unpack_fromstring()
@@ -105,15 +108,16 @@ declare module Mani {
     }
     
     /* Path end */
-}
+} //declare module MPath
+
 
 
 /* Unpacked forms */
 
 interface FormEx {
     pool: string[];
-    rects: Mani.PathItem_loc[];
-    paths: Mani.FieldPath[]; // each item corresponds to each field
+    rects: MPath.PathItem_loc[];
+    paths: MPath.FieldPath[]; // each item corresponds to each field
 }
 
 /* Unpacked forms end */
