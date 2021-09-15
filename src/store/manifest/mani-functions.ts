@@ -52,9 +52,9 @@ export function poolName(pool: string[], index: string): string {
     return '????????????';
 }
 
-function pathItem_p4a(pool: string[], s: string): PathItem_p4a {
+function pathItem_p4a(pool: string[], s: string): Mani.PathItem_p4a {
     let ss = s.split('.');
-    let rv: PathItem_p4a = {
+    let rv: Mani.PathItem_p4a = {
         rnumber: 0,
         roleString: poolName(pool, ss[1]),
         className: cpp_restore(poolName(pool, ss[2])),
@@ -63,7 +63,7 @@ function pathItem_p4a(pool: string[], s: string): PathItem_p4a {
     return rv;
 }
 
-function pathItem_sid(pool: string[], v: string): PathItem_sid {
+function pathItem_sid(pool: string[], v: string): Mani.PathItem_sid {
     let sid = {} as any;
     v.split('.').forEach((_, index) => {
         let s = cpp_restore(poolName(pool, _));
@@ -88,26 +88,26 @@ function pathItem_loc_removePool(pool: string[], v: string): string {
     return rv;
 }
 
-function str2loc(str: string): PathItem_loc {
+function str2loc(str: string): Mani.PathItem_loc {
     let s = str.split(' ').map(_ => +_);
     return { x: s[0], y: s[1], w: s[2] - s[0], h: s[3] - s[1], f: s[4] || 0, i: s[5] || 0 };
 }
 
-function loc2str(loc: PathItem_loc): string {
+function loc2str(loc: Mani.PathItem_loc): string {
     let s = `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
     return s;
 }
 
-export function pathItem_loc2items(v: string): PathItem_loc[] {
+export function pathItem_loc2items(v: string): Mani.PathItem_loc[] {
     let rv = dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
     return rv;
 }
 
-export function buildFormLocations(form: Form): PathItem_loc[] {
+export function buildFormLocations(form: Mani.Form): Mani.PathItem_loc[] {
     let pool: string[] = getPool(form);
     let uni = new Set<string>();
 
-    form.fields.map((field: Field) => {
+    form.fields.map((field: Mani.Field) => {
         let path = field.path_ext ? field.path_ext : '';
         let items: [string, string][] = pathItems(path);
         let locsItem = items.find((_) => _[0] === 'loc');
@@ -129,12 +129,12 @@ function pathItems(path: string): [string, string][] {
     return rv;
 }
 
-export function getPool(form: Form): string[] {
+export function getPool(form: Mani.Form): string[] {
     return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
 }
 
-export function fieldPathItems(pool: string[], path: string): FieldPath {
-    let rv: FieldPath = {};
+export function fieldPathItems(pool: string[], path: string): Mani.FieldPath {
+    let rv: Mani.FieldPath = {};
 
     let items: [string, string][] = pathItems(path);
 
