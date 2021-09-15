@@ -189,9 +189,12 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
             const pool = getPool(form) || [];
             return {
                 mani: form,
+                disp: {
+                    isScript: false,
+                },
                 pool: pool,
                 rects: buildFormLocations(form) || [],
-                paths: (form.fields || []).map((field: Mani.Field) => ({
+                fields: (form.fields || []).map((field: Mani.Field) => ({
                     mani: field,
                     path: fieldPathItems(pool, field.path_ext || ''),
                 })),

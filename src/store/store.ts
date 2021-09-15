@@ -1,4 +1,4 @@
-import { atom, WritableAtom } from 'jotai';
+import { atom, Getter, Setter, WritableAtom } from 'jotai';
 import uuid from '../utils/uuid';
 import { buildFormExs } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
@@ -52,6 +52,16 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
+function countManifestTypes(get: Getter) {
+    const files = get(filesAtom);
+    const res = files.reduce((acc, cur) => {
+        const m: FileUs = get(cur);
+        
+        return acc;
+    }, { normal: 0, manual: 0 });
+    return res;
+}
+
 const updateCacheAtom = atom(
     null,
     async (get, set) => {
@@ -86,10 +96,11 @@ const updateCacheAtom = atom(
             } catch (error) {
                 console.log('error', error);
             }
-        }
+        } //for
 
-        set(totalManualManiAtom, files.length);
-        set(totalNormalManiAtom, files.length);
+        const total = countManifestTypes(get);
+        set(totalNormalManiAtom, total.normal);
+        set(totalManualManiAtom, total.manual);
     }
 );
 

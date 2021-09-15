@@ -101,7 +101,7 @@ declare module MPath {      // Manifest unpacked path data
 
 declare module Meta {       // Manifest unpacked forms, as meta data
 
-    interface Path {        // a collection of path items
+    interface Path {        // Collection of path items
         p4a?: MPath.Chunk_p4a[];
         p4?: MPath.Chunk_p4[];
         loc?: string;       // "x y w h | x y w h ... | x y w h"
@@ -115,11 +115,16 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         path: Path;
     }
 
+    interface Disp {        // Display information about form
+        isScript: boolean;
+    }
+
     interface Form {
         mani: Mani.Form;
+        disp: Disp;
         pool: string[];
         rects: MPath.Chunk_loc[];
-        paths: Field[]; // each item corresponds to each field
+        fields: Field[]; // each item corresponds to each field
     }
 
 } //declare module Meta
