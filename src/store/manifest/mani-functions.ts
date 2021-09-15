@@ -178,8 +178,7 @@ export function fieldPathItems(pool: string[], path: string): Meta.Path {
 
 export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isScript = (fields: Meta.Field[]): boolean => {
-        console.log('path', fields.some(({path}: {path: Meta.Path}) => path.sn));
-        return fields.some(({path}: {path: Meta.Path}) => path.sn);
+        return !!fields.length && fields.some(({path}: {path: Meta.Path}) => path.sn);
     };
     const buildMetaForm = (form: Mani.Form): Meta.Form => {
         const pool: string[] = getPool(form) || [];

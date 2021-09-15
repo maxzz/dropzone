@@ -1,9 +1,8 @@
-import { atom, Getter, Setter, WritableAtom } from 'jotai';
+import { atom, Getter, WritableAtom } from 'jotai';
 import uuid from '../utils/uuid';
 import { buildFormExs } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { delay, isEmpty, isManual, textFileReader } from './store-functions';
 
 export type FileUs = {
     id: string;
@@ -39,28 +38,28 @@ export const SetFilesAtom = atom(
     }
 );
 
-// Cache
+export const filteredAtom = atom<FileUsAtom[]>(
+    (get) => {
+        const showNormal = get(showNormalManiAtom);
+        const showManual = get(showManualManiAtom);
+        const showEmpty = get(showEmptyManiAtom);
+        const files = get(filesAtom);
+        return files.filter((fileAtom: FileUsAtom) => {
+            const fileUs = get(fileAtom);
+            return isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
+        });
+    }
+);
 
-function textFileReader(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        const aborted = () => reject(`File (${file.name}) reading was aborted`);
-        reader.onabort = aborted;
-        reader.onerror = aborted;
-        reader.onload = () => resolve(reader.result?.toString() || '');
-        reader.readAsText(file);
-    });
-}
+// Cache
 
 function countManifestTypes(get: Getter) {
     const files = get(filesAtom);
     const res = files.reduce((acc, cur) => {
         const m: FileUs = get(cur);
-        const isManual = m.meta?.some((form) => form.disp.isScript);
-        const isEmpty = m.meta?.some((form) => form.disp.isEmpty);
-        if (isEmpty) {
+        if (isEmpty(m)) {
             acc.empty++;
-        } else if (isManual) {
+        } else if (isManual(m)) {
             acc.manual++;
         } else {
             acc.normal++;
@@ -87,7 +86,6 @@ const updateCacheAtom = atom(
                     try {
                         mani = parseManifest(raw);
                         meta = buildFormExs(mani);
-                        //console.log('extra', meta);
                     } catch (error) {
                         console.log('%ctm error', 'color: red', error, '\n', file.fname, raw);
                     }
