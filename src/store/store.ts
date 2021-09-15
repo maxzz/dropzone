@@ -57,13 +57,16 @@ function countManifestTypes(get: Getter) {
     const res = files.reduce((acc, cur) => {
         const m: FileUs = get(cur);
         const isManual = m.meta?.some((form) => form.disp.isScript);
-        if (isManual) {
+        const isEmpty = m.meta?.some((form) => form.disp.isEmpty);
+        if (isEmpty) {
+            acc.empty++;
+        } else if (isManual) {
             acc.manual++;
         } else {
             acc.normal++;
         }
         return acc;
-    }, { normal: 0, manual: 0 });
+    }, { normal: 0, manual: 0, empty: 0 });
     return res;
 }
 
@@ -84,7 +87,7 @@ const updateCacheAtom = atom(
                     try {
                         mani = parseManifest(raw);
                         meta = buildFormExs(mani);
-                        console.log('extra', meta);
+                        //console.log('extra', meta);
                     } catch (error) {
                         console.log('%ctm error', 'color: red', error, '\n', file.fname, raw);
                     }
@@ -106,6 +109,7 @@ const updateCacheAtom = atom(
         const total = countManifestTypes(get);
         set(totalNormalManiAtom, total.normal);
         set(totalManualManiAtom, total.manual);
+        set(totalEmptyManiAtom, total.empty);
     }
 );
 
@@ -113,6 +117,8 @@ const updateCacheAtom = atom(
 
 export const showNormalManiAtom = atom(true);
 export const showManualManiAtom = atom(true);
+export const showEmptyManiAtom = atom(true);
 
 export const totalManualManiAtom = atom(0);
 export const totalNormalManiAtom = atom(0);
+export const totalEmptyManiAtom = atom(0);

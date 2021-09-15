@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { showManualManiAtom, showNormalManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../store/store';
+import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../store/store';
 import LabeledSwitch from './Switch';
 import { DropzoneArea } from './Dropzone';
 
@@ -16,12 +16,15 @@ function LabeWithNumber({ label, value }: { label: string; value: number; }) {
 function AppFilters() {
     const [showNormalMani, setShowNormalMani] = useAtom(showNormalManiAtom);
     const [showManualMani, setShowManualMani] = useAtom(showManualManiAtom);
+    const [showEmptyMani, setShowEmptyMani] = useAtom(showEmptyManiAtom);
 
     const [totalNormalMani] = useAtom(totalNormalManiAtom);
     const [totalManualMani] = useAtom(totalManualManiAtom);
+    const [totalEmptyMani] = useAtom(totalEmptyManiAtom);
     return (<>
         <LabeledSwitch label={<LabeWithNumber label={'Normal'} value={totalNormalMani} />} value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} title="Show normal mode manifests" />
         <LabeledSwitch label={<LabeWithNumber label={'Manual'} value={totalManualMani} />} value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} title="Show manual mode manifests" />
+        <LabeledSwitch label={<LabeWithNumber label={'Empty'} value={totalEmptyMani} />} value={showEmptyMani} onChange={() => setShowEmptyMani(!showEmptyMani)} title="Show excluded manifests" />
     </>);
 }
 

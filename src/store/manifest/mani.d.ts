@@ -116,7 +116,8 @@ declare module Meta {       // Manifest unpacked forms, as meta data
     }
 
     interface Disp {        // Display information about form
-        isScript: boolean;
+        isScript: boolean;  // Form has at least one script field
+        isEmpty: boolean;   // Form has no field, i.e. excluded website
     }
 
     interface Form {
