@@ -111,8 +111,8 @@ declare module MPath { // Manifest path
 } //declare module MPath
 
 
-
-/* Unpacked forms */
+declare module MExtra { // Manifest unpacked forms
+    /* Unpacked forms */
 
 interface FormEx {
     pool: string[];
@@ -120,4 +120,5 @@ interface FormEx {
     paths: MPath.FieldPath[]; // each item corresponds to each field
 }
 
-/* Unpacked forms end */
+    /* Unpacked forms end */
+} //declare module MExtra
