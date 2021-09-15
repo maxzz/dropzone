@@ -5,14 +5,14 @@ declare module Mani {
         dbname?: string;
         path_ext?: string;
         rfield?: 'in' | 'out';
-        rfieldindex?: number; // "2"
-        password?: boolean, // "1"
-        useit?: boolean, //"1"
+        rfieldindex?: number;   // "2"
+        password?: boolean,     // "1"
+        useit?: boolean,        //"1"
     }
 
     interface FContext {
         type: 'pchange';
-        name: number; // "1"
+        name: number;           // "1"
     }
 
     interface Detection {
@@ -28,10 +28,10 @@ declare module Mani {
 
     interface Options {
         choosename?: string;
-        sidekick?: string; // "manual mode hint"
+        sidekick?: string;      // "manual mode hint"
         quicklink?: string;
-        usequicklink?: number; // "1" | "2"
-        iconlocation?: string; // "Q:0:0:0"
+        usequicklink?: number;  // "1" | "2"
+        iconlocation?: string;  // "Q:0:0:0"
     }
 
     interface Form {
@@ -42,11 +42,11 @@ declare module Mani {
     }
 
     interface Descriptor {
-        id: string; // "{fe94ea4f-ac76-4f7d-9c74-fa14abca889b}"
-        created: string; // "1d57495 61c6f733"
-        modified: string; // "1d57496 87bed3e8",
+        id: string;         // "{fe94ea4f-ac76-4f7d-9c74-fa14abca889b}"
+        created: string;    // "1d57495 61c6f733"
+        modified: string;   // "1d57496 87bed3e8",
         integrity?: string; // "OTS2.056a41167041b1ea2c529494aeb606d0e"
-        version: string; // "2.4.3"
+        version: string;    // "2.4.3"
     }
 
     interface Manifest {
@@ -56,18 +56,18 @@ declare module Mani {
 
 } //declare module Mani
 
-declare module MPath { // Manifest unpacked path data
+declare module MPath {      // Manifest unpacked path data
 
-    interface PathItem_p4a { // from: unpack_fromstring()
+    interface Chunk_p4a {   // from: unpack_fromstring()
         rnumber: number;
         roleString: string;
         className: string;
         name?: string;
     }
 
-    type PathItem_p4 = PathItem_p4a;
+    type Chunk_p4 = Chunk_p4a;
 
-    interface PathItem_sid {
+    interface Chunk_sid {
         version: string;
         generatedId: string;
         formName: string;
@@ -75,45 +75,45 @@ declare module MPath { // Manifest unpacked path data
         outerHtml?: string;
     }
 
-    interface PathItem_did2 {
+    interface Chunk_did2 {
         s1: string;
         s2: string;
         s3: string;
         s4?: string;
     }
 
-    interface PathItem_loc { // In client area or against 1920x1200 or 1600x1200?
+    interface Chunk_loc {   // In client area or against 1920x1200 or 1600x1200?
         x: number;
         y: number;
         w: number;
         h: number;
-        f?: number; // 0 | 1 if the last element in field (this is internal and not saved).
-        i?: number; // index of rect before dedupe (this is internal and not saved).
+        f?: number;         // 0 | 1 if the last element in field (this is internal and not saved).
+        i?: number;         // index of rect before dedupe (this is internal and not saved).
     }
 
-    interface PathItem_sn {
+    interface Chunk_sn {
         total: number;      // total blocks
         current: number;    // current block
         parts: string[];    // block parts
     }
 
-    interface FieldPath {
-        p4a?: PathItem_p4a[];
-        p4?: PathItem_p4[];
-        loc?: string; // "x y w h | x y w h ... | x y w h"
-        sid?: PathItem_sid;
+    interface FieldPath {   // a collection of path items
+        p4a?: Chunk_p4a[];
+        p4?: Chunk_p4[];
+        loc?: string;       // "x y w h | x y w h ... | x y w h"
+        sid?: Chunk_sid;
         did2?: string;
-        sn?: PathItem_sn; // script number
+        sn?: Chunk_sn;      // script number
     }
 
 } //declare module MPath
 
-declare module MExtra { // Manifest unpacked forms, as meta data
+declare module Meta {       // Manifest unpacked forms, as meta data
 
-    interface FormEx {
+    interface Form {
         pool: string[];
-        rects: MPath.PathItem_loc[];
+        rects: MPath.Chunk_loc[];
         paths: MPath.FieldPath[]; // each item corresponds to each field
     }
 
-} //declare module MExtra
+} //declare module Meta

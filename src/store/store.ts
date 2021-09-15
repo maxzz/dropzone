@@ -12,7 +12,7 @@ export type FileUs = {
     size: number;
     raw?: string;
     mani?: Mani.Manifest;
-    forms?: MExtra.FormEx[],
+    meta?: Meta.Form[],
     file?: File;
 };
 
@@ -62,25 +62,25 @@ const updateCacheAtom = atom(
                 const file = get(fileAtom);
 
                 if (file.file && !file.raw) {
-                    const cnt = await textFileReader(file.file);
-                    //console.log('cnt', cnt);
+                    const raw = await textFileReader(file.file);
 
                     let mani: Mani.Manifest | undefined;
-                    let extra: MExtra.FormEx[] | undefined;
+                    let meta: Meta.Form[] | undefined;
                     try {
-                        mani = parseManifest(cnt);
-                        extra = buildFormExs(mani);
-                        console.log('extra', extra);
+                        mani = parseManifest(raw);
+                        meta = buildFormExs(mani);
+                        console.log('extra', meta);
                     } catch (error) {
-                        console.log('%ctm error', 'color: red', error, '\n', file.fname, cnt);
+                        console.log('%ctm error', 'color: red', error, '\n', file.fname, raw);
                     }
 
-                    const newAtom = {
+                    const forNewAtom: FileUs = {
                         ...file,
-                        raw: cnt,
-                        mani: mani,
+                        raw: raw,
+                        mani,
+                        meta,
                     };
-                    set(fileAtom, newAtom);
+                    set(fileAtom, forNewAtom);
                     //await delay(1000);
                 }
             } catch (error) {

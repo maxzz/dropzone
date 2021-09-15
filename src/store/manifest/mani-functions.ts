@@ -52,9 +52,9 @@ export function poolName(pool: string[], index: string): string {
     return '????????????';
 }
 
-function pathItem_p4a(pool: string[], s: string): MPath.PathItem_p4a {
+function pathItem_p4a(pool: string[], s: string): MPath.Chunk_p4a {
     let ss = s.split('.');
-    let rv: MPath.PathItem_p4a = {
+    let rv: MPath.Chunk_p4a = {
         rnumber: 0,
         roleString: poolName(pool, ss[1]),
         className: cpp_restore(poolName(pool, ss[2])),
@@ -63,7 +63,7 @@ function pathItem_p4a(pool: string[], s: string): MPath.PathItem_p4a {
     return rv;
 }
 
-function pathItem_sid(pool: string[], v: string): MPath.PathItem_sid {
+function pathItem_sid(pool: string[], v: string): MPath.Chunk_sid {
     let sid = {} as any;
     v.split('.').forEach((_, index) => {
         let s = cpp_restore(poolName(pool, _));
@@ -88,22 +88,22 @@ function pathItem_loc_removePool(pool: string[], v: string): string {
     return rv;
 }
 
-function str2loc(str: string): MPath.PathItem_loc {
+function str2loc(str: string): MPath.Chunk_loc {
     let s = str.split(' ').map(_ => +_);
     return { x: s[0], y: s[1], w: s[2] - s[0], h: s[3] - s[1], f: s[4] || 0, i: s[5] || 0 };
 }
 
-function loc2str(loc: MPath.PathItem_loc): string {
+function loc2str(loc: MPath.Chunk_loc): string {
     let s = `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
     return s;
 }
 
-export function pathItem_loc2items(v: string): MPath.PathItem_loc[] {
+export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
     let rv = dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
     return rv;
 }
 
-export function buildFormLocations(form: Mani.Form): MPath.PathItem_loc[] {
+export function buildFormLocations(form: Mani.Form): MPath.Chunk_loc[] {
     let pool: string[] = getPool(form);
     let uni = new Set<string>();
 
@@ -182,18 +182,15 @@ export function fieldPathItems(pool: string[], path: string): MPath.FieldPath {
     return rv;
 }
 
-export function buildFormExs(mani: Mani.Manifest | undefined): MExtra.FormEx[] {
-    if (!mani || !mani.forms || !mani.forms.length) {
-        return [];
-    }
-    let formExs = mani.forms.map((form: Mani.Form) => {
-        let pool = getPool(form) || [];
-        let formEx: MExtra.FormEx = {
-            pool: pool,
-            rects: buildFormLocations(form) || [],
-            paths: (form.fields || []).map((field: Mani.Field) => fieldPathItems(pool, field.path_ext || ''))
-        };
-        return formEx;
-    });
-    return formExs;
+export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
+    return !mani || !mani.forms || !mani.forms.length
+        ? []
+        : mani.forms.map((form: Mani.Form): Meta.Form => {
+            const pool = getPool(form) || [];
+            return {
+                pool: pool,
+                rects: buildFormLocations(form) || [],
+                paths: (form.fields || []).map((field: Mani.Field) => fieldPathItems(pool, field.path_ext || '')),
+            };
+        });
 }
