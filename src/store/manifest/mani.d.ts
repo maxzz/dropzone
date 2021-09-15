@@ -108,7 +108,7 @@ declare module MPath { // Manifest unpacked path data
 
 } //declare module MPath
 
-declare module MExtra { // Manifest unpacked forms
+declare module MExtra { // Manifest unpacked forms, as meta data
 
     interface FormEx {
         pool: string[];

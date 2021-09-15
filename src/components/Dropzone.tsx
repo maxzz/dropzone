@@ -37,7 +37,7 @@ export function DropzoneBase({className, classNameActive, children}: React.HTMLA
 export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
     return (
         <div className="flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
-            <DropzoneBase className="px-4 py-2 my-1 mr-4 rounded bg-gray-900 ml-4" classNameActive="bg-green-600"> {/* TODO: classNameActive is not good fot tailwind parser */}
+            <DropzoneBase className="px-4 py-2 my-1 mr-4 rounded bg-gray-900 ml-4 flex items-center" classNameActive="bg-green-600"> {/* TODO: classNameActive is not good fot tailwind parser */}
                 <div>
                     Drag 'n' drop files here, or click to select files
                 </div>
