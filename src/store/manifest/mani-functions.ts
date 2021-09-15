@@ -188,9 +188,13 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
         : mani.forms.map((form: Mani.Form): Meta.Form => {
             const pool = getPool(form) || [];
             return {
+                mani: form,
                 pool: pool,
                 rects: buildFormLocations(form) || [],
-                paths: (form.fields || []).map((field: Mani.Field) => fieldPathItems(pool, field.path_ext || '')),
+                paths: (form.fields || []).map((field: Mani.Field) => ({
+                    mani: field,
+                    path: fieldPathItems(pool, field.path_ext || ''),
+                })),
             };
         });
 }

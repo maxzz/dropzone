@@ -110,10 +110,16 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         sn?: MPath.Chunk_sn; // script number
     }
 
+    interface Field {
+        mani: Mani.Field,
+        path: Path;
+    }
+
     interface Form {
+        mani: Mani.Form;
         pool: string[];
         rects: MPath.Chunk_loc[];
-        paths: Path[]; // each item corresponds to each field
+        paths: Field[]; // each item corresponds to each field
     }
 
 } //declare module Meta
