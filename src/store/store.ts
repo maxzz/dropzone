@@ -1,5 +1,6 @@
 import { atom, WritableAtom } from 'jotai';
 import uuid from '../utils/uuid';
+import { buildFormExs } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -11,6 +12,7 @@ export type FileUs = {
     size: number;
     raw?: string;
     mani?: Mani.Manifest;
+    forms?: MExtra.FormEx[],
     file?: File;
 };
 
@@ -64,8 +66,11 @@ const updateCacheAtom = atom(
                     //console.log('cnt', cnt);
 
                     let mani: Mani.Manifest | undefined;
+                    let extra: MExtra.FormEx[] | undefined;
                     try {
                         mani = parseManifest(cnt);
+                        extra = buildFormExs(mani);
+                        console.log('extra', extra);
                     } catch (error) {
                         console.log('%ctm error', 'color: red', error, '\n', file.fname, cnt);
                     }

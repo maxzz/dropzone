@@ -33,7 +33,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
         return login;
     }
     const m: Mani.Manifest = fileUs.mani;
-    console.log('raw', fileUs.raw);
+    //console.log('raw', fileUs.raw);
 
     login.fname = fileUs.fname;
     login.title = m.forms[0]?.options.choosename;

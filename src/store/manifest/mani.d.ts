@@ -9,12 +9,12 @@ declare module Mani {
         password?: boolean, // "1"
         useit?: boolean, //"1"
     }
-    
+
     interface FContext {
         type: 'pchange';
         name: number; // "1"
     }
-    
+
     interface Detection {
         caption?: string;
         web_ourl?: string;
@@ -25,7 +25,7 @@ declare module Mani {
         processname?: string;
         commandline?: string;
     }
-    
+
     interface Options {
         choosename?: string;
         sidekick?: string; // "manual mode hint"
@@ -33,14 +33,14 @@ declare module Mani {
         usequicklink?: number; // "1" | "2"
         iconlocation?: string; // "Q:0:0:0"
     }
-    
+
     interface Form {
         fcontext?: FContext;
         detection: Detection;
         options: Options;
         fields: Field[];
     }
-    
+
     interface Descriptor {
         id: string; // "{fe94ea4f-ac76-4f7d-9c74-fa14abca889b}"
         created: string; // "1d57495 61c6f733"
@@ -48,26 +48,25 @@ declare module Mani {
         integrity?: string; // "OTS2.056a41167041b1ea2c529494aeb606d0e"
         version: string; // "2.4.3"
     }
-    
+
     interface Manifest {
         descriptor: Descriptor;
         forms: Form[];
     }
 
 } //declare module Mani
-    
-declare module MPath { // Manifest path
-    /* Path */
-    
+
+declare module MPath { // Manifest unpacked path data
+
     interface PathItem_p4a { // from: unpack_fromstring()
         rnumber: number;
         roleString: string;
         className: string;
         name?: string;
     }
-    
+
     type PathItem_p4 = PathItem_p4a;
-    
+
     interface PathItem_sid {
         version: string;
         generatedId: string;
@@ -75,14 +74,14 @@ declare module MPath { // Manifest path
         formAttrs?: string;
         outerHtml?: string;
     }
-    
+
     interface PathItem_did2 {
         s1: string;
         s2: string;
         s3: string;
         s4?: string;
     }
-    
+
     interface PathItem_loc { // In client area or against 1920x1200 or 1600x1200?
         x: number;
         y: number;
@@ -91,13 +90,13 @@ declare module MPath { // Manifest path
         f?: number; // 0 | 1 if the last element in field (this is internal and not saved).
         i?: number; // index of rect before dedupe (this is internal and not saved).
     }
-    
+
     interface PathItem_sn {
         total: number;      // total blocks
         current: number;    // current block
         parts: string[];    // block parts
     }
-    
+
     interface FieldPath {
         p4a?: PathItem_p4a[];
         p4?: PathItem_p4[];
@@ -106,19 +105,15 @@ declare module MPath { // Manifest path
         did2?: string;
         sn?: PathItem_sn; // script number
     }
-    
-    /* Path end */
+
 } //declare module MPath
 
-
 declare module MExtra { // Manifest unpacked forms
-    /* Unpacked forms */
 
-interface FormEx {
-    pool: string[];
-    rects: MPath.PathItem_loc[];
-    paths: MPath.FieldPath[]; // each item corresponds to each field
-}
+    interface FormEx {
+        pool: string[];
+        rects: MPath.PathItem_loc[];
+        paths: MPath.FieldPath[]; // each item corresponds to each field
+    }
 
-    /* Unpacked forms end */
 } //declare module MExtra

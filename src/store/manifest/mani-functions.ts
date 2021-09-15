@@ -181,3 +181,19 @@ export function fieldPathItems(pool: string[], path: string): MPath.FieldPath {
 
     return rv;
 }
+
+export function buildFormExs(mani: Mani.Manifest | undefined): MExtra.FormEx[] {
+    if (!mani || !mani.forms || !mani.forms.length) {
+        return [];
+    }
+    let formExs = mani.forms.map((form: Mani.Form) => {
+        let pool = getPool(form) || [];
+        let formEx: MExtra.FormEx = {
+            pool: pool,
+            rects: buildFormLocations(form) || [],
+            paths: (form.fields || []).map((field: Mani.Field) => fieldPathItems(pool, field.path_ext || ''))
+        };
+        return formEx;
+    });
+    return formExs;
+}
