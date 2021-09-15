@@ -7,6 +7,15 @@ import LabeledSwitch from './components/Switch';
 import { useAtom } from 'jotai';
 import { showManualManiAtom, showNormalManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store/store';
 
+function LabeWithNumber({ label, value }: { label: string; value: number; }) {
+    return (
+        <div className="ml-2 flex items-center">
+            <div className="inline-block">{label}</div>
+            <div className="inline-block ml-1 pb-3">{value}</div>
+        </div>
+    );
+}
+
 function AppFilters() {
     const [showNormalMani, setShowNormalMani] = useAtom(showNormalManiAtom);
     const [showManualMani, setShowManualMani] = useAtom(showManualManiAtom);
@@ -14,14 +23,8 @@ function AppFilters() {
     const [totalNormalMani] = useAtom(totalNormalManiAtom);
     const [totalManualMani] = useAtom(totalManualManiAtom);
     return (<>
-        <LabeledSwitch label={
-            <div className="flex items-center">
-                <div className="inline-block">Normal</div>
-                <div className="inline-block ml-1 pb-3">{totalNormalMani}</div>
-            </div>
-        }
-            value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} />
-        <LabeledSwitch label={`Manual (${totalManualMani})`} value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} />
+        <LabeledSwitch label={<LabeWithNumber label={'Normal'} value={totalNormalMani}/>} value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} title="Show normal mode manifests"/>
+        <LabeledSwitch label={<LabeWithNumber label={'Manual'} value={totalManualMani}/>} value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} title="Show manual mode manifests"/>
     </>);
 }
 
