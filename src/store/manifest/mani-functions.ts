@@ -132,8 +132,8 @@ export function getPool(form: Mani.Form): string[] {
     return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
 }
 
-export function fieldPathItems(pool: string[], path: string): MPath.FieldPath {
-    let rv: MPath.FieldPath = {};
+export function fieldPathItems(pool: string[], path: string): Meta.Path {
+    let rv: Meta.Path = {};
 
     let items: [string, string][] = pathItems(path);
 

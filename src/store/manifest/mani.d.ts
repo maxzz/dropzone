@@ -97,23 +97,23 @@ declare module MPath {      // Manifest unpacked path data
         parts: string[];    // block parts
     }
 
-    interface FieldPath {   // a collection of path items
-        p4a?: Chunk_p4a[];
-        p4?: Chunk_p4[];
-        loc?: string;       // "x y w h | x y w h ... | x y w h"
-        sid?: Chunk_sid;
-        did2?: string;
-        sn?: Chunk_sn;      // script number
-    }
-
 } //declare module MPath
 
 declare module Meta {       // Manifest unpacked forms, as meta data
 
+    interface Path {        // a collection of path items
+        p4a?: MPath.Chunk_p4a[];
+        p4?: MPath.Chunk_p4[];
+        loc?: string;       // "x y w h | x y w h ... | x y w h"
+        sid?: MPath.Chunk_sid;
+        did2?: string;
+        sn?: MPath.Chunk_sn; // script number
+    }
+
     interface Form {
         pool: string[];
         rects: MPath.Chunk_loc[];
-        paths: MPath.FieldPath[]; // each item corresponds to each field
+        paths: Path[]; // each item corresponds to each field
     }
 
 } //declare module Meta
