@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
-import { filesAtom, FileUs, FileUsAtom, filteredAtom } from '../store/store';
+import { FileUs, FileUsAtom, filteredAtom } from '../store/store';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
 //import TextareaAutosize from 'react-textarea-autosize';
 
@@ -293,7 +293,6 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
 }
 
 function FilesList() {
-    // const [files] = useAtom(filesAtom);
     const [files] = useAtom(filteredAtom);
     return (
         <div className="h-full overflow-y-auto mx-auto w-[585px]">
