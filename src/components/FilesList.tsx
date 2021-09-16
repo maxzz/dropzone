@@ -2,7 +2,8 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
 import { FileUs, FileUsAtom, filteredAtom } from '../store/store';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode } from './Icons';
+import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from './Icons';
 //import TextareaAutosize from 'react-textarea-autosize';
 
 type CardForm = {
@@ -11,7 +12,7 @@ type CardForm = {
     isManual?: boolean; // is manual mode
 };
 
-type CardLogin = {
+export type CardLogin = {
     fileUs: FileUs;     // raw data
     fname: string;      // manifest filename
     title?: string;     // title by user
@@ -97,8 +98,13 @@ function Title({ login }: { login: CardLogin; }) {
     return (
         // <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
-            <div className="absolute top-3 right-2 w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
-                <IconInfo />
+            <div className="absolute top-3 right-2">
+                <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                    <IconInfo />
+                </div>
+                <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                    <IconMenuHamburger />
+                </div>
             </div>
             <div className="">
                 <TitleFirstRow login={login} />
@@ -112,74 +118,6 @@ function Title({ login }: { login: CardLogin; }) {
             {open && <div className="">
                 <CardInfo login={login} />
             </div>}
-        </div>
-    );
-}
-
-// Form parts utils
-
-function isObject(value: any): boolean {
-    return value && typeof value === 'object';
-}
-
-function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
-    const values = Object.entries(obj);
-    return (
-        <div className="grid grid-cols-[auto,1fr] gap-x-1 text-xs">
-            {values.map((pair) => {
-                if (isObject(pair[1])) {
-                    return (<React.Fragment key={pair[0]}>
-                        <div className="">field {pair[0]}</div>
-                        {/* <div className="">field2</div> */}
-                        {ObjectTable({ obj: pair[1] })} {/* TODO: we don't need to add grid */}
-                    </React.Fragment>);
-                } else {
-                    return (<React.Fragment key={pair[0]}>
-                        <div className="">{pair[0]}</div>
-                        {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-                        {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-                        <div className="border-l border-gray-500 pl-1 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
-                    </React.Fragment>);
-                }
-            })}
-        </div>
-    );
-}
-
-// Form parts
-
-function PartFormDetection({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
-    const form = login.fileUs.mani?.forms[formIndex];
-    return (
-        <div className="">
-            <div className="pt-2">detection</div>
-            <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={form?.detection} />
-            <div className="font-bold border-t border-gray-500"></div>
-        </div>
-    );
-}
-
-function PartFormOptions({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
-    const form = login.fileUs.mani?.forms[formIndex];
-    return (
-        <div className="">
-            <div className="">options</div>
-            <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={form?.options} />
-            <div className="font-bold border-t border-gray-500"></div>
-        </div>
-    );
-}
-
-function PartFormFields({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
-    const form = login.fileUs.mani?.forms[formIndex];
-    return (
-        <div className="">
-            <div className="">fields</div>
-            <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={form?.fields} />
-            <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
 }
@@ -295,7 +233,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
 function FilesList() {
     const [files] = useAtom(filteredAtom);
     return (
-        <div className="h-full overflow-y-auto mx-auto w-[585px]">
+        <div className="h-full overflow-y-auto mx-auto max-w-[585px]">
             <div className="grid grid-flow-row gap-4 text-sm"
             // style={{gridTemplateColumns: 'repeat(auto-fit, minmax(0,1fr))'}}
             >
