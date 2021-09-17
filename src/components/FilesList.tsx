@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { removeQuery, urlDomain } from '../store/manifest/url';
 import { FileUs, FileUsAtom, filteredAtom } from '../store/store';
+import CardActions from './CardActions';
 import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from './Icons';
 //import TextareaAutosize from 'react-textarea-autosize';
@@ -108,7 +109,7 @@ function Title({ login }: { login: CardLogin; }) {
                         <IconMenuHamburger />
                     </div>
                     {openActions && <div className="absolute -bottom-4 right-1">
-
+                        <CardActions />
                     </div>}
                 </div>
                 <div className="mr-8">
