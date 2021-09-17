@@ -79,13 +79,13 @@ const StyledContent = styled(Primitive.Content, {
     },
 });
 
-const StyledRoot = styled(Primitive.Root, {
+const StyledTrigger = styled(Primitive.Trigger, {
     outline: '2px solid transparent',
     outlineOffset: '2px',
 });
 
-export const DropdownMenu = StyledRoot;
-export const DropdownMenuTrigger = Primitive.Trigger;
+export const DropdownMenu = Primitive.Root;
+export const DropdownMenuTrigger = StyledTrigger;
 export const DropdownMenuContent = StyledContent;
 export const DropdownMenuItem = StyledItem;
 export const DropdownMenuSeparator = StyledSeparator;
