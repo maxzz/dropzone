@@ -4,7 +4,7 @@ import { removeQuery, urlDomain } from '../store/manifest/url';
 import { FileUs, FileUsAtom, filteredAtom } from '../store/store';
 import CardActions from './CardActions';
 import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from './Icons';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from './UiIcons';
 //import TextareaAutosize from 'react-textarea-autosize';
 
 type CardForm = {

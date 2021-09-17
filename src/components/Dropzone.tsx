@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useUpdateAtom } from 'jotai/utils';
 import { SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
-import { IconAppLogo } from './Icons';
+import { IconAppLogo } from './UiIcons';
 import toast from 'react-hot-toast';
 
 function nameLengthValidator(file: File) {
