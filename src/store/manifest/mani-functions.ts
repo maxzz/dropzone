@@ -41,6 +41,10 @@ export function cpp_restore(s: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::cpp_restore()
 }
 
+function getPool(form: Mani.Form): string[] {
+    return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
+}
+
 function getPoolName(pool: string[], index: string): string {
     if (!index) {
         return '';
@@ -79,55 +83,53 @@ function pathItem_sid(pool: string[], v: string): MPath.Chunk_sid {
     return sid;
 }
 
-function dedupe(items: string[]): string[] {
-    return Array.from(new Set(items));
-}
-
-function pathItem_loc_removePool(pool: string[], v: string): string {
-    return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
-}
-
-function str2loc(str: string): MPath.Chunk_loc {
-    let nmbs = str.split(' ').map(_ => +_);
-    return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
-}
-
-function loc2str(loc: MPath.Chunk_loc): string {
-    return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
-}
-
-function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
-    return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
-}
-
-function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
-    let uni = new Set<string>();
-
-    (form.fields || []).map((field: Mani.Field) => {
-        let path = field.path_ext ? field.path_ext : '';
-        let items: [string, string][] = pathItems(path);
-        let locsItem = items.find((_) => _[0] === 'loc');
-        let locs = locsItem ? locsItem[1] : '';
-        // We got locations now as string
-        let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
-        if (clearLocs.length) {
-            clearLocs[clearLocs.length - 1].f = 1;
-        }
-        clearLocs.map(loc2str).forEach(_ => uni.add(_));
-    });
-
-    return Array.from(uni).map(str2loc);
-}
+namespace PathLocations {
+    function dedupe(items: string[]): string[] {
+        return Array.from(new Set(items));
+    }
+    
+    export function pathItem_loc_removePool(pool: string[], v: string): string {
+        return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
+    }
+    
+    function str2loc(str: string): MPath.Chunk_loc {
+        let nmbs = str.split(' ').map(_ => +_);
+        return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
+    }
+    
+    function loc2str(loc: MPath.Chunk_loc): string {
+        return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
+    }
+    
+    function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
+    }
+    
+    export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
+        let uni = new Set<string>();
+    
+        (form.fields || []).map((field: Mani.Field) => {
+            let path = field.path_ext ? field.path_ext : '';
+            let items: [string, string][] = pathItems(path);
+            let locsItem = items.find((_) => _[0] === 'loc');
+            let locs = locsItem ? locsItem[1] : '';
+            // We got locations now as string
+            let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+            if (clearLocs.length) {
+                clearLocs[clearLocs.length - 1].f = 1;
+            }
+            clearLocs.map(loc2str).forEach(_ => uni.add(_));
+        });
+    
+        return Array.from(uni).map(str2loc);
+    }
+} //namespace PathLocations
 
 function pathItems(path: string): [string, string][] {
     return path.split('[').filter(Boolean).map<[string, string]>((val) => val.split(']') as [string, string]);;
 }
 
-export function getPool(form: Mani.Form): string[] {
-    return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
-}
-
-export function fieldPathItems(pool: string[], path: string): Meta.Path {
+function fieldPathItems(pool: string[], path: string): Meta.Path {
     const rv: Meta.Path = {};
     const items: [string, string][] = pathItems(path);
 
@@ -139,7 +141,7 @@ export function fieldPathItems(pool: string[], path: string): Meta.Path {
                 break;
             }
             case 'loc': {
-                rv.loc = pathItem_loc_removePool(pool, item[1]);
+                rv.loc = PathLocations.pathItem_loc_removePool(pool, item[1]);
                 break;
             }
             case 'sid': {
@@ -193,7 +195,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isEmpty: !fields.length,
             },
             pool: pool,
-            rects: buildFormLocations(form, pool) || [],
+            rects: PathLocations.buildFormLocations(form, pool) || [],
             fields,
         };
     };
