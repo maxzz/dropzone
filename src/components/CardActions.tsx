@@ -35,8 +35,7 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
     backgroundColor: 'white',
     borderRadius: 6,
     padding: 5,
-    boxShadow:
-        '0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)',
+    boxShadow: '0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)',
     '@media (prefers-reduced-motion: no-preference)': {
         animationDuration: '400ms',
         animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
@@ -153,7 +152,7 @@ const IconButton = styled('button', {
     '&:focus': { boxShadow: `0 0 0 2px black` },
 });
 
-export const CardActions = () => {
+export const CardActions = ({icon}: {icon: React.ReactNode}) => {
     const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
     const [urlsChecked, setUrlsChecked] = React.useState(false);
     const [person, setPerson] = React.useState('pedro');
@@ -161,10 +160,11 @@ export const CardActions = () => {
     return (
         <Box>
             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <IconButton aria-label="Customise options">
+                <DropdownMenuTrigger>
+                    {icon}
+                    {/* <IconButton aria-label="Manifest actions">
                         <HamburgerMenuIcon />
-                    </IconButton>
+                    </IconButton> */}
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent sideOffset={5}>
