@@ -58,7 +58,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: colors.sky,
+                primary: colors.gray,
             },
         },
     },
