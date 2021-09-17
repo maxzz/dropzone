@@ -96,23 +96,16 @@ function TitleSecondRow({ login }: { login: CardLogin; }) {
 
 function Title({ login }: { login: CardLogin; }) {
     const [open, setOpen] = React.useState(false);
-    // const [openActions, setOpenActions] = React.useState(false);
     return (
-        // <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
             <div className="">
                 <div className="absolute top-3 right-2 z-10">
                     <div className="w-6 h-6 opacity-50 hover:opacity-100 select-none active:scale-[.97]" onClick={() => setOpen((v) => !v)}>
                         <IconInfo />
                     </div>
-                    {/* <div className="w-6 h-6 opacity-50 hover:opacity-100 select-none active:scale-[.97]" onClick={() => setOpenActions((v) => !v)}>
+                    <CardActions icon={<div className="w-6 h-6 opacity-50 hover:opacity-100 select-none active:scale-[.97]">
                         <IconMenuHamburger />
-                    </div> */}
-                    {/* {<div className=""> */}
-                        <CardActions icon={<div className="w-6 h-6 opacity-50 hover:opacity-100 select-none active:scale-[.97]" >
-                            <IconMenuHamburger />
-                        </div>} />
-                    {/* </div>} */}
+                    </div>} />
                 </div>
                 <div className="mr-8">
                     <TitleFirstRow login={login} />

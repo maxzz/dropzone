@@ -1,13 +1,12 @@
 import React from 'react';
-
 import { styled, keyframes } from '@stitches/react';
 import { violet, mauve, blackA } from '@radix-ui/colors';
-import {
-    HamburgerMenuIcon,
-    DotFilledIcon,
-    CheckIcon,
-    ChevronRightIcon,
-} from '@radix-ui/react-icons';
+// import {
+//     HamburgerMenuIcon,
+//     DotFilledIcon,
+//     CheckIcon,
+//     ChevronRightIcon,
+// } from '@radix-ui/react-icons';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 
 const slideUpAndFade = keyframes({
@@ -75,161 +74,72 @@ const itemStyles = {
 };
 
 const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
-const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, { ...itemStyles });
-const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, { ...itemStyles });
-const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
-    '&[data-state="open"]': {
-        backgroundColor: violet.violet4,
-        color: violet.violet11,
-    },
-    ...itemStyles,
-});
+// const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, { ...itemStyles });
+// const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, { ...itemStyles });
+// const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
+//     '&[data-state="open"]': {
+//         backgroundColor: violet.violet4,
+//         color: violet.violet11,
+//     },
+//     ...itemStyles,
+// });
 
-const StyledLabel = styled(DropdownMenuPrimitive.Label, {
-    paddingLeft: 25,
-    fontSize: 12,
-    lineHeight: '25px',
-    color: mauve.mauve11,
-});
+// const StyledLabel = styled(DropdownMenuPrimitive.Label, {
+//     paddingLeft: 25,
+//     fontSize: 12,
+//     lineHeight: '25px',
+//     color: mauve.mauve11,
+// });
 
-const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
-    height: 1,
-    backgroundColor: violet.violet6,
-    margin: 5,
-});
+// const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
+//     height: 1,
+//     backgroundColor: violet.violet6,
+//     margin: 5,
+// });
 
-const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
-    position: 'absolute',
-    left: 0,
-    width: 25,
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-});
+// const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
+//     position: 'absolute',
+//     left: 0,
+//     width: 25,
+//     display: 'inline-flex',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+// });
 
-const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
-    fill: 'white',
-});
+// const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
+//     fill: 'white',
+// });
 
 // Exports
 export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = StyledContent;
 export const DropdownMenuItem = StyledItem;
-export const DropdownMenuCheckboxItem = StyledCheckboxItem;
-export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
-export const DropdownMenuRadioItem = StyledRadioItem;
-export const DropdownMenuItemIndicator = StyledItemIndicator;
-export const DropdownMenuTriggerItem = StyledTriggerItem;
-export const DropdownMenuLabel = StyledLabel;
-export const DropdownMenuSeparator = StyledSeparator;
-export const DropdownMenuArrow = StyledArrow;
+
+// export const DropdownMenuCheckboxItem = StyledCheckboxItem;
+// export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
+// export const DropdownMenuRadioItem = StyledRadioItem;
+// export const DropdownMenuItemIndicator = StyledItemIndicator;
+// export const DropdownMenuTriggerItem = StyledTriggerItem;
+// export const DropdownMenuLabel = StyledLabel;
+// export const DropdownMenuSeparator = StyledSeparator;
+// export const DropdownMenuArrow = StyledArrow;
 
 // Your app...
 const Box = styled('div', {});
 
-const RightSlot = styled('div', {
-    marginLeft: 'auto',
-    paddingLeft: 20,
-    color: mauve.mauve11,
-    ':focus > &': { color: 'white' },
-    '[data-disabled] &': { color: mauve.mauve8 },
-});
-
-const IconButton = styled('button', {
-    all: 'unset',
-    fontFamily: 'inherit',
-    borderRadius: '100%',
-    height: 35,
-    width: 35,
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: violet.violet11,
-    backgroundColor: 'white',
-    boxShadow: `0 2px 10px ${blackA.blackA7}`,
-    '&:hover': { backgroundColor: violet.violet3 },
-    '&:focus': { boxShadow: `0 0 0 2px black` },
-});
-
-export const CardActions = ({icon}: {icon: React.ReactNode}) => {
-    const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
-    const [urlsChecked, setUrlsChecked] = React.useState(false);
-    const [person, setPerson] = React.useState('pedro');
-
+export const CardActions = ({ icon }: { icon: React.ReactNode; }) => {
     return (
-        <Box>
-            <DropdownMenu>
-                <DropdownMenuTrigger>
-                    {icon}
-                    {/* <IconButton aria-label="Manifest actions">
-                        <HamburgerMenuIcon />
-                    </IconButton> */}
-                </DropdownMenuTrigger>
+        <DropdownMenu>
+            <DropdownMenuTrigger>
+                {icon}
+            </DropdownMenuTrigger>
 
-                <DropdownMenuContent sideOffset={5}>
-                    <DropdownMenuItem>
-                        New Tab <RightSlot>⌘+T</RightSlot>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                        New Window <RightSlot>⌘+N</RightSlot>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem disabled>
-                        New Private Window <RightSlot>⇧+⌘+N</RightSlot>
-                    </DropdownMenuItem>
-                    <DropdownMenu>
-                        <DropdownMenuTriggerItem>
-                            More Tools
-                            <RightSlot>
-                                <ChevronRightIcon />
-                            </RightSlot>
-                        </DropdownMenuTriggerItem>
-                        <DropdownMenuContent sideOffset={2} alignOffset={-5}>
-                            <DropdownMenuItem>
-                                Save Page As… <RightSlot>⌘+S</RightSlot>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
-                            <DropdownMenuItem>Name Window…</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Developer Tools</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuCheckboxItem
-                        checked={bookmarksChecked}
-                        onCheckedChange={setBookmarksChecked}
-                    >
-                        <DropdownMenuItemIndicator>
-                            <CheckIcon />
-                        </DropdownMenuItemIndicator>
-                        Show Bookmarks <RightSlot>⌘+B</RightSlot>
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem checked={urlsChecked} onCheckedChange={setUrlsChecked}>
-                        <DropdownMenuItemIndicator>
-                            <CheckIcon />
-                        </DropdownMenuItemIndicator>
-                        Show Full URLs
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuLabel>People</DropdownMenuLabel>
-                    <DropdownMenuRadioGroup value={person} onValueChange={setPerson}>
-                        <DropdownMenuRadioItem value="pedro">
-                            <DropdownMenuItemIndicator>
-                                <DotFilledIcon />
-                            </DropdownMenuItemIndicator>
-                            Pedro Duarte
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="colm">
-                            <DropdownMenuItemIndicator>
-                                <DotFilledIcon />
-                            </DropdownMenuItemIndicator>
-                            Colm Tuite
-                        </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                    <DropdownMenuArrow />
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </Box>
+            <DropdownMenuContent sideOffset={5}>
+                <DropdownMenuItem>Convert 1</DropdownMenuItem>
+                <DropdownMenuItem>Convert 2</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 };
 
