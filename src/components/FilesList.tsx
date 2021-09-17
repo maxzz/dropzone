@@ -7,10 +7,8 @@ function FilesList() {
     const [files] = useAtom(filteredAtom);
     return (
         // <div className="ml-[2rem]">
-            <div className="h-full overflow-y-auto">
-                <div className="" 
-                style={{width: 'calc(500px - 1rem)'}}
-                >
+            <div className="h-full overflow-y-auto w-[490px]">
+                <div className="" style={{width: 'calc(100% - 1rem)'}} >
                     <div className="h-full mx-auto max-w-[585px]"
                     // <div className="h-full overflow-y-auto mx-auto max-w-[585px] ml-[2rem]"
             
