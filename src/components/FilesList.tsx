@@ -6,8 +6,8 @@ import ManifestCard from './Card/Card';
 function FilesList() {
     const [files] = useAtom(filteredAtom);
     return (
-        <div className="ml-[2rem] h-full">
-            <div className="overflow-y-auto" style={{width: 'calc(400px - 4rem)'}}>
+        <div className="ml-[2rem] h-full overflow-y-auto">
+            <div className="" style={{width: 'calc(400px - 4rem)'}}>
                 <div className="h-full mx-auto max-w-[585px]"
                 // <div className="h-full overflow-y-auto mx-auto max-w-[585px] ml-[2rem]"
                 

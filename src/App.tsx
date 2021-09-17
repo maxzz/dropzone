@@ -10,7 +10,8 @@ function App() {
             {/* <div className="p-4 grid grid-rows-[auto,1fr] h-screen"> */}
             <div className="p-4 flex flex-col h-screen">
                 <Header />
-                <div className="flex-1 mt-4 -mr-2 max-h-full overflow-y-auto mb-8">
+                <div className="flex-1 mt-4 -mr-2 max-h-full mb-8">
+                {/* <div className="flex-1 mt-4 -mr-2 max-h-full overflow-y-auto mb-8"> */}
                 {/* <div className="flex-1 mt-4 -mr-2 max-h-full overflow-y-hidden"> */}
                     <FilesList />
                 </div>
