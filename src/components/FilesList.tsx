@@ -51,7 +51,7 @@ function repackManifest(fileUs: FileUs): CardLogin {
     return login;
 }
 
-function CardInfo({ login }: { login: CardLogin; }) {
+function CardRawInfo({ login }: { login: CardLogin; }) {
     return (
         // <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
         <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md"> 
@@ -98,25 +98,28 @@ function Title({ login }: { login: CardLogin; }) {
     return (
         // <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
-            <div className="absolute top-3 right-2">
-                <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
-                    <IconInfo />
-                </div>
-                <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
-                    <IconMenuHamburger />
-                </div>
-            </div>
             <div className="">
-                <TitleFirstRow login={login} />
-                <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
-                    {login.fname}
+                <div className="absolute top-3 right-2 z-10">
+                    <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                        <IconInfo />
+                    </div>
+                    <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                        <IconMenuHamburger />
+                    </div>
                 </div>
-                <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                    {login.title || 'No title'}
+                <div className="mr-8">
+                    <TitleFirstRow login={login} />
+                    <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
+                        {login.fname}{login.fname}{login.fname}{login.fname}{login.fname}
+                    </div>
+                    <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
+                        {login.title || 'No title'}
+                    </div>
                 </div>
             </div>
+
             {open && <div className="">
-                <CardInfo login={login} />
+                <CardRawInfo login={login} />
             </div>}
         </div>
     );
