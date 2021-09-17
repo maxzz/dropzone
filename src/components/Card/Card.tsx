@@ -1,10 +1,10 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { removeQuery, urlDomain } from '../store/manifest/url';
-import { FileUs, FileUsAtom, filteredAtom } from '../store/store';
+import { removeQuery, urlDomain } from '../../store/manifest/url';
+import { FileUs, FileUsAtom } from '../../store/store';
 import CardActions from './CardActions';
 import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from './UiIcons';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UiIcons';
 
 type CardForm = {
     domain?: string;    // domain if web app
@@ -217,19 +217,4 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     );
 }
 
-function FilesList() {
-    const [files] = useAtom(filteredAtom);
-    return (
-        <div className="h-full overflow-y-auto mx-auto max-w-[585px]">
-            <div className="grid grid-flow-row gap-4 text-sm"
-            // style={{gridTemplateColumns: 'repeat(auto-fit, minmax(0,1fr))'}}
-            >
-                {/* smallscroll smallscroll-light */}
-                {files.map((atom) =>
-                    <ManifestCard atom={atom} key={`${atom}`} />
-                )}
-            </div>
-        </div>
-    );
-}
-export default FilesList;
+export default ManifestCard;

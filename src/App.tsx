@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
 import Toaster from './components/UiToaster';
-import FilesList from './components/FilesList';
 import Header from './components/Header';
+import FilesList from './components/ManiList';
 
 function App() {
     return (

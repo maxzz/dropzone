@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardLogin } from './FilesList';
+import { CardLogin } from './Card';
 
 // Form parts utils
 
