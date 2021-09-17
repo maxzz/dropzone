@@ -40,22 +40,22 @@ const StyledSeparator = styled(Primitive.Separator, {
 });
 
 const slideUpAndFade = keyframes({
-    '0%': { opacity: 0, transform: 'translateY(2px)' },
+    '0%': { opacity: 0, transform: 'translateY(3px) scale(.2)' },
     '100%': { opacity: 1, transform: 'translateY(0)' },
 });
 
 const slideRightAndFade = keyframes({
-    '0%': { opacity: 0, transform: 'translateX(-2px)' },
+    '0%': { opacity: 0, transform: 'translateX(-4px) scale(.2)' },
     '100%': { opacity: 1, transform: 'translateX(0)' },
 });
 
 const slideDownAndFade = keyframes({
-    '0%': { opacity: 1, backgroundColor: 'blue', transform: 'translateY(-2px) scale(3.2)' },
-    '100%': { opacity: .1, backgroundColor: 'red', transform: 'translateY(0) scale(2)' },
+    '0%': { opacity: 1, backgroundColor: 'blue', transform: 'translateY(-5px) scale(.2)' },
+    '100%': { opacity: .1, backgroundColor: 'red', transform: 'translateY(0)' },
 });
 
 const slideLeftAndFade = keyframes({
-    '0%': { opacity: 0, transform: 'translateX(2px)' },
+    '0%': { opacity: 0, transform: 'translateX(6px) scale(.2)' },
     '100%': { opacity: 1, transform: 'translateX(0)' },
 });
 
@@ -66,34 +66,20 @@ const StyledContent = styled(Primitive.Content, {
     padding: '2px 0', // 2
     boxShadow: '0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)',
 
-    // '@media (prefers-reduced-motion: no-preference)': {
-    //     animationDuration: '22400ms',
-    //     animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-    //     willChange: 'transform, opacity',
-    //     '&[data-state="open"]': {
-    //         '&[data-side="top"]': { animationName: slideDownAndFade },
-    //         '&[data-side="right"]': { animationName: slideLeftAndFade },
-    //         '&[data-side="bottom"]': { animationName: slideUpAndFade },
-    //         '&[data-side="left"]': { animationName: slideRightAndFade },
-    //     },
-    //     '&[data-state="closed"]': {
-    //         outline: 'none',
-    //     },
-    // },
-
-    animationDuration: '22400ms',
-    animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-    willChange: 'transform, opacity',
-    '&[data-state="open"]': {
-        '&[data-side="top"]': { animationName: slideDownAndFade },
-        '&[data-side="right"]': { animationName: slideLeftAndFade },
-        '&[data-side="bottom"]': { animationName: slideUpAndFade },
-        '&[data-side="left"]': { animationName: slideRightAndFade },
+    '@media (prefers-reduced-motion: no-preference)': {
+        animationDuration: '.2s',
+        animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        willChange: 'transform, opacity',
+        '&[data-state="open"]': {
+            '&[data-side="top"]': { animationName: slideDownAndFade },
+            '&[data-side="right"]': { animationName: slideLeftAndFade },
+            '&[data-side="bottom"]': { animationName: slideUpAndFade },
+            '&[data-side="left"]': { animationName: slideRightAndFade },
+        },
+        '&[data-state="closed"]': {
+            outline: 'none',
+        },
     },
-    '&[data-state="closed"]': {
-        outline: 'none',
-    },
-
 });
 
 const StyledTrigger = styled(Primitive.Trigger, {
