@@ -24,7 +24,7 @@ export const filesAtom = atom<FileUsAtom[]>([]);
 export const SetFilesAtom = atom(
     null,
     (get, set, accepterFiles: File[]) => {
-        const dropped: FileUsAtom[] = accepterFiles.map((file) => {
+        const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file) => {
             return atom<FileUs>({
                 id: uuid(),
                 fname: file.name,
