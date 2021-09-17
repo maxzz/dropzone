@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import Toaster from './components/UiToaster';
+import Toaster from './components/UI/UiToaster';
 import Header from './components/Header';
 import FilesList from './components/ManiList';
 

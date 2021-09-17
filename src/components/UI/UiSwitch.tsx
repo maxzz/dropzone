@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from '../stitches.config';
+import { styled } from '../../stitches.config';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 
 const blackA = {

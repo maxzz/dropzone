@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../store/store';
-import LabeledSwitch from './Switch';
+import LabeledSwitch from './UI/UiSwitch';
 import { DropzoneArea } from './Dropzone';
 
 function LabeWithNumber({ label, value }: { label: string; value: number; }) {
