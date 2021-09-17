@@ -40,22 +40,22 @@ const StyledSeparator = styled(Primitive.Separator, {
 });
 
 const slideUpAndFade = keyframes({
-    '0%': { opacity: 0, transform: 'translateY(3px) scale(.2)' },
+    '0%': { opacity: 0, transform: 'translateY(2px) scale(.2)' },
     '100%': { opacity: 1, transform: 'translateY(0)' },
 });
 
 const slideRightAndFade = keyframes({
-    '0%': { opacity: 0, transform: 'translateX(-4px) scale(.2)' },
+    '0%': { opacity: 0, transform: 'translateX(-2px) scale(.2)' },
     '100%': { opacity: 1, transform: 'translateX(0)' },
 });
 
 const slideDownAndFade = keyframes({
-    '0%': { opacity: 1, backgroundColor: 'blue', transform: 'translateY(-5px) scale(.2)' },
-    '100%': { opacity: .1, backgroundColor: 'red', transform: 'translateY(0)' },
+    '0%': { opacity: 0, transform: 'translateY(-2px) scale(.2)' },
+    '100%': { opacity: 1, transform: 'translateY(0)' },
 });
 
 const slideLeftAndFade = keyframes({
-    '0%': { opacity: 0, transform: 'translateX(6px) scale(.2)' },
+    '0%': { opacity: 0, transform: 'translateX(2px) scale(.2)' },
     '100%': { opacity: 1, transform: 'translateX(0)' },
 });
 
