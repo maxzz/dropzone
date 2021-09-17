@@ -117,7 +117,7 @@ export function IconInfo(props: SVGProps<SVGSVGElement>) {
 
 export function IconMenuHamburger(props: SVGProps<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 21 21" strokeLinecap="round" fill="none" stroke="currentColor" {...props}>
+        <svg viewBox="0 0 21 21" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...props}>
             <path d="M4.5 6.5h12"></path>
             <path d="M4.498 10.5h11.997"></path>
             <path d="M4.5 14.5h11.995"></path>

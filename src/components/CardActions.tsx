@@ -9,11 +9,10 @@ export const CardActions = ({ icon }: { icon: React.ReactNode; }) => {
             </Trigger>
 
             <Content sideOffset={5}>
-                <Item className="!text-sm" onSelect={() => console.log('selected 1')}>Convert 1</Item>
+                <Item className="!text-sm" onSelect={() => console.log('selected 1')}>Convert manual to normal</Item>
+                <Item className="!text-sm" onSelect={() => console.log('selected 2')}>Merge two manifests </Item>
                 <Separator />
-                <Item className="!text-sm" onSelect={() => console.log('selected 2')}>Convert 2</Item>
-                <Item>Convert 3</Item>
-                <Item>Convert 3</Item>
+                <Item>Save</Item>
             </Content>
         </Menu>
     );
