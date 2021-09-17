@@ -54,12 +54,12 @@ function repackManifest(fileUs: FileUs): CardLogin {
 function CardRawInfo({ login }: { login: CardLogin; }) {
     return (
         // <div className="my-2 overflow-auto smallscroll text-xs text-gray-800 bg-gray-800 border-4 border-gray-800 shadow-md">
-        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md"> 
+        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
             {/* h-[70vh] opacity-50 */}
 
             {/* <textarea cols={30} rows={10} defaultValue={login.fileUs.raw}></textarea> */}
             {/* <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" /> */}
-            
+
             {/* Final */}
             {/* <TextareaAutosize className="w-full whitespace-pre smallscroll smallscroll-light" value={login.fileUs.raw} spellCheck="false" autoComplete="off" /> */}
 
@@ -95,17 +95,21 @@ function TitleSecondRow({ login }: { login: CardLogin; }) {
 
 function Title({ login }: { login: CardLogin; }) {
     const [open, setOpen] = React.useState(false);
+    const [openActions, setOpenActions] = React.useState(false);
     return (
         // <div className={`relative p-2 ${open ? 'bg-transparent' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
             <div className="">
                 <div className="absolute top-3 right-2 z-10">
-                    <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                    <div className="w-6 h-6 opacity-50 hover:opacity-100 select-none active:scale-[.97]" onClick={() => setOpen((v) => !v)}>
                         <IconInfo />
                     </div>
-                    <div className="w-6 h-6 opacity-50 hover:opacity-100" onClick={() => setOpen((v) => !v)}>
+                    <div className="w-6 h-6 opacity-50 hover:opacity-100 select-none active:scale-[.97]" onClick={() => setOpenActions((v) => !v)}>
                         <IconMenuHamburger />
                     </div>
+                    {openActions && <div className="absolute -bottom-4 right-1">
+
+                    </div>}
                 </div>
                 <div className="mr-8">
                     <TitleFirstRow login={login} />
@@ -184,7 +188,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const login: CardLogin = repackManifest(fileUs);
     return (
         <div className="mr-2 grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
-        {/* min-w-[450px] max-w-[560px] */}
+            {/* min-w-[450px] max-w-[560px] */}
 
             {/* Card title */}
             <Title login={login} />
