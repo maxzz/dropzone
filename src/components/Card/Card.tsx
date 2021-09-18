@@ -159,11 +159,12 @@ function CardBody({ login }: { login: CardLogin; }) {
     );
 }
 
-function ManifestCard({ atom }: { atom: FileUsAtom; }) {
+function ManifestCard({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
+    const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
     const login: CardLogin = repackManifest(fileUs);
     return (
-        <div className="grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
+        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
             <Title login={login} />
             <CardBody login={login} />
         </div>

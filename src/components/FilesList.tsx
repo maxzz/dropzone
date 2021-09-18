@@ -9,9 +9,9 @@ function FilesList() {
     return (
         <div className="h-full w-full">
             <UISimpleBar className="h-full text-gray-500">
-                <div className="grid grid-flow-row gap-4 text-sm">
+                <div className="grid grid-flow-col gap-4 text-sm">
                     {files.map((atom) =>
-                        <ManifestCard atom={atom} key={`${atom}`} />
+                        <ManifestCard atom={atom} className="min-w-[500px]" key={`${atom}`} />
                     )}
                 </div>
             </UISimpleBar>
