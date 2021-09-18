@@ -3,11 +3,29 @@ import React from 'react';
 import { filteredAtom } from '../store/store';
 import ManifestCard from './Card/Card';
 
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+
 function FilesList() {
     const [files] = useAtom(filteredAtom);
     return (
-        <div className="ml-[1rem] h-full w-full">
-            <div className="h-full overflow-y-auto w-[510px]" style={{width: 'calc(100% - 2rem)'}}> {/* width w/ or /o scrollbar width is 493px but $0.clientWidth w/ scrollbar it gets 16px less */}
+        <div className="h-full w-full">
+            <SimpleBar className="h-full">
+                <div className="grid grid-flow-row gap-4 text-sm">
+                    {files.map((atom) =>
+                        <ManifestCard atom={atom} key={`${atom}`} />
+                    )}
+                </div>
+            </SimpleBar>
+        </div>
+    );
+}
+
+function FilesList2() {
+    const [files] = useAtom(filteredAtom);
+    return (
+        <div className="h-full w-full">
+            <div className="h-full overflow-y-auto smallscroll smallscroll-light"> {/* width w/ or /o scrollbar width is 493px but $0.clientWidth w/ scrollbar it gets 16px less */}
                 {/* <div className=""> */}
                 {/* <div className="" style={{width: 'calc(100% - 1rem)'}} > */}
                 {/* <div className="" style={{width: 'calc(490px - 1rem)'}} > */}

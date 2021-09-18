@@ -167,7 +167,7 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const [fileUs] = useAtom(atom);
     const login: CardLogin = repackManifest(fileUs);
     return (
-        <div className="mr-2 grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
+        <div className="grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
             {/* min-w-[450px] max-w-[560px] */}
 
             {/* Card title */}

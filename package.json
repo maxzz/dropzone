@@ -26,6 +26,7 @@
         "react-dropzone": "11.4.0",
         "react-hot-toast": "^2.1.1",
         "sass": "1.41.1",
+        "simplebar-react": "^2.3.5",
         "tailwindcss": "^2.2.15",
         "xml-js": "^1.6.11"
     },
