@@ -10,8 +10,8 @@ function FilesList() {
     const [files] = useAtom(filteredAtom);
     return (
         <div className="h-full w-full">
-            <SimpleBar className="h-full text-gray-300" autoHide={false}>
-                <div className="grid grid-flow-row gap-4 text-sm" style={{width: 'calc(100% - 11px)'}}>
+            <SimpleBar className="h-full text-gray-500">
+                <div className="grid grid-flow-row gap-4 text-sm">
                     {files.map((atom) =>
                         <ManifestCard atom={atom} key={`${atom}`} />
                     )}
