@@ -118,10 +118,14 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
     );
 }
 
-const iconIe = <IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} key="iconIe"/>;
-const iconManual = <IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} key="iconManual"/>;
-const iconChrome = <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} key="iconChrome"/>;
-const iconWin = <IconAppWindows className="w-5 h-5 ml-2 opacity-75" key="iconWin"/>;
+const TagWebIe = <IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} key="TagIe" />;
+const TagWeb = <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} key="TagChrome" />;
+const TagModeManual = <IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} key="TagManual" />;
+const TagWinApp = <IconAppWindows className="w-5 h-5 ml-2 opacity-75" key="TagWin" />;
+
+const TagModeNormal = <IconAutoMode className="w-5 h-5 ml-2 opacity-75" key="TagModeNormal" />;
+const TagChgPsw = <IconFormChangePsw className="w-5 h-5 ml-2 opacity-75" key="TagChgPsw" />;
+const TagLogin = <IconFormLogin className="w-5 h-5 ml-2 opacity-75" key="TagLogin" />;
 
 function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; form: number; opened: boolean; onClick: () => void; }) {
     const disp = (form === 0 ? cardData.login : cardData.cpass).meta?.disp;
@@ -129,10 +133,11 @@ function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; f
     const isScript = disp?.isScript;
     const isWeb = !!disp?.domain;
 
-    const icons = [];
-    icons.push(isWeb ? iconChrome : iconWin);
-    isIe && icons.push(iconIe);
-    isScript && icons.push(iconManual);
+    const icons = [
+        isWeb ? TagWeb : TagWinApp,
+        isIe && TagWebIe,
+        isScript && TagModeManual
+    ];
 
     const label = form === 0 ? 'Login form' : 'Password change form';
     return (
