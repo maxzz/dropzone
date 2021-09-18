@@ -1,70 +1,59 @@
-import { useAtom } from 'jotai';
 import React from 'react';
-import { removeQuery, urlDomain } from '../../store/manifest/url';
+import { useAtom } from 'jotai';
 import { FileUs, FileUsAtom } from '../../store/store';
 import CardActions from './CardActions';
 import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UI/UiIcons';
 
-type CardForm = {
-    domain?: string;    // domain if web app
-    isIE?: boolean;     // was trained with IE or Chrome
-    isManual?: boolean; // is manual mode
+type FormData = {
+    meta?: Meta.Form;
 };
 
-export type CardLogin = {
+export type CardData = {
     fileUs: FileUs;     // raw data
     fname: string;      // manifest filename
     title?: string;     // title by user
     hasCpass?: boolean; // has change password
-    login: CardForm;    // login form
-    cpass: CardForm;    // change password form
+    login: FormData;    // login form
+    cpass: FormData;    // change password form
 };
 
-function repackManifest(fileUs: FileUs): CardLogin {
-    let login: CardLogin = {
+function buildCardData(fileUs: FileUs): CardData {
+    const m: Mani.Manifest = fileUs.mani!;
+    //console.log('raw', fileUs.raw);
+
+    let cardData: CardData = {
         fileUs,
         fname: '',
         login: {
+            meta: fileUs.meta?.[0],
         },
         cpass: {
+            meta: fileUs.meta?.[1],
         },
     };
-    if (!fileUs.mani) {
-        return login;
-    }
-    const m: Mani.Manifest = fileUs.mani;
-    //console.log('raw', fileUs.raw);
 
-    login.fname = fileUs.fname;
-    login.title = m.forms[0]?.options.choosename;
-    login.hasCpass = m.forms?.length > 1;
+    cardData.fname = fileUs.fname;
+    cardData.title = m.forms[0]?.options.choosename;
+    cardData.hasCpass = m.forms?.length > 1;
 
-    m.forms?.forEach((mform, idx) => {
-        const form = idx === 0 ? login.login : idx === 1 ? login.cpass : undefined;
-        if (!form) {
-            return;
-        }
-        form.domain = urlDomain(removeQuery(mform.detection?.web_ourl));
-    });
-
-    return login;
+    return cardData;
 }
 
-function CardRawInfo({ login }: { login: CardLogin; }) {
+function CardRawInfo({ cardData }: { cardData: CardData; }) {
     return (
         <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
-            <pre>{login.fileUs.raw}</pre>
+            <pre>{cardData.fileUs.raw}</pre>
         </div>
     );
 }
 
-function TitleFirstRow({ login }: { login: CardLogin; }) {
-    const icon = login.login.domain
+function TitleFirstRow({ cardData }: { cardData: CardData; }) {
+    const icon = cardData.login.meta?.disp.domain
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
-    const text = login.login.domain
-        ? <span className="ml-2 uppercase">{login.login.domain}</span>
+    const text = cardData.login.meta?.disp.domain
+        ? <span className="ml-2 uppercase">{cardData.login.meta.disp.domain}</span>
         : <span className="ml-2 uppercase">Windows application</span>;
     return (
         <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -74,7 +63,7 @@ function TitleFirstRow({ login }: { login: CardLogin; }) {
     );
 }
 
-function Title({ login }: { login: CardLogin; }) {
+function Title({ cardData }: { cardData: CardData; }) {
     const [open, setOpen] = React.useState(false);
     return (
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -88,18 +77,18 @@ function Title({ login }: { login: CardLogin; }) {
                     </div>} />
                 </div>
                 <div className="mr-8">
-                    <TitleFirstRow login={login} />
+                    <TitleFirstRow cardData={cardData} />
                     <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
-                        {login.fname}
+                        {cardData.fname}
                     </div>
                     <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                        {login.title || 'No title'}
+                        {cardData.title || 'No title'}
                     </div>
                 </div>
             </div>
 
             {open && <div className="">
-                <CardRawInfo login={login} />
+                <CardRawInfo cardData={cardData} />
             </div>}
         </div>
     );
@@ -107,29 +96,33 @@ function Title({ login }: { login: CardLogin; }) {
 
 // Forms
 
-function FormLogin({ login }: { login: CardLogin; }) {
+function FormContentLogin({ cardData }: { cardData: CardData; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Login form</div>
-            <PartFormDetection login={login} formIndex={0} />
-            <PartFormOptions login={login} formIndex={0} />
-            <PartFormFields login={login} formIndex={0} />
+            <PartFormDetection cardData={cardData} formIndex={0} />
+            <PartFormOptions cardData={cardData} formIndex={0} />
+            <PartFormFields cardData={cardData} formIndex={0} />
         </div>
     );
 }
 
-function FormCpass({ login }: { login: CardLogin; }) {
+function FormContentCpass({ cardData }: { cardData: CardData; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Password change form</div>
-            <PartFormDetection login={login} formIndex={1} />
-            <PartFormOptions login={login} formIndex={1} />
-            <PartFormFields login={login} formIndex={1} />
+            <PartFormDetection cardData={cardData} formIndex={1} />
+            <PartFormOptions cardData={cardData} formIndex={1} />
+            <PartFormFields cardData={cardData} formIndex={1} />
         </div>
     );
 }
 
-function FormButton({ login, form, opened, onClick }: { login: CardLogin; form: number; opened: boolean; onClick: () => void; }) {
+function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; form: number; opened: boolean; onClick: () => void; }) {
+    const disp = (form === 0 ? cardData.login : cardData.cpass).meta?.disp;
+    const isIe = disp?.isIe;
+    const isScript = disp?.isScript;
+    const isWeb = !!disp?.domain;
     const label = form === 0 ? 'Login form' : 'Password change form';
     const icon = form === 0 ? <IconAppWindows className="w-5 h-5 ml-2 opacity-75" /> : <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} />;
     return (
@@ -140,33 +133,33 @@ function FormButton({ login, form, opened, onClick }: { login: CardLogin; form: 
     );
 }
 
-function CardBody({ login }: { login: CardLogin; }) {
+function CardBody({ cardData }: { cardData: CardData; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
                 {/* Login form button */}
-                <FormButton login={login} form={0} opened={open1} onClick={() => setOpen1((v) => !v)} />
+                <FormButton cardData={cardData} form={0} opened={open1} onClick={() => setOpen1((v) => !v)} />
                 {/* Cpass form button */}
-                {login.hasCpass && <FormButton login={login} form={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
+                {cardData.hasCpass && <FormButton cardData={cardData} form={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
-            {open1 && (<FormLogin login={login} />)}
-            {open2 && (<FormCpass login={login} />)}
+            {open1 && (<FormContentLogin cardData={cardData} />)}
+            {open2 && (<FormContentCpass cardData={cardData} />)}
         </div>
     );
 }
 
-function ManifestCard({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
+function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
     const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
-    const login: CardLogin = repackManifest(fileUs);
-    return (
-        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
-            <Title login={login} />
-            <CardBody login={login} />
-        </div>
-    );
+    const cardData: CardData | undefined = fileUs.mani && buildCardData(fileUs);
+    return (<>
+        {cardData && <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
+            <Title cardData={cardData} />
+            <CardBody cardData={cardData} />
+        </div>}
+    </>);
 }
 
-export default ManifestCard;
+export default Card;
