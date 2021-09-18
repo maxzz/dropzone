@@ -74,10 +74,6 @@ function TitleFirstRow({ login }: { login: CardLogin; }) {
     );
 }
 
-function TitleSecondRow({ login }: { login: CardLogin; }) {
-    return (1);
-}
-
 function Title({ login }: { login: CardLogin; }) {
     const [open, setOpen] = React.useState(false);
     return (
@@ -168,51 +164,8 @@ function ManifestCard({ atom }: { atom: FileUsAtom; }) {
     const login: CardLogin = repackManifest(fileUs);
     return (
         <div className="grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md">{/* select-none */}
-            {/* min-w-[450px] max-w-[560px] */}
-
-            {/* Card title */}
             <Title login={login} />
-
-            {/* Card body */}
-            {/* <div className=""> */}
-
-            {/* Card body 1st col */}
-            {/* <div className="flex flex-col items-center">
-                    <div className="w-5 h-5">
-                        {/* {fileUs.cnt && <IconAppWindows />} * /}
-                        {fileUs.raw && <IconAppWebIE />}
-                        {/* {fileUs.cnt && <IconManualMode />} * /}
-                    </div>
-                    <div className="w-4 h-4">
-                        {fileUs.raw && <IconAppWebChrome strokeWidth={.9} />}
-                        {/* {fileUs.cnt && <IconAutoMode />} * /}
-                    </div>
-                </div> */}
-
-            {/* Card body 2nd col */}
-            {/* <div className="p-2 grid grid-cols-[auto,1fr] gap-2 bg-gray-200 text-gray-800"> */}
-            {/* Card body 2nd col: filename */}
-            {/* <div className="">{fileUs.fname}</div> */}
-
-            {/* Card body 2nd col: forms */}
             <CardBody login={login} />
-
-            {/* <div className="overflow-hidden">
-                        {login.forms && login.forms.map((f, idx) => (
-                            <div className="flex" key={idx}>
-                                <div className="w-4 h-4 p-0.5 mr-1 flex-none">
-                                    {idx === 0 ? <IconFormLogin /> : <IconFormChangePsw />}
-                                </div>
-                                <div className="overflow-x-auto smallscroll">{f}</div>
-                            </div>)
-                        )}
-                    </div>
-                     */}
-
-            {/* <div className="">{fileUs.size} bytes</div> */}
-            {/* </div> */}
-            {/* <div className="">{fileUs.cnt}</div> */}
-            {/* </div> */}
         </div>
     );
 }
