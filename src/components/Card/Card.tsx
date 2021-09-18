@@ -118,12 +118,13 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
     );
 }
 
-const TagWebIe = <IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} key="TagIe" />;
-const TagWeb = <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} key="TagChrome" />;
-const TagModeManual = <IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} key="TagManual" />;
-const TagWinApp = <IconAppWindows className="w-5 h-5 ml-2 opacity-75" key="TagWin" />;
+//TODO: some IE forms have no detection section: but we can check IE_Server or presences of locations
 
+const TagWinApp = <IconAppWindows className="w-5 h-5 ml-2 opacity-75" key="TagWinApp" />;
+const TagWebIe = <IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} key="TagWebIe" />;
+const TagWeb = <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} key="TagWeb" />;
 const TagModeNormal = <IconAutoMode className="w-5 h-5 ml-2 opacity-75" key="TagModeNormal" />;
+const TagModeManual = <IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} key="TagModeManual" />;
 const TagChgPsw = <IconFormChangePsw className="w-5 h-5 ml-2 opacity-75" key="TagChgPsw" />;
 const TagLogin = <IconFormLogin className="w-5 h-5 ml-2 opacity-75" key="TagLogin" />;
 
@@ -134,8 +135,8 @@ function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; f
     const isWeb = !!disp?.domain;
 
     const icons = [
-        isWeb ? TagWeb : TagWinApp,
-        isIe && TagWebIe,
+        isWeb ? isIe ? TagWebIe : TagWeb : TagWinApp,
+        !isWeb && isIe && TagWebIe,
         isScript && TagModeManual
     ];
 
