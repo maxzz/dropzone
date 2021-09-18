@@ -4,14 +4,14 @@ import { filteredAtom } from '../store/store';
 import ManifestCard from './Card/Card';
 
 import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+import './UI/simplebar.css';
 
 function FilesList() {
     const [files] = useAtom(filteredAtom);
     return (
         <div className="h-full w-full">
-            <SimpleBar className="h-full">
-                <div className="grid grid-flow-row gap-4 text-sm">
+            <SimpleBar className="h-full text-gray-300" autoHide={false}>
+                <div className="grid grid-flow-row gap-4 text-sm" style={{width: 'calc(100% - 11px)'}}>
                     {files.map((atom) =>
                         <ManifestCard atom={atom} key={`${atom}`} />
                     )}

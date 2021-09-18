@@ -139,7 +139,7 @@
 .simplebar-scrollbar:before {
   position: absolute;
   content: '';
-  background: black;
+  background: currentColor; /*black #00ff95*/
   border-radius: 7px;
   left: 2px;
   right: 2px;
