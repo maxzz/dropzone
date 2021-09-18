@@ -1,3 +1,5 @@
+import { removeQuery, urlDomain } from './url';
+
 /**
    * fileTimeToDate()
    * Convert a Windows FILETIME to a Javascript Date
@@ -182,17 +184,23 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isScript = (fields: Meta.Field[]): boolean => {
         return !!fields.length && fields.some(({path}: {path: Meta.Path}) => path.sn);
     };
+    const isIe = (form: Mani.Form):boolean => {
+        return !!form.detection?.processname?.match(/iexplore\.exe$/);
+    }
     const buildMetaForm = (form: Mani.Form): Meta.Form => {
         const pool: string[] = getPool(form) || [];
         const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field) => ({
             mani: field,
             path: fieldPathItems(pool, field.path_ext || ''),
         }));
+        
         return {
             mani: form,
             disp: {
+                domain: urlDomain(removeQuery(form.detection?.web_ourl)),
                 isScript: isScript(fields),
                 isEmpty: !fields.length,
+                isIe: isIe(form),
             },
             pool: pool,
             rects: PathLocations.buildFormLocations(form, pool) || [],

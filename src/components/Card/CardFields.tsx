@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardLogin } from './Card';
+import { CardData } from './Card';
 
 // Form parts utils
 
@@ -33,8 +33,8 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 
 // Form parts
 
-export function PartFormDetection({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
-    const form = login.fileUs.mani?.forms[formIndex];
+export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+    const form = cardData.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
             <div className="pt-2">detection</div>
@@ -45,8 +45,8 @@ export function PartFormDetection({ login, formIndex }: { login: CardLogin; form
     );
 }
 
-export function PartFormOptions({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
-    const form = login.fileUs.mani?.forms[formIndex];
+export function PartFormOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+    const form = cardData.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
             <div className="">options</div>
@@ -57,8 +57,8 @@ export function PartFormOptions({ login, formIndex }: { login: CardLogin; formIn
     );
 }
 
-export function PartFormFields({ login, formIndex }: { login: CardLogin; formIndex: number; }) {
-    const form = login.fileUs.mani?.forms[formIndex];
+export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+    const form = cardData.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
             <div className="">fields</div>
