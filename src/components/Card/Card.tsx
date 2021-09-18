@@ -129,6 +129,17 @@ function FormCpass({ login }: { login: CardLogin; }) {
     );
 }
 
+function FormButton({ login, form, opened, onClick }: { login: CardLogin; form: number; opened: boolean; onClick: () => void; }) {
+    const label = form === 0 ? 'Login form' : 'Password change form';
+    const icon = form === 0 ? <IconAppWindows className="w-5 h-5 ml-2 opacity-75" /> : <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} />;
+    return (
+        <button className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]" onClick={onClick}>
+            <span className={`${opened ? 'text-gray-900' : ''}`}>{label}</span>
+            {icon}
+        </button>
+    );
+}
+
 function CardBody({ login }: { login: CardLogin; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
@@ -136,25 +147,12 @@ function CardBody({ login }: { login: CardLogin; }) {
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
                 {/* Login form button */}
-                <button
-                    className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
-                    onClick={() => setOpen1((v) => !v)}
-                >
-                    <span className={`${open1 ? 'text-gray-900' : ''}`}>Login form</span>
-                    <IconAppWindows className="w-5 h-5 ml-2 opacity-75" />
-                </button>
+                <FormButton login={login} form={0} opened={open1} onClick={() => setOpen1((v) => !v)} />
                 {/* Cpass form button */}
-                {login.hasCpass && <button
-                    className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]"
-                    onClick={() => setOpen2((v) => !v)}
-                >
-                    <span className={`${open2 ? 'text-gray-900' : ''}`}>Password change form </span>
-                    <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} />
-                </button>}
+                {login.hasCpass && <FormButton login={login} form={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
             {open1 && (<FormLogin login={login} />)}
             {open2 && (<FormCpass login={login} />)}
-
         </div>
     );
 }
