@@ -118,17 +118,27 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
     );
 }
 
+const iconIe = <IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} key="iconIe"/>;
+const iconManual = <IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} key="iconManual"/>;
+const iconChrome = <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} key="iconChrome"/>;
+const iconWin = <IconAppWindows className="w-5 h-5 ml-2 opacity-75" key="iconWin"/>;
+
 function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; form: number; opened: boolean; onClick: () => void; }) {
     const disp = (form === 0 ? cardData.login : cardData.cpass).meta?.disp;
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
     const isWeb = !!disp?.domain;
+
+    const icons = [];
+    icons.push(isWeb ? iconChrome : iconWin);
+    isIe && icons.push(iconIe);
+    isScript && icons.push(iconManual);
+
     const label = form === 0 ? 'Login form' : 'Password change form';
-    const icon = form === 0 ? <IconAppWindows className="w-5 h-5 ml-2 opacity-75" /> : <IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} />;
     return (
         <button className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]" onClick={onClick}>
             <span className={`${opened ? 'text-gray-900' : ''}`}>{label}</span>
-            {icon}
+            {icons}
         </button>
     );
 }
