@@ -9,11 +9,14 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
     const setRightPanel = useUpdateAtom(rightPanelAtom);
     return (
         <div className="" {...props}>
-            <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} />
             {rightPanelValue &&
-                <div>
-                    {rightPanelValue.raw}
-                </div>}
+                <>
+                    <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} />
+                    <div>
+                        {rightPanelValue.raw}
+                    </div>
+                </>
+            }
         </div>
     );
 }
