@@ -131,8 +131,8 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
 //TODO: some IE forms have no detection section: but we can check IE_Server and presences of locations
 
 const TagWinApp = <div key="TagWinApp" title="Windows application"><IconAppWindows className="w-5 h-5 ml-2 opacity-75" /></div>;
-const TagWebIe = <div key="TagWebIe" title="Web IE application"><IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
-const TagWeb = <div key="TagWeb" title="Web application"><IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
+const TagWebIe = <div key="TagWebIe" title="Webiste trained with IE"><IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
+const TagWeb = <div key="TagWeb" title="Webiste trained with Chrome/Firefox"><IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
 const TagModeNormal = <div key="TagModeNormal" title="Normal mode"><IconAutoMode className="w-5 h-5 ml-2 opacity-75" /></div>;
 const TagModeManual = <div key="TagModeManual" title="Manual mode"><IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
 const TagChgPsw = <div key="TagChgPsw" title="Password change form"><IconFormChangePsw className="w-5 h-5 ml-2 opacity-75" /></div>;
