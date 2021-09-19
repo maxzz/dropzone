@@ -4,7 +4,7 @@ import { filteredAtom } from '../store/store';
 import Card from './Card/Card';
 import UISimpleBar from './UI/UIScrollbar';
 
-function FilesList() {
+function FilesList() { //TODO: add compact view
     const [files] = useAtom(filteredAtom);
     return (
         <div className="h-full w-full">

@@ -11,10 +11,6 @@ function App() {
             <div className="p-4 flex flex-col h-screen">
                 <Header />
                 <div className="flex-auto flex justify-center my-4 overflow-y-hidden">
-                {/* <div className="flex-auto mt-4 -mr-2 max-h-full overflow-y-hidden mb-8"> */}
-                {/* <div className="flex-1 mt-4 -mr-2 max-h-full mb-8"> */}
-                {/* <div className="flex-1 mt-4 -mr-2 max-h-full overflow-y-auto mb-8"> */}
-                {/* <div className="flex-1 mt-4 -mr-2 max-h-full overflow-y-hidden"> */}
                     <FilesList />
                 </div>
             </div>
