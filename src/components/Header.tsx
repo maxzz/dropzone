@@ -28,9 +28,9 @@ function AppFilters() {
     </>);
 }
 
-function Header() {
+function Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
-        <header className="">
+        <header className="" {...props}>
             <DropzoneArea>
                 <div className="p-2 sm:p-0 flex flex-col sm:flex-row items-end sm:items-center space-x-2 space-y-2 sm:space-y-0 text-sm text-gray-200">
                     <AppFilters />
