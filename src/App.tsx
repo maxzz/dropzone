@@ -7,10 +7,9 @@ import FilesList from './components/FilesList';
 function App() {
     return (
         <React.Fragment>
-            {/* <div className="p-4 grid grid-rows-[auto,1fr] h-screen"> */}
-            <div className="p-4 flex flex-col h-screen">
-                <Header />
-                <div className="flex-auto flex justify-center my-4 overflow-y-hidden">
+            <div className="p-4 grid grid-cols-[minmax(470px,550px),1fr] h-screen">
+                <Header className="col-span-full" />
+                <div className="w-full h-full flex-auto flex justify-center my-4 overflow-y-hidden">
                     <FilesList />
                 </div>
             </div>
