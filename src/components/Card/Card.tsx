@@ -142,8 +142,8 @@ function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; f
 
     const label = form === 0 ? 'Login form' : 'Password change form';
     return (
-        <button className="p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97]" onClick={onClick}>
-            <span className={`${opened ? 'text-gray-900' : ''}`}>{label}</span>
+        <button className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] ${opened ? 'bg-gray-800 text-gray-100' : ''}`} onClick={onClick}>
+            <span className="">{label}</span>
             {icons}
         </button>
     );
