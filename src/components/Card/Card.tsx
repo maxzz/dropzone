@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUs, FileUsAtom } from '../../store/store';
+import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardActions from './CardActions';
 import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UI/UiIcons';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 
 type FormData = {
     meta?: Meta.Form;
@@ -63,13 +64,22 @@ function TitleFirstRow({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function Title({ cardData }: { cardData: CardData; }) {
+function Title({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
+    const setRightPanel = useUpdateAtom(rightPanelAtom);
     return (
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
             <div className="">
                 <div className="absolute top-3 right-2 z-10">
-                    <button className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block" onClick={() => setOpen((v) => !v)}>
+                    <button className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block" onClick={
+                        () => {
+                            setOpen((v) => {
+                                let newState = !v;
+                                setRightPanel(newState ? atom : undefined);
+                                return !v;
+                            });
+                        }
+                    }>
                         <IconInfo />
                     </button>
                     <CardActions icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
@@ -172,10 +182,13 @@ function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom:
     const cardData: CardData | undefined = fileUs.mani && buildCardData(fileUs);
     return (<>
         {cardData && <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
-            <Title cardData={cardData} />
+            <Title cardData={cardData} atom={atom} />
             <CardBody cardData={cardData} />
         </div>}
     </>);
 }
+
+//TODO: add card index of total
+//TODO: compact view
 
 export default Card;

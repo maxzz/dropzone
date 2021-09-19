@@ -120,3 +120,14 @@ export const showEmptyManiAtom = atom(true);
 export const totalManualManiAtom = atom(0);
 export const totalNormalManiAtom = atom(0);
 export const totalEmptyManiAtom = atom(0);
+
+// Current atom for the right panel
+
+export const rightPanelAtom = atom<FileUsAtom | undefined>(undefined);
+
+export const rightPanelValue = atom(
+    (get) => {
+        const rpa = get(rightPanelAtom);
+        return rpa ? get(rpa) : undefined;
+    }
+);
