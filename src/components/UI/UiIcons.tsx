@@ -132,3 +132,13 @@ export function IconBack(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+
+export function IconTrash(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg viewBox="0 0 24 24" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
+            <path d="M2.65 5.15h18.93" />
+            <path d="M8.13 5.22V2.09A.87.87 0 0 1 9 1.22h6.25a.87.87 0 0 1 .88.87v3.13M19.19 5.22v15.94a1.14 1.14 0 0 1-1.14 1.14H6.16A1.14 1.14 0 0 1 5 21.16V5.22" />
+            <path d="M9.13 7.72v12M12.13 7.72v12M15.13 7.72v12" />
+        </svg>
+    );
+}

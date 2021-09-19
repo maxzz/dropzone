@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { filesAtom, SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
-import { IconAppLogo } from './UI/UiIcons';
+import { IconAppLogo, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
 
 function nameLengthValidator(file: File) {
@@ -44,7 +44,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                     ?
                     <div className="flex items-center">
                         {files.length} file{files.length === 1 ? '': 's'}
-                        <div className="ml-4">x</div>
+                        <div className="ml-4"><IconTrash className="w-4 h-4" /></div>
                     </div>
                     :
                     <div>
