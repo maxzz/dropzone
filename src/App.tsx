@@ -8,7 +8,7 @@ import RightPanel from './components/RightPanel';
 function App() {
     return (
         <React.Fragment>
-            <div className="h-screen p-4 grid grid-rows-[auto,1fr] grid-cols-[minmax(470px,550px),1fr] gap-4">
+            <div className="h-screen p-4 grid grid-rows-[auto,1fr] grid-cols-[minmax(450px,550px),1fr] gap-y-4 sm:gap-4">
                 <Header className="col-span-full" />
                 <div className="w-full h-full flex-auto overflow-y-hidden bg-green-500">
                     <FilesList />
