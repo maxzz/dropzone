@@ -12,8 +12,8 @@ function App() {
             <div className="h-screen p-4 flex flex-col">
                 <Header className="flex-none mb-4" />
                 <div className="flex-auto flex overflow-y-hidden">
-                    <FilesList className="flex-auto" />
-                    <RightPanel className="bg-red-500" />
+                    <FilesList className="fl1ex-auto w-1/3" />
+                    <RightPanel className="bg-red-500 flex-auto" />
                     <button className="bg-yellow-600" onClick={() => setOpen((v) => !v)}>Do</button>
                 </div>
             </div>
