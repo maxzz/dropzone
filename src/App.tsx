@@ -15,9 +15,9 @@ function App() {
 
                 <Header className="mb-4" />
 
-                <div className="flex-auto" // style={{ transition: 'transform .2s ease', transform: 'scaleX(.0001)', transformOrigin: 'left top', }}
+                <div className="flex-auto h-full" // style={{ transition: 'transform .2s ease', transform: 'scaleX(.0001)', transformOrigin: 'left top', }}
                 >
-                    <div className="flex">
+                    <div className="flex h-full">
 
                         <FilesList />
                         <RightPanel className="bg-red-500" />
