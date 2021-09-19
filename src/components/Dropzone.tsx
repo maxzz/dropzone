@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
+import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { SetFilesAtom } from '../store/store';
+import { filesAtom, SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
 import { IconAppLogo } from './UI/UiIcons';
 import toast from 'react-hot-toast';
@@ -16,7 +17,7 @@ function nameLengthValidator(file: File) {
     return null;
 }
 
-export function DropzoneBase({className, classNameActive, children}: React.HTMLAttributes<HTMLDivElement> & {classNameActive?: string}) {
+export function DropzoneBase({ className, classNameActive, children }: React.HTMLAttributes<HTMLDivElement> & { classNameActive?: string; }) {
     const setFiles = useUpdateAtom(SetFilesAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => setFiles(accepterFiles), []);
@@ -35,12 +36,21 @@ export function DropzoneBase({className, classNameActive, children}: React.HTMLA
 }
 
 export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
+    const [files] = useAtom(filesAtom);
     return (
         <div className="flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
-            <DropzoneBase className="px-4 py-2 my-1 mr-4 rounded bg-gray-900 ml-4 flex items-center" classNameActive="bg-green-600"> {/* TODO: classNameActive is not good fot tailwind parser */}
-                <div>
-                    Drag 'n' drop files here, or click to select files
-                </div>
+            <DropzoneBase className="px-4 py-2 my-0.5 ml-0.5 rounded bg-gray-900 flex items-center" classNameActive="bg-green-600"> {/* TODO: classNameActive is not good fot tailwind parser */}
+                {files.length
+                    ?
+                    <div className="flex items-center">
+                        {files.length} file{files.length === 1 ? '': 's'}
+                        <div className="ml-4">x</div>
+                    </div>
+                    :
+                    <div>
+                        Drag 'n' drop files here, or click to select files
+                    </div>
+                }
             </DropzoneBase>
             <div className="flex items-center justify-between">
                 {children}
