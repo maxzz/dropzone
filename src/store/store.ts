@@ -125,7 +125,7 @@ export const totalEmptyManiAtom = atom(0);
 
 export const rightPanelAtom = atom<FileUsAtom | undefined>(undefined);
 
-export const rightPanelValue = atom(
+export const rightPanelValueAtom = atom<FileUs | undefined>(
     (get) => {
         const rpa = get(rightPanelAtom);
         return rpa ? get(rpa) : undefined;
