@@ -12,8 +12,9 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
             {rightPanelValue &&
                 <>
                     <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} />
-                    <div>
-                        {rightPanelValue.raw}
+
+                    <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
+                        <pre>{rightPanelValue.raw}</pre>
                     </div>
                 </>
             }
