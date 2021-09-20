@@ -48,7 +48,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
     return (
         <div className="min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
             <DropzoneBase
-                className={`m-0.5 rounded-l flex items-stretch ${files.length ? 'bg-gray-600' : 'bg-gray-900'}`}
+                className={`m-0.5 rounded-l flex items-stretch ${files.length ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer`}
                 stylesActive={{backgroundColor: '#059669'}} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
             >
                 {files.length
