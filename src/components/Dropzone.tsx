@@ -44,7 +44,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                     ?
                     <div className="flex items-center">
                         {files.length} file{files.length === 1 ? '': 's'}
-                        <div className="ml-4"><IconTrash className="w-4 h-4" /></div>
+                        <div className="ml-4"><IconTrash className="w-4 h-4 text-gray-50" /></div>
                     </div>
                     :
                     <div>

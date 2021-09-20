@@ -142,3 +142,4 @@ export function IconTrash(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+//<svg id="Layer_5" data-name="Layer 5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#ccc;}.cls-2,.cls-3{fill:none;stroke:#000;stroke-miterlimit:10;}.cls-3{fill-rule:evenodd;}</style></defs><rect class="cls-1" width="24" height="24"/><line class="cls-2" x1="2.65" y1="5.15" x2="21.58" y2="5.15"/><path class="cls-3" d="M8.13,5.22V2.09A.87.87,0,0,1,9,1.22h6.25a.87.87,0,0,1,.88.87V5.22"/><path class="cls-3" d="M19.19,5.22V21.16a1.14,1.14,0,0,1-1.14,1.14H6.16A1.14,1.14,0,0,1,5,21.16V5.22"/><line class="cls-2" x1="9.13" y1="7.72" x2="9.13" y2="19.72"/><line class="cls-2" x1="12.13" y1="7.72" x2="12.13" y2="19.72"/><line class="cls-2" x1="15.13" y1="7.72" x2="15.13" y2="19.72"/></svg>
