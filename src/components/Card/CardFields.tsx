@@ -36,7 +36,7 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 // Form parts
 
 export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    let detection = {...cardData.fileUs.mani?.forms[formIndex]?.detection || {}};
+    const detection = { ...cardData.fileUs.mani?.forms[formIndex]?.detection || {} };
 
     /*
    interface Detection {
@@ -48,7 +48,7 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
         names_ext?: string;
         processname?: string;
         commandline?: string;
-    }    
+    }
     */
 
     // 1. fix packed names
@@ -57,32 +57,34 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
 
     // 2. fix urls
-    let urlField: string;
-    let urlvalue: string;
-    if (detection.web_murl) {
-        let urlname = '';
-        if (detection.web_ourl === detection.web_murl) {
-            delete detection.web_ourl;
-            urlname += '+o';
-        }
-        if (detection.web_qurl === detection.web_murl) {
-            delete detection.web_qurl;
-            urlname += '+q';
-        }
-        let s = detection.web_murl;
-        urlField = `URL m${urlname}`;
-        urlvalue = s;
-        delete detection.web_murl;
-        (detection as any)[urlField] = s;
 
-        //detection = {caption: detection.caption}
+    let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
+
+    let urlname = '';
+    if (web_ourl === web_murl) {
+        web_ourl = undefined;
+        urlname += '+o';
     }
+    if (web_qurl === web_murl) {
+        web_qurl = undefined;
+        urlname += '+q';
+    }
+
+    let toShow = {
+        caption,
+        [`URL m${urlname}`]: detection.web_murl,
+        ...{ web_ourl, web_murl, web_qurl },
+        web_checkurl,
+        names_ext,
+        processname,
+        commandline,
+    };
 
     return (
         <div className="">
             <div className="pt-2">detection</div>
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={detection} />
+            <ObjectTable obj={toShow} />
             <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
@@ -108,11 +110,11 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
             <div className="font-bold border-b border-gray-500"></div>
             {form?.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
-                    {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />) }
-                    {field.type === "check" && <IconInputFieldChk className="w-4 h-4" /> }
-                    {field.type === "list" && <IconInputFieldList className="w-4 h-4" /> }
-                    {field.type === "text" && <IconFieldText className="w-4 h-4" /> }
-                    {field.type === "button" && <IconToggleRight className="w-4 h-4" /> }
+                    {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />)}
+                    {field.type === "check" && <IconInputFieldChk className="w-4 h-4" />}
+                    {field.type === "list" && <IconInputFieldList className="w-4 h-4" />}
+                    {field.type === "text" && <IconFieldText className="w-4 h-4" />}
+                    {field.type === "button" && <IconToggleRight className="w-4 h-4" />}
                     <ObjectTable obj={field} />
                 </React.Fragment>
             )}
