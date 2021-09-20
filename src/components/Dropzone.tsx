@@ -46,7 +46,7 @@ export function DropzoneBase({ className, classNameActive, stylesActive = {}, ch
 export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
     const [files, setFiles] = useAtom(filesAtom);
     return (
-        <div className="flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
+        <div className="min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
             <DropzoneBase
                 className={`m-0.5 rounded-l flex items-stretch ${files.length ? 'bg-gray-600' : 'bg-gray-900'}`}
                 stylesActive={{backgroundColor: '#059669'}} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
@@ -54,7 +54,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                 {files.length
                     ?
                     <div className="flex items-center">
-                        <div className="mx-4 my-2 uppercase">
+                        <div className="mx-4 my-2 uppercase text-xs">
                             {files.length} file{files.length === 1 ? '' : 's'}
                         </div>
                         <button className="px-2 self-stretch border-l rounded-none border-gray-500 flex items-center justify-center">
