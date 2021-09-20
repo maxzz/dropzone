@@ -65,7 +65,7 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
             <div className="">fields</div>
             <div className="font-bold border-b border-gray-500"></div>
             {/* <ObjectTable obj={form?.fields} /> */}
-            {form?.fields.map((field, idx) =>
+            {form?.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />) }
                     {field.type === "check" && <IconInputFieldChk className="w-4 h-4" /> }
@@ -79,3 +79,5 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
         </div>
     );
 }
+
+//TODO: policy field
