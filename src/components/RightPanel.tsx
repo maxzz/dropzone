@@ -16,7 +16,7 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
                     {/* <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} /> */}
 
                     <UISimpleBar className={`text-gray-500 ${className}`} autoHide={false}>
-                        <div className="my-2 overflow-auto text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
+                        <div className="my-2 text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
                             {/* overflow-auto smallscroll */}
                             <pre>{rightPanelValue.raw}</pre>
                         </div>

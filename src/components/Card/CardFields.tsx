@@ -56,8 +56,7 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     detection.commandline && (detection.commandline = decodeURI(detection.commandline));
     detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
 
-    // 2. fix urls
-
+    // 2. fix duplicated fields
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
 
     let urlname = '';
@@ -73,7 +72,8 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     let toShow = {
         caption,
         [`URL m${urlname}`]: detection.web_murl,
-        ...{ web_ourl, web_murl, web_qurl },
+        ...(web_ourl && {web_ourl}),
+        ...(web_qurl && {web_qurl}),
         web_checkurl,
         names_ext,
         processname,

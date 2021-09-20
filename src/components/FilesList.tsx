@@ -9,7 +9,7 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
     const [files] = useAtom(filteredAtom);
     return (
         <UISimpleBar className={`text-gray-500 ${className}`} {...rest}>
-            <div className="overflow-y-auto grid grid-flow-row gap-4 text-sm">
+            <div className="grid grid-flow-row gap-4 text-sm">
                 {files.map((atom) => <Card atom={atom} className="" key={`${atom}`} />)}
             </div>
         </UISimpleBar>
