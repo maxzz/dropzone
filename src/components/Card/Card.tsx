@@ -4,7 +4,7 @@ import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardActions from './CardActions';
 import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UI/UiIcons';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { useUpdateAtom } from 'jotai/utils';
 
 type FormData = {
     meta?: Meta.Form;
@@ -54,12 +54,12 @@ function TitleFirstRow({ cardData, cardIndex }: { cardData: CardData; cardIndex?
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
     const text = cardData.login.meta?.disp.domain
-        ? <span className="ml-2 uppercase">{cardData.login.meta.disp.domain}</span>
-        : <span className="ml-2 uppercase">Windows application</span>;
+        ? <span className="ml-1 uppercase">{cardData.login.meta.disp.domain}</span>
+        : <span className="ml-1 uppercase">Windows application</span>;
     return (
         <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-            <div className="">{cardIndex}</div>
             {icon}
+            <div className="self-start text-xs text-gray-400">{cardIndex}</div>
             {text}
         </div>
     );
