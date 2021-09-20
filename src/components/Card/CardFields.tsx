@@ -1,4 +1,5 @@
 import React from 'react';
+import { cpp_restore } from '../../store/manifest/mani-functions';
 import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 
@@ -35,12 +36,18 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 // Form parts
 
 export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const form = cardData.fileUs.mani?.forms[formIndex];
+    const detection = {...cardData.fileUs.mani?.forms[formIndex]?.detection || {}};
+    detection.processname && (detection.processname = decodeURI(detection.processname));
+    detection.commandline && (detection.commandline = decodeURI(detection.commandline));
+    //detection.names_ext && (detection.names_ext = cpp_restore(detection.names_ext.replace(/:/g, '||')));
+    //detection.names_ext && (detection.names_ext = cpp_restore(detection.names_ext.replace(/:/g, '║')));
+    //detection.names_ext && (detection.names_ext = cpp_restore(detection.names_ext.replace(/:/g, '♣')));
+    detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●'))));
     return (
         <div className="">
             <div className="pt-2">detection</div>
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={form?.detection} />
+            <ObjectTable obj={detection} />
             <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
