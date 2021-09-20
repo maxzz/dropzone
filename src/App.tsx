@@ -16,9 +16,9 @@ function App() {
                     <div className="h-full flex">
                         <FilesList className="flex-auto w-1/3 flex-shrink-0" />
                         {/* <FilesList className="fl1ex-auto w-1/3 flex-shrink-0" /> */}
-                        <RightPanel className="flex-auto bg-red-500" />
+                        <RightPanel className="ml-4 flex-auto" />
                         {/* <RightPanel className="flex-none w-1/3 bg-red-500" /> */}
-                        <button className="bg-yellow-600" onClick={() => setOpen((v) => !v)}>Do</button>
+                        {/* <button className="bg-yellow-600" onClick={() => setOpen((v) => !v)}>Do</button> */}
                     </div>
                     
                 </div>
