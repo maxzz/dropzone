@@ -10,7 +10,7 @@ function isObject(value: any): boolean {
 function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
-        <div className="grid grid-cols-[auto,1fr] gap-x-1 text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto),1fr] gap-x-1 text-xs">
             {values.map((pair) => {
                 if (isObject(pair[1])) {
                     return (<React.Fragment key={pair[0]}>
@@ -63,7 +63,10 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
         <div className="">
             <div className="">fields</div>
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={form?.fields} />
+            {/* <ObjectTable obj={form?.fields} /> */}
+            {form?.fields.map((field, idx) => 
+                <ObjectTable obj={field} key={idx} />
+            )}
             <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
