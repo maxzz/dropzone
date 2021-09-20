@@ -12,7 +12,7 @@ function isObject(value: any): boolean {
 function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
-        <div className="grid grid-cols-[minmax(5rem,auto),1fr] gap-x-1 text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
             {values.map((pair) => {
                 if (isObject(pair[1])) {
                     return (<React.Fragment key={pair[0]}>
@@ -22,10 +22,10 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
                     </React.Fragment>);
                 } else {
                     return (<React.Fragment key={pair[0]}>
-                        <div className="">{pair[0]}</div>
+                        <div className="h-6 leading-5">{pair[0]}</div>
                         {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
                         {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-                        <div className="border-l border-gray-500 pl-1 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
+                        <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
                     </React.Fragment>);
                 }
             })}
@@ -51,14 +51,10 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     }
     */
 
-    // 1. fix packed names
-    detection.processname && (detection.processname = decodeURI(detection.processname));
-    detection.commandline && (detection.commandline = decodeURI(detection.commandline));
-    detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
-
     // 2. fix duplicated fields
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
 
+    // 2.1. urls
     let urlname = '';
     if (web_ourl === web_murl) {
         web_ourl = undefined;
@@ -69,15 +65,27 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
         urlname += '+q';
     }
 
+    // 2.2. processnames
+    if (processname === commandline) {
+        commandline = undefined;
+    }
+
+    processname && (processname = decodeURI(processname));
+    commandline && (commandline = decodeURI(commandline));
+
+    // 3. fix packed names
+
+    names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
+
     let toShow = {
         caption,
-        [`URL m${urlname}`]: detection.web_murl,
-        ...(web_ourl && {web_ourl}),
-        ...(web_qurl && {web_qurl}),
-        web_checkurl,
+        [`url m${urlname}`]: detection.web_murl,
+        ...(web_ourl && { web_ourl }),
+        ...(web_qurl && { web_qurl }),
         names_ext,
         processname,
-        commandline,
+        ...(commandline && { commandline }),
+        web_checkurl,
     };
 
     return (
@@ -102,6 +110,20 @@ export function PartFormOptions({ cardData, formIndex }: { cardData: CardData; f
     );
 }
 
+function ObjectTableFields({ obj = {} }: { obj?: any; }): JSX.Element {
+    const values = Object.entries(obj);
+    return (
+        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
+            {values.map(([key, val]) => {
+                return (<React.Fragment key={key}>
+                    <div className="h-6 leading-5">{key}</div>
+                    <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${val}`}</div>
+                </React.Fragment>);
+            })}
+        </div>
+    );
+}
+
 export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
     return (
@@ -115,7 +137,7 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
                     {field.type === "list" && <IconInputFieldList className="w-4 h-4" />}
                     {field.type === "text" && <IconFieldText className="w-4 h-4" />}
                     {field.type === "button" && <IconToggleRight className="w-4 h-4" />}
-                    <ObjectTable obj={field} />
+                    <ObjectTableFields obj={field} />
                 </React.Fragment>
             )}
             <div className="font-bold border-t border-gray-500"></div>
