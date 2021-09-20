@@ -133,13 +133,24 @@ export function IconBack(props: SVGProps<SVGSVGElement>) {
     );
 }
 
+// export function IconTrash(props: SVGProps<SVGSVGElement>) {
+//     return (
+//         <svg viewBox="0 0 24 24" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
+//             <path d="M2.65 5.15h18.93" />
+//             <path d="M8.13 5.22V2.09A.87.87 0 0 1 9 1.22h6.25a.87.87 0 0 1 .88.87v3.13M19.19 5.22v15.94a1.14 1.14 0 0 1-1.14 1.14H6.16A1.14 1.14 0 0 1 5 21.16V5.22" />
+//             <path d="M9.13 7.72v12M12.13 7.72v12M15.13 7.72v12" />
+//         </svg>
+//     );
+// }
+
+
 export function IconTrash(props: SVGProps<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 24 24" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
-            <path d="M2.65 5.15h18.93" />
-            <path d="M8.13 5.22V2.09A.87.87 0 0 1 9 1.22h6.25a.87.87 0 0 1 .88.87v3.13M19.19 5.22v15.94a1.14 1.14 0 0 1-1.14 1.14H6.16A1.14 1.14 0 0 1 5 21.16V5.22" />
-            <path d="M9.13 7.72v12M12.13 7.72v12M15.13 7.72v12" />
+        <svg width="1em" height="1em" viewBox="0 0 16 16" fillRule="evenodd" clipRule="evenodd" fill="currentColor" {...props}>
+            <path d="M10 3h3v1h-1v9l-1 1H4l-1-1V4H2V3h3V2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1zM9 2H6v1h3V2zM4 13h7V4H4v9zm2-8H5v7h1V5zm1 0h1v7H7V5zm2 0h1v7H9V5z" />
         </svg>
     );
 }
-//<svg id="Layer_5" data-name="Layer 5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#ccc;}.cls-2,.cls-3{fill:none;stroke:#000;stroke-miterlimit:10;}.cls-3{fill-rule:evenodd;}</style></defs><rect class="cls-1" width="24" height="24"/><line class="cls-2" x1="2.65" y1="5.15" x2="21.58" y2="5.15"/><path class="cls-3" d="M8.13,5.22V2.09A.87.87,0,0,1,9,1.22h6.25a.87.87,0,0,1,.88.87V5.22"/><path class="cls-3" d="M19.19,5.22V21.16a1.14,1.14,0,0,1-1.14,1.14H6.16A1.14,1.14,0,0,1,5,21.16V5.22"/><line class="cls-2" x1="9.13" y1="7.72" x2="9.13" y2="19.72"/><line class="cls-2" x1="12.13" y1="7.72" x2="12.13" y2="19.72"/><line class="cls-2" x1="15.13" y1="7.72" x2="15.13" y2="19.72"/></svg>
+
+//d="M188 244h56v-19h-19v-169l-19 -18h-131l-19 18v169h-18v19h56v19q0 7 5.5 12.5t13.5 5.5h56q8 0 13.5 -5.5t5.5 -12.5v-19zM169 263h-56v-19h56v19zM75 56h131v169h-131v-169zM113 206h-19v-131h19v131zM131 206h19v-131h-19v131zM169 206h19v-131h-19v131z" />
+
