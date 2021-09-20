@@ -175,7 +175,7 @@ export function IconInputFieldChk(props: SVGProps<SVGSVGElement>) {
 
 // Field icons old
 
-export function IconAirplay(props: SVGProps<SVGSVGElement>) {
+function IconAirplay(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
             <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
@@ -183,7 +183,8 @@ export function IconAirplay(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-export function IconCheckSquare(props: SVGProps<SVGSVGElement>) {
+
+function IconCheckSquare(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
             <polyline points="9 11 12 14 23 3"></polyline>
@@ -191,7 +192,8 @@ export function IconCheckSquare(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-export function IconEyeOff(props: SVGProps<SVGSVGElement>) {
+
+function IconEyeOff(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
@@ -199,7 +201,8 @@ export function IconEyeOff(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-export function IconEye(props: SVGProps<SVGSVGElement>) {
+
+function IconEye(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
@@ -207,7 +210,8 @@ export function IconEye(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-export function IconToggleLeft(props: SVGProps<SVGSVGElement>) {
+
+function IconToggleLeft(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
             <rect x="1" y="5" width="22" height="14" rx="7" ry="7"></rect>
@@ -215,6 +219,7 @@ export function IconToggleLeft(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+
 export function IconToggleRight(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
@@ -223,4 +228,3 @@ export function IconToggleRight(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-

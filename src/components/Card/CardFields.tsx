@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconInputFieldChk, IconInputFieldPsw, IconInputFieldText, IconToggleLeft, IconToggleRight } from '../UI/UiIcons';
+import { IconInputFieldChk, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 
 // Form parts utils
