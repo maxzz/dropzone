@@ -73,20 +73,6 @@ function Title({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
                 <div className="absolute top-3 right-2 z-10">
                     <button className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block" onClick={
                         () => {
-
-                            //error: Cannot update a component ...
-                            // setOpen((v) => {
-                            //     let newState = !v;
-                            //     setRightPanel(newState ? atom : undefined);
-                            //     return !v;
-                            // });
-
-                            // let newState = !open;
-                            // setRightPanel(newState ? atom : undefined);
-                            // setOpen((v) => {
-                            //     return !v;
-                            // });
-
                             let newState = !open;
                             setRightPanel(newState ? atom : undefined);
                             setOpen(newState);
