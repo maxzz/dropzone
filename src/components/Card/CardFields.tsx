@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconInputFieldChk, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
+import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 
 // Form parts utils
@@ -67,9 +67,11 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
             {/* <ObjectTable obj={form?.fields} /> */}
             {form?.fields.map((field, idx) =>
                 <React.Fragment key={idx}>
-                    {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" /> : <IconInputFieldText className="w-4 h-4" />) }
-                    {field.type === "button" && <IconInputFieldChk className="w-4 h-4" /> }
-                    {/* {field.type === "button" && <IconToggleRight className="w-4 h-4" /> } */}
+                    {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />) }
+                    {field.type === "check" && <IconInputFieldChk className="w-4 h-4" /> }
+                    {field.type === "list" && <IconInputFieldList className="w-4 h-4" /> }
+                    {field.type === "text" && <IconFieldText className="w-4 h-4" /> }
+                    {field.type === "button" && <IconToggleRight className="w-4 h-4" /> }
                     <ObjectTable obj={field} />
                 </React.Fragment>
             )}
