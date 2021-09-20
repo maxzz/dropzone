@@ -36,7 +36,20 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 // Form parts
 
 export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const detection = {...cardData.fileUs.mani?.forms[formIndex]?.detection || {}};
+    let detection = {...cardData.fileUs.mani?.forms[formIndex]?.detection || {}};
+
+    /*
+   interface Detection {
+        caption?: string;
+        web_ourl?: string;
+        web_murl?: string;
+        web_qurl?: string;
+        web_checkurl?: boolean; // "1"
+        names_ext?: string;
+        processname?: string;
+        commandline?: string;
+    }    
+    */
 
     // 1. fix packed names
     detection.processname && (detection.processname = decodeURI(detection.processname));
@@ -44,6 +57,8 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
 
     // 2. fix urls
+    let urlField: string;
+    let urlvalue: string;
     if (detection.web_murl) {
         let urlname = '';
         if (detection.web_ourl === detection.web_murl) {
@@ -55,8 +70,12 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
             urlname += '+q';
         }
         let s = detection.web_murl;
+        urlField = `URL m${urlname}`;
+        urlvalue = s;
         delete detection.web_murl;
-        (detection as any)[`URL m${urlname}`] = s;
+        (detection as any)[urlField] = s;
+
+        //detection = {caption: detection.caption}
     }
 
     return (
