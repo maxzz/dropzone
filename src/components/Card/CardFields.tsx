@@ -37,12 +37,28 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 
 export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const detection = {...cardData.fileUs.mani?.forms[formIndex]?.detection || {}};
+
+    // 1. fix packed names
     detection.processname && (detection.processname = decodeURI(detection.processname));
     detection.commandline && (detection.commandline = decodeURI(detection.commandline));
-    //detection.names_ext && (detection.names_ext = cpp_restore(detection.names_ext.replace(/:/g, '||')));
-    //detection.names_ext && (detection.names_ext = cpp_restore(detection.names_ext.replace(/:/g, '║')));
-    //detection.names_ext && (detection.names_ext = cpp_restore(detection.names_ext.replace(/:/g, '♣')));
-    detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●'))));
+    detection.names_ext && (detection.names_ext = decodeURI(cpp_restore(detection.names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
+
+    // 2. fix urls
+    if (detection.web_murl) {
+        let urlname = '';
+        if (detection.web_ourl === detection.web_murl) {
+            delete detection.web_ourl;
+            urlname += '+o';
+        }
+        if (detection.web_qurl === detection.web_murl) {
+            delete detection.web_qurl;
+            urlname += '+q';
+        }
+        let s = detection.web_murl;
+        delete detection.web_murl;
+        (detection as any)[`URL m${urlname}`] = s;
+    }
+
     return (
         <div className="">
             <div className="pt-2">detection</div>
@@ -71,7 +87,6 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
         <div className="">
             <div className="">fields</div>
             <div className="font-bold border-b border-gray-500"></div>
-            {/* <ObjectTable obj={form?.fields} /> */}
             {form?.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />) }
