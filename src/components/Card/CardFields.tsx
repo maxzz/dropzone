@@ -81,3 +81,7 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
 }
 
 //TODO: policy field
+//TODO: rfield (in out), rfieldrindex
+//TODO: refs @email
+//TODO: script
+//TODO: 'path_ext' and ignore 'path' but complain about 'path'
