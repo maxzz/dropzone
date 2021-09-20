@@ -49,7 +49,7 @@ function CardRawInfo({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function TitleFirstRow({ cardData, cardIndex }: { cardData: CardData; cardIndex?: number; }) {
+function TitleFirstRow({ cardData }: { cardData: CardData; }) {
     const icon = cardData.login.meta?.disp.domain
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
@@ -59,13 +59,13 @@ function TitleFirstRow({ cardData, cardIndex }: { cardData: CardData; cardIndex?
     return (
         <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
             {icon}
-            <div className="self-start text-xs text-gray-400">{cardIndex}</div>
+            <div className="self-start text-xs text-gray-400">{cardData.fileUs.idx + 1}</div>
             {text}
         </div>
     );
 }
 
-function Title({ cardData, atom, cardIndex }: { cardData: CardData; atom: FileUsAtom; cardIndex?: number; }) {
+function Title({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
     const setRightPanel = useUpdateAtom(rightPanelAtom);
     return (
@@ -86,7 +86,7 @@ function Title({ cardData, atom, cardIndex }: { cardData: CardData; atom: FileUs
                     </div>} />
                 </div>
                 <div className="mr-8">
-                    <TitleFirstRow cardData={cardData} cardIndex={cardIndex} />
+                    <TitleFirstRow cardData={cardData} />
                     <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
                         {cardData.fname}
                     </div>
@@ -173,13 +173,13 @@ function CardBody({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function Card({ atom, cardIndex, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; cardIndex?: number; }) {
+function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
     const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
     const cardData: CardData | undefined = fileUs.mani && buildCardData(fileUs);
     return (<>
         {cardData && <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
-            <Title cardData={cardData} atom={atom} cardIndex={cardIndex} />
+            <Title cardData={cardData} atom={atom} />
             <CardBody cardData={cardData} />
         </div>}
     </>);

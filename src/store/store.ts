@@ -6,6 +6,7 @@ import { delay, isEmpty, isManual, textFileReader } from './store-functions';
 
 export type FileUs = {
     id: string;
+    idx: number; // index in the loaded list wo/ counting on filters, i.e. absolute index
     fname: string;
     modified: number; // last modified
     size: number;
@@ -24,9 +25,10 @@ export const filesAtom = atom<FileUsAtom[]>([]);
 export const SetFilesAtom = atom(
     null,
     (get, set, accepterFiles: File[]) => {
-        const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file) => {
+        const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
             return atom<FileUs>({
                 id: uuid(),
+                idx,
                 fname: file.name,
                 modified: file.lastModified,
                 size: file.size,
