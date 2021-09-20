@@ -49,7 +49,7 @@ function CardRawInfo({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function TitleFirstRow({ cardData }: { cardData: CardData; }) {
+function TitleFirstRow({ cardData, cardIndex }: { cardData: CardData; cardIndex?: number; }) {
     const icon = cardData.login.meta?.disp.domain
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
@@ -58,13 +58,14 @@ function TitleFirstRow({ cardData }: { cardData: CardData; }) {
         : <span className="ml-2 uppercase">Windows application</span>;
     return (
         <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <div className="">{cardIndex}</div>
             {icon}
             {text}
         </div>
     );
 }
 
-function Title({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
+function Title({ cardData, atom, cardIndex }: { cardData: CardData; atom: FileUsAtom; cardIndex?: number; }) {
     const [open, setOpen] = React.useState(false);
     const setRightPanel = useUpdateAtom(rightPanelAtom);
     return (
@@ -85,7 +86,7 @@ function Title({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
                     </div>} />
                 </div>
                 <div className="mr-8">
-                    <TitleFirstRow cardData={cardData} />
+                    <TitleFirstRow cardData={cardData} cardIndex={cardIndex} />
                     <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
                         {cardData.fname}
                     </div>
@@ -125,8 +126,6 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
         </div>
     );
 }
-
-//TODO: some IE forms have no detection section: but we can check IE_Server and presences of locations
 
 const TagWinApp = <div key="TagWinApp" title="Windows application"><IconAppWindows className="w-5 h-5 ml-2 opacity-75" /></div>;
 const TagWebIe = <div key="TagWebIe" title="Webiste trained with IE"><IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
@@ -174,19 +173,21 @@ function CardBody({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
+function Card({ atom, cardIndex, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; cardIndex?: number; }) {
     const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
     const cardData: CardData | undefined = fileUs.mani && buildCardData(fileUs);
     return (<>
         {cardData && <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
-            <Title cardData={cardData} atom={atom} />
+            <Title cardData={cardData} atom={atom} cardIndex={cardIndex} />
             <CardBody cardData={cardData} />
         </div>}
     </>);
 }
 
+export default Card;
+
 //TODO: add card index of total
 //TODO: compact view
 
-export default Card;
+//TODO: some IE forms have no detection section: but we can check IE_Server and presences of locations
