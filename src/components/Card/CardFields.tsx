@@ -95,17 +95,19 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
     );
 }
 
-function FieldFirstCol({ children }: { children?: React.ReactNode; }): JSX.Element {
+function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+    const {className, ...attrs} = rest;
     return (
-        <div className="h-6 leading-5">
+        <div className={`h-6 leading-5 ${className}`} {...attrs}>
             {children}
         </div>
     );
 }
 
-function FieldSecondCol({ children }: { children?: React.ReactNode; }): JSX.Element {
+function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+    const {className, ...attrs} = rest;
     return (
-        <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+        <div className={`border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}>
             {children}
         </div>
     );
@@ -122,9 +124,11 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                 if (key === 'type') {
                     return (
                         <React.Fragment key={`${key || idx}`}>
-                            <FieldFirstCol>{key}</FieldFirstCol>
-                            <FieldSecondCol>
+                            <FieldFirstCol>
                                 <div className="flex items-center"> {key === 'type' && <FieldIcon field={field} />} {`${val}`} </div>
+                            </FieldFirstCol>
+                            <FieldSecondCol>
+                                {field.displayname}
                             </FieldSecondCol>
                         </React.Fragment>);
                 }
