@@ -120,12 +120,12 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
 function maxRect(rects: MPath.Chunk_loc[]) {
     let w = 0;
     let h = 0;
-    rects.forEach(_ => {
-        if (_.w > w) {
-            w = _.w;
+    rects.forEach(rect => {
+        if (rect.x + rect.w > w) {
+            w = rect.x + rect.w;
         }
-        if (_.h > h) {
-            h = _.h;
+        if (rect.y + rect.h > h) {
+            h = rect.y + rect.h;
         }
     });
     return { w, h };
@@ -140,8 +140,8 @@ function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }):
         thisRects.push(fieldLocs[fieldLocs.length - 1]);
     }
 
-    console.log('locs', fieldLocs);
-    
+    // TODO: move left-top to min point, i.e. ignore window position
+    //console.log('locs', fieldLocs);
 
     return (
         <div className="rects">
