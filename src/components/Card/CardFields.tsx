@@ -5,29 +5,43 @@ import { CardData } from './Card';
 
 // Form parts utils
 
-function isObject(value: any): boolean {
-    return value && typeof value === 'object';
-}
+// function isObject(value: any): boolean {
+//     return value && typeof value === 'object';
+// }
+
+// function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
+//     const values = Object.entries(obj);
+//     return (
+//         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
+//             {values.map((pair) => {
+//                 if (isObject(pair[1])) {
+//                     return (<React.Fragment key={pair[0]}>
+//                         <div className="">field {pair[0]}</div>
+//                         {/* <div className="">field2</div> */}
+//                         {ObjectTable({ obj: pair[1] })} {/* TODO: we don't need to add grid */}
+//                     </React.Fragment>);
+//                 } else {
+//                     return (<React.Fragment key={pair[0]}>
+//                         <div className="h-6 leading-5">{pair[0]}</div>
+//                         {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
+//                         {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
+//                         <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
+//                     </React.Fragment>);
+//                 }
+//             })}
+//         </div>
+//     );
+// }
 
 function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
-            {values.map((pair) => {
-                if (isObject(pair[1])) {
-                    return (<React.Fragment key={pair[0]}>
-                        <div className="">field {pair[0]}</div>
-                        {/* <div className="">field2</div> */}
-                        {ObjectTable({ obj: pair[1] })} {/* TODO: we don't need to add grid */}
-                    </React.Fragment>);
-                } else {
-                    return (<React.Fragment key={pair[0]}>
-                        <div className="h-6 leading-5">{pair[0]}</div>
-                        {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-                        {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-                        <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
-                    </React.Fragment>);
-                }
+            {values.map(([key, val]) => {
+                return (<React.Fragment key={key}>
+                    <div className="h-6 leading-5">{key}</div>
+                    <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">{`${val}`}</div>
+                </React.Fragment>);
             })}
         </div>
     );
@@ -117,10 +131,22 @@ function ObjectTableFields({ obj = {} }: { obj?: any; }): JSX.Element {
             {values.map(([key, val]) => {
                 return (<React.Fragment key={key}>
                     <div className="h-6 leading-5">{key}</div>
-                    <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${val}`}</div>
+                    <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">{`${val}`}</div>
                 </React.Fragment>);
             })}
         </div>
+    );
+}
+
+function FieldIcon({ field }: { field: Mani.Field; }) {
+    return (
+        <>
+            {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />)}
+            {field.type === "check" && <IconInputFieldChk className="w-4 h-4" />}
+            {field.type === "list" && <IconInputFieldList className="w-4 h-4" />}
+            {field.type === "text" && <IconFieldText className="w-4 h-4" />}
+            {field.type === "button" && <IconToggleRight className="w-4 h-4" />}
+        </>
     );
 }
 
@@ -132,11 +158,12 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
             <div className="font-bold border-b border-gray-500"></div>
             {form?.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
-                    {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />)}
+                    <FieldIcon field={field} />
+                    {/* {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />)}
                     {field.type === "check" && <IconInputFieldChk className="w-4 h-4" />}
                     {field.type === "list" && <IconInputFieldList className="w-4 h-4" />}
                     {field.type === "text" && <IconFieldText className="w-4 h-4" />}
-                    {field.type === "button" && <IconToggleRight className="w-4 h-4" />}
+                    {field.type === "button" && <IconToggleRight className="w-4 h-4" />} */}
                     <ObjectTableFields obj={field} />
                 </React.Fragment>
             )}
