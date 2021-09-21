@@ -114,25 +114,16 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
 }
 
 function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
-    const {
-        displayname,
-        type,
-        dbname,
-        path_ext,
-        rfield,
-        rfieldindex,
-        password,
-        useit,
-    } = field;
+    const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field;
     const toShow = {
-        displayname,
-        type,
-        dbname,
-        path_ext,
-        rfield,
-        rfieldindex,
-        password,
-        useit,
+        ...(displayname && {displayname}),
+        ...(type && {type}),
+        ...(dbname && {dbname}),
+        ...(path_ext && {path_ext}),
+        ...(rfield && {rfield}),
+        ...(rfieldindex && {rfieldindex}),
+        ...(password && {password}),
+        ...(useit && {useit}),
     };
     const values = Object.entries(toShow);
     return (
