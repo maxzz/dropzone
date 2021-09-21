@@ -89,7 +89,7 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
             {field.type === "edit" && (field.password ? <IconInputFieldPsw className={cls} fill="#38a000" /> : <IconInputFieldText className={`${cls} opacity-75`} />)}
             {field.type === "check" && <IconInputFieldChk className={cls} />}
             {field.type === "list" && <IconInputFieldList className={cls} />}
-            {field.type === "text" && <IconFieldText className={`${cls} opacity-75`} />}
+            {field.type === "text" && <IconFieldText className="w-4 h-4 mr-1 opacity-75" />} {/* to guaranty than tailwind give us: "w-4 h-4 mr-1" */}
             {field.type === "button" && <IconToggleRight className={cls} />}
         </>
     );
@@ -136,14 +136,9 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                     return (
                         <React.Fragment key={`${key || idx}`}>
                             <FieldFirstCol className="bg-gray-300">
-                                {/* ??? flex items-center */}
                                 <div className="flex items-center justify-between pr-1">
-                                    {/* before:inline-block before:h-6 before:align-middle */}
-                                    {/* <div className="flex items-center"> */}
-                                        <FieldIcon field={toShow} />
-                                        <div className="flex-1">{`${field.password ? 'psw' : val}`}</div>
-                                        {/* leading-[23px] */}
-                                    {/* </div> */}
+                                    <FieldIcon field={toShow} />
+                                    <div className="flex-1">{`${field.password ? 'psw' : val}`}</div>
                                     {field.useit
                                         ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
                                         : <IconInputFieldChkEmpty className="w-4 h-4" />
