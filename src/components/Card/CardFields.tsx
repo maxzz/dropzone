@@ -2,6 +2,7 @@ import React from 'react';
 import { cpp_restore } from '../../store/manifest/mani-functions';
 import { IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
+import UISimpleBar from '../UI/UIScrollbar';
 
 // Form parts utils
 
@@ -107,9 +108,12 @@ function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & 
 function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
     return (
-        <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}>
+        <UISimpleBar>
+        <div className={`border-l border-gray-500 pl-1 h-6 leading-6 whitespace-nowrap ${className}`} {...attrs}>
+        {/* <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}> */}
             {children}
         </div>
+        </UISimpleBar>
     );
 }
 
