@@ -22,25 +22,10 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 // Form parts
 
 export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const detection = { ...cardData.fileUs.mani?.forms[formIndex]?.detection || {} };
-
-    /*
-   interface Detection {
-        caption?: string;
-        web_ourl?: string;
-        web_murl?: string;
-        web_qurl?: string;
-        web_checkurl?: boolean; // "1"
-        names_ext?: string;
-        processname?: string;
-        commandline?: string;
-    }
-    */
-
-    // 2. fix duplicated fields
+    const detection = cardData.fileUs.mani?.forms[formIndex]?.detection || {};
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
 
-    // 2.1. urls
+    // 1. fix duplicated urls
     let urlname = '';
     if (web_ourl === web_murl) {
         web_ourl = undefined;
@@ -51,7 +36,7 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
         urlname += '+q';
     }
 
-    // 2.2. processnames
+    // 2. fix duplicated processnames
     if (processname === commandline) {
         commandline = undefined;
     }
@@ -60,26 +45,25 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     commandline && (commandline = decodeURI(commandline));
 
     // 3. fix packed names
-
     names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
 
-    let toShow = {
-        caption,
-        [`url m${urlname}`]: detection.web_murl,
+    const toShow = {
+        ...(caption && { caption }),
+        ...(web_murl && {[`url m${urlname}`]: web_murl}),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),
-        names_ext,
-        processname,
+        ...(names_ext && { names_ext }),
+        ...(processname && { processname }),
         ...(commandline && { commandline }),
-        web_checkurl,
+        ...(web_checkurl && { web_checkurl }),
     };
 
     return (
         <div className="">
-            <div className="pt-2">detection</div>
+            <div className="pt-2">detection and options</div>
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={toShow} />
-            <div className="font-bold border-t border-gray-500"></div>
+            {/* <div className="font-bold border-t border-gray-500"></div> */}
         </div>
     );
 }
@@ -88,7 +72,7 @@ export function PartFormOptions({ cardData, formIndex }: { cardData: CardData; f
     const form = cardData.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
-            <div className="">options</div>
+            {/* <div className="-mt-2">options</div> */}
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.options} />
             <div className="font-bold border-t border-gray-500"></div>
