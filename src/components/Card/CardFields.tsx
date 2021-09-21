@@ -49,7 +49,7 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
 
     const toShow = {
         ...(caption && { caption }),
-        ...(web_murl && {[`url m${urlname}`]: web_murl}),
+        ...(web_murl && { [`url m${urlname}`]: web_murl }),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),
         ...(names_ext && { names_ext }),
@@ -97,9 +97,24 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
     const values = Object.entries(field);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
-            {values.map(([key, val], idx) => (
-                <React.Fragment key={`${key || idx}`}>
-                    {key !== 'password' && <>
+            {values.map(([key, val], idx) => {
+                if (key === 'displayname' || key === 'password') {
+                    return;
+                }
+                if (key === 'type') {
+                    return (
+                        <React.Fragment key={`${key || idx}`}>
+                            <div className="h-6 leading-5">{key}</div>
+                            <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+                                <div className="flex items-center">
+                                    {key === 'type' && <FieldIcon field={field} />}
+                                    {`${val}`}
+                                </div>
+                            </div>
+                        </React.Fragment>);
+                    }
+                return (
+                    <React.Fragment key={`${key || idx}`}>
                         <div className="h-6 leading-5">{key}</div>
                         <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
                             <div className="flex items-center">
@@ -107,8 +122,8 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                                 {`${val}`}
                             </div>
                         </div>
-                    </>}
-                </React.Fragment>)
+                    </React.Fragment>);
+            }
             )}
         </div>
     );
