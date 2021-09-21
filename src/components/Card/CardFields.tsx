@@ -5,34 +5,6 @@ import { CardData } from './Card';
 
 // Form parts utils
 
-// function isObject(value: any): boolean {
-//     return value && typeof value === 'object';
-// }
-
-// function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
-//     const values = Object.entries(obj);
-//     return (
-//         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
-//             {values.map((pair) => {
-//                 if (isObject(pair[1])) {
-//                     return (<React.Fragment key={pair[0]}>
-//                         <div className="">field {pair[0]}</div>
-//                         {/* <div className="">field2</div> */}
-//                         {ObjectTable({ obj: pair[1] })} {/* TODO: we don't need to add grid */}
-//                     </React.Fragment>);
-//                 } else {
-//                     return (<React.Fragment key={pair[0]}>
-//                         <div className="h-6 leading-5">{pair[0]}</div>
-//                         {/* <div className="border-l border-gray-500 pl-1 smallscroll overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-//                         {/* <div className="border-l border-gray-500 pl-1 sb overflow-x-auto whitespace-nowrap overflow-ellipsis">{`${pair[1]}`}</div> */}
-//                         <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto whitespace-nowrap">{`${pair[1]}`}</div>
-//                     </React.Fragment>);
-//                 }
-//             })}
-//         </div>
-//     );
-// }
-
 function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
@@ -158,24 +130,6 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
     );
 }
 
-// type Entries<T> = { [K in keyof T]: [K, T[K]]; }[keyof T][];
-// function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
-//     const values = Object.entries(field) as Entries<Mani.Field>[];
-//     return (
-//         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
-//             {values.map(([key, val], idx) => {
-//                 return (<React.Fragment key={`${key || idx}`}>
-//                     <div className="h-6 leading-5">{key}</div>
-//                     <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
-//                         {key === 'type' && <FieldIcon field={field} />}
-//                         {`${val}`}
-//                     </div>
-//                 </React.Fragment>);
-//             })}
-//         </div>
-//     );
-// }
-
 export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
     return (
@@ -184,7 +138,6 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
             <div className="font-bold border-b border-gray-500"></div>
             {form?.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
-                    <FieldIcon field={field} />
                     <ObjectTableFields field={field} />
                 </React.Fragment>
             )}

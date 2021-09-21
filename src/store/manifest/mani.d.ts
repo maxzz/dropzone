@@ -1,7 +1,9 @@
 declare module Mani {
+    type FieldType = 'edit' | 'check' | 'button' | 'list' | 'text';
+
     interface Field {
         displayname?: string,
-        type: 'edit' | 'check' | 'button' | 'list' | 'text';
+        type: FieldType;
         dbname?: string;
         path_ext?: string;
         rfield?: 'in' | 'out';
