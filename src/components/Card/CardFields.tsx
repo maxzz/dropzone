@@ -8,7 +8,7 @@ import { CardData } from './Card';
 function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
-        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
             {values.map(([key, val]) => {
                 return (<React.Fragment key={key}>
                     <FieldFirstCol>{key}</FieldFirstCol>
@@ -116,7 +116,7 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
 function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
     const values = Object.entries(field);
     return (
-        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
             {values.map(([key, val], idx) => {
                 if (key === 'displayname' || key === 'password') {
                     return;
@@ -124,10 +124,10 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                 if (key === 'type') {
                     return (
                         <React.Fragment key={`${key || idx}`}>
-                            <FieldFirstCol>
+                            <FieldFirstCol className="bg-gray-300">
                                 <div className="flex items-center"> {key === 'type' && <FieldIcon field={field} />} {`${val}`} </div>
                             </FieldFirstCol>
-                            <FieldSecondCol>
+                            <FieldSecondCol className="bg-gray-300">
                                 {field.displayname}
                             </FieldSecondCol>
                         </React.Fragment>);
