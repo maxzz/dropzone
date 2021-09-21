@@ -93,6 +93,14 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
     );
 }
 
+function FieldSecondCol({ children }: { children: React.ReactNode; }): JSX.Element {
+    return (
+        <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+            {children}
+        </div>
+    );
+}
+
 function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
     const values = Object.entries(field);
     return (
@@ -105,23 +113,23 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                     return (
                         <React.Fragment key={`${key || idx}`}>
                             <div className="h-6 leading-5">{key}</div>
-                            <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+                            <FieldSecondCol>
                                 <div className="flex items-center">
                                     {key === 'type' && <FieldIcon field={field} />}
                                     {`${val}`}
                                 </div>
-                            </div>
+                            </FieldSecondCol>
                         </React.Fragment>);
-                    }
+                }
                 return (
                     <React.Fragment key={`${key || idx}`}>
                         <div className="h-6 leading-5">{key}</div>
-                        <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+                        <FieldSecondCol>
                             <div className="flex items-center">
                                 {key === 'type' && <FieldIcon field={field} />}
                                 {`${val}`}
                             </div>
-                        </div>
+                        </FieldSecondCol>
                     </React.Fragment>);
             }
             )}
