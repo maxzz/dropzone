@@ -124,31 +124,57 @@ export function PartFormOptions({ cardData, formIndex }: { cardData: CardData; f
     );
 }
 
-function ObjectTableFields({ obj = {} }: { obj?: any; }): JSX.Element {
-    const values = Object.entries(obj);
+function FieldIcon({ field }: { field: Mani.Field; }) {
+    const cls = "w-4 h-4 mr-1";
+    return (
+        <>
+            {field.type === "edit" && (field.password ? <IconInputFieldPsw className={cls} fill="#38a000" /> : <IconInputFieldText className={cls} />)}
+            {field.type === "check" && <IconInputFieldChk className={cls} />}
+            {field.type === "list" && <IconInputFieldList className={cls} />}
+            {field.type === "text" && <IconFieldText className={cls} />}
+            {field.type === "button" && <IconToggleRight className={cls} />}
+        </>
+    );
+}
+
+function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
+    const values = Object.entries(field);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
-            {values.map(([key, val]) => {
-                return (<React.Fragment key={key}>
-                    <div className="h-6 leading-5">{key}</div>
-                    <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">{`${val}`}</div>
-                </React.Fragment>);
-            })}
+            {values.map(([key, val], idx) => (
+                <React.Fragment key={`${key || idx}`}>
+                    {key !== 'password' && <>
+                        <div className="h-6 leading-5">{key}</div>
+                        <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+                            <div className="flex items-center">
+                                {key === 'type' && <FieldIcon field={field} />}
+                                {`${val}`}
+                            </div>
+                        </div>
+                    </>}
+                </React.Fragment>)
+            )}
         </div>
     );
 }
 
-function FieldIcon({ field }: { field: Mani.Field; }) {
-    return (
-        <>
-            {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />)}
-            {field.type === "check" && <IconInputFieldChk className="w-4 h-4" />}
-            {field.type === "list" && <IconInputFieldList className="w-4 h-4" />}
-            {field.type === "text" && <IconFieldText className="w-4 h-4" />}
-            {field.type === "button" && <IconToggleRight className="w-4 h-4" />}
-        </>
-    );
-}
+// type Entries<T> = { [K in keyof T]: [K, T[K]]; }[keyof T][];
+// function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
+//     const values = Object.entries(field) as Entries<Mani.Field>[];
+//     return (
+//         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
+//             {values.map(([key, val], idx) => {
+//                 return (<React.Fragment key={`${key || idx}`}>
+//                     <div className="h-6 leading-5">{key}</div>
+//                     <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
+//                         {key === 'type' && <FieldIcon field={field} />}
+//                         {`${val}`}
+//                     </div>
+//                 </React.Fragment>);
+//             })}
+//         </div>
+//     );
+// }
 
 export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
@@ -159,12 +185,7 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
             {form?.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     <FieldIcon field={field} />
-                    {/* {field.type === "edit" && (field.password ? <IconInputFieldPsw className="w-4 h-4" fill="#38a000" /> : <IconInputFieldText className="w-4 h-4" />)}
-                    {field.type === "check" && <IconInputFieldChk className="w-4 h-4" />}
-                    {field.type === "list" && <IconInputFieldList className="w-4 h-4" />}
-                    {field.type === "text" && <IconFieldText className="w-4 h-4" />}
-                    {field.type === "button" && <IconToggleRight className="w-4 h-4" />} */}
-                    <ObjectTableFields obj={field} />
+                    <ObjectTableFields field={field} />
                 </React.Fragment>
             )}
             <div className="font-bold border-t border-gray-500"></div>
