@@ -11,8 +11,10 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center gap-x-1 text-xs">
             {values.map(([key, val]) => {
                 return (<React.Fragment key={key}>
-                    <div className="h-6 leading-5">{key}</div>
-                    <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">{`${val}`}</div>
+                    <FieldFirstCol>{key}</FieldFirstCol>
+                    <FieldSecondCol>
+                        {`${val}`}
+                    </FieldSecondCol>
                 </React.Fragment>);
             })}
         </div>
@@ -93,7 +95,15 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
     );
 }
 
-function FieldSecondCol({ children }: { children: React.ReactNode; }): JSX.Element {
+function FieldFirstCol({ children }: { children?: React.ReactNode; }): JSX.Element {
+    return (
+        <div className="h-6 leading-5">
+            {children}
+        </div>
+    );
+}
+
+function FieldSecondCol({ children }: { children?: React.ReactNode; }): JSX.Element {
     return (
         <div className="border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap">
             {children}
@@ -112,27 +122,20 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                 if (key === 'type') {
                     return (
                         <React.Fragment key={`${key || idx}`}>
-                            <div className="h-6 leading-5">{key}</div>
+                            <FieldFirstCol>{key}</FieldFirstCol>
                             <FieldSecondCol>
-                                <div className="flex items-center">
-                                    {key === 'type' && <FieldIcon field={field} />}
-                                    {`${val}`}
-                                </div>
+                                <div className="flex items-center"> {key === 'type' && <FieldIcon field={field} />} {`${val}`} </div>
                             </FieldSecondCol>
                         </React.Fragment>);
                 }
                 return (
                     <React.Fragment key={`${key || idx}`}>
-                        <div className="h-6 leading-5">{key}</div>
+                        <FieldFirstCol>{key}</FieldFirstCol>
                         <FieldSecondCol>
-                            <div className="flex items-center">
-                                {key === 'type' && <FieldIcon field={field} />}
-                                {`${val}`}
-                            </div>
+                            <div className="flex items-center"> {key === 'type' && <FieldIcon field={field} />} {`${val}`} </div>
                         </FieldSecondCol>
                     </React.Fragment>);
-            }
-            )}
+            })}
         </div>
     );
 }
