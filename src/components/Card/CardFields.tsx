@@ -114,7 +114,27 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
 }
 
 function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
-    const values = Object.entries(field);
+    const {
+        displayname,
+        type,
+        dbname,
+        path_ext,
+        rfield,
+        rfieldindex,
+        password,
+        useit,
+    } = field;
+    const toShow = {
+        displayname,
+        type,
+        dbname,
+        path_ext,
+        rfield,
+        rfieldindex,
+        password,
+        useit,
+    };
+    const values = Object.entries(toShow);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
             {values.map(([key, val], idx) => {
@@ -125,10 +145,10 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                     return (
                         <React.Fragment key={`${key || idx}`}>
                             <FieldFirstCol className="bg-gray-300">
-                                <div className="flex items-center"> {key === 'type' && <FieldIcon field={field} />} {`${val}`} </div>
+                                <div className="flex items-center"> <FieldIcon field={toShow} /> {`${val}`} </div>
                             </FieldFirstCol>
                             <FieldSecondCol className="bg-gray-300">
-                                {field.displayname}
+                                {toShow.displayname}
                             </FieldSecondCol>
                         </React.Fragment>);
                 }
@@ -136,7 +156,7 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                     <React.Fragment key={`${key || idx}`}>
                         <FieldFirstCol>{key}</FieldFirstCol>
                         <FieldSecondCol>
-                            <div className="flex items-center"> {key === 'type' && <FieldIcon field={field} />} {`${val}`} </div>
+                            <div className="flex items-center">{`${val}`}</div>
                         </FieldSecondCol>
                     </React.Fragment>);
             })}
