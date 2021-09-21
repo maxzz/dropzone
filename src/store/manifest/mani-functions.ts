@@ -58,7 +58,7 @@ function getPoolName(pool: string[], index: string): string {
     return '????????????';
 }
 
-namespace FieldPath {
+export namespace FieldPath {
     function pathItem_p4a(pool: string[], s: string): MPath.Chunk_p4a {
         let ss = s.split('.');
         let rv: MPath.Chunk_p4a = {
@@ -104,7 +104,7 @@ namespace FieldPath {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
     
-        function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
             return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
         }
     

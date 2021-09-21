@@ -1,5 +1,5 @@
 import React from 'react';
-import { cpp_restore } from '../../store/manifest/mani-functions';
+import { cpp_restore, FieldPath } from '../../store/manifest/mani-functions';
 import { IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
@@ -99,7 +99,7 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
 function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
     return (
-        <div className={`h-6 leading-6 ${className}`} {...attrs}>
+        <div className={`h-5 leading-5 ${className}`} {...attrs}>
             {children}
         </div>
     );
@@ -109,16 +109,56 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
     const { className, ...attrs } = rest;
     return (
         <UISimpleBar>
-        <div className={`border-l border-gray-500 pl-1 h-6 leading-6 whitespace-nowrap ${className}`} {...attrs}>
-        {/* <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}> */}
-            {children}
-        </div>
+            <div className={`border-l border-gray-500 pl-1 h-5 leading-5 whitespace-nowrap ${className}`} {...attrs}>
+                {/* <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}> */}
+                {children}
+            </div>
         </UISimpleBar>
     );
 }
 
-function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
-    const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field;
+function maxRect(rects: MPath.Chunk_loc[]) {
+    let w = 0;
+    let h = 0;
+    rects.forEach(_ => {
+        if (_.w > w) {
+            w = _.w;
+        }
+        if (_.h > h) {
+            h = _.h;
+        }
+    });
+    return { w, h };
+}
+
+function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
+    let maxSize = maxRect(form.rects);
+    let thisRects = [...form.rects];
+
+    let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
+    if (fieldLocs.length) {
+        thisRects.push(fieldLocs[fieldLocs.length - 1]);
+    }
+
+    console.log('locs', fieldLocs);
+    
+
+    return (
+        <div className="rects">
+            <svg viewBox={`0 0 ${maxSize.w} ${maxSize.h}`}>
+                {thisRects.map((item, idx) => (
+                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${item.f ? 'last-field' : ''}`}>
+                        <title>{idx}</title>
+                    </rect>
+                ))}
+            </svg>
+        </div >
+    );
+}
+
+
+function ObjectTableFields({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
+    const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const toShow = {
         ...(displayname && { displayname }),
         ...(type && { type }),
@@ -142,8 +182,8 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
                             <FieldFirstCol className="bg-gray-300">
                                 <div className="flex items-center justify-between pr-1">
                                     <FieldIcon field={toShow} />
-                                    <div className="flex-1">{`${field.password ? 'psw' : val}`}</div>
-                                    {field.useit
+                                    <div className="flex-1">{`${password ? 'psw' : val}`}</div>
+                                    {useit
                                         ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
                                         : <IconInputFieldChkEmpty className="w-4 h-4" />
                                     }
@@ -167,14 +207,18 @@ function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
 }
 
 export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const form = cardData.fileUs.mani?.forms[formIndex];
+    const meta = cardData.fileUs.meta?.[formIndex];
+    if (!meta) {
+        return null;
+    }
     return (
         <div className="">
             <div className="">fields</div>
             <div className="font-bold border-b border-gray-500"></div>
-            {form?.fields?.map((field, idx) =>
+            {meta.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
-                    <ObjectTableFields field={field} />
+                    <FieldPreview form={meta} field={field} />
+                    <ObjectTableFields form={meta} field={field} />
                 </React.Fragment>
             )}
             <div className="font-bold border-t border-gray-500"></div>

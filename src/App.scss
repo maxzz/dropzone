@@ -29,3 +29,24 @@ body {
         url("./assets/background-bw.jpg") /*http://higeom.math.msu.su/history/delone_r.html*/;
     background-blend-mode: multiply;
 }
+
+.rects svg {
+    --size-div: 6;
+    width: calc(1920px / var(--size-div));
+    height: calc(1200px / var(--size-div));
+    background-color: #f4f4f4;
+
+    rect {
+        fill: #e8e8e8;
+        stroke-width: calc(10 - var(--size-div));
+        stroke: #d7a9ff;
+    }
+
+    rect.last-field {
+        fill: #f0ddb0;
+    }
+
+    rect:last-child {
+        fill: #00ff62;
+    }
+}
