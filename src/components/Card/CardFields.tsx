@@ -1,6 +1,6 @@
 import React from 'react';
 import { cpp_restore } from '../../store/manifest/mani-functions';
-import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
+import { IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 
 // Form parts utils
@@ -57,7 +57,7 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
         ...(names_ext && { names_ext }),
         ...(processname && { processname }),
         ...(commandline && { commandline }),
-        ...(web_checkurl && { web_checkurl }),
+        ...(web_checkurl && { checkurl: web_checkurl }),
     };
 
     return (
@@ -86,28 +86,28 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
     const cls = "w-4 h-4 mr-1";
     return (
         <>
-            {field.type === "edit" && (field.password ? <IconInputFieldPsw className={cls} fill="#38a000" /> : <IconInputFieldText className={cls} />)}
+            {field.type === "edit" && (field.password ? <IconInputFieldPsw className={cls} fill="#38a000" /> : <IconInputFieldText className={`${cls} opacity-75`} />)}
             {field.type === "check" && <IconInputFieldChk className={cls} />}
             {field.type === "list" && <IconInputFieldList className={cls} />}
-            {field.type === "text" && <IconFieldText className={cls} />}
+            {field.type === "text" && <IconFieldText className={`${cls} opacity-75`} />}
             {field.type === "button" && <IconToggleRight className={cls} />}
         </>
     );
 }
 
 function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
-    const {className, ...attrs} = rest;
+    const { className, ...attrs } = rest;
     return (
-        <div className={`h-6 leading-5 ${className}`} {...attrs}>
+        <div className={`h-6 leading-6 ${className}`} {...attrs}>
             {children}
         </div>
     );
 }
 
 function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
-    const {className, ...attrs} = rest;
+    const { className, ...attrs } = rest;
     return (
-        <div className={`border-l border-gray-500 pl-1 h-6 leading-5 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}>
+        <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}>
             {children}
         </div>
     );
@@ -116,27 +116,39 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
 function ObjectTableFields({ field }: { field: Mani.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field;
     const toShow = {
-        ...(displayname && {displayname}),
-        ...(type && {type}),
-        ...(dbname && {dbname}),
-        ...(path_ext && {path_ext}),
-        ...(rfield && {rfield}),
-        ...(rfieldindex && {rfieldindex}),
-        ...(password && {password}),
-        ...(useit && {useit}),
+        ...(displayname && { displayname }),
+        ...(type && { type }),
+        ...(dbname && { id: dbname }),
+        ...(path_ext && { path: path_ext }),
+        ...(rfield && { rfield }),
+        ...(rfieldindex && { rfieldindex }),
+        ...(password && { password }),
+        ...(useit && { useit }),
     };
     const values = Object.entries(toShow);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
             {values.map(([key, val], idx) => {
-                if (key === 'displayname' || key === 'password') {
+                if (key === 'displayname' || key === 'password' || key === 'useit') {
                     return;
                 }
                 if (key === 'type') {
                     return (
                         <React.Fragment key={`${key || idx}`}>
                             <FieldFirstCol className="bg-gray-300">
-                                <div className="flex items-center"> <FieldIcon field={toShow} /> {`${val}`} </div>
+                                {/* ??? flex items-center */}
+                                <div className="flex items-center justify-between pr-1">
+                                    {/* before:inline-block before:h-6 before:align-middle */}
+                                    {/* <div className="flex items-center"> */}
+                                        <FieldIcon field={toShow} />
+                                        <div className="flex-1">{`${field.password ? 'psw' : val}`}</div>
+                                        {/* leading-[23px] */}
+                                    {/* </div> */}
+                                    {field.useit
+                                        ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
+                                        : <IconInputFieldChkEmpty className="w-4 h-4" />
+                                    }
+                                </div>
                             </FieldFirstCol>
                             <FieldSecondCol className="bg-gray-300">
                                 {toShow.displayname}

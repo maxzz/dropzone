@@ -173,6 +173,14 @@ export function IconInputFieldChk(props: SVGProps<SVGSVGElement>) {
     );
 }
 
+export function IconInputFieldChkEmpty(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg viewBox="0 0 21 21" fill="none" stroke="currentColor" {...props}>
+            <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
+        </svg>
+    );
+}
+
 export function IconInputFieldList(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
