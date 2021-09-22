@@ -140,9 +140,6 @@ function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }):
         thisRects.push(fieldLocs[fieldLocs.length - 1]);
     }
 
-    // TODO: move left-top to min point, i.e. ignore window position
-    //console.log('locs', fieldLocs);
-
     return (
         <div className="rects">
             <svg viewBox={`0 0 ${maxSize.w} ${maxSize.h}`}>
@@ -231,3 +228,7 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
 //TODO: refs @email
 //TODO: script
 //TODO: 'path_ext' and ignore 'path' but complain about 'path'
+
+// TODO: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
+// TODO: show one preview per form?
+// TODO: checkbox (on form preview) to show individual preview per field or not
