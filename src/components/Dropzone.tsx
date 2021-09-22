@@ -54,8 +54,8 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                 {files.length
                     ?
                     <div className="flex items-center">
-                        <div className="mx-4 my-2 uppercase text-xs flex items-center">
-                            <IconDocumentsAccepted className="w-6 h-6" />
+                        <div className="mr-4 my-2 uppercase text-xs flex items-center">
+                            <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
                             {files.length} file{files.length === 1 ? '' : 's'}
                         </div>
                         <button className="px-2 self-stretch border-l rounded-none border-gray-500 flex items-center justify-center">
