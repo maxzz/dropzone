@@ -12,17 +12,19 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     return (
         <>
-            {/* <div className={`---cont bg-gray-900 text-gray-100 w-full h-full overflow-auto ${className}`} {...rest}> */}
+        <UISimpleBar className={`---scrollbar000 text-gray-500`} >
+            <div className={`---cont bg-gray-900 text-gray-100 w-full h-full ${className}`} {...rest}>
             {rightPanelValue &&
-                <div className="---full w-full h-full overflow-scroll">
-                    <UISimpleBar className={`text-gray-500 ${className}`} autoHide={false}>
-                        <div className="my-2 text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md min-w-0">
+                // <div className={`---full w-full h-full ${className}`}>
+                    <UISimpleBar className={`---scrollbar text-gray-500`} autoHide={false}>
+                        <div className="my-2 text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
                             <pre>{rightPanelValue.raw}</pre>
                         </div>
                     </UISimpleBar>
-                </div>
+                // </div>
             }
-            {/* </div> */}
+            </div>
+            </UISimpleBar>
         </>
     );
 }
