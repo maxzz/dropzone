@@ -11,14 +11,34 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     return (
+        <>
+            {/* <div className={`---cont bg-gray-900 text-gray-100 w-full h-full overflow-auto ${className}`} {...rest}> */}
+            {rightPanelValue &&
+                <div className="---full w-full h-full overflow-scroll">
+                    <UISimpleBar className={`text-gray-500 ${className}`} autoHide={false}>
+                        <div className="my-2 text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md min-w-0">
+                            <pre>{rightPanelValue.raw}</pre>
+                        </div>
+                    </UISimpleBar>
+                </div>
+            }
+            {/* </div> */}
+        </>
+    );
+}
+
+function RightPanel4OKLindof(props: React.HTMLAttributes<HTMLDivElement>) {
+    const { className, ...rest } = props;
+    const [rightPanelValue] = useAtom(rightPanelValueAtom);
+    return (
         <div className={`---cont bg-gray-900 text-gray-100 w-full h-full overflow-auto ${className}`} {...rest}>
             {rightPanelValue &&
-            <div className="---full  overflow-auto">
-                {/* <OverlayScrollbarsComponent> */}
+                <div className="---full  overflow-auto">
+                    {/* <OverlayScrollbarsComponent> */}
                     <div className="my-2 text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
                         <pre>{rightPanelValue.raw}</pre>
                     </div>
-                {/* </OverlayScrollbarsComponent> */}
+                    {/* </OverlayScrollbarsComponent> */}
                 </div>
             }
         </div>
@@ -31,12 +51,12 @@ function RightPanel3(props: React.HTMLAttributes<HTMLDivElement>) {
     return (
         <div className={`---cont bg-gray-900 text-gray-100 w-full h-full overflow-hidden ${className}`} {...rest}>
             {rightPanelValue &&
-            <div className="---full  overflow-auto">
-                {/* <OverlayScrollbarsComponent> */}
+                <div className="---full  overflow-auto">
+                    {/* <OverlayScrollbarsComponent> */}
                     <div className="my-2 text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
                         <pre>{rightPanelValue.raw}</pre>
                     </div>
-                {/* </OverlayScrollbarsComponent> */}
+                    {/* </OverlayScrollbarsComponent> */}
                 </div>
             }
         </div>
