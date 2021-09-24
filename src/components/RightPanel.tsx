@@ -13,10 +13,10 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
         <>
             {/* <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} /> */}
 
-            <div className={`---cont flex-auto bg-gray-900 text-gray-100 ${className}`} {...rest}>
+            <div className={`flex-auto bg-gray-900 ${className}`} {...rest}>
                 {rightPanelValue &&
-                    <UISimpleBar className={`---scrollbar overflow-auto w-full h-full text-gray-500`} autoHide={false}>
-                        <div className="text-xs bg-green-800 opacity-50 border-8 border-gray-800 shadow-md">
+                    <UISimpleBar className={`overflow-auto w-full h-full text-gray-500 cursor-default`}>
+                        <div className="text-xs bg-gray-900 text-gray-100 opacity-50">
                             <pre>{rightPanelValue.raw}</pre>
                         </div>
                     </UISimpleBar>
