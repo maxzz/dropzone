@@ -9,15 +9,15 @@ function App() {
     const [open, setOpen] = React.useState(false);
     return (
         <React.Fragment>
-            <div className="h-screen p-4 flex flex-col">
+            <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
-                <div className="flex-auto flex min-h-0 min-w-0">
+                <div className="flex-1 flex min-w-0 min-h-0">
                     {/* overflow-y-hidden */}
 
                     {/* <div className="flex"> */}
                         <FilesList className="flex-auto w-1/3 flex-shrink-0" />
                         {/* <FilesList className="fl1ex-auto w-1/3 flex-shrink-0" /> */}
-                        <RightPanel className="ml-4 flex-1 w-full" />
+                        <RightPanel className="ml-4" />
                         {/* <RightPanel className="flex-none w-1/3 bg-red-500" /> */}
                         {/* <button className="bg-yellow-600" onClick={() => setOpen((v) => !v)}>Do</button> */}
                     {/* </div> */}
