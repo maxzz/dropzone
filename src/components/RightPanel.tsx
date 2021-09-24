@@ -17,7 +17,7 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
                 <div className={`---cont flex-auto min-w-0 min-h-0 bg-gray-900 text-gray-100 ${className}`} {...rest}>
                     {rightPanelValue &&
                         // <div className={`---full w-full h-full`}>
-                            <UISimpleBar className={`---scrollbar overflow-auto text-gray-500`} autoHide={false}>
+                            <UISimpleBar className={`---scrollbar overflow-auto w-full h-full text-gray-500`} autoHide={false}>
                                 <div className="text-xs bg-green-800 opacity-50 border-8 border-gray-800 shadow-md">
                                     <pre>{rightPanelValue.raw}</pre>
                                 </div>
