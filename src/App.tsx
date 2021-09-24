@@ -6,22 +6,13 @@ import FilesList from './components/FilesList';
 import RightPanel from './components/RightPanel';
 
 function App() {
-    const [open, setOpen] = React.useState(false);
     return (
         <React.Fragment>
             <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
                 <div className="flex-1 flex min-w-0 min-h-0">
-                    {/* overflow-y-hidden */}
-
-                    {/* <div className="flex"> */}
-                        <FilesList className="flex-auto w-1/3 flex-shrink-0" />
-                        {/* <FilesList className="fl1ex-auto w-1/3 flex-shrink-0" /> */}
-                        <RightPanel className="ml-4" />
-                        {/* <RightPanel className="flex-none w-1/3 bg-red-500" /> */}
-                        {/* <button className="bg-yellow-600" onClick={() => setOpen((v) => !v)}>Do</button> */}
-                    {/* </div> */}
-                    
+                    <FilesList className="flex-auto w-1/3 flex-shrink-0" />
+                    <RightPanel className="ml-4" />
                 </div>
             </div>
             <Toaster />
