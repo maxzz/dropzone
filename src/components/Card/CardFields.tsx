@@ -44,7 +44,7 @@ function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
         <>
             <button className={`px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} onClick={() => setOpen((v) => !v)}>names</button>
             {open &&
-                <div className="-mt-2 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
+                <div className="absolute top-full overflow-auto left-0 right-0 z-10 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {items.map((item, idx) => <React.Fragment key={idx}>
                         <div className="text-right">{idx}:</div>
                         <div className="">{item}</div>
@@ -100,7 +100,7 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.options} />
 
-            <div className="flex space-x-1">
+            <div className="relative flex space-x-1">
                 <ButtonFormLockfields lockfields={form?.options.lockfields} />
                 <ButtonFormNames names_ext={names_ext} />
             </div>
