@@ -22,6 +22,22 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 
 // Form parts
 
+function PartFormMetaFormNames({ names_ext }: { names_ext: string | undefined; }) {
+    const [open, setOpen] = React.useState(false);
+    if (!names_ext) {
+        return null;
+    }
+    let items = names_ext.split('●');
+    return (
+        <>
+            <button className="px-2 border border-gray-500 rounded" onClick={() => setOpen((v) => !v)}>names</button>
+            {open &&
+                <div className="">{names_ext}</div>
+            }
+        </>
+    );
+}
+
 function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
     const detection = cardData.fileUs.mani?.forms[formIndex]?.detection || {};
@@ -70,6 +86,8 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
             {/* <div className="-mt-2">options</div> */}
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.options} />
+
+            <PartFormMetaFormNames names_ext={names_ext} />
             <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
