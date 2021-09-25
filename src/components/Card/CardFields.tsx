@@ -23,6 +23,7 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 // Form parts
 
 function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+    const form = cardData.fileUs.mani?.forms[formIndex];
     const detection = cardData.fileUs.mani?.forms[formIndex]?.detection || {};
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
 
@@ -65,14 +66,7 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={toShow} />
             {/* <div className="font-bold border-t border-gray-500"></div> */}
-        </div>
-    );
-}
 
-function PartFormOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const form = cardData.fileUs.mani?.forms[formIndex];
-    return (
-        <div className="">
             {/* <div className="-mt-2">options</div> */}
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.options} />
@@ -85,7 +79,6 @@ export function FormDetectioAndOptions({ cardData, formIndex }: { cardData: Card
     return (
         <>
             <PartFormDetection cardData={cardData} formIndex={formIndex} />
-            <PartFormOptions cardData={cardData} formIndex={formIndex} />
         </>
     );
 }

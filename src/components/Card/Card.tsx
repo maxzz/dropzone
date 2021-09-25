@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardActions from './CardActions';
-import { FormDetectioAndOptions, PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
+import { FormDetectioAndOptions, PartFormFields } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UI/UiIcons';
 import { useUpdateAtom } from 'jotai/utils';
 
