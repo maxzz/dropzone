@@ -27,9 +27,7 @@ function ButtonFormLockfields({ lockfields }: { lockfields: string | undefined; 
         return null;
     }
     return (
-        <div className="px-2 border border-gray-500 rounded text-xs"
-        style={{gridArea: "'a1'"}}
-        >
+        <div className="px-2 border border-gray-500 rounded text-xs">
             fields: {lockfields == '1' ? 'lock' : 'don\'t lock'}
         </div>
     );
@@ -44,13 +42,9 @@ function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
     let items = (names_ext || '').split('●');
     return (
         <>
-            <button className={`px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} 
-            style={{gridArea: "'a1'"}}
-            onClick={() => setOpen((v) => !v)}>names</button>
+            <button className={`px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} onClick={() => setOpen((v) => !v)}>names</button>
             {open &&
-                <div className="-mt-2 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs"
-                style={{gridArea: "'b1'"}}
-                >
+                <div className="-mt-2 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {items.map((item, idx) => <React.Fragment key={idx}>
                         <div className="text-right">{idx}:</div>
                         <div className="">{item}</div>
@@ -106,14 +100,10 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.options} />
 
-            <div className="a1 grid" style={{gridTemplateAreas: "'a1' 'b1'"}}>
+            <div className="flex space-x-1">
                 <ButtonFormLockfields lockfields={form?.options.lockfields} />
                 <ButtonFormNames names_ext={names_ext} />
             </div>
-            {/* <div className="flex space-x-1">
-                <ButtonFormLockfields lockfields={form?.options.lockfields} />
-                <ButtonFormNames names_ext={names_ext} />
-            </div> */}
             <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
