@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardActions from './CardActions';
-import { PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
+import { FormDetectioAndOptions, PartFormDetection, PartFormFields, PartFormOptions } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UI/UiIcons';
 import { useUpdateAtom } from 'jotai/utils';
 
@@ -109,8 +109,7 @@ function FormContentLogin({ cardData }: { cardData: CardData; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Login form</div>
-            <PartFormDetection cardData={cardData} formIndex={0} />
-            <PartFormOptions cardData={cardData} formIndex={0} />
+            <FormDetectioAndOptions cardData={cardData} formIndex={0} />
             <PartFormFields cardData={cardData} formIndex={0} />
         </div>
     );
@@ -120,8 +119,7 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Password change form</div>
-            <PartFormDetection cardData={cardData} formIndex={1} />
-            <PartFormOptions cardData={cardData} formIndex={1} />
+            <FormDetectioAndOptions cardData={cardData} formIndex={1} />
             <PartFormFields cardData={cardData} formIndex={1} />
         </div>
     );

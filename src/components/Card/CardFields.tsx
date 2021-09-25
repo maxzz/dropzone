@@ -13,9 +13,7 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
             {values.map(([key, val]) => {
                 return (<React.Fragment key={key}>
                     <FieldFirstCol>{key}</FieldFirstCol>
-                    <FieldSecondCol>
-                        {`${val}`}
-                    </FieldSecondCol>
+                    <FieldSecondCol>{`${val}`}</FieldSecondCol>
                 </React.Fragment>);
             })}
         </div>
@@ -24,7 +22,7 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 
 // Form parts
 
-export function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const detection = cardData.fileUs.mani?.forms[formIndex]?.detection || {};
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
 
@@ -71,7 +69,7 @@ export function PartFormDetection({ cardData, formIndex }: { cardData: CardData;
     );
 }
 
-export function PartFormOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+function PartFormOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
     return (
         <div className="">
@@ -80,6 +78,15 @@ export function PartFormOptions({ cardData, formIndex }: { cardData: CardData; f
             <ObjectTable obj={form?.options} />
             <div className="font-bold border-t border-gray-500"></div>
         </div>
+    );
+}
+
+export function FormDetectioAndOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+    return (
+        <>
+            <PartFormDetection cardData={cardData} formIndex={formIndex} />
+            <PartFormOptions cardData={cardData} formIndex={formIndex} />
+        </>
     );
 }
 
