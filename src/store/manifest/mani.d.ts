@@ -31,9 +31,18 @@ declare module Mani {
     interface Options {
         choosename?: string;
         sidekick?: string;      // "manual mode hint"
-        quicklink?: string;
-        usequicklink?: number;  // "1" | "2"
-        iconlocation?: string;  // "Q:0:0:0"
+        ownernote?: string;
+        quicklink?: string;     // QL menu name
+        auth_pl?: string;       // policy
+        balooncount?: string;
+        autoprompt?: string;    // boolean
+        lockfields?: string;    // "0" | "1"
+        submittype?: string;    // "dosubmit" | "nosubmit"
+        iconkey?: string;       // Any name not necessarily unique
+        iconlocation?: string;  // Format is the same as described into feedback_drawing.h. "Q:0:0:0"
+        usequicklink?: number;  // ("1" | "usequicklink") | ("2" | "dontusequicklink")
+        recheckwindowafterfillin?: string; // boolean
+        qlwocred?: string;      // boolean. Quick reauthentication enable/disable
     }
 
     interface Form {

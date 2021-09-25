@@ -22,15 +22,27 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 
 // Form parts
 
-function PartFormMetaFormNames({ names_ext }: { names_ext: string | undefined; }) {
+function ButtonFormLockfields({ lockfields }: { lockfields: string | undefined; }) {
+    if (!lockfields) {
+        return null;
+    }
+    return (
+        <div className="px-2 border border-gray-500 rounded text-xs">
+            fields: {lockfields == '1' ? 'lock' : 'don\'t lock'}
+        </div>
+    );
+}
+
+function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
     const [open, setOpen] = React.useState(false);
     if (!names_ext) {
         return null;
     }
+    names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
     let items = (names_ext || '').split('●');
     return (
         <>
-            <button className={`ml-4 px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} onClick={() => setOpen((v) => !v)}>names</button>
+            <button className={`px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} onClick={() => setOpen((v) => !v)}>names</button>
             {open &&
                 <div className="-mt-2 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {items.map((item, idx) => <React.Fragment key={idx}>
@@ -67,15 +79,11 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
     processname && (processname = decodeURI(processname));
     commandline && (commandline = decodeURI(commandline));
 
-    // 3. fix packed names
-    names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); //TODO: decodeURI does not do all % encodings
-
     const toShow = {
         ...(caption && { caption }),
         ...(web_murl && { [`url m${urlname}`]: web_murl }),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),
-        ...(names_ext && { names_ext }),
         ...(processname && { processname }),
         ...(commandline && { commandline }),
         ...(web_checkurl && { checkurl: web_checkurl }),
@@ -92,7 +100,10 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={form?.options} />
 
-            <PartFormMetaFormNames names_ext={names_ext} />
+            <div className="flex space-x-1">
+                <ButtonFormLockfields lockfields={form?.options.lockfields} />
+                <ButtonFormNames names_ext={names_ext} />
+            </div>
             <div className="font-bold border-t border-gray-500"></div>
         </div>
     );
