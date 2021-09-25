@@ -27,12 +27,17 @@ function PartFormMetaFormNames({ names_ext }: { names_ext: string | undefined; }
     if (!names_ext) {
         return null;
     }
-    let items = names_ext.split('●');
+    let items = (names_ext || '').split('●');
     return (
         <>
-            <button className="px-2 border border-gray-500 rounded" onClick={() => setOpen((v) => !v)}>names</button>
+            <button className={`ml-4 px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} onClick={() => setOpen((v) => !v)}>names</button>
             {open &&
-                <div className="">{names_ext}</div>
+                <div className="-mt-2 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
+                    {items.map((item, idx) => <React.Fragment key={idx}>
+                        <div className="text-right">{idx}:</div>
+                        <div className="">{item}</div>
+                    </React.Fragment>)}
+                </div>
             }
         </>
     );
