@@ -7,7 +7,7 @@ import { useClickAway } from 'react-use';
 
 // Form parts utils
 
-function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
+function TableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
@@ -18,6 +18,31 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
                 </React.Fragment>);
             })}
         </div>
+    );
+}
+
+function ButtonWithChildren({ name, children }: { name: string | undefined; children: React.ReactNode; }) {
+    const [open, setOpen] = React.useState(false);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+    useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
+    if (!name) {
+        return null;
+    }
+    return (
+        <>
+            <button
+                className={`list-owner pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                onClick={() => setOpen((v) => !v)}
+            >
+                <div className="list-owner pb-1 mr-1">{name}</div>
+                {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
+            </button>
+            {open &&
+                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 py-2 px-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
+                    {children}
+                </div>
+            }
+        </>
     );
 }
 
@@ -45,62 +70,7 @@ function OptionUseQuickLink({ usequicklink }: { usequicklink: string | undefined
     );
 }
 
-// function OptionNames({ names_ext }: { names_ext: string | undefined; }) {
-//     const [open, setOpen] = React.useState(false);
-//     const containerRef = React.useRef<HTMLDivElement>(null);
-//     useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
-//     if (!names_ext) {
-//         return null;
-//     }
-//     names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
-//     let items = (names_ext || '').split('●');
-//     return (
-//         <>
-//             <button
-//                 className={`list-owner pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
-//                 onClick={() => setOpen((v) => !v)}
-//             >
-//                 <div className="list-owner pb-1 mr-1">pool </div>
-//                 {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-//             </button>
-//             {open &&
-//                 <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 py-2 px-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
-//                     {items.map((item, idx) => <React.Fragment key={idx}>
-//                         <div className="text-right">{idx}:</div>
-//                         <div className="">{item}</div>
-//                     </React.Fragment>)}
-//                 </div>
-//             }
-//         </>
-//     );
-// }
-
-function ButtonWithChildren({ name, children }: { name: string | undefined; children: React.ReactNode }) {
-    const [open, setOpen] = React.useState(false);
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
-    if (!name) {
-        return null;
-    }
-    return (
-        <>
-            <button
-                className={`list-owner pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
-                onClick={() => setOpen((v) => !v)}
-            >
-                <div className="list-owner pb-1 mr-1">{name}</div>
-                {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-            </button>
-            {open &&
-                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 py-2 px-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
-                    {children}
-                </div>
-            }
-        </>
-    );
-}
-
-function OptionNames({ names_ext }: { names_ext: string | undefined; }) {
+function OptionPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
         return null;
     }
@@ -108,11 +78,12 @@ function OptionNames({ names_ext }: { names_ext: string | undefined; }) {
     let items = (names_ext || '').split('●');
     return (
         <ButtonWithChildren name="pool">
-            {items.map((item, idx) => <React.Fragment key={idx}>
-                <div className="text-right">{idx}:</div>
-                <div className="">{item}</div>
-            </React.Fragment>)}
-
+            {items.map((item, idx) =>
+                <React.Fragment key={idx}>
+                    <div className="text-right">{idx}:</div>
+                    <div className="">{item}</div>
+                </React.Fragment>)
+            }
         </ButtonWithChildren>
     );
 }
@@ -171,17 +142,17 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
         <div className="">
             <div className="pt-2">detection and options</div>
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={toShowDetection} />
+            <TableFromObject obj={toShowDetection} />
             {/* <div className="font-bold border-t border-gray-500"></div> */}
 
             {/* <div className="-mt-2">options</div> */}
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={toShowOptions} />
+            <TableFromObject obj={toShowOptions} />
 
             <div className="relative m-1 flex space-x-1">
                 <OptionUseQuickLink usequicklink={options.usequicklink} />
                 <OptionLockFields lockfields={options.lockfields} />
-                <OptionNames names_ext={detection.names_ext} />
+                <OptionPool names_ext={detection.names_ext} />
             </div>
             <div className="font-bold border-t border-gray-500"></div>
         </div>
