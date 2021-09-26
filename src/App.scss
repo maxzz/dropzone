@@ -34,7 +34,7 @@ body {
     --size-div: 6;
     width: calc(1920px / var(--size-div));
     height: calc(1200px / var(--size-div));
-    background-color: #f4f4f4;
+    background-color: red; //#f4f4f4
 
     rect {
         fill: #e8e8e8;

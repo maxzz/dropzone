@@ -25,7 +25,7 @@ function ButtonWithChildren({ name, children }: { name: string | undefined; chil
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement)  && setOpen(false));
+    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
     if (!name) {
         return null;
     }
@@ -239,8 +239,7 @@ function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }):
     );
 }
 
-
-function ObjectTableFields({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
+function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const toShow = {
         ...(displayname && { displayname }),
@@ -272,8 +271,15 @@ function ObjectTableFields({ form, field }: { form: Meta.Form; field: Meta.Field
                                     }
                                 </div>
                             </FieldFirstCol>
-                            <FieldSecondCol className="bg-gray-300">
-                                {toShow.displayname}
+                            <FieldSecondCol className="relative bg-gray-300 flex flex-between">
+                                <div className="flex-1">
+                                    {toShow.displayname}
+                                </div>
+                                <div className="">
+                                    <ButtonWithChildren name="detection">
+                                        <FieldPreview form={metaForm} field={field} />
+                                    </ButtonWithChildren>
+                                </div>
                             </FieldSecondCol>
                         </React.Fragment>);
                 }
@@ -290,18 +296,18 @@ function ObjectTableFields({ form, field }: { form: Meta.Form; field: Meta.Field
 }
 
 export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const meta = cardData.fileUs.meta?.[formIndex];
-    if (!meta) {
+    const metaForm = cardData.fileUs.meta?.[formIndex];
+    if (!metaForm) {
         return null;
     }
     return (
         <div className="">
             <div className="">fields</div>
             <div className="font-bold border-b border-gray-500"></div>
-            {meta.fields?.map((field, idx) =>
+            {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
-                    <FieldPreview form={meta} field={field} />
-                    <ObjectTableFields form={meta} field={field} />
+                    {/* <FieldPreview form={metaForm} field={field} /> */}
+                    <TableField metaForm={metaForm} field={field} />
                 </React.Fragment>
             )}
             <div className="font-bold border-t border-gray-500"></div>
