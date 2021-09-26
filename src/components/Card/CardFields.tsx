@@ -23,7 +23,7 @@ function ObjectTable({ obj = {} }: { obj?: any; }): JSX.Element {
 
 // Form parts
 
-function ButtonFormLockfields({ lockfields }: { lockfields: string | undefined; }) {
+function OptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
     if (!lockfields) {
         return null;
     }
@@ -34,7 +34,18 @@ function ButtonFormLockfields({ lockfields }: { lockfields: string | undefined; 
     );
 }
 
-function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
+function OptionUseQuickLink({ usequicklink }: { usequicklink: string | undefined; }) {
+    if (!usequicklink) {
+        return null;
+    }
+    return (
+        <div className="px-2 border border-gray-500 rounded text-xs">
+            quick link: {usequicklink == '1' ? 'use' : usequicklink == '2' ? 'don\'t use' : { usequicklink }}
+        </div>
+    );
+}
+
+function OptionNames({ names_ext }: { names_ext: string | undefined; }) {
     const [open, setOpen] = React.useState(false);
     const containerRef = React.useRef<HTMLDivElement>(null);
     useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
@@ -62,9 +73,7 @@ function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
     );
 }
 
-function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
-    const form = cardData.fileUs.mani?.forms[formIndex];
-    const detection = cardData.fileUs.mani?.forms[formIndex]?.detection || {};
+function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
 
     // 1. fix duplicated urls
@@ -86,7 +95,7 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
     processname && (processname = decodeURI(processname));
     commandline && (commandline = decodeURI(commandline));
 
-    const toShow = {
+    return {
         ...(caption && { caption }),
         ...(web_murl && { [`url m${urlname}`]: web_murl }),
         ...(web_ourl && { web_ourl }),
@@ -95,21 +104,40 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
         ...(commandline && { commandline }),
         ...(web_checkurl && { checkurl: web_checkurl }),
     };
+}
+
+function filterOptions(options: Mani.Options) {
+    let { usequicklink, ...rest } = options;
+
+    return {
+        ...rest,
+    };
+}
+
+function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+    const form = cardData.fileUs.mani?.forms[formIndex];
+
+    const detection = form?.detection || {};
+    const toShowDetection = filterDetection(detection);
+
+    const options = form?.options || {};
+    const toShowOptions = filterOptions(options);
 
     return (
         <div className="">
             <div className="pt-2">detection and options</div>
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={toShow} />
+            <ObjectTable obj={toShowDetection} />
             {/* <div className="font-bold border-t border-gray-500"></div> */}
 
             {/* <div className="-mt-2">options</div> */}
             <div className="font-bold border-b border-gray-500"></div>
-            <ObjectTable obj={form?.options} />
+            <ObjectTable obj={toShowOptions} />
 
             <div className="relative flex space-x-1">
-                <ButtonFormLockfields lockfields={form?.options.lockfields} />
-                <ButtonFormNames names_ext={names_ext} />
+                <OptionUseQuickLink usequicklink={options.usequicklink} />
+                <OptionLockFields lockfields={options.lockfields} />
+                <OptionNames names_ext={detection.names_ext} />
             </div>
             <div className="font-bold border-t border-gray-500"></div>
         </div>

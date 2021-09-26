@@ -40,7 +40,7 @@ declare module Mani {
         submittype?: string;    // "dosubmit" | "nosubmit"
         iconkey?: string;       // Any name not necessarily unique
         iconlocation?: string;  // Format is the same as described into feedback_drawing.h. "Q:0:0:0"
-        usequicklink?: number;  // ("1" | "usequicklink") | ("2" | "dontusequicklink")
+        usequicklink?: string;  // ("1" | "usequicklink") | ("2" | "dontusequicklink")
         recheckwindowafterfillin?: string; // boolean
         qlwocred?: string;      // boolean. Quick reauthentication enable/disable
     }
