@@ -70,8 +70,8 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    // const [ref, { x, y }] = useMeasure();
-    // console.log('ref', ref, buttonRef);
+    const [ref, { x, y }] = useMeasure();
+    console.log('ref', x, y, ref, buttonRef);
     
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
     if (!name) {
@@ -84,6 +84,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                     ref={(node) => {
                         console.log('node', node);
                         buttonRef.current = node;
+                        ref(node!);
                     }}
                     onClick={() => setOpen((v) => !v)}
                 >
