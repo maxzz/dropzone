@@ -21,7 +21,7 @@ function TableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
     );
 }
 
-function ButtonWithChildren({ name, children }: { name: string | undefined; children: React.ReactNode; }) {
+function ButtonWithChildren({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
@@ -31,14 +31,31 @@ function ButtonWithChildren({ name, children }: { name: string | undefined; chil
     }
     return (
         <>
-            <button
+            {toggle
+                ? <button
+                    ref={buttonRef}
+                    onClick={() => setOpen((v) => !v)}
+                >
+                    {toggle}
+                </button>
+                : <button
+                    ref={buttonRef}
+                    className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                    onClick={() => setOpen((v) => !v)}
+                >
+                    <div className="pb-1 mr-1">{name}</div>
+                    {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
+                </button>
+            }
+
+            {/* <button
                 ref={buttonRef}
                 className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                 onClick={() => setOpen((v) => !v)}
             >
                 <div className="pb-1 mr-1">{name}</div>
                 {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-            </button>
+            </button> */}
             {open &&
                 <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {children}
@@ -261,41 +278,54 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
         //     </div>
 
 
-            <div className="grid grid-cols-[minmax(7rem,auto),1fr] items-center text-xs">
+        <div className="grid grid-cols-[minmax(7rem,auto),1fr] items-center text-xs">
 
 
-                {values.map(([key, val], idx) => {
-                    if (key === 'displayname' || key === 'password' || key === 'useit') {
-                        return;
-                    }
-                    if (key === 'type') {
-                        return (
-                            <React.Fragment key={`${key || idx}`}>
-                                <FieldFirstCol className="bg-gray-300">
-                                    <div className="flex items-center justify-between pr-1">
-                                        <FieldIcon field={toShow} />
-                                        <div className="flex-1">{`${password ? 'psw' : val}`}</div>
-                                        <IconPreview className="w-[14px] h-[14px]" />
-                                        {useit
-                                            ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
-                                            : <IconInputFieldChkEmpty className="w-4 h-4" />
-                                        }
-                                    </div>
-                                </FieldFirstCol>
-                                <FieldSecondCol className="bg-gray-300">
-                                    {toShow.displayname}
-                                </FieldSecondCol>
-                            </React.Fragment>);
-                    }
+            {values.map(([key, val], idx) => {
+                if (key === 'displayname' || key === 'password' || key === 'useit') {
+                    return;
+                }
+                if (key === 'type') {
                     return (
                         <React.Fragment key={`${key || idx}`}>
-                            <FieldFirstCol>{key}</FieldFirstCol>
-                            <FieldSecondCol>
-                                <div className="flex items-center">{`${val}`}</div>
+                            <FieldFirstCol className="bg-gray-300 relative">
+                                <div className="flex items-center justify-between pr-1">
+                                    <FieldIcon field={toShow} />
+                                    <div className="flex-1">{`${password ? 'psw' : val}`}</div>
+
+                                    {/* <div className="" title="Preview">
+                                        <IconPreview className="w-[14px] h-[14px]" />
+                                    </div> */}
+
+                                    <div className="flex items-center">
+                                        <ButtonWithChildren name="preview" toggle={
+                                            <IconPreview className="w-[14px] h-[14px]" />
+                                        }>
+                                            <FieldPreview form={metaForm} field={field} />
+                                        </ButtonWithChildren>
+                                    </div>
+
+
+                                    {useit
+                                        ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
+                                        : <IconInputFieldChkEmpty className="w-4 h-4" />
+                                    }
+                                </div>
+                            </FieldFirstCol>
+                            <FieldSecondCol className="bg-gray-300">
+                                {toShow.displayname}
                             </FieldSecondCol>
                         </React.Fragment>);
-                })}
-            </div>
+                }
+                return (
+                    <React.Fragment key={`${key || idx}`}>
+                        <FieldFirstCol>{key}</FieldFirstCol>
+                        <FieldSecondCol>
+                            <div className="flex items-center">{`${val}`}</div>
+                        </FieldSecondCol>
+                    </React.Fragment>);
+            })}
+        </div>
         // </div>
     );
 }
