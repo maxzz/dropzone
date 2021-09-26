@@ -37,13 +37,7 @@ function ButtonFormLockfields({ lockfields }: { lockfields: string | undefined; 
 function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
     const [open, setOpen] = React.useState(false);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    useClickAway(containerRef, (event) => {
-        if (!(event.target as HTMLElement)?.classList.contains('list-owner')) {
-            setOpen(false);
-            console.log('away');
-        }
-
-    });
+    useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
     if (!names_ext) {
         return null;
     }
@@ -51,7 +45,11 @@ function ButtonFormNames({ names_ext }: { names_ext: string | undefined; }) {
     let items = (names_ext || '').split('●');
     return (
         <>
-            <button className={`list-owner px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`} onClick={() => setOpen((v) => !v)}>names</button>
+            <button
+                className={`list-owner px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`}
+                onClick={() => setOpen((v) => !v)}>
+                names
+            </button>
             {open &&
                 <div ref={containerRef} className="absolute top-full overflow-auto left-0 right-0 z-10 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {items.map((item, idx) => <React.Fragment key={idx}>
