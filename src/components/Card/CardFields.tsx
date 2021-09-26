@@ -4,6 +4,7 @@ import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconI
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { useClickAway } from 'react-use';
+import ReactDOM from 'react-dom';
 
 // Form parts utils
 
@@ -297,13 +298,21 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                         <IconPreview className="w-[14px] h-[14px]" />
                                     </div> */}
 
-                                    <div className="flex items-center">
+                                    {ReactDOM.createPortal(<div className="flex items-center">
                                         <ButtonWithChildren name="preview" toggle={
                                             <IconPreview className="w-[14px] h-[14px]" />
                                         }>
                                             <FieldPreview form={metaForm} field={field} />
                                         </ButtonWithChildren>
-                                    </div>
+                                    </div>, document.getElementById('portal')!)}
+
+                                    {/* <div className="flex items-center">
+                                        <ButtonWithChildren name="preview" toggle={
+                                            <IconPreview className="w-[14px] h-[14px]" />
+                                        }>
+                                            <FieldPreview form={metaForm} field={field} />
+                                        </ButtonWithChildren>
+                                    </div> */}
 
 
                                     {useit
