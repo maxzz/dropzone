@@ -38,8 +38,7 @@ function ButtonWithChildren({ name, children }: { name: string | undefined; chil
                 {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
             </button>
             {open &&
-                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 py-2 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
-                {/* <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 py-2 px-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs"> */}
+                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {children}
                 </div>
             }
@@ -79,7 +78,7 @@ function OptionPool({ names_ext }: { names_ext: string | undefined; }) {
     let items = (names_ext || '').split('●');
     return (
         <ButtonWithChildren name="pool">
-            <div className="overflow-auto grid grid-cols-[auto,1fr] gap-x-2">
+            <div className="py-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2">
                 {items.map((item, idx) =>
                     <React.Fragment key={idx}>
                         <div className="text-right">{idx}:</div>
@@ -142,19 +141,15 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
     const toShowOptions = filterOptions(options);
 
     return (
-        <div className="relative">
-            <div className="pt-2">detection and options</div>
-            <ButtonWithChildren name="detection">
-                <div className="font-bold border-b border-gray-500"></div>
-                <TableFromObject obj={toShowDetection} />
-                {/* <div className="font-bold border-t border-gray-500"></div> */}
+        <div className="">
+            <div className="relative my-1 flex space-x-1">
+                <ButtonWithChildren name="detection">
+                    {/* <div className="font-bold border-b border-gray-500"></div> */}
+                    <TableFromObject obj={toShowDetection} />
+                    {/* <div className="font-bold border-b border-gray-500"></div> */}
+                    <TableFromObject obj={toShowOptions} />
+                </ButtonWithChildren>
 
-                {/* <div className="-mt-2">options</div> */}
-                <div className="font-bold border-b border-gray-500"></div>
-                <TableFromObject obj={toShowOptions} />
-            </ButtonWithChildren>
-
-            <div className="relative m-1 flex space-x-1">
                 <OptionUseQuickLink usequicklink={options.usequicklink} />
                 <OptionLockFields lockfields={options.lockfields} />
                 <OptionPool names_ext={detection.names_ext} />
