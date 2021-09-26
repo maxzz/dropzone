@@ -101,12 +101,13 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                 <div className="pb-1 mr-1">{name}</div>
                 {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
             </button> */}
-            {open &&
+            {open && ReactDOM.createPortal(
                 <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {children}
                 </div>
+                , document.getElementById('portal')!)
             }
-            
+
             {/* {open &&
                 <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {children}
@@ -349,13 +350,11 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                     </div> */}
 
                                     <div className="flex items-center">
-                                        <ButtonWithChildren name="preview" toggle={
+                                        <ButtonWithChildrenPortal name="preview" toggle={
                                             <IconPreview className="w-[14px] h-[14px]" />
                                         }>
-                                            {ReactDOM.createPortal(
-                                                <FieldPreview form={metaForm} field={field} />, document.getElementById('portal')!
-                                            )}
-                                        </ButtonWithChildren>
+                                            <FieldPreview form={metaForm} field={field} />
+                                        </ButtonWithChildrenPortal>
                                     </div>
 
                                     {/* <div className="flex items-center">
@@ -365,7 +364,6 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                             <FieldPreview form={metaForm} field={field} />
                                         </ButtonWithChildren>
                                     </div> */}
-
 
                                     {useit
                                         ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
