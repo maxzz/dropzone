@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import { cpp_restore, FieldPath } from '../../store/manifest/mani-functions';
-import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
+import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconPreview, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { useClickAway } from 'react-use';
@@ -253,15 +253,15 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
     };
     const values = Object.entries(toShow);
     return (
-        <div className="relative">
-            <div className="absolute z-10 right-0">
-                <ButtonWithChildren name="preview">
-                    <FieldPreview form={metaForm} field={field} />
-                </ButtonWithChildren>
-            </div>
+        // <div className="relative">
+        //     <div className="absolute z-10 right-0">
+        //         <ButtonWithChildren name="preview">
+        //             <FieldPreview form={metaForm} field={field} />
+        //         </ButtonWithChildren>
+        //     </div>
 
 
-            <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
+            <div className="grid grid-cols-[minmax(7rem,auto),1fr] items-center text-xs">
 
 
                 {values.map(([key, val], idx) => {
@@ -275,6 +275,7 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                     <div className="flex items-center justify-between pr-1">
                                         <FieldIcon field={toShow} />
                                         <div className="flex-1">{`${password ? 'psw' : val}`}</div>
+                                        <IconPreview className="w-[14px] h-[14px]" />
                                         {useit
                                             ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
                                             : <IconInputFieldChkEmpty className="w-4 h-4" />
@@ -295,7 +296,7 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                         </React.Fragment>);
                 })}
             </div>
-        </div>
+        // </div>
     );
 }
 
