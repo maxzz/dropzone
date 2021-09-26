@@ -25,12 +25,7 @@ function ButtonWithChildren({ name, children }: { name: string | undefined; chil
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    // useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
-    useClickAway(containerRef, (event) => {
-        console.log('cont', containerRef.current?.contains(event.target as HTMLElement));
-        
-        return event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement)  && setOpen(false)
-    });
+    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement)  && setOpen(false));
     if (!name) {
         return null;
     }
@@ -38,11 +33,11 @@ function ButtonWithChildren({ name, children }: { name: string | undefined; chil
         <>
             <button
                 ref={buttonRef}
-                className={`list-owner pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                 onClick={() => setOpen((v) => !v)}
             >
-                <div className="list-owner pb-1 mr-1">{name}</div>
-                {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
+                <div className="pb-1 mr-1">{name}</div>
+                {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
             </button>
             {open &&
                 <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
