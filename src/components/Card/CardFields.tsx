@@ -23,14 +23,21 @@ function TableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
 
 function ButtonWithChildren({ name, children }: { name: string | undefined; children: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
+    // useClickAway(containerRef, (event) => !(event.target as HTMLElement)?.classList.contains('list-owner') && setOpen(false));
+    useClickAway(containerRef, (event) => {
+        console.log('cont', containerRef.current?.contains(event.target as HTMLElement));
+        
+        return event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement)  && setOpen(false)
+    });
     if (!name) {
         return null;
     }
     return (
         <>
             <button
+                ref={buttonRef}
                 className={`list-owner pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                 onClick={() => setOpen((v) => !v)}
             >
