@@ -3,7 +3,7 @@ import { cpp_restore, FieldPath } from '../../store/manifest/mani-functions';
 import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconPreview, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
-import { useClickAway } from 'react-use';
+import { useClickAway, useMeasure } from 'react-use';
 import ReactDOM from 'react-dom';
 
 // Form parts utils
@@ -70,6 +70,9 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
+    // const [ref, { x, y }] = useMeasure();
+    // console.log('ref', ref, buttonRef);
+    
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
     if (!name) {
         return null;
@@ -78,7 +81,10 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
         <>
             {toggle
                 ? <button
-                    ref={buttonRef}
+                    ref={(node) => {
+                        console.log('node', node);
+                        buttonRef.current = node;
+                    }}
                     onClick={() => setOpen((v) => !v)}
                 >
                     {toggle}
