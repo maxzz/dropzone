@@ -1,6 +1,6 @@
 import React from 'react';
 import { cpp_restore, FieldPath } from '../../store/manifest/mani-functions';
-import { IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
+import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { useClickAway } from 'react-use';
@@ -40,7 +40,7 @@ function OptionUseQuickLink({ usequicklink }: { usequicklink: string | undefined
     }
     return (
         <div className="px-2 border border-gray-500 rounded text-xs">
-            quick link: {usequicklink == '1' ? 'use' : usequicklink == '2' ? 'don\'t use' : { usequicklink }}
+            quick link{usequicklink == '1' ? '' : usequicklink == '2' ? ': don\'t use' : { usequicklink }}
         </div>
     );
 }
@@ -57,12 +57,14 @@ function OptionNames({ names_ext }: { names_ext: string | undefined; }) {
     return (
         <>
             <button
-                className={`list-owner px-2 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''}`}
-                onClick={() => setOpen((v) => !v)}>
-                names
+                className={`list-owner pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                onClick={() => setOpen((v) => !v)}
+            >
+                <div className="list-owner pb-1 mr-1">pool </div>
+                {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
             </button>
             {open &&
-                <div ref={containerRef} className="absolute top-full overflow-auto left-0 right-0 z-10 py-2 px-2 grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
+                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 py-2 px-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {items.map((item, idx) => <React.Fragment key={idx}>
                         <div className="text-right">{idx}:</div>
                         <div className="">{item}</div>
@@ -134,7 +136,7 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
             <div className="font-bold border-b border-gray-500"></div>
             <ObjectTable obj={toShowOptions} />
 
-            <div className="relative flex space-x-1">
+            <div className="relative m-1 flex space-x-1">
                 <OptionUseQuickLink usequicklink={options.usequicklink} />
                 <OptionLockFields lockfields={options.lockfields} />
                 <OptionNames names_ext={detection.names_ext} />
