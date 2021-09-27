@@ -5,7 +5,7 @@ import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconI
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { usePopper } from 'react-popper';
-import { useClickAway } from 'react-use';
+import { useClickAway, useElementClickAway } from '../../hooks/useElementClickAway';
 
 // Form parts utils
 
@@ -140,13 +140,13 @@ function ToggleWithPortal() {
     const { styles, attributes } = usePopper(referenceElement, popperElement);
     const [open, setOpen] = React.useState(false);
 
-    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
-    const containerRef = React.useRef<HTMLDivElement | null>(null);
+    // const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+    // const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-    React.useEffect(() => { buttonRef.current = referenceElement; }, [referenceElement]);
-    React.useEffect(() => { containerRef.current = popperElement; }, [popperElement]);
+    // React.useEffect(() => { buttonRef.current = referenceElement; }, [referenceElement]);
+    // React.useEffect(() => { containerRef.current = popperElement; }, [popperElement]);
 
-    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+    useElementClickAway(popperElement, (event) => event.target !== popperElement && !referenceElement?.contains(event.target as HTMLElement) && setOpen(false));
 
     return (
         <>
@@ -162,6 +162,35 @@ function ToggleWithPortal() {
         </>
     );
 }
+
+// function ToggleWithPortal() {
+//     const [referenceElement, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
+//     const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(null);
+//     const { styles, attributes } = usePopper(referenceElement, popperElement);
+//     const [open, setOpen] = React.useState(false);
+
+//     const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+//     const containerRef = React.useRef<HTMLDivElement | null>(null);
+
+//     React.useEffect(() => { buttonRef.current = referenceElement; }, [referenceElement]);
+//     React.useEffect(() => { containerRef.current = popperElement; }, [popperElement]);
+
+//     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+
+//     return (
+//         <>
+//             <button type="button" ref={setReferenceElement} onClick={() => setOpen((v) => !v)}>
+//                 Reference
+//             </button>
+//             {open && ReactDOM.createPortal(
+//                 <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+//                     <div className="w-[100px] h-[200px] bg-red-500">Popper</div>
+//                 </div>
+//                 , document.getElementById('portal')!
+//             )}
+//         </>
+//     );
+// }
 
 // Form parts
 
