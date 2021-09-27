@@ -82,20 +82,54 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
 //     };
 // };
 
+function useClientRect() {
+    const [rect, setRect] = React.useState(null);
+    const ref = React.useCallback(node => {
+        console.log('setRef', node);
+        
+        if (node !== null) {
+            setRect(node.getBoundingClientRect());
+        }
+    }, []);
+    return [rect, ref];
+}
+
 function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const [ref, rect] = useMeasure();
+    //const [ref, rect] = useMeasure();
+    const [rect, ref] = useClientRect();
     //console.log('ref', x, y, ref, buttonRef);
 
-    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+    console.log('rect', rect);
+
+    //useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
     if (!name) {
         return null;
     }
     return (
         <>
-            {toggle
+        <div ref={mergeRefs([ref])} className="">fake</div>
+        {/* <div ref={ref} className="">fake</div> */}
+
+        <button
+                    // ref={(node) => {
+                    //     console.log('node', node);
+                    //     buttonRef.current = node;
+                    //     ref(node!);
+                    // }}
+//                    ref={mergeRefs([buttonRef, ref])}
+                    // onClick={() => setOpen((v) => !v)}
+                    // onClick={() => {
+                    //     console.log('rect', rect, ref);
+                    //     setOpen((v) => !v);
+                    // }}
+                >
+                    {toggle}
+                </button>
+
+            {/* {toggle
                 ? <button
                     // ref={(node) => {
                     //     console.log('node', node);
@@ -104,10 +138,10 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                     // }}
                     ref={mergeRefs([buttonRef, ref])}
                     // onClick={() => setOpen((v) => !v)}
-                    onClick={() => {
-                        console.log('rect', rect, ref);
-                        setOpen((v) => !v)
-                    }}
+                    // onClick={() => {
+                    //     console.log('rect', rect, ref);
+                    //     setOpen((v) => !v);
+                    // }}
                 >
                     {toggle}
                 </button>
@@ -119,7 +153,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                     <div className="pb-1 mr-1">{name}</div>
                     {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
                 </button>
-            }
+            } */}
 
             {/* <button
                 ref={buttonRef}
@@ -129,6 +163,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                 <div className="pb-1 mr-1">{name}</div>
                 {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
             </button> */}
+
             {open && ReactDOM.createPortal(
                 <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {children}
