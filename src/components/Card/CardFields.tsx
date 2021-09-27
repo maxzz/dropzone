@@ -5,6 +5,7 @@ import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { useClickAway, useMeasure } from 'react-use';
 import ReactDOM from 'react-dom';
+import mergeRefs from 'react-merge-refs';
 
 // Form parts utils
 
@@ -66,13 +67,28 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
     );
 }
 
+// const mergeRefs = (...refs) => {
+//     const filteredRefs = refs.filter(Boolean);
+//     if (!filteredRefs.length) return null;
+//     if (filteredRefs.length === 0) return filteredRefs[0];
+//     return inst => {
+//         for (const ref of filteredRefs) {
+//             if (typeof ref === 'function') {
+//                 ref(inst);
+//             } else if (ref) {
+//                 ref.current = inst;
+//             }
+//         }
+//     };
+// };
+
 function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [ref, { x, y }] = useMeasure();
     console.log('ref', x, y, ref, buttonRef);
-    
+
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
     if (!name) {
         return null;
@@ -81,11 +97,12 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
         <>
             {toggle
                 ? <button
-                    ref={(node) => {
-                        console.log('node', node);
-                        buttonRef.current = node;
-                        ref(node!);
-                    }}
+                    // ref={(node) => {
+                    //     console.log('node', node);
+                    //     buttonRef.current = node;
+                    //     ref(node!);
+                    // }}
+                    ref={mergeRefs([buttonRef, ref])}
                     onClick={() => setOpen((v) => !v)}
                 >
                     {toggle}
