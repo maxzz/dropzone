@@ -29,7 +29,7 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
     const containerRef = React.useRef<HTMLDivElement>(null);
 
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
-    
+
     if (!name) {
         return null;
     }
@@ -117,7 +117,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
 
             {open && ReactDOM.createPortal(
                 <div
-                    ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs"
+                    ref={containerRef} className="absolute z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs"
                     style={posStyles}
                 >
                     {children}
