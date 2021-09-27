@@ -6,7 +6,6 @@ import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { usePopper } from 'react-popper';
 import { useClickAway } from 'react-use';
-import { on, off } from 'react-use/esm/misc/util';
 
 // Form parts utils
 
