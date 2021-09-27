@@ -126,8 +126,8 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
 }
 
 function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
-    const [referenceElm, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
-    const [popperElm, setPopperElement] = React.useState<HTMLDivElement | null>(null);
+    const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
+    const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end' });
     const [open, setOpen] = React.useState(false);
 
@@ -135,14 +135,9 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
     return (
         <>
-            <button type="button" ref={setReferenceElement} onClick={() => setOpen((v) => !v)}>
-                {toggle
-                    ? <>{ toggle }</>
-                    : <div className="">"Reference"</div>
-                }
-            </button>
+            <button type="button" ref={setReferenceElm} onClick={() => setOpen((v) => !v)}> {toggle} </button>
             {open && ReactDOM.createPortal(
-                <div ref={setPopperElement} style={styles.popper} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
+                <div ref={setPopperElm} style={styles.popper} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
                     {/* <div className="w-[100px] h-[200px] bg-red-500">Popper</div> */}
                     {children}
                 </div>
@@ -388,7 +383,8 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                         <FieldPreview form={metaForm} field={field} />
                                     </ButtonWithChildrenPortal>
 
-                                    <ToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
+                                    <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}>
+                                    {/* <ToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}> */}
                                         <FieldPreview form={metaForm} field={field} />
                                     </ToggleWithPortal>
 
