@@ -82,16 +82,14 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
 //     };
 // };
 
-function useClientRect() {
-    const [rect, setRect] = React.useState(null);
-    const ref = React.useCallback(node => {
-        if (node !== null) {
+function useClientRect<T extends HTMLElement>() {
+    const [rect, setRect] = React.useState<DOMRect|null>(null);
+    const ref = React.useCallback((node: T) => {
+        if (node) {
             setRect(node.getBoundingClientRect());
-        } else {
-            setRect({} as any);
         }
     }, []);
-    return [rect, ref];
+    return [ref, rect] as const;
 }
 
 function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
@@ -99,9 +97,14 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     const buttonRef = React.useRef<HTMLButtonElement|null>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
     //const [ref, rect] = useMeasure();
-    const [rect, ref] = useClientRect();
+    const [ref, rect] = useClientRect<HTMLDivElement>();
 
     console.log('rect', rect);
+
+    const posStyles = rect ? {
+        left: rect.x,
+        top: rect.y + 24,
+    } : {};
 
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
     if (!name) {
@@ -111,6 +114,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
         <>
             {/* <div ref={mergeRefs([ref])} className="">fake</div> */}
             <div ref={ref} className="">fake</div>
+            {/* <div {...ref()} className="">fake</div> */}
 
             {toggle
                 ? <button
@@ -144,7 +148,10 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
             </button> */}
 
             {open && ReactDOM.createPortal(
-                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
+                <div 
+                    ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs"
+                    style={posStyles}
+                >
                     {children}
                 </div>
                 , document.getElementById('portal')!)
