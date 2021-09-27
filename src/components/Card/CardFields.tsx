@@ -1,11 +1,12 @@
-import React, { Children } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { cpp_restore, FieldPath } from '../../store/manifest/mani-functions';
 import { IconChevronDown, IconChevronUp, IconFieldText, IconInputFieldChk, IconInputFieldChkEmpty, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconPreview, IconToggleRight } from '../UI/UiIcons';
 import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
-import { useClickAway, useMeasure } from 'react-use';
-import ReactDOM from 'react-dom';
-import mergeRefs from 'react-merge-refs';
+import { usePopper } from 'react-popper';
+import { useClickAway } from 'react-use';
+import { on, off } from 'react-use/esm/misc/util';
 
 // Form parts utils
 
@@ -130,6 +131,35 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                     {children}
                 </div>
             } */}
+        </>
+    );
+}
+
+function ToggleWithPortal() {
+    const [referenceElement, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
+    const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(null);
+    const { styles, attributes } = usePopper(referenceElement, popperElement);
+    const [open, setOpen] = React.useState(false);
+
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+    const containerRef = React.useRef<HTMLDivElement | null>(null);
+
+    React.useEffect(() => { buttonRef.current = referenceElement; }, [referenceElement]);
+    React.useEffect(() => { containerRef.current = popperElement; }, [popperElement]);
+
+    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+
+    return (
+        <>
+            <button type="button" ref={setReferenceElement} onClick={() => setOpen((v) => !v)}>
+                Reference
+            </button>
+            {open && ReactDOM.createPortal(
+                <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                    <div className="w-[100px] h-[200px] bg-red-500">Popper</div>
+                </div>
+                , document.getElementById('portal')!
+            )}
         </>
     );
 }
@@ -400,38 +430,6 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
     );
 }
 
-import { usePopper } from 'react-popper';
-import { on, off } from 'react-use/esm/misc/util';
-
-const Example = () => {
-    const [referenceElement, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElement, popperElement);
-    const [open, setOpen] = React.useState(false);
-
-    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
-    const containerRef = React.useRef<HTMLDivElement | null>(null);
-
-    React.useEffect(() => { buttonRef.current = referenceElement; }, [referenceElement]);
-    React.useEffect(() => { containerRef.current = popperElement; }, [popperElement]);
-
-    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
-
-    return (
-        <>
-            <button type="button" ref={setReferenceElement} onClick={() => setOpen((v) => !v)}>
-                Reference
-            </button>
-            {open && ReactDOM.createPortal(
-                <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-                    <div className="w-[100px] h-[200px] bg-red-500">Popper</div>
-                </div>
-                , document.getElementById('portal')!
-            )}
-        </>
-    );
-};
-
 export function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const metaForm = cardData.fileUs.meta?.[formIndex];
     if (!metaForm) {
@@ -440,7 +438,7 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
     return (
         <div className="">
             <div className="">fields</div>
-            <Example />
+            <ToggleWithPortal />
             <div className="font-bold border-b border-gray-500"></div>
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
