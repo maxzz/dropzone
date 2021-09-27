@@ -117,7 +117,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                     ref={(node) => {
                         console.log('node', node);
                         buttonRef.current = node;
-                        ref && ref(node!);
+                        ref && ref(node!); // <- this is the problem: ref is using setState inside and component re-renders
                     }}
                     //ref={buttonRef}
 
