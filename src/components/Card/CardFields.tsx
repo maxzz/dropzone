@@ -112,10 +112,6 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     }
     return (
         <>
-            {/* <div ref={mergeRefs([ref])} className="">fake</div> */}
-            <div ref={ref} className="">fake</div>
-            {/* <div {...ref()} className="">fake</div> */}
-
             {toggle
                 ? <button
                     ref={buttonRef}
@@ -126,6 +122,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                         setOpen((v) => !v);
                     }}
                 >
+                    <div ref={ref} className="fake"></div>
                     {toggle}
                 </button>
                 : <button
@@ -133,6 +130,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
                     className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                     onClick={() => setOpen((v) => !v)}
                 >
+                    <div ref={ref} className="fake"></div>
                     <div className="pb-1 mr-1">{name}</div>
                     {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
                 </button>
