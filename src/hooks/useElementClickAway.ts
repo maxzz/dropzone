@@ -3,13 +3,9 @@ import { on, off } from 'react-use/esm/misc/util';
 
 const defaultEvents = ['mousedown', 'touchstart'];
 
-export const useClickAway = <E extends Event = Event>
-    (ref: RefObject<HTMLElement | null>, onClickAway: (event: E) => void, events: string[] = defaultEvents) => {
-
-    const savedCallback = useRef<(event: E) => void>(onClickAway);
-    useEffect(() => {
-        savedCallback.current = onClickAway;
-    }, [onClickAway]);
+export function useClickAway<E extends Event = Event>(ref: RefObject<HTMLElement | null>, onClickAway: (event: E) => void, events: string[] = defaultEvents): void {
+    const savedCallback = useRef(onClickAway);
+    useEffect(() => { savedCallback.current = onClickAway; }, [onClickAway]);
 
     useEffect(() => {
         const handler = (event: E) => {
@@ -25,15 +21,11 @@ export const useClickAway = <E extends Event = Event>
             }
         };
     }, [events, ref]);
-};
+}
 
-export const useElementClickAway = <E extends Event = Event>
-    (el: HTMLElement | null, onClickAway: (event: E) => void, events: string[] = defaultEvents) => {
-
+export function useElementClickAway<E extends Event = Event>(el: HTMLElement | null, onClickAway: (event: E) => void, events: string[] = defaultEvents): void {
     const savedCallback = useRef(onClickAway);
-    useEffect(() => {
-        savedCallback.current = onClickAway;
-    }, [onClickAway]);
+    useEffect(() => { savedCallback.current = onClickAway; }, [onClickAway]);
 
     useEffect(() => {
         const handler = (event: E) => {
@@ -48,4 +40,4 @@ export const useElementClickAway = <E extends Event = Event>
             }
         };
     }, [events, el]);
-};
+}
