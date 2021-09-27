@@ -27,19 +27,16 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
     const [open, setOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
+
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+    
     if (!name) {
         return null;
     }
     return (
         <>
             {toggle
-                ? <button
-                    ref={buttonRef}
-                    onClick={() => setOpen((v) => !v)}
-                >
-                    {toggle}
-                </button>
+                ? <button ref={buttonRef} onClick={() => setOpen((v) => !v)} > {toggle} </button>
                 : <button
                     ref={buttonRef}
                     className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
@@ -67,23 +64,8 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
     );
 }
 
-// const mergeRefs = (...refs) => {
-//     const filteredRefs = refs.filter(Boolean);
-//     if (!filteredRefs.length) return null;
-//     if (filteredRefs.length === 0) return filteredRefs[0];
-//     return inst => {
-//         for (const ref of filteredRefs) {
-//             if (typeof ref === 'function') {
-//                 ref(inst);
-//             } else if (ref) {
-//                 ref.current = inst;
-//             }
-//         }
-//     };
-// };
-
 function useClientRect<T extends HTMLElement>() {
-    const [rect, setRect] = React.useState<DOMRect|null>(null);
+    const [rect, setRect] = React.useState<DOMRect | null>(null);
     const ref = React.useCallback((node: T) => {
         if (node) {
             setRect(node.getBoundingClientRect());
@@ -94,47 +76,35 @@ function useClientRect<T extends HTMLElement>() {
 
 function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
-    const buttonRef = React.useRef<HTMLButtonElement|null>(null);
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    //const [ref, rect] = useMeasure();
     const [ref, rect] = useClientRect<HTMLDivElement>();
-
-    console.log('rect', rect);
 
     const posStyles = rect ? {
         left: rect.x,
-        top: rect.y + 24,
+        top: rect.y + rect.height + 4,
     } : {};
 
     useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+
     if (!name) {
         return null;
     }
     return (
         <>
-            {toggle
-                ? <button
-                    ref={buttonRef}
-
-                    // onClick={() => setOpen((v) => !v)}
-                    onClick={() => {
-                        console.log('rect', rect, ref);
-                        setOpen((v) => !v);
-                    }}
-                >
-                    <div ref={ref} className="fake"></div>
-                    {toggle}
-                </button>
-                : <button
-                    ref={buttonRef}
-                    className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
-                    onClick={() => setOpen((v) => !v)}
-                >
-                    <div ref={ref} className="fake"></div>
-                    <div className="pb-1 mr-1">{name}</div>
-                    {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-                </button>
-            }
+            <div ref={ref} className="flex items-center">
+                {toggle
+                    ? <button ref={buttonRef} onClick={() => setOpen((v) => !v)}> {toggle} </button>
+                    : <button
+                        ref={buttonRef}
+                        className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                        onClick={() => setOpen((v) => !v)}
+                    >
+                        <div className="pb-1 mr-1">{name}</div>
+                        {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
+                    </button>
+                }
+            </div>
 
             {/* <button
                 ref={buttonRef}
@@ -146,7 +116,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
             </button> */}
 
             {open && ReactDOM.createPortal(
-                <div 
+                <div
                     ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs"
                     style={posStyles}
                 >
@@ -396,18 +366,12 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                         <IconPreview className="w-[14px] h-[14px]" />
                                     </div> */}
 
-                                    <div className="flex items-center">
-                                        <ButtonWithChildrenPortal name="preview" toggle={
-                                            <IconPreview className="w-[14px] h-[14px]" />
-                                        }>
-                                            <FieldPreview form={metaForm} field={field} />
-                                        </ButtonWithChildrenPortal>
-                                    </div>
+                                    <ButtonWithChildrenPortal name="preview" toggle={<IconPreview className="w-[14px] h-[14px]" />}>
+                                        <FieldPreview form={metaForm} field={field} />
+                                    </ButtonWithChildrenPortal>
 
                                     {/* <div className="flex items-center">
-                                        <ButtonWithChildren name="preview" toggle={
-                                            <IconPreview className="w-[14px] h-[14px]" />
-                                        }>
+                                        <ButtonWithChildren name="preview" toggle={ <IconPreview className="w-[14px] h-[14px]" /> }>
                                             <FieldPreview form={metaForm} field={field} />
                                         </ButtonWithChildren>
                                     </div> */}
