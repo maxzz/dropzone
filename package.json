@@ -11,6 +11,7 @@
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
+        "@popperjs/core": "^2.10.1",
         "@radix-ui/colors": "^0.1.7",
         "@radix-ui/react-dropdown-menu": "^0.1.0",
         "@radix-ui/react-icons": "^1.0.3",
@@ -28,6 +29,7 @@
         "react-dropzone": "11.4.2",
         "react-hot-toast": "^2.1.1",
         "react-merge-refs": "^1.1.0",
+        "react-popper": "^2.2.5",
         "react-use": "^17.3.1",
         "sass": "1.42.1",
         "simplebar-react": "2.3.6",
