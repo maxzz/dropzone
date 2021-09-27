@@ -85,10 +85,10 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
 function useClientRect() {
     const [rect, setRect] = React.useState(null);
     const ref = React.useCallback(node => {
-        console.log('setRef', node);
-
         if (node !== null) {
             setRect(node.getBoundingClientRect());
+        } else {
+            setRect({} as any);
         }
     }, []);
     return [rect, ref];
