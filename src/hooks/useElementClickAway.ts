@@ -28,7 +28,7 @@ export const useClickAway = <E extends Event = Event>
 };
 
 export const useElementClickAway = <E extends Event = Event>
-    (ref: RefObject<HTMLElement | null>, onClickAway: (event: E) => void, events: string[] = defaultEvents) => {
+    (el: HTMLElement | null, onClickAway: (event: E) => void, events: string[] = defaultEvents) => {
 
     const savedCallback = useRef(onClickAway);
     useEffect(() => {
@@ -37,7 +37,6 @@ export const useElementClickAway = <E extends Event = Event>
 
     useEffect(() => {
         const handler = (event: E) => {
-            const { current: el } = ref;
             el && !el.contains(event.target as Node) && savedCallback.current(event);
         };
         for (const eventName of events) {
@@ -48,5 +47,5 @@ export const useElementClickAway = <E extends Event = Event>
                 off(document, eventName, handler);
             }
         };
-    }, [events, ref]);
+    }, [events, el]);
 };
