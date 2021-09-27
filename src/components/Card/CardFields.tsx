@@ -110,16 +110,11 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     return (
         <>
             {/* <div ref={mergeRefs([ref])} className="">fake</div> */}
-            {/* <div ref={ref} className="">fake</div> */}
+            <div ref={ref} className="">fake</div>
 
             {toggle
                 ? <button
-                    ref={(node) => {
-                        console.log('node', node);
-                        buttonRef.current = node;
-                        ref && ref(node!); // <- this is the problem: ref is using setState inside and component re-renders
-                    }}
-                    //ref={buttonRef}
+                    ref={buttonRef}
 
                     // onClick={() => setOpen((v) => !v)}
                     onClick={() => {
