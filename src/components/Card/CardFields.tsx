@@ -128,7 +128,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
 function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
     const [referenceElm, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElement] = React.useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElm, popperElm);
+    const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end' });
     const [open, setOpen] = React.useState(false);
 
     useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
@@ -142,7 +142,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
                 }
             </button>
             {open && ReactDOM.createPortal(
-                <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                <div ref={setPopperElement} style={styles.popper} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
                     {/* <div className="w-[100px] h-[200px] bg-red-500">Popper</div> */}
                     {children}
                 </div>
