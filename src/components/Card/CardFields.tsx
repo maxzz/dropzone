@@ -401,19 +401,30 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
 }
 
 import { usePopper } from 'react-popper';
+import { on, off } from 'react-use/esm/misc/util';
 
 const Example = () => {
     const [referenceElement, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
     const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElement, popperElement);
+    const [open, setOpen] = React.useState(false);
+
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+    const containerRef = React.useRef<HTMLDivElement | null>(null);
+
+    React.useEffect(() => { buttonRef.current = referenceElement; }, [referenceElement]);
+    React.useEffect(() => { containerRef.current = popperElement; }, [popperElement]);
+
+    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
+
     return (
         <>
-            <button type="button" ref={setReferenceElement}>
+            <button type="button" ref={setReferenceElement} onClick={() => setOpen((v) => !v)}>
                 Reference
             </button>
-            {ReactDOM.createPortal(
+            {open && ReactDOM.createPortal(
                 <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-                    <div className="w-[400px] h-[200px] bg-red-500">Popper</div>
+                    <div className="w-[100px] h-[200px] bg-red-500">Popper</div>
                 </div>
                 , document.getElementById('portal')!
             )}
