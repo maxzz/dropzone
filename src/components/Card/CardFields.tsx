@@ -6,6 +6,7 @@ import { CardData } from './Card';
 import UISimpleBar from '../UI/UIScrollbar';
 import { usePopper } from 'react-popper';
 import { useClickAway, useElementClickAway } from '../../hooks/useElementClickAway';
+import { useClientRect } from '../../hooks/useClientRect';
 
 // Form parts utils
 
@@ -64,21 +65,11 @@ function ButtonWithChildren({ name, children, toggle }: { name: string | undefin
     );
 }
 
-function useClientRect<T extends HTMLElement>() {
-    const [rect, setRect] = React.useState<DOMRect | null>(null);
-    const ref = React.useCallback((node: T) => {
-        if (node) {
-            setRect(node.getBoundingClientRect());
-        }
-    }, []);
-    return [ref, rect] as const;
-}
-
 function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
-    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const [ref, rect] = useClientRect<HTMLDivElement>();
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+    const [buttonPosRef, rect] = useClientRect<HTMLDivElement>();
 
     const posStyles = rect ? {
         left: rect.x,
@@ -92,7 +83,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     }
     return (
         <>
-            <div ref={ref} className="flex items-center">
+            <div ref={buttonPosRef} className="flex items-center">
                 {toggle
                     ? <button ref={buttonRef} onClick={() => setOpen((v) => !v)}> {toggle} </button>
                     : <button
@@ -134,13 +125,13 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     );
 }
 
-function ToggleWithPortal() {
-    const [referenceElement, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElement, popperElement);
+function ToggleWithPortal({ children }: { children?: React.ReactNode; }) {
+    const [referenceElm, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
+    const [popperElm, setPopperElement] = React.useState<HTMLDivElement | null>(null);
+    const { styles, attributes } = usePopper(referenceElm, popperElm);
     const [open, setOpen] = React.useState(false);
 
-    useElementClickAway(popperElement, (event) => event.target !== popperElement && !referenceElement?.contains(event.target as HTMLElement) && setOpen(false));
+    useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
 
     return (
         <>
@@ -149,7 +140,8 @@ function ToggleWithPortal() {
             </button>
             {open && ReactDOM.createPortal(
                 <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-                    <div className="w-[100px] h-[200px] bg-red-500">Popper</div>
+                    {/* <div className="w-[100px] h-[200px] bg-red-500">Popper</div> */}
+                    {children}
                 </div>
                 , document.getElementById('portal')!
             )}
@@ -393,6 +385,10 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                         <FieldPreview form={metaForm} field={field} />
                                     </ButtonWithChildrenPortal>
 
+                                    <ToggleWithPortal>
+                                        <FieldPreview form={metaForm} field={field} />
+                                    </ToggleWithPortal>
+
                                     {/* <div className="flex items-center">
                                         <ButtonWithChildren name="preview" toggle={ <IconPreview className="w-[14px] h-[14px]" /> }>
                                             <FieldPreview form={metaForm} field={field} />
@@ -431,7 +427,6 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
     return (
         <div className="">
             <div className="">fields</div>
-            <ToggleWithPortal />
             <div className="font-bold border-b border-gray-500"></div>
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
