@@ -125,7 +125,7 @@ function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | u
     );
 }
 
-function ToggleWithPortal({ children }: { children?: React.ReactNode; }) {
+function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
     const [referenceElm, setReferenceElement] = React.useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElement] = React.useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElm, popperElm);
@@ -136,7 +136,10 @@ function ToggleWithPortal({ children }: { children?: React.ReactNode; }) {
     return (
         <>
             <button type="button" ref={setReferenceElement} onClick={() => setOpen((v) => !v)}>
-                Reference
+                {toggle
+                    ? <>{ toggle }</>
+                    : <div className="">"Reference"</div>
+                }
             </button>
             {open && ReactDOM.createPortal(
                 <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
@@ -385,7 +388,7 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                         <FieldPreview form={metaForm} field={field} />
                                     </ButtonWithChildrenPortal>
 
-                                    <ToggleWithPortal>
+                                    <ToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
                                         <FieldPreview form={metaForm} field={field} />
                                     </ToggleWithPortal>
 
