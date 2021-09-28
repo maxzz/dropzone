@@ -27,7 +27,7 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
     let size = maxRect(form.rects);
     let thisRects = [...form.rects];
     console.log('rect', thisRects);
-    
+
 
     let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
     if (fieldLocs.length) {
@@ -38,7 +38,9 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
         <div className="rects">
             <svg viewBox={`0 0 ${size.w} ${size.h}`}>
                 {thisRects.map((item, idx) => (
-                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${item.f ? 'last-field' : ''}`}>
+                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx}
+                        className={`${item.f ? 'last-field' : ''} last:fill-[red]`}
+                    >
                         <title>{idx}</title>
                     </rect>
                 ))}
