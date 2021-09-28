@@ -2,26 +2,26 @@ import React from 'react';
 import { css } from '../../stitches.config';
 import { FieldPath } from '../../store/manifest/mani-functions';
 
-function maxRect(rects: MPath.Chunk_loc[]): { x: number; y: number; w: number; h: number; } {
-    let x = 0;
-    let y = 0;
-    let w = 0;
-    let h = 0;
+function rectsBoundaries(rects: MPath.Chunk_loc[]): { x1: number; y1: number; x2: number; y2: number; } {
+    let x1 = 0; // x1,y1 ┌──────┐
+    let y1 = 0; //       │      │
+    let x2 = 0; //       └──────┘ x2,y2
+    let y2 = 0;
     rects.forEach(rect => {
-        if (rect.x > x) {
-            x = rect.x;
+        if (rect.x > x1) {
+            x1 = rect.x;
         }
-        if (rect.y > y) {
-            y = rect.y;
+        if (rect.y > y1) {
+            y1 = rect.y;
         }
-        if (rect.x + rect.w > w) {
-            w = rect.x + rect.w;
+        if (rect.x + rect.w > x2) {
+            x2 = rect.x + rect.w;
         }
-        if (rect.y + rect.h > h) {
-            h = rect.y + rect.h;
+        if (rect.y + rect.h > y2) {
+            y2 = rect.y + rect.h;
         }
     });
-    return { x, y, w, h };
+    return { x1, y1, x2, y2 };
 }
 
 const stylesSvg = css({
@@ -49,7 +49,7 @@ const styleRect = css({
 });
 
 export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
-    let size = maxRect(form.rects);
+    let boundaries = rectsBoundaries(form.rects);
     let thisRects = [...form.rects];
     console.log('rect', thisRects);
 
@@ -61,7 +61,7 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
 
     return (
         <div className="rects">
-            <svg viewBox={`0 0 ${size.w} ${size.h}`} className={stylesSvg()}>
+            <svg viewBox={`0 0 ${boundaries.x2} ${boundaries.y2}`} className={stylesSvg()}>
                 {thisRects.map((item, idx) => (
                     <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx}
                         // className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'} last:fill-[red]`}
