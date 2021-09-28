@@ -31,7 +31,7 @@ body {
 }
 
 .rects svg {
-    --size-div: 6;
+    --size-div: 4;
     width: calc(1920px / var(--size-div));
     height: calc(1200px / var(--size-div));
     background-color: red; //#f4f4f4
