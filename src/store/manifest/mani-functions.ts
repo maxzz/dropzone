@@ -92,8 +92,12 @@ export namespace FieldPath {
         }
     
         export function pathItem_loc_removePool(pool: string[], v: string): string {
-            return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
+            return dedupe(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         }
+    
+        // export function pathItem_loc_removePool(pool: string[], v: string): string {
+        //     return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
+        // }
     
         function str2loc(str: string): MPath.Chunk_loc {
             let nmbs = str.split(' ').map(_ => +_);
@@ -103,6 +107,13 @@ export namespace FieldPath {
         function loc2str(loc: MPath.Chunk_loc): string {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
+    
+        // export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        //     let arr = v.split('|');
+        //     let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
+        //     console.log('v', v, 'res', res);
+        //     return res;
+        // }
     
         export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
             return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
