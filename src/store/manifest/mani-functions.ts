@@ -69,7 +69,7 @@ export namespace FieldPath {
         };
         return rv;
     }
-    
+
     function pathItem_sid(pool: string[], v: string): MPath.Chunk_sid {
         let sid = {} as any;
         v.split('.').forEach((_, index) => {
@@ -85,68 +85,88 @@ export namespace FieldPath {
         });
         return sid;
     }
-    
+
     export namespace PathLocations {
         function dedupe(items: string[]): string[] {
             return Array.from(new Set(items));
         }
-    
+
         export function pathItem_loc_removePool(pool: string[], v: string): string {
             return dedupe(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         }
-    
+
         // export function pathItem_loc_removePool(pool: string[], v: string): string {
         //     return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         // }
-    
+
         function str2loc(str: string): MPath.Chunk_loc {
             let nmbs = str.split(' ').map(_ => +_);
             return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
         }
-    
+
         function loc2str(loc: MPath.Chunk_loc): string {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
-    
-        // export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
-        //     let arr = v.split('|');
-        //     let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
-        //     console.log('v', v, 'res', res);
-        //     return res;
-        // }
-    
+
         export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
-            return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
+            let arr = v.split('|');
+            let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
+            console.log('v', v, 'res', res);
+            return res;
         }
-    
+
+        // export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        //     return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
+        // }
+
         export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
             let uni = new Set<string>();
-    
+
             (form.fields || []).map((field: Mani.Field) => {
                 let path = field.path_ext ? field.path_ext : '';
                 let items: [string, string][] = pathItems(path);
                 let locsItem = items.find((_) => _[0] === 'loc');
                 let locs = locsItem ? locsItem[1] : '';
                 // We got locations now as string
-                let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                // let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                let clearLocs = dedupe(locs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
                 if (clearLocs.length) {
                     clearLocs[clearLocs.length - 1].f = 1;
                 }
                 clearLocs.map(loc2str).forEach(_ => uni.add(_));
             });
-    
+
             return Array.from(uni).map(str2loc);
         }
+
+        // export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
+        //     let uni = new Set<string>();
+
+        //     (form.fields || []).map((field: Mani.Field) => {
+        //         let path = field.path_ext ? field.path_ext : '';
+        //         let items: [string, string][] = pathItems(path);
+        //         let locsItem = items.find((_) => _[0] === 'loc');
+        //         let locs = locsItem ? locsItem[1] : '';
+        //         // We got locations now as string
+        //         let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+        //         if (clearLocs.length) {
+        //             clearLocs[clearLocs.length - 1].f = 1;
+        //         }
+        //         clearLocs.map(loc2str).forEach(_ => uni.add(_));
+        //     });
+
+        //     return Array.from(uni).map(str2loc);
+        // }
     } //namespace PathLocations
-    
+
     function pathItems(path: string): [string, string][] {
         return path.split('[').filter(Boolean).map<[string, string]>((val) => val.split(']') as [string, string]);;
     }
-    
+
     export function fieldPathItems(pool: string[], path: string): Meta.Path {
         const rv: Meta.Path = {};
         const items: [string, string][] = pathItems(path);
-    
+
         items.forEach((item: [string, string]) => {
             switch (item[0]) {
                 case 'p4a':
@@ -188,7 +208,7 @@ export namespace FieldPath {
                     console.log('??????path??????');
             }
         });
-    
+
         return rv;
     }
 } //namespace FieldPath

@@ -38,7 +38,8 @@ const stylesSvg = css({
     //background: 'radial-gradient(circle, #c19191 0%, #607b98 100%)',
     //background: 'linear-gradient(135deg, var(--tm-primary-300-, #607b98), var(--tm-primary-800-, #c19191))', //#f4f4f4
     stroke: '#00000080', //'#2d005e',
-    strokeWidth: 'calc(6 - var(--size-div))',
+    // strokeWidth: 'calc(6 - var(--size-div))',
+    strokeWidth: 1,
 });
 
 const styleRect = css({
