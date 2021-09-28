@@ -28,13 +28,15 @@ const stylesSvg = css({
     '--size-div': 4,
     width: 'calc(1920px / var(--size-div))',
     height: 'calc(1200px / var(--size-div))',
-    backgroundColor: 'red', //#f4f4f4
+    background: 'linear-gradient(135deg, var(--tm-primary-300-, #607b98), var(--tm-primary-800-, #c19191))', //#f4f4f4
+    stroke: '#2d005e',
+    strokeWidth: 'calc(6 - var(--size-div))',
 });
 
 const styleRect = css({
-    fill: '#e8e8e8',
-    strokeWidth: 'calc(10 - var(--size-div))',
-    stroke: '#d7a9ff',
+    '&:last-child': {
+        fill: '#00ff62',
+    }
 })
 
 export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
@@ -53,7 +55,8 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
             <svg viewBox={`0 0 ${size.w} ${size.h}`} className={stylesSvg()}>
                 {thisRects.map((item, idx) => (
                     <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx}
-                        className={`${styleRect()} ${item.f ? '!fill-[#f0ddb0]' : ''} last:fill-[red]`}
+                        // className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'} last:fill-[red]`}
+                        className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'}`}
                     >
                         <title>{idx}</title>
                     </rect>
