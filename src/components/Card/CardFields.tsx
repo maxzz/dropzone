@@ -7,6 +7,7 @@ import UISimpleBar from '../UI/UIScrollbar';
 import { usePopper } from 'react-popper';
 import { useClickAway, useElementClickAway } from '../../hooks/useElementClickAway';
 import { useClientRect } from '../../hooks/useClientRect';
+import { FieldPreview } from './CardFieldPreview';
 
 // Form parts utils
 
@@ -302,42 +303,6 @@ function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } &
     );
 }
 
-function maxRect(rects: MPath.Chunk_loc[]) {
-    let w = 0;
-    let h = 0;
-    rects.forEach(rect => {
-        if (rect.x + rect.w > w) {
-            w = rect.x + rect.w;
-        }
-        if (rect.y + rect.h > h) {
-            h = rect.y + rect.h;
-        }
-    });
-    return { w, h };
-}
-
-function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
-    let maxSize = maxRect(form.rects);
-    let thisRects = [...form.rects];
-
-    let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
-    if (fieldLocs.length) {
-        thisRects.push(fieldLocs[fieldLocs.length - 1]);
-    }
-
-    return (
-        <div className="rects">
-            <svg viewBox={`0 0 ${maxSize.w} ${maxSize.h}`}>
-                {thisRects.map((item, idx) => (
-                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${item.f ? 'last-field' : ''}`}>
-                        <title>{idx}</title>
-                    </rect>
-                ))}
-            </svg>
-        </div >
-    );
-}
-
 function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const toShow = {
@@ -379,12 +344,12 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                         <IconPreview className="w-[14px] h-[14px]" />
                                     </div> */}
 
-                                    <ButtonWithChildrenPortal name="preview" toggle={<IconPreview className="w-[14px] h-[14px]" />}>
+                                    {/* <ButtonWithChildrenPortal name="preview" toggle={<IconPreview className="w-[14px] h-[14px]" />}>
                                         <FieldPreview form={metaForm} field={field} />
-                                    </ButtonWithChildrenPortal>
+                                    </ButtonWithChildrenPortal> */}
 
-                                    <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}>
-                                    {/* <ToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}> */}
+                                    {/* <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}> */}
+                                    <ToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
                                         <FieldPreview form={metaForm} field={field} />
                                     </ToggleWithPortal>
 
