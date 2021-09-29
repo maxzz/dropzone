@@ -29,16 +29,7 @@ const stylesSvg = css({
     width: 'calc(1920px / var(--size-div))',
     height: 'calc(1200px / var(--size-div))',
     background: 'radial-gradient(circle, #679dff 0%, #3478f4 100%)',
-    //background: 'radial-gradient(circle, rgba(109,149,222,1) 0%, rgba(49,102,198,1) 100%)',
-    //background: 'radial-gradient(circle, rgba(157,201,251,1) 0%, rgba(109,149,222,1) 45%, rgba(49,102,198,1) 100%)',
-    //background: 'radial-gradient(circle, rgba(157,201,251,1) 0%, rgba(49,102,198,1) 100%)',
-    //background: 'radial-gradient(circle, rgba(174,206,242,1) 0%, rgba(49,102,198,1) 100%)',
-    //background: 'radial-gradient(circle, rgba(174,206,242,1) 0%, rgba(187,181,244,1) 100%)',
-    //background: 'radial-gradient(circle, rgba(213,233,255,1) 0%, rgba(255,232,235,1) 100%)',
-    //background: 'radial-gradient(circle, #c19191 0%, #607b98 100%)',
-    //background: 'linear-gradient(135deg, var(--tm-primary-300-, #607b98), var(--tm-primary-800-, #c19191))', //#f4f4f4
     stroke: '#d1d1d1', //#2d005e #00000080 #b19b9b80
-    // strokeWidth: 'calc(6 - var(--size-div))',
     strokeWidth: 1,
 });
 
@@ -58,8 +49,7 @@ const styleRect = css({
 export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
     let boundaries = rectsBoundaries(form.rects);
     let thisRects = [...form.rects];
-    console.log('rect', thisRects);
-
+    //console.log('rect', thisRects);
 
     let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
     if (fieldLocs.length) {
@@ -70,13 +60,7 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
         <div className="rects">
             <svg viewBox={`0 0 ${boundaries.x2} ${boundaries.y2}`} className={stylesSvg()}>
                 {thisRects.map((item, idx) => (
-                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx}
-                        // className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'} last:fill-[red]`}
-                        // className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'}`}
-                        // className={`${styleRect()} ${item.f ? 'fill-[#d3d3d3]' : 'fill-[#e4e4e4]'}`}
-                        // className={`${styleRect()} ${item.f ? 'fill-[#454545]' : ''}`}
-                        className={`${styleRect({field: !!item.f})}`}
-                    >
+                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({field: !!item.f})}`} >
                         <title>{idx}</title>
                     </rect>
                 ))}

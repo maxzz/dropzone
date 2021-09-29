@@ -108,16 +108,16 @@ export namespace FieldPath {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
 
-        export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
-            let arr = v.split('|');
-            let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
-            console.log('v', v, 'res', res);
-            return res;
-        }
-
         // export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
-        //     return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
+        //     let arr = v.split('|');
+        //     let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
+        //     console.log('v', v, 'res', res);
+        //     return res;
         // }
+
+        export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+            return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
+        }
 
         export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
             let uni = new Set<string>();
@@ -128,7 +128,7 @@ export namespace FieldPath {
                 let locsItem = items.find((_) => _[0] === 'loc');
                 let locs = locsItem ? locsItem[1] : '';
                 // We got locations now as string
-                // let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                //let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
                 let clearLocs = dedupe(locs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
                 if (clearLocs.length) {
                     clearLocs[clearLocs.length - 1].f = 1;
@@ -138,25 +138,6 @@ export namespace FieldPath {
 
             return Array.from(uni).map(str2loc);
         }
-
-        // export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
-        //     let uni = new Set<string>();
-
-        //     (form.fields || []).map((field: Mani.Field) => {
-        //         let path = field.path_ext ? field.path_ext : '';
-        //         let items: [string, string][] = pathItems(path);
-        //         let locsItem = items.find((_) => _[0] === 'loc');
-        //         let locs = locsItem ? locsItem[1] : '';
-        //         // We got locations now as string
-        //         let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
-        //         if (clearLocs.length) {
-        //             clearLocs[clearLocs.length - 1].f = 1;
-        //         }
-        //         clearLocs.map(loc2str).forEach(_ => uni.add(_));
-        //     });
-
-        //     return Array.from(uni).map(str2loc);
-        // }
     } //namespace PathLocations
 
     function pathItems(path: string): [string, string][] {
