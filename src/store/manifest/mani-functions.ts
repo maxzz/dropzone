@@ -108,14 +108,14 @@ export namespace FieldPath {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
 
-        // export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        // function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
         //     let arr = v.split('|');
         //     let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
         //     console.log('v', v, 'res', res);
         //     return res;
         // }
 
-        export function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
             return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
         }
 
@@ -140,7 +140,7 @@ export namespace FieldPath {
         }
 
         export namespace utils {
-            export function rectsBoundaries(rects: MPath.Chunk_loc[]): { x1: number; y1: number; x2: number; y2: number; } {
+            function rectsBoundaries(rects: MPath.Chunk_loc[]): { x1: number; y1: number; x2: number; y2: number; } {
                 let x1 = 0; // x1,y1 ┌──────┐
                 let y1 = 0; //       │      │
                 let x2 = 0; //       └──────┘ x2,y2
@@ -162,11 +162,21 @@ export namespace FieldPath {
                 return { x1, y1, x2, y2 };
             }
             
-            export function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
-                let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
+            function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
+                let fieldLocs = pathItem_loc2items(field.path.loc || '');
                 if (fieldLocs.length) {
                     rv.push(fieldLocs[fieldLocs.length - 1]);
                 }
+            }
+
+            export function getFieldRects(form: Meta.Form, field: Meta.Field) {
+                let boundaries = rectsBoundaries(form.rects);
+                let thisRects = [...form.rects];
+                //console.log('rect', thisRects);
+            
+                addLastRect(field, thisRects);
+            
+                return { rects: thisRects, boundaries };
             }
         }
     } //namespace PathLocations
