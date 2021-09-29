@@ -91,11 +91,11 @@ export namespace FieldPath {
             return Array.from(new Set(items)); // This should preserve insertion order, if I remember correctly.
         }
 
-        export function pathItem_loc_removePool(pool: string[], v: string): string {
+        export function unPool(pool: string[], v: string): string {
             return dedupe(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         }
 
-        // export function pathItem_loc_removePool(pool: string[], v: string): string {
+        // export function unPool(pool: string[], v: string): string {
         //     return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         // }
 
@@ -115,22 +115,19 @@ export namespace FieldPath {
         //     return res;
         // }
 
-        function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
+        function locs2items(v: string): MPath.Chunk_loc[] {
             return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
         }
 
-        function pathItem_lastitem(v: string | undefined): MPath.Chunk_loc | undefined {
+        function lastItem(v: string | undefined): MPath.Chunk_loc | undefined {
             let arr = (v || '').split('|');
-            let last: string | undefined = arr[arr.length - 1];
-            //return last && str2loc(last);
+            let last = arr[arr.length - 1];
             if (last) {
                 return str2loc(last);
             }
-
-            //return dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
         }
 
-        export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
+        export function getAllRects(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
             let uni = new Set<string>();
 
             (form.fields || []).map((field: Mani.Field) => {
@@ -174,7 +171,7 @@ export namespace FieldPath {
             }
             
             function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
-                let fieldLocs = pathItem_loc2items(field.path.loc || '');
+                let fieldLocs = locs2items(field.path.loc || '');
                 if (fieldLocs.length) {
                     rv.push(fieldLocs[fieldLocs.length - 1]);
                 }
@@ -208,7 +205,7 @@ export namespace FieldPath {
                     break;
                 }
                 case 'loc': {
-                    rv.loc = PathLocations.pathItem_loc_removePool(pool, item[1]);
+                    rv.loc = PathLocations.unPool(pool, item[1]);
                     break;
                 }
                 case 'sid': {
@@ -269,7 +266,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            rects: FieldPath.PathLocations.buildFormLocations(form, pool) || [],
+            rects: FieldPath.PathLocations.getAllRects(form, pool) || [],
             fields,
         };
     };
