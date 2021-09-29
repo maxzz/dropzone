@@ -91,18 +91,15 @@ export namespace FieldPath {
             return Array.from(new Set(items)); // This will preserve insertion order from items in set and then in array.
         }
 
-        export function unPool(pool: string[], v: string): string {
-            return dedupe(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
-        }
-
         // export function unPool(pool: string[], v: string): string {
-        //     return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
+        //     return dedupe(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         // }
 
-        function str2loc(v: string): MPath.loc {
-            // let nmbs = v.split(' ').map(_ => +_);
-            // return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
+        export function unPool(pool: string[], v: string): string {
+            return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
+        }
 
+        function str2loc(v: string): MPath.loc {
             let [x, y, x2, y2, f, i] = v.split(' ').map(_ => +_);
             return { x, y, w: x2 - x, h: y2 - y, f: f || 0, i: i || 0 };
         }
@@ -132,9 +129,9 @@ export namespace FieldPath {
 
         export namespace utils {
             function rectsBoundaries(rects: MPath.loc[]): { x1: number; y1: number; x2: number; y2: number; } {
-                let x1 = 0; // x1,y1 ┌──────┐
-                let y1 = 0; //       │      │
-                let x2 = 0; //       └──────┘ x2,y2
+                let x1 = 0;
+                let y1 = 0;
+                let x2 = 0;
                 let y2 = 0;
                 rects.forEach(rect => {
                     if (rect.x > x1) {
@@ -161,8 +158,8 @@ export namespace FieldPath {
             // }
 
             export function getFieldRects(form: Meta.Form, field: Meta.Field) {
-                let boundaries = rectsBoundaries(form.rects);
-                let thisRects = [...form.rects];
+                let boundaries = rectsBoundaries(form.view);
+                let thisRects = [...form.view];
                 //console.log('rect', thisRects);
 
                 const last = lastItem(field.path.loc);
@@ -282,7 +279,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            rects: FieldPath.loc.utils.getAllRects(form, pool) || [],
+            view: FieldPath.loc.utils.getAllRects(form, pool) || [],
             fields,
         };
     };
