@@ -127,26 +127,6 @@ export namespace FieldPath {
             }
         }
 
-        export function getAllRects(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
-            let uni = new Set<string>();
-
-            (form.fields || []).map((field: Mani.Field) => {
-                let path = field.path_ext ? field.path_ext : '';
-                let items: [string, string][] = pathItems(path);
-                let locsItem = items.find((_) => _[0] === 'loc');
-                let locs = locsItem ? locsItem[1] : '';
-                // We got locations now as string
-                //let clearLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
-                let clearLocs = dedupe(locs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
-                if (clearLocs.length) {
-                    clearLocs[clearLocs.length - 1].f = 1;
-                }
-                clearLocs.map(loc2str).forEach(_ => uni.add(_));
-            });
-
-            return Array.from(uni).map(str2loc);
-        }
-
         export namespace utils {
             function rectsBoundaries(rects: MPath.Chunk_loc[]): { x1: number; y1: number; x2: number; y2: number; } {
                 let x1 = 0; // x1,y1 ┌──────┐
@@ -189,7 +169,29 @@ export namespace FieldPath {
             
                 return { rects: thisRects, boundaries };
             }
-        }
+
+            export function getAllRects(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
+                let uni = new Set<string>();
+    
+                (form.fields || []).map((field: Mani.Field) => {
+                    let path = field.path_ext ? field.path_ext : '';
+                    let items: [string, string][] = pathItems(path);
+                    let locsItem = items.find((_) => _[0] === 'loc');
+                    let locs = locsItem ? locsItem[1] : '';
+                    // We got locations now as string
+                    //let cleanLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                    let cleanLocs = dedupe(locs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                    // mark the last item as field
+                    if (cleanLocs.length) {
+                        cleanLocs[cleanLocs.length - 1].f = 1;
+                    }
+                    // add to set locations from this path
+                    cleanLocs.map(loc2str).forEach(loc => uni.add(loc));
+                });
+    
+                return Array.from(uni).map(str2loc);
+            }
+        } //namespace utils
     } //namespace PathLocations
 
     function pathItems(path: string): [string, string][] {
@@ -269,7 +271,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            rects: FieldPath.PathLocations.getAllRects(form, pool) || [],
+            rects: FieldPath.PathLocations.utils.getAllRects(form, pool) || [],
             fields,
         };
     };
