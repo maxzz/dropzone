@@ -170,19 +170,22 @@ export namespace FieldPath {
                 return { x1, y1, x2, y2 };
             }
             
-            function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
-                let fieldLocs = locs2items(field.path.loc || '');
-                if (fieldLocs.length) {
-                    rv.push(fieldLocs[fieldLocs.length - 1]);
-                }
-            }
+            // function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
+            //     let fieldLocs = locs2items(field.path.loc || '');
+            //     if (fieldLocs.length) {
+            //         rv.push(fieldLocs[fieldLocs.length - 1]);
+            //     }
+            // }
 
             export function getFieldRects(form: Meta.Form, field: Meta.Field) {
                 let boundaries = rectsBoundaries(form.rects);
                 let thisRects = [...form.rects];
                 //console.log('rect', thisRects);
+
+                const last = lastItem(field.path.loc);
+                last && thisRects.push(last);
             
-                addLastRect(field, thisRects);
+                //addLastRect(field, thisRects);
             
                 return { rects: thisRects, boundaries };
             }
