@@ -128,23 +128,23 @@ export namespace FieldPath {
         }
 
         export namespace utils {
-            function rectsBoundaries(rects: MPath.loc[]): { x1: number; y1: number; x2: number; y2: number; } {
+            function rectsBoundaries(rects: MPath.loc[]): Meta.Bounds {
                 let x1 = 0;
                 let y1 = 0;
                 let x2 = 0;
                 let y2 = 0;
-                rects.forEach(rect => {
-                    if (rect.x > x1) {
-                        x1 = rect.x;
+                rects.forEach(({x, y, w, h}) => {
+                    if (x1 < x) {
+                        x1 = x;
                     }
-                    if (rect.y > y1) {
-                        y1 = rect.y;
+                    if (y1 < y) {
+                        y1 = y;
                     }
-                    if (rect.x + rect.w > x2) {
-                        x2 = rect.x + rect.w;
+                    if (x2 < x + w) {
+                        x2 = x + w;
                     }
-                    if (rect.y + rect.h > y2) {
-                        y2 = rect.y + rect.h;
+                    if (y2 < y + h) {
+                        y2 = y + h;
                     }
                 });
                 return { x1, y1, x2, y2 };
