@@ -8,6 +8,7 @@ import { usePopper } from 'react-popper';
 import { useClickAway, useElementClickAway } from '../../hooks/useElementClickAway';
 import { useClientRect } from '../../hooks/useClientRect';
 import { FieldPreview } from './CardFieldPreview';
+import { OptionPool } from './FormOptions';
 
 // Form parts utils
 
@@ -169,26 +170,6 @@ function OptionUseQuickLink({ usequicklink }: { usequicklink: string | undefined
         <div className="px-2 border border-gray-500 rounded text-xs">
             quick link{usequicklink == '1' ? '' : usequicklink == '2' ? ': don\'t use' : { usequicklink }}
         </div>
-    );
-}
-
-function OptionPool({ names_ext }: { names_ext: string | undefined; }) {
-    if (!names_ext) {
-        return null;
-    }
-    names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
-    let items = (names_ext || '').split('●');
-    return (
-        <ButtonWithChildren name="pool">
-            <div className="py-2 overflow-auto grid grid-cols-[auto,1fr] gap-x-2">
-                {items.map((item, idx) =>
-                    <React.Fragment key={idx}>
-                        <div className="text-right">{idx}:</div>
-                        <div className="">{item}</div>
-                    </React.Fragment>)
-                }
-            </div>
-        </ButtonWithChildren>
     );
 }
 
