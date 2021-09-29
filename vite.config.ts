@@ -5,6 +5,7 @@ import url from '@rollup/plugin-url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '',
     plugins: [
         reactRefresh(),
 
