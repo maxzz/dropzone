@@ -140,6 +140,28 @@ export namespace FieldPath {
         }
 
         export namespace utils {
+            export function rectsBoundaries(rects: MPath.Chunk_loc[]): { x1: number; y1: number; x2: number; y2: number; } {
+                let x1 = 0; // x1,y1 ┌──────┐
+                let y1 = 0; //       │      │
+                let x2 = 0; //       └──────┘ x2,y2
+                let y2 = 0;
+                rects.forEach(rect => {
+                    if (rect.x > x1) {
+                        x1 = rect.x;
+                    }
+                    if (rect.y > y1) {
+                        y1 = rect.y;
+                    }
+                    if (rect.x + rect.w > x2) {
+                        x2 = rect.x + rect.w;
+                    }
+                    if (rect.y + rect.h > y2) {
+                        y2 = rect.y + rect.h;
+                    }
+                });
+                return { x1, y1, x2, y2 };
+            }
+            
             export function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
                 let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
                 if (fieldLocs.length) {
