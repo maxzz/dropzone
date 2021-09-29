@@ -158,8 +158,8 @@ export namespace FieldPath {
             // }
 
             export function getFieldRects(form: Meta.Form, field: Meta.Field) {
-                let boundaries = rectsBoundaries(form.view);
-                let thisRects = [...form.view];
+                let boundaries = rectsBoundaries(form.view.rects);
+                let thisRects = [...form.view.rects];
                 //console.log('rect', thisRects);
 
                 const last = lastItem(field.path.loc);
@@ -170,7 +170,7 @@ export namespace FieldPath {
                 return { rects: thisRects, boundaries };
             }
 
-            export function getAllRects(form: Mani.Form, pool: string[]): MPath.loc[] {
+            export function getAllRects(form: Mani.Form, pool: string[]): Meta.View {
                 let uniqueLocs = new Set<string>();
 
                 (form.fields || []).map((field: Mani.Field) => {
@@ -195,7 +195,13 @@ export namespace FieldPath {
                     cleanLocs.map(loc2str).forEach(loc => uniqueLocs.add(loc));
                 });
 
-                return Array.from(uniqueLocs).map(str2loc);
+                let rects = Array.from(uniqueLocs).map(str2loc);
+                let bounds = rectsBoundaries(rects);
+
+                return {
+                    rects,
+                    bounds, 
+                };
             }
         } //namespace utils
     } //namespace PathLocations

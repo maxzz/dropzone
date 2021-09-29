@@ -151,7 +151,7 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         mani: Mani.Form;
         disp: Disp;
         pool: string[];
-        view: MPath.loc[];
+        view: View;
         fields: Field[]; // each item corresponds to each field
     }
 
