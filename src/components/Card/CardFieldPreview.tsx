@@ -45,7 +45,14 @@ const stylesSvg = css({
 const styleRect = css({
     '&:last-child': {
         fill: '#00ff62',
-    }
+    },
+    variants: {
+        field: {
+            true: {
+                fill: '#454545',
+            },
+        }
+    },
 });
 
 export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
@@ -67,7 +74,8 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
                         // className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'} last:fill-[red]`}
                         // className={`${styleRect()} ${item.f ? 'fill-[#f0ddb0]' : 'fill-[#e8e8e8]'}`}
                         // className={`${styleRect()} ${item.f ? 'fill-[#d3d3d3]' : 'fill-[#e4e4e4]'}`}
-                        className={`${styleRect()} ${item.f ? 'fill-[#454545]' : ''}`}
+                        // className={`${styleRect()} ${item.f ? 'fill-[#454545]' : ''}`}
+                        className={`${styleRect({field: !!item.f})}`}
                     >
                         <title>{idx}</title>
                     </rect>
