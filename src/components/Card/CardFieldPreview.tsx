@@ -25,7 +25,7 @@ const styleRect = css({
 });
 
 export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { rects, boundaries } = FieldPath.PathLocations.utils.getFieldRects(form, field);
+    const { rects, boundaries } = FieldPath.loc.utils.getFieldRects(form, field);
     return (
         <div className="rects">
             <svg viewBox={`0 0 ${boundaries.x2} ${boundaries.y2}`} className={stylesSvg()}>

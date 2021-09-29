@@ -1,13 +1,13 @@
 import { removeQuery, urlDomain } from './url';
 
-/**
-   * fileTimeToDate()
-   * Convert a Windows FILETIME to a Javascript Date
-   * @param {number} fileTime - the number of 100ns
-   * intervals since January 1, 1601 (UTC)
-   * @returns {Date}
-   **/
 export function fileTimeToDate(fileTime: number | string): Date {
+    /**
+     * fileTimeToDate()
+     * Convert a Windows FILETIME to a Javascript Date
+     * @param {number} fileTime - the number of 100ns
+     * intervals since January 1, 1601 (UTC)
+     * @returns {Date}
+     **/
     if (typeof fileTime === 'string') {
         fileTime = Number('0x' + fileTime.split(' ').join('')); // dwHighDateTime + ' ' + dwLowDateTime 
     }
@@ -59,9 +59,9 @@ function getPoolName(pool: string[], index: string): string {
 }
 
 export namespace FieldPath {
-    function pathItem_p4a(pool: string[], s: string): MPath.Chunk_p4a {
+    function p4a(pool: string[], s: string): MPath.p4a {
         let ss = s.split('.');
-        let rv: MPath.Chunk_p4a = {
+        let rv: MPath.p4a = {
             rnumber: 0,
             roleString: getPoolName(pool, ss[1]),
             className: cpp_restore(getPoolName(pool, ss[2])),
@@ -70,7 +70,7 @@ export namespace FieldPath {
         return rv;
     }
 
-    function pathItem_sid(pool: string[], v: string): MPath.Chunk_sid {
+    function sid(pool: string[], v: string): MPath.sid {
         let sid = {} as any;
         v.split('.').forEach((_, index) => {
             let s = cpp_restore(getPoolName(pool, _));
@@ -86,7 +86,7 @@ export namespace FieldPath {
         return sid;
     }
 
-    export namespace PathLocations {
+    export namespace loc {
         function dedupe(items: string[]): string[] {
             return Array.from(new Set(items)); // This should preserve insertion order, if I remember correctly.
         }
@@ -99,12 +99,12 @@ export namespace FieldPath {
         //     return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         // }
 
-        function str2loc(v: string): MPath.Chunk_loc {
+        function str2loc(v: string): MPath.loc {
             let nmbs = v.split(' ').map(_ => +_);
             return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
         }
 
-        function loc2str(loc: MPath.Chunk_loc): string {
+        function loc2str(loc: MPath.loc): string {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
 
@@ -115,11 +115,11 @@ export namespace FieldPath {
         //     return res;
         // }
 
-        function locs2items(v: string): MPath.Chunk_loc[] {
+        function locs2items(v: string): MPath.loc[] {
             return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
         }
 
-        function lastItem(v: string | undefined): MPath.Chunk_loc | undefined {
+        function lastItem(v: string | undefined): MPath.loc | undefined {
             let arr = (v || '').split('|');
             let last = arr[arr.length - 1];
             if (last) {
@@ -128,7 +128,7 @@ export namespace FieldPath {
         }
 
         export namespace utils {
-            function rectsBoundaries(rects: MPath.Chunk_loc[]): { x1: number; y1: number; x2: number; y2: number; } {
+            function rectsBoundaries(rects: MPath.loc[]): { x1: number; y1: number; x2: number; y2: number; } {
                 let x1 = 0; // x1,y1 ┌──────┐
                 let y1 = 0; //       │      │
                 let x2 = 0; //       └──────┘ x2,y2
@@ -170,7 +170,7 @@ export namespace FieldPath {
                 return { rects: thisRects, boundaries };
             }
 
-            export function getAllRects(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
+            export function getAllRects(form: Mani.Form, pool: string[]): MPath.loc[] {
                 let uni = new Set<string>();
 
                 (form.fields || []).map((field: Mani.Field) => {
@@ -195,35 +195,33 @@ export namespace FieldPath {
         } //namespace utils
     } //namespace PathLocations
 
-    type ChunkName = 'p4a' | 'p4' | 'loc' | 'sid' | 'did2' | 'sn';
-
-    function getChunks(path: string): [ChunkName, string][] {
+    function getChunks(path: string): [Meta.Chunk, string][] {
         // from [p4a]0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..[loc]b|c|c|c|c|d|e|f|10|11|12|13[sid]14.15.16..17
         // to ['p4a', '0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..'], ['loc', 'b|c|c|c|c|d|e|f|10|11|12|13'], ['sid', '14.15.16..17']
-        return path.split('[').filter(Boolean).map((val: string) => val.split(']') as [ChunkName, string]);;
+        return path.split('[').filter(Boolean).map((val: string) => val.split(']') as [Meta.Chunk, string]);;
     }
 
     export function fieldPathItems(pool: string[], path: string): Meta.Path {
         const rv: Meta.Path = {};
-        const items: [ChunkName, string][] = getChunks(path);
+        const items: [Meta.Chunk, string][] = getChunks(path);
 
-        items.forEach(([chunkName, value]) => {
+        items.forEach(([chunkName, chunkValue]) => {
             switch (chunkName) {
                 case 'p4a':
                 case 'p4': {
-                    rv.p4a = value.split('|').map(_ => pathItem_p4a(pool, _));
+                    rv.p4a = chunkValue.split('|').map(_ => p4a(pool, _));
                     break;
                 }
                 case 'loc': {
-                    rv.loc = PathLocations.unPool(pool, value);
+                    rv.loc = loc.unPool(pool, chunkValue);
                     break;
                 }
                 case 'sid': {
-                    rv.sid = pathItem_sid(pool, value);
+                    rv.sid = sid(pool, chunkValue);
                     break;
                 }
                 case 'did2': {
-                    rv.did2 = value;
+                    rv.did2 = chunkValue;
                     break;
                 }
                 case 'sn': {
@@ -232,7 +230,7 @@ export namespace FieldPath {
                         current: 0,
                         parts: [],
                     };
-                    let ss = value.split(';');
+                    let ss = chunkValue.split(';');
                     if (ss.length) {
                         let first = ss[0].split('.'); // '3.0.the-rest'
                         if (first.length > 2) {
@@ -244,15 +242,15 @@ export namespace FieldPath {
                     }
                     break;
                 }
-                default:
+                default: {
                     console.log('??????path??????');
+                }
             }
         });
 
         return rv;
     }
 } //namespace FieldPath
-
 
 export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isScript = (fields: Meta.Field[]): boolean => {
@@ -276,7 +274,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            rects: FieldPath.PathLocations.utils.getAllRects(form, pool) || [],
+            rects: FieldPath.loc.utils.getAllRects(form, pool) || [],
             fields,
         };
     };

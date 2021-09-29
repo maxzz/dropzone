@@ -67,18 +67,18 @@ declare module Mani {
 
 } //declare module Mani
 
-declare module MPath {      // Manifest unpacked path data
+declare module MPath {      // Meta path. Manifest unpacked path data
 
-    interface Chunk_p4a {   // from: unpack_fromstring()
+    interface p4a {         // Chunk: p4a (from: unpack_fromstring())
         rnumber: number;
         roleString: string;
         className: string;
         name?: string;
     }
 
-    type Chunk_p4 = Chunk_p4a;
+    type p4 = p4a;          // Chunk: p4
 
-    interface Chunk_sid {
+    interface sid {         // Chunk: sid
         version: string;
         generatedId: string;
         formName: string;
@@ -86,14 +86,14 @@ declare module MPath {      // Manifest unpacked path data
         outerHtml?: string;
     }
 
-    interface Chunk_did2 {
+    interface did2 {        // Chunk: did2
         s1: string;
         s2: string;
         s3: string;
         s4?: string;
     }
 
-    interface Chunk_loc {   // In client area or against 1920x1200 or 1600x1200?
+    interface loc {         // Chunk: loc (size is in client area or against 1920x1200 or 1600x1200?)
         x: number;
         y: number;
         w: number;
@@ -102,7 +102,7 @@ declare module MPath {      // Manifest unpacked path data
         i?: number;         // index of rect before dedupe (this is internal and not saved).
     }
 
-    interface Chunk_sn {
+    interface sn {          // Chunk: sn
         total: number;      // total blocks
         current: number;    // current block
         parts: string[];    // block parts
@@ -112,14 +112,16 @@ declare module MPath {      // Manifest unpacked path data
 
 declare module Meta {       // Manifest unpacked forms, as meta data
 
-    interface Path {        // Collection of path items
-        p4a?: MPath.Chunk_p4a[];
-        p4?: MPath.Chunk_p4[];
+    interface Path {        // Collection of path items (chunks)
+        p4a?: MPath.p4a[];
+        p4?: MPath.p4[];
         loc?: string;       // "x y w h | x y w h ... | x y w h"
-        sid?: MPath.Chunk_sid;
+        sid?: MPath.sid;
         did2?: string;
-        sn?: MPath.Chunk_sn; // script number
+        sn?: MPath.sn;      // script number
     }
+
+    type Chunk = keyof Meta.Path; //type ChunkName = 'p4a' | 'p4' | 'loc' | 'sid' | 'did2' | 'sn';
 
     interface Field {
         mani: Mani.Field,
@@ -137,7 +139,7 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         mani: Mani.Form;
         disp: Disp;
         pool: string[];
-        rects: MPath.Chunk_loc[];
+        rects: MPath.loc[];
         fields: Field[]; // each item corresponds to each field
     }
 
