@@ -135,11 +135,23 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         isIe: boolean;      // Form detection processname contains 'iexplore.exe' i.e. login was trained with IE as (manual or normal and this depends on isScript).
     }
 
+    interface Bounds {
+        x1: number; // x1,y1 ┌──────┐
+        y1: number; //       │      │
+        x2: number; //       └──────┘ x2,y2
+        y2: number;
+    }
+
+    interface View {
+        rects: MPath.loc[];
+        bounds: Bounds;
+    }
+
     interface Form {
         mani: Mani.Form;
         disp: Disp;
         pool: string[];
-        rects: MPath.loc[];
+        view: MPath.loc[];
         fields: Field[]; // each item corresponds to each field
     }
 
