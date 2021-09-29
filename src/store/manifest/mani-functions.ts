@@ -91,12 +91,8 @@ export namespace FieldPath {
             return Array.from(new Set(items)); // This will preserve insertion order from items in set and then in array.
         }
 
-        // export function unPool(pool: string[], v: string): string {
-        //     return dedupe(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
-        // }
-
-        export function unPool(pool: string[], v: string): string {
-            return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
+        export function unPool(pool: string[], v: string): string[] {
+            return /*dedupe*/(v.split('|').map(idx => getPoolName(pool, idx)));
         }
 
         function str2loc(v: string): MPath.loc {
@@ -108,32 +104,13 @@ export namespace FieldPath {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
 
-        // function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
-        //     let arr = v.split('|');
-        //     let res = dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
-        //     console.log('v', v, 'res', res);
-        //     return res;
-        // }
-
-        function locs2items(v: string): MPath.loc[] {
-            return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
-        }
-
-        function lastItem(v: string | undefined): MPath.loc | undefined {
-            let arr = (v || '').split('|');
-            let last = arr[arr.length - 1];
-            if (last) {
-                return str2loc(last);
-            }
-        }
-
         export namespace utils {
             function rectsBoundaries(rects: MPath.loc[]): Meta.Bounds {
                 let x1 = Number.MAX_SAFE_INTEGER;
                 let y1 = Number.MAX_SAFE_INTEGER;
                 let x2 = 0;
                 let y2 = 0;
-                rects.forEach(({x, y, w, h}) => {
+                rects.forEach(({ x, y, w, h }) => {
                     if (x1 > x) {
                         x1 = x;
                     }
@@ -150,24 +127,28 @@ export namespace FieldPath {
                 return { x1, y1, x2, y2 };
             }
 
-            // function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
-            //     let fieldLocs = locs2items(field.path.loc || '');
-            //     if (fieldLocs.length) {
-            //         rv.push(fieldLocs[fieldLocs.length - 1]);
-            //     }
-            // }
+            function lastItem(v: string | undefined): MPath.loc | undefined {
+                let arr = (v || '').split('|');
+                let last = arr[arr.length - 1];
+                if (last) {
+                    return str2loc(last);
+                }
+            }
 
             export function getFieldRects(form: Meta.Form, field: Meta.Field) {
                 let bounds = rectsBoundaries(form.view.rects);
                 let thisRects = [...form.view.rects];
-                //console.log('rect', thisRects);
 
                 const last = lastItem(field.path.loc);
                 last && thisRects.push(last);
 
-                //addLastRect(field, thisRects);
+                let lt = {x: form.view.bounds.x1, y: form.view.bounds.y1}; // left-top
+                console.log('thisRects0', form.view.bounds);
+                console.log('thisRects1', [...thisRects]);
+                thisRects = thisRects.map((loc) => (loc.x -= lt.x, loc.y -= lt.y, loc));
+                console.log('thisRects2', [...thisRects]);
 
-                return { rects: thisRects, bounds };
+                return { rects: thisRects, bounds: rectsBoundaries(thisRects) };
             }
 
             export function getAllRects(form: Mani.Form, pool: string[]): Meta.View {
@@ -200,7 +181,7 @@ export namespace FieldPath {
 
                 return {
                     rects,
-                    bounds, 
+                    bounds,
                 };
             }
         } //namespace utils
@@ -214,9 +195,9 @@ export namespace FieldPath {
 
     export function fieldPathItems(pool: string[], path: string): Meta.Path {
         const rv: Meta.Path = {};
-        const items: [Meta.Chunk, string][] = getChunks(path);
+        const chunks: [Meta.Chunk, string][] = getChunks(path);
 
-        items.forEach(([chunkName, chunkValue]) => {
+        chunks.forEach(([chunkName, chunkValue]) => {
             switch (chunkName) {
                 case 'p4a':
                 case 'p4': {
@@ -224,7 +205,7 @@ export namespace FieldPath {
                     break;
                 }
                 case 'loc': {
-                    rv.loc = loc.unPool(pool, chunkValue);
+                    rv.loc = loc.unPool(pool, chunkValue).join('|');
                     break;
                 }
                 case 'sid': {
