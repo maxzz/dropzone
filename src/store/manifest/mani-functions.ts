@@ -100,8 +100,11 @@ export namespace FieldPath {
         // }
 
         function str2loc(v: string): MPath.loc {
-            let nmbs = v.split(' ').map(_ => +_);
-            return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
+            // let nmbs = v.split(' ').map(_ => +_);
+            // return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
+
+            let [x, y, x2, y2, f, i] = v.split(' ').map(_ => +_);
+            return { x, y, w: x2 - x, h: y2 - y, f: f || 0, i: i || 0 };
         }
 
         function loc2str(loc: MPath.loc): string {
@@ -178,8 +181,14 @@ export namespace FieldPath {
                     let thisLocs = pathChunks.find(([chunck]) => chunck === 'loc')?.[1] || '';
 
                     // We got locations now as string
-                    //let cleanLocs = thisLocs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
-                    let cleanLocs = dedupe(thisLocs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                    let cleanLocs =
+                        //thisLocs.split('|')
+                        dedupe(thisLocs.split('|'))
+                            .map(_ => getPoolName(pool, _))
+                            .map(str2loc)
+                            .map((_, index) => (_.i = index, _))
+                            .filter(_ => _.w && _.h);
+
                     // mark the last item as field
                     if (cleanLocs.length) {
                         cleanLocs[cleanLocs.length - 1].f = 1;
