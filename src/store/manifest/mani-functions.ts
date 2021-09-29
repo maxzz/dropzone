@@ -143,10 +143,7 @@ export namespace FieldPath {
                 last && thisRects.push(last);
 
                 let lt = {x: form.view.bounds.x1, y: form.view.bounds.y1}; // left-top
-                console.log('thisRects0', form.view.bounds);
-                console.log('thisRects1', [...thisRects]);
-                thisRects = thisRects.map((loc) => (loc.x -= lt.x, loc.y -= lt.y, loc));
-                console.log('thisRects2', [...thisRects]);
+                thisRects = thisRects.map((loc) => ({...loc, x: loc.x - lt.x, y: loc.y - lt.y, }));
 
                 return { rects: thisRects, bounds: rectsBoundaries(thisRects) };
             }
