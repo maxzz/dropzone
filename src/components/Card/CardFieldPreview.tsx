@@ -51,10 +51,7 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
     let thisRects = [...form.rects];
     //console.log('rect', thisRects);
 
-    let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
-    if (fieldLocs.length) {
-        thisRects.push(fieldLocs[fieldLocs.length - 1]);
-    }
+    FieldPath.PathLocations.utils.addLastRect(field, thisRects);
 
     return (
         <div className="rects">

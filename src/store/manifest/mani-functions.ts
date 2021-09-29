@@ -138,6 +138,15 @@ export namespace FieldPath {
 
             return Array.from(uni).map(str2loc);
         }
+
+        export namespace utils {
+            export function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
+                let fieldLocs = FieldPath.PathLocations.pathItem_loc2items(field.path.loc || '');
+                if (fieldLocs.length) {
+                    rv.push(fieldLocs[fieldLocs.length - 1]);
+                }
+            }
+        }
     } //namespace PathLocations
 
     function pathItems(path: string): [string, string][] {
