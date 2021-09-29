@@ -88,7 +88,7 @@ export namespace FieldPath {
 
     export namespace PathLocations {
         function dedupe(items: string[]): string[] {
-            return Array.from(new Set(items));
+            return Array.from(new Set(items)); // This should preserve insertion order, if I remember correctly.
         }
 
         export function pathItem_loc_removePool(pool: string[], v: string): string {
@@ -99,8 +99,8 @@ export namespace FieldPath {
         //     return /*dedupe*/(v.split('|').map(_ => getPoolName(pool, _))).join('|');;
         // }
 
-        function str2loc(str: string): MPath.Chunk_loc {
-            let nmbs = str.split(' ').map(_ => +_);
+        function str2loc(v: string): MPath.Chunk_loc {
+            let nmbs = v.split(' ').map(_ => +_);
             return { x: nmbs[0], y: nmbs[1], w: nmbs[2] - nmbs[0], h: nmbs[3] - nmbs[1], f: nmbs[4] || 0, i: nmbs[5] || 0 };
         }
 
@@ -117,6 +117,17 @@ export namespace FieldPath {
 
         function pathItem_loc2items(v: string): MPath.Chunk_loc[] {
             return dedupe(v.split('|')).map(str2loc).filter(_ => _.w && _.h);
+        }
+
+        function pathItem_lastitem(v: string | undefined): MPath.Chunk_loc | undefined {
+            let arr = (v || '').split('|');
+            let last: string | undefined = arr[arr.length - 1];
+            //return last && str2loc(last);
+            if (last) {
+                return str2loc(last);
+            }
+
+            //return dedupe(arr).map(str2loc).filter(_ => _.w && _.h);
         }
 
         export function buildFormLocations(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
