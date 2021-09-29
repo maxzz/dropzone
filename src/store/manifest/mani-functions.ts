@@ -88,7 +88,7 @@ export namespace FieldPath {
 
     export namespace loc {
         function dedupe(items: string[]): string[] {
-            return Array.from(new Set(items)); // This should preserve insertion order, if I remember correctly.
+            return Array.from(new Set(items)); // This will preserve insertion order from items in set and then in array.
         }
 
         export function unPool(pool: string[], v: string): string {
@@ -171,26 +171,25 @@ export namespace FieldPath {
             }
 
             export function getAllRects(form: Mani.Form, pool: string[]): MPath.loc[] {
-                let uni = new Set<string>();
+                let uniqueLocs = new Set<string>();
 
                 (form.fields || []).map((field: Mani.Field) => {
-                    let items: [string, string][] = getChunks(field.path_ext || '');
-                    // console.log('path', field.path_ext);
-                    // console.log('items', items);
-                    let locsItem = items.find((_) => _[0] === 'loc');
-                    let locs = locsItem ? locsItem[1] : '';
+                    let pathChunks: [Meta.Chunk, string][] = getChunks(field.path_ext || '');
+                    let thisLocs = pathChunks.find(([chunck]) => chunck === 'loc')?.[1] || '';
+
                     // We got locations now as string
-                    //let cleanLocs = locs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
-                    let cleanLocs = dedupe(locs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                    //let cleanLocs = thisLocs.split('|').map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
+                    let cleanLocs = dedupe(thisLocs.split('|')).map(_ => getPoolName(pool, _)).map(str2loc).map((_, index) => (_.i = index, _)).filter(_ => _.w && _.h);
                     // mark the last item as field
                     if (cleanLocs.length) {
                         cleanLocs[cleanLocs.length - 1].f = 1;
                     }
+
                     // add to set locations from this path
-                    cleanLocs.map(loc2str).forEach(loc => uni.add(loc));
+                    cleanLocs.map(loc2str).forEach(loc => uniqueLocs.add(loc));
                 });
 
-                return Array.from(uni).map(str2loc);
+                return Array.from(uniqueLocs).map(str2loc);
             }
         } //namespace utils
     } //namespace PathLocations
