@@ -129,15 +129,15 @@ export namespace FieldPath {
 
         export namespace utils {
             function rectsBoundaries(rects: MPath.loc[]): Meta.Bounds {
-                let x1 = 0;
-                let y1 = 0;
+                let x1 = Number.MAX_SAFE_INTEGER;
+                let y1 = Number.MAX_SAFE_INTEGER;
                 let x2 = 0;
                 let y2 = 0;
                 rects.forEach(({x, y, w, h}) => {
-                    if (x1 < x) {
+                    if (x1 > x) {
                         x1 = x;
                     }
-                    if (y1 < y) {
+                    if (y1 > y) {
                         y1 = y;
                     }
                     if (x2 < x + w) {
@@ -158,7 +158,7 @@ export namespace FieldPath {
             // }
 
             export function getFieldRects(form: Meta.Form, field: Meta.Field) {
-                let boundaries = rectsBoundaries(form.view.rects);
+                let bounds = rectsBoundaries(form.view.rects);
                 let thisRects = [...form.view.rects];
                 //console.log('rect', thisRects);
 
@@ -167,7 +167,7 @@ export namespace FieldPath {
 
                 //addLastRect(field, thisRects);
 
-                return { rects: thisRects, boundaries };
+                return { rects: thisRects, bounds };
             }
 
             export function getAllRects(form: Mani.Form, pool: string[]): Meta.View {

@@ -25,10 +25,10 @@ const styleRect = css({
 });
 
 export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { rects, boundaries } = FieldPath.loc.utils.getFieldRects(form, field);
+    const { rects, bounds } = FieldPath.loc.utils.getFieldRects(form, field);
     return (
         <div className="rects">
-            <svg viewBox={`0 0 ${boundaries.x2} ${boundaries.y2}`} className={stylesSvg()}>
+            <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
                 {rects.map((item, idx) => (
                     <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: !!item.f })}`} >
                         <title>{idx}</title>
