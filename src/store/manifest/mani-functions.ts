@@ -149,7 +149,7 @@ export namespace FieldPath {
                 });
                 return { x1, y1, x2, y2 };
             }
-            
+
             // function addLastRect(field: Meta.Field, rv: MPath.Chunk_loc[] ) {
             //     let fieldLocs = locs2items(field.path.loc || '');
             //     if (fieldLocs.length) {
@@ -164,18 +164,19 @@ export namespace FieldPath {
 
                 const last = lastItem(field.path.loc);
                 last && thisRects.push(last);
-            
+
                 //addLastRect(field, thisRects);
-            
+
                 return { rects: thisRects, boundaries };
             }
 
             export function getAllRects(form: Mani.Form, pool: string[]): MPath.Chunk_loc[] {
                 let uni = new Set<string>();
-    
+
                 (form.fields || []).map((field: Mani.Field) => {
-                    let path = field.path_ext ? field.path_ext : '';
-                    let items: [string, string][] = pathItems(path);
+                    let items: [string, string][] = getChunks(field.path_ext || '');
+                    // console.log('path', field.path_ext);
+                    // console.log('items', items);
                     let locsItem = items.find((_) => _[0] === 'loc');
                     let locs = locsItem ? locsItem[1] : '';
                     // We got locations now as string
@@ -188,37 +189,41 @@ export namespace FieldPath {
                     // add to set locations from this path
                     cleanLocs.map(loc2str).forEach(loc => uni.add(loc));
                 });
-    
+
                 return Array.from(uni).map(str2loc);
             }
         } //namespace utils
     } //namespace PathLocations
 
-    function pathItems(path: string): [string, string][] {
-        return path.split('[').filter(Boolean).map<[string, string]>((val) => val.split(']') as [string, string]);;
+    type ChunkName = 'p4a' | 'p4' | 'loc' | 'sid' | 'did2' | 'sn';
+
+    function getChunks(path: string): [ChunkName, string][] {
+        // from [p4a]0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..[loc]b|c|c|c|c|d|e|f|10|11|12|13[sid]14.15.16..17
+        // to ['p4a', '0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..'], ['loc', 'b|c|c|c|c|d|e|f|10|11|12|13'], ['sid', '14.15.16..17']
+        return path.split('[').filter(Boolean).map((val: string) => val.split(']') as [ChunkName, string]);;
     }
 
     export function fieldPathItems(pool: string[], path: string): Meta.Path {
         const rv: Meta.Path = {};
-        const items: [string, string][] = pathItems(path);
+        const items: [ChunkName, string][] = getChunks(path);
 
-        items.forEach((item: [string, string]) => {
-            switch (item[0]) {
+        items.forEach(([chunkName, value]) => {
+            switch (chunkName) {
                 case 'p4a':
                 case 'p4': {
-                    rv.p4a = item[1].split('|').map(_ => pathItem_p4a(pool, _));
+                    rv.p4a = value.split('|').map(_ => pathItem_p4a(pool, _));
                     break;
                 }
                 case 'loc': {
-                    rv.loc = PathLocations.unPool(pool, item[1]);
+                    rv.loc = PathLocations.unPool(pool, value);
                     break;
                 }
                 case 'sid': {
-                    rv.sid = pathItem_sid(pool, item[1]);
+                    rv.sid = pathItem_sid(pool, value);
                     break;
                 }
                 case 'did2': {
-                    rv.did2 = item[1];
+                    rv.did2 = value;
                     break;
                 }
                 case 'sn': {
@@ -227,7 +232,7 @@ export namespace FieldPath {
                         current: 0,
                         parts: [],
                     };
-                    let ss = item[1].split(';');
+                    let ss = value.split(';');
                     if (ss.length) {
                         let first = ss[0].split('.'); // '3.0.the-rest'
                         if (first.length > 2) {
