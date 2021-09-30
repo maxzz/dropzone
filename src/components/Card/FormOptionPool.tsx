@@ -20,7 +20,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
             >
                 {toggle}
 
-                <div className="pb-1 mr-1">name</div>
+                <div className="pb-1 mr-1">pool</div>
                 {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
 
             </button>
@@ -57,13 +57,3 @@ export function OptionPool({ names_ext }: { names_ext: string | undefined; }) {
         </ToggleWithPortal>
     );
 }
-
-function FormOptions() {
-    return (
-        <div>
-
-        </div>
-    );
-}
-
-export default FormOptions;

@@ -8,7 +8,7 @@ import { usePopper } from 'react-popper';
 import { useClickAway, useElementClickAway } from '../../hooks/useElementClickAway';
 import { useClientRect } from '../../hooks/useClientRect';
 import { FieldPreview } from './CardFieldPreview';
-import { OptionPool } from './FormOptions';
+import { OptionPool } from './FormOptionPool';
 
 // Form parts utils
 
@@ -372,14 +372,14 @@ export function PartFormFields({ cardData, formIndex }: { cardData: CardData; fo
     return (
         <div className="">
             <div className="">fields</div>
-            <div className="font-bold border-b border-gray-500"></div>
+            {/* <div className="font-bold border-b border-gray-500"></div> */}
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
                     <TableField metaForm={metaForm} field={field} />
                 </React.Fragment>
             )}
-            <div className="font-bold border-t border-gray-500"></div>
+            {/* <div className="font-bold border-t border-gray-500"></div> */}
         </div>
     );
 }
