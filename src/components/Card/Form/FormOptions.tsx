@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardDatum, FormDatum } from '../CardDatum';
+import { FormDatum } from '../CardDatum';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
 
@@ -25,14 +25,14 @@ function FormOptionQuickLink({ usequicklink }: { usequicklink: string | undefine
     );
 }
 
-function FormOptions({formDatum: { cardDatum, formIndex }}: { formDatum: FormDatum }): JSX.Element {
-    const form = cardDatum.fileUs.mani?.forms[formIndex];
+function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element {
+    const form = formDatum.cardDatum.fileUs.mani?.forms[formDatum.formIndex];
     const detection = form?.detection || {};
     const options = form?.options || {};
     return (
         <div className="">
             <div className="relative my-1 flex space-x-1">
-                <FormOptionDetection cardData={cardDatum} formIndex={formIndex} />
+                <FormOptionDetection formDatum={formDatum} />
                 <FormOptionQuickLink usequicklink={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
                 <FormOptionPool names_ext={detection.names_ext} />

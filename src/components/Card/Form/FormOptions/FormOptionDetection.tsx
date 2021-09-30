@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardDatum } from '../../CardDatum';
+import { FormDatum } from '../../CardDatum';
 import UITableFromObject from '../../UITableFromObject';
 import UIButtonWithChildren from '../../UIButtonWithChildren';
 
@@ -43,8 +43,8 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-function FormOptionDetection({ cardData, formIndex }: { cardData: CardDatum; formIndex: number; }) {
-    const form = cardData.fileUs.mani?.forms[formIndex];
+function FormOptionDetection({ formDatum }: { formDatum: FormDatum; }) {
+    const form = formDatum.cardDatum.fileUs.mani?.forms[formDatum.formIndex];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
     return (
