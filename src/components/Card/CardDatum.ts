@@ -8,7 +8,8 @@ export type CardDatum = {
     fileUs: FileUs;     // raw data
     fname: string;      // manifest filename
     title?: string;     // title by user
-    hasCpass?: boolean; // has change password
+    hasLogin?: boolean; // has login form
+    hasCpass?: boolean; // has change password form
     login: FormData;    // login form
     cpass: FormData;    // change password form
 };
@@ -30,6 +31,7 @@ function buildCardDatum(fileUs: FileUs): CardDatum {
 
     cardData.fname = fileUs.fname;
     cardData.title = m.forms[0]?.options.choosename;
+    cardData.hasLogin = m.forms?.length > 0;
     cardData.hasCpass = m.forms?.length > 1;
 
     return cardData;

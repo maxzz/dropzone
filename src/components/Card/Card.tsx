@@ -36,7 +36,7 @@ function CardBodyTopButtons({ cardData }: { cardData: CardDatum; }) {
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
                 {/* Login form button */}
-                <UICardFormButton cardData={cardData} form={0} opened={open1} onClick={() => setOpen1((v) => !v)} />
+                {cardData.hasLogin && <UICardFormButton cardData={cardData} form={0} opened={open1} onClick={() => setOpen1((v) => !v)} />}
                 {/* Cpass form button */}
                 {cardData.hasCpass && <UICardFormButton cardData={cardData} form={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
