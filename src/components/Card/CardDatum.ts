@@ -4,7 +4,7 @@ type FormData = {
     meta?: Meta.Form;
 };
 
-export type CardData = {
+export type CardDatum = {
     fileUs: FileUs;     // raw data
     fname: string;      // manifest filename
     title?: string;     // title by user
@@ -13,11 +13,11 @@ export type CardData = {
     cpass: FormData;    // change password form
 };
 
-function buildCardData(fileUs: FileUs): CardData {
+function buildCardDatum(fileUs: FileUs): CardDatum {
     const m: Mani.Manifest = fileUs.mani!;
     //console.log('raw', fileUs.raw);
 
-    let cardData: CardData = {
+    let cardData: CardDatum = {
         fileUs,
         fname: '',
         login: {
@@ -35,4 +35,4 @@ function buildCardData(fileUs: FileUs): CardData {
     return cardData;
 }
 
-export default buildCardData;
+export default buildCardDatum;

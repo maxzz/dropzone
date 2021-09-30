@@ -1,7 +1,7 @@
 import React from 'react';
-import { UITableFromObject } from '../UITableFromObject';
+import { CardDatum } from '../CardDatum';
+import UITableFromObject from '../UITableFromObject';
 import UIButtonWithChildren from '../UIButtonWithChildren';
-import { CardData } from '../CardDatum';
 
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
@@ -43,7 +43,7 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-function FormOptionDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+function FormOptionDetection({ cardData, formIndex }: { cardData: CardDatum; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});

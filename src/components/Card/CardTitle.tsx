@@ -1,11 +1,11 @@
 import { useUpdateAtom } from 'jotai/utils';
 import React from 'react';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
-import { CardData } from './CardDatum';
+import { CardDatum } from './CardDatum';
 import { IconAppWebIE, IconAppWindows, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
-import CardActions from './CardActions';
+import CardTitleMenu from './CardTitleMenu';
 
-function CardRawInfo({ cardData }: { cardData: CardData; }) {
+function CardRawInfo({ cardData }: { cardData: CardDatum; }) {
     return (
         <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
             <pre>{cardData.fileUs.raw}</pre>
@@ -13,7 +13,7 @@ function CardRawInfo({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function TitleFirstRow({ cardData }: { cardData: CardData; }) {
+function TitleFirstRow({ cardData }: { cardData: CardDatum; }) {
     const icon = cardData.login.meta?.disp.domain
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
@@ -29,7 +29,7 @@ function TitleFirstRow({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function CardTitle({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
+function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
     const setRightPanel = useUpdateAtom(rightPanelAtom);
     return (
@@ -45,7 +45,7 @@ function CardTitle({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }
                     >
                         <IconInfo />
                     </button>
-                    <CardActions icon={
+                    <CardTitleMenu icon={
                         <div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
                             <IconMenuHamburger />
                         </div>}

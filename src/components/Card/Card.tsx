@@ -1,15 +1,15 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../store/store';
-import buildCardData, { CardData } from './CardDatum';
+import buildCardDatum, { CardDatum } from './CardDatum';
+import CardTitle from './CardTitle';
 import FormOptions from './FormOptions';
 import FormFields from './FormFields';
-import CardTitle from './CardTitle';
 import UICardFormButton from './UICardFormButton';
 
 // Forms
 
-function FormContentLogin({ cardData }: { cardData: CardData; }) {
+function FormContentLogin({ cardData }: { cardData: CardDatum; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Login form</div>
@@ -19,7 +19,7 @@ function FormContentLogin({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function FormContentCpass({ cardData }: { cardData: CardData; }) {
+function FormContentCpass({ cardData }: { cardData: CardDatum; }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">Password change form</div>
@@ -29,7 +29,7 @@ function FormContentCpass({ cardData }: { cardData: CardData; }) {
     );
 }
 
-function CardBodyTopButtons({ cardData }: { cardData: CardData; }) {
+function CardBodyTopButtons({ cardData }: { cardData: CardDatum; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     return (
@@ -49,7 +49,7 @@ function CardBodyTopButtons({ cardData }: { cardData: CardData; }) {
 function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
     const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
-    const cardData: CardData | undefined = fileUs.mani && buildCardData(fileUs);
+    const cardData: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);
     return (<> {cardData &&
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
             <CardTitle cardData={cardData} atom={atom} />

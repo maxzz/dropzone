@@ -1,7 +1,7 @@
 import React from 'react';
 import { DropdownMenu as Menu, DropdownMenuContent as Content, DropdownMenuItem as Item, DropdownMenuSeparator as Separator, DropdownMenuTrigger as Trigger } from '../../store/UiDropdownMenu';
 
-export const CardActions = ({ icon }: { icon: React.ReactNode; }) => {
+export const CardTitleMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
             <Trigger>
@@ -18,4 +18,4 @@ export const CardActions = ({ icon }: { icon: React.ReactNode; }) => {
     );
 };
 
-export default CardActions;
+export default CardTitleMenu;

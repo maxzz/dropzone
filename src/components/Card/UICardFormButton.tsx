@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from '../UI/UiIcons';
-import { CardData } from './CardDatum';
+import { CardDatum } from './CardDatum';
 
 const TagWinApp = <div key="TagWinApp" title="Windows application"><IconAppWindows className="w-5 h-5 ml-2 opacity-75" /></div>;
 const TagWebIe = <div key="TagWebIe" title="Webiste trained with IE"><IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
@@ -10,7 +10,7 @@ const TagModeManual = <div key="TagModeManual" title="Manual mode"><IconManualMo
 const TagChgPsw = <div key="TagChgPsw" title="Password change form"><IconFormChangePsw className="w-5 h-5 ml-2 opacity-75" /></div>;
 const TagLogin = <div key="TagLogin" title="Login form"><IconFormLogin className="w-5 h-5 ml-2 opacity-75" /></div>;
 
-function UICardFormButton({ cardData, form, opened, onClick }: { cardData: CardData; form: number; opened: boolean; onClick: () => void; }) {
+function UICardFormButton({ cardData, form, opened, onClick }: { cardData: CardDatum; form: number; opened: boolean; onClick: () => void; }) {
     const disp = (form === 0 ? cardData.login : cardData.cpass).meta?.disp;
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
