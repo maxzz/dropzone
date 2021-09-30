@@ -269,3 +269,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
     };
     return !mani || !mani.forms || !mani.forms.length ? [] : mani.forms.map(createMetaForm);
 }
+
+export const enum CONST {
+    login = 0,
+}

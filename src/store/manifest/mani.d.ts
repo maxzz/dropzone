@@ -67,15 +67,6 @@ declare module Mani {
 
 } //declare module Mani
 
-// declare namespace CONST {
-//     declare const login: 0;
-// }
-
-// export const enum CONST {
-//     login = 0,
-//     cpass = 1,
-// }
-
 declare module MPath {      // Meta path. Manifest unpacked path data
 
     interface p4a {         // Chunk: p4a (from: unpack_fromstring())
