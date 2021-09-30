@@ -1,8 +1,8 @@
 import React from 'react';
-import { CardData } from './Card';
-import TableField from './FieldRow';
+import { CardData } from './CardDatum';
+import FieldRow from './FieldRow';
 
-function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+function FormFields({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const metaForm = cardData.fileUs.meta?.[formIndex];
     if (!metaForm) {
         return null;
@@ -14,11 +14,11 @@ function PartFormFields({ cardData, formIndex }: { cardData: CardData; formIndex
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
-                    <TableField metaForm={metaForm} field={field} />
+                    <FieldRow metaForm={metaForm} field={field} />
                 </React.Fragment>
             )}
             {/* <div className="font-bold border-t border-gray-500"></div> */}
         </div>
     );
 }
-export default PartFormFields;
+export default FormFields;

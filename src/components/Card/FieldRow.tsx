@@ -5,7 +5,7 @@ import FormRowTypeIcon from './FieldRowTypeIcon';
 import { FieldFirstCol, FieldSecondCol } from './UITableFromObject';
 import UIToggleWithPortal from './UITogglewithPortal';
 
-function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
+function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const toShow = {
         ...(displayname && { displayname }),
@@ -70,4 +70,4 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
     );
 }
 
-export default TableField;
+export default FieldRow;
