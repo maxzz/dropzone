@@ -12,7 +12,7 @@ function App() {
             <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
 
-                <div className="flex-1 flex min-w-0 min-h-0">
+                <div className="flex-1 relative flex min-w-0 min-h-0">
                     <SplitPane className="" split="vertical" minSize={270}>
                         <FilesList className="" />
                         <RightPanel className="" />
