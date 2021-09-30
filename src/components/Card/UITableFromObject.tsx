@@ -22,7 +22,7 @@ export function FieldSecondCol({ children, ...rest }: { children?: React.ReactNo
     );
 }
 
-export function TableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
+export function UITableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">

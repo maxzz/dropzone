@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardData } from './Card';
-import { TableFromObject } from './UITableFromObject';
-import ButtonWithChildren from './UIButtonWithChildren';
+import { UITableFromObject } from './UITableFromObject';
+import UIButtonWithChildren from './UIButtonWithChildren';
 
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
@@ -38,7 +38,6 @@ function filterDetection(detection: Mani.Detection) {
 
 function filterOptions(options: Mani.Options) {
     let { usequicklink, ...rest } = options;
-
     return {
         ...rest,
     };
@@ -46,22 +45,13 @@ function filterOptions(options: Mani.Options) {
 
 function FormOptionDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
-    console.log({ form });
-
-
-    const detection = form?.detection || {};
-    const toShowDetection = filterDetection(detection);
-
-    const options = form?.options || {};
-    const toShowOptions = filterOptions(options);
-
+    const toShowDetection = filterDetection(form?.detection || {});
+    const toShowOptions = filterOptions(form?.options || {});
     return (
-        <ButtonWithChildren name="detection">
-            {/* <div className="font-bold border-b border-gray-500"></div> */}
-            <TableFromObject obj={toShowDetection} />
-            {/* <div className="font-bold border-b border-gray-500"></div> */}
-            <TableFromObject obj={toShowOptions} />
-        </ButtonWithChildren>
+        <UIButtonWithChildren name="detection">
+            <UITableFromObject obj={toShowDetection} />
+            <UITableFromObject obj={toShowOptions} />
+        </UIButtonWithChildren>
     );
 }
 

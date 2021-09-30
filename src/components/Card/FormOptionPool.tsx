@@ -34,7 +34,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
     );
 }
 
-export function OptionPool({ names_ext }: { names_ext: string | undefined; }) {
+export function FormOptionPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
         return null;
     }
