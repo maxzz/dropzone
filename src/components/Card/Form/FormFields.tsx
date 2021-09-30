@@ -1,9 +1,9 @@
 import React from 'react';
-import { CardDatum } from './../CardDatum';
+import { FormDatum } from './../CardDatum';
 import FieldRow from './FieldRow/FieldRow';
 
-function FormFields({ cardData, formIndex }: { cardData: CardDatum; formIndex: number; }) {
-    const metaForm = cardData.fileUs.meta?.[formIndex];
+function FormFields({ formDatum: { cardDatum, formIndex } }: { formDatum: FormDatum; }) {
+    const metaForm = cardDatum.fileUs.meta?.[formIndex];
     if (!metaForm) {
         return null;
     }

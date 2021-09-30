@@ -1,18 +1,18 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../store/store';
-import buildCardDatum, { CardDatum } from './CardDatum';
+import buildCardDatum, { CardDatum, FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
 import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
 import UICardFormButton from './UICardFormButton';
 
-function FormContent({ cardData, formIndex }: { cardData: CardDatum; formIndex: number; }) {
+function FormContent({ formDatum }: { formDatum: FormDatum; }) {
     return (
         <div className="">
-            <div className="pt-2 font-bold border-b border-gray-500">{formIndex === 0 ? "Login form" : "Password change form"}</div>
-            <FormOptions cardData={cardData} formIndex={formIndex} />
-            <FormFields cardData={cardData} formIndex={formIndex} />
+            <div className="pt-2 font-bold border-b border-gray-500">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
+            <FormOptions formDatum={formDatum} />
+            <FormFields formDatum={formDatum} />
         </div>
     );
 }
@@ -26,8 +26,8 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
                 {cardDatum.hasLogin && <UICardFormButton formDatum={{cardDatum, formIndex: 0}} opened={open1} onClick={() => setOpen1((v) => !v)} />}
                 {cardDatum.hasCpass && <UICardFormButton formDatum={{cardDatum, formIndex: 1}} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
-            {open1 && (<FormContent cardData={cardDatum} formIndex={0} />)}
-            {open2 && (<FormContent cardData={cardDatum} formIndex={1} />)}
+            {open1 && (<FormContent formDatum={{cardDatum, formIndex: 0}} />)}
+            {open2 && (<FormContent formDatum={{cardDatum, formIndex: 1}} />)}
         </div>
     );
 }
