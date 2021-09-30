@@ -77,13 +77,15 @@ function Title({ cardData, atom }: { cardData: CardData; atom: FileUsAtom; }) {
                             let newState = !open;
                             setRightPanel(newState ? atom : undefined);
                             setOpen(newState);
-                        }
-                    }>
+                        }}
+                    >
                         <IconInfo />
                     </button>
-                    <CardActions icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
-                        <IconMenuHamburger />
-                    </div>} />
+                    <CardActions icon={
+                        <div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
+                            <IconMenuHamburger />
+                        </div>}
+                    />
                 </div>
                 <div className="mr-8">
                     <TitleFirstRow cardData={cardData} />
@@ -154,7 +156,7 @@ function FormButton({ cardData, form, opened, onClick }: { cardData: CardData; f
     );
 }
 
-function CardBody({ cardData }: { cardData: CardData; }) {
+function CardBodyTopButtons({ cardData }: { cardData: CardData; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     return (
@@ -175,12 +177,12 @@ function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom:
     const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
     const cardData: CardData | undefined = fileUs.mani && buildCardData(fileUs);
-    return (<>
-        {cardData && <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
+    return (<> {cardData &&
+        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
             <Title cardData={cardData} atom={atom} />
-            <CardBody cardData={cardData} />
-        </div>}
-    </>);
+            <CardBodyTopButtons cardData={cardData} />
+        </div>
+    }</>);
 }
 
 export default Card;

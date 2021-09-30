@@ -120,7 +120,7 @@ function OptionUseQuickLink({ usequicklink }: { usequicklink: string | undefined
     );
 }
 
-function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
+function FormOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
 
     const detection = form?.detection || {};
@@ -153,7 +153,7 @@ function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIn
 export function FormDetectioAndOptions({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     return (
         <>
-            <PartFormDetection cardData={cardData} formIndex={formIndex} />
+            <FormOptions cardData={cardData} formIndex={formIndex} />
         </>
     );
 }
