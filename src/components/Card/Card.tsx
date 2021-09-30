@@ -3,8 +3,8 @@ import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../store/store';
 import buildCardDatum, { CardDatum } from './CardDatum';
 import CardTitle from './CardTitle';
-import FormOptions from './FormOptions';
-import FormFields from './FormFields';
+import FormOptions from './Form/FormOptions';
+import FormFields from './Form/FormFields';
 import UICardFormButton from './UICardFormButton';
 
 // Forms

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardDatum } from './CardDatum';
+import { CardDatum } from './../CardDatum';
 import FieldRow from './FieldRow/FieldRow';
 
 function FormFields({ cardData, formIndex }: { cardData: CardDatum; formIndex: number; }) {

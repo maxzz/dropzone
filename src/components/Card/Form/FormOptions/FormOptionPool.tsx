@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
-import { useElementClickAway } from '../../../hooks/useElementClickAway';
-import { cpp_restore } from '../../../store/manifest/mani-functions';
-import { IconChevronDown, IconChevronUp } from '../../UI/UiIcons';
+import { useElementClickAway } from '../../../../hooks/useElementClickAway';
+import { cpp_restore } from '../../../../store/manifest/mani-functions';
+import { IconChevronDown, IconChevronUp } from '../../../UI/UiIcons';
 
 function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
     const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);

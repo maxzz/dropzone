@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from '../UI/UiIcons';
 import { CardDatum } from './CardDatum';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from '../UI/UiIcons';
 
 const TagWinApp = <div key="TagWinApp" title="Windows application"><IconAppWindows className="w-5 h-5 ml-2 opacity-75" /></div>;
 const TagWebIe = <div key="TagWebIe" title="Webiste trained with IE"><IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;

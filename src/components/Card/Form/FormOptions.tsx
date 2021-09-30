@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardDatum } from './CardDatum';
+import { CardDatum } from '../CardDatum';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
 
@@ -50,8 +50,8 @@ export default FormOptions;
 //TODO: script
 //TODO: 'path_ext' and ignore 'path' but complain about 'path'
 
-// TODO: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
-// TODO: show one preview per form?
-// TODO: checkbox (on form preview) to show individual preview per field or not
+//TODO: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
+//TODO: show one preview per form?
+//TODO: checkbox (on form preview) to show individual preview per field or not
 
 //TODO: use hover over preview icon instead of click

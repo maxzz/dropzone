@@ -1,9 +1,9 @@
 import React from 'react';
-import { IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../UI/UiIcons';
+import { IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UiIcons';
 import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
-import { FieldFirstCol, FieldSecondCol } from '../UITableFromObject';
-import UIToggleWithPortal from '../UIToggleWithPortal';
+import { FieldFirstCol, FieldSecondCol } from '../../UITableFromObject';
+import UIToggleWithPortal from '../../UIToggleWithPortal';
 
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
