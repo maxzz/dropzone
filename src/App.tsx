@@ -12,15 +12,15 @@ function App() {
             <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
 
-                <div className="flex-1">
-                    <SplitPane className="w-full h-full" split="vertical" minSize={350}>
+                <div className="flex-1 flex min-w-0 min-h-0">
+                    <SplitPane className="" split="vertical" minSize={270}>
                         <FilesList className="" />
                         <RightPanel className="" />
                     </SplitPane>
                 </div>
 
                 {/* <div className="flex-1 flex min-w-0 min-h-0">
-                    <FilesList className="flex-auto w-1/3 flex-shrink-0" />
+                    <FilesList className="w-1/3 flex-auto flex-shrink-0" />
                     <RightPanel className="ml-4" />
                 </div>
  */}
