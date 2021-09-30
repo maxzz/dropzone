@@ -17,17 +17,17 @@ function FormContent({ cardData, formIndex }: { cardData: CardDatum; formIndex: 
     );
 }
 
-function CardBodyTopButtons({ cardData }: { cardData: CardDatum; }) {
+function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
-                {cardData.hasLogin && <UICardFormButton cardData={cardData} formIndex={0} opened={open1} onClick={() => setOpen1((v) => !v)} />}
-                {cardData.hasCpass && <UICardFormButton cardData={cardData} formIndex={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
+                {cardDatum.hasLogin && <UICardFormButton formDatum={{cardDatum, formIndex: 0}} opened={open1} onClick={() => setOpen1((v) => !v)} />}
+                {cardDatum.hasCpass && <UICardFormButton formDatum={{cardDatum, formIndex: 1}} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
-            {open1 && (<FormContent cardData={cardData} formIndex={0} />)}
-            {open2 && (<FormContent cardData={cardData} formIndex={1} />)}
+            {open1 && (<FormContent cardData={cardDatum} formIndex={0} />)}
+            {open2 && (<FormContent cardData={cardDatum} formIndex={1} />)}
         </div>
     );
 }
@@ -39,7 +39,7 @@ function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom:
     return (<> {cardData &&
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>
             <CardTitle cardData={cardData} atom={atom} />
-            <CardBodyTopButtons cardData={cardData} />
+            <CardBodyTopButtons cardDatum={cardData} />
         </div>
     }</>);
 }

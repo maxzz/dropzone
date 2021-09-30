@@ -14,6 +14,11 @@ export type CardDatum = {
     cpass: FormData;    // change password form
 };
 
+export type FormDatum = {
+    cardDatum: CardDatum;
+    formIndex: number;
+}
+
 function buildCardDatum(fileUs: FileUs): CardDatum {
     const m: Mani.Manifest = fileUs.mani!;
     //console.log('raw', fileUs.raw);
