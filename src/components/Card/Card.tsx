@@ -23,11 +23,11 @@ function CardBodyTopButtons({ cardData }: { cardData: CardDatum; }) {
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
-                {cardData.hasLogin && <UICardFormButton cardData={cardData} formIndex={0} opened={open1} onClick={() => setOpen1((v) => !v)} />}
-                {cardData.hasCpass && <UICardFormButton cardData={cardData} formIndex={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
+                {cardData.hasLogin && <UICardFormButton cardData={cardData} formIndex={Mani.FormLogin} opened={open1} onClick={() => setOpen1((v) => !v)} />}
+                {cardData.hasCpass && <UICardFormButton cardData={cardData} formIndex={Mani.FormCpass} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
-            {open1 && (<FormContent cardData={cardData} formIndex={0} />)}
-            {open2 && (<FormContent cardData={cardData} formIndex={1} />)}
+            {open1 && (<FormContent cardData={cardData} formIndex={Mani.FormLogin} />)}
+            {open2 && (<FormContent cardData={cardData} formIndex={Mani.FormCpass} />)}
         </div>
     );
 }

@@ -45,6 +45,9 @@ declare module Mani {
         qlwocred?: string;      // boolean. Quick reauthentication enable/disable
     }
 
+    const FormLogin: 0;
+    const FormCpass: 1;
+
     interface Form {
         fcontext?: FContext;
         detection: Detection;
