@@ -9,63 +9,10 @@ import { useClickAway, useElementClickAway } from '../../hooks/useElementClickAw
 import { useClientRect } from '../../hooks/useClientRect';
 import { FieldPreview } from './CardFieldPreview';
 import { OptionPool } from './FormOptionPool';
+import { FieldFirstCol, FieldSecondCol, TableFromObject } from './UITableFromObject';
+import FormOptionDetection from './FormOptionDetection';
 
 // Form parts utils
-
-function TableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
-    const values = Object.entries(obj);
-    return (
-        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
-            {values.map(([key, val]) => {
-                return (<React.Fragment key={key}>
-                    <FieldFirstCol>{key}</FieldFirstCol>
-                    <FieldSecondCol>{`${val}`}</FieldSecondCol>
-                </React.Fragment>);
-            })}
-        </div>
-    );
-}
-
-function ButtonWithChildren({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
-    const [open, setOpen] = React.useState(false);
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const containerRef = React.useRef<HTMLDivElement>(null);
-
-    useClickAway(containerRef, (event) => event.target !== containerRef.current && !buttonRef.current?.contains(event.target as HTMLElement) && setOpen(false));
-
-    if (!name) {
-        return null;
-    }
-    return (
-        <>
-            {toggle
-                ? <button ref={buttonRef} onClick={() => setOpen((v) => !v)} > {toggle} </button>
-                : <button
-                    ref={buttonRef}
-                    className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
-                    onClick={() => setOpen((v) => !v)}
-                >
-                    <div className="pb-1 mr-1">{name}</div>
-                    {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-                </button>
-            }
-
-            {/* <button
-                ref={buttonRef}
-                className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
-                onClick={() => setOpen((v) => !v)}
-            >
-                <div className="pb-1 mr-1">{name}</div>
-                {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-            </button> */}
-            {open &&
-                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
-                    {children}
-                </div>
-            }
-        </>
-    );
-}
 
 function ButtonWithChildrenPortal({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
@@ -173,65 +120,26 @@ function OptionUseQuickLink({ usequicklink }: { usequicklink: string | undefined
     );
 }
 
-function filterDetection(detection: Mani.Detection) {
-    let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
-
-    // 1. fix duplicated urls
-    let urlname = '';
-    if (web_ourl === web_murl) {
-        web_ourl = undefined;
-        urlname += '+o';
-    }
-    if (web_qurl === web_murl) {
-        web_qurl = undefined;
-        urlname += '+q';
-    }
-
-    // 2. fix duplicated processnames
-    if (processname === commandline) {
-        commandline = undefined;
-    }
-
-    processname && (processname = decodeURI(processname));
-    commandline && (commandline = decodeURI(commandline));
-
-    return {
-        ...(caption && { caption }),
-        ...(web_murl && { [`url m${urlname}`]: web_murl }),
-        ...(web_ourl && { web_ourl }),
-        ...(web_qurl && { web_qurl }),
-        ...(processname && { processname }),
-        ...(commandline && { commandline }),
-        ...(web_checkurl && { checkurl: web_checkurl }),
-    };
-}
-
-function filterOptions(options: Mani.Options) {
-    let { usequicklink, ...rest } = options;
-
-    return {
-        ...rest,
-    };
-}
-
 function PartFormDetection({ cardData, formIndex }: { cardData: CardData; formIndex: number; }) {
     const form = cardData.fileUs.mani?.forms[formIndex];
 
     const detection = form?.detection || {};
-    const toShowDetection = filterDetection(detection);
+    // const toShowDetection = filterDetection(detection);
 
     const options = form?.options || {};
-    const toShowOptions = filterOptions(options);
+    // const toShowOptions = filterOptions(options);
 
     return (
         <div className="">
             <div className="relative my-1 flex space-x-1">
-                <ButtonWithChildren name="detection">
-                    {/* <div className="font-bold border-b border-gray-500"></div> */}
+                <FormOptionDetection cardData={cardData} formIndex={formIndex} />
+
+                {/* <ButtonWithChildren name="detection">
+                    {/* <div className="font-bold border-b border-gray-500"></div> * /}
                     <TableFromObject obj={toShowDetection} />
-                    {/* <div className="font-bold border-b border-gray-500"></div> */}
+                    {/* <div className="font-bold border-b border-gray-500"></div> * /}
                     <TableFromObject obj={toShowOptions} />
-                </ButtonWithChildren>
+                </ButtonWithChildren> */}
 
                 <OptionUseQuickLink usequicklink={options.usequicklink} />
                 <OptionLockFields lockfields={options.lockfields} />
@@ -260,27 +168,6 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
             {field.type === "text" && <IconFieldText className="w-4 h-4 mr-1 opacity-75" />} {/* to guaranty than tailwind give us: "w-4 h-4 mr-1" */}
             {field.type === "button" && <IconToggleRight className={cls} />}
         </>
-    );
-}
-
-function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
-    const { className, ...attrs } = rest;
-    return (
-        <div className={`h-5 leading-5 ${className}`} {...attrs}>
-            {children}
-        </div>
-    );
-}
-
-function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
-    const { className, ...attrs } = rest;
-    return (
-        <UISimpleBar>
-            <div className={`border-l border-gray-500 pl-1 h-5 leading-5 whitespace-nowrap ${className}`} {...attrs}>
-                {/* <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}> */}
-                {children}
-            </div>
-        </UISimpleBar>
     );
 }
 
