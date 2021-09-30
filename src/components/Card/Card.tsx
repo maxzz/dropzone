@@ -23,10 +23,8 @@ function CardBodyTopButtons({ cardData }: { cardData: CardDatum; }) {
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
-                {/* Login */}
-                {cardData.hasLogin && <UICardFormButton cardData={cardData} form={0} opened={open1} onClick={() => setOpen1((v) => !v)} />}
-                {/* Password change */}
-                {cardData.hasCpass && <UICardFormButton cardData={cardData} form={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
+                {cardData.hasLogin && <UICardFormButton cardData={cardData} formIndex={0} opened={open1} onClick={() => setOpen1((v) => !v)} />}
+                {cardData.hasCpass && <UICardFormButton cardData={cardData} formIndex={1} opened={open2} onClick={() => setOpen2((v) => !v)} />}
             </div>
             {open1 && (<FormContent cardData={cardData} formIndex={0} />)}
             {open2 && (<FormContent cardData={cardData} formIndex={1} />)}
@@ -39,7 +37,7 @@ function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom:
     const [fileUs] = useAtom(atom);
     const cardData: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);
     return (<> {cardData &&
-        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>{/* select-none */}
+        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>
             <CardTitle cardData={cardData} atom={atom} />
             <CardBodyTopButtons cardData={cardData} />
         </div>
