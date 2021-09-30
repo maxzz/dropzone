@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
+import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../../UI/UiIcons';
 
 function FormRowTypeIcon({ field }: { field: Mani.Field; }) {
     const cls = "w-4 h-4 mr-1";

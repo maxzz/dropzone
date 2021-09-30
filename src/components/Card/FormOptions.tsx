@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardData } from './CardDatum';
-import FormOptionDetection from './FormOptionDetection';
-import FormOptionPool from './FormOptionPool';
+import FormOptionDetection from './FormOptions/FormOptionDetection';
+import FormOptionPool from './FormOptions/FormOptionPool';
 
 function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
     if (!lockfields) {

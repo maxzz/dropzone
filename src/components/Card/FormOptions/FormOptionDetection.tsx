@@ -1,7 +1,7 @@
 import React from 'react';
-import { CardData } from './Card';
-import { UITableFromObject } from './UITableFromObject';
-import UIButtonWithChildren from './UIButtonWithChildren';
+import { UITableFromObject } from '../UITableFromObject';
+import UIButtonWithChildren from '../UIButtonWithChildren';
+import { CardData } from '../CardDatum';
 
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
