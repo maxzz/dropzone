@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../UI/UiIcons';
 
-function FieldIcon({ field }: { field: Mani.Field; }) {
+function FormRowTypeIcon({ field }: { field: Mani.Field; }) {
     const cls = "w-4 h-4 mr-1";
     return (
         <>
@@ -14,4 +14,4 @@ function FieldIcon({ field }: { field: Mani.Field; }) {
     );
 }
 
-export default FieldIcon;
+export default FormRowTypeIcon;

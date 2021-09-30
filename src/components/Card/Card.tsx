@@ -2,9 +2,10 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardActions from './CardActions';
-import { FormDetectioAndOptions, PartFormFields } from './CardFields';
+import { FormDetectioAndOptions } from './CardFields';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconInfo, IconManualMode, IconMenuHamburger } from '../UI/UiIcons';
 import { useUpdateAtom } from 'jotai/utils';
+import PartFormFields from './FormFields';
 
 type FormData = {
     meta?: Meta.Form;

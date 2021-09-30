@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../hooks/useElementClickAway';
 
-function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
+function UIToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
     const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end' });
@@ -25,4 +25,4 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
     );
 }
 
-export default ToggleWithPortal;
+export default UIToggleWithPortal;

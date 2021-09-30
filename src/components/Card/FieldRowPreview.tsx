@@ -24,7 +24,7 @@ const styleRect = css({
     },
 });
 
-export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
+function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { rects, bounds } = FieldPath.loc.utils.getFieldRects(form, field);
     return (
         <div className="rects">
@@ -38,3 +38,5 @@ export function FieldPreview({ form, field }: { form: Meta.Form; field: Meta.Fie
         </div >
     );
 }
+
+export default FieldRowPreview;

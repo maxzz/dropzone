@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../UI/UiIcons';
-import { FieldPreview } from './CardFieldPreview';
-import FieldIcon from './FieldRowTypeIcon';
+import FieldRowPreview from './FieldRowPreview';
+import FormRowTypeIcon from './FieldRowTypeIcon';
 import { FieldFirstCol, FieldSecondCol } from './UITableFromObject';
-import ToggleWithPortal from './UITogglewithPortal';
+import UIToggleWithPortal from './UITogglewithPortal';
 
 function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
@@ -29,7 +29,7 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                         <React.Fragment key={`${key || idx}`}>
                             <FieldFirstCol className="bg-gray-300 relative">
                                 <div className="flex items-center justify-between pr-1">
-                                    <FieldIcon field={toShow} />
+                                    <FormRowTypeIcon field={toShow} />
                                     <div className="flex-1">{`${password ? 'psw' : val}`}</div>
 
                                     {/* <ButtonWithChildrenPortal name="preview" toggle={<IconPreview className="w-[14px] h-[14px]" />}>
@@ -37,9 +37,9 @@ function TableField({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Fiel
                                     </ButtonWithChildrenPortal> */}
 
                                     {/* <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}> */}
-                                    <ToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
-                                        <FieldPreview form={metaForm} field={field} />
-                                    </ToggleWithPortal>
+                                    <UIToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
+                                        <FieldRowPreview form={metaForm} field={field} />
+                                    </UIToggleWithPortal>
 
                                     {/* <div className="flex items-center">
                                         <ButtonWithChildren name="preview" toggle={ <IconPreview className="w-[14px] h-[14px]" /> }>
