@@ -14,17 +14,24 @@ const styleB: React.CSSProperties = {
     minHeight: 0,
 };
 
+type SplitPaneProps = {
+    vertical?: boolean;
+    className?: string;
+    children: React.ReactNode;
+    onResize?: () => void;
+};
+
 /**
  * Creates a left-right split pane inside its container.
  */
-export default function SplitPane({ vertical, className, children, onResize }: { vertical: boolean, className: string, children: React.ReactNode, onResize: () => void; }) {
+function SimpleSplitPane({ vertical = true, className, children, onResize }: SplitPaneProps): JSX.Element {
     // Position is really the size (width or height) of the first (left or top)
     // panel, as percentage of the parent containers size. The remaining elements
     // are sized and layed out through flexbox.
     const [position, setPosition] = React.useState(50);
     const container = React.useRef<HTMLDivElement | null>(null);
 
-    const onMouseDown = React.useCallback(function (event) {
+    const onMouseDown = React.useCallback(function (event: MouseEvent) {
         if (!container.current) {
             return;
         }
@@ -35,12 +42,14 @@ export default function SplitPane({ vertical, className, children, onResize }: {
         const offset = vertical ? container.current.offsetTop : container.current.offsetLeft;
         const size = vertical ? container.current.offsetHeight : container.current.offsetWidth;
         document.body.style.cursor = vertical ? 'row-resize' : 'col-resize';
+
         let moveHandler = (event: MouseEvent) => {
             event.preventDefault();
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
             setPosition(Math.min(Math.max(0, newPosition), 99));
         };
+
         let upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
@@ -56,7 +65,6 @@ export default function SplitPane({ vertical, className, children, onResize }: {
     }, [vertical, position, container]);
 
     let childrenArr = React.Children.toArray(children);
-
     if (childrenArr.length < 2) {
         return (
             <div className={className} style={{ display: 'flex' }}>
@@ -88,9 +96,11 @@ export default function SplitPane({ vertical, className, children, onResize }: {
     );
 }
 
-SplitPane.propTypes = {
+SimpleSplitPane.propTypes = {
     vertical: PropTypes.bool,
     className: PropTypes.string,
     children: PropTypes.node,
     onResize: PropTypes.func,
 };
+
+export default SimpleSplitPane;

@@ -5,6 +5,7 @@ import Header from './components/Header';
 import FilesList from './components/FilesList';
 import RightPanel from './components/RightPanel';
 import UISplitPane from './components/UI/UISplitPane';
+import SimpleSplitPane from './components/UI/SimpleSplitPane';
 
 function App() {
     return (
@@ -13,11 +14,13 @@ function App() {
                 <Header className="flex-none mb-4" />
 
                 <div className="flex-1 relative flex min-w-0 min-h-0">
-                    <UISplitPane split="vertical" defaultSize="50%">
+                    <SimpleSplitPane vertical={false} className="splitpane">
+                    {/* <UISplitPane split="vertical" defaultSize="50%"> */}
                         {/* minSize={250} */}
                         <FilesList />
                         <RightPanel />
-                    </UISplitPane>
+                    {/* </UISplitPane> */}
+                    </SimpleSplitPane>
                 </div>
 
             </div>
