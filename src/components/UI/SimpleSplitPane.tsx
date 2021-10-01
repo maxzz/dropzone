@@ -31,7 +31,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
     const [position, setPosition] = React.useState(50);
     const container = React.useRef<HTMLDivElement | null>(null);
 
-    const onMouseDown = React.useCallback(function (event: MouseEvent) {
+    const onMouseDown = React.useCallback(function (event) {
         if (!container.current) {
             return;
         }
@@ -45,11 +45,13 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
 
         let moveHandler = (event: MouseEvent) => {
             event.preventDefault();
+            //console.log({offset, size});
+            
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
             setPosition(Math.min(Math.max(0, newPosition), 99));
         };
-
+        
         let upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
