@@ -13,6 +13,19 @@ function CardRawInfo({ cardData }: { cardData: CardDatum; }) {
     );
 }
 
+function CardIcon({ isweb }: { isweb: boolean; }) {
+    const icon = isweb
+        ? <IconAppWebIE className="w-6 h-6" />
+        : <IconAppWindows className="w-6 h-6" />;
+    return icon;
+}
+
+function CardCaption({ domain }: { domain?: string; }) {
+    return (
+        <span className="ml-1 uppercase">{domain || 'Windows application'}</span>
+    );
+}
+
 function TitleFirstRow({ cardData }: { cardData: CardDatum; }) {
     const icon = cardData.login.meta?.disp.domain
         ? <IconAppWebIE className="w-6 h-6" />
@@ -28,6 +41,20 @@ function TitleFirstRow({ cardData }: { cardData: CardDatum; }) {
             </div>
             {text}
         </div>
+    );
+}
+
+function CardTitleText({ cardData }: { cardData: CardDatum; }) {
+    return (
+        <>
+            <TitleFirstRow cardData={cardData} />
+            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
+                {cardData.fname}
+            </div>
+            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
+                {cardData.title || 'No title'}
+            </div>
+        </>
     );
 }
 
@@ -58,13 +85,7 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                 </div>
                 {/* All text rows */}
                 <div className="mr-8">
-                    <TitleFirstRow cardData={cardData} />
-                    <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
-                        {cardData.fname}
-                    </div>
-                    <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                        {cardData.title || 'No title'}
-                    </div>
+                    <CardTitleText cardData={cardData} />
                 </div>
             </div>
 
