@@ -37,7 +37,9 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
     return (
         <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
             <div className="">
+                {/* Actions */}
                 <div className="absolute top-3 right-2 z-10">
+                    {/* Show raw data button */}
                     <button className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block" onClick={
                         () => {
                             let newState = !open;
@@ -47,12 +49,14 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                     >
                         <IconInfo />
                     </button>
+                    {/* Card actions */}
                     <CardTitleMenu icon={
                         <div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
                             <IconMenuHamburger />
                         </div>}
                     />
                 </div>
+                {/* All text rows */}
                 <div className="mr-8">
                     <TitleFirstRow cardData={cardData} />
                     <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">

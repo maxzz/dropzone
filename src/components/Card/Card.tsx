@@ -5,7 +5,7 @@ import buildCardDatum, { CardDatum, FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
 import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
-import UICardFormButton from './UICardFormButton';
+import UICardFormButton from './UICard/UICardFormButton';
 
 function FormContent({ formDatum }: { formDatum: FormDatum; }) {
     return (

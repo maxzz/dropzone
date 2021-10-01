@@ -1,6 +1,6 @@
 import React from 'react';
-import { useClickAway } from '../../hooks/useElementClickAway';
-import { IconChevronDown, IconChevronUp } from '../UI/UiIcons';
+import { useClickAway } from '../../../hooks/useElementClickAway';
+import { IconChevronDown, IconChevronUp } from '../../UI/UiIcons';
 
 function UIButtonWithChildren({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);

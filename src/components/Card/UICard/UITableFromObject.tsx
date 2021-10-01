@@ -1,5 +1,5 @@
 import React from 'react';
-import UISimpleBar from '../UI/UIScrollbar';
+import UISimpleBar from '../../UI/UIScrollbar';
 
 export function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;

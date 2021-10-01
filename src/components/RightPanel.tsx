@@ -5,6 +5,7 @@ import { IconBack } from './UI/UiIcons';
 import { useUpdateAtom } from 'jotai/utils';
 import UISimpleBar from './UI/UIScrollbar';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
+import CardTitle from './Card/CardTitle';
 
 function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
@@ -16,6 +17,7 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
             <div className={`flex-auto overflow-hidden w-full h-full bg-gray-900 ${className}`} {...rest}>
                 {rightPanelValue &&
                     <UISimpleBar className={`overflow-auto w-full h-full text-gray-500 cursor-default`}>
+                        {/* <CardTitle /> */}
                         <div className="text-xs bg-gray-900 text-gray-100 opacity-50">
                             <pre>{rightPanelValue.raw}</pre>
                         </div>
