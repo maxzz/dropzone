@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import cx from '../../utils/classnames';
 import './SimpleSplitPane.css';
 
 const baseStyle: React.CSSProperties = {
@@ -21,9 +19,10 @@ type SplitPaneProps = {
     onResize?: (position: number) => void;
 };
 
-/**
- * Creates a left-right split pane inside its container.
- */
+function cx(...configs: any[]) {
+    return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '), ).join(' ');
+}
+
 function SimpleSplitPane({ vertical = true, className, children, onResize }: SplitPaneProps): JSX.Element {
     // Position is really the size (width or height) of the first (left or top)
     // panel, as percentage of the parent containers size. The remaining elements
@@ -36,9 +35,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
             return;
         }
 
-        // This is needed to prevent text selection in Safari
-        event.preventDefault();
-        //document.body.style.cursor = vertical ? 'ns-resize' : 'ew-resize'; // document.body.style.cursor = vertical ? 'row-resize' : 'col-resize';
+        event.preventDefault(); // This is needed to prevent text selection in Safari
 
         const containerOfs = container.current.getBoundingClientRect();
         const offset = vertical ? container.current.offsetTop + containerOfs.y : container.current.offsetLeft + containerOfs.x;
@@ -46,8 +43,6 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
 
         let moveHandler = (event: MouseEvent) => {
             event.preventDefault();
-            // console.log({offset, size, left: container.current?.offsetLeft, width: container.current?.offsetWidth, pageX: event.pageX});
-            // console.log({container: container.current?.getBoundingClientRect()});
             
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
@@ -57,11 +52,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
         let upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
-            //document.body.style.cursor = '';
-
-            if (onResize) {
-                onResize(position);
-            }
+            onResize && onResize(position);
         };
 
         document.addEventListener('mousemove', moveHandler);
@@ -96,13 +87,6 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
         </div>
     );
 }
-
-SimpleSplitPane.propTypes = {
-    vertical: PropTypes.bool,
-    className: PropTypes.string,
-    children: PropTypes.node,
-    onResize: PropTypes.func,
-};
 
 export default SimpleSplitPane;
 
