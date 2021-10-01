@@ -30,7 +30,7 @@
         "react-hot-toast": "^2.1.1",
         "react-merge-refs": "^1.1.0",
         "react-popper": "^2.2.5",
-        "react-split-pane": "^2.0.3",
+        "react-split-pane": "^0.1.92",
         "react-use": "^17.3.1",
         "sass": "1.42.1",
         "simplebar-react": "2.3.6",
