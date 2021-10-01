@@ -1,4 +1,4 @@
-import { useUpdateAtom } from 'jotai/utils';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import React from 'react';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
 import { CardDatum } from './CardDatum';
@@ -13,8 +13,8 @@ function CardRawInfo({ cardData }: { cardData: CardDatum; }) {
     );
 }
 
-function CardIcon({ isweb }: { isweb: boolean; }) {
-    const icon = isweb
+function CardIcon({ isWeb }: { isWeb: boolean; }) {
+    const icon = isWeb
         ? <IconAppWebIE className="w-6 h-6" />
         : <IconAppWindows className="w-6 h-6" />;
     return icon;
@@ -44,15 +44,27 @@ function TitleFirstRow({ cardData }: { cardData: CardDatum; }) {
     );
 }
 
-function CardTitleText({ cardData }: { cardData: CardDatum; }) {
+function CardTitleText({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; }) {
+    const fileUs = useAtomValue(atom);
+    const title = fileUs.mani?.forms[0]?.options.choosename;
+    const domain = fileUs.meta?.[0]?.disp.domain;
     return (
         <>
-            <TitleFirstRow cardData={cardData} />
+            {/* <TitleFirstRow cardData={cardData} /> */}
+
+            <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+                <CardIcon isWeb={!!domain} />
+                <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center">
+                    {fileUs.idx + 1}
+                </div>
+                <CardCaption domain={domain} />
+            </div>
+
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
-                {cardData.fname}
+                {fileUs.fname}
             </div>
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                {cardData.title || 'No title'}
+                {title || 'No title'}
             </div>
         </>
     );
@@ -85,7 +97,7 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                 </div>
                 {/* All text rows */}
                 <div className="mr-8">
-                    <CardTitleText cardData={cardData} />
+                    <CardTitleText cardData={cardData} atom={atom} />
                 </div>
             </div>
 
