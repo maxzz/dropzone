@@ -38,14 +38,16 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
 
         // This is needed to prevent text selection in Safari
         event.preventDefault();
-
-        const offset = vertical ? container.current.offsetTop : container.current.offsetLeft;
-        const size = vertical ? container.current.offsetHeight : container.current.offsetWidth;
         document.body.style.cursor = vertical ? 'row-resize' : 'col-resize';
+
+        const containerOfs = container.current.getBoundingClientRect();
+        const offset = vertical ? container.current.offsetTop + containerOfs.y : container.current.offsetLeft + containerOfs.x;
+        const size = vertical ? container.current.offsetHeight : container.current.offsetWidth;
 
         let moveHandler = (event: MouseEvent) => {
             event.preventDefault();
-            //console.log({offset, size});
+            console.log({offset, size, left: container.current?.offsetLeft, width: container.current?.offsetWidth, pageX: event.pageX});
+            console.log({container: container.current?.getBoundingClientRect()});
             
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
