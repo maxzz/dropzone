@@ -18,7 +18,7 @@ type SplitPaneProps = {
     vertical?: boolean;
     className?: string;
     children: React.ReactNode;
-    onResize?: () => void;
+    onResize?: (position: number) => void;
 };
 
 /**
@@ -46,8 +46,8 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
 
         let moveHandler = (event: MouseEvent) => {
             event.preventDefault();
-            console.log({offset, size, left: container.current?.offsetLeft, width: container.current?.offsetWidth, pageX: event.pageX});
-            console.log({container: container.current?.getBoundingClientRect()});
+            // console.log({offset, size, left: container.current?.offsetLeft, width: container.current?.offsetWidth, pageX: event.pageX});
+            // console.log({container: container.current?.getBoundingClientRect()});
             
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
@@ -60,7 +60,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
             document.body.style.cursor = '';
 
             if (onResize) {
-                onResize();
+                onResize(position);
             }
         };
 
@@ -78,13 +78,10 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
     }
 
     const styleA = { ...baseStyle };
-
     if (vertical) {
-        // top
-        styleA.minHeight = styleA.maxHeight = position + '%';
+        styleA.minHeight = styleA.maxHeight = position + '%'; // top
     } else {
-        // left
-        styleA.minWidth = styleA.maxWidth = position + '%';
+        styleA.minWidth = styleA.maxWidth = position + '%'; // left
     }
 
     return (
@@ -108,3 +105,6 @@ SimpleSplitPane.propTypes = {
 };
 
 export default SimpleSplitPane;
+
+//TODO: styles
+//TODO: highlight moving bar by timer

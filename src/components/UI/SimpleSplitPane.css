@@ -13,20 +13,25 @@
 }
 
 .splitpane-divider {
-    background-color: #ddd;
+    /*background-color: #ddd;*/
+    /* transition: background-color .2s ease .4s; */
 }
 
 .splitpane-divider.horizontal {
-    width: 5px;
+    width: 3px;
 }
 
 .splitpane-divider.vertical {
-    height: 5px;
+    height: 3px;
 }
 
 .splitpane-divider:hover {
-    background-color: #999;
+    background-color: rgb(45, 143, 255);
+    /* background-color: #999; */
     cursor: col-resize;
+    width: 1px;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
 }
 
 .splitpane-divider.vertical:hover {
