@@ -1,0 +1,34 @@
+.splitpane-content {
+    flex: 1;
+    /* for Firefox, otherwise it overflows the parent*/
+    min-height: 0;
+    min-width: 0;
+}
+
+.splitpane {
+    flex: 1;
+    /* for Firefox, otherwise it overflows the parent*/
+    min-height: 0;
+    min-width: 0;
+}
+
+.splitpane-divider {
+    background-color: #ddd;
+}
+
+.splitpane-divider.horizontal {
+    width: 5px;
+}
+
+.splitpane-divider.vertical {
+    height: 5px;
+}
+
+.splitpane-divider:hover {
+    background-color: #999;
+    cursor: col-resize;
+}
+
+.splitpane-divider.vertical:hover {
+    cursor: row-resize;
+}
