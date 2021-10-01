@@ -26,32 +26,12 @@ function CardCaption({ domain }: { domain?: string; }) {
     );
 }
 
-function TitleFirstRow({ cardData }: { cardData: CardDatum; }) {
-    const icon = cardData.login.meta?.disp.domain
-        ? <IconAppWebIE className="w-6 h-6" />
-        : <IconAppWindows className="w-6 h-6" />;
-    const text = cardData.login.meta?.disp.domain
-        ? <span className="ml-1 uppercase">{cardData.login.meta.disp.domain}</span>
-        : <span className="ml-1 uppercase">Windows application</span>;
-    return (
-        <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-            {icon}
-            <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center">
-                {cardData.fileUs.idx + 1}
-            </div>
-            {text}
-        </div>
-    );
-}
-
-function CardTitleText({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; }) {
+function CardTitleText({ atom }: { atom: FileUsAtom; }) {
     const fileUs = useAtomValue(atom);
     const title = fileUs.mani?.forms[0]?.options.choosename;
     const domain = fileUs.meta?.[0]?.disp.domain;
     return (
         <>
-            {/* <TitleFirstRow cardData={cardData} /> */}
-
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <CardIcon isWeb={!!domain} />
                 <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center">
@@ -97,7 +77,7 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                 </div>
                 {/* All text rows */}
                 <div className="mr-8">
-                    <CardTitleText cardData={cardData} atom={atom} />
+                    <CardTitleText atom={atom} />
                 </div>
             </div>
 
