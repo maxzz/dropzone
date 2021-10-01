@@ -15,7 +15,7 @@ function UIToggleWithPortal({ children, toggle }: { children?: React.ReactNode; 
         <>
             <button type="button" ref={setReferenceElm} onClick={() => setOpen((v) => !v)}> {toggle} </button>
             {open && ReactDOM.createPortal(
-                <div ref={setPopperElm} style={styles.popper} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
+                <div ref={setPopperElm} style={{...styles.popper, zIndex: 'inherit'}} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
                     {children}
                 </div>
                 , document.getElementById('portal')!
