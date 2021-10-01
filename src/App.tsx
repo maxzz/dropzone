@@ -13,9 +13,9 @@ function App() {
                 <Header className="flex-none mb-4" />
 
                 <div className="flex-1 relative flex min-w-0 min-h-0">
-                    <UISplitPane className="" split="vertical" minSize={270}>
-                        <FilesList className="" />
-                        <RightPanel className="" />
+                    <UISplitPane split="vertical" minSize={270}>
+                        <FilesList />
+                        <RightPanel />
                     </UISplitPane>
                 </div>
 
