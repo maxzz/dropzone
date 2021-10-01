@@ -1,4 +1,6 @@
 import SimpleBar from 'simplebar-react';
 import './simplebar.css';
 
-export default SimpleBar;
+const UIScrollbar = SimpleBar;
+
+export default UIScrollbar;
