@@ -17,8 +17,12 @@ function App() {
                     <SimpleSplitPane vertical={false} className="splitpane">
                     {/* <UISplitPane split="vertical" defaultSize="50%"> */}
                         {/* minSize={250} */}
-                        <FilesList />
-                        <RightPanel />
+                        <div className="">
+                            {/* <FilesList /> */}
+                        </div>
+                        <div className="">
+                            {/* <RightPanel /> */}
+                        </div>
                     {/* </UISplitPane> */}
                     </SimpleSplitPane>
                 </div>
