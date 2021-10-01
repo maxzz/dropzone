@@ -14,7 +14,7 @@
 
 .splitpane-divider {
     /*background-color: #ddd;*/
-    /* transition: background-color .2s ease .4s; */
+    transition: background-color .1s ease .4s;
 }
 
 .splitpane-divider.horizontal {
@@ -28,12 +28,11 @@
 .splitpane-divider:hover {
     background-color: rgb(45, 143, 255);
     /* background-color: #999; */
-    cursor: col-resize;
-    width: 1px;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+    /* cursor: col-resize; */
+    cursor: ew-resize;
 }
 
 .splitpane-divider.vertical:hover {
-    cursor: row-resize;
+    /* cursor: row-resize; */
+    cursor: ns-resize;
 }

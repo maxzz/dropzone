@@ -28,7 +28,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
     // Position is really the size (width or height) of the first (left or top)
     // panel, as percentage of the parent containers size. The remaining elements
     // are sized and layed out through flexbox.
-    const [position, setPosition] = React.useState(50);
+    const [position, setPosition] = React.useState(40);
     const container = React.useRef<HTMLDivElement | null>(null);
 
     const onMouseDown = React.useCallback(function (event) {
@@ -38,7 +38,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
 
         // This is needed to prevent text selection in Safari
         event.preventDefault();
-        document.body.style.cursor = vertical ? 'row-resize' : 'col-resize';
+        //document.body.style.cursor = vertical ? 'ns-resize' : 'ew-resize'; // document.body.style.cursor = vertical ? 'row-resize' : 'col-resize';
 
         const containerOfs = container.current.getBoundingClientRect();
         const offset = vertical ? container.current.offsetTop + containerOfs.y : container.current.offsetLeft + containerOfs.x;
@@ -57,7 +57,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
         let upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
-            document.body.style.cursor = '';
+            //document.body.style.cursor = '';
 
             if (onResize) {
                 onResize(position);
