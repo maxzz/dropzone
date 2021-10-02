@@ -5,14 +5,6 @@ import { CardDatum } from './CardDatum';
 import { IconAppWebIE, IconAppWindows, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
 
-function CardRawInfo({ cardData }: { cardData: CardDatum; }) {
-    return (
-        <div className="my-2 overflow-auto smallscroll text-xs bg-gray-800 opacity-50 border-4 border-gray-800 shadow-md">
-            <pre>{cardData.fileUs.raw}</pre>
-        </div>
-    );
-}
-
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
         ? <IconAppWebIE className="w-6 h-6" />
@@ -81,10 +73,6 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                     <CardTitleText atom={atom} />
                 </div>
             </div>
-
-            {/* {open && <div className="">
-                <CardRawInfo cardData={cardData} />
-            </div>} */}
         </div>
     );
 }
