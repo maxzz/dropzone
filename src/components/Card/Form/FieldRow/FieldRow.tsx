@@ -73,25 +73,26 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type = 'NOTYPE', dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const disp = type !== 'text' ? displayname : 
-        <div className="">
-            <span className="text-[.65rem] my-1 inline-block align-text-top border border-gray-800 rounded text-gray-100 bg-gray-600">
+        <div className="flex">
+            <div className="px-1 h-4 text-[.65rem] leading-[.65rem] border border-gray-800 rounded text-gray-300 bg-gray-600 cursor-default"
+            title={displayname}>
                 patern
-            </span>
+            </div>
         </div>;
     return (
         <div className="flex items-center text-sm ">
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 mr-1" field={field.mani} />
 
-            <div className="w-24">{`${password ? 'psw' : type}`}</div>
+            <div className="w-16">{`${password ? 'psw' : type}`}</div>
+
+            <UIToggleWithPortal toggle={<IconPreview className="w-[17px] h-[17px] mr-1" />}>
+                <FieldRowPreview form={metaForm} field={field} />
+            </UIToggleWithPortal>
 
             <div className="flex-1">
                 {disp}
             </div>
-
-            <UIToggleWithPortal toggle={<IconPreview className="w-[17px] h-[17px]" />}>
-                <FieldRowPreview form={metaForm} field={field} />
-            </UIToggleWithPortal>
 
             {useit
                 ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
