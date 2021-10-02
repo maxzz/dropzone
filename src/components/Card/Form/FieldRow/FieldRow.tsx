@@ -71,11 +71,15 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 }
 
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { displayname, type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
-    const disp = type !== 'text' ? displayname :
-        <div className="flex">
+    const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
+    const disp = type !== 'text'
+        ? <div className="" title={displayname}>
+            {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
+        </div>
+        : <div className="flex">
             <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-600 rounded ${useit ? 'bg-gray-600 text-gray-300' : 'opacity-25'} cursor-default`}
-                title={displayname}>
+                title={displayname}
+            >
                 patern
             </div>
         </div>;
@@ -91,18 +95,18 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 <FieldRowPreview form={metaForm} field={field} />
             </UIToggleWithPortal>
 
-            <div className="flex-1">
+            <div className="flex-1 cursor-default">
                 {disp}
             </div>
 
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '':'opacity-25'}`} title={`Field policy: ${policy}`}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '' : 'opacity-25'}`} title={`Field policy: ${policy}`}>
                 policy
             </div>
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '':'opacity-25'}`} title={`Field value: ${value}`}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '' : 'opacity-25'}`} title={`Field value: ${value}`}>
                 value
             </div>
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rdir ? '':'opacity-25'}`} title={`Direction: ${rdir}`}>
-            <div className=""><IconInOut className="w-3 h-4" /></div>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rdir ? '' : 'opacity-25'}`} title={`Direction: ${rdir}`}>
+                <div className=""><IconInOut className="w-3 h-4" /></div>
             </div>
             <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={dbname}>
                 id
