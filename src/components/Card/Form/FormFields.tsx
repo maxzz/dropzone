@@ -14,7 +14,7 @@ function FormFields({ formDatum }: { formDatum: FormDatum; }) {
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
-                    <FieldRowOld metaForm={metaForm} field={field} />
+                    {/* <FieldRowOld metaForm={metaForm} field={field} /> */}
                     <FieldRow metaForm={metaForm} field={field} />
                 </React.Fragment>
             )}
