@@ -46,27 +46,30 @@ function CardTitle({ atom }: { atom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
     const isCurrent = atom === rightPanel;
     return (
-        <div className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
+        <div 
+            className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer`}
+            onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
+        >
             <div className="">
+                {/* All text rows */}
+                <div className="">
+                    <CardTitleText atom={atom} />
+                </div>
                 {/* Actions */}
                 <div className="absolute top-3 right-2 z-10 flex">
                     {/* Show raw data button */}
-                    <button
+                    {/* <button
                         className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block"
-                        onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
+                        //onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
                     >
                         <IconInfo />
-                    </button>
+                    </button> */}
                     {/* Card actions */}
                     <CardTitleMenu icon={
                         <div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
                             <IconMenuHamburger />
                         </div>}
                     />
-                </div>
-                {/* All text rows */}
-                <div className="">
-                    <CardTitleText atom={atom} />
                 </div>
             </div>
         </div>
