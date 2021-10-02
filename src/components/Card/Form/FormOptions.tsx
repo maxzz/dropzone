@@ -33,9 +33,9 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element {
         <div className="">
             <div className="relative my-1 flex space-x-1">
                 <FormOptionDetection formDatum={formDatum} />
+                <FormOptionPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink usequicklink={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
-                <FormOptionPool names_ext={detection.names_ext} />
             </div>
             <div className="font-bold border-t border-gray-500"></div>
         </div>

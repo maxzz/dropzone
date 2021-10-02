@@ -5,7 +5,7 @@ import FormRowTypeIcon from './FieldRowTypeIcon';
 import { FieldFirstCol, FieldSecondCol } from '../../UICard/UITableFromObject';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
 
-function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
+export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const toShow = {
         ...(displayname && { displayname }),
@@ -66,6 +66,19 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                         </FieldSecondCol>
                     </React.Fragment>);
             })}
+        </div>
+    );
+}
+
+function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
+    const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
+    return (
+        <div className="flex">
+            <FormRowTypeIcon field={field.mani} />
+            <div className="flex-1">{`${password ? 'psw' : field.mani.type}`}</div>
+            <UIToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
+                <FieldRowPreview form={metaForm} field={field} />
+            </UIToggleWithPortal>
         </div>
     );
 }

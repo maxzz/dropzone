@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormDatum } from './../CardDatum';
-import FieldRow from './FieldRow/FieldRow';
+import FieldRow, { FieldRowOld } from './FieldRow/FieldRow';
 
 function FormFields({ formDatum }: { formDatum: FormDatum; }) {
     const metaForm = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
@@ -14,6 +14,7 @@ function FormFields({ formDatum }: { formDatum: FormDatum; }) {
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
+                    <FieldRowOld metaForm={metaForm} field={field} />
                     <FieldRow metaForm={metaForm} field={field} />
                 </React.Fragment>
             )}
