@@ -1,6 +1,6 @@
 import React from 'react';
 import { useClickAway } from '../../../hooks/useElementClickAway';
-import { IconChevronDown, IconChevronUp } from '../../UI/UiIcons';
+import UIUpDownIcon from '../../UI/UIUpDownIcon';
 
 function UIButtonWithChildren({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
@@ -27,10 +27,8 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
                     <div className="pb-1">
                         {name}
                     </div>
-                    {open
-                        ? <IconChevronUp className="list-owner w-4 h-4" />
-                        : <IconChevronDown className="list-owner w-4 h-4" />
-                    }
+
+                    <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
                 </button>
             }
 

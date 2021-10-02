@@ -136,6 +136,6 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
 
 // Split pane position
 
-export const SplitPaneAtom = atom(40);
+export const SplitPaneAtom = atom(44);
 
 //TODO: localStorage
