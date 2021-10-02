@@ -3,17 +3,6 @@ import { FormDatum } from '../CardDatum';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
 
-// function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
-//     if (!lockfields) {
-//         return null;
-//     }
-//     return (
-//         <div className="px-2 border border-gray-500 rounded">
-//             fields: {lockfields == '1' ? 'lock' : 'don\'t lock'}
-//         </div>
-//     );
-// }
-
 function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
     const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
@@ -23,17 +12,6 @@ function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; 
         </div>
     );
 }
-
-// function FormOptionQuickLink({ usequicklink }: { usequicklink: string | undefined; }) {
-//     if (!usequicklink) {
-//         return null;
-//     }
-//     return (
-//         <div className="px-2 border border-gray-500 rounded text-xs">
-//             quick link{usequicklink == '1' ? '' : usequicklink == '2' ? ': don\'t use' : { usequicklink }}
-//         </div>
-//     );
-// }
 
 function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
