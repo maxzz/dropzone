@@ -2,7 +2,6 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
-import { CardDatum } from './CardDatum';
 import { IconAppWebIE, IconAppWindows, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
 
@@ -43,22 +42,18 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
     );
 }
 
-function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; }) {
-    const [open, setOpen] = React.useState(false);
+function CardTitle({ atom }: { atom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
     const isCurrent = atom === rightPanel;
     return (
-        <div className={`relative p-2 ${isCurrent ? 'bg-blue-900': 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
+        <div className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
             <div className="">
                 {/* Actions */}
-                <div className="absolute top-3 right-2 z-10">
+                <div className="absolute top-3 right-2 z-10 flex">
                     {/* Show raw data button */}
-                    <button className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block" onClick={
-                        () => {
-                            let newState = !open;
-                            setRightPanel(newState ? atom : undefined);
-                            setOpen(newState);
-                        }}
+                    <button
+                        className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block"
+                        onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
                     >
                         <IconInfo />
                     </button>
