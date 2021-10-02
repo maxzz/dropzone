@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../hooks/useElementClickAway';
 
-function UIToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
+function UIToggleWithPortal({ children, toggle, ...rest }: { children?: React.ReactNode; toggle?: React.ReactNode; } & React.HTMLAttributes<HTMLButtonElement> ) {
     const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end' });
@@ -13,13 +13,18 @@ function UIToggleWithPortal({ children, toggle }: { children?: React.ReactNode; 
 
     return (
         <>
-            <button type="button" ref={setReferenceElm} onClick={() => setOpen((v) => !v)}> {toggle} </button>
-            {open && ReactDOM.createPortal(
-                <div ref={setPopperElm} style={{...styles.popper, zIndex: 'inherit'}} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
-                    {children}
-                </div>
-                , document.getElementById('portal')!
-            )}
+            <button type="button" ref={setReferenceElm} onClick={() => setOpen((v) => !v)} {...rest}>
+                {toggle}
+            </button>
+
+            {open && children &&
+                ReactDOM.createPortal(
+                    <div ref={setPopperElm} style={{ ...styles.popper, zIndex: 'inherit' }} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
+                        {children}
+                    </div>
+                    , document.getElementById('portal')!
+                )
+            }
         </>
     );
 }

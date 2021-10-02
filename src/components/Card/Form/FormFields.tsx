@@ -9,7 +9,7 @@ function FormFields({ formDatum }: { formDatum: FormDatum; }) {
     }
     return (
         <div className="">
-            <div className="">fields</div>
+            {/* <div className="">fields</div> */}
             {/* <div className="font-bold border-b border-gray-500"></div> */}
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>

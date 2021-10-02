@@ -73,7 +73,7 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
     const disp = type !== 'text'
-        ? 
+        ?
         //displayname
         <div className="" title={displayname}>
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
@@ -85,16 +85,17 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 patern
             </div>
         </div>;
-    //const policy
+    const isScript = !!field.path.loc;
     return (
         <div className="flex items-center text-xs h-6 space-x-1 overflow-hidden">
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
-            <div className="w-12 text-xs">{`${password ? 'psw' : type}`}</div>
+            <div className="w-11 text-xs">{`${password ? 'psw' : type}`}</div>
 
-            <UIToggleWithPortal toggle={<IconPreview className="w-[17px] h-[17px]" />}>
-                <FieldRowPreview form={metaForm} field={field} />
+            <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
+                {/* title="preview" */}
+                {isScript && <FieldRowPreview form={metaForm} field={field} />}
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">
