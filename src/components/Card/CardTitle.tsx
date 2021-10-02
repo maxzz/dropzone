@@ -47,7 +47,7 @@ function CardTitle({ atom }: { atom: FileUsAtom; }) {
     const isCurrent = atom === rightPanel;
     return (
         <div
-            className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer`}
+            className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
             onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
         >
             <div className="">
@@ -66,7 +66,7 @@ function CardTitle({ atom }: { atom: FileUsAtom; }) {
                     </button> */}
                     {/* Card actions */}
                     <CardTitleMenu icon={
-                        <div className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97]">
+                        <div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]">
                             <IconMenuHamburger />
                         </div>}
                     />

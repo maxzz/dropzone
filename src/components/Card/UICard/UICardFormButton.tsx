@@ -24,7 +24,7 @@ function UICardFormButton({ formDatum: { cardDatum, formIndex }, opened, onClick
 
     const label = formIndex === 0 ? 'Login form' : 'Password change form';
     return (
-        <button className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] ${opened ? 'bg-gray-800 text-gray-100' : ''}`} onClick={onClick}>
+        <button className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] select-none ${opened ? 'bg-gray-800 text-gray-100' : ''}`} onClick={onClick}>
             <span className="">{label}</span>
             {icons}
         </button>
