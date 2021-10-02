@@ -1,5 +1,6 @@
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import React from 'react';
+import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai/utils';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
 import { CardDatum } from './CardDatum';
 import { IconAppWebIE, IconAppWindows, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
@@ -44,10 +45,10 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
 
 function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
-    //const isCurrent = atom === rightPanelAtom;
-    const setRightPanel = useUpdateAtom(rightPanelAtom);//#091e4c
+    const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
+    const isCurrent = atom === rightPanel;
     return (
-        <div className={`relative p-2 ${open ? 'bg-blue-900': 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
+        <div className={`relative p-2 ${isCurrent ? 'bg-blue-900': 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
             <div className="">
                 {/* Actions */}
                 <div className="absolute top-3 right-2 z-10">
@@ -69,7 +70,7 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                     />
                 </div>
                 {/* All text rows */}
-                <div className="mr-8">
+                <div className="">
                     <CardTitleText atom={atom} />
                 </div>
             </div>
