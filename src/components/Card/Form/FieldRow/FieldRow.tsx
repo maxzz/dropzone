@@ -1,18 +1,18 @@
 import React from 'react';
-import { IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UiIcons';
+import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UiIcons';
 import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import { FieldFirstCol, FieldSecondCol } from '../../UICard/UITableFromObject';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
 
 export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
+    const { displayname, type, dbname, path_ext, rdir, rfieldindex, password, useit, } = field.mani;
     const toShow = {
         ...(displayname && { displayname }),
         ...(type && { type }),
         ...(dbname && { id: dbname }),
         ...(path_ext && { path: path_ext }),
-        ...(rfield && { rfield }),
+        ...(rdir && { rdir }),
         ...(rfieldindex && { rfieldindex }),
         ...(password && { password }),
         ...(useit && { useit }),
@@ -95,14 +95,14 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 {disp}
             </div>
 
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '':'opacity-25'}`} title={policy}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '':'opacity-25'}`} title={`Field policy: ${policy}`}>
                 policy
             </div>
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '':'opacity-25'}`} title={value}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '':'opacity-25'}`} title={`Field value: ${value}`}>
                 value
             </div>
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rdir ? '':'opacity-25'}`} title={rdir}>
-                in-out
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rdir ? '':'opacity-25'}`} title={`Direction: ${rdir}`}>
+            <div className=""><IconInOut className="w-3 h-4" /></div>
             </div>
             <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={dbname}>
                 id
