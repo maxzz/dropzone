@@ -37,8 +37,8 @@ function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom:
     const [fileUs] = useAtom(atom);
     const cardData: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);
     return (<> {cardData &&
-        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] ring-4 ring-inset ring-gray-200 overflow-hidden rounded shadow-md ${className}`} {...rest}>
-            <CardTitle cardData={cardData} atom={atom} />
+        <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md ${className}`} {...rest}>
+            <CardTitle atom={atom} />
             <CardBodyTopButtons cardDatum={cardData} />
         </div>
     }</>);
