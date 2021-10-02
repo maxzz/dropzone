@@ -74,7 +74,7 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
     const { displayname, type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
     const disp = type !== 'text' ? displayname :
         <div className="flex">
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-800 rounded text-gray-300 bg-gray-600 cursor-default"
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-600 rounded ${useit ? 'bg-gray-600 text-gray-300' : 'opacity-25'} cursor-default`}
                 title={displayname}>
                 patern
             </div>
