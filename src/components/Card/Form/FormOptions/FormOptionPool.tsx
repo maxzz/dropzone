@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../../hooks/useElementClickAway';
 import { cpp_restore } from '../../../../store/manifest/mani-functions';
-import { IconChevronDown, IconChevronUp } from '../../../UI/UiIcons';
+import UIUpDownIcon from '../../../UI/UIUpDownIcon';
 
-function IconUpDn({ open, className }: { open: boolean; className: string; }) {
-    const icon = open ? IconChevronUp : IconChevronDown;
-    return icon({ className });
-}
+type DropDownButtonProps = {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open, setOpen }, ref) {
+    return (
+        <button
+            ref={ref}
+            onClick={() => setOpen((v) => !v)}
+            className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+        >
+            <div className="pb-1">
+                pool
+            </div>
+
+            <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
+        </button>
+    );
+});
 
 function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
     const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
@@ -31,12 +47,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
                     pool
                 </div>
 
-                <IconUpDn open={open} className="list-owner w-4 h-4" />
-
-                {open
-                    ? <IconChevronUp className="list-owner w-4 h-4" />
-                    : <IconChevronDown className="list-owner w-4 h-4" />
-                }
+                <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
             </button>
 
             {open &&
