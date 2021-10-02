@@ -87,7 +87,7 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
         </div>;
     //const policy
     return (
-        <div className="flex items-center text-sm h-6 space-x-1 overflow-hidden">
+        <div className="flex items-center text-xs h-6 space-x-1 overflow-hidden">
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 

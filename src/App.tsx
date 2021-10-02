@@ -16,7 +16,7 @@ function App() {
                 <div className="flex-1 relative flex min-w-0 min-h-0">
                     <SimpleSplitPane vertical={false} className="splitpane" minPersent={24}>
                     {/* <UISplitPane split="vertical" defaultSize="50%"> */}
-                        {/* minSize={250} */}
+                        {/* minSize={382} */}
                         <FilesList />
                         <RightPanel />
                     {/* </UISplitPane> */}
@@ -30,3 +30,5 @@ function App() {
 }
 
 export default App;
+
+//TODO: limit list width to 382
