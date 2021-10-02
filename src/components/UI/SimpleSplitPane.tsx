@@ -21,15 +21,18 @@ type SplitPaneProps = {
     onResize?: (position: number) => void;
 };
 
+type SplitPaneDataProps = {
+    position: number;
+    setPosition: (value: number) => void,
+};
+
 function cx(...configs: any[]) {
-    return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '), ).join(' ');
+    return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '),).join(' ');
 }
 
-function SimpleSplitPane({ vertical = true, minPersent = 1, maxPersent = 99, className, children, onResize }: SplitPaneProps): JSX.Element {
-    // Position is really the size (width or height) of the first (left or top)
-    // panel, as percentage of the parent containers size. The remaining elements
-    // are sized and layed out through flexbox.
-    const [position, setPosition] = React.useState(40);
+function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.Element {
+    const { vertical = true, minPersent = 1, maxPersent = 99, className, children, position, setPosition, onResize } = props;
+   
     const container = React.useRef<HTMLDivElement | null>(null);
 
     const onMouseDown = React.useCallback(function (event) {
@@ -45,12 +48,12 @@ function SimpleSplitPane({ vertical = true, minPersent = 1, maxPersent = 99, cla
 
         let moveHandler = (event: MouseEvent) => {
             event.preventDefault();
-            
+
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
             setPosition(Math.min(Math.max(minPersent, newPosition), maxPersent));
         };
-        
+
         let upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
@@ -87,6 +90,16 @@ function SimpleSplitPane({ vertical = true, minPersent = 1, maxPersent = 99, cla
                 {childrenArr[1]}
             </div>
         </div>
+    );
+}
+
+function SimpleSplitPane(props: SplitPaneProps): JSX.Element {
+    // Position is really the size (width or height) of the first (left or top)
+    // panel, as percentage of the parent containers size. The remaining elements
+    // are sized and layed out through flexbox.
+    const [position, setPosition] = React.useState(40);
+    return (
+        <SimpleSplitPaneBody position={position} setPosition={setPosition} {...props} />
     );
 }
 
