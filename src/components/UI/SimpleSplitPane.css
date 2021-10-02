@@ -14,6 +14,7 @@
 
 .splitpane-divider {
     /*background-color: #ddd;*/
+    z-index: 1000;
     transition: background-color .1s ease .4s;
 }
 

@@ -46,7 +46,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
             
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
-            setPosition(Math.min(Math.max(0, newPosition), 99));
+            setPosition(Math.min(Math.max(1, newPosition), 99));
         };
         
         let upHandler = () => {
