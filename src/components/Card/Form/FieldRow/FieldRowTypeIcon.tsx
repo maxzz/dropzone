@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../../../UI/UiIcons';
+import { IconButton, IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText, IconToggleRight } from '../../../UI/UiIcons';
 
 function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {
     return (
@@ -8,7 +8,7 @@ function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: 
             {field.type === "check" && <IconInputFieldChk />}
             {field.type === "list" && <IconInputFieldList />}
             {field.type === "text" && <IconFieldText className="opacity-75" />} {/* to guaranty than tailwind give us: "w-4 h-4 mr-1" */}
-            {field.type === "button" && <IconToggleRight />}
+            {field.type === "button" && <IconButton />}
         </div>
     );
 }

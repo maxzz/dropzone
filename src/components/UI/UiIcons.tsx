@@ -255,6 +255,18 @@ export function IconToggleRight(props: SVGProps<SVGSVGElement>) {
     );
 }
 
+export function IconButton(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={.9} {...props}>
+            
+            <rect x="3.68" y="4.22" width="16.87" height="15" rx="1.57" stroke="#000" stroke-miterlimit="10" />
+            <path 
+            stroke="none" fill="#000"
+            d="M8.2 14.62V8.55h.55v2.59a1.11 1.11 0 0 1 1-.76c.77 0 1.31.86 1.3 2.11 0 1.48-.69 2.22-1.38 2.22a1.1 1.1 0 0 1-1-.78v.68ZM8.77 13a2.4 2.4 0 0 0 0 .28c.11.52.43.88.84.88.58 0 .93-.64.93-1.59S10.25 11 9.66 11c-.38 0-.74.35-.85.92a1.37 1.37 0 0 0 0 .31ZM12.51 9.3v1.19h.8v.57h-.8v2.23c0 .51.1.8.42.8a.85.85 0 0 0 .32-.05v.56a1 1 0 0 1-.49.11.67.67 0 0 1-.6-.32 1.92 1.92 0 0 1-.16-1.08v-2.25h-.48v-.57H12v-1ZM13.93 11.61v-1.12h.49v.68a1.13 1.13 0 0 1 1-.78c.43 0 1.09.34 1.09 1.76v2.47H16v-2.38c0-.67-.19-1.22-.71-1.22-.37 0-.65.35-.75.76a1.29 1.29 0 0 0 0 .35v2.49h-.56Z" />
+        </svg>
+    );
+}
+
 // Misc
 
 export function IconDocumentsAccepted(props: SVGProps<SVGSVGElement>) {
