@@ -133,3 +133,7 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
         return rpa ? get(rpa) : undefined;
     }
 );
+
+// Split pane position
+
+export const SplitPaneAtom = atom(40);
