@@ -8,19 +8,29 @@ function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; 
         return null;
     }
     return (
-        <div className="px-2 border border-gray-500 rounded text-xs">
+        <div className="px-2 border border-gray-500 rounded">
             fields: {lockfields == '1' ? 'lock' : 'don\'t lock'}
         </div>
     );
 }
 
-function FormOptionQuickLink({ usequicklink }: { usequicklink: string | undefined; }) {
-    if (!usequicklink) {
-        return null;
-    }
+// function FormOptionQuickLink({ usequicklink }: { usequicklink: string | undefined; }) {
+//     if (!usequicklink) {
+//         return null;
+//     }
+//     return (
+//         <div className="px-2 border border-gray-500 rounded text-xs">
+//             quick link{usequicklink == '1' ? '' : usequicklink == '2' ? ': don\'t use' : { usequicklink }}
+//         </div>
+//     );
+// }
+
+function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
+    const useit = ql == '1';
+    const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
     return (
-        <div className="px-2 border border-gray-500 rounded text-xs">
-            quick link{usequicklink == '1' ? '' : usequicklink == '2' ? ': don\'t use' : { usequicklink }}
+        <div className={`px-1 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title}>
+            QL
         </div>
     );
 }
@@ -31,10 +41,10 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element {
     const options = form?.options || {};
     return (
         <div className="">
-            <div className="relative my-1 flex space-x-1">
+            <div className="relative my-1 flex space-x-1 text-xs leading-5">
                 <FormOptionDetection formDatum={formDatum} />
                 <FormOptionPool names_ext={detection.names_ext} />
-                <FormOptionQuickLink usequicklink={options.usequicklink} />
+                <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="font-bold border-t border-gray-500"></div>
