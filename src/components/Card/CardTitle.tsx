@@ -46,7 +46,7 @@ function CardTitle({ atom }: { atom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
     const isCurrent = atom === rightPanel;
     return (
-        <div 
+        <div
             className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer`}
             onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
         >

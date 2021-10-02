@@ -14,6 +14,8 @@ const styleB: React.CSSProperties = {
 
 type SplitPaneProps = {
     vertical?: boolean;
+    minPersent?: number,
+    maxPersent?: number,
     className?: string;
     children: React.ReactNode;
     onResize?: (position: number) => void;
@@ -23,7 +25,7 @@ function cx(...configs: any[]) {
     return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '), ).join(' ');
 }
 
-function SimpleSplitPane({ vertical = true, className, children, onResize }: SplitPaneProps): JSX.Element {
+function SimpleSplitPane({ vertical = true, minPersent = 1, maxPersent = 99, className, children, onResize }: SplitPaneProps): JSX.Element {
     // Position is really the size (width or height) of the first (left or top)
     // panel, as percentage of the parent containers size. The remaining elements
     // are sized and layed out through flexbox.
@@ -46,7 +48,7 @@ function SimpleSplitPane({ vertical = true, className, children, onResize }: Spl
             
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
-            setPosition(Math.min(Math.max(1, newPosition), 99));
+            setPosition(Math.min(Math.max(minPersent, newPosition), maxPersent));
         };
         
         let upHandler = () => {
