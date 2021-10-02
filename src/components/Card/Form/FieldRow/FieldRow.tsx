@@ -73,9 +73,10 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
     const disp = type !== 'text'
-        ? <div className="" title={displayname}>
-            {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
-        </div>
+        ? displayname
+        // <div className="" title={displayname}>
+        //     {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
+        // </div>
         : <div className="flex">
             <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-600 rounded ${useit ? 'bg-gray-600 text-gray-300' : 'opacity-25'} cursor-default`}
                 title={displayname}
@@ -85,7 +86,7 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
         </div>;
     //const policy
     return (
-        <div className="flex items-center text-sm h-6 space-x-1">
+        <div className="flex items-center text-sm h-6 space-x-1 overflow-hidden">
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
@@ -95,8 +96,8 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 <FieldRowPreview form={metaForm} field={field} />
             </UIToggleWithPortal>
 
-            <div className="flex-1 cursor-default">
-                {disp}
+            <div className="flex-1 cursor-default overflow-hidden">
+                <div className="whitespace-nowrap overflow-ellipsis">{disp}</div>
             </div>
 
             <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '' : 'opacity-25'}`} title={`Field policy: ${policy}`}>
