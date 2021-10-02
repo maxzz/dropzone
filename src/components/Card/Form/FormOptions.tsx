@@ -44,14 +44,7 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element {
 
 export default FormOptions;
 
-//TODO: policy field
-//TODO: rfield (in out), rfieldrindex
-//TODO: refs @email
-//TODO: script
-//TODO: 'path_ext' and ignore 'path' but complain about 'path'
-
-//TODO: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
-//TODO: show one preview per form?
-//TODO: checkbox (on form preview) to show individual preview per field or not
-
-//TODO: use hover over preview icon instead of click
+//TODO: form preview: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
+//TODO: form preview: show one preview per form?
+//TODO: form preview: checkbox (on form preview) to show individual preview per field or not
+//TODO: form preview: use hover over preview icon instead of click

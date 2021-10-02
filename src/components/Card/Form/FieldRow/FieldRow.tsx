@@ -72,21 +72,28 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type = 'NOTYPE', dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
-    const disp = type !== 'text' ? displayname : 
+    const disp = type !== 'text' ? displayname :
         <div className="flex">
-            <div className="px-1 h-4 text-[.65rem] leading-[.65rem] border border-gray-800 rounded text-gray-300 bg-gray-600 cursor-default"
-            title={displayname}>
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-800 rounded text-gray-300 bg-gray-600 cursor-default"
+                title={displayname}>
                 patern
             </div>
         </div>;
     return (
-        <div className="flex items-center text-sm ">
+        <div className="flex items-center text-sm h-6 space-x-1">
             {/* bg-blue-200 */}
-            <FormRowTypeIcon className="w-5 h-5 mr-1" field={field.mani} />
+            <FormRowTypeIcon className="w-5 h-5" field={field.mani} />
 
-            <div className="w-16">{`${password ? 'psw' : type}`}</div>
+            <div className="w-14 text-xs">{`${password ? 'psw' : type}`}</div>
 
-            <UIToggleWithPortal toggle={<IconPreview className="w-[17px] h-[17px] mr-1" />}>
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
+                id
+            </div>
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={path_ext}>
+                path
+            </div>
+
+            <UIToggleWithPortal toggle={<IconPreview className="w-[17px] h-[17px]" />}>
                 <FieldRowPreview form={metaForm} field={field} />
             </UIToggleWithPortal>
 
@@ -103,3 +110,10 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
 }
 
 export default FieldRow;
+
+//TODO: policy field
+//TODO: rfield (in out), rfieldrindex
+//TODO: refs @email
+
+//TODO: script
+//TODO: 'path_ext' and ignore 'path' but complain about 'path'
