@@ -74,12 +74,13 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
     const { displayname, type = 'NOTYPE', dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     const disp = type !== 'text' ? displayname : 
         <div className="">
-            <span className="text-[.65rem] border border-gray-800 rounded text-gray-100 bg-gray-600">
+            <span className="text-[.65rem] my-1 inline-block align-text-top border border-gray-800 rounded text-gray-100 bg-gray-600">
                 patern
             </span>
         </div>;
     return (
-        <div className="flex items-center text-sm bg-blue-200">
+        <div className="flex items-center text-sm ">
+            {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 mr-1" field={field.mani} />
 
             <div className="w-24">{`${password ? 'psw' : type}`}</div>
