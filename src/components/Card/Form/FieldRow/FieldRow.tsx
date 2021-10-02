@@ -71,7 +71,7 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 }
 
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { displayname, type = 'NOTYPE', dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
+    const { displayname, type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
     const disp = type !== 'text' ? displayname :
         <div className="flex">
             <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-800 rounded text-gray-300 bg-gray-600 cursor-default"
@@ -79,6 +79,7 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 patern
             </div>
         </div>;
+    //const policy
     return (
         <div className="flex items-center text-sm h-6 space-x-1">
             {/* bg-blue-200 */}
@@ -94,16 +95,19 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 {disp}
             </div>
 
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
-                id
-            </div>
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '':'opacity-25'}`} title={policy}>
                 policy
             </div>
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '':'opacity-25'}`} title={value}>
+                value
+            </div>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rdir ? '':'opacity-25'}`} title={rdir}>
                 in-out
             </div>
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={path_ext}>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={dbname}>
+                id
+            </div>
+            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={path_ext}>
                 path
             </div>
 

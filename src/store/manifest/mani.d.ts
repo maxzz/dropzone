@@ -6,10 +6,20 @@ declare module Mani {
         type: FieldType;
         dbname?: string;
         path_ext?: string;
-        rfield?: 'in' | 'out';
-        rfieldindex?: number;   // "2"
+        policy?: string;
+
+        value?: string;
+        choosevalue?: string;
+        
         password?: boolean,     // "1"
         useit?: boolean,        // "1"
+
+        rdir?: 'in' | 'out';
+        rfieldindex?: number;   // "2"
+        
+        controltosubmitdata?: boolean;
+        ids?: string;
+        options?: string;
     }
 
     interface FContext {
