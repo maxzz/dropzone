@@ -52,9 +52,10 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
 
 function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
-    const setRightPanel = useUpdateAtom(rightPanelAtom);
+    //const isCurrent = atom === rightPanelAtom;
+    const setRightPanel = useUpdateAtom(rightPanelAtom);//#091e4c
     return (
-        <div className="relative p-2 bg-gray-900 text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className={`relative p-2 ${open ? 'bg-blue-900': 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis`}>
             <div className="">
                 {/* Actions */}
                 <div className="absolute top-3 right-2 z-10">
@@ -81,9 +82,9 @@ function CardTitle({ cardData, atom }: { cardData: CardDatum; atom: FileUsAtom; 
                 </div>
             </div>
 
-            {open && <div className="">
+            {/* {open && <div className="">
                 <CardRawInfo cardData={cardData} />
-            </div>}
+            </div>} */}
         </div>
     );
 }
