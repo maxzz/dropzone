@@ -20,16 +20,24 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
             >
                 {toggle}
 
-                <div className="pb-1 mr-1">pool</div>
-                {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
-
-            </button>
-            {open && ReactDOM.createPortal(
-                <div ref={setPopperElm} style={{...styles.popper, zIndex: 'inherit'}} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
-                    {children}
+                <div className="pb-1">
+                    pool
                 </div>
-                , document.getElementById('portal')!
-            )}
+
+                {open
+                    ? <IconChevronUp className="w-4 h-4" />
+                    : <IconChevronDown className="list-owner w-4 h-4" />
+                }
+            </button>
+
+            {open &&
+                ReactDOM.createPortal(
+                    <div ref={setPopperElm} style={{ ...styles.popper, zIndex: 'inherit' }} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
+                        {children}
+                    </div>
+                    , document.getElementById('portal')!
+                )
+            }
         </>
     );
 }

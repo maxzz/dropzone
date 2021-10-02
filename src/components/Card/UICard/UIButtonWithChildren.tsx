@@ -15,14 +15,22 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
     return (
         <>
             {toggle
-                ? <button ref={buttonRef} onClick={() => setOpen((v) => !v)} > {toggle} </button>
+                ? <button ref={buttonRef} onClick={() => setOpen((v) => !v)} >
+                    {toggle}
+                </button>
+
                 : <button
                     ref={buttonRef}
                     className={`pl-2 pr-1 inline-block text-xs leading-3 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                     onClick={() => setOpen((v) => !v)}
                 >
-                    <div className="pb-1 mr-1">{name}</div>
-                    {open ? <IconChevronUp className="list-owner w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
+                    <div className="pb-1">
+                        {name}
+                    </div>
+                    {open
+                        ? <IconChevronUp className="list-owner w-4 h-4" />
+                        : <IconChevronDown className="list-owner w-4 h-4" />
+                    }
                 </button>
             }
 
