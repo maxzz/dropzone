@@ -82,16 +82,9 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
     return (
         <div className="flex items-center text-sm h-6 space-x-1">
             {/* bg-blue-200 */}
-            <FormRowTypeIcon className="w-5 h-5" field={field.mani} />
+            <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
-            <div className="w-14 text-xs">{`${password ? 'psw' : type}`}</div>
-
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
-                id
-            </div>
-            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={path_ext}>
-                path
-            </div>
+            <div className="w-12 text-xs">{`${password ? 'psw' : type}`}</div>
 
             <UIToggleWithPortal toggle={<IconPreview className="w-[17px] h-[17px]" />}>
                 <FieldRowPreview form={metaForm} field={field} />
@@ -101,9 +94,22 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
                 {disp}
             </div>
 
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
+                id
+            </div>
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
+                policy
+            </div>
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={dbname}>
+                in-out
+            </div>
+            <div className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default" title={path_ext}>
+                path
+            </div>
+
             {useit
-                ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
-                : <IconInputFieldChkEmpty className="w-5 h-5" />
+                ? <IconInputFieldChk className="ml-4 w-5 h-5" fill="#38a00040" />
+                : <IconInputFieldChkEmpty className="ml-4 w-5 h-5" />
             }
         </div>
     );
