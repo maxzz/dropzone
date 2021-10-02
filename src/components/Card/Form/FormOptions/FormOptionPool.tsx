@@ -5,6 +5,11 @@ import { useElementClickAway } from '../../../../hooks/useElementClickAway';
 import { cpp_restore } from '../../../../store/manifest/mani-functions';
 import { IconChevronDown, IconChevronUp } from '../../../UI/UiIcons';
 
+function IconUpDn({ open, className }: { open: boolean; className: string; }) {
+    const icon = open ? IconChevronUp : IconChevronDown;
+    return icon({ className });
+}
+
 function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
     const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
@@ -15,7 +20,9 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
     return (
         <>
-            <button type="button" ref={setReferenceElm} onClick={() => setOpen((v) => !v)}
+            <button
+                ref={setReferenceElm}
+                onClick={() => setOpen((v) => !v)}
                 className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
             >
                 {toggle}
@@ -24,8 +31,10 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
                     pool
                 </div>
 
+                <IconUpDn open={open} className="list-owner w-4 h-4" />
+
                 {open
-                    ? <IconChevronUp className="w-4 h-4" />
+                    ? <IconChevronUp className="list-owner w-4 h-4" />
                     : <IconChevronDown className="list-owner w-4 h-4" />
                 }
             </button>
