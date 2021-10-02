@@ -14,7 +14,7 @@ function App() {
                 <Header className="flex-none mb-4" />
 
                 <div className="flex-1 relative flex min-w-0 min-h-0">
-                    <SimpleSplitPane vertical={false} className="splitpane" minPersent={20}>
+                    <SimpleSplitPane vertical={false} className="splitpane" minPersent={24}>
                     {/* <UISplitPane split="vertical" defaultSize="50%"> */}
                         {/* minSize={250} */}
                         <FilesList />
