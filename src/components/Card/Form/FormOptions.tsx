@@ -3,13 +3,23 @@ import { FormDatum } from '../CardDatum';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
 
+// function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
+//     if (!lockfields) {
+//         return null;
+//     }
+//     return (
+//         <div className="px-2 border border-gray-500 rounded">
+//             fields: {lockfields == '1' ? 'lock' : 'don\'t lock'}
+//         </div>
+//     );
+// }
+
 function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
-    if (!lockfields) {
-        return null;
-    }
+    const useit = lockfields == '1';
+    const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
     return (
-        <div className="px-2 border border-gray-500 rounded">
-            fields: {lockfields == '1' ? 'lock' : 'don\'t lock'}
+        <div className={`px-2 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title}>
+            lock
         </div>
     );
 }
