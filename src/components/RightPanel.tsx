@@ -14,19 +14,19 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
         <>
             {/* <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} /> */}
 
-            <div className={`p-4 flex-auto overflow-hidden w-full h-full bg-gray-900 ${className}`} {...rest}>
+            <div className={`px-2 pt-4 pb-2 flex-auto overflow-hidden w-full h-full bg-gray-900 ${className}`} {...rest}>
                 {rightPanelValue &&
-                    <>
+                    <div className="w-full h-full flex flex-col">
+                        <div className="my-2 text-gray-100 bg-gray-900">
+                            <CardTitleText atom={rightPanelValueAtom as FileUsAtom} />
+                        </div>
                         <UISimpleBar className={`overflow-auto w-full h-full text-gray-500 cursor-default`}>
-                            <div className="m-4 text-gray-100 bg-gray-900">
-                                <CardTitleText atom={rightPanelValueAtom as FileUsAtom} />
-                            </div>
                             {/* <CardTitle /> */}
                             <div className="text-xs bg-gray-800 text-gray-100 opacity-50">
                                 <pre>{rightPanelValue.raw}</pre>
                             </div>
                         </UISimpleBar>
-                    </>
+                    </div>
                 }
             </div>
         </>
