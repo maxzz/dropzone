@@ -26,7 +26,7 @@ function CardCaption({ domain }: { domain?: string; }) {
     );
 }
 
-function CardTitleText({ atom }: { atom: FileUsAtom; }) {
+export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
     const fileUs = useAtomValue(atom);
     const title = fileUs.mani?.forms[0]?.options.choosename;
     const domain = fileUs.meta?.[0]?.disp.domain;
