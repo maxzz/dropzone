@@ -71,14 +71,25 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 }
 
 function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
+    const { displayname, type = 'NOTYPE', dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
     return (
-        <div className="flex">
-            <FormRowTypeIcon field={field.mani} />
-            <div className="flex-1">{`${password ? 'psw' : field.mani.type}`}</div>
+        <div className="flex items-center text-sm">
+            <FormRowTypeIcon className="w-5 h-5 mr-1" field={field.mani} />
+
+            <div className="">{`${password ? 'psw' : type}`}</div>
+
+            <div className="flex-1">
+                {displayname}
+            </div>
+
             <UIToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
                 <FieldRowPreview form={metaForm} field={field} />
             </UIToggleWithPortal>
+
+            {useit
+                ? <IconInputFieldChk className="w-4 h-4" fill="#38a00040" />
+                : <IconInputFieldChkEmpty className="w-4 h-4" />
+            }
         </div>
     );
 }
