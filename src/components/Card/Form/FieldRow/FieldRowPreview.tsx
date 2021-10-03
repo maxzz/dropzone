@@ -24,8 +24,12 @@ const styleRect = css({
     },
 });
 
-function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element {
-    const { rects, bounds } = FieldPath.loc.utils.getFieldRects(form, field);
+function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element | null {
+    const view = FieldPath.loc.utils.getFieldRects(form, field);
+    if (!view) {
+        return null;
+    }
+    const { rects, bounds } = view;
     return (
         <div className="rects">
             <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>

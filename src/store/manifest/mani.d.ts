@@ -136,6 +136,7 @@ declare module Meta {       // Manifest unpacked forms, as meta data
     interface Field {
         mani: Mani.Field,
         path: Path;
+        pidx: number;       // for preview index in form.view.rects
     }
 
     interface Disp {        // Display information about form
@@ -146,9 +147,9 @@ declare module Meta {       // Manifest unpacked forms, as meta data
     }
 
     interface Bounds {
-        x1: number; // x1,y1 ┌──────┐
-        y1: number; //       │      │
-        x2: number; //       └──────┘ x2,y2
+        x1: number;         // x1,y1 ┌──────┐
+        y1: number;         //       │      │
+        x2: number;         //       └──────┘ x2,y2
         y2: number;
     }
 
@@ -161,8 +162,8 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         mani: Mani.Form;
         disp: Disp;
         pool: string[];
-        view: View;
-        fields: Field[]; // each item corresponds to each field
+        view?: View;        // view exists only for IE and win32
+        fields: Field[];    // each item corresponds to each field
     }
 
 } //declare module Meta

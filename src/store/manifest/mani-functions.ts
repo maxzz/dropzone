@@ -135,8 +135,11 @@ export namespace FieldPath {
                 }
             }
 
-            export function getFieldRects(form: Meta.Form, field: Meta.Field) {
-                let bounds = rectsBoundaries(form.view.rects);
+            export function getFieldRects(form: Meta.Form, field: Meta.Field): Meta.View | undefined {
+                if (!form.view) {
+                    return;
+                }
+                //let bounds = rectsBoundaries(form.view.rects);
                 let thisRects = [...form.view.rects];
 
                 const last = lastItem(field.path.loc);
@@ -153,12 +156,12 @@ export namespace FieldPath {
 
                 (form.fields || []).map((field: Mani.Field) => {
                     let pathChunks: [Meta.Chunk, string][] = getChunks(field.path_ext || '');
-                    let thisLocs = pathChunks.find(([chunck]) => chunck === 'loc')?.[1] || '';
+                    let fieldLocs = pathChunks.find(([chunck]) => chunck === 'loc')?.[1] || '';
 
                     // We got locations now as string
                     let cleanLocs =
                         //thisLocs.split('|')
-                        dedupe(thisLocs.split('|'))
+                        dedupe(fieldLocs.split('|'))
                             .map(_ => getPoolName(pool, _))
                             .map(str2loc)
                             .map((_, index) => (_.i = index, _))
@@ -172,6 +175,18 @@ export namespace FieldPath {
                     // add to set locations from this path
                     cleanLocs.map(loc2str).forEach(loc => uniqueLocs.add(loc));
                 });
+
+                let rects = Array.from(uniqueLocs).map(str2loc);
+                let bounds = rectsBoundaries(rects);
+
+                return {
+                    rects,
+                    bounds,
+                };
+            }
+
+            export function buildPreviewData(fields: Meta.Field[]): Meta.View {
+                let uniqueLocs = new Set<string>();
 
                 let rects = Array.from(uniqueLocs).map(str2loc);
                 let bounds = rectsBoundaries(rects);
@@ -253,6 +268,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
         const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field) => ({
             mani: field,
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
+            pidx: 0,
         }));
         return {
             mani: form,
@@ -263,7 +279,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            view: FieldPath.loc.utils.getAllRects(form, pool) || [],
+            view: FieldPath.loc.utils.getAllRects(form, pool),
             fields,
         };
     };
