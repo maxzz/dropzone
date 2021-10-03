@@ -11,18 +11,18 @@ const stylesSvg = css({
     strokeWidth: 1,
 });
 
-const styleRect = css({
-    '&:last-child': {
-        fill: '#00ff62',
-    },
-    variants: {
-        field: {
-            true: {
-                fill: '#454545',
-            },
-        }
-    },
-});
+// const styleRect = css({
+//     '&:last-child': {
+//         fill: '#00ff62',
+//     },
+//     variants: {
+//         field: {
+//             true: {
+//                 fill: '#454545',
+//             },
+//         }
+//     },
+// });
 
 function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element | null {
     const view = form.view;
@@ -42,7 +42,9 @@ function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; 
         <div className="rects">
             <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
                 {rects.map((item, idx) => (
-                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: item.f === idx })}`} >
+                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx}
+                        className={`${idx === field.pidx ? 'fill-[#00ff62]' : ''}`}
+                    >
                         <title>{idx}</title>
                     </rect>
                 ))}
