@@ -6,16 +6,17 @@ import { cpp_restore } from '../../../../store/manifest/mani-functions';
 import UIUpDownIcon from '../../../UI/UIUpDownIcon';
 
 type DropDownButtonProps = {
+    disabled?: boolean;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open, setOpen }, ref) {
+const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ disabled, open, setOpen }, ref) {
     return (
         <button
             ref={ref}
-            onClick={() => setOpen((v) => !v)}
-            className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+            onClick={() => !disabled && setOpen((v) => !v)}
+            className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} ${disabled ? 'opacity-25' : ''} flex items-center`}
         >
             <div className="pb-1">
                 pool
@@ -36,7 +37,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
     return (
         <>
-            <button
+            {/* <button
                 ref={setReferenceElm}
                 onClick={() => setOpen((v) => !v)}
                 className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
@@ -48,7 +49,9 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
                 </div>
 
                 <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
-            </button>
+            </button> */}
+
+            <DropDownButton ref={setReferenceElm} open={open} setOpen={setOpen} />
 
             {open &&
                 ReactDOM.createPortal(
