@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormDatum } from '../CardDatum';
+import FieldRowPreview from './FieldRow/FieldRowPreview';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
 
@@ -23,8 +24,12 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element {
-    const form = formDatum.cardDatum.fileUs.mani?.forms[formDatum.formIndex];
+function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | null {
+    const meta = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
+    if (!meta) {
+        return null;
+    }
+    const form = meta.mani;
     const detection = form?.detection || {};
     const options = form?.options || {};
     return (
@@ -34,6 +39,7 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element {
                 <FormOptionPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
+                <FieldRowPreview form={meta} highlight={1} />
             </div>
             <div className="font-bold border-t border-gray-500"></div>
         </div>
