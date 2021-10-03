@@ -5,7 +5,7 @@ import { filesAtom, SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
 import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
-import CardTitleMenu from './Card/CardTitleMenu';
+import TopMenu from './TopMenu';
 
 function nameLengthValidator(file: File) {
     const maxLength = 30000;
@@ -61,7 +61,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                         </div>
 
                         <div className="px-2 self-stretch border-l rounded-none border-gray-500 flex items-center justify-center">
-                            <CardTitleMenu icon={
+                            <TopMenu icon={
                                 <IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />
                             }
                             />
