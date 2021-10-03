@@ -16,12 +16,10 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
 
             <Content sideOffset={5}>
                 <Item className="!text-sm" onSelect={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
                     console.log({event});
                     
                     console.log('selected 1');
-                }}>Toggle folding of all cards</Item>
+                }}>Toggle cards folding</Item> {/* Toggle collapsed content of cards */}
                 <Separator />
                 <Item>More</Item>
             </Content>

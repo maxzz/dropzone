@@ -70,7 +70,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                 </DropzoneBase>
                 {!!files.length &&
                     <>
-                        <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
+                        <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
                             <TopMenu icon={ <IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" /> } />
                         </div>
                         <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
