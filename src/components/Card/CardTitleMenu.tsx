@@ -1,5 +1,11 @@
 import React from 'react';
-import { DropdownMenu as Menu, DropdownMenuContent as Content, DropdownMenuItem as Item, DropdownMenuSeparator as Separator, DropdownMenuTrigger as Trigger } from '../../store/UiDropdownMenu';
+import {
+    DropdownMenu as Menu,
+    DropdownMenuContent as Content,
+    DropdownMenuItem as Item,
+    DropdownMenuSeparator as Separator,
+    DropdownMenuTrigger as Trigger
+} from '../UI/UiDropdownMenu';
 
 export const CardTitleMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (

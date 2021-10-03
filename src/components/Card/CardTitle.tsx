@@ -41,7 +41,7 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <CardIcon isWeb={!!domain} />
                 {/* File index in all loaded files */}
-                <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center"
+                <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
                     title="File index in all loaded files"
                 >
                     {fileUs.idx + 1}

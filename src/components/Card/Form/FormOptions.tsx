@@ -46,3 +46,6 @@ export default FormOptions;
 //TODO: form preview: show one preview per form?
 //TODO: form preview: checkbox (on form preview) to show individual preview per field or not
 //TODO: form preview: use hover over preview icon instead of click
+
+//TODO: preview for all fields and highlight on click
+//TODO: save split pane position
