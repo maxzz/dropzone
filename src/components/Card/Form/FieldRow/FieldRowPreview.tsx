@@ -24,7 +24,7 @@ const stylesSvg = css({
 //     },
 // });
 
-function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element | null {
+function FieldRowPreview({ form, highlight }: { form: Meta.Form; highlight: number; }): JSX.Element | null {
     const view = form.view;
     if (!view) {
         return null;
@@ -44,8 +44,9 @@ function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; 
         <div className="rects">
             <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
                 {rects.map((rect, idx) => (
+                    // <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: !!item.f })}`} >
                     <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
-                        className={`${idx === field.pidx ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : ''}`}
+                        className={`${idx === highlight ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : ''}`}
                     >
                         <title>{idx}</title>
                     </rect>
