@@ -37,22 +37,24 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
 
     return (
         <>
+            {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <CardIcon isWeb={!!domain} />
-                <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center">
+                {/* File index in all loaded files */}
+                <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center"
+                    title="File index in all loaded files"
+                >
                     {fileUs.idx + 1}
                 </div>
                 <CardCaption domain={domain} />
             </div>
 
+            {/* Login caption */}
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
                 {title || 'No login title'}
             </div>
 
-            {/* <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
-                {fileUs.fname}
-            </div>
-             */}
+            {/* Filename */}
             <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
                 {fname}
             </div>
@@ -72,7 +74,7 @@ function CardTitle({ atom }: { atom: FileUsAtom; }) {
             <div className="">
                 <CardTitleText atom={atom} />
             </div>
-            
+
             {/* Actions */}
             <div className="absolute top-3 right-2 z-10 flex">
                 {/* Show raw data button */}
