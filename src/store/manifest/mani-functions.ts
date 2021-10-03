@@ -87,12 +87,13 @@ export namespace FieldPath {
     }
 
     export namespace loc {
-        function dedupe(items: string[]): string[] {
-            return Array.from(new Set(items)); // This will preserve insertion order from items in set and then in array.
-        }
-
         export function unPool(pool: string[], v: string): string[] {
             return /*dedupe*/(v.split('|').map(idx => getPoolName(pool, idx)));
+        }
+
+        /*
+        function dedupe(items: string[]): string[] {
+            return Array.from(new Set(items)); // This will preserve insertion order from items in set and then in array.
         }
 
         function str2loc(v: string): MPath.loc {
@@ -103,6 +104,7 @@ export namespace FieldPath {
         function loc2str(loc: MPath.loc): string {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
+        */
 
         function str2loc4(v: string): MPath.loc {
             let [x, y, x2, y2 ] = v.split(' ').map(_ => +_);
@@ -136,6 +138,7 @@ export namespace FieldPath {
                 return { x1, y1, x2, y2 };
             }
 
+            /*
             function lastItem(v: string | undefined): MPath.loc | undefined {
                 let arr = (v || '').split('|');
                 let last = arr[arr.length - 1];
@@ -144,7 +147,7 @@ export namespace FieldPath {
                 }
             }
 
-            export function getFieldRects(form: Meta.Form, field: Meta.Field): Meta.View | undefined {
+            function getFieldRects(form: Meta.Form, field: Meta.Field): Meta.View | undefined {
                 if (!form.view) {
                     return;
                 }
@@ -190,6 +193,7 @@ export namespace FieldPath {
 
                 return { rects, bounds, };
             }
+            */
 
             export function buildPreviewData(fields: Meta.Field[]): Meta.View {
                 let uniqueLocs = new Set<string>();
