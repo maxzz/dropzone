@@ -57,7 +57,7 @@ export const filteredAtom = atom<FileUsAtom[]>(
 
 function countManifestTypes(get: Getter) {
     const files = get(filesAtom);
-    const res = files.reduce((acc, cur) => {
+    const res = files.reduce((acc, cur: FileUsAtom) => {
         const m: FileUs = get(cur);
         if (isEmpty(m)) {
             acc.empty++;
