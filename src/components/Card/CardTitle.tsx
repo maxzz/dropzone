@@ -22,10 +22,12 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
     const fileUs = useAtomValue(atom);
     const title = fileUs.mani?.forms[0]?.options.choosename;
     const domain = fileUs.meta?.[0]?.disp.domain;
-    const m = (fileUs.fname || '').match(/(.*)([0-9A-Za-z]{3,})\}\.dpm$/);
+    const m = (fileUs.fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
     const fname = !m ? fileUs.fname : <div className="text-[0.65rem]">
-        <span className="opacity-75">{m[1]}</span>
-        <span className="px-1 text-sm text-gray-300 opacity-100">{m[2]}</span>
+        <span className="opacity-75">{'{'}</span>
+        <span className="px-1 text-sm text-gray-300 opacity-100">{m[1]}</span>
+        <span className="opacity-75">{m[2]}</span>
+        <span className="px-1 text-sm text-gray-300 opacity-100">{m[3]}</span>
         <span className="opacity-75">{'}.dpm'}</span>
     </div>;
     console.log({m});
