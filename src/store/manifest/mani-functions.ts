@@ -114,7 +114,7 @@ export namespace FieldPath {
         }
 
         export namespace utils {
-            function rectsBoundaries(rects: MPath.loc[]): Meta.Bounds {
+            export function rectsBoundaries(rects: MPath.loc[]): Meta.Bounds {
                 let x1 = Number.MAX_SAFE_INTEGER;
                 let y1 = Number.MAX_SAFE_INTEGER;
                 let x2 = 0;

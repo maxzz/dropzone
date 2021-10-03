@@ -25,16 +25,26 @@ const styleRect = css({
 });
 
 function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; }): JSX.Element | null {
-    const view = FieldPath.loc.utils.getFieldRects(form, field);
+    //const view = FieldPath.loc.utils.getFieldRects(form, field);
+    const view = form.view;
     if (!view) {
         return null;
     }
-    const { rects, bounds } = view;
+    let { rects, bounds } = view;
+
+    const asbPos = true;
+    if (asbPos) {
+        let lt = { x: view.bounds.x1, y: view.bounds.y1 }; // left-top
+        rects = rects.map((loc) => ({ ...loc, x: loc.x - lt.x, y: loc.y - lt.y, }));
+        bounds = FieldPath.loc.utils.rectsBoundaries(rects);
+    }
+
     return (
         <div className="rects">
             <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
                 {rects.map((item, idx) => (
-                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: !!item.f })}`} >
+                    // <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: !!item.f })}`} >
+                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: item.f === idx })}`} >
                         <title>{idx}</title>
                     </rect>
                 ))}
