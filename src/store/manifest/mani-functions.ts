@@ -91,12 +91,12 @@ export namespace FieldPath {
             return (v.split('|').map(idx => getPoolName(pool, idx)));
         }
 
-        function str2loc4(v: string): MPath.loc {
-            let [x, y, x2, y2 ] = v.split(' ').map(_ => +_);
+        function str2loc(v: string): MPath.loc {
+            let [x, y, x2, y2 ] = v.split(' ').map(str => +str);
             return { x, y, w: x2 - x, h: y2 - y };
         }
 
-        function loc42str(loc: MPath.loc): string {
+        function loc2str(loc: MPath.loc): string {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h}`;
         }
 
@@ -132,10 +132,10 @@ export namespace FieldPath {
                     field.pidx = fieldLocs[fieldLocs.length - 1] as any; // temp store string as number
                 });
 
-                let rects = Array.from(uniqueLocs).map(str2loc4).filter(loc => loc.w || loc.h);
+                let rects = Array.from(uniqueLocs).map(str2loc).filter(loc => loc.w || loc.h);
                 let bounds = rectsBoundaries(rects);
 
-                const rectStrs = rects.map(loc42str);
+                const rectStrs = rects.map(loc2str);
                 fields.forEach((field) => {
                     field.pidx = rectStrs.findIndex((locStr) => locStr === field.pidx as any); // restore str to number
                     rects[field.pidx] && (rects[field.pidx].f = 1);
