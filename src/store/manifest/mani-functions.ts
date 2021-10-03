@@ -104,6 +104,15 @@ export namespace FieldPath {
             return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
         }
 
+        function str2loc4(v: string): MPath.loc {
+            let [x, y, x2, y2 ] = v.split(' ').map(_ => +_);
+            return { x, y, w: x2 - x, h: y2 - y };
+        }
+
+        function loc42str(loc: MPath.loc): string {
+            return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h}`;
+        }
+
         export namespace utils {
             function rectsBoundaries(rects: MPath.loc[]): Meta.Bounds {
                 let x1 = Number.MAX_SAFE_INTEGER;
@@ -165,7 +174,7 @@ export namespace FieldPath {
                             .map(_ => getPoolName(pool, _))
                             .map(str2loc)
                             .map((_, index) => (_.i = index, _))
-                            .filter(_ => _.w && _.h);
+                            .filter(_ => _.w || _.h);
 
                     // mark the last item as field
                     if (cleanLocs.length) {
@@ -179,10 +188,7 @@ export namespace FieldPath {
                 let rects = Array.from(uniqueLocs).map(str2loc);
                 let bounds = rectsBoundaries(rects);
 
-                return {
-                    rects,
-                    bounds,
-                };
+                return { rects, bounds, };
             }
 
             export function buildPreviewData(fields: Meta.Field[]): Meta.View {
@@ -194,16 +200,16 @@ export namespace FieldPath {
                     field.pidx = fieldLocs[fieldLocs.length - 1] as any; // temp store string as number
                 });
 
-                let rects = Array.from(uniqueLocs).map(str2loc).filter(loc => loc.w || loc.h);
+                let rects = Array.from(uniqueLocs).map(str2loc4).filter(loc => loc.w || loc.h);
                 let bounds = rectsBoundaries(rects);
 
-                const rectStrs = rects.map(loc2str);
-                fields.forEach((field) => field.pidx = rectStrs.findIndex((locStr) => locStr === field.pidx as any)); // restore str to number
+                const rectStrs = rects.map(loc42str);
+                fields.forEach((field) => {
+                    field.pidx = rectStrs.findIndex((locStr) => locStr === field.pidx as any); // restore str to number
+                    rects[field.pidx] && (rects[field.pidx].f = 1);
+                });
 
-                return {
-                    rects,
-                    bounds,
-                };
+                return { rects, bounds, };
             }
         } //namespace utils
     } //namespace loc
@@ -290,7 +296,8 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            view: FieldPath.loc.utils.getAllRects(form, pool),
+            // view: FieldPath.loc.utils.getAllRects(form, pool),
+            view: view,
             fields,
         };
     };
