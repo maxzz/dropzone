@@ -46,9 +46,10 @@ function FieldRowPreview({ form, highlight }: { form: Meta.Form; highlight: numb
                 {rects.map((rect, idx) => (
                     // <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: !!item.f })}`} >
                     <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
-                        className={`${idx === highlight ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : ''}`}
+                        className={`${idx === highlight ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : 'fill-[#0008] hover:fill-[beige]'}`}
                     >
-                        <title>{idx}</title>
+                        {/* <title>{`idx ${idx}: x: ${rect.x} y: ${rect.y} width: ${rect.w} height: ${rect.h}`}</title> */}
+                        <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>
                     </rect>
                 ))}
             </svg>

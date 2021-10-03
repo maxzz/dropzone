@@ -39,7 +39,7 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | nu
                 <FormOptionPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
-                <FieldRowPreview form={meta} highlight={1} />
+                <FieldRowPreview form={meta} highlight={-1} />
             </div>
             <div className="font-bold border-t border-gray-500"></div>
         </div>
