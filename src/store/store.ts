@@ -57,6 +57,7 @@ export const clearFilesAtom = atom(
     (get) => get(filesAtom),
     (get, set) => {
         set(filesAtom, []);
+        set(rightPanelAtom, undefined);
     }
 )
 
