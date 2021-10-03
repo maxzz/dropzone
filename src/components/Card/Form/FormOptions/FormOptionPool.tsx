@@ -6,12 +6,12 @@ import { cpp_restore } from '../../../../store/manifest/mani-functions';
 import UIUpDownIcon from '../../../UI/UIUpDownIcon';
 
 type DropDownButtonProps = {
-    disabled?: boolean;
-    open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    open?: boolean;
+    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ disabled, open, setOpen }, ref) {
+const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen }, ref) {
+    const disabled = !setOpen;
     return (
         <button
             ref={ref}
@@ -67,7 +67,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
 function FormOptionPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
-        return null;
+        return <DropDownButton />;
     }
     names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
     let items = (names_ext || '').split('●');
