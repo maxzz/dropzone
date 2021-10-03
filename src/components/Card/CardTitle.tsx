@@ -22,6 +22,14 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
     const fileUs = useAtomValue(atom);
     const title = fileUs.mani?.forms[0]?.options.choosename;
     const domain = fileUs.meta?.[0]?.disp.domain;
+    const m = (fileUs.fname || '').match(/(.*)([0-9A-Za-z]{3,})\}\.dpm$/);
+    const fname = !m ? fileUs.fname : <div className="text-[0.65rem]">
+        <span className="opacity-75">{m[1]}</span>
+        <span className="px-1 text-sm text-gray-300 opacity-100">{m[2]}</span>
+        <span className="opacity-75">{'}.dpm'}</span>
+    </div>;
+    console.log({m});
+    
     return (
         <>
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
@@ -32,11 +40,16 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
                 <CardCaption domain={domain} />
             </div>
 
-            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
+            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
+                {title || 'No login title'}
+            </div>
+
+            {/* <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
                 {fileUs.fname}
             </div>
-            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                {title || 'No title'}
+             */}
+            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
+                {fname}
             </div>
         </>
     );
