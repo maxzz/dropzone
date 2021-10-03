@@ -88,23 +88,8 @@ export namespace FieldPath {
 
     export namespace loc {
         export function unPool(pool: string[], v: string): string[] {
-            return /*dedupe*/(v.split('|').map(idx => getPoolName(pool, idx)));
+            return (v.split('|').map(idx => getPoolName(pool, idx)));
         }
-
-        /*
-        function dedupe(items: string[]): string[] {
-            return Array.from(new Set(items)); // This will preserve insertion order from items in set and then in array.
-        }
-
-        function str2loc(v: string): MPath.loc {
-            let [x, y, x2, y2, f, i] = v.split(' ').map(_ => +_);
-            return { x, y, w: x2 - x, h: y2 - y, f: f || 0, i: i || 0 };
-        }
-
-        function loc2str(loc: MPath.loc): string {
-            return `${loc.x} ${loc.y} ${loc.x + loc.w} ${loc.y + loc.h} ${loc.f || 0} ${loc.i || 0}`;
-        }
-        */
 
         function str2loc4(v: string): MPath.loc {
             let [x, y, x2, y2 ] = v.split(' ').map(_ => +_);
@@ -137,63 +122,6 @@ export namespace FieldPath {
                 });
                 return { x1, y1, x2, y2 };
             }
-
-            /*
-            function lastItem(v: string | undefined): MPath.loc | undefined {
-                let arr = (v || '').split('|');
-                let last = arr[arr.length - 1];
-                if (last) {
-                    return str2loc(last);
-                }
-            }
-
-            function getFieldRects(form: Meta.Form, field: Meta.Field): Meta.View | undefined {
-                if (!form.view) {
-                    return;
-                }
-                //let bounds = rectsBoundaries(form.view.rects);
-                let thisRects = [...form.view.rects];
-
-                const last = lastItem(field.path.loc);
-                last && thisRects.push(last);
-
-                let lt = { x: form.view.bounds.x1, y: form.view.bounds.y1 }; // left-top
-                thisRects = thisRects.map((loc) => ({ ...loc, x: loc.x - lt.x, y: loc.y - lt.y, }));
-
-                return { rects: thisRects, bounds: rectsBoundaries(thisRects) };
-            }
-
-            function getAllRects(form: Mani.Form, pool: string[]): Meta.View {
-                let uniqueLocs = new Set<string>();
-
-                (form.fields || []).map((field: Mani.Field) => {
-                    let pathChunks: [Meta.Chunk, string][] = getChunks(field.path_ext || '');
-                    let fieldLocs = pathChunks.find(([chunck]) => chunck === 'loc')?.[1] || '';
-
-                    // We got locations now as string
-                    let cleanLocs =
-                        //thisLocs.split('|')
-                        dedupe(fieldLocs.split('|'))
-                            .map(_ => getPoolName(pool, _))
-                            .map(str2loc)
-                            .map((_, index) => (_.i = index, _))
-                            .filter(_ => _.w || _.h);
-
-                    // mark the last item as field
-                    if (cleanLocs.length) {
-                        cleanLocs[cleanLocs.length - 1].f = 1;
-                    }
-
-                    // add to set locations from this path
-                    cleanLocs.map(loc2str).forEach(loc => uniqueLocs.add(loc));
-                });
-
-                let rects = Array.from(uniqueLocs).map(str2loc);
-                let bounds = rectsBoundaries(rects);
-
-                return { rects, bounds, };
-            }
-            */
 
             export function buildPreviewData(fields: Meta.Field[]): Meta.View {
                 let uniqueLocs = new Set<string>();
@@ -279,7 +207,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
         return !!fields.length && fields.some(({ path }: { path: Meta.Path; }) => path.sn);
     };
     const isIe = (form: Mani.Form): boolean => {
-        return !!form.detection?.names_ext?.match(/Internet Explorer_Server/); //return !!form.detection?.processname?.match(/iexplore\.exe$/);
+        return !!form.detection?.names_ext?.match(/Internet Explorer_Server/); //old: return !!form.detection?.processname?.match(/iexplore\.exe$/);
     };
     const createMetaForm = (form: Mani.Form): Meta.Form => {
         const pool: string[] = getPool(form) || [];
