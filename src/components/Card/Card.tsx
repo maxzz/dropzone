@@ -17,17 +17,36 @@ function FormContent({ formDatum }: { formDatum: FormDatum; }) {
     );
 }
 
+// function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
+//     const [open1, setOpen1] = React.useState(false);
+//     const [open2, setOpen2] = React.useState(false);
+//     return (
+//         <div className="p-2 bg-gray-200 text-gray-800">
+//             <div className="flex items-center space-x-2 text-sm">
+//                 {cardDatum.hasLogin && <UICardFormButton formDatum={{cardDatum, formIndex: 0}} opened={open1} onClick={() => setOpen1((v) => !v)} />}
+//                 {cardDatum.hasCpass && <UICardFormButton formDatum={{cardDatum, formIndex: 1}} opened={open2} onClick={() => setOpen2((v) => !v)} />}
+//             </div>
+//             {open1 && (<FormContent formDatum={{cardDatum, formIndex: 0}} />)}
+//             {open2 && (<FormContent formDatum={{cardDatum, formIndex: 1}} />)}
+//         </div>
+//     );
+// }
+
 function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    function Toogle() {
+        setOpen1((v) => !v);
+        setOpen2((v) => !v);
+    }
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
-                {cardDatum.hasLogin && <UICardFormButton formDatum={{cardDatum, formIndex: 0}} opened={open1} onClick={() => setOpen1((v) => !v)} />}
-                {cardDatum.hasCpass && <UICardFormButton formDatum={{cardDatum, formIndex: 1}} opened={open2} onClick={() => setOpen2((v) => !v)} />}
+                {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open1} onClick={Toogle} />}
+                {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open2} onClick={Toogle} />}
             </div>
-            {open1 && (<FormContent formDatum={{cardDatum, formIndex: 0}} />)}
-            {open2 && (<FormContent formDatum={{cardDatum, formIndex: 1}} />)}
+            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} />)}
+            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} />)}
         </div>
     );
 }
