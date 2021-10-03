@@ -160,7 +160,7 @@ export namespace FieldPath {
                 return { rects: thisRects, bounds: rectsBoundaries(thisRects) };
             }
 
-            export function getAllRects(form: Mani.Form, pool: string[]): Meta.View {
+            function getAllRects(form: Mani.Form, pool: string[]): Meta.View {
                 let uniqueLocs = new Set<string>();
 
                 (form.fields || []).map((field: Mani.Field) => {
@@ -215,8 +215,7 @@ export namespace FieldPath {
     } //namespace loc
 
     function getChunks(path: string): [Meta.Chunk, string][] {
-        // from [p4a]0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..[loc]b|c|c|c|c|d|e|f|10|11|12|13[sid]14.15.16..17
-        // to ['p4a', '0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..'], ['loc', 'b|c|c|c|c|d|e|f|10|11|12|13'], ['sid', '14.15.16..17']
+        // [p4a]0.0.1.|0.2.1.[loc]b|c[sid]14.15.16..17 -> ['p4a', '0.0.1.|0.2.1.'], ['loc', 'b|c'], ['sid', '14.15.16..17']
         return path.split('[').filter(Boolean).map((val: string) => val.split(']') as [Meta.Chunk, string]);;
     }
 
@@ -285,8 +284,6 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
             pidx: 0,
         }));
-        const view = FieldPath.loc.utils.buildPreviewData(fields);
-        console.log({ view });
         return {
             mani: form,
             disp: {
@@ -296,8 +293,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
                 isIe: isIe(form),
             },
             pool: pool,
-            // view: FieldPath.loc.utils.getAllRects(form, pool),
-            view: view,
+            view: FieldPath.loc.utils.buildPreviewData(fields),
             fields,
         };
     };
