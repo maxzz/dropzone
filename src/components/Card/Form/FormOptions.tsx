@@ -17,7 +17,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
     return (
-        <div className={`px-1 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title}>
+        <div className={`px-1 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title}>
             QL
         </div>
     );

@@ -18,11 +18,11 @@ const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(functi
             onClick={() => !disabled && setOpen((v) => !v)}
             className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} ${disabled ? 'opacity-25' : ''} flex items-center`}
         >
-            <div className="pb-1">
+            <div className="">
                 pool
             </div>
 
-            <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
+            <UIUpDownIcon open={open} className="list-owner w-4 h-4 pt-0.5" />
         </button>
     );
 });

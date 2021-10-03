@@ -32,7 +32,7 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
                 <CardCaption domain={domain} />
             </div>
 
-            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Filename">
+            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
                 {fileUs.fname}
             </div>
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">

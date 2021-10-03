@@ -24,11 +24,11 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
                     className={`pl-2 pr-1 inline-block text-xs leading-3 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                     onClick={() => setOpen((v) => !v)}
                 >
-                    <div className="pb-1">
+                    <div className="">
                         {name}
                     </div>
 
-                    <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
+                    <UIUpDownIcon open={open} className="list-owner w-4 h-4 pt-0.5" />
                 </button>
             }
 
