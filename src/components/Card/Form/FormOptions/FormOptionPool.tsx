@@ -37,20 +37,6 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
     return (
         <>
-            {/* <button
-                ref={setReferenceElm}
-                onClick={() => setOpen((v) => !v)}
-                className={`pl-2 pr-1 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
-            >
-                {toggle}
-
-                <div className="pb-1">
-                    pool
-                </div>
-
-                <UIUpDownIcon open={open} className="list-owner w-4 h-4" />
-            </button> */}
-
             <DropDownButton ref={setReferenceElm} open={open} setOpen={setOpen} />
 
             {open &&
