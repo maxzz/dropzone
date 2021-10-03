@@ -3,8 +3,9 @@ import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { filesAtom, SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
-import { IconAppLogo, IconDocumentsAccepted, IconTrash } from './UI/UiIcons';
+import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
+import CardTitleMenu from './Card/CardTitleMenu';
 
 function nameLengthValidator(file: File) {
     const maxLength = 30000;
@@ -58,6 +59,14 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                             <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
                             {files.length} file{files.length === 1 ? '' : 's'}
                         </div>
+
+                        <div className="px-2 self-stretch border-l rounded-none border-gray-500 flex items-center justify-center">
+                            <CardTitleMenu icon={
+                                <IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />
+                            }
+                            />
+                        </div>
+
                         <button className="px-2 self-stretch border-l rounded-none border-gray-500 flex items-center justify-center">
                             <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={(event) => { event.stopPropagation(); setFiles([]); }} />
                         </button>
