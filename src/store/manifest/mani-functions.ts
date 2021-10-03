@@ -145,8 +145,8 @@ export namespace FieldPath {
                 const last = lastItem(field.path.loc);
                 last && thisRects.push(last);
 
-                let lt = {x: form.view.bounds.x1, y: form.view.bounds.y1}; // left-top
-                thisRects = thisRects.map((loc) => ({...loc, x: loc.x - lt.x, y: loc.y - lt.y, }));
+                let lt = { x: form.view.bounds.x1, y: form.view.bounds.y1 }; // left-top
+                thisRects = thisRects.map((loc) => ({ ...loc, x: loc.x - lt.x, y: loc.y - lt.y, }));
 
                 return { rects: thisRects, bounds: rectsBoundaries(thisRects) };
             }
@@ -188,8 +188,17 @@ export namespace FieldPath {
             export function buildPreviewData(fields: Meta.Field[]): Meta.View {
                 let uniqueLocs = new Set<string>();
 
-                let rects = Array.from(uniqueLocs).map(str2loc);
+                fields.forEach((field) => {
+                    const fieldLocs = (field.path.loc || '').split('|');
+                    fieldLocs.forEach(loc => uniqueLocs.add(loc));
+                    field.pidx = fieldLocs[fieldLocs.length - 1] as any; // temp store string as number
+                });
+
+                let rects = Array.from(uniqueLocs).map(str2loc).filter(loc => loc.w || loc.h);
                 let bounds = rectsBoundaries(rects);
+
+                const rectStrs = rects.map(loc2str);
+                fields.forEach((field) => field.pidx = rectStrs.findIndex((locStr) => locStr === field.pidx as any)); // restore str to number
 
                 return {
                     rects,
@@ -197,7 +206,7 @@ export namespace FieldPath {
                 };
             }
         } //namespace utils
-    } //namespace PathLocations
+    } //namespace loc
 
     function getChunks(path: string): [Meta.Chunk, string][] {
         // from [p4a]0.0.1.|0.2.1.|0.3.1.|0.3.4.5|0.6.4.7|1.8..|1.9..|1.8..|0.9..|0.8..|3.9..|0.a..[loc]b|c|c|c|c|d|e|f|10|11|12|13[sid]14.15.16..17
@@ -270,6 +279,8 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
             pidx: 0,
         }));
+        const view = FieldPath.loc.utils.buildPreviewData(fields);
+        console.log({ view });
         return {
             mani: form,
             disp: {
