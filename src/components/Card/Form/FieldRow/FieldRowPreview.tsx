@@ -38,12 +38,14 @@ function FieldRowPreview({ form, field }: { form: Meta.Form; field: Meta.Field; 
         bounds = FieldPath.loc.utils.rectsBoundaries(rects);
     }
 
+    //const classes = (idx: number, item: MPath.loc) => 
+
     return (
         <div className="rects">
             <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
-                {rects.map((item, idx) => (
-                    <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx}
-                        className={`${idx === field.pidx ? 'fill-[#00ff62]' : ''}`}
+                {rects.map((rect, idx) => (
+                    <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
+                        className={`${idx === field.pidx ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : ''}`}
                     >
                         <title>{idx}</title>
                     </rect>
