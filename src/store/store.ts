@@ -53,6 +53,13 @@ export const filteredAtom = atom<FileUsAtom[]>(
     }
 );
 
+export const clearFilesAtom = atom(
+    (get) => get(filesAtom),
+    (get, set) => {
+        set(filesAtom, []);
+    }
+)
+
 // Cache
 
 function countManifestTypes(get: Getter) {
