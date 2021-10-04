@@ -100,7 +100,7 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript && <FieldRowPreview form={metaForm} highlight={field.pidx} />}
+                {isScript && <FieldRowPreview form={metaForm} highlight={field.pidx} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">
