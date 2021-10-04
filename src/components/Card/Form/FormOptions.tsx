@@ -32,16 +32,17 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | nu
     const form = meta.mani;
     const detection = form?.detection || {};
     const options = form?.options || {};
+    const [small, setSmall] = React.useState(true);
     return (
         <div className="relative my-1 flex justify-between text-xs leading-5">
-            <div className="place-self-start flex space-x-1">
+            <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
                 <FormOptionDetection formDatum={formDatum} />
                 <FormOptionPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
-            <div className="">
-                <FieldRowPreview form={meta} highlight={-1} small={true} className="w-24 h-24" />
+            <div className="" onClick={() => setSmall((v) => !v)}>
+                <FieldRowPreview form={meta} highlight={-1} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} />
             </div>
         </div>
     );

@@ -48,14 +48,23 @@ function FieldRowPreview({ form, highlight, small, ...attrs }: PreviewProps): JS
 
     const { className, ...rest } = attrs;
     const styles: React.CSSProperties = {
-        background: small ? 'transparent': 'radial-gradient(circle, #679dff 0%, #3478f4 100%)'
+        background: small ? 'transparent' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)'
     };
 
     return (
         <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={`${stylesSvg()} ${className}`} style={styles} {...rest}>
             {rects.map((rect, idx) => (
                 <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
-                    className={`${idx === highlight ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : `fill-[#0008] ${small ? '' : 'hover:fill-[beige]'}`}`}
+                    className={`
+                        ${idx === highlight
+                            ? 'fill-[#00ff62]'
+                            : rect.f
+                                ? 'fill-[#454545]'
+                                : `fill-[#0008] 
+                            ${small ? '' : 'hover:fill-[#2d6865]'}
+                            `}
+                            transition-[fill,2s]
+                    `}
                 >
                     {!small && <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>}
                 </rect>
