@@ -37,6 +37,7 @@ export const SetFilesAtom = atom(
         });
         set(filesAtom, dropped);
         set(updateCacheAtom);
+        set(_foldAllCardsAtom, -1);
     }
 );
 
@@ -60,6 +61,17 @@ export const clearFilesAtom = atom(
         set(rightPanelAtom, undefined);
     }
 )
+
+// Files toggle folding. TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
+
+export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
+
+export const foldAllCardsAtom = atom(
+    (get) => get(_foldAllCardsAtom),
+    (get, set) => {
+        set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
+    }
+);
 
 // Cache
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUsAtom } from '../../store/store';
+import { FileUsAtom, foldAllCardsAtom } from '../../store/store';
 import buildCardDatum, { CardDatum, FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
 import FormOptions from './Form/FormOptions';
@@ -20,6 +20,18 @@ function FormContent({ formDatum }: { formDatum: FormDatum; }) {
 function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    const [foldAll] = useAtom(foldAllCardsAtom);
+
+    React.useEffect(() => {
+        if (foldAll >= 0) {
+            console.log(`aaa ${foldAll}`);
+            
+            const collapse = foldAll % 2 === 0;
+            setOpen1(collapse);
+            setOpen2(collapse);
+        }
+    }, [foldAll]);
+
     function Toogle() {
         setOpen1((v) => !v);
         setOpen2((v) => !v);
