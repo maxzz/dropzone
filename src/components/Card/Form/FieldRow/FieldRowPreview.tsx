@@ -24,7 +24,13 @@ const stylesSvg = css({
 //     },
 // });
 
-function FieldRowPreview({ form, highlight, ...attrs }: { form: Meta.Form; highlight: number; } & React.HTMLAttributes<SVGSVGElement>): JSX.Element | null {
+type PreviewProps = {
+    form: Meta.Form;
+    highlight: number;
+    small: boolean; // show small preview: incative background and not hover effects
+} & React.HTMLAttributes<SVGSVGElement>;
+
+function FieldRowPreview({ form, highlight, small, ...attrs }: PreviewProps): JSX.Element | null {
     const view = form.view;
     if (!view) {
         return null;

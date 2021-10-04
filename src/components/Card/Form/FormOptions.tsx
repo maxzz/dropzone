@@ -41,7 +41,7 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | nu
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="">
-                <FieldRowPreview form={meta} highlight={-1} className="w-24 h-24" />
+                <FieldRowPreview form={meta} highlight={-1} small={true} className="w-24 h-24" />
             </div>
         </div>
     );
