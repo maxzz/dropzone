@@ -33,15 +33,14 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | nu
     const detection = form?.detection || {};
     const options = form?.options || {};
     return (
-        <div className="">
-            <div className="relative my-1 flex space-x-1 text-xs leading-5">
+        <div className="relative my-1 flex space-x-1 text-xs leading-5">
+            <div className="place-self-start flex space-x-1">
                 <FormOptionDetection formDatum={formDatum} />
                 <FormOptionPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
-                <FieldRowPreview form={meta} highlight={-1} />
             </div>
-            <div className="font-bold border-t border-gray-500"></div>
+            <FieldRowPreview form={meta} highlight={-1} />
         </div>
     );
 }

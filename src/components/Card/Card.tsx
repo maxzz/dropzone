@@ -12,6 +12,7 @@ function FormContent({ formDatum }: { formDatum: FormDatum; }) {
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
             <FormOptions formDatum={formDatum} />
+            <div className="font-bold border-t border-gray-500"></div>
             <FormFields formDatum={formDatum} />
         </div>
     );
@@ -24,8 +25,6 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
 
     React.useEffect(() => {
         if (foldAll >= 0) {
-            console.log(`aaa ${foldAll}`);
-            
             const collapse = foldAll % 2 === 0;
             setOpen1(collapse);
             setOpen2(collapse);

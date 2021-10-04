@@ -38,22 +38,16 @@ function FieldRowPreview({ form, highlight }: { form: Meta.Form; highlight: numb
         bounds = FieldPath.loc.utils.rectsBoundaries(rects);
     }
 
-    //const classes = (idx: number, item: MPath.loc) => 
-
     return (
-        <div className="rects">
-            <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
-                {rects.map((rect, idx) => (
-                    // <rect x={item.x} y={item.y} width={item.w} height={item.h} key={idx} className={`${styleRect({ field: !!item.f })}`} >
-                    <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
-                        className={`${idx === highlight ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : 'fill-[#0008] hover:fill-[beige]'}`}
-                    >
-                        {/* <title>{`idx ${idx}: x: ${rect.x} y: ${rect.y} width: ${rect.w} height: ${rect.h}`}</title> */}
-                        <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>
-                    </rect>
-                ))}
-            </svg>
-        </div >
+        <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={stylesSvg()}>
+            {rects.map((rect, idx) => (
+                <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
+                    className={`${idx === highlight ? 'fill-[#00ff62]' : rect.f ? 'fill-[#454545]' : 'fill-[#0008] hover:fill-[beige]'}`}
+                >
+                    <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>
+                </rect>
+            ))}
+        </svg>
     );
 }
 
