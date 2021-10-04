@@ -18,9 +18,9 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
             </Trigger>
 
             <Content sideOffset={5}>
-                <Item className="!text-sm" onSelect={() => toggleFolding()}>Toggle cards folding</Item> {/* Toggle collapsed content of cards */}
+                <Item className="!text-sm" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
                 <Separator />
-                <Item>More to come</Item>
+                <Item>Help</Item>
             </Content>
         </Menu>
     );
