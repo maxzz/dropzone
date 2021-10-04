@@ -7,9 +7,9 @@ import CardTitleMenu from './CardTitleMenu';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
-        ? <IconAppWebIE className="w-6 h-6" />
-        : <IconAppWindows className="w-6 h-6" />;
-    return icon;
+        ? <IconAppWebIE /> //TODO: add Chrome trained detection 
+        : <IconAppWindows />;
+    return <div className="w-6 h-6" title={`${isWeb ? 'Webiste trained with IE' : 'Windows application'} `}>{icon}</div>;
 }
 
 function CardCaption({ domain }: { domain?: string; }) {

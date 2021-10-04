@@ -38,7 +38,7 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 
                                     {/* <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}> */}
                                     <UIToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
-                                        <FieldRowPreview form={metaForm} highlight={field.pidx} />
+                                        <FieldRowPreview form={metaForm} highlight={field.pidx} small={false} />
                                     </UIToggleWithPortal>
 
                                     {/* <div className="flex items-center">
