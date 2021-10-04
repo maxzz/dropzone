@@ -77,3 +77,8 @@ function FieldRowPreview({ form, highlight, small, ...attrs }: PreviewProps): JS
 }
 
 export default FieldRowPreview;
+
+//TODO: remove rect outside fields rect: {5cd5ac7d-7d6e-4395-94a6-36be1d6beea0}.dpm
+//TODO: add abs switch
+//TODO: field select from list and from preview
+//TODO: card size change animations
