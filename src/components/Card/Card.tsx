@@ -32,8 +32,8 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     }, [foldAll]);
 
     function Toogle() {
-        setOpen1((v) => !v);
-        setOpen2((v) => !v);
+        cardDatum.hasLogin && setOpen1((v) => !v);
+        cardDatum.hasCpass && setOpen2((v) => !v);
     }
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
