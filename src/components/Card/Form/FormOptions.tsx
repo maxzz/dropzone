@@ -10,7 +10,7 @@ function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; 
     const useit = lockfields == '1';
     const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
     return (
-        <div className={`px-2 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title}>
+        <div className={`px-2 h-6 leading-6 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title}>
             lock
         </div>
     );
@@ -20,7 +20,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
     return (
-        <div className={`px-1 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title}>
+        <div className={`px-1 h-6 leading-6 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title}>
             QL
         </div>
     );

@@ -21,7 +21,7 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
 
                 : <button
                     ref={buttonRef}
-                    className={`pl-2 pr-1 inline-block text-xs leading-3 border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                    className={`pl-2 pr-1 h-6 leading-6 inline-block text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
                     onClick={() => setOpen((v) => !v)}
                 >
                     <div className="">
@@ -41,7 +41,7 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
                 {open ? <IconChevronUp className="w-4 h-4" /> : <IconChevronDown className="list-owner w-4 h-4" />}
             </button> */}
             {open &&
-                <div ref={containerRef} className="absolute top-[110%] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
+                <div ref={containerRef} className="absolute top-[32px] left-0 right-0 z-10 px-2 border border-gray-500 rounded bg-gray-300 text-xs">
                     {children}
                 </div>
             }
