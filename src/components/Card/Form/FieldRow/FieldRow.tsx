@@ -92,7 +92,7 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
         </div>;
     const isScript = !!field.path.loc;
     return (
-        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${isSelected ? 'bg-blue-300' : ''}`}
+        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit?'bg-[#bbffdf42]':''} ${isSelected ? '!bg-blue-200' : ''}`} // ${useit?'font-bold':''}
             onClick={() => {
                 setSelectedRow(isSelected ? -1 : field.pidx);
             }}
