@@ -67,7 +67,7 @@ function FieldRowPreview({ form, highlight, small, ...attrs }: PreviewProps): JS
                                 : `fill-[#0008] ${small ? '' : 'hover:fill-[#2d6865]'}
                         `}
                     `}
-                    style={stylesRect}
+                    style={rect.f ? {} : stylesRect}
                 >
                     {!small && <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>}
                 </rect>
