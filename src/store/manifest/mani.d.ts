@@ -16,6 +16,7 @@ declare module Mani {
 
         rfield?: 'in' | 'out';
         rfieldindex?: number;   // "2"
+        rfieldform?: string;    // refs from login form
         
         controltosubmitdata?: boolean;
         ids?: string;

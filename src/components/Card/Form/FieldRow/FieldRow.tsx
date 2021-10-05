@@ -72,7 +72,7 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 }
 
 function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; field: Meta.Field; selectedRowAtom: PrimitiveAtom<number>; }): JSX.Element {
-    const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rfield, rfieldindex, password, useit, } = field.mani;
+    const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     const isSelected = metaForm.view?.rects.length && field.pidx === selectedRow;
     console.log({ isSelected });
@@ -133,8 +133,8 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
                 value
             </div>
             <div
-                className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rfield ? '' : 'opacity-25'}`}
-                title={`Direction: ${rfield} Ref.index: ${rfieldindex}`}
+                className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rfield || rfieldform ? '' : 'opacity-25'}`}
+                title={`Direction: ${rfield} Ref.index: ${rfieldindex} Ref.form: ${rfieldform}`}
             >
                 <div className=""><IconInOut className="w-3 h-4" /></div>
             </div>
