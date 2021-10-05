@@ -1,4 +1,6 @@
 import { atom, Getter, WritableAtom } from 'jotai';
+import atomWithCallback from '../hooks/atomsX';
+import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildFormExs } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
@@ -17,6 +19,39 @@ export type FileUs = {
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
+
+// Local storage
+
+namespace Storage {
+    const KEY = 'pmit-01';
+
+    type Store = {
+        vSplitPos: number;
+    };
+
+    export let initialData: Store = {
+        vSplitPos: 44,
+    };
+
+    function load() {
+        const s = localStorage.getItem(KEY);
+        if (s) {
+            try {
+                let obj = JSON.parse(s) as Store;
+                initialData = obj;
+            } catch (error) {
+            }
+        }
+    }
+    load();
+
+    export const save = debounce(function _save(get: Getter) {
+        let newStore: Store = {
+            vSplitPos: get(SplitPaneAtom),
+        };
+        localStorage.setItem(KEY, JSON.stringify(newStore));
+    }, 1000);
+}
 
 // Files
 
@@ -156,6 +191,4 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
 
 // Split pane position
 
-export const SplitPaneAtom = atom(44);
-
-//TODO: localStorage
+export const SplitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplitPos, (get, _) => Storage.save(get));
