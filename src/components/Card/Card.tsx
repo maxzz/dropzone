@@ -10,9 +10,9 @@ import UICardFormButton from './UICard/UICardFormButton';
 function FormContent({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number> }) {
     return (
         <div className="">
-            <div className="pt-2 font-bold border-b border-gray-500">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
+            <div className="pt-2 font-bold border-b border-gray-400">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
             <FormOptions formDatum={formDatum} selectedRowAtom={selectedRowAtom}/>
-            <div className="font-bold border-t border-gray-500"></div>
+            {/* <div className="font-bold border-t border-gray-400" style={{boxShadow: '0 0 2px 0 #0008'}}></div> */}
             <FormFields formDatum={formDatum} selectedRowAtom={selectedRowAtom}/>
         </div>
     );

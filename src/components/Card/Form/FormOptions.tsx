@@ -37,7 +37,7 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
     const [small, setSmall] = React.useState(true);
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
-        <div className="relative my-1 flex justify-between text-xs leading-5">
+        <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
                 <FormOptionDetection formDatum={formDatum} />
                 <FormOptionPool names_ext={detection.names_ext} />
@@ -45,7 +45,7 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="" onClick={() => setSmall((v) => !v)}>
-                <FieldRowPreview form={meta} selected={selectedRow} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} 
+                <FieldRowPreview form={meta} selected={selectedRow} small={small} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`} 
                     onSelected={(selected: number) => setSelectedRow(selected)} 
                 />
             </div>

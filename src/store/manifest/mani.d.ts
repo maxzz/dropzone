@@ -14,7 +14,7 @@ declare module Mani {
         password?: boolean,     // "1"
         useit?: boolean,        // "1"
 
-        rdir?: 'in' | 'out';
+        rfield?: 'in' | 'out';
         rfieldindex?: number;   // "2"
         
         controltosubmitdata?: boolean;
