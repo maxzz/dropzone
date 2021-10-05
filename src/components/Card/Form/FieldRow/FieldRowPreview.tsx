@@ -69,15 +69,16 @@ function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: Previ
                     `}
                     style={rect.f ? {} : stylesRect}
                     onClick={(event) => {
-                        console.log({...rect}, 'ddddd', onSelected && rect.f);
-                        
-                        if (onSelected && rect.f) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            console.log('prevent');
+                        if (onSelected) {
+                            rect.f && onSelected(rect.f);
+                        } else {
+                            if (rect.f) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                console.log('prevent');
+                            }
                         }
-
-                        //onSelected && rect.f && onSelected(rect.f);
+                        console.log({...rect}, 'ddddd', onSelected && rect.f);
                     }}
                 >
                     {!small && <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>}
