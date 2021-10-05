@@ -70,11 +70,10 @@ function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: Previ
                     style={rect.f ? {} : stylesRect}
                     onClick={(event) => {
                         if (onSelected) {
-                            rect.f && onSelected(rect.f);
-                        } else {
                             if (rect.f) {
                                 event.preventDefault();
                                 event.stopPropagation();
+                                rect.f && onSelected(idx);
                                 console.log('prevent');
                             }
                         }

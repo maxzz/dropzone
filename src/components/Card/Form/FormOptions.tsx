@@ -1,4 +1,4 @@
-import { PrimitiveAtom } from 'jotai';
+import { PrimitiveAtom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import React from 'react';
 import { FormDatum } from '../CardDatum';
@@ -35,7 +35,7 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
     const detection = form?.detection || {};
     const options = form?.options || {};
     const [small, setSmall] = React.useState(true);
-    const selectedRow = useAtomValue(selectedRowAtom);
+    const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
         <div className="relative my-1 flex justify-between text-xs leading-5">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
@@ -45,7 +45,11 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="" onClick={() => setSmall((v) => !v)}>
-                <FieldRowPreview form={meta} highlight={selectedRow} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} />
+                <FieldRowPreview form={meta} highlight={selectedRow} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} 
+                    onSelected={(selected: number) => {
+                        setSelectedRow(selected);
+                    }} 
+                />
             </div>
         </div>
     );
