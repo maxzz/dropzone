@@ -28,16 +28,16 @@ type PreviewProps = {
     form: Meta.Form;
     highlight: number;
     small: boolean; // show small preview: incative background and not hover effects
+    onSelected?: (selected: number) => void;
 } & React.HTMLAttributes<SVGSVGElement>;
 
-function FieldRowPreview({ form, highlight, small, ...attrs }: PreviewProps): JSX.Element | null {
+function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
     const view = form.view;
     if (!view || !view.rects.length) {
         return null;
     }
     let { rects, bounds } = view;
-    console.log({ view });
-
+    //console.log({ view });
 
     const asbPos = true;
     if (asbPos) {
@@ -68,6 +68,17 @@ function FieldRowPreview({ form, highlight, small, ...attrs }: PreviewProps): JS
                         `}
                     `}
                     style={rect.f ? {} : stylesRect}
+                    onClick={(event) => {
+                        console.log({...rect}, 'ddddd', onSelected && rect.f);
+                        
+                        if (onSelected && rect.f) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            console.log('prevent');
+                        }
+
+                        //onSelected && rect.f && onSelected(rect.f);
+                    }}
                 >
                     {!small && <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>}
                 </rect>
