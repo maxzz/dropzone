@@ -83,14 +83,14 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
         </div>
         : <div className="flex">
             <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-600 rounded ${useit ? 'bg-gray-600 text-gray-300' : 'opacity-25'} cursor-default`}
-                title={displayname}
+                title={`Matching pattern: ${displayname}`}
             >
                 patern
             </div>
         </div>;
     const isScript = !!field.path.loc;
     return (
-        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${isSelected ?'bg-gray-400':''}`}
+        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${isSelected ? 'bg-blue-300' : ''}`}
             onClick={() => {
                 setSelectedRow(isSelected ? -1 : field.pidx);
             }}
@@ -107,7 +107,7 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript && <FieldRowPreview form={metaForm} highlight={field.pidx} small={false} onSelected={(selected: number) => {setSelectedRow(selected)}} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
+                {isScript && <FieldRowPreview form={metaForm} highlight={field.pidx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">
