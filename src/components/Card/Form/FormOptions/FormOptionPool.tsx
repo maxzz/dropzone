@@ -16,7 +16,7 @@ const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(functi
         <button
             ref={ref}
             onClick={() => !disabled && setOpen((v) => !v)}
-            className={`pl-2 pr-1 h-6 leading-6 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} ${disabled ? 'opacity-25' : ''} flex items-center`}
+            className={`pl-2 pr-1 h-6 leading-6 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} ${disabled ? 'opacity-25' : ''} flex items-center justify-between`}
         >
             <div className="">
                 pool

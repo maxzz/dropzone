@@ -21,7 +21,7 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
 
                 : <button
                     ref={buttonRef}
-                    className={`pl-2 pr-1 h-6 leading-6 inline-block text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center`}
+                    className={`pl-2 pr-1 h-6 leading-6 inline-block text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center justify-between`}
                     onClick={() => setOpen((v) => !v)}
                 >
                     <div className="">
