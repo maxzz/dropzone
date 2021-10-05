@@ -25,13 +25,13 @@ const stylesSvg = css({
 // });
 
 type PreviewProps = {
-    form: Meta.Form;
-    highlight: number;
     small: boolean; // show small preview: incative background and not hover effects
+    form: Meta.Form;
+    selected: number;
     onSelected?: (selected: number) => void;
 } & React.HTMLAttributes<SVGSVGElement>;
 
-function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
+function FieldRowPreview({ small, form, selected, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
     const view = form.view;
     if (!view || !view.rects.length) {
         return null;
@@ -46,26 +46,20 @@ function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: Previ
     }
 
     const { className, ...rest } = attrs;
-    const styles: React.CSSProperties = {
-        background: small ? 'transparent' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)'
-    };
-
-    const stylesRect: React.CSSProperties = {
-        transition: 'fill .5s .5s'
-    };
+    const styles: React.CSSProperties = { background: small ? 'transparent' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)' };
+    const stylesRect: React.CSSProperties = { transition: 'fill .5s .5s' };
 
     return (
         <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={`${stylesSvg()} ${className}`} style={styles} {...rest}>
             {rects.map((rect, idx) => (
                 <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
-                    className={`
-                        ${idx === highlight
+                    className={
+                        `${idx === selected
                             ? 'fill-[#00ff62]'
                             : rect.f
                                 ? 'fill-[#454545]'
-                                : `fill-[#0008] ${small ? '' : 'hover:fill-[#2d6865]'}
+                                : `fill-[#0008] ${small ? '' : 'hover:fill-[#2d6865]'}`}
                         `}
-                    `}
                     style={rect.f ? {} : stylesRect}
                     onClick={(event) => onSelected && rect.f && (event.stopPropagation(), onSelected(idx))}
                 >

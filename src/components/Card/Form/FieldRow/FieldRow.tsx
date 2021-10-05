@@ -39,7 +39,7 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 
                                     {/* <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}> */}
                                     <UIToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
-                                        <FieldRowPreview form={metaForm} highlight={field.pidx} small={false} />
+                                        <FieldRowPreview form={metaForm} selected={field.pidx} small={false} />
                                     </UIToggleWithPortal>
 
                                     {/* <div className="flex items-center">
@@ -107,7 +107,7 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript && <FieldRowPreview form={metaForm} highlight={field.pidx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
+                {isScript && <FieldRowPreview form={metaForm} selected={field.pidx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">
