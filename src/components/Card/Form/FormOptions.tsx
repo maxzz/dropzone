@@ -1,3 +1,5 @@
+import { PrimitiveAtom } from 'jotai';
+import { useAtomValue } from 'jotai/utils';
 import React from 'react';
 import { FormDatum } from '../CardDatum';
 import FieldRowPreview from './FieldRow/FieldRowPreview';
@@ -24,7 +26,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | null {
+function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number>; }): JSX.Element | null {
     const meta = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
     if (!meta) {
         return null;
@@ -33,6 +35,7 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | nu
     const detection = form?.detection || {};
     const options = form?.options || {};
     const [small, setSmall] = React.useState(true);
+    const selectedRow = useAtomValue(selectedRowAtom);
     return (
         <div className="relative my-1 flex justify-between text-xs leading-5">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
@@ -42,7 +45,7 @@ function FormOptions({ formDatum }: { formDatum: FormDatum; }): JSX.Element | nu
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="" onClick={() => setSmall((v) => !v)}>
-                <FieldRowPreview form={meta} highlight={-1} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} />
+                <FieldRowPreview form={meta} highlight={selectedRow} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} />
             </div>
         </div>
     );

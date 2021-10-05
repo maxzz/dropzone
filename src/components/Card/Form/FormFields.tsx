@@ -1,8 +1,9 @@
+import { PrimitiveAtom } from 'jotai';
 import React from 'react';
 import { FormDatum } from './../CardDatum';
 import FieldRow, { FieldRowOld } from './FieldRow/FieldRow';
 
-function FormFields({ formDatum }: { formDatum: FormDatum; }) {
+function FormFields({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number>; }) {
     const metaForm = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
     if (!metaForm) {
         return null;
@@ -15,7 +16,7 @@ function FormFields({ formDatum }: { formDatum: FormDatum; }) {
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
                     {/* <FieldRowOld metaForm={metaForm} field={field} /> */}
-                    <FieldRow metaForm={metaForm} field={field} />
+                    <FieldRow metaForm={metaForm} field={field} selectedRowAtom={selectedRowAtom} />
                 </React.Fragment>
             )}
             {/* <div className="font-bold border-t border-gray-500"></div> */}

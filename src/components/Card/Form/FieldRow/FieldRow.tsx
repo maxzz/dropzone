@@ -4,6 +4,7 @@ import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import { FieldFirstCol, FieldSecondCol } from '../../UICard/UITableFromObject';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
+import { PrimitiveAtom, useAtom } from 'jotai';
 
 export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rdir, rfieldindex, password, useit, } = field.mani;
@@ -70,8 +71,10 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
     );
 }
 
-function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
+function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; field: Meta.Field; selectedRowAtom: PrimitiveAtom<number>; }): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rdir, rfieldindex, password, useit, } = field.mani;
+    const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
+    const isSelected = field.pidx === selectedRow;
     const disp = type !== 'text'
         ?
         //displayname
@@ -87,7 +90,11 @@ function FieldRow({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field;
         </div>;
     const isScript = !!field.path.loc;
     return (
-        <div className="flex items-center text-xs h-6 space-x-1 overflow-hidden">
+        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${isSelected ?'bg-gray-400':''}`}
+            onClick={() => {
+                setSelectedRow(isSelected ? -1 : field.pidx);
+            }}
+        >
             {useit
                 ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
                 : <IconInputFieldChkEmpty className="w-5 h-5" />

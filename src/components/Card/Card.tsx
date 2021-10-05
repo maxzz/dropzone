@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import { FileUsAtom, foldAllCardsAtom } from '../../store/store';
 import buildCardDatum, { CardDatum, FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
@@ -7,13 +7,13 @@ import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
-function FormContent({ formDatum }: { formDatum: FormDatum; }) {
+function FormContent({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number> }) {
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-500">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
-            <FormOptions formDatum={formDatum} />
+            <FormOptions formDatum={formDatum} selectedRowAtom={selectedRowAtom}/>
             <div className="font-bold border-t border-gray-500"></div>
-            <FormFields formDatum={formDatum} />
+            <FormFields formDatum={formDatum} selectedRowAtom={selectedRowAtom}/>
         </div>
     );
 }
@@ -22,6 +22,9 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
+
+    const [selectedRowLoginAtom] = React.useState(atom(-1));
+    const [selectedRowCpassAtom] = React.useState(atom(-1));
 
     React.useEffect(() => {
         if (foldAll >= 0) {
@@ -43,8 +46,8 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
                 {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open1} onClick={Toogle} />}
                 {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open2} onClick={Toogle} />}
             </div>
-            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} />)}
-            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} />)}
+            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectedRowAtom={selectedRowLoginAtom}/>)}
+            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectedRowAtom={selectedRowCpassAtom}/>)}
         </div>
     );
 }
