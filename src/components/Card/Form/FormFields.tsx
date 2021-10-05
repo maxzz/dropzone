@@ -3,7 +3,13 @@ import React from 'react';
 import { FormDatum } from './../CardDatum';
 import FieldRow, { FieldRowOld } from './FieldRow/FieldRow';
 
-function FormFields({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number>; }) {
+type FormFieldsProps = {
+    formDatum: FormDatum;
+    selectedLoginRowAtom: PrimitiveAtom<number>;
+    selectedCPassRowAtom: PrimitiveAtom<number>;
+};
+
+function FormFields({ formDatum, selectedLoginRowAtom, selectedCPassRowAtom }: FormFieldsProps) {
     const metaForm = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
     if (!metaForm) {
         return null;
@@ -16,11 +22,12 @@ function FormFields({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sele
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
                     {/* <FieldRowOld metaForm={metaForm} field={field} /> */}
-                    <FieldRow metaForm={metaForm} field={field} selectedRowAtom={selectedRowAtom} />
+                    <FieldRow form={metaForm} field={field} selectedLoginRowAtom={selectedLoginRowAtom} selectedCPassRowAtom={selectedCPassRowAtom} />
                 </React.Fragment>
             )}
             {/* <div className="font-bold border-t border-gray-500"></div> */}
         </div>
     );
 }
+
 export default FormFields;

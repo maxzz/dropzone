@@ -7,13 +7,14 @@ import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
-function FormContent({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number> }) {
+function FormContent({ formDatum, selectedLoginRowAtom, selectedCPassRowAtom }: { formDatum: FormDatum; selectedLoginRowAtom: PrimitiveAtom<number>; selectedCPassRowAtom: PrimitiveAtom<number>; }) {
+    const previewAtom = formDatum.formIndex === 0 ? selectedLoginRowAtom : selectedCPassRowAtom;
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-400">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
-            <FormOptions formDatum={formDatum} selectedRowAtom={selectedRowAtom}/>
+            <FormOptions formDatum={formDatum} selectedRowAtom={previewAtom} />
             {/* <div className="font-bold border-t border-gray-400" style={{boxShadow: '0 0 2px 0 #0008'}}></div> */}
-            <FormFields formDatum={formDatum} selectedRowAtom={selectedRowAtom}/>
+            <FormFields formDatum={formDatum} selectedLoginRowAtom={selectedLoginRowAtom} selectedCPassRowAtom={selectedCPassRowAtom} />
         </div>
     );
 }
@@ -46,8 +47,8 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
                 {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open1} onClick={Toogle} />}
                 {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open2} onClick={Toogle} />}
             </div>
-            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectedRowAtom={selectedRowLoginAtom}/>)}
-            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectedRowAtom={selectedRowCpassAtom}/>)}
+            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectedLoginRowAtom={selectedRowLoginAtom} selectedCPassRowAtom={selectedRowCpassAtom} />)}
+            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectedLoginRowAtom={selectedRowLoginAtom} selectedCPassRowAtom={selectedRowCpassAtom} />)}
         </div>
     );
 }

@@ -71,11 +71,20 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
     );
 }
 
-function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; field: Meta.Field; selectedRowAtom: PrimitiveAtom<number>; }): JSX.Element {
+type FieldRowProps = {
+    form: Meta.Form;
+    field: Meta.Field;
+    selectedLoginRowAtom: PrimitiveAtom<number>;
+    selectedCPassRowAtom: PrimitiveAtom<number>;
+};
+
+function FieldRow({ form, field, selectedLoginRowAtom, selectedCPassRowAtom }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
-    const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
-    const isSelected = metaForm.view?.rects.length && field.pidx === selectedRow;
-    console.log({ isSelected });
+    const formAtom = form.type === 0 ? selectedLoginRowAtom : selectedCPassRowAtom;
+    console.log({form});
+    
+    const [selectedRow, setSelectedRow] = useAtom(formAtom);
+    const isSelected = form.view?.rects.length && field.pidx === selectedRow;
 
     const disp = type !== 'text'
         ?
@@ -92,7 +101,7 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
         </div>;
     const isScript = !!field.path.loc;
     return (
-        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit?'bg-[#bbffdf42]':''} ${isSelected ? '!bg-blue-200' : ''}`} // ${useit?'font-bold':''}
+        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit?'bg-[#bbffdf42]':''} ${isSelected ? '!bg-blue-200' : ''}`}
             onClick={() => {
                 setSelectedRow(isSelected ? -1 : field.pidx);
             }}
@@ -109,7 +118,7 @@ function FieldRow({ metaForm, field, selectedRowAtom }: { metaForm: Meta.Form; f
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript && <FieldRowPreview form={metaForm} selected={field.pidx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
+                {isScript && <FieldRowPreview form={form} selected={field.pidx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">
