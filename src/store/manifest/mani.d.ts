@@ -161,6 +161,7 @@ declare module Meta {       // Manifest unpacked forms, as meta data
 
     interface Form {
         mani: Mani.Form;
+        type: number;       // 0 - login; 1 - password change
         disp: Disp;
         pool: string[];
         view?: View;        // view exists only for IE and win32

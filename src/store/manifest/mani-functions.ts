@@ -209,7 +209,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isIe = (form: Mani.Form): boolean => {
         return !!form.detection?.names_ext?.match(/Internet Explorer_Server/); //old: return !!form.detection?.processname?.match(/iexplore\.exe$/);
     };
-    const createMetaForm = (form: Mani.Form): Meta.Form => {
+    const createMetaForm = (form: Mani.Form, idx: number): Meta.Form => {
         const pool: string[] = getPool(form) || [];
         const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field) => ({
             mani: field,
@@ -218,6 +218,7 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
         }));
         return {
             mani: form,
+            type: idx,
             disp: {
                 domain: urlDomain(removeQuery(form.detection?.web_ourl)),
                 isScript: isScript(fields),
