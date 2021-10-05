@@ -46,9 +46,7 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
             </div>
             <div className="" onClick={() => setSmall((v) => !v)}>
                 <FieldRowPreview form={meta} highlight={selectedRow} small={small} className={`${small ? 'w-24 h-24' : 'w-96 max-h-96'}`} 
-                    onSelected={(selected: number) => {
-                        setSelectedRow(selected);
-                    }} 
+                    onSelected={(selected: number) => setSelectedRow(selected)} 
                 />
             </div>
         </div>

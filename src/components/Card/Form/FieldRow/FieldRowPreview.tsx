@@ -37,7 +37,6 @@ function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: Previ
         return null;
     }
     let { rects, bounds } = view;
-    //console.log({ view });
 
     const asbPos = true;
     if (asbPos) {
@@ -68,17 +67,7 @@ function FieldRowPreview({ form, highlight, small, onSelected, ...attrs }: Previ
                         `}
                     `}
                     style={rect.f ? {} : stylesRect}
-                    onClick={(event) => {
-                        if (onSelected) {
-                            if (rect.f) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                rect.f && onSelected(idx);
-                                console.log('prevent');
-                            }
-                        }
-                        console.log({...rect}, 'ddddd', onSelected && rect.f);
-                    }}
+                    onClick={(event) => onSelected && rect.f && (event.stopPropagation(), onSelected(idx))}
                 >
                     {!small && <title>{`xy: ${rect.x},${rect.y} wh: ${rect.w} x ${rect.h}`}</title>}
                 </rect>
