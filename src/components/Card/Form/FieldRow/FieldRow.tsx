@@ -4,7 +4,8 @@ import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import { FieldFirstCol, FieldSecondCol } from '../../UICard/UITableFromObject';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
-import { PrimitiveAtom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
+import { SelectRowAtoms } from '../../../../store/store';
 
 export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: Meta.Field; }): JSX.Element {
     const { displayname, type, dbname, path_ext, rfield, rfieldindex, password, useit, } = field.mani;
@@ -74,16 +75,13 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 type FieldRowProps = {
     form: Meta.Form;
     field: Meta.Field;
-    selectedLoginRowAtom: PrimitiveAtom<number>;
-    selectedCPassRowAtom: PrimitiveAtom<number>;
+    selectRowAtoms: SelectRowAtoms;
 };
 
-function FieldRow({ form, field, selectedLoginRowAtom, selectedCPassRowAtom }: FieldRowProps): JSX.Element {
+function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
-    const formAtom = form.type === 0 ? selectedLoginRowAtom : selectedCPassRowAtom;
-    console.log({form});
-    
-    const [selectedRow, setSelectedRow] = useAtom(formAtom);
+    const selectInFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
+    const [selectedRow, setSelectedRow] = useAtom(selectInFormAtom);
     const isSelected = form.view?.rects.length && field.ridx === selectedRow;
 
     const disp = type !== 'text'
@@ -106,7 +104,7 @@ function FieldRow({ form, field, selectedLoginRowAtom, selectedCPassRowAtom }: F
                 setSelectedRow(isSelected ? -1 : field.ridx);
             }}
         >
-            <div className="" title={`Use it or not use. Field index: ${1}`}>
+            <div className="" title={`Use it or not use. Field index: ${field.pidx}`}>
                 {useit
                     ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
                     : <IconInputFieldChkEmpty className="w-5 h-5" />

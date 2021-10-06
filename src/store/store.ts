@@ -1,4 +1,4 @@
-import { atom, Getter, WritableAtom } from 'jotai';
+import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
 import atomWithCallback from '../hooks/atomsX';
 import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
@@ -109,6 +109,13 @@ export const foldAllCardsAtom = atom(
         set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
     }
 );
+
+// Fields selection
+
+export type SelectRowAtoms = {
+    loginAtom: PrimitiveAtom<number>;
+    cpassAtom: PrimitiveAtom<number>;
+};
 
 // Cache
 

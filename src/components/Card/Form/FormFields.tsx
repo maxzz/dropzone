@@ -1,15 +1,14 @@
-import { PrimitiveAtom } from 'jotai';
 import React from 'react';
+import { SelectRowAtoms } from '../../../store/store';
 import { FormDatum } from './../CardDatum';
 import FieldRow, { FieldRowOld } from './FieldRow/FieldRow';
 
 type FormFieldsProps = {
     formDatum: FormDatum;
-    selectedLoginRowAtom: PrimitiveAtom<number>;
-    selectedCPassRowAtom: PrimitiveAtom<number>;
+    selectRowAtoms: SelectRowAtoms;
 };
 
-function FormFields({ formDatum, selectedLoginRowAtom, selectedCPassRowAtom }: FormFieldsProps) {
+function FormFields({ formDatum, selectRowAtoms }: FormFieldsProps) {
     const metaForm = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
     if (!metaForm) {
         return null;
@@ -22,7 +21,7 @@ function FormFields({ formDatum, selectedLoginRowAtom, selectedCPassRowAtom }: F
                 <React.Fragment key={idx}>
                     {/* <FieldPreview form={metaForm} field={field} /> */}
                     {/* <FieldRowOld metaForm={metaForm} field={field} /> */}
-                    <FieldRow form={metaForm} field={field} selectedLoginRowAtom={selectedLoginRowAtom} selectedCPassRowAtom={selectedCPassRowAtom} />
+                    <FieldRow form={metaForm} field={field} selectRowAtoms={selectRowAtoms} />
                 </React.Fragment>
             )}
             {/* <div className="font-bold border-t border-gray-500"></div> */}

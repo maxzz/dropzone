@@ -1,20 +1,20 @@
 import React from 'react';
-import { atom, PrimitiveAtom, useAtom } from 'jotai';
-import { FileUsAtom, foldAllCardsAtom } from '../../store/store';
+import { atom, useAtom } from 'jotai';
+import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms } from '../../store/store';
 import buildCardDatum, { CardDatum, FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
 import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
-function FormContent({ formDatum, selectedLoginRowAtom, selectedCPassRowAtom }: { formDatum: FormDatum; selectedLoginRowAtom: PrimitiveAtom<number>; selectedCPassRowAtom: PrimitiveAtom<number>; }) {
-    const previewAtom = formDatum.formIndex === 0 ? selectedLoginRowAtom : selectedCPassRowAtom;
+function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; selectRowAtoms: SelectRowAtoms; }) {
+    const previewAtom = formDatum.formIndex === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-400">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
             <FormOptions formDatum={formDatum} selectedRowAtom={previewAtom} />
             {/* <div className="font-bold border-t border-gray-400" style={{boxShadow: '0 0 2px 0 #0008'}}></div> */}
-            <FormFields formDatum={formDatum} selectedLoginRowAtom={selectedLoginRowAtom} selectedCPassRowAtom={selectedCPassRowAtom} />
+            <FormFields formDatum={formDatum} selectRowAtoms={selectRowAtoms} />
         </div>
     );
 }
@@ -24,8 +24,10 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open2, setOpen2] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
 
-    const [selectedRowLoginAtom] = React.useState(atom(-1));
-    const [selectedRowCpassAtom] = React.useState(atom(-1));
+    const [selectRowAtoms] = React.useState({
+        loginAtom: atom(-1),
+        cpassAtom: atom(-1),
+    })
 
     React.useEffect(() => {
         if (foldAll >= 0) {
@@ -47,8 +49,8 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
                 {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open1} onClick={Toogle} />}
                 {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open2} onClick={Toogle} />}
             </div>
-            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectedLoginRowAtom={selectedRowLoginAtom} selectedCPassRowAtom={selectedRowCpassAtom} />)}
-            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectedLoginRowAtom={selectedRowLoginAtom} selectedCPassRowAtom={selectedRowCpassAtom} />)}
+            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
+            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
         </div>
     );
 }
