@@ -8,9 +8,10 @@ import UIUpDownIcon from '../../../UI/UIUpDownIcon';
 type DropDownButtonProps = {
     open?: boolean;
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+    text: string;
 };
 
-const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen }, ref) {
+const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
     const disabled = !setOpen;
     return (
         <button
@@ -19,7 +20,7 @@ const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(functi
             className={`pl-2 pr-1 h-6 leading-6 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} ${disabled ? 'opacity-25' : ''} flex items-center justify-between`}
         >
             <div className="">
-                pool
+                {text}
             </div>
 
             <UIUpDownIcon open={open} className="list-owner w-4 h-4 pt-0.5" />
@@ -37,7 +38,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
     return (
         <>
-            <DropDownButton ref={setReferenceElm} open={open} setOpen={setOpen} />
+            <DropDownButton text={"pool"} ref={setReferenceElm} open={open} setOpen={setOpen} />
 
             {open &&
                 ReactDOM.createPortal(
@@ -53,7 +54,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
 function FormOptionPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
-        return <DropDownButton />;
+        return <DropDownButton text={"pool"} />;
     }
     names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
     let items = (names_ext || '').split('●');
