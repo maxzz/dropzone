@@ -72,6 +72,7 @@ export const SetFilesAtom = atom(
         });
         set(filesAtom, dropped);
         set(updateCacheAtom);
+        set(rightPanelAtom, undefined);
         set(_foldAllCardsAtom, -1);
     }
 );
@@ -97,8 +98,9 @@ export const clearFilesAtom = atom(
     }
 )
 
-// Files toggle folding. TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
+// Files toggle folding.
 
+//TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
 export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
 
 export const foldAllCardsAtom = atom(
@@ -168,7 +170,7 @@ const updateCacheAtom = atom(
     }
 );
 
-// Filers
+// Filters
 
 export const showNormalManiAtom = atom(true);
 export const showManualManiAtom = atom(true);
