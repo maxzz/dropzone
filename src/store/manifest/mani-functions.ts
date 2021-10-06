@@ -129,7 +129,7 @@ export namespace FieldPath {
                 fields.forEach((field) => {
                     const fieldLocs = (field.path.loc || '').split('|');
                     fieldLocs.forEach(loc => uniqueLocs.add(loc));
-                    field.pidx = fieldLocs[fieldLocs.length - 1] as any; // temp store string as number
+                    field.ridx = fieldLocs[fieldLocs.length - 1] as any; // temp store string as number
                 });
 
                 let rects = Array.from(uniqueLocs).map(str2loc).filter(loc => loc.w || loc.h);
@@ -137,8 +137,8 @@ export namespace FieldPath {
 
                 const rectStrs = rects.map(loc2str);
                 fields.forEach((field) => {
-                    field.pidx = rectStrs.findIndex((locStr) => locStr === field.pidx as any); // restore str to number
-                    rects[field.pidx] && (rects[field.pidx].f = 1);
+                    field.ridx = rectStrs.findIndex((locStr) => locStr === field.ridx as any); // restore str to number
+                    rects[field.ridx] && (rects[field.ridx].f = 1);
                 });
 
                 return { rects, bounds, };
@@ -211,10 +211,11 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
     };
     const createMetaForm = (form: Mani.Form, idx: number): Meta.Form => {
         const pool: string[] = getPool(form) || [];
-        const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field) => ({
+        const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field, idx: number) => ({
             mani: field,
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
-            pidx: 0,
+            pidx: idx,
+            ridx: 0,
         }));
         return {
             mani: form,

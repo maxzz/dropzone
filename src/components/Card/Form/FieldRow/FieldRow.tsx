@@ -39,7 +39,7 @@ export function FieldRowOld({ metaForm, field }: { metaForm: Meta.Form; field: M
 
                                     {/* <ToggleWithPortal toggle={<div className="w-[14px] h-[14px]">text</div>}> */}
                                     <UIToggleWithPortal toggle={<IconPreview className="w-[14px] h-[14px]" />}>
-                                        <FieldRowPreview form={metaForm} selected={field.pidx} small={false} />
+                                        <FieldRowPreview form={metaForm} selected={field.ridx} small={false} />
                                     </UIToggleWithPortal>
 
                                     {/* <div className="flex items-center">
@@ -84,7 +84,7 @@ function FieldRow({ form, field, selectedLoginRowAtom, selectedCPassRowAtom }: F
     console.log({form});
     
     const [selectedRow, setSelectedRow] = useAtom(formAtom);
-    const isSelected = form.view?.rects.length && field.pidx === selectedRow;
+    const isSelected = form.view?.rects.length && field.ridx === selectedRow;
 
     const disp = type !== 'text'
         ?
@@ -103,13 +103,15 @@ function FieldRow({ form, field, selectedLoginRowAtom, selectedCPassRowAtom }: F
     return (
         <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit?'bg-[#bbffdf42]':''} ${isSelected ? '!bg-blue-200' : ''}`}
             onClick={() => {
-                setSelectedRow(isSelected ? -1 : field.pidx);
+                setSelectedRow(isSelected ? -1 : field.ridx);
             }}
         >
-            {useit
-                ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
-                : <IconInputFieldChkEmpty className="w-5 h-5" />
-            }
+            <div className="" title={`Use it or not use. Field index: ${1}`}>
+                {useit
+                    ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
+                    : <IconInputFieldChkEmpty className="w-5 h-5" />
+                }
+            </div>
 
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
@@ -118,7 +120,7 @@ function FieldRow({ form, field, selectedLoginRowAtom, selectedCPassRowAtom }: F
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript && <FieldRowPreview form={form} selected={field.pidx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
+                {isScript && <FieldRowPreview form={form} selected={field.ridx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">

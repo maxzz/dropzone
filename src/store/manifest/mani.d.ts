@@ -137,7 +137,8 @@ declare module Meta {       // Manifest unpacked forms, as meta data
     interface Field {
         mani: Mani.Field,
         path: Path;
-        pidx: number;       // for preview index in form.view.rects (or -1 if no found, but it should never happens if view exist)
+        pidx: number;       // index in the form
+        ridx: number;       // for preview index in form.view.rects (or -1 if no found, but it should never happens if view exist)
     }
 
     interface Disp {        // Display information about form
