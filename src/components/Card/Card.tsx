@@ -13,44 +13,32 @@ function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; sele
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-400">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
             <FormOptions formDatum={formDatum} selectedRowAtom={previewAtom} />
-            {/* <div className="font-bold border-t border-gray-400" style={{boxShadow: '0 0 2px 0 #0008'}}></div> */}
             <FormFields formDatum={formDatum} selectRowAtoms={selectRowAtoms} />
         </div>
     );
 }
 
 function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
-    const [open1, setOpen1] = React.useState(false);
-    const [open2, setOpen2] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
-
-    const [selectRowAtoms] = React.useState({
-        loginAtom: atom(-1),
-        cpassAtom: atom(-1),
-    })
+    const [selectRowAtoms] = React.useState({ loginAtom: atom(-1), cpassAtom: atom(-1), });
+    const Toogle = () => setOpen((v) => !v);
 
     React.useEffect(() => {
         if (foldAll >= 0) {
             const collapse = foldAll % 2 === 0;
-            setOpen1(collapse);
-            setOpen2(collapse);
+            setOpen(collapse);
         }
     }, [foldAll]);
 
-    function Toogle() {
-        cardDatum.hasLogin && setOpen1((v) => !v);
-        cardDatum.hasCpass && setOpen2((v) => !v);
-    }
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
-                {/* {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open1} onClick={Toogle} />}
-                {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open2} onClick={Toogle} />} */}
-                {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open1} onClick={Toogle} />}
-                {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open2} onClick={Toogle} />}
+                {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open} onClick={Toogle} />}
+                {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open} onClick={Toogle} />}
             </div>
-            {open1 && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
-            {open2 && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
+            {cardDatum.hasLogin && open && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
+            {cardDatum.hasCpass && open && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
         </div>
     );
 }
