@@ -33,19 +33,23 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
         }
     }, [foldAll]);
 
+    const nForms = cardDatum.fileUs.mani?.forms.length || 0;
+    const hasLogin = nForms > 0;
+    const hasCpass = nForms > 1;
+
     return (
         <div className="p-2 bg-gray-200 text-gray-800">
             <div className="flex items-center space-x-2 text-sm">
-                {cardDatum.hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open} onClick={Toogle} />}
-                {cardDatum.hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open} onClick={Toogle} />}
+                {hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open} onClick={Toogle} />}
+                {hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open} onClick={Toogle} />}
             </div>
-            {cardDatum.hasLogin && open && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
-            {cardDatum.hasCpass && open && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
+            {hasLogin && open && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
+            {hasCpass && open && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
         </div>
     );
 }
 
-function Card({ atom, ...props }: React.HTMLAttributes<HTMLDivElement> & { atom: FileUsAtom; }) {
+function Card({ atom, ...props }: { atom: FileUsAtom; } & React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [fileUs] = useAtom(atom);
     const cardData: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);

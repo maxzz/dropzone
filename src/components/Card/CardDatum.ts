@@ -6,10 +6,10 @@ type FormData = {
 
 export type CardDatum = {
     fileUs: FileUs;     // raw data
-    fname: string;      // manifest filename
-    title?: string;     // title by user
-    hasLogin?: boolean; // has login form
-    hasCpass?: boolean; // has change password form
+    //fname: string;      // manifest filename
+    //title?: string;     // title by user
+    // hasLogin?: boolean; // has login form
+    // hasCpass?: boolean; // has change password form
     login: FormData;    // login form
     cpass: FormData;    // change password form
 };
@@ -25,7 +25,7 @@ function buildCardDatum(fileUs: FileUs): CardDatum {
 
     let cardData: CardDatum = {
         fileUs,
-        fname: '',
+        //fname: '',
         login: {
             meta: fileUs.meta?.[0],
         },
@@ -34,10 +34,10 @@ function buildCardDatum(fileUs: FileUs): CardDatum {
         },
     };
 
-    cardData.fname = fileUs.fname;
-    cardData.title = m.forms[0]?.options.choosename;
-    cardData.hasLogin = m.forms?.length > 0;
-    cardData.hasCpass = m.forms?.length > 1;
+    //cardData.fname = fileUs.fname;
+    //cardData.title = m.forms[0]?.options.choosename;
+    // cardData.hasLogin = m.forms?.length > 0;
+    // cardData.hasCpass = m.forms?.length > 1;
 
     return cardData;
 }
