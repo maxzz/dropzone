@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormDatum } from './../CardDatum';
 import { FileUsAtom, SelectRowAtoms } from '../../../store/store';
 import FieldRow from './FieldRow/FieldRow';
 import { useAtom } from 'jotai';

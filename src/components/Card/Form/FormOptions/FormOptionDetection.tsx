@@ -1,7 +1,6 @@
 import { useAtom } from 'jotai';
 import React from 'react';
 import { FileUsAtom } from '../../../../store/store';
-import { FormDatum } from '../../CardDatum';
 import UITableFromObject from '../../UICard/UITableFromObject';
 import { ToggleWithPortal } from './FormOptionPool';
 
