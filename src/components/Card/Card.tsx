@@ -1,25 +1,24 @@
 import React from 'react';
 import { atom, useAtom } from 'jotai';
 import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms } from '../../store/store';
-import { FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
 import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
-function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; selectRowAtoms: SelectRowAtoms; }) {
+function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }) {
     return (
         <div className="">
-            <div className="pt-2 font-bold border-b border-gray-400">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
-            <FormOptions formDatum={formDatum} selectRowAtoms={selectRowAtoms} />
-            <FormFields formDatum={formDatum} selectRowAtoms={selectRowAtoms} />
+            <div className="pt-2 font-bold border-b border-gray-400">{formType === 0 ? "Login form" : "Password change form"}</div>
+            <FormOptions fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
+            <FormFields fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
         </div>
     );
 }
 
 function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
-    const [foldAll] = useAtom(foldAllCardsAtom);
+    const [openAll] = useAtom(foldAllCardsAtom);
     const [selectRowAtoms] = React.useState<SelectRowAtoms>({
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
@@ -27,14 +26,13 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const Toogle = () => setOpen((v) => !v);
 
     React.useEffect(() => {
-        if (foldAll >= 0) {
-            const collapse = foldAll % 2 === 0;
+        if (openAll >= 0) {
+            const collapse = openAll % 2 === 0;
             setOpen(collapse);
         }
-    }, [foldAll]);
+    }, [openAll]);
 
     const [fileUs] = useAtom(fileUsAtom);
-
     const nForms = fileUs.mani?.forms.length || 0;
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
@@ -48,8 +46,8 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {hasLogin && <UICardFormButton disp={disp(0)} label={label(0)} opened={open} onClick={Toogle} />}
                     {hasCpass && <UICardFormButton disp={disp(1)} label={label(1)} opened={open} onClick={Toogle} />}
                 </div>
-                {hasLogin && open && (<FormContent formDatum={{ fileUsAtom, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
-                {hasCpass && open && (<FormContent formDatum={{ fileUsAtom, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
+                {hasLogin && open && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
+                {hasCpass && open && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)}
             </div>
         }</>
     );
@@ -59,7 +57,7 @@ function Card({ fileUsAtom, ...props }: { fileUsAtom: FileUsAtom; } & React.HTML
     const { className, ...rest } = props;
     return (<>
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
-            <CardTitle atom={fileUsAtom} />
+            <CardTitle fileUsAtom={fileUsAtom} />
             <CardTopButtons fileUsAtom={fileUsAtom} />
         </div>
     </>);

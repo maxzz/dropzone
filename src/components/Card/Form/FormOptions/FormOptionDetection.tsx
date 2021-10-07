@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import React from 'react';
+import { FileUsAtom } from '../../../../store/store';
 import { FormDatum } from '../../CardDatum';
 import UITableFromObject from '../../UICard/UITableFromObject';
 import { ToggleWithPortal } from './FormOptionPool';
@@ -44,9 +45,9 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-function FormOptionDetection({ formDatum }: { formDatum: FormDatum; }) {
-    const [fileUs] = useAtom(formDatum.fileUsAtom);
-    const form = fileUs.mani?.forms[formDatum.formIndex];
+function FormOptionDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
+    const [fileUs] = useAtom(fileUsAtom);
+    const form = fileUs.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
     return (

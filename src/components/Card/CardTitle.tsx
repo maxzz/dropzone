@@ -18,8 +18,8 @@ function CardCaption({ domain }: { domain?: string; }) {
     );
 }
 
-export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
-    const fileUs = useAtomValue(atom);
+export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+    const fileUs = useAtomValue(fileUsAtom);
     const title = fileUs.mani?.forms[0]?.options.choosename;
     const domain = fileUs.meta?.[0]?.disp.domain;
 
@@ -62,17 +62,17 @@ export function CardTitleText({ atom }: { atom: FileUsAtom; }) {
     );
 }
 
-function CardTitle({ atom }: { atom: FileUsAtom; }) {
+function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
-    const isCurrent = atom === rightPanel;
+    const isCurrent = fileUsAtom === rightPanel;
     return (
         <div
             className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
-            onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
+            onClick={() => setRightPanel(!isCurrent ? fileUsAtom : undefined)}
         >
             {/* All text rows */}
             <div className="">
-                <CardTitleText atom={atom} />
+                <CardTitleText fileUsAtom={fileUsAtom} />
             </div>
 
             {/* Actions */}

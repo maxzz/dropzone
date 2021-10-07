@@ -1,8 +1,7 @@
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import React from 'react';
-import { SelectRowAtoms } from '../../../store/store';
-import { FormDatum } from '../CardDatum';
+import { FileUsAtom, SelectRowAtoms } from '../../../store/store';
 import FieldRowPreview from './FieldRow/FieldRowPreview';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
@@ -31,9 +30,9 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormOptions({ formDatum, selectRowAtoms }: { formDatum: FormDatum; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
-    const [fileUs] = useAtom(formDatum.fileUsAtom);
-    const meta = fileUs.meta?.[formDatum.formIndex];
+function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
+    const [fileUs] = useAtom(fileUsAtom);
+    const meta = fileUs.meta?.[formType];
     if (!meta) {
         return null;
     }
@@ -41,12 +40,12 @@ function FormOptions({ formDatum, selectRowAtoms }: { formDatum: FormDatum; sele
     const detection = form?.detection || {};
     const options = form?.options || {};
     const [small, setSmall] = React.useState(true);
-    const selectedRowAtom = formDatum.formIndex === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
+    const selectedRowAtom = formType === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
         <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
-                <FormOptionDetection formDatum={formDatum} />
+                <FormOptionDetection fileUsAtom={fileUsAtom} formType={formType} />
                 <FormOptionPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />

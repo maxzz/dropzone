@@ -1,17 +1,18 @@
 import React from 'react';
 import { FormDatum } from './../CardDatum';
-import { SelectRowAtoms } from '../../../store/store';
+import { FileUsAtom, SelectRowAtoms } from '../../../store/store';
 import FieldRow from './FieldRow/FieldRow';
 import { useAtom } from 'jotai';
 
 type FormFieldsProps = {
-    formDatum: FormDatum;
+    fileUsAtom: FileUsAtom;
+    formType: number; 
     selectRowAtoms: SelectRowAtoms;
 };
 
-function FormFields({ formDatum, selectRowAtoms }: FormFieldsProps) {
-    const [fileUs] = useAtom(formDatum.fileUsAtom);
-    const metaForm = fileUs.meta?.[formDatum.formIndex];
+function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
+    const [fileUs] = useAtom(fileUsAtom);
+    const metaForm = fileUs.meta?.[formType];
     if (!metaForm) {
         return null;
     }
