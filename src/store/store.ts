@@ -2,7 +2,7 @@ import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
 import atomWithCallback from '../hooks/atomsX';
 import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
-import { buildFormExs } from './manifest/mani-functions';
+import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
 import { delay, isEmpty, isManual, textFileReader } from './store-functions';
 
@@ -156,7 +156,7 @@ const updateCacheAtom = atom(
                     let meta: Meta.Form[] | undefined;
                     try {
                         mani = parseManifest(raw);
-                        meta = buildFormExs(mani);
+                        meta = buildManiMetaForms(mani);
                     } catch (error) {
                         console.log('%ctm error', 'color: red', error, '\n', file.fname, raw);
                     }

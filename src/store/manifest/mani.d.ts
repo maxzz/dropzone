@@ -167,6 +167,7 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         pool: string[];
         view?: View;        // view exists only for IE and win32
         fields: Field[];    // each item corresponds to each field
+        other: number[];    // array of ridx from another form, i.e for form.type 0 its rects indices of form.type 1, and vice versa
     }
 
 } //declare module Meta

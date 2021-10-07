@@ -92,7 +92,7 @@ export namespace FieldPath {
         }
 
         function str2loc(v: string): MPath.loc {
-            let [x, y, x2, y2 ] = v.split(' ').map(str => +str);
+            let [x, y, x2, y2] = v.split(' ').map(str => +str);
             return { x, y, w: x2 - x, h: y2 - y };
         }
 
@@ -202,7 +202,7 @@ export namespace FieldPath {
     }
 } //namespace FieldPath
 
-export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
+export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isScript = (fields: Meta.Field[]): boolean => {
         return !!fields.length && fields.some(({ path }: { path: Meta.Path; }) => path.sn);
     };
@@ -229,7 +229,15 @@ export function buildFormExs(mani: Mani.Manifest | undefined): Meta.Form[] {
             pool: pool,
             view: FieldPath.loc.utils.buildPreviewData(fields),
             fields,
+            other: [],
         };
     };
-    return !mani || !mani.forms || !mani.forms.length ? [] : mani.forms.map(createMetaForm);
+    const forms: Meta.Form[] = !mani || !mani.forms || !mani.forms.length ? [] : mani.forms.map(createMetaForm);
+
+    [0, 1].forEach((type: number) => {
+        const otherType = type === 0 ? 1 : 0;
+        forms[type].other = forms[otherType].fields.map((field) => field.ridx);
+    });
+
+    return forms;
 }

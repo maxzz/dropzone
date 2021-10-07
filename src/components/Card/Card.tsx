@@ -20,7 +20,10 @@ function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; sele
 function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open, setOpen] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
-    const [selectRowAtoms] = React.useState({ loginAtom: atom({ field: -1, form: -1 }), cpassAtom: atom({ field: -1, form: -1 }), });
+    const [selectRowAtoms] = React.useState<SelectRowAtoms>({
+        loginAtom: atom({ field: -1, form: -1 }),
+        cpassAtom: atom({ field: -1, form: -1 }),
+    });
     const Toogle = () => setOpen((v) => !v);
 
     React.useEffect(() => {
