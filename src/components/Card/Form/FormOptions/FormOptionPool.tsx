@@ -25,7 +25,7 @@ const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(functi
                 {text}
             </div>
 
-            <UIUpDownIcon open={open} className="list-owner w-4 h-4 pt-0.5" />
+            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIUpDownIcon open={open} className="list-owner w-4 h-4 pt-0.5" />}
         </button>
     );
 });
@@ -62,8 +62,8 @@ function FormOptionPool({ names_ext }: { names_ext: string | undefined; }) {
     let items = (names_ext || '').split('●');
     return (
         <ToggleWithPortal >
-            <div className="mt-1 p-2 bg-gray-300 rounded ring-1 ring-gray-400">
-                <div className="text-xs max-w-sm max-h-[40vh] overflow-auto">
+            <div className="mt-1 bg-gray-100 ring-1 ring-gray-400">
+                <div className="px-2 text-xs max-w-sm max-h-[40vh] overflow-auto shadow-2xl">
                     <div className="grid grid-cols-[auto,1fr] gap-x-2 ">
                         {items.map((item, idx) =>
                             <React.Fragment key={idx}>
