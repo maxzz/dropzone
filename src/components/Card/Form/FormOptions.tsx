@@ -6,11 +6,15 @@ import FieldRowPreview from './FieldRow/FieldRowPreview';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
 import FormOptionPool from './FormOptions/FormOptionPool';
 
+export const BtnShading: React.CSSProperties = {
+    backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
+};
+
 function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
     const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
     return (
-        <div className={`px-2 h-6 leading-6 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title}>
+        <div className={`px-2 h-6 leading-6 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title} style={BtnShading}>
             lock
         </div>
     );
@@ -20,7 +24,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
     return (
-        <div className={`px-2 h-6 leading-6 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title}>
+        <div className={`px-2 h-6 leading-6 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title} style={BtnShading}>
             QL
         </div>
     );
@@ -45,8 +49,8 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="" onClick={() => setSmall((v) => !v)}>
-                <FieldRowPreview form={meta} selected={selectedRow} small={small} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`} 
-                    onSelected={(selected: number) => setSelectedRow(selected)} 
+                <FieldRowPreview form={meta} selected={selectedRow} small={small} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
+                    onSelected={(selected: number) => setSelectedRow(selected)}
                 />
             </div>
         </div>

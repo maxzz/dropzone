@@ -1,6 +1,7 @@
 import React from 'react';
 import { useClickAway } from '../../../hooks/useElementClickAway';
 import UIUpDownIcon from '../../UI/UIUpDownIcon';
+import { BtnShading } from '../Form/FormOptions';
 
 function UIButtonWithChildren({ name, children, toggle }: { name: string | undefined; children: React.ReactNode; toggle?: React.ReactNode; }) {
     const [open, setOpen] = React.useState(false);
@@ -23,6 +24,7 @@ function UIButtonWithChildren({ name, children, toggle }: { name: string | undef
                     ref={buttonRef}
                     className={`pl-2 pr-1 h-6 leading-6 inline-block text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} flex items-center justify-between`}
                     onClick={() => setOpen((v) => !v)}
+                    style={BtnShading}
                 >
                     <div className="">
                         {name}

@@ -4,6 +4,7 @@ import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../../hooks/useElementClickAway';
 import { cpp_restore } from '../../../../store/manifest/mani-functions';
 import UIUpDownIcon from '../../../UI/UIUpDownIcon';
+import { BtnShading } from '../FormOptions';
 
 type DropDownButtonProps = {
     open?: boolean;
@@ -18,6 +19,7 @@ const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(functi
             ref={ref}
             onClick={() => !disabled && setOpen((v) => !v)}
             className={`pl-2 pr-1 h-6 leading-6 text-xs border border-gray-500 rounded ${open ? 'bg-gray-300' : ''} ${disabled ? 'opacity-25' : ''} flex items-center justify-between`}
+            style={BtnShading}
         >
             <div className="">
                 {text}
