@@ -1,8 +1,8 @@
-import { useAtom } from 'jotai';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../../../store/store';
-import UITableFromObject from '../../UICard/UITableFromObject';
 import { ToggleWithPortal } from './FormOptionPool';
+import UITableFromObject from '../../UICard/UITableFromObject';
 
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;

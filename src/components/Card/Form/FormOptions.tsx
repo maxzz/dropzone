@@ -30,18 +30,28 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
+function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }: { form: Meta.Form; formType: number; selectRowAtoms: SelectRowAtoms; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>; }) {
+    const selectedRowAtom = formType === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
+    const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
+    return (
+        <div className="" onClick={() => setSmall((v) => !v)}>
+            <FieldRowPreview small={small} form={form} selected={selectedRow.field} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
+                onSelected={(selected: number) => setSelectedRow({ field: selected, form: form.type })}
+            />
+        </div>
+    );
+}
+
 function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
     const [fileUs] = useAtom(fileUsAtom);
     const meta = fileUs.meta?.[formType];
     if (!meta) {
         return null;
     }
+    const [small, setSmall] = React.useState(true);
     const form = meta.mani;
     const detection = form?.detection || {};
     const options = form?.options || {};
-    const [small, setSmall] = React.useState(true);
-    const selectedRowAtom = formType === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
-    const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
         <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
@@ -50,11 +60,7 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
-            <div className="" onClick={() => setSmall((v) => !v)}>
-                <FieldRowPreview small={small} form={meta} selected={selectedRow.field} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
-                    onSelected={(selected: number) => setSelectedRow({ field: selected, form: meta.type })}
-                />
-            </div>
+            <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />
         </div>
     );
 }
