@@ -4,7 +4,6 @@ import { FileUsAtom, rightPanelValueAtom } from '../store/store';
 import { IconBack } from './UI/UiIcons';
 import { useUpdateAtom } from 'jotai/utils';
 import UISimpleBar from './UI/UIScrollbar';
-import 'overlayscrollbars/css/OverlayScrollbars.css';
 import { CardTitleText } from './Card/CardTitle';
 
 function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
