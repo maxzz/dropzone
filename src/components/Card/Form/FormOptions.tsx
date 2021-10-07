@@ -52,6 +52,7 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
     const form = meta.mani;
     const detection = form?.detection || {};
     const options = form?.options || {};
+    const hasFormPreview = !!meta?.view?.rects.length;
     return (
         <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
@@ -60,7 +61,7 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
-            <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />
+            {hasFormPreview && <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />}
         </div>
     );
 }
