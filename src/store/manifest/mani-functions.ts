@@ -233,6 +233,10 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         };
     };
     const forms: Meta.Form[] = !mani || !mani.forms || !mani.forms.length ? [] : mani.forms.map(createMetaForm);
-    [0, 1].forEach((type: number) => forms[type].other = forms[type === 0 ? 1 : 0].fields.map((field) => field.ridx)); // build xlinks
+    [0, 1].forEach((type: number) => { // build xlinks
+        if (forms[type]) {
+            forms[type].other = forms[type === 0 ? 1 : 0]?.fields.map((field) => field.ridx) || [];
+        }
+    });
     return forms;
 }
