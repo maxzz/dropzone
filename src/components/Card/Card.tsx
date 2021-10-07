@@ -1,7 +1,7 @@
 import React from 'react';
 import { atom, useAtom } from 'jotai';
 import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms } from '../../store/store';
-import buildCardDatum, { CardDatum, FormDatum } from './CardDatum';
+import { FormDatum } from './CardDatum';
 import CardTitle from './CardTitle';
 import FormOptions from './Form/FormOptions';
 import FormFields from './Form/FormFields';
@@ -34,7 +34,6 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     }, [foldAll]);
 
     const [fileUs] = useAtom(fileUsAtom);
-    const cardDatum: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);
 
     const nForms = fileUs.mani?.forms.length || 0;
     const hasLogin = nForms > 0;
@@ -49,8 +48,8 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {hasLogin && <UICardFormButton disp={disp(0)} label={label(0)} opened={open} onClick={Toogle} />}
                     {hasCpass && <UICardFormButton disp={disp(1)} label={label(1)} opened={open} onClick={Toogle} />}
                 </div>
-                {hasLogin && open && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
-                {hasCpass && open && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
+                {hasLogin && open && (<FormContent formDatum={{ fileUsAtom, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
+                {hasCpass && open && (<FormContent formDatum={{ fileUsAtom, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
             </div>
         }</>
     );

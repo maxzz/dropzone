@@ -2,6 +2,7 @@ import React from 'react';
 import { FormDatum } from './../CardDatum';
 import { SelectRowAtoms } from '../../../store/store';
 import FieldRow from './FieldRow/FieldRow';
+import { useAtom } from 'jotai';
 
 type FormFieldsProps = {
     formDatum: FormDatum;
@@ -9,7 +10,8 @@ type FormFieldsProps = {
 };
 
 function FormFields({ formDatum, selectRowAtoms }: FormFieldsProps) {
-    const metaForm = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
+    const [fileUs] = useAtom(formDatum.fileUsAtom);
+    const metaForm = fileUs.meta?.[formDatum.formIndex];
     if (!metaForm) {
         return null;
     }

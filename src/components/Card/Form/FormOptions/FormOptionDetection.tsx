@@ -1,3 +1,4 @@
+import { useAtom } from 'jotai';
 import React from 'react';
 import { FormDatum } from '../../CardDatum';
 import UITableFromObject from '../../UICard/UITableFromObject';
@@ -44,7 +45,8 @@ function filterOptions(options: Mani.Options) {
 }
 
 function FormOptionDetection({ formDatum }: { formDatum: FormDatum; }) {
-    const form = formDatum.cardDatum.fileUs.mani?.forms[formDatum.formIndex];
+    const [fileUs] = useAtom(formDatum.fileUsAtom);
+    const form = fileUs.mani?.forms[formDatum.formIndex];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
     return (

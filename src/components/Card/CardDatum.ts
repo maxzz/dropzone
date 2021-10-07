@@ -1,4 +1,4 @@
-import { FileUs } from '../../store/store';
+import { FileUs, FileUsAtom } from '../../store/store';
 
 type FormData = {
     meta?: Meta.Form;
@@ -10,12 +10,12 @@ export type CardDatum = {
     //title?: string;     // title by user
     // hasLogin?: boolean; // has login form
     // hasCpass?: boolean; // has change password form
-    login: FormData;    // login form
-    cpass: FormData;    // change password form
+    // login: FormData;    // login form
+    // cpass: FormData;    // change password form
 };
 
 export type FormDatum = {
-    cardDatum: CardDatum;
+    fileUsAtom: FileUsAtom;
     formIndex: number;
 }
 
@@ -26,12 +26,12 @@ function buildCardDatum(fileUs: FileUs): CardDatum {
     let cardData: CardDatum = {
         fileUs,
         //fname: '',
-        login: {
-            meta: fileUs.meta?.[0],
-        },
-        cpass: {
-            meta: fileUs.meta?.[1],
-        },
+        // login: {
+        //     meta: fileUs.meta?.[0],
+        // },
+        // cpass: {
+        //     meta: fileUs.meta?.[1],
+        // },
     };
 
     //cardData.fname = fileUs.fname;
@@ -42,4 +42,4 @@ function buildCardDatum(fileUs: FileUs): CardDatum {
     return cardData;
 }
 
-export default buildCardDatum;
+//export default buildCardDatum;

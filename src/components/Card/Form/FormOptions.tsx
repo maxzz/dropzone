@@ -32,7 +32,8 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
 }
 
 function FormOptions({ formDatum, selectRowAtoms }: { formDatum: FormDatum; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
-    const meta = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
+    const [fileUs] = useAtom(formDatum.fileUsAtom);
+    const meta = fileUs.meta?.[formDatum.formIndex];
     if (!meta) {
         return null;
     }
