@@ -17,7 +17,7 @@ function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; sele
     );
 }
 
-function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
+function CardBodyTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
     const [selectRowAtoms] = React.useState<SelectRowAtoms>({
@@ -33,32 +33,37 @@ function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
         }
     }, [foldAll]);
 
-    const nForms = cardDatum.fileUs.mani?.forms.length || 0;
+    const [fileUs] = useAtom(fileUsAtom);
+    const cardDatum: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);
+
+    const nForms = fileUs.mani?.forms.length || 0;
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
+    const disp = (type: number) => fileUs?.meta?.[type].disp;
+    const label = (type: number) => type === 0 ? 'Login form' : 'Password change form';
 
     return (
-        <div className="p-2 bg-gray-200 text-gray-800">
-            <div className="flex items-center space-x-2 text-sm">
-                {hasLogin && <UICardFormButton formDatum={{ cardDatum, formIndex: 0 }} opened={open} onClick={Toogle} />}
-                {hasCpass && <UICardFormButton formDatum={{ cardDatum, formIndex: 1 }} opened={open} onClick={Toogle} />}
+        <>{(hasLogin || hasCpass) &&
+            <div className="p-2 bg-gray-200 text-gray-800">
+                <div className="flex items-center space-x-2 text-sm">
+                    {hasLogin && <UICardFormButton disp={disp(0)} label={label(0)} opened={open} onClick={Toogle} />}
+                    {hasCpass && <UICardFormButton disp={disp(1)} label={label(1)} opened={open} onClick={Toogle} />}
+                </div>
+                {hasLogin && open && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
+                {hasCpass && open && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
             </div>
-            {hasLogin && open && (<FormContent formDatum={{ cardDatum, formIndex: 0 }} selectRowAtoms={selectRowAtoms} />)}
-            {hasCpass && open && (<FormContent formDatum={{ cardDatum, formIndex: 1 }} selectRowAtoms={selectRowAtoms} />)}
-        </div>
+        }</>
     );
 }
 
-function Card({ atom, ...props }: { atom: FileUsAtom; } & React.HTMLAttributes<HTMLDivElement>) {
+function Card({ fileUsAtom, ...props }: { fileUsAtom: FileUsAtom; } & React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    const [fileUs] = useAtom(atom);
-    const cardData: CardDatum | undefined = fileUs.mani && buildCardDatum(fileUs);
-    return (<> {cardData &&
+    return (<>
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
-            <CardTitle atom={atom} />
-            <CardBodyTopButtons cardDatum={cardData} />
+            <CardTitle atom={fileUsAtom} />
+            <CardBodyTopButtons fileUsAtom={fileUsAtom} />
         </div>
-    }</>);
+    </>);
 }
 
 export default Card;
