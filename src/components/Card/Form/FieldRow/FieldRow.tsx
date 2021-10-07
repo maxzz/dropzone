@@ -16,7 +16,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
     const selectInFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectInFormAtom);
-    const isSelected = form.view?.rects.length && field.ridx === selectedRow;
+    const isSelected = form.view?.rects.length && field.ridx === selectedRow.field;
     const isScript = !!field.path.loc;
 
     const disp = type !== 'text'
@@ -36,7 +36,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     return (
         <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
             onClick={() => {
-                setSelectedRow(isSelected ? -1 : field.ridx);
+                setSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
             }}
         >
             <div className="" title={`Use it or not use. Field index: ${field.pidx}`}>
@@ -53,7 +53,13 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript && <FieldRowPreview form={form} selected={field.ridx} small={false} onSelected={(selected: number) => { setSelectedRow(selected); }} className="w-[calc(1920px/4)] h-[calc(1200px/4)]" />}
+                {isScript &&
+                    <FieldRowPreview
+                        form={form} small={false} 
+                        selected={field.ridx} onSelected={(selected: number) => { setSelectedRow({ field: selected, form: form.type }); }}
+                        className="w-[calc(1920px/4)] h-[calc(1200px/4)]"
+                    />
+                }
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">

@@ -8,11 +8,10 @@ import FormFields from './Form/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
 function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; selectRowAtoms: SelectRowAtoms; }) {
-    const previewAtom = formDatum.formIndex === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     return (
         <div className="">
             <div className="pt-2 font-bold border-b border-gray-400">{formDatum.formIndex === 0 ? "Login form" : "Password change form"}</div>
-            <FormOptions formDatum={formDatum} selectedRowAtom={previewAtom} />
+            <FormOptions formDatum={formDatum} selectRowAtoms={selectRowAtoms} />
             <FormFields formDatum={formDatum} selectRowAtoms={selectRowAtoms} />
         </div>
     );
@@ -21,7 +20,7 @@ function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; sele
 function CardBodyTopButtons({ cardDatum }: { cardDatum: CardDatum; }) {
     const [open, setOpen] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
-    const [selectRowAtoms] = React.useState({ loginAtom: atom(-1), cpassAtom: atom(-1), });
+    const [selectRowAtoms] = React.useState({ loginAtom: atom({ field: -1, form: -1 }), cpassAtom: atom({ field: -1, form: -1 }), });
     const Toogle = () => setOpen((v) => !v);
 
     React.useEffect(() => {

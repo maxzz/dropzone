@@ -112,9 +112,14 @@ export const foldAllCardsAtom = atom(
 
 // Fields selection
 
+export type SelectRow = {
+    field: number;
+    form: number;
+}
+
 export type SelectRowAtoms = {
-    loginAtom: PrimitiveAtom<number>;
-    cpassAtom: PrimitiveAtom<number>;
+    loginAtom: PrimitiveAtom<SelectRow>;
+    cpassAtom: PrimitiveAtom<SelectRow>;
 };
 
 // Cache

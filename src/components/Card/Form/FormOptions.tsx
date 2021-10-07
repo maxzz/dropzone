@@ -1,6 +1,7 @@
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import React from 'react';
+import { SelectRowAtoms } from '../../../store/store';
 import { FormDatum } from '../CardDatum';
 import FieldRowPreview from './FieldRow/FieldRowPreview';
 import FormOptionDetection from './FormOptions/FormOptionDetection';
@@ -30,7 +31,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; selectedRowAtom: PrimitiveAtom<number>; }): JSX.Element | null {
+function FormOptions({ formDatum, selectRowAtoms }: { formDatum: FormDatum; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
     const meta = formDatum.cardDatum.fileUs.meta?.[formDatum.formIndex];
     if (!meta) {
         return null;
@@ -39,6 +40,7 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
     const detection = form?.detection || {};
     const options = form?.options || {};
     const [small, setSmall] = React.useState(true);
+    const selectedRowAtom = formDatum.formIndex === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
         <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
@@ -49,8 +51,8 @@ function FormOptions({ formDatum, selectedRowAtom }: { formDatum: FormDatum; sel
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>
             <div className="" onClick={() => setSmall((v) => !v)}>
-                <FieldRowPreview form={meta} selected={selectedRow} small={small} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
-                    onSelected={(selected: number) => setSelectedRow(selected)}
+                <FieldRowPreview small={small} form={meta} selected={selectedRow.field} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
+                    onSelected={(selected: number) => setSelectedRow({ field: selected, form: meta.type })}
                 />
             </div>
         </div>
