@@ -17,7 +17,7 @@ function FormContent({ formDatum, selectRowAtoms }: { formDatum: FormDatum; sele
     );
 }
 
-function CardBodyTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [open, setOpen] = React.useState(false);
     const [foldAll] = useAtom(foldAllCardsAtom);
     const [selectRowAtoms] = React.useState<SelectRowAtoms>({
@@ -61,7 +61,7 @@ function Card({ fileUsAtom, ...props }: { fileUsAtom: FileUsAtom; } & React.HTML
     return (<>
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
             <CardTitle atom={fileUsAtom} />
-            <CardBodyTopButtons fileUsAtom={fileUsAtom} />
+            <CardTopButtons fileUsAtom={fileUsAtom} />
         </div>
     </>);
 }
