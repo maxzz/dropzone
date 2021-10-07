@@ -2,6 +2,7 @@ import React from 'react';
 import { FormDatum } from '../../CardDatum';
 import UITableFromObject from '../../UICard/UITableFromObject';
 import UIButtonWithChildren from '../../UICard/UIButtonWithChildren';
+import { DropDownButton, ToggleWithPortal } from './FormOptionPool';
 
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
@@ -43,15 +44,32 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
+
+// function FormOptionDetection({ formDatum }: { formDatum: FormDatum; }) {
+//     const form = formDatum.cardDatum.fileUs.mani?.forms[formDatum.formIndex];
+//     const toShowDetection = filterDetection(form?.detection || {});
+//     const toShowOptions = filterOptions(form?.options || {});
+//     return (
+//         <UIButtonWithChildren name="detection">
+//             <UITableFromObject obj={toShowDetection} />
+//             <UITableFromObject obj={toShowOptions} />
+//         </UIButtonWithChildren>
+//     );
+// }
+
 function FormOptionDetection({ formDatum }: { formDatum: FormDatum; }) {
     const form = formDatum.cardDatum.fileUs.mani?.forms[formDatum.formIndex];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
     return (
-        <UIButtonWithChildren name="detection">
-            <UITableFromObject obj={toShowDetection} />
-            <UITableFromObject obj={toShowOptions} />
-        </UIButtonWithChildren>
+        <ToggleWithPortal text="detection">
+            <div className="mt-1 bg-gray-100 ring-1 ring-gray-400">
+                <div className="px-2 text-xs w-96 max-w-sm max-h-[40vh] overflow-auto shadow-2xl">
+                    <UITableFromObject obj={toShowDetection} />
+                    <UITableFromObject obj={toShowOptions} />
+                </div>
+            </div>
+        </ToggleWithPortal>
     );
 }
 

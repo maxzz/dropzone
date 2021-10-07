@@ -12,7 +12,7 @@ type DropDownButtonProps = {
     text: string;
 };
 
-const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
+export const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
     const disabled = !setOpen;
     return (
         <button
@@ -30,7 +30,7 @@ const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(functi
     );
 });
 
-function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; toggle?: React.ReactNode; }) {
+export function ToggleWithPortal({ children, text }: { children?: React.ReactNode; text: string; }) {
     const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
@@ -40,7 +40,7 @@ function ToggleWithPortal({ children, toggle }: { children?: React.ReactNode; to
 
     return (
         <>
-            <DropDownButton text={"pool"} ref={setReferenceElm} open={open} setOpen={setOpen} />
+            <DropDownButton text={text} ref={setReferenceElm} open={open} setOpen={setOpen} />
 
             {open &&
                 ReactDOM.createPortal(
@@ -61,7 +61,7 @@ function FormOptionPool({ names_ext }: { names_ext: string | undefined; }) {
     names_ext && (names_ext = decodeURI(cpp_restore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
     let items = (names_ext || '').split('●');
     return (
-        <ToggleWithPortal >
+        <ToggleWithPortal text={"pool"}>
             <div className="mt-1 bg-gray-100 ring-1 ring-gray-400">
                 <div className="px-2 text-xs max-w-sm max-h-[40vh] overflow-auto shadow-2xl">
                     <div className="grid grid-cols-[auto,1fr] gap-x-2 ">
