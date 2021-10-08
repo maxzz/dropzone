@@ -37,14 +37,13 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
     const disp = (type: number) => fileUs?.meta?.[type].disp;
-    const label = (type: number) => type === 0 ? 'Login form' : 'Password change form';
 
     return (
         <>{(hasLogin || hasCpass) &&
             <div className="p-2 bg-gray-200 text-gray-800">
                 <div className="flex items-center space-x-2 text-sm">
-                    {hasLogin && <UICardFormButton disp={disp(0)} label={label(0)} opened={open} onClick={Toogle} />}
-                    {hasCpass && <UICardFormButton disp={disp(1)} label={label(1)} opened={open} onClick={Toogle} />}
+                    {hasLogin && <UICardFormButton disp={disp(0)} opened={open} onClick={Toogle} label="Login form" />}
+                    {hasCpass && <UICardFormButton disp={disp(1)} opened={open} onClick={Toogle} label="Password change form" />}
                 </div>
                 {hasLogin && open && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
                 {hasCpass && open && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)}
