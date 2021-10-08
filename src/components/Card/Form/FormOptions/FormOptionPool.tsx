@@ -4,7 +4,7 @@ import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../../hooks/useElementClickAway';
 import { cpp_restore } from '../../../../store/manifest/mani-functions';
 import UIUpDownIcon from '../../../UI/UIUpDownIcon';
-import { BtnShading } from '../FormOptions';
+import { BtnShading } from './FormOptions';
 
 type DropDownButtonProps = {
     open?: boolean;

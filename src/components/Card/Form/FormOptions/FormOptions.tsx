@@ -1,10 +1,10 @@
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import React from 'react';
-import { FileUsAtom, SelectRowAtoms } from '../../../store/store';
-import FieldRowPreview from './FieldRow/FieldRowPreview';
-import FormOptionDetection from './FormOptions/FormOptionDetection';
-import FormOptionPool from './FormOptions/FormOptionPool';
+import { FileUsAtom, SelectRowAtoms } from '../../../../store/store';
+import FieldRowPreview from '../FormRows/FieldRowPreview';
+import FormOptionDetection from './FormOptionDetection';
+import FormOptionPool from './FormOptionPool';
 
 export const BtnShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
