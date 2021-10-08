@@ -52,7 +52,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
-            <div className="w-11 text-xs" title="Field type">{`${password ? 'psw' : type}`}</div>
+            <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
