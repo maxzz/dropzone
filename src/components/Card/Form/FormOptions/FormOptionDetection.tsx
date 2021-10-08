@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../../../store/store';
+import { restoreXml } from '../../../../store/manifest/mani-functions';
 import { ToggleWithPortal } from './FormOptionPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
 
@@ -24,7 +25,7 @@ function filterDetection(detection: Mani.Detection) {
     }
 
     processname && (processname = decodeURI(processname));
-    commandline && (commandline = decodeURI(commandline));
+    commandline && (commandline = restoreXml(decodeURI(commandline)));
 
     return {
         ...(caption && { caption }),

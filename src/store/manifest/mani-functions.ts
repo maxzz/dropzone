@@ -23,7 +23,7 @@ function removeEscapeChars(s: string, escapeChar: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
 }
 
-export function cpp_restore(s: string): string {
+export function restoreCpp(s: string): string {
     if (!s) {
         return '';
     }
@@ -41,6 +41,26 @@ export function cpp_restore(s: string): string {
         s = s.replace(_[0], _[1] as string);
     });
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::cpp_restore()
+}
+
+export function restoreXml(s: string): string {
+    if (!s) {
+        return '';
+    }
+    const html = [
+        [/&lt;/g, "<"],
+        [/&gt;/g, ">"],
+        [/&amp;/g, "&"],
+        [/&quot;/g, "\""],
+        [/&apos;/g, "\\"],
+
+        [/%0d/gi, "\r"],
+        [/%0a/g, "\n"],
+    ];
+    html.forEach(_ => {
+        s = s.replace(_[0], _[1] as string);
+    });
+    return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::xml_remove()
 }
 
 function getPool(form: Mani.Form): string[] {
@@ -64,8 +84,8 @@ export namespace FieldPath {
         let rv: MPath.p4a = {
             rnumber: 0,
             roleString: getPoolName(pool, ss[1]),
-            className: cpp_restore(getPoolName(pool, ss[2])),
-            name: cpp_restore(getPoolName(pool, ss[3]))
+            className: restoreCpp(getPoolName(pool, ss[2])),
+            name: restoreCpp(getPoolName(pool, ss[3]))
         };
         return rv;
     }
@@ -73,7 +93,7 @@ export namespace FieldPath {
     function sid(pool: string[], v: string): MPath.sid {
         let sid = {} as any;
         v.split('.').forEach((_, index) => {
-            let s = cpp_restore(getPoolName(pool, _));
+            let s = restoreCpp(getPoolName(pool, _));
             switch (index) {
                 case 0: sid.version = s; break;
                 case 1: sid.generatedId = s; break;
