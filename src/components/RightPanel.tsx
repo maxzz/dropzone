@@ -21,9 +21,9 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
                             <CardTitleText fileUsAtom={rightPanelValueAtom as FileUsAtom} />
                         </div>
                         {/* Raw data preview (+ codemirror?) */}
-                        <UISimpleBar className={`px-2 overflow-auto w-full h-full text-gray-500 cursor-default`}>
-                            <div className="text-xs bg-gray-800 text-gray-100 opacity-50">
-                                <pre>{rightPanelValue.raw}</pre>
+                        <UISimpleBar className={`px-2 overflow-auto w-full h-full text-xs text-gray-100 bg-gray-800 opacity-50 cursor-default`}>
+                            <div className="">
+                                <pre className="">{rightPanelValue.raw}</pre>
                             </div>
                         </UISimpleBar>
                     </div>
