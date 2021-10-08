@@ -12,16 +12,20 @@ function CardIcon({ isWeb }: { isWeb: boolean; }) {
     return <div className="w-6 h-6" title={`${isWeb ? 'Webiste trained with IE' : 'Windows application'} `}>{icon}</div>;
 }
 
-function CardCaption({ domain }: { domain?: string; }) {
+function CardCaption({ domain, url }: { domain?: string; url: string | undefined; }) {
     return (
-        <span className="ml-1 uppercase">{domain || 'Windows application'}</span>
+        <div className="ml-1 uppercase">
+            {url ? <a href={url} target="_blank" rel="noopener">{domain}</a> : <>{domain || 'Windows application'}</>}
+        </div>
     );
 }
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const title = fileUs.mani?.forms[0]?.options.choosename;
     const domain = fileUs.meta?.[0]?.disp.domain;
+    const loginForm = fileUs.mani?.forms[0];
+    const title = loginForm?.options.choosename;
+    const url = loginForm?.detection.web_ourl;
 
     const fname = React.useMemo(() => {
         const m = (fileUs.fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
@@ -40,13 +44,15 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <CardIcon isWeb={!!domain} />
+
                 {/* File index in all loaded files */}
                 <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
                     title="File index in all loaded files"
                 >
                     {fileUs.idx + 1}
                 </div>
-                <CardCaption domain={domain} />
+
+                <CardCaption domain={domain} url={url} />
             </div>
 
             {/* Login caption */}
@@ -75,16 +81,8 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 <CardTitleText fileUsAtom={fileUsAtom} />
             </div>
 
-            {/* Actions */}
+            {/* Card actions */}
             <div className="absolute top-3 right-2 z-10 flex">
-                {/* Show raw data button */}
-                {/* <button
-                        className="w-6 h-6 opacity-60 hover:opacity-100 select-none active:scale-[.97] block"
-                        //onClick={() => setRightPanel(!isCurrent ? atom : undefined)}
-                    >
-                        <IconInfo />
-                    </button> */}
-                {/* Card actions */}
                 <CardTitleMenu icon={
                     <div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]">
                         <IconMenuHamburger />
