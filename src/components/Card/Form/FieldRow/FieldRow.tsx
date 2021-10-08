@@ -22,7 +22,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const disp = type !== 'text'
         ?
         //displayname
-        <div className="" title={displayname}>
+        <div className="" title={`Dispaly name: ${displayname}`}>
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
         </div>
         : <div className="flex">
@@ -39,7 +39,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
                 setSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
             }}
         >
-            <div className="" title={`Use it or not use. Field index: ${field.pidx}`}>
+            <div className="" title={`To use or not to use. Field index: ${field.pidx}`}>
                 {useit
                     ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
                     : <IconInputFieldChkEmpty className="w-5 h-5" />
@@ -49,7 +49,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
             {/* bg-blue-200 */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
-            <div className="w-11 text-xs">{`${password ? 'psw' : type}`}</div>
+            <div className="w-11 text-xs" title="Field type">{`${password ? 'psw' : type}`}</div>
 
             <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
