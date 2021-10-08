@@ -1,5 +1,5 @@
 declare module Mani {
-    type FieldType = 'edit' | 'check' | 'button' | 'list' | 'text';
+    type FieldType = 'edit' | 'button' | 'list'| 'combo' | 'check' | 'radio' | 'text';
 
     interface Field {
         displayname?: string,
