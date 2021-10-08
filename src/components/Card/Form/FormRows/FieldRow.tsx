@@ -4,21 +4,23 @@ import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
 import { useAtom } from 'jotai';
-import { SelectRowAtoms } from '../../../../store/store';
+import { FileUs, SelectRowAtoms } from '../../../../store/store';
 
 type FieldRowProps = {
+    fileUs: FileUs;
     form: Meta.Form;
     field: Meta.Field;
     selectRowAtoms: SelectRowAtoms;
 };
 
-function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
+function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
-    const selectInFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
-    const [selectedRow, setSelectedRow] = useAtom(selectInFormAtom);
+
+    const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
+    const [selectedRow, setSelectedRow] = useAtom(selectThisFormAtom);
+
     const isSelected = form.view?.rects.length && field.ridx === selectedRow.field;
     const isScript = !!field.path.loc;
-
     const disp = type === 'text'
         ?
         <div className="flex">
@@ -36,11 +38,13 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
         </div>
         ;
 
+    function selectThisRow() {
+        setSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
+    }
+
     return (
         <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
-            onClick={() => {
-                setSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
-            }}
+            onClick={selectThisRow}
         >
             <div className="" title={`To use or not to use. Field index: ${field.pidx}`}>
                 {useit
@@ -81,7 +85,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
             </div>
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '' : 'opacity-25'}`}
-                title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}`: ''}`}
+                title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
             >
                 value
             </div>
