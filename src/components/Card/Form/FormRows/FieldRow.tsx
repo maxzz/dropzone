@@ -26,7 +26,8 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
         </div>
         : <div className="flex">
-            <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-600 rounded ${useit ? 'bg-gray-600 text-gray-300' : 'opacity-25'} cursor-default`}
+            <div 
+                className={`px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm ${useit ? 'bg-gray-300 text-gray-800' : 'opacity-25'} cursor-default`}
                 title={`Matching pattern: ${displayname}`}
             >
                 patern
@@ -51,7 +52,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
 
             <div className="w-11 text-xs" title="Field type">{`${password ? 'psw' : type}`}</div>
 
-            <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[17px] h-[17px] ${isScript ? '' : 'opacity-25'}`} />}>
+            <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${isScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
                 {isScript &&
                     <FieldRowPreview
