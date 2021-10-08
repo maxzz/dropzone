@@ -13,26 +13,28 @@ type FieldRowProps = {
 };
 
 function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
-    const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
+    const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
     const selectInFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectInFormAtom);
     const isSelected = form.view?.rects.length && field.ridx === selectedRow.field;
     const isScript = !!field.path.loc;
 
-    const disp = type !== 'text'
+    const disp = type === 'text'
         ?
-        //displayname
-        <div className="" title={`Dispaly name: ${displayname}`}>
-            {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
-        </div>
-        : <div className="flex">
-            <div 
+        <div className="flex">
+            <div
                 className={`px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm ${useit ? 'bg-gray-300 text-gray-800' : 'opacity-25'} cursor-default`}
                 title={`Matching pattern: ${displayname}`}
             >
                 patern
             </div>
-        </div>;
+        </div>
+        :
+        //displayname
+        <div className="" title={`Dispaly name: ${displayname}`}>
+            {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
+        </div>
+        ;
 
     return (
         <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
@@ -56,7 +58,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
                 {/* title="preview" */}
                 {isScript &&
                     <FieldRowPreview
-                        form={form} small={false} 
+                        form={form} small={false}
                         selected={field.ridx} onSelected={(selected: number) => { setSelectedRow({ field: selected, form: form.type }); }}
                         className="w-[calc(1920px/4)] h-[calc(1200px/4)]"
                     />
@@ -79,7 +81,7 @@ function FieldRow({ form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
             </div>
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '' : 'opacity-25'}`}
-                title={`Field value: ${value}`}
+                title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}`: ''}`}
             >
                 value
             </div>
