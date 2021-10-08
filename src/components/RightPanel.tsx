@@ -18,7 +18,7 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
                     <div className="w-full h-full flex flex-col space-y-2">
                         {/* Card title */}
                         <div className="p-2 text-gray-100 bg-gray-900 border-b-[0.5px] border-gray-600">
-                            <CardTitleText atom={rightPanelValueAtom as FileUsAtom} />
+                            <CardTitleText fileUsAtom={rightPanelValueAtom as FileUsAtom} />
                         </div>
                         {/* Raw data preview (+ codemirror?) */}
                         <UISimpleBar className={`px-2 overflow-auto w-full h-full text-gray-500 cursor-default`}>
