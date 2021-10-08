@@ -15,9 +15,7 @@ function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
     if (!metaForm) {
         return null;
     }
-    return (<>
-        {metaForm.fields?.map((field, idx) => <FieldRow form={metaForm} field={field} selectRowAtoms={selectRowAtoms} key={idx} />)}
-    </>);
+    return (<>{metaForm.fields?.map((field, idx) => <FieldRow form={metaForm} field={field} selectRowAtoms={selectRowAtoms} key={idx} />)}</>);
 }
 
 export default FormFields;

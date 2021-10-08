@@ -52,12 +52,12 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
 function Card({ fileUsAtom, ...props }: { fileUsAtom: FileUsAtom; } & React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    return (<>
+    return (
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
             <CardTitle fileUsAtom={fileUsAtom} />
             <CardTopButtons fileUsAtom={fileUsAtom} />
         </div>
-    </>);
+    );
 }
 
 export default Card;
