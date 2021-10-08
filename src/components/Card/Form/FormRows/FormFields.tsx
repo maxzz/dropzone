@@ -1,7 +1,7 @@
 import React from 'react';
+import { useAtom } from 'jotai';
 import { FileUsAtom, SelectRowAtoms } from '../../../../store/store';
 import FieldRow from './FieldRow';
-import { useAtom } from 'jotai';
 
 type FormFieldsProps = {
     fileUsAtom: FileUsAtom;
@@ -16,13 +16,13 @@ function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
         return null;
     }
     return (
-        <div className="">
+        <>
             {metaForm.fields?.map((field, idx) =>
                 <React.Fragment key={idx}>
                     <FieldRow form={metaForm} field={field} selectRowAtoms={selectRowAtoms} />
                 </React.Fragment>
             )}
-        </div>
+        </>
     );
 }
 

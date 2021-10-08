@@ -7,13 +7,11 @@ import FormFields from './Form/FormRows/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }) {
-    return (
-        <div className="">
-            <div className="pt-2 font-bold border-b border-gray-400">{formType === 0 ? "Login form" : "Password change form"}</div>
-            <FormOptions fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
-            <FormFields fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
-        </div>
-    );
+    return (<>
+        <div className="pt-2 font-bold border-b border-gray-400">{formType === 0 ? "Login form" : "Password change form"}</div>
+        <FormOptions fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
+        <FormFields fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
+    </>);
 }
 
 function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
