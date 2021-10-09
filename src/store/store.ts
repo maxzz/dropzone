@@ -76,6 +76,10 @@ export const SetFilesAtom = atom(
                 file: file,
             });
         });
+        set(totalNormalManiAtom, 0);
+        set(totalManualManiAtom, 0);
+        set(totalEmptyManiAtom, 0);
+        
         set(filesAtom, dropped);
         set(updateCacheAtom);
         set(rightPanelAtom, undefined);
@@ -101,6 +105,9 @@ export const clearFilesAtom = atom(
     (get, set) => {
         set(filesAtom, []);
         set(rightPanelAtom, undefined);
+        set(totalNormalManiAtom, 0);
+        set(totalManualManiAtom, 0);
+        set(totalEmptyManiAtom, 0);
     }
 )
 
@@ -132,11 +139,12 @@ export type SelectRowAtoms = {
 
 function countManifestTypes(get: Getter) {
     const files = get(filesAtom);
+    //console.log('count');
     const res = files.reduce((acc, cur: FileUsAtom) => {
-        const m: FileUs = get(cur);
-        if (isEmpty(m)) {
+        const fileUs: FileUs = get(cur);
+        if (isEmpty(fileUs)) {
             acc.empty++;
-        } else if (isManual(m)) {
+        } else if (isManual(fileUs)) {
             acc.manual++;
         } else {
             acc.normal++;
