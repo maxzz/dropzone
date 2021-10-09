@@ -73,8 +73,10 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
     const [busy] = useAtom(busyAtom);
     const total = files.length;
     return (
-        <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
-        style={{ transition: 'background-color .5s 1s' }}
+        <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}
+        // <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
+        // <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ${busy ? 'ring-yellow-400' : 'ring-gray-50'} rounded-md`}
+        // style={{ transition: 'background-color .5s 1s' }}
         >
 
             <div className="flex items-center my-0.5">
@@ -107,7 +109,8 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                         </button>
 
                         {/* <div className="ml-2">Loading...</div> */}
-                        {busy && <div className="ml-2">Loading...</div>}
+                        {/* {busy && <div className="ml-2">Loading...</div>} */}
+                        {busy && <div className={`ml-2 ${busy ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity .5s 1s' }}>Loading...</div>}
                     </>
                 }
             </div>
