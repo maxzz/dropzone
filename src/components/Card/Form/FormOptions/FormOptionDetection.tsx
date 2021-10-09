@@ -6,7 +6,7 @@ import { ToggleWithPortal } from './FormOptionPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
 
 function filterDetection(detection: Mani.Detection) {
-    let { caption, web_ourl, web_murl, web_qurl, web_checkurl, names_ext, processname, commandline, } = detection;
+    let { caption, web_ourl, web_murl, web_qurl, web_checkurl, dlg_class, names_ext, processname, commandline, } = detection;
 
     // 1. fix duplicated urls
     let urlname = '';
@@ -29,6 +29,7 @@ function filterDetection(detection: Mani.Detection) {
 
     return {
         ...(caption && { caption }),
+        ...(dlg_class && { dlg_class }),
         ...(web_murl && { [`url m${urlname}`]: web_murl }),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),
