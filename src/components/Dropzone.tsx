@@ -13,9 +13,9 @@ function fileExt(filename: string = ''): string {
 
 function nameLengthValidator(file: File) {
     const maxSize = 30000;
-    console.log('drop', file);
+    //console.log('drop', file);
 
-    const ext = fileExt(file.name);
+    const ext = fileExt(file.name).toLowerCase();
     if (ext !== 'dpm' && ext !== 'dpn') {
         return {
             code: "unknown-type",
@@ -42,7 +42,7 @@ export function DropzoneBase({ className, classNameActive, stylesActive = {}, ch
     const setFiles = useUpdateAtom(SetFilesAtom);
 
     const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[], event: DropEvent) => {
-        console.log('dropped', acceptedFiles, rejectedFiles, event);
+        //console.log('dropped', acceptedFiles, rejectedFiles, event);
         setFiles(acceptedFiles);
 
         if (rejectedFiles.length) {

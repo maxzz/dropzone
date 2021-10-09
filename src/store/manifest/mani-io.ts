@@ -6,7 +6,7 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
     // 0. convert XML .dpm object to manifest format.
 
     manifest.descriptor = (manifest.descriptor as any)?._attributes || {};
-    manifest.forms = (manifest.forms as any).form || [];
+    manifest.forms = (manifest.forms as any)?.form || [];
 
     if (!Array.isArray(manifest.forms)) {
         manifest.forms = [manifest.forms];
