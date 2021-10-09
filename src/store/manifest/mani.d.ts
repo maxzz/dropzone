@@ -1,5 +1,5 @@
 declare module Mani {
-    type FieldType = 'edit' | 'button' | 'list'| 'combo' | 'check' | 'radio' | 'text';
+    type FieldType = 'edit' | 'button' | 'list' | 'combo' | 'check' | 'radio' | 'text';
 
     interface Field {
         displayname?: string,
@@ -10,17 +10,24 @@ declare module Mani {
 
         value?: string;
         choosevalue?: string;
-        
+
         password?: boolean,     // "1"
         useit?: boolean,        // "1"
 
         rfield?: 'in' | 'out';
         rfieldindex?: number;   // "2"
         rfieldform?: string;    // refs from login form
-        
+
         controltosubmitdata?: boolean;
         ids?: string;
         options?: string;
+    }
+
+    enum FORMNAME {             // predefined form names
+        noname = -1,
+        signon = 0,
+        pchange = 1,
+        fieldcatalog = -2,
     }
 
     interface FContext {
