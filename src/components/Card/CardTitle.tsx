@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
-import { IconAppWebIE, IconAppWindows, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
+import { IconAppWebIE, IconAppWindows, IconFolder, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
@@ -61,8 +61,11 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             </div>
 
             {/* Filename */}
-            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title={`Filename: ${fileUs.fpath || fileUs.fname}`}>
-                {fname}
+            <div className="flex items-center justify-between">
+                <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title={`${fileUs.fpath ? `Folder: "${fileUs.fpath}"` : `Filename: ${fileUs.fname}`}`}>
+                    {fname}
+                </div>
+                {fileUs.fpath && <IconFolder className="w-4 h-4 mr-1 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
             </div>
         </>
     );
