@@ -23,7 +23,7 @@ declare module Mani {
         options?: string;
     }
 
-    const enum FORMNAME {             // predefined form names
+    enum FORMNAME {             // predefined form names
         noname = -1,
         signon = 0,
         pchange = 1,
