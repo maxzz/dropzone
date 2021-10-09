@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { clearFilesAtom, SetFilesAtom } from '../store/store';
+import { clearFilesAtom, setFilesAtom } from '../store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
@@ -39,7 +39,7 @@ type DropzoneBaseProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 export function DropzoneBase({ className, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
-    const setFiles = useUpdateAtom(SetFilesAtom);
+    const setFiles = useUpdateAtom(setFilesAtom);
 
     const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[], event: DropEvent) => {
         //console.log('dropped', acceptedFiles, rejectedFiles, event);

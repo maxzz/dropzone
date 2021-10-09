@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { SplitPaneAtom } from '../../store/store';
+import { splitPaneAtom } from '../../store/store';
 import './SimpleSplitPane.css';
 
 const baseStyle: React.CSSProperties = {
@@ -99,7 +99,7 @@ function SimpleSplitPane(props: SplitPaneProps): JSX.Element {
     // Position is really the size (width or height) of the first (left or top)
     // panel, as percentage of the parent containers size. The remaining elements
     // are sized and layed out through flexbox.
-    const [position, setPosition] = useAtom(SplitPaneAtom);
+    const [position, setPosition] = useAtom(splitPaneAtom);
     return (
         <SimpleSplitPaneBody position={position} setPosition={setPosition} {...props} />
     );

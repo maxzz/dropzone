@@ -49,7 +49,7 @@ namespace Storage {
 
     export const save = debounce(function _save(get: Getter) {
         let newStore: Store = {
-            vSplitPos: get(SplitPaneAtom),
+            vSplitPos: get(splitPaneAtom),
         };
         localStorage.setItem(KEY, JSON.stringify(newStore));
     }, 1000);
@@ -59,7 +59,7 @@ namespace Storage {
 
 export const filesAtom = atom<FileUsAtom[]>([]);
 
-export const SetFilesAtom = atom(
+export const setFilesAtom = atom(
     null,
     (get, set, accepterFiles: File[]) => {
         const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
@@ -76,10 +76,6 @@ export const SetFilesAtom = atom(
                 file: file,
             });
         });
-        set(totalNormalManiAtom, 0);
-        set(totalManualManiAtom, 0);
-        set(totalEmptyManiAtom, 0);
-        
         set(filesAtom, dropped);
         set(updateCacheAtom);
         set(rightPanelAtom, undefined);
@@ -157,6 +153,10 @@ function countManifestTypes(get: Getter) {
 const updateCacheAtom = atom(
     null,
     async (get, set) => {
+        set(totalNormalManiAtom, 0);
+        set(totalManualManiAtom, 0);
+        set(totalEmptyManiAtom, 0);
+
         const files = get(filesAtom);
 
         for (let fileAtom of files) {
@@ -217,6 +217,10 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
     }
 );
 
+// Busy indicator
+
+export const busyAtom = atom(false);
+
 // Split pane position
 
-export const SplitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplitPos, (get, _) => Storage.save(get));
+export const splitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplitPos, (get, _) => Storage.save(get));
