@@ -5,6 +5,7 @@ import FormRowTypeIcon from './FieldRowTypeIcon';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
 import { useAtom } from 'jotai';
 import { FileUs, SelectRowAtoms } from '../../../../store/store';
+import { useUpdateAtom } from 'jotai/utils';
 
 type FieldRowProps = {
     fileUs: FileUs;
@@ -17,11 +18,13 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
 
     const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
-    const [selectedRow, setSelectedRow] = useAtom(selectThisFormAtom);
+    const selectThemFormAtom = form.type === 0 ? selectRowAtoms.cpassAtom : selectRowAtoms.loginAtom;
+    const [thisSelectedRow, setThisSelectedRow] = useAtom(selectThisFormAtom);
+    const setThemSelectedRow = useUpdateAtom(selectThemFormAtom);
 
-    const isSelected = form.view?.rects.length && field.ridx === selectedRow.field;
-    const isScript = !!field.path.loc;
-    const disp = type === 'text'
+    const isThisScript = !!field.path.loc;
+    const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
+    const columnDispText = type === 'text'
         ?
         <div className="flex">
             <div
@@ -37,9 +40,30 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
         </div>
         ;
+    const columnRefTitle = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
+
+    console.log({...thisSelectedRow, r: form.other});
+    
 
     function selectThisRow() {
-        setSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
+        console.log('row');
+        
+        // if (rfieldindex) {
+        //     const themType = form.type === 0 ? 1 : 0;
+        //     const otherLocs = fileUs.meta?.[themType].other;
+        //     if (otherLocs) {
+        //         const otherLoc = otherLocs[rfieldindex];
+        //         setThemSelectedRow({ field: otherLoc ? otherLoc : -1, form: themType });
+        //     }
+        // }
+        if (rfieldindex) {
+            if (form.other) {
+                const themType = form.type === 0 ? 1 : 0;
+                const otherLoc = form.other[rfieldindex];
+                setThemSelectedRow({ field: otherLoc ? otherLoc : -1, form: themType });
+            }
+        }
+        setThisSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
     }
 
     return (
@@ -58,19 +82,19 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
 
             <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
 
-            <UIToggleWithPortal title={`${isScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${isScript ? '' : 'opacity-25'}`} />}>
+            <UIToggleWithPortal title={`${isThisScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${isThisScript ? '' : 'opacity-25'}`} />}>
                 {/* title="preview" */}
-                {isScript &&
+                {isThisScript &&
                     <FieldRowPreview
                         form={form} small={false}
-                        selected={field.ridx} onSelected={(selected: number) => { setSelectedRow({ field: selected, form: form.type }); }}
+                        selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
                         className="w-[calc(1920px/4)] h-[calc(1200px/4)]"
                     />
                 }
             </UIToggleWithPortal>
 
             <div className="flex-1 cursor-default">
-                {disp}
+                {columnDispText}
             </div>
 
             {/* <div className="w-[20%] pr-2 cursor-default overflow-hidden">
@@ -91,7 +115,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
             </div>
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rfield || rfieldform ? '' : 'opacity-25'}`}
-                title={`Direction: ${rfield} Ref.index: ${rfieldindex} Ref.form: ${rfieldform}`}
+                title={columnRefTitle}
             >
                 <div className=""><IconInOut className="w-3 h-4" /></div>
             </div>
