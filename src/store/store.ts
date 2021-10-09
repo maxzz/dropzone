@@ -67,7 +67,7 @@ export const SetFilesAtom = atom(
                 id: uuid(),
                 idx,
                 fname: file.name,
-                fpath: (file as any).path || '',
+                fpath: ((file as any).path as string || '').replace(/^\//, ''),
                 fmodi: (file as any).lastModified || 0,
                 modified: file.lastModified,
                 size: file.size,
