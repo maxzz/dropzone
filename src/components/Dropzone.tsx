@@ -27,7 +27,7 @@ export function DropzoneBase({ className, classNameActive, stylesActive = {}, ch
     const setFiles = useUpdateAtom(SetFilesAtom);
 
     const onDrop = useCallback((accepterFiles: File[]) => {
-        //console.log('files', accepterFiles);
+        console.log('files', accepterFiles);
         setFiles(accepterFiles);
     }, []);
 

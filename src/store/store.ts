@@ -63,11 +63,16 @@ export const SetFilesAtom = atom(
     null,
     (get, set, accepterFiles: File[]) => {
         const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
+            // let fparts = ((file as any).path as string || '').replace(/^\//, '').split(/(\/|\\)/);
+            let fparts = ((file as any).path as string || '').replace(/^\//, '').split(/[\\\/]/);
+            console.log('parts', fparts);
+            fparts.pop();
+            let fpath = fparts.join('/');
             return atom<FileUs>({
                 id: uuid(),
                 idx,
                 fname: file.name,
-                fpath: ((file as any).path as string || '').replace(/^\//, ''), //TODO remove filename from path
+                fpath,
                 fmodi: (file as any).lastModified || 0,
                 modified: file.lastModified,
                 size: file.size,
