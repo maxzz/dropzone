@@ -16,5 +16,5 @@ export const isObject = (value: any): boolean => value && typeof value === 'obje
 
 // Utilities
 
-export const isManual = (m: FileUs): boolean => !!m.meta?.some((form: Meta.Form) => form.disp.isScript);
-export const isEmpty = (m: FileUs): boolean => !!m.meta?.some((form: Meta.Form) => form.disp.isEmpty);
+export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: Meta.Form) => form.disp.isScript);
+export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.isEmpty);
