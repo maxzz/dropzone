@@ -2,19 +2,34 @@ import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { clearFilesAtom, SetFilesAtom } from '../store/store';
-import { useDropzone } from 'react-dropzone';
+import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
 import TopMenu from './TopMenu';
 
+function fileExt(filename: string = ''): string {
+    return /[.]/.exec(filename) ? /([^.]+$)/.exec(filename)?.[0] || '' : '';
+}
+
 function nameLengthValidator(file: File) {
-    const maxLength = 30000;
-    if (file.name.length > maxLength) {
+    const maxSize = 30000;
+    console.log('drop', file);
+
+    const ext = fileExt(file.name);
+    if (ext !== 'dpm' && ext !== 'dpn') {
         return {
-            code: "name-too-large",
-            message: `Name is larger than ${maxLength} characters`
+            code: "unknown-type",
+            message: `File extension should be '.dpm or .dpn`,
         };
     }
+
+    if (file.size > maxSize) {
+        return {
+            code: "size-too-big",
+            message: `Name is larger than ${maxSize} characters`,
+        };
+    }
+
     return null;
 }
 
@@ -26,9 +41,15 @@ type DropzoneBaseProps = React.HTMLAttributes<HTMLDivElement> & {
 export function DropzoneBase({ className, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
     const setFiles = useUpdateAtom(SetFilesAtom);
 
-    const onDrop = useCallback((accepterFiles: File[]) => {
-        //console.log('files', accepterFiles);
-        setFiles(accepterFiles);
+    const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[], event: DropEvent) => {
+        console.log('dropped', acceptedFiles, rejectedFiles, event);
+        setFiles(acceptedFiles);
+
+        if (rejectedFiles.length) {
+            rejectedFiles.forEach((file) => {
+                toast(`Dropped file "${file.file.name}" as: ${file.errors.map((error) => error.message).join(' + ')}`, { style: { backgroundColor: 'red' } });
+            });
+        }
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
