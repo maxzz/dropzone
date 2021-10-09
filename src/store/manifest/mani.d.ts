@@ -41,6 +41,7 @@ declare module Mani {
         web_murl?: string;
         web_qurl?: string;
         web_checkurl?: boolean; // "1"
+        dlg_class?: string;
         names_ext?: string;
         processname?: string;
         commandline?: string;
