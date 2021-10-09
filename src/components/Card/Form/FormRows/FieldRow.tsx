@@ -42,15 +42,9 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
         ;
     const columnRefTitle = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
-    //console.log({ ...thisSelectedRow });
-
     function selectThisRow() {
-        if (form.type === 1) {
-            if (form.other) {
-                const otherLoc = rfieldindex && form.other[rfieldindex] || -1;
-                //console.log('otherLoc', otherLoc, 'rfieldindex', rfieldindex);
-                setThemSelectedRow({ field: otherLoc, form: 0 });
-            }
+        if (form.type === Mani.FORMNAME.pchange /*Mani.FORMNAME.pchange*/ && form.other) {
+            setThemSelectedRow({ field: rfieldindex && form.other[rfieldindex] || -1, form: 0 });
         }
         setThisSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
     }
