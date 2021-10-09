@@ -8,9 +8,11 @@ import { delay, isEmpty, isManual, textFileReader } from './store-functions';
 
 export type FileUs = {
     id: string;
-    idx: number; // index in the loaded list wo/ counting on filters, i.e. absolute index
+    idx: number;        // index in the loaded list wo/ counting on filters, i.e. absolute index
     fname: string;
-    modified: number; // last modified
+    fpath: string;      // file relative path to the dropped folder
+    fmodi: number;      // lastModified
+    modified: number;   // last modified
     size: number;
     raw?: string;
     mani?: Mani.Manifest;
@@ -65,6 +67,8 @@ export const SetFilesAtom = atom(
                 id: uuid(),
                 idx,
                 fname: file.name,
+                fpath: (file as any).path || '',
+                fmodi: (file as any).lastModified || 0,
                 modified: file.lastModified,
                 size: file.size,
                 file: file,

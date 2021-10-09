@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { clearFilesAtom, filesAtom, SetFilesAtom } from '../store/store';
+import { clearFilesAtom, SetFilesAtom } from '../store/store';
 import { useDropzone } from 'react-dropzone';
 import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';

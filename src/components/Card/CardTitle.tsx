@@ -61,7 +61,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             </div>
 
             {/* Filename */}
-            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title="Filename">
+            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title={`Filename: ${fileUs.fpath || fileUs.fname}`}>
                 {fname}
             </div>
         </>
