@@ -156,6 +156,7 @@ const updateCacheAtom = atom(
         set(totalNormalManiAtom, 0);
         set(totalManualManiAtom, 0);
         set(totalEmptyManiAtom, 0);
+        set(busyAtom, true);
 
         const files = get(filesAtom);
 
@@ -193,6 +194,7 @@ const updateCacheAtom = atom(
         set(totalNormalManiAtom, total.normal);
         set(totalManualManiAtom, total.manual);
         set(totalEmptyManiAtom, total.empty);
+        set(busyAtom, false);
     }
 );
 

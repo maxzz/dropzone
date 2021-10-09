@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { clearFilesAtom, setFilesAtom } from '../store/store';
+import { busyAtom, clearFilesAtom, setFilesAtom } from '../store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
@@ -70,11 +70,15 @@ export function DropzoneBase({ className, classNameActive, stylesActive = {}, ch
 
 export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
     const [files, clearFiles] = useAtom(clearFilesAtom);
+    const [busy] = useAtom(busyAtom);
     const total = files.length;
     return (
-        <div className="min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md">
+        <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
+        style={{ transition: 'background-color .5s 1s' }}
+        >
 
-            <div className="flex my-0.5">
+            <div className="flex items-center my-0.5">
+
                 <DropzoneBase
                     className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
                     stylesActive={{ backgroundColor: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
@@ -97,9 +101,13 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                         <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
                             <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
                         </div>
+
                         <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
                             <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
                         </button>
+
+                        {/* <div className="ml-2">Loading...</div> */}
+                        {busy && <div className="ml-2">Loading...</div>}
                     </>
                 }
             </div>
