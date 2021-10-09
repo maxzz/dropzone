@@ -5,7 +5,7 @@ import { parse } from 'fast-xml-parser';
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
     // 0. convert XML .dpm object to manifest format.
 
-    manifest.descriptor = (manifest.descriptor as any)._attributes || {};
+    manifest.descriptor = (manifest.descriptor as any)?._attributes || {};
     manifest.forms = (manifest.forms as any).form || [];
 
     if (!Array.isArray(manifest.forms)) {
@@ -29,9 +29,6 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
         }
         if (form.detection) {
             form.detection.web_checkurl !== undefined && (form.detection.web_checkurl = !!form.detection.web_checkurl);
-        }
-        if (form.options) {
-            form.options.usequicklink !== undefined && (form.options.usequicklink = +form.options.usequicklink);
         }
         if (form.fields) {
             form.fields = form.fields.map(field => (field as any)._attributes);
@@ -59,7 +56,7 @@ export function parseManifest(cnt: string): Mani.Manifest | undefined {
     const obj = parse(cnt, parseOptions);
     //console.log('%craw', 'color: red', obj);
 
-    const res = beautifyXMLManifest(obj.manifest);
+    const res = obj?.manifest && beautifyXMLManifest(obj.manifest);
     // //console.log('%ctm', 'color: red', res);
 
     return res;
