@@ -42,25 +42,14 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
         ;
     const columnRefTitle = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
-    console.log({...thisSelectedRow, r: form.other});
-    
+    //console.log({ ...thisSelectedRow });
 
     function selectThisRow() {
-        console.log('row');
-        
-        // if (rfieldindex) {
-        //     const themType = form.type === 0 ? 1 : 0;
-        //     const otherLocs = fileUs.meta?.[themType].other;
-        //     if (otherLocs) {
-        //         const otherLoc = otherLocs[rfieldindex];
-        //         setThemSelectedRow({ field: otherLoc ? otherLoc : -1, form: themType });
-        //     }
-        // }
-        if (rfieldindex) {
+        if (form.type === 1) {
             if (form.other) {
-                const themType = form.type === 0 ? 1 : 0;
-                const otherLoc = form.other[rfieldindex];
-                setThemSelectedRow({ field: otherLoc ? otherLoc : -1, form: themType });
+                const otherLoc = rfieldindex && form.other[rfieldindex] || -1;
+                //console.log('otherLoc', otherLoc, 'rfieldindex', rfieldindex);
+                setThemSelectedRow({ field: otherLoc, form: 0 });
             }
         }
         setThisSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
