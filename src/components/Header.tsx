@@ -21,27 +21,11 @@ function AppFilter({ atomShow, atomCnt, label, title }: { atomShow: PrimitiveAto
     );
 }
 
-// function AppFilters() {
-//     const [showNormalMani, setShowNormalMani] = useAtom(showNormalManiAtom);
-//     const [showManualMani, setShowManualMani] = useAtom(showManualManiAtom);
-//     const [showEmptyMani, setShowEmptyMani] = useAtom(showEmptyManiAtom);
-
-//     const [totalNormalMani] = useAtom(totalNormalManiAtom);
-//     const [totalManualMani] = useAtom(totalManualManiAtom);
-//     const [totalEmptyMani] = useAtom(totalEmptyManiAtom);
-//     return (<>
-//         <LabeledSwitch label={<LabeWithNumber label={'Normal'} value={totalNormalMani} />} value={showNormalMani} onChange={() => setShowNormalMani(!showNormalMani)} title="Show normal mode manifests" />
-//         <LabeledSwitch label={<LabeWithNumber label={'Manual'} value={totalManualMani} />} value={showManualMani} onChange={() => setShowManualMani(!showManualMani)} title="Show manual mode manifests" />
-//         <LabeledSwitch label={<LabeWithNumber label={'Empty'} value={totalEmptyMani} />} value={showEmptyMani} onChange={() => setShowEmptyMani(!showEmptyMani)} title="Show excluded manifests" />
-//     </>);
-// }
-
 function Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
             <DropzoneArea>
                 <div className="p-2 sm:p-0 flex flex-col sm:flex-row items-end sm:items-center space-x-2 space-y-2 sm:space-y-0 text-sm text-gray-200">
-                    {/* <AppFilters /> */}
                     <AppFilter  atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
                     <AppFilter  atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
                     <AppFilter  atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
