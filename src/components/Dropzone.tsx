@@ -67,7 +67,7 @@ function DropzoneBase({ className, classNameActive, stylesActive = {}, children 
     );
 }
 
-export default function DropzoneBlock() {
+export default function DropzoneArea() {
     const [files] = useAtom(clearFilesAtom);
     const total = files.length;
     return (
@@ -83,7 +83,7 @@ export default function DropzoneBlock() {
                 </div>
                 :
                 <div className="px-4 py-2 flex items-center">
-                    Drag 'n' drop files here, or click to select files
+                    Drag &amp; drop files here, or click to select files
                 </div>
             }
         </DropzoneBase>
@@ -91,7 +91,7 @@ export default function DropzoneBlock() {
     );
 }
 
-//TODO: if we drop a folder then we have a relative path from this folder as a root
+//TODO: if we drop a folder then we have a relative path from this folder as a root. Done.
 /*
 (10) [File, File, File, File, File, File, File, File, File, File]
 0: File {path: '/DI Admin Test/field_catalog.dpn', name: 'field_catalog.dpn', lastModified: 1585844956000, lastModifiedDate: Thu Apr 02 2020 09:29:16 GMT-0700 (Pacific Daylight Time), webkitRelativePath: '', …}

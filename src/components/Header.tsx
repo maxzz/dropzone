@@ -2,43 +2,44 @@ import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { busyAtom, clearFilesAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../store/store';
 import { IconAppLogo, IconMenuHamburger, IconRocket, IconTrash } from './UI/UiIcons';
-import DropzoneBlock from './Dropzone';
+import DropzoneArea from './Dropzone';
 import LabeledSwitch from './UI/UiSwitch';
 import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
 
-function DropzoneArea({ children }: { children?: React.ReactNode; }) {
+function BusyIndicator() {
+    const [busy] = useAtom(busyAtom);
+    return (<>
+        {/* <div className="ml-2">Loading...</div> */}
+        {/* {busy && <div className="ml-2">Loading...</div>} */}
+        {busy && <div className={`ml-2 ${busy ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity .5s 1s' }}>Loading...</div>}
+        <IconRocket className="w-5 h-5" />
+    </>);
+}
+
+function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
     const [files, clearFiles] = useAtom(clearFilesAtom);
     const total = !!files.length;
-    
-    const [busy] = useAtom(busyAtom);
-    
     return (
         <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}
         // <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
         // <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ${busy ? 'ring-yellow-400' : 'ring-gray-50'} rounded-md`}
         // style={{ transition: 'background-color .5s 1s' }}
         >
-
             <div className="flex items-center my-0.5">
-                <DropzoneBlock />
+                <DropzoneArea />
 
-                {total &&
-                    <>
-                        <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
-                            <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
-                        </div>
+                {total && <>
+                    <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
+                        <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
+                    </div>
 
-                        <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
-                            <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
-                        </button>
+                    <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
+                        <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
+                    </button>
 
-                        {/* <div className="ml-2">Loading...</div> */}
-                        {/* {busy && <div className="ml-2">Loading...</div>} */}
-                        {busy && <div className={`ml-2 ${busy ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity .5s 1s' }}>Loading...</div>}
-                        <IconRocket className="w-5 h-5" />
-                    </>
-                }
+                    <BusyIndicator />
+                </>}
             </div>
 
             <div className="flex items-center justify-between">
@@ -73,13 +74,13 @@ function AppFilter({ atomShow, atomCnt, label, title }: { atomShow: PrimitiveAto
 function Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
-            <DropzoneArea>
+            <LeftInfoBar>
                 <div className="p-2 sm:p-0 flex flex-col sm:flex-row items-end sm:items-center space-x-2 space-y-2 sm:space-y-0 text-sm text-gray-200">
-                    <AppFilter  atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
-                    <AppFilter  atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
-                    <AppFilter  atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
+                    <AppFilter atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
+                    <AppFilter atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
+                    <AppFilter atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
                 </div>
-            </DropzoneArea>
+            </LeftInfoBar>
         </header>
     );
 }
