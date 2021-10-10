@@ -1,8 +1,55 @@
 import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
-import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../store/store';
+import { busyAtom, clearFilesAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../store/store';
+import { IconAppLogo, IconMenuHamburger, IconRocket, IconTrash } from './UI/UiIcons';
+import DropzoneBlock from './Dropzone';
 import LabeledSwitch from './UI/UiSwitch';
-import { DropzoneArea } from './Dropzone';
+import TopMenu from './TopMenu';
+import toast from 'react-hot-toast';
+
+function DropzoneArea({ children }: { children?: React.ReactNode; }) {
+    const [files, clearFiles] = useAtom(clearFilesAtom);
+    const total = !!files.length;
+    
+    const [busy] = useAtom(busyAtom);
+    
+    return (
+        <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}
+        // <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
+        // <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ${busy ? 'ring-yellow-400' : 'ring-gray-50'} rounded-md`}
+        // style={{ transition: 'background-color .5s 1s' }}
+        >
+
+            <div className="flex items-center my-0.5">
+                <DropzoneBlock />
+
+                {total &&
+                    <>
+                        <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
+                            <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
+                        </div>
+
+                        <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
+                            <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
+                        </button>
+
+                        {/* <div className="ml-2">Loading...</div> */}
+                        {/* {busy && <div className="ml-2">Loading...</div>} */}
+                        {busy && <div className={`ml-2 ${busy ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity .5s 1s' }}>Loading...</div>}
+                        <IconRocket className="w-5 h-5" />
+                    </>
+                }
+            </div>
+
+            <div className="flex items-center justify-between">
+                {children}
+                <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
+                    <IconAppLogo />
+                </div>
+            </div>
+        </div>
+    );
+}
 
 function LabeWithNumber({ label, atomCnt }: { label: string; atomCnt: PrimitiveAtom<number>; }) {
     const [total] = useAtom(atomCnt);
