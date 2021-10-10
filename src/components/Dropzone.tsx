@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { busyAtom, clearFilesAtom, setFilesAtom } from '../store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
-import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconTrash } from './UI/UiIcons';
+import { IconAppLogo, IconDocumentsAccepted, IconMenuHamburger, IconRocket, IconTrash } from './UI/UiIcons';
 import toast from 'react-hot-toast';
 import TopMenu from './TopMenu';
 
@@ -111,6 +111,7 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
                         {/* <div className="ml-2">Loading...</div> */}
                         {/* {busy && <div className="ml-2">Loading...</div>} */}
                         {busy && <div className={`ml-2 ${busy ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity .5s 1s' }}>Loading...</div>}
+                        <IconRocket className="w-5 h-5" />
                     </>
                 }
             </div>
