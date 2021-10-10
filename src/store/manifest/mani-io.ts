@@ -36,7 +36,6 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
             form.fields.forEach((field: Mani.Field) => {
                 field.password && (field.password = !!field.password);
                 field.useit && (field.useit = !!field.useit);
-
                 field.rfieldindex && (field.rfieldindex = +field.rfieldindex);
             });
         }
@@ -54,10 +53,8 @@ const parseOptions = {
 
 export function parseManifest(cnt: string): Mani.Manifest | undefined {
     const obj = parse(cnt, parseOptions);
-    //console.log('%craw', 'color: red', obj);
+    //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
 
     const res = obj?.manifest && beautifyXMLManifest(obj.manifest);
-    // //console.log('%ctm', 'color: red', res);
-
     return res;
 }
