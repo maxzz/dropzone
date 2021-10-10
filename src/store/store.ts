@@ -133,23 +133,6 @@ export type SelectRowAtoms = {
 
 // Cache
 
-function countManifestTypes(get: Getter) {
-    const files = get(filesAtom);
-    //console.log('count');
-    const res = files.reduce((acc, cur: FileUsAtom) => {
-        const fileUs: FileUs = get(cur);
-        if (isEmpty(fileUs)) {
-            acc.empty++;
-        } else if (isManual(fileUs)) {
-            acc.manual++;
-        } else {
-            acc.normal++;
-        }
-        return acc;
-    }, { normal: 0, manual: 0, empty: 0 });
-    return res;
-}
-
 const updateCacheAtom = atom(
     null,
     async (get, set) => {
@@ -194,68 +177,16 @@ const updateCacheAtom = atom(
                         set(totalNormalManiAtom, ++total.normal);
                     }
             
-                    await delay(1000);
+                    //await delay(1000);
                 }
             } catch (error) {
                 console.log('error', error);
             }
         } //for
 
-        // const total = countManifestTypes(get);
-        // set(totalNormalManiAtom, total.normal);
-        // set(totalManualManiAtom, total.manual);
-        // set(totalEmptyManiAtom, total.empty);
         set(busyAtom, false);
     }
 );
-
-// const updateCacheAtom = atom(
-//     null,
-//     async (get, set) => {
-//         set(totalNormalManiAtom, 0);
-//         set(totalManualManiAtom, 0);
-//         set(totalEmptyManiAtom, 0);
-//         set(busyAtom, true);
-
-//         const files = get(filesAtom);
-
-//         for (let fileAtom of files) {
-//             try {
-//                 const file = get(fileAtom);
-
-//                 if (file.file && !file.raw) {
-//                     const raw = await textFileReader(file.file);
-
-//                     let mani: Mani.Manifest | undefined;
-//                     let meta: Meta.Form[] | undefined;
-//                     try {
-//                         mani = parseManifest(raw);
-//                         meta = buildManiMetaForms(mani);
-//                     } catch (error) {
-//                         console.log('%ctm error', 'color: red', error, '\n', file.fname, raw);
-//                     }
-
-//                     const forNewAtom: FileUs = {
-//                         ...file,
-//                         raw: raw,
-//                         mani,
-//                         meta,
-//                     };
-//                     set(fileAtom, forNewAtom);
-//                     //await delay(1000);
-//                 }
-//             } catch (error) {
-//                 console.log('error', error);
-//             }
-//         } //for
-
-//         const total = countManifestTypes(get);
-//         set(totalNormalManiAtom, total.normal);
-//         set(totalManualManiAtom, total.manual);
-//         set(totalEmptyManiAtom, total.empty);
-//         set(busyAtom, false);
-//     }
-// );
 
 // Filters
 
