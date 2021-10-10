@@ -38,7 +38,7 @@ type DropzoneBaseProps = React.HTMLAttributes<HTMLDivElement> & {
     stylesActive?: React.CSSProperties;
 };
 
-export function DropzoneBase({ className, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
+function DropzoneBase({ className, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
     const setFiles = useUpdateAtom(setFilesAtom);
 
     const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[], event: DropEvent) => {
@@ -68,10 +68,36 @@ export function DropzoneBase({ className, classNameActive, stylesActive = {}, ch
     );
 }
 
+function DropzoneBlock() {
+    const [files] = useAtom(clearFilesAtom);
+    const total = files.length;
+    return (
+        <DropzoneBase
+            className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
+            stylesActive={{ backgroundColor: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
+        >
+            {total
+                ?
+                <div className="mr-4 my-2 uppercase text-xs flex items-center">
+                    <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
+                    {total} file{total === 1 ? '' : 's'}
+                </div>
+                :
+                <div className="px-4 py-2 flex items-center">
+                    Drag 'n' drop files here, or click to select files
+                </div>
+            }
+        </DropzoneBase>
+
+    );
+}
+
 export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
     const [files, clearFiles] = useAtom(clearFilesAtom);
+    const total = !!files.length;
+    
     const [busy] = useAtom(busyAtom);
-    const total = files.length;
+    
     return (
         <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}
         // <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
@@ -80,25 +106,9 @@ export function DropzoneArea({ children }: { children?: React.ReactNode; }) {
         >
 
             <div className="flex items-center my-0.5">
+                <DropzoneBlock />
 
-                <DropzoneBase
-                    className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
-                    stylesActive={{ backgroundColor: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
-                >
-                    {total
-                        ?
-                        <div className="mr-4 my-2 uppercase text-xs flex items-center">
-                            <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
-                            {total} file{total === 1 ? '' : 's'}
-                        </div>
-                        :
-                        <div className="px-4 py-2 flex items-center">
-                            Drag 'n' drop files here, or click to select files
-                        </div>
-                    }
-                </DropzoneBase>
-
-                {!!total &&
+                {total &&
                     <>
                         <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
                             <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
