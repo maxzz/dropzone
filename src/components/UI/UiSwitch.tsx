@@ -59,10 +59,10 @@ const SwitchThumb = StyledThumb;
 // );
 //#7b899d
 
-function LabeledSwitch({ label, title, value, onChange }: { label: React.ReactNode; title?: string; value: boolean; onChange: () => void; }) {
+function LabeledSwitch({ children, title, value, onChange }: { children?: React.ReactNode; title?: string; value: boolean; onChange: () => void; }) {
     return (
         <label className="flex items-center select-none" title={title}>
-            {label}
+            {children}
             <Switch
                 className="ml-2 w-[46px] h-[28px] flex items-center bg-gray-700 rounded-full relative shadow border-2 ring-gray-400 focus:ring-gray-900"
                 checked={value}

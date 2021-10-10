@@ -17,7 +17,9 @@ function LabeWithNumber({ label, atomCnt }: { label: string; atomCnt: PrimitiveA
 function AppFilter({ atomShow, atomCnt, label, title }: { atomShow: PrimitiveAtom<boolean>, atomCnt: PrimitiveAtom<number>, label: string, title: string; }) {
     const [show, setShow] = useAtom(atomShow);
     return (
-        <LabeledSwitch label={<LabeWithNumber label={label} atomCnt={atomCnt} />} value={show} onChange={() => setShow(!show)} title={title} />
+        <LabeledSwitch value={show} onChange={() => setShow(!show)} title={title}>
+            <LabeWithNumber label={label} atomCnt={atomCnt} />
+        </LabeledSwitch>
     );
 }
 
