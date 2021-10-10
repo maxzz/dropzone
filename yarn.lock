@@ -562,6 +562,51 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@react-spring/animated@~9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.3.0.tgz#294f7696e450c4ae3abd2b59a6dd08bf70b53d3f"
+  integrity sha512-QvuyW77eDvLhdJyO6FFldlWlvnuKK2cpOx4+Zr962RyT/0IO1tbNDRO6G1vM8va6mbv6tmfYmRGKmKYePN3kVg==
+  dependencies:
+    "@react-spring/shared" "~9.3.0"
+    "@react-spring/types" "~9.3.0"
+
+"@react-spring/core@~9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/core/-/core-9.3.0.tgz#2d0534c5b53c7e39b8e9ed3d996502828c90f4d4"
+  integrity sha512-SZQOIX7wkIagmucAi7zxqGGIb9A60o9n5922UrWo8Kl3FdG7FgrNwqr0kOI43/pMFeL70/PXwFhBatB03N5ctw==
+  dependencies:
+    "@react-spring/animated" "~9.3.0"
+    "@react-spring/shared" "~9.3.0"
+    "@react-spring/types" "~9.3.0"
+
+"@react-spring/rafz@~9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/rafz/-/rafz-9.3.0.tgz#e791c0ae854f7c1a512ae87f34fff36934d82d29"
+  integrity sha512-FD04d2TNb3xOZ6+04qwDmC3d0H4X6gvhsxU71/nSm4PPYRqFzZEolcVPmrHlbGzco3bvXKI+Kp2pIrpXLPUJFA==
+
+"@react-spring/shared@~9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/shared/-/shared-9.3.0.tgz#7b4393094a97a1384f74fd8088e0b896e8f0c411"
+  integrity sha512-7ZFY2Blu/wxbLGcYvQavyLUVi9bK/is1bsn11qZ9AaZb4iucRyIf2jgjBfKZFCq4qgi7S/7QmDQG7sucUyLELg==
+  dependencies:
+    "@react-spring/rafz" "~9.3.0"
+    "@react-spring/types" "~9.3.0"
+
+"@react-spring/types@~9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.3.0.tgz#54ec58ca40414984209c8baa75fddd394f9e2949"
+  integrity sha512-q4cDr2RSPblXMD3Rxvk6qcC7nmhhfV2izEBP06hb8ZCXznA6qJirG3RMpi29kBtEQiw1lWR59hAXKhauaPtbOA==
+
+"@react-spring/web@^9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.3.0.tgz#48d1ebdd1d484065e0a943dbbb343af259496427"
+  integrity sha512-OTAGKRdyz6fLRR1tABFyw9KMpytyATIndQrj0O6RG47GfjiInpf4+WZKxo763vpS7z1OlnkI81WLUm/sqOqAnA==
+  dependencies:
+    "@react-spring/animated" "~9.3.0"
+    "@react-spring/core" "~9.3.0"
+    "@react-spring/shared" "~9.3.0"
+    "@react-spring/types" "~9.3.0"
+
 "@rollup/plugin-url@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-url/-/plugin-url-6.1.0.tgz#1234bba9aa30b5972050bdfcf8fcbb1cb8070465"
@@ -588,10 +633,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@stitches/react@1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.4.tgz#0b544e97555ffadaeae5ca07f8fff7a6231a4ef3"
-  integrity sha512-QiP54385bx7NPk2dNpCdu49bUaC/lxl5bdP6pJOnxS/VKkF6tD1lTvJ+ud0u6wF2J92TUiCP6E5vKWVzV5dCbg==
+"@stitches/react@1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.5.tgz#2353343c220f0c59ba388a26fdd9ff7962cb6031"
+  integrity sha512-95Wwjp5cvoYQjg616OBiHZM1PnIF51pnFQIgSPxPzS/xXBrer9sNO1tfpVfLYfOifvuotse2IFNbypJ92BXzvg==
 
 "@types/estree@0.0.39":
   version "0.0.39"
@@ -1483,10 +1528,10 @@ isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-jotai@1.3.7:
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.3.7.tgz#527e9764a8a1f69d7c059545c4b3f651c18938a4"
-  integrity sha512-vLs/7CpXZy11REfeHaEUaXe3oqY9O0YwUAHUI/mph2Lujw4YqtyRk8r5qo0vq10nA9rESWHO+ky84Bf+lRG1lg==
+jotai@1.3.9:
+  version "1.3.9"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.3.9.tgz#d65a7069b949a3a74f9e069d3e3f06f99be02817"
+  integrity sha512-b6DvH9gf+7TfjaboCO54g+C0yhaakIaUBtjLf0dk1p15FWCzNw/93sezdXy9cCaZ8qcEdMLJcjBwQlORmIq29g==
 
 js-cookie@^2.2.1:
   version "2.2.1"
@@ -2342,10 +2387,10 @@ util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-vite@2.6.3:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.6.3.tgz#5bbc1d3fcff6bfee9c5e3c0d0a689b18e5974b38"
-  integrity sha512-mLiN4WR8zpmn04khhBf7YvC3FHrGhZt9S6xm53uDWgtYcUVNtV5LXHLI2Sc4SpL8jd/dsSIHzRxj7JTIu+MTDQ==
+vite@2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.6.5.tgz#c4d25972e2f7371e682da86828722ddf5126f3d1"
+  integrity sha512-vavXMChDUb4Oh4YunrK9BrH5Ox74cu0eOp0VuyI/iqFz1FqbWD72So2c9I87lLL2n0+6tFPV5ijow60KrtxuZg==
   dependencies:
     esbuild "^0.13.2"
     postcss "^8.3.8"
