@@ -72,8 +72,9 @@ export default function DropzoneArea() {
     const total = files.length;
     return (
         <DropzoneBase
-            className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
-            stylesActive={{ backgroundColor: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
+            className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 border-r border-gray-500'} cursor-pointer select-none`}
+            //className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
+            stylesActive={{ background: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
         >
             {total
                 ?
