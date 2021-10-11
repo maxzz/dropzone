@@ -13,11 +13,8 @@ function BusyIndicator() {
     const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
     return (
         <a.div style={styles} className="flex items-center">
-            {/* <div className="ml-2">Loading...</div> */}
-            {/* {busy && <div className="ml-2">Loading...</div>} */}
             <IconRocket className="ml-2 w-5 h-5" />
             <div className={`ml-1 text-xs text-green-400`} style={{ transition: 'opacity .5s 1s' }}>Parsing...</div>
-            {/* ${busy ? 'opacity-100' : 'opacity-0'} */}
         </a.div>
     );
 }
@@ -26,11 +23,9 @@ function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
     const [files, clearFiles] = useAtom(clearFilesAtom);
     const total = !!files.length;
     return (
-        <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}
-        // <div className={`min-h-[40px] flex justify-between ${busy ? 'bg-yellow-900' : 'bg-gray-700'} text-gray-100 ring-2 ring-gray-50 rounded-md`}
-        // <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ${busy ? 'ring-yellow-400' : 'ring-gray-50'} rounded-md`}
-        // style={{ transition: 'background-color .5s 1s' }}
-        >
+        <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}>
+
+            {/* Left header */}
             <div className="flex items-center my-0.5">
                 <DropzoneArea />
 
@@ -47,8 +42,10 @@ function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
                 </>}
             </div>
 
+            {/* Right header */}
             <div className="flex items-center justify-between">
                 {children}
+
                 <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
                     <IconAppLogo />
                 </div>
