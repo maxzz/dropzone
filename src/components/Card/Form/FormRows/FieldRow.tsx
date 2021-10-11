@@ -22,10 +22,10 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
     const [thisSelectedRow, setThisSelectedRow] = useAtom(selectThisFormAtom);
     const setThemSelectedRow = useUpdateAtom(selectThemFormAtom);
 
-    const isThisScript = !!field.path.loc;
+    const hasPreview = !!field.path.loc;
     const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
     //console.log(`isSelected: ${isSelected} field.ridx: ${field.ridx} thisSelectedRow.field: ${thisSelectedRow.field}`);
-    
+
     const columnDispText = type === 'text'
         ?
         <div className="flex">
@@ -67,14 +67,16 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
 
             <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
 
-            <UIToggleWithPortal title={`${isThisScript ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${isThisScript ? '' : 'opacity-25'}`} />}>
-                {/* title="preview" */}
-                {isThisScript &&
-                    <FieldRowPreview
-                        form={form} small={false}
-                        selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
-                        className="w-[calc(1920px/4)] h-[calc(1200px/4)]"
-                    />
+            <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${hasPreview ? '' : 'opacity-25'}`} />}>
+                {hasPreview &&
+                    <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
+                        <FieldRowPreview
+                            form={form} small={false}
+                            selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
+                            className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
+                        />
+                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br/> {field.path.loc?.replace(/\|/g, ' | ')}</div>
+                    </div>
                 }
             </UIToggleWithPortal>
 
