@@ -6,6 +6,7 @@ import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
 import { useAtom } from 'jotai';
 import { FileUs, SelectRowAtoms } from '../../../../store/store';
 import { useUpdateAtom } from 'jotai/utils';
+import FieldRowPath from './FieldRowPath';
 
 type FieldRowProps = {
     fileUs: FileUs;
@@ -151,16 +152,16 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                     </div>
                 }
             >
-                {/* {hasPreview &&
-                    <div className="w-[480px] bg-gray-100 p-0.5 border border-gray-700">
+                {hasPreview &&
+                    <div className="ml-4 w-[480px] bg-gray-100 p-0.5 border border-gray-700">
                         <FieldRowPath
                             // form={form}
                             className=""
                         />
                     </div>
-                } */}
+                }
 
-                {hasPreview &&
+                {/* {hasPreview &&
                     <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
                         <FieldRowPreview
                             form={form} small={false}
@@ -169,7 +170,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                         />
                         <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}</div>
                     </div>
-                }
+                } */}
 
             </UIToggleWithPortal>
 
