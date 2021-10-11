@@ -11,21 +11,21 @@ function fileExt(filename: string = ''): string {
 }
 
 function nameLengthValidator(file: File) {
-    const maxSize = 30000;
+    const maxSize = 200000;
     //console.log('drop', file);
 
     const ext = fileExt(file.name).toLowerCase();
     if (ext !== 'dpm' && ext !== 'dpn') {
         return {
             code: "unknown-type",
-            message: `File extension should be '.dpm or .dpn`,
+            message: `The file extension must be .dpm or .dpn`,
         };
     }
 
     if (file.size > maxSize) {
         return {
             code: "size-too-big",
-            message: `Name is larger than ${maxSize} characters`,
+            message: `Name is larger than allowed ${maxSize} bytes.`,
         };
     }
 
@@ -46,7 +46,7 @@ function DropzoneBase({ className, classNameActive, stylesActive = {}, children 
 
         if (rejectedFiles.length) {
             rejectedFiles.forEach((file) => {
-                toast(`Dropped file "${file.file.name}" as: ${file.errors.map((error) => error.message).join(' + ')}`, { style: { backgroundColor: 'red' } });
+                toast(`"${file.file.name}" skipped. ${file.errors.map((error) => error.message).join(' + ')}`, { style: { backgroundColor: 'red' } });
             });
         }
     }, []);
