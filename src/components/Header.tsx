@@ -6,15 +6,20 @@ import DropzoneArea from './Dropzone';
 import LabeledSwitch from './UI/UiSwitch';
 import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
+import { useSpring, a } from '@react-spring/web';
 
 function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
-    return (<>
-        {/* <div className="ml-2">Loading...</div> */}
-        {/* {busy && <div className="ml-2">Loading...</div>} */}
-        {busy && <div className={`ml-2 ${busy ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity .5s 1s' }}>Loading...</div>}
-        <IconRocket className="w-5 h-5" />
-    </>);
+    const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
+    return (
+        <a.div style={styles} className="flex items-center">
+            {/* <div className="ml-2">Loading...</div> */}
+            {/* {busy && <div className="ml-2">Loading...</div>} */}
+            <IconRocket className="ml-2 w-5 h-5" />
+            <div className={`ml-1 text-xs text-green-400`} style={{ transition: 'opacity .5s 1s' }}>Parsing...</div>
+            {/* ${busy ? 'opacity-100' : 'opacity-0'} */}
+        </a.div>
+    );
 }
 
 function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
