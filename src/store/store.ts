@@ -163,7 +163,7 @@ const updateCacheAtom = atom(
 
                     const forNewAtom: FileUs = {
                         ...file,
-                        raw: raw,
+                        raw,
                         mani,
                         meta,
                     };

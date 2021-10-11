@@ -24,6 +24,8 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
 
     const isThisScript = !!field.path.loc;
     const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
+    //console.log(`isSelected: ${isSelected} field.ridx: ${field.ridx} thisSelectedRow.field: ${thisSelectedRow.field}`);
+    
     const columnDispText = type === 'text'
         ?
         <div className="flex">

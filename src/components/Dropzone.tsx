@@ -46,7 +46,7 @@ function DropzoneBase({ className, classNameActive, stylesActive = {}, children 
 
         if (rejectedFiles.length) {
             rejectedFiles.forEach((file) => {
-                toast(`"${file.file.name}" skipped. ${file.errors.map((error) => error.message).join(' + ')}`, { style: { backgroundColor: 'red' } });
+                toast(`"${file.file.name}" skipped. ${file.errors.map((error) => error.message).join(' + ')}`, { style: { backgroundColor: '#f19700' } });
             });
         }
     }, []);

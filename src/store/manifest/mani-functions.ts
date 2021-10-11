@@ -146,7 +146,7 @@ export namespace FieldPath {
             export function buildPreviewData(fields: Meta.Field[]): Meta.View {
                 let uniqueLocs = new Set<string>();
 
-                fields.forEach((field) => {
+                fields.forEach((field) => { //console.log(`field.path.loc: ${field.path.loc}`);
                     const fieldLocs = (field.path.loc || '').split('|');
                     fieldLocs.forEach(loc => uniqueLocs.add(loc));
                     field.ridx = fieldLocs[fieldLocs.length - 1] as any; // temp store string as number
