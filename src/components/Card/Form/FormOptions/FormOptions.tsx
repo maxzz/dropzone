@@ -3,8 +3,8 @@ import { useAtomValue } from 'jotai/utils';
 import React from 'react';
 import { FileUsAtom, SelectRowAtoms } from '../../../../store/store';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
-import FormOptionDetection from './FormOptionDetection';
-import FormOptionPool from './FormOptionPool';
+import FormOptionsDetection from './FormOptionsDetection';
+import FormOptionsPool from './FormOptionsPool';
 
 export const BtnShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
@@ -57,8 +57,8 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
     return (
         <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
             <div className={`place-self-start flex ${small ? 'space-x-1' : 'flex-col items-stretch space-y-1 mr-1'}`}>
-                <FormOptionDetection fileUsAtom={fileUsAtom} formType={formType} />
-                <FormOptionPool names_ext={detection.names_ext} />
+                <FormOptionsDetection fileUsAtom={fileUsAtom} formType={formType} />
+                <FormOptionsPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
             </div>

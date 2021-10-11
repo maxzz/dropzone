@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../../../store/store';
 import { restoreXml } from '../../../../store/manifest/mani-functions';
-import { ToggleWithPortal } from './FormOptionPool';
+import { ToggleWithPortal } from './FormOptionsPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
 
 function filterDetection(detection: Mani.Detection) {
@@ -46,7 +46,7 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-function FormOptionDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
+function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
     const [fileUs] = useAtom(fileUsAtom);
     const form = fileUs.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});
@@ -63,4 +63,4 @@ function FormOptionDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom;
     );
 }
 
-export default FormOptionDetection;
+export default FormOptionsDetection;
