@@ -67,7 +67,11 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
 
             <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
 
-            <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`} toggle={<IconPreview className={`w-[16px] h-[16px] ${hasPreview ? '' : 'opacity-25'}`} />}>
+            <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
+                toggle={
+                    <IconPreview className={`w-[16px] h-[16px] ${hasPreview ? '' : 'opacity-25'}`} />
+                }
+            >
                 {hasPreview &&
                     <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
                         <FieldRowPreview
@@ -75,7 +79,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                             selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
                             className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
                         />
-                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br/> {field.path.loc?.replace(/\|/g, ' | ')}</div>
+                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}</div>
                     </div>
                 }
             </UIToggleWithPortal>
@@ -112,12 +116,64 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
             >
                 id
             </div>
-            <div
+
+            {/* <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`}
                 title={path_ext}
             >
                 path
-            </div>
+            </div> */}
+
+
+            {/* <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
+                toggle={
+                    <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={path_ext}>
+                        path
+                    </div>
+                }
+            >
+                {hasPreview &&
+                    <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
+                        <FieldRowPreview
+                            form={form} small={false}
+                            selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
+                            className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
+                        />
+                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}</div>
+                    </div>
+                }
+            </UIToggleWithPortal> */}
+
+            <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
+                toggle={
+                    <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={path_ext}>
+                        path
+                    </div>
+                }
+            >
+                {/* {hasPreview &&
+                    <div className="w-[480px] bg-gray-100 p-0.5 border border-gray-700">
+                        <FieldRowPath
+                            // form={form}
+                            className=""
+                        />
+                    </div>
+                } */}
+
+                {hasPreview &&
+                    <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
+                        <FieldRowPreview
+                            form={form} small={false}
+                            selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
+                            className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
+                        />
+                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}</div>
+                    </div>
+                }
+
+            </UIToggleWithPortal>
+
+
         </div>
     );
 }
