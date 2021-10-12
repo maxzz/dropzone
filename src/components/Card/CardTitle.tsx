@@ -71,14 +71,9 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     );
 }
 
-function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
-    const isCurrent = fileUsAtom === rightPanel;
+function CardTitleContent({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     return (
-        <div
-            className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
-            onClick={() => setRightPanel(!isCurrent ? fileUsAtom : undefined)}
-        >
+        <>
             {/* All text rows */}
             <div className="">
                 <CardTitleText fileUsAtom={fileUsAtom} />
@@ -92,6 +87,21 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     </div>}
                 />
             </div>
+        </>
+    );
+}
+
+const CardTitleContent_ = React.memo(CardTitleContent);
+
+function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+    const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
+    const isCurrent = fileUsAtom === rightPanel;
+    return (
+        <div
+            className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
+            onClick={() => setRightPanel(!isCurrent ? fileUsAtom : undefined)}
+        >
+            <CardTitleContent_ fileUsAtom={fileUsAtom} />
         </div>
     );
 }
