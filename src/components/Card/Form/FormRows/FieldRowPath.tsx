@@ -14,6 +14,22 @@ function PartString({ label, part }: { label: string; part?: any; }) {
     </>);
 }
 
+function PartLoc({ label, part }: { label: string; part?: string; }) {
+    const items = part?.split('|') || [];
+    return (<>
+        {!!part &&
+            <div>
+                <div className="font-bold">{label}</div>
+                <div className="">
+                    {items.map((item, idx) => {
+                        return <div>{idx}: {item}</div>;
+                    })}
+                </div>
+            </div>
+        }
+    </>);
+}
+
 function PartP4({ label, part }: { label: string; part?: MPath.p4[]; }) {
     return (<>
         {!!part &&
@@ -47,7 +63,7 @@ function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs;
             <div className={`max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto ${className}`}>
                 <PartP4 label={'p4'} part={field.path.p4} />
                 <PartP4 label={'p4a'} part={field.path.p4a} />
-                <PartString label={'loc'} part={field.path.loc} />
+                <PartLoc label={'loc'} part={field.path.loc} />
                 <PartString label={'sid'} part={field.path.sid} />
                 <PartString label={'did2'} part={field.path.did2} />
                 <PartString label={'sn'} part={field.path.sn} />
