@@ -43,7 +43,7 @@ export function restoreCpp(s: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::cpp_restore()
 }
 
-export function restoreXml(s: string): string {
+export function restoreXml(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
     if (!s) {
         return '';
     }
@@ -52,7 +52,7 @@ export function restoreXml(s: string): string {
         [/&gt;/g, ">"],
         [/&amp;/g, "&"],
         [/&quot;/g, "\""],
-        [/&apos;/g, "\\"],
+        [/&apos;/g, "\'"],
 
         [/%0d/gi, "\r"],
         [/%0a/g, "\n"],
