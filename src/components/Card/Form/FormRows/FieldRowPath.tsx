@@ -7,14 +7,14 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
         {!!part &&
             <div>
                 <div className="font-bold">{label}</div>
-                <div className="box-content grid grid-cols-[auto,1fr]">
+                <div className="grid grid-cols-[auto,1fr] overflow-x-hidden">
                     {part.map((item, idx) => {
                         return <Fragment key={idx}>
                             {/* <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
                             <div className="pl-2 leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div> */}
 
-                            <div className="box-content px-2 min-w-0 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
-                            <div className="box-content pl-2 min-w-0 leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div>
+                            <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
+                            <div className="pl-2 min-w-0 whitespace-nowrap overflow-ellipsis leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div>
 
                             {/* <div className="box-content border-l border-r border-t border-gray-400"><div className="box-content px-2 leading-5">{idx}</div></div>
                             <div className="box-content border-r border-t border-gray-400"><div className="box-content pl-2 leading-5">{JSON.stringify(item)}</div></div> */}
