@@ -1,4 +1,3 @@
-import { stringify } from 'postcss';
 import React, { Fragment } from 'react';
 import { restoreXml } from '../../../../store/manifest/mani-functions';
 import { FileUs } from '../../../../store/store';
@@ -8,9 +7,19 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
         {!!part &&
             <div>
                 <div className="font-bold">{label}</div>
-                <div className="">
+                <div className="box-content grid grid-cols-[auto,1fr]">
                     {part.map((item, idx) => {
-                        return <div>{idx}: {JSON.stringify(item)}</div>;
+                        return <Fragment key={idx}>
+                            {/* <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
+                            <div className="pl-2 leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div> */}
+
+                            <div className="box-content px-2 min-w-0 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
+                            <div className="box-content pl-2 min-w-0 leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div>
+
+                            {/* <div className="box-content border-l border-r border-t border-gray-400"><div className="box-content px-2 leading-5">{idx}</div></div>
+                            <div className="box-content border-r border-t border-gray-400"><div className="box-content pl-2 leading-5">{JSON.stringify(item)}</div></div> */}
+
+                        </Fragment>;
                     })}
                 </div>
             </div>
