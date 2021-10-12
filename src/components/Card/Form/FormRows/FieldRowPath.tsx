@@ -2,7 +2,7 @@ import { stringify } from 'postcss';
 import React from 'react';
 import { FileUs } from '../../../../store/store';
 
-function PathPartString({ label, part }: { label: string; part?: any; }) {
+function PartString({ label, part }: { label: string; part?: any; }) {
     const text = typeof part === 'string' ? part : JSON.stringify(part, null, 4);
     return (<>
         {!!part &&
@@ -14,12 +14,16 @@ function PathPartString({ label, part }: { label: string; part?: any; }) {
     </>);
 }
 
-function PathPartArray({ label, part }: { label: string; part?: MPath.p4; }) {
+function PartP4({ label, part }: { label: string; part?: MPath.p4[]; }) {
     return (<>
         {!!part &&
             <div>
                 <div className="font-bold">{label}</div>
-                <div className="">{part}</div>
+                <div className="">
+                    {part.map((item, idx) => {
+                        return <div>{idx}: {JSON.stringify(item)}</div>;
+                    })}
+                </div>
             </div>
         }
     </>);
@@ -36,17 +40,17 @@ function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs;
     // sn?: MPath.sn;      // script number
 
     console.log('sid', field.path, JSON.stringify(field.path.sid || ''));
-    
+
 
     return (
         <div className="text-xs bg-gray-200 px-1">
             <div className={`max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto ${className}`}>
-                <PathPartString label={'p4'} part={field.path.p4} />
-                <PathPartString label={'p4a'} part={field.path.p4a} />
-                <PathPartString label={'loc'} part={field.path.loc} />
-                <PathPartString label={'sid'} part={field.path.sid} />
-                <PathPartString label={'did2'} part={field.path.did2} />
-                <PathPartString label={'sn'} part={field.path.sn} />
+                <PartP4 label={'p4'} part={field.path.p4} />
+                <PartP4 label={'p4a'} part={field.path.p4a} />
+                <PartString label={'loc'} part={field.path.loc} />
+                <PartString label={'sid'} part={field.path.sid} />
+                <PartString label={'did2'} part={field.path.did2} />
+                <PartString label={'sn'} part={field.path.sn} />
             </div>
         </div>
     );
