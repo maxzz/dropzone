@@ -1,5 +1,4 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -15,7 +14,7 @@ export const CardTitleMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 {icon}
             </Trigger>
 
-            <Content sideOffset={5}>
+            <Content sideOffset={5} forceMount>
                 <Item className="!text-sm" onSelect={() => console.log('selected 1')}>Convert manual to normal</Item>
                 <Item className="!text-sm" onSelect={() => console.log('selected 2')}>Merge two manifests </Item>
                 <Separator />
