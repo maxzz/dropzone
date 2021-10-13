@@ -7,12 +7,18 @@ import RightPanel from './components/RightPanel';
 import UISplitPane from './components/UI/UISplitPane';
 import SimpleSplitPane from './components/UI/SimpleSplitPane';
 
+//import Symbols from "./assets/symbol.defs.svg";
+import { ReactComponent as YourSvg } from "./assets/symbol.defs.svg";
+
 function App() {
     return (
         <React.Fragment>
-            <img src="/src/assets/symbol.defs.svg" atl="symbols" />
-
+            
             <div>
+                {/* <Symbols /> */}
+                <YourSvg />
+                {/* <img src={Symbols} atl="symbols" /> */}
+
                 <svg>
                     <use xlink:href="#icon-user"></use>
                 </svg>
