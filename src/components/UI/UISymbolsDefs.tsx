@@ -27,3 +27,15 @@ function UISymbolsDefs() {
 }
 
 export default UISymbolsDefs;
+
+{/*
+<div className="flex items-center text-xs">
+    <div className="w-4 h-4 text-red-400 fill-current">
+        <svg className="w-full h-full">
+            <use xlinkHref="#icon-user" />
+        </svg>
+    </div>
+    <span> icon-user </span>
+</div>
+*/}
+

@@ -8,33 +8,9 @@ import UISplitPane from './components/UI/UISplitPane';
 import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UISymbolsDefs';
 
-// import symbols from "./assets/symbol.defs.svg";
-// import Symbols from "./assets/symbol.defs.svg";
-// import { ReactComponent as YourSvg } from "./assets/symbol.defs.svg";
-
 function App() {
     return (
         <React.Fragment>
-
-            <div className="flex items-center text-xs">
-                {/* <Symbols /> */}
-                {/* <YourSvg /> */}
-                {/* <img src={symbols} atl="symbols" /> */}
-
-                <div className="w-4 h-4 text-red-400 fill-current">
-                    <svg className="w-full h-full">
-                        <use xlinkHref="#icon-user" />
-                    </svg>
-                </div>
-
-                {/* <svg> */}
-                {/* <use className="w-4 h-4 text-red-400" xlinkHref="#icon-user" /> */}
-                {/* <use xlinkHref="#icon-user"></use>
-                    <use xlinkHref="#icon-user"></use> */}
-                {/* </svg> */}
-                <span> icon-user </span>
-            </div>
-
             <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
 
