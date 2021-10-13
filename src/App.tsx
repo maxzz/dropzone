@@ -6,7 +6,7 @@ import FilesList from './components/FilesList';
 import RightPanel from './components/RightPanel';
 import UISplitPane from './components/UI/UISplitPane';
 import SimpleSplitPane from './components/UI/SimpleSplitPane';
-import UISymbolsDefs from './components/UI/UISymbolsDefs';
+import UISymbolsDefs, { IconAppWindows } from './components/UI/UIIconsSymbolsDefs';
 
 function App() {
     return (
