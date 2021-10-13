@@ -6,11 +6,13 @@ import FilesList from './components/FilesList';
 import RightPanel from './components/RightPanel';
 import UISplitPane from './components/UI/UISplitPane';
 import SimpleSplitPane from './components/UI/SimpleSplitPane';
-import UISymbolsDefs, { IconAppWindows } from './components/UI/UIIconsSymbolsDefs';
+import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 
 function App() {
     return (
         <React.Fragment>
+            <Toaster />
+            <UISymbolsDefs />
             <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
 
@@ -23,10 +25,7 @@ function App() {
                         {/* </UISplitPane> */}
                     </SimpleSplitPane>
                 </div>
-
             </div>
-            <Toaster />
-            <UISymbolsDefs />
         </React.Fragment>
     );
 }
