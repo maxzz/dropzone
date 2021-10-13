@@ -37,8 +37,9 @@ function UISymbolsDefs() {
 }
 
 export function IconAppWindows(props: SVGProps<SVGSVGElement>) {
+    const {className = '', ...rest} = props;
     return (
-        <svg fill="currentColor" {...props}>
+        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
             <use xlinkHref="#app-windows" />
         </svg>
     );
