@@ -10,16 +10,25 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 function App() {
     return (
         <React.Fragment>
+            <img src="/src/assets/symbol.defs.svg" atl="symbols" />
+
+            <div>
+                <svg>
+                    <use xlink:href="#icon-user"></use>
+                </svg>
+                <span> icon-user </span>
+            </div>
+
             <div className="h-screen p-4 flex flex-col overflow-hidden">
                 <Header className="flex-none mb-4" />
 
                 <div className="flex-1 relative flex min-w-0 min-h-0">
                     <SimpleSplitPane vertical={false} className="splitpane" minPersent={24}>
-                    {/* <UISplitPane split="vertical" defaultSize="50%"> */}
+                        {/* <UISplitPane split="vertical" defaultSize="50%"> */}
                         {/* minSize={382} */}
                         <FilesList />
                         <RightPanel />
-                    {/* </UISplitPane> */}
+                        {/* </UISplitPane> */}
                     </SimpleSplitPane>
                 </div>
 
