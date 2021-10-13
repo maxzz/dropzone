@@ -1,5 +1,6 @@
 import React from 'react';
-import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UiIcons';
+//import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UiIcons';
+import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';

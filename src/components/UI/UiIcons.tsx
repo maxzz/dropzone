@@ -59,7 +59,7 @@ export function IconAutoMode(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+/** /
 export function IconAppWindows(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -67,7 +67,7 @@ export function IconAppWindows(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+/**/
 export function IconAppWebChrome(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
@@ -79,7 +79,7 @@ export function IconAppWebChrome(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-
+/** /
 export function IconAppWebIE(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 32 32" fill="currentColor" {...props}>
@@ -87,7 +87,7 @@ export function IconAppWebIE(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+/**/
 
 
 export function IconFormLogin(props: SVGProps<SVGSVGElement>) {
@@ -107,7 +107,7 @@ export function IconFormChangePsw(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconInfo(props: SVGProps<SVGSVGElement>) {
+function IconInfo(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -115,7 +115,7 @@ export function IconInfo(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconMenuHamburger(props: SVGProps<SVGSVGElement>) {
+function IconMenuHamburger(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 21 21" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...props}>
             <path d="M4.5 6.5h12"></path>
@@ -125,7 +125,7 @@ export function IconMenuHamburger(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconBack(props: SVGProps<SVGSVGElement>) {
+function IconBack(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...props}>
             <path d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
@@ -144,7 +144,7 @@ export function IconTrash(props: SVGProps<SVGSVGElement>) {
 // Field icons
 
 
-export function IconInputFieldText(props: SVGProps<SVGSVGElement>) {
+function IconInputFieldText(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" fill="none" strokeWidth={1.5} stroke="currentColor" {...props}>
             <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path>
@@ -153,7 +153,7 @@ export function IconInputFieldText(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconInputFieldPsw(props: SVGProps<SVGSVGElement>) {
+function IconInputFieldPsw(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
             <path d="M11.78 10.22a.75.75 0 0 0-1.06 1.06l.72.72l-.72.72a.75.75 0 1 0 1.06 1.06l.72-.72l.72.72a.75.75 0 0 0 1.06-1.062L13.561 12l.72-.72a.75.75 0 1 0-1.061-1.06l-.72.72l-.72-.72z" />
@@ -164,7 +164,7 @@ export function IconInputFieldPsw(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconInputFieldChk(props: SVGProps<SVGSVGElement>) {
+function IconInputFieldChk(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 21 21" fill="none" stroke="currentColor" {...props}>
             <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
@@ -173,7 +173,7 @@ export function IconInputFieldChk(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconInputFieldChkEmpty(props: SVGProps<SVGSVGElement>) {
+function IconInputFieldChkEmpty(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 21 21" fill="none" stroke="currentColor" {...props}>
             <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
@@ -181,7 +181,7 @@ export function IconInputFieldChkEmpty(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconInputFieldList(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+function IconInputFieldList(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { title, ...rest } = props;
     return (
         <svg viewBox="0 0 16 16" fill="currentColor" {...rest}>
@@ -192,7 +192,7 @@ export function IconInputFieldList(props: SVGProps<SVGSVGElement> & { title?: st
     );
 }
 
-export function IconFieldText(props: SVGProps<SVGSVGElement>) {
+function IconFieldText(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
             <path d="M6.5 10.5A.5.5 0 0 1 7 10h.5V6H6v.5a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V6H8.5v4H9a.5.5 0 0 1 0 1H7a.5.5 0 0 1-.5-.5z" />
@@ -248,7 +248,7 @@ function IconToggleLeft(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconToggleRight(props: SVGProps<SVGSVGElement>) {
+function IconToggleRight(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} {...props}>
             <rect x="1" y="5" width="22" height="14" rx="7" ry="7"></rect>
@@ -257,7 +257,7 @@ export function IconToggleRight(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconButton(props: SVGProps<SVGSVGElement>) {
+function IconButton(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth={5} {...props}>
             <path d="M9 72.6A11.43 11.43 0 0 0 20.43 84h59.14A11.43 11.43 0 0 0 91 72.6" stroke="#999" />
@@ -270,7 +270,7 @@ export function IconButton(props: SVGProps<SVGSVGElement>) {
 }
 
 
-export function IconInOut(props: SVGProps<SVGSVGElement>) {
+function IconInOut(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
             <path d="M21.71 9.29l-4-4a1 1 0 0 0-1.42 1.42L18.59 9H7a1 1 0 0 0 0 2h14a1 1 0 0 0 .92-.62a1 1 0 0 0-.21-1.09zM17 13H3a1 1 0 0 0-.92.62a1 1 0 0 0 .21 1.09l4 4a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L5.41 15H17a1 1 0 0 0 0-2z" />
@@ -290,7 +290,7 @@ export function IconDocumentsAccepted(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconChevronUp(props: SVGProps<SVGSVGElement>) {
+function IconChevronUp(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
             <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
@@ -298,7 +298,7 @@ export function IconChevronUp(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconChevronDown(props: SVGProps<SVGSVGElement>) {
+function IconChevronDown(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
             <path d="M5.843 9.593L11.5 15.25l5.657-5.657l-.707-.707l-4.95 4.95l-4.95-4.95l-.707.707z" />
@@ -307,7 +307,7 @@ export function IconChevronDown(props: SVGProps<SVGSVGElement>) {
 }
 
 
-export function IconPreview(props: SVGProps<SVGSVGElement>) {
+function IconPreview(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 36 36" fill="currentColor" {...props}>
             <path d="M32 4H4a2 2 0 0 0-2 2v24a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 30V6h28v24z" />

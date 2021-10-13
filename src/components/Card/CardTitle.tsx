@@ -2,9 +2,10 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
-import { IconAppWebIE, IconAppWindows, IconFolder, IconInfo, IconMenuHamburger } from '../UI/UiIcons';
+//import { IconAppWebIE, IconAppWindows, IconFolder, IconMenuHamburger } from '../UI/UiIcons';
+import { IconFolder } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
-//import { IconAppWindows } from '../UI/UIIconsSymbolsDefs';
+import { IconAppWebIE, IconAppWindows, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
