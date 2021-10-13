@@ -37,7 +37,7 @@ type DropzoneBaseProps = React.HTMLAttributes<HTMLDivElement> & {
     stylesActive?: React.CSSProperties;
 };
 
-function DropzoneBase({ className, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
+function DropzoneBase({ className, style = {}, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
     const setFiles = useUpdateAtom(setFilesAtom);
 
     const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[], event: DropEvent) => {
@@ -59,7 +59,7 @@ function DropzoneBase({ className, classNameActive, stylesActive = {}, children 
     return (
         <div {...getRootProps()}
             className={`${className} ${isDragActive ? classNameActive : ''}`}
-            style={isDragActive ? { ...stylesActive } : {}}
+            style={isDragActive ? { ...stylesActive } : style}
         >
             <input {...getInputProps()} />
             {children}
@@ -73,6 +73,9 @@ export default function DropzoneArea() {
     return (
         <DropzoneBase
             className={`ml-0.5 rounded-l self-stretch flex items-stretch ${total ? 'bg-gray-600' : 'bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900 border-r border-gray-500'} cursor-pointer select-none`}
+            style={total ? {} : {backgroundImage: 'conic-gradient(at right 0%, rgb(64 95 149) 214deg, #44536d 264deg, rgb(164 164 164) 274deg)'}}
+            // style={{backgroundImage: 'conic-gradient(at top right, #111827, red, rgb(49, 46, 129))'}}
+            // style={{backgroundImage: 'conic-gradient(at top right, slategray, white)'}}
             //className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
             stylesActive={{ background: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
         >
