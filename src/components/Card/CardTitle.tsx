@@ -75,9 +75,7 @@ function CardTitleContent({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     return (
         <>
             {/* All text rows */}
-            <div className="">
-                <CardTitleText fileUsAtom={fileUsAtom} />
-            </div>
+            <CardTitleText fileUsAtom={fileUsAtom} />
 
             {/* Card actions */}
             <div className="absolute top-3 right-2 z-10 flex">
