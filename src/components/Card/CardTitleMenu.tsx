@@ -14,7 +14,7 @@ export const CardTitleMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 {icon}
             </Trigger>
 
-            <Content sideOffset={5} forceMount>
+            <Content sideOffset={5}>
                 <Item className="!text-sm" onSelect={() => console.log('selected 1')}>Convert manual to normal</Item>
                 <Item className="!text-sm" onSelect={() => console.log('selected 2')}>Merge two manifests </Item>
                 <Separator />
