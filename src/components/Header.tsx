@@ -9,7 +9,6 @@ import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
 import { useSpring, a } from '@react-spring/web';
 import { IconMenuHamburger } from './UI/UIIconsSymbolsDefs';
-import { DropdownExampleDropdown } from './Card/CardTitleMenu';
 
 function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
@@ -42,7 +41,6 @@ function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
                     </button>
 
                     <BusyIndicator />
-                    <DropdownExampleDropdown />
                 </>}
             </div>
 
