@@ -5,7 +5,7 @@ import { busyAtom, clearFilesAtom, showEmptyManiAtom, showManualManiAtom, showNo
 import { IconAppLogo, IconRocket, IconTrash } from './UI/UiIcons';
 import DropzoneArea from './Dropzone';
 import LabeledSwitch from './UI/UiSwitch';
-import TopMenu from './TopMenu';
+import TopMenu, { PopoverMenu } from './TopMenu';
 import toast from 'react-hot-toast';
 import { useSpring, a } from '@react-spring/web';
 import { IconMenuHamburger } from './UI/UIIconsSymbolsDefs';
@@ -39,6 +39,8 @@ function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
                     <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
                         <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
                     </button>
+
+                    <PopoverMenu />
 
                     <BusyIndicator />
                 </>}
