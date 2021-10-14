@@ -73,7 +73,8 @@ export default function DropzoneArea() {
     return (
         <DropzoneBase
             className={`ml-0.5 rounded-l self-stretch flex items-stretch ${total ? 'bg-gray-600' : 'bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900 border-r border-gray-500'} cursor-pointer select-none`}
-            style={total ? {} : {backgroundImage: 'conic-gradient(at right 0%, rgb(64 95 149) 214deg, #44536d 264deg, rgb(164 164 164) 274deg)'}}
+            style={total ? {} : {backgroundImage: 'conic-gradient(at right 0%, rgb(93, 106, 129) 214deg, rgb(40, 68, 111) 264deg, rgb(164, 164, 164) 274deg)'}}
+            //style={total ? {} : {backgroundImage: 'conic-gradient(at right top, rgb(64 95 149) 214deg, rgb(25 53 101) 264deg, rgb(164 164 164) 274deg)'}}
             // style={{backgroundImage: 'conic-gradient(at top right, #111827, red, rgb(49, 46, 129))'}}
             // style={{backgroundImage: 'conic-gradient(at top right, slategray, white)'}}
             //className={`ml-0.5 rounded-l flex items-stretch ${total ? 'bg-gray-600' : 'bg-gray-900'} cursor-pointer select-none`}
