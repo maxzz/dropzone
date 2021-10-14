@@ -5,10 +5,11 @@ import { busyAtom, clearFilesAtom, showEmptyManiAtom, showManualManiAtom, showNo
 import { IconAppLogo, IconRocket, IconTrash } from './UI/UiIcons';
 import DropzoneArea from './Dropzone';
 import LabeledSwitch from './UI/UiSwitch';
-import TopMenu, { PopoverMenu } from './TopMenu';
+import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
 import { useSpring, a } from '@react-spring/web';
 import { IconMenuHamburger } from './UI/UIIconsSymbolsDefs';
+import { PopoverMenu } from './UI/UIdropdownMenuLaag';
 
 function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
