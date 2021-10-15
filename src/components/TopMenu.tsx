@@ -1,5 +1,5 @@
-import { useUpdateAtom } from 'jotai/utils';
 import React from 'react';
+import { useUpdateAtom } from 'jotai/utils';
 import { foldAllCardsAtom } from '../store/store';
 import {
     DropdownMenu as Menu,

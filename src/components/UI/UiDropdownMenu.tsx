@@ -27,6 +27,7 @@ const itemStyles = {
 
     '&:focus': {
         backgroundColor: 'var(--tm-primary-300)', //violet.violet9
+        //backgroundColor: 'red',
         //color: 'var(--tm-primary-100)', //violet.violet1
     },
 };
