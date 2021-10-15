@@ -3,18 +3,22 @@ import { Arrow, ArrowProps, useLayer } from 'react-laag';
 import { styled } from '../../stitches.config';
 
 const MenuBase = styled('ul', {
-    transition: 'color 0.15s, background-color 0.15s',
     position: 'absolute',
-    minWidth: '160px',
+
+    margin: '0',
     padding: '4px 0px',
+    minWidth: '160px',
+
     listStyle: 'none',
     backgroundClip: 'padding-box',
     borderRadius: '4px',
     boxShadow: '0 1px 15px rgba(27, 31, 35, 0.15)',
-    margin: '0',
-    backgroundColor: 'white',
+    
     color: '#333',
+    backgroundColor: 'white',
     border: '1px solid rgba(27, 31, 35, 0.15)',
+
+    transition: 'color 0.15s, background-color 0.15s',
 });
 
 type MenuProps = {
@@ -53,17 +57,20 @@ export const Menu2 = React.forwardRef<HTMLUListElement, MenuProps>(function Menu
 */
 
 export const MenuItem = styled('li', {
-    listStyle: 'none',
+    position: 'relative',
     display: 'block',
+    listStyle: 'none',
     padding: '4px 8px 4px 16px',
+    
     overflow: 'hidden',
-    color: '${p => (p.$isOpen || p.$highlight ? "white" : "inherit")}',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
+
+    color: '${p => (p.$isOpen || p.$highlight ? "white" : "inherit")}',
+    
     fontSize: '14px',
     lineHeight: '1.5',
     cursor: 'pointer',
-    position: 'relative',
     backgroundColor: '${p => p.$isOpen || p.$highlight ? "#359ed0" : "transparent"}',
     '&:hover': {
         backgroundColor: '#359ed0',
@@ -95,17 +102,16 @@ export function PopoverMenu() {
 
     const { renderLayer, triggerProps, layerProps, arrowProps } = useLayer({
         isOpen,
-        onOutsideClick: close, // close the menu when the user clicks outside
-        onDisappear: close, // close the menu when the menu gets scrolled out of sight
-        overflowContainer: false, // keep the menu positioned inside the container
-        auto: true, // automatically find the best placement
-        placement: "top-end", // we prefer to place the menu "top-end"
-        triggerOffset: 12, // keep some distance to the trigger
-        containerOffset: 16, // give the menu some room to breath relative to the container
-        arrowOffset: 16 // let the arrow have some room to breath also
+        onOutsideClick: close,      // close the menu when the user clicks outside
+        onDisappear: close,         // close the menu when the menu gets scrolled out of sight
+        overflowContainer: false,   // keep the menu positioned inside the container
+        auto: true,                 // automatically find the best placement
+        placement: "top-end",       // we prefer to place the menu "top-end"
+        triggerOffset: 12,          // keep some distance to the trigger
+        containerOffset: 16,        // give the menu some room to breath relative to the container
+        arrowOffset: 16,            // let the arrow have some room to breath also
     });
 
-    // Again, we're using framer-motion for the transition effect
     return (
         <>
             <button {...triggerProps} onClick={() => setOpen(!isOpen)}>
@@ -115,10 +121,10 @@ export function PopoverMenu() {
             {renderLayer(<>{
                 isOpen && (
                     <MenuBase {...layerProps} className="bg-red-400 min-w-[12rem]">
-                        <li>Item 1</li>
-                        <li>Item 2</li>
-                        <li>Item 3</li>
-                        <li>Item 4</li>
+                        <MenuItem>Item 1</MenuItem>
+                        <MenuItem>Item 2 ItemItemItemItemItemItemItemItemItemItemItemItem</MenuItem>
+                        <MenuItem>Item 3</MenuItem>
+                        <MenuItem>Item 4</MenuItem>
                     </MenuBase>
                 )}
             </>)}
