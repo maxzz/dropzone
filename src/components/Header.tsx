@@ -9,7 +9,7 @@ import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
 import { useSpring, a } from '@react-spring/web';
 import { IconMenuHamburger } from './UI/UIIconsSymbolsDefs';
-import { PopoverMenu } from './UI/UIdropdownMenuLaag';
+import { PopoverMenu } from './UI/UIDropdownMenuLaag';
 
 function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
