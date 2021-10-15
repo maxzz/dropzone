@@ -1,9 +1,8 @@
 import React from 'react';
 import { Arrow, ArrowProps, useLayer } from 'react-laag';
-import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import { styled } from '../../stitches.config';
 
-const MenuBase = styled(motion.ul, {
+const MenuBase = styled('ul', {
     transition: 'color 0.15s, background-color 0.15s',
     position: 'absolute',
     minWidth: '160px',
@@ -20,7 +19,7 @@ const MenuBase = styled(motion.ul, {
 
 type MenuProps = {
     arrowProps?: ArrowProps;
-} & HTMLMotionProps<"ul">;
+};
 
 export const Menu2 = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     { children, arrowProps, ...rest },
@@ -29,14 +28,6 @@ export const Menu2 = React.forwardRef<HTMLUListElement, MenuProps>(function Menu
     return (
         <MenuBase
             ref={ref}
-            initial={{ opacity: 0, scale: 0.85 }} // animate from
-            animate={{ opacity: 1, scale: 1 }} // animate to
-            exit={{ opacity: 0, scale: 0.85 }} // animate exit
-            transition={{
-                type: "spring",
-                stiffness: 800,
-                damping: 35
-            }}
             {...rest}
         >
             {children}
@@ -77,8 +68,8 @@ export const MenuItem = styled('li', {
     '&:hover': {
         backgroundColor: '#359ed0',
         color: 'white',
-      }
-  })
+    }
+});
 /*
     ${p =>
       p.$nested &&
@@ -120,19 +111,17 @@ export function PopoverMenu() {
             <button {...triggerProps} onClick={() => setOpen(!isOpen)}>
                 {isOpen ? "Hide" : "Show"}
             </button>
-            {renderLayer(
-                <AnimatePresence>
-                    {isOpen && (
-                        <MenuBase {...layerProps} className="bg-red-400 min-w-[12rem]">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                            <li>Item 4</li>
-                            <Arrow {...arrowProps} />
-                        </MenuBase>
-                    )}
-                </AnimatePresence>
-            )}
+
+            {renderLayer(<>{
+                isOpen && (
+                    <MenuBase {...layerProps} className="bg-red-400 min-w-[12rem]">
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                        <li>Item 4</li>
+                    </MenuBase>
+                )}
+            </>)}
         </>
     );
 }
