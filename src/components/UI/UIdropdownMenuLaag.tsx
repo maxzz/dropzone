@@ -10,7 +10,9 @@ const MenuBase = styled('ul', {
 
     // margin: '0',
     // padding: '4px 0px',
-    // minWidth: '160px',
+
+    minWidth: '160px',
+    maxWidth: '460px',
 
     // listStyle: 'none',
     // backgroundClip: 'padding-box',
@@ -54,18 +56,18 @@ const StyledSeparator = styled('div', {
 
 function MenuRow({ close }: { close: () => void; }) {
     return (
-        <div className="h-8 flex items-center px-2 py-1 text-primary-900 hover:bg-primary-300 text-sm" style={{ transition: 'background-color .3s ease' }}>
+        <li className="h-8 flex items-center px-2 py-1 text-primary-900 hover:bg-primary-300 text-sm" style={{ transition: 'background-color .3s ease' }}>
             Another item1
-        </div>
+        </li>
     );
 }
 
 const menuLayerOptions: Partial<Options> = {
-    overflowContainer: true,   // keep the menu positioned inside the container
+    overflowContainer: false,   // keep the menu positioned inside the container
     auto: true,                 // automatically find the best placement
     placement: "bottom-center", // we prefer to place the menu "top-end"
     possiblePlacements: ["top-center", "bottom-center"],
-    triggerOffset: 12,          // keep some distance to the trigger
+    triggerOffset: 6,          // keep some distance to the trigger
     containerOffset: 16,        // give the menu some room to breath relative to the container
     arrowOffset: 16,            // let the arrow have some room to breath also
 };
@@ -113,7 +115,7 @@ export function PopoverMenu() {
                         <StyledSeparator />
                         <div className="h-8 flex items-center px-2 py-1 text-primary-900 hover:bg-primary-300 text-sm" style={{ transition: 'background-color .3s ease' }}>Another item2</div>
                         <div className="h-8 flex items-center px-2 py-1 text-primary-900 hover:bg-primary-300 text-sm" style={{ transition: 'background-color .3s ease' }}>Another item3</div>
-                        <MenuItem>Item 2 ItemItemItemItemItemItemItemItemItemItemItemItem</MenuItem>
+                        <MenuItem>Item 2 ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem</MenuItem>
                         <MenuItem>Item 3</MenuItem>
                         <MenuItem>Item 4</MenuItem>
                     </MenuBase>
