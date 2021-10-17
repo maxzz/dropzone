@@ -32,7 +32,7 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
         // itemCount: len,
         itemCount: files.length,
         resetScroll: true,
-        itemSize: 141,
+        //itemSize: 141,
     });
 
     //console.log('items', files.length, items);
@@ -51,7 +51,7 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
 
                         return (
                         //<div ref={measureRef} className="">
-                            <CardWRef ref={measureRef} fileUsAtom={atom} className="" key={`${atom}`} />
+                            <CardWRef ref={measureRef} fileUsAtom={atom} className="mb-4" key={`${atom}`} />
                         //</div>
                         );
                     })}
