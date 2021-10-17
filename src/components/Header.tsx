@@ -41,7 +41,7 @@ function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
                         <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
                     </button>
 
-                    <PopoverMenu />
+                    {/* <PopoverMenu /> */}
 
                     <BusyIndicator />
                 </>}

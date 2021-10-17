@@ -82,7 +82,7 @@ function CardTitleContent({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
             {/* Card actions */}
             <div className="absolute top-3 right-2 z-10 flex">
-                <PopoverMenu />
+                {/* <PopoverMenu /> */}
                 <CardTitleMenu icon={
                     <div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]">
                         <IconMenuHamburger />
