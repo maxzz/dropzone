@@ -22,16 +22,17 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
 
-    const [len, setLen] = React.useState(files.length);
+    //const [len, setLen] = React.useState(files.length);
 
-    React.useEffect(() => {
-        setLen(files.length);
-     }, [files.length]);
+    // React.useEffect(() => {
+    //     setLen(files.length);
+    //  }, [files.length]);
 
     const { outerRef, innerRef, items } = useVirtual<HTMLDivElement, HTMLDivElement>({
-        itemCount: len,
+        // itemCount: len,
+        itemCount: files.length,
         resetScroll: true,
-        itemSize: 140,
+        itemSize: 141,
     });
 
     //console.log('items', files.length, items);
