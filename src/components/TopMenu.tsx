@@ -1,6 +1,4 @@
 import React from 'react';
-import { useUpdateAtom } from 'jotai/utils';
-import { foldAllCardsAtom } from '../store/store';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -8,6 +6,17 @@ import {
     DropdownMenuSeparator as Separator,
     DropdownMenuTrigger as Trigger
 } from './UI/UiDropdownMenu';
+import { useAtom } from 'jotai';
+import { useUpdateAtom } from 'jotai/utils';
+import { foldAllCardsAtom, rightPanelValueAtom } from '../store/store';
+
+function MenuItemConvert() {
+    const [rightPanelValue] = useAtom(rightPanelValueAtom);
+    const isEnabled = !!rightPanelValue;
+    return (
+        <Item className={`${isEnabled ? 'opacity-100' : '!opacity-30'}`} title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</Item>
+    );
+}
 
 export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
@@ -18,6 +27,7 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
             </Trigger>
 
             <Content sideOffset={5}>
+                <MenuItemConvert />
                 <Item className="!text-sm" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
                 <Separator />
                 <Item>Help</Item>
