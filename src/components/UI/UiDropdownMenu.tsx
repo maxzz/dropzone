@@ -22,7 +22,9 @@ const itemStyles = {
 
     '&[data-disabled]': {
         color: 'var(--tm-primary-300)', //mauve.mauve8
-        pointerEvents: 'none',
+
+        //pointerEvents: 'none', // I need pointer events to show browser's tooltip
+        backgroundColor: 'white !important',
     },
 
     '&:focus': {
@@ -34,7 +36,7 @@ const itemStyles = {
 
 const StyledItem = styled(Primitive.Item, { ...itemStyles });
 
-export const MenuItem = ({disabled, ...rest}: {disabled?: boolean} & Primitive.MenuItemProps) => {
+const MenuItem = ({disabled, ...rest}: {disabled?: boolean} & Primitive.MenuItemProps) => {
     return <StyledItem {...rest} {...(disabled && {'data-disabled': ''})} />
 }
 
@@ -95,5 +97,6 @@ const StyledTrigger = styled(Primitive.Trigger, {
 export const DropdownMenu = Primitive.Root;
 export const DropdownMenuTrigger = StyledTrigger;
 export const DropdownMenuContent = StyledContent;
-export const DropdownMenuItem = StyledItem;
+//export const DropdownMenuItem = StyledItem;
+export const DropdownMenuItem = MenuItem;
 export const DropdownMenuSeparator = StyledSeparator;
