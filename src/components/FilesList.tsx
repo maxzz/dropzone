@@ -40,7 +40,8 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
     return (
         <>
             <div ref={outerRef} className="w-full h-full overflow-auto">
-                <div ref={innerRef} className="relative grid grid-flow-row gap-4 text-sm">
+                {/* <div ref={innerRef} className="relative grid grid-flow-row gap-4 text-sm"> */}
+                <div ref={innerRef} className="text-sm">
                     {items.map(({ index, measureRef }) => {
                         const atom = files[index];
                         //console.log('item atom', atom);
