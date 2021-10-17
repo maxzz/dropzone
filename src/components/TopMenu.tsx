@@ -14,9 +14,17 @@ function MenuItemConvert() {
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     const isEnabled = !!rightPanelValue;
     return (
-        <Item className={`${isEnabled ? 'opacity-100' : '!opacity-30'}`} title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</Item>
+        <Item {...(isEnabled && {'data-disabled': ''})} title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</Item>
     );
 }
+
+//{...(isEnabled && {'data-disabled': ''})} Ok
+//{...(isEnabled && 'data-disabled')} No
+//{...(isEnabled && {'data-disabled': true})} OK
+//{...{'data-disabled': isEnabled}} No
+//{isEnabled ?'data-disabled':''} No
+
+//className={`${isEnabled ? 'opacity-100' : '!opacity-30'}`}
 
 export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
