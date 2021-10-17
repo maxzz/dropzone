@@ -4,7 +4,8 @@ import {
     DropdownMenuContent as Content,
     DropdownMenuItem as Item,
     DropdownMenuSeparator as Separator,
-    DropdownMenuTrigger as Trigger
+    DropdownMenuTrigger as Trigger,
+    MenuItem
 } from './UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
@@ -14,7 +15,8 @@ function MenuItemConvert() {
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     const isEnabled = !!rightPanelValue;
     return (
-        <Item {...(isEnabled && {'data-disabled': ''})} title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</Item>
+        // <Item {...(isEnabled && {'data-disabled': ''})} title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</Item>
+        <MenuItem disabled title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</MenuItem>
     );
 }
 

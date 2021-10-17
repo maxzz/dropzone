@@ -34,6 +34,10 @@ const itemStyles = {
 
 const StyledItem = styled(Primitive.Item, { ...itemStyles });
 
+export const MenuItem = ({disabled, ...rest}: {disabled?: boolean} & Primitive.MenuItemProps) => {
+    return <StyledItem {...rest} {...(disabled && {'data-disabled': ''})} />
+}
+
 const StyledSeparator = styled(Primitive.Separator, {
     height: 1,
     backgroundColor: 'var(--tm-primary-300)', //violet.violet6
