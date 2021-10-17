@@ -110,6 +110,8 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
         for (let i = 0; i < itemCount; i += 1) {
             msDataRef.current[i] = getMeasure(i, useCache && msDataRef.current[i] ? msDataRef.current[i].size : getItemSize(i));
         }
+
+//        console.log('tm: measureItems', msDataRef.current);
     }, [getItemSize, getMeasure, itemCount]);
 
     const getCalcData = useCallback((scrollOffset: number) => {
@@ -338,15 +340,7 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
             }
 
             if (stickies.length) {
-                const stickyIdx =
-                    stickies[
-                    findNearestBinarySearch(
-                        0,
-                        stickies.length - 1,
-                        vStart,
-                        (idx) => stickies[idx]
-                    )
-                    ];
+                const stickyIdx = stickies[findNearestBinarySearch(0, stickies.length - 1, vStart, (idx) => stickies[idx])];
 
                 if (oStart > stickyIdx) {
                     const { size } = msDataRef.current[stickyIdx];
@@ -372,11 +366,12 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
                     innerRef.current!.style[sizeKey] = `${innerSize}px`;
                     return nextItems;
                 }
-
                 return prevItems;
             });
 
-            if (!isScrolling) return;
+            if (!isScrolling) {
+                return;
+            }
 
             const scrollForward = scrollOffset > scrollOffsetRef.current;
 
@@ -391,17 +386,10 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
                     userScroll: userScrollRef.current,
                 });
 
-            const loadIndex = Math.max(
-                Math.floor((vStop + 1) / loadMoreCount) - (scrollForward ? 0 : 1),
-                0
-            );
+            const loadIndex = Math.max(Math.floor((vStop + 1) / loadMoreCount) - (scrollForward ? 0 : 1), 0);
             const startIndex = loadIndex * loadMoreCount;
 
-            if (
-                loadMoreRef.current &&
-                vStop !== prevVStopRef.current &&
-                !(isItemLoadedRef.current && isItemLoadedRef.current(loadIndex))
-            )
+            if (loadMoreRef.current && vStop !== prevVStopRef.current && !(isItemLoadedRef.current && isItemLoadedRef.current(loadIndex)))
                 loadMoreRef.current({
                     startIndex,
                     stopIndex: startIndex + loadMoreCount - 1,
@@ -410,23 +398,24 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
                     userScroll: userScrollRef.current,
                 });
 
-            if (uxScrolling) resetIsScrolling();
+            if (uxScrolling) {
+                resetIsScrolling();
+            }
 
             prevVStopRef.current = vStop;
-        },
-        [
-            stickyIndicesRef,
-            getCalcData,
-            getMeasure,
-            itemCount,
-            loadMoreCount,
-            loadMoreRef,
-            marginKey,
-            onScrollRef,
-            resetIsScrolling,
-            scrollTo,
-            sizeKey,
-        ]
+        }, [
+        stickyIndicesRef,
+        getCalcData,
+        getMeasure,
+        itemCount,
+        loadMoreCount,
+        loadMoreRef,
+        marginKey,
+        onScrollRef,
+        resetIsScrolling,
+        scrollTo,
+        sizeKey,
+    ]
     );
 
     useResizeEffect<O>(outerRef, (rect) => {
@@ -435,6 +424,8 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
         const isSameSize = isSameWidth && height === rect.height;
         const msDataLen = msDataRef.current.length;
         const prevTotalSize = msDataRef.current[msDataLen - 1]?.end;
+
+//        console.log('tm: useResizeEffect', msDataRef.current);
 
         outerRectRef.current = rect;
         measureItems(hasDynamicSizeRef.current);

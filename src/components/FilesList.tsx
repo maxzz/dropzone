@@ -4,7 +4,7 @@ import { filteredAtom } from '../store/store';
 import Card, { CardWRef } from './Card/Card';
 import UISimpleBar from './UI/UIScrollbar';
 //import useVirtual, { Item } from 'react-cool-virtual';
-import useVirtual from '../hooks/useVirtual/usevirtual';
+import useVirtual from '../hooks/useVirtual/useVirtual';
 
 function FilesListOld(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
@@ -31,11 +31,15 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
     const { outerRef, innerRef, items } = useVirtual<HTMLDivElement, HTMLDivElement>({
         // itemCount: len,
         itemCount: files.length,
-        resetScroll: true,
-        //itemSize: 141,
+        //resetScroll: true,
+        // itemSize: 141,
+        // itemSize: (idx: number) => {
+        //     console.log('idx', idx);
+        //     return 141;
+        // },
     });
 
-    //console.log('items', files.length, items);
+    //console.log(`items dropped: ${files.length} virtual:`, items);
 
     return (
         <>
@@ -52,6 +56,7 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
                         return (
                         //<div ref={measureRef} className="">
                             <CardWRef ref={measureRef} fileUsAtom={atom} className="mb-4" key={`${atom}`} />
+                            // <CardWRef fileUsAtom={atom} className="mb-4" key={`${atom}`} />
                         //</div>
                         );
                     })}
