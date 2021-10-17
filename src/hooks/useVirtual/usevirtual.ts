@@ -306,7 +306,6 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
                             // NOTE: Use `borderBoxSize` when it's supported by Safari
                             // see: https://caniuse.com/mdn-api_resizeobserverentry_borderboxsize
                             const measuredSize = target.getBoundingClientRect()[sizeKey];
-
                             if (!measuredSize) {
                                 ro.disconnect();
                                 rosRef.current.delete(target);
@@ -317,16 +316,14 @@ export default <O extends HTMLElement = HTMLElement, I extends HTMLElement = O>(
 
                             if (measuredSize !== size || start !== prevEnd) {
                                 // To prevent dynamic size from jumping during backward scrolling
-                                if (i < prevItemIdxRef.current && start < scrollOffset)
+                                if (i < prevItemIdxRef.current && start < scrollOffset) {
                                     scrollTo(scrollOffset + measuredSize - size, false);
+                                }
 
                                 msDataRef.current[i] = getMeasure(i, measuredSize);
-                                if (!isScrollToItemRef.current)
-                                    handleScroll(
-                                        scrollOffsetRef.current,
-                                        isScrolling,
-                                        uxScrolling
-                                    );
+                                if (!isScrollToItemRef.current) {
+                                    handleScroll(scrollOffsetRef.current, isScrolling, uxScrolling);
+                                }
 
                                 hasDynamicSizeRef.current = true;
                             }
