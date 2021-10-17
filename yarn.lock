@@ -188,7 +188,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.13.10":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.13.10", "@babel/runtime@^7.15.4":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.4.tgz#fd17d16bfdf878e6dd02d19753a39fa8a8d9c84a"
   integrity sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==
@@ -1921,6 +1921,13 @@ quick-lru@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
+
+react-cool-virtual@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/react-cool-virtual/-/react-cool-virtual-0.5.5.tgz#e3d50c362140ed6bf51488639d0fb72df7ca8dd0"
+  integrity sha512-+s9LAs6nOTSN9erAwiemwA9a3rBh/8K9J7km1Cx4Xe6pO6Ux2B+0fgf8eL0y2Yw9JkjeM7cguTu3+VKkpqOVeg==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
 
 react-dom@^17.0.0:
   version "17.0.2"

@@ -50,7 +50,11 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     );
 }
 
-function Card_({ fileUsAtom, ...props }: { fileUsAtom: FileUsAtom; } & React.HTMLAttributes<HTMLDivElement>) {
+type CardProps = {
+    fileUsAtom: FileUsAtom;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+function Card_({ fileUsAtom, ...props }: CardProps) {
     const { className, ...rest } = props;
     return (
         <div className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
@@ -63,6 +67,17 @@ function Card_({ fileUsAtom, ...props }: { fileUsAtom: FileUsAtom; } & React.HTM
 const Card = React.memo(Card_);
 
 export default Card;
+
+export const CardWRef = React.forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+    const { fileUsAtom, className, ...rest } = props;
+    return (
+        <div ref={ref} className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
+            <CardTitle fileUsAtom={fileUsAtom} />
+            <CardTopButtons fileUsAtom={fileUsAtom} />
+        </div>
+    );
+})
+
 
 //TODO: add card index of total
 //TODO: compact view

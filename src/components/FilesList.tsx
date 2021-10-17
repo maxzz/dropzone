@@ -1,11 +1,12 @@
-import { useAtom } from 'jotai';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { filteredAtom } from '../store/store';
-import Card from './Card/Card';
+import Card, { CardWRef } from './Card/Card';
 import UISimpleBar from './UI/UIScrollbar';
+import useVirtual, { Item } from 'react-cool-virtual';
 
 function FilesListOld(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
-    const {className, ...rest} = props;
+    const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
     return (
         <UISimpleBar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
@@ -17,14 +18,43 @@ function FilesListOld(props: React.HTMLAttributes<HTMLElement>) { //TODO: add co
 }
 
 function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
-    const {className, ...rest} = props;
+    const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
+
+    const [len, setLen] = React.useState(files.length);
+
+    React.useEffect(() => {
+        setLen(files.length);
+     }, [files.length]);
+
+    const { outerRef, innerRef, items } = useVirtual<HTMLDivElement, HTMLDivElement>({
+        itemCount: len,
+        resetScroll: true,
+        itemSize: 140,
+    });
+
+    //console.log('items', files.length, items);
+
     return (
-        <UISimpleBar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
-            <div className="grid grid-flow-row gap-4 text-sm">
-                {files.map((atom) => <Card fileUsAtom={atom} className="" key={`${atom}`} />)}
+        <>
+            <div ref={outerRef} className="w-full h-full overflow-auto">
+                <div ref={innerRef} className="relative grid grid-flow-row gap-4 text-sm">
+                    {items.map(({ index, measureRef }) => {
+                        const atom = files[index];
+                        //console.log('item atom', atom);
+                        if (!atom) {
+                            return;
+                        }
+
+                        return (
+                        //<div ref={measureRef} className="">
+                            <CardWRef ref={measureRef} fileUsAtom={atom} className="" key={`${atom}`} />
+                        //</div>
+                        );
+                    })}
+                </div>
             </div>
-        </UISimpleBar>
+        </>
     );
 }
 
