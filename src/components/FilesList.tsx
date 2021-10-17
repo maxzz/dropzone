@@ -6,7 +6,7 @@ import UISimpleBar from './UI/UIScrollbar';
 //import useVirtual, { Item } from 'react-cool-virtual';
 import useVirtual from '../hooks/useVirtual/useVirtual';
 
-function FilesListOld(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
     return (
@@ -18,7 +18,7 @@ function FilesListOld(props: React.HTMLAttributes<HTMLElement>) { //TODO: add co
     );
 }
 
-function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+function FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
 
