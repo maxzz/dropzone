@@ -15,9 +15,10 @@ function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
     const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
     return (
-        <a.div style={styles} className="flex items-center">
-            <IconRocket className="ml-2 w-5 h-5" />
-            <div className={`ml-1 text-xs text-green-400`} style={{ transition: 'opacity .5s 1s' }}>Parsing...</div>
+        <a.div style={styles} className="flex items-center flex-col md:flex-row">
+        {/* <a.div style={styles} className="flex items-center"> */}
+            <IconRocket className="ml-2 w-5 h-5 -mt-8 md:mt-0" />
+            <div className={`ml-1 text-xs text-green-400 rotate-90 translate-x-[3px] translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`} style={{ transition: 'opacity .5s 1s' }}>Parsing...</div>
         </a.div>
     );
 }
@@ -82,7 +83,7 @@ function Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
             <LeftInfoBar>
-                <div className="p-2 sm:p-0 flex flex-col sm:flex-row items-end sm:items-center space-x-2 space-y-2 sm:space-y-0 text-sm text-gray-200">
+                <div className="p-2 md:p-0 flex flex-col md:flex-row items-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200">
                     <AppFilter atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
                     <AppFilter atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
                     <AppFilter atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />

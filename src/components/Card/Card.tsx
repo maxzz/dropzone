@@ -78,7 +78,6 @@ export const CardWRef = React.forwardRef<HTMLDivElement, CardProps>((props, ref)
     );
 })
 
-
-//TODO: add card index of total
-//TODO: compact view
+//TODO: add card index of total - done
+//TODO: compact view - tbd
 //TODO: some IE forms have no detection section: but we can check IE_Server and presences of locations
