@@ -5,7 +5,7 @@ import { IconDocument } from './UI/UiIcons';
 function SelectedItem({ selectedAtom }: { selectedAtom: Atom<string>; }) {
     const [selected] = useAtom(selectedAtom);
     return (
-        <div className="w-16 h-auto ratio34 p-2 rounded border border-gray-500 text-xs f_lex flex-col items-center overflow-hidden">
+        <div className="min-w-[max(44px,10vh)] h-auto ratio34 p-2 rounded border border-gray-500 text-xs f_lex flex-col items-center overflow-hidden">
             <IconDocument className="w-6 h-6 mb-1 flex-none" />
             <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">{selected}</div>
 
