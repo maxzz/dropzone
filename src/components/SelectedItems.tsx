@@ -16,10 +16,10 @@ function SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [selected] = React.useState([atom('long filename A'), atom('file B')]);
 
-    
     if (selected.length) {
         return null;
     }
+    
     return (
         <div className={`${className} p-4 min-h-[40px] flex items-center bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`} {...rest}
             title="Action items"
