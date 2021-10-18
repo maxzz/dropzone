@@ -10,6 +10,13 @@ import toast from 'react-hot-toast';
 import { useSpring, a } from '@react-spring/web';
 import { IconMenuHamburger } from './UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from './UI/UIDropdownMenuLaag';
+import { keyframes } from '@stitches/react';
+
+const rocketAnimation = keyframes({
+    '0%': {transform: 'scale(1) translateY(0)'},
+    '50%': {transform: 'scale(.5) translateY(15px)'},
+    '100%': {transform: 'scale(.5) translateY(0px)'},
+});
 
 function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
@@ -17,7 +24,7 @@ function BusyIndicator() {
     return (
         <a.div style={styles} className="flex items-center flex-col md:flex-row">
         {/* <a.div style={styles} className="flex items-center"> */}
-            <IconRocket className="ml-2 w-5 h-5 -mt-8 md:mt-0" />
+            <IconRocket style={{animation: busy ? `${rocketAnimation} 1.2s infinite` : ''}} className="ml-2 w-5 h-5 -mt-8 md:mt-0" />
             <div className={`ml-1 text-xs text-green-400 rotate-90 translate-x-[3px] translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`} style={{ transition: 'opacity .5s 1s' }}>Parsing...</div>
         </a.div>
     );
