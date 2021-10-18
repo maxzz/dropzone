@@ -67,3 +67,5 @@ function FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO: add co
 }
 
 export default FilesList;
+
+//TODO: we can use alternative solutins: virtual list; pagination; popup; right panel; ...
