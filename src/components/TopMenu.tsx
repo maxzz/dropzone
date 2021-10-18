@@ -19,7 +19,7 @@ function MenuItemMarkSelected() {
         if (!disabled) {
             const idx = selectedAtoms.find((atom) => rightPanelValueAtom === atom);
             //console.log('items', selectedAtoms.map(_ => _.toString()), rightPanelValueAtom.toString());
-            
+
             if (idx) {
                 const newSelection = selectedAtoms.filter((atom) => rightPanelValueAtom !== atom);
                 //console.log('add items', newSelection.map(_ => _.toString()), rightPanelValueAtom.toString());
@@ -47,6 +47,15 @@ function MenuItemConvert() {
     );
 }
 
+function MenuItemFolding() {
+    const toggleFolding = useUpdateAtom(foldAllCardsAtom);
+    return (
+        <Item className="" onSelect={async () => {
+            toggleFolding();
+        }}>Toggle cards folding</Item>
+    );
+}
+
 export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
     return (
@@ -59,7 +68,8 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 <MenuItemMarkSelected />
                 <MenuItemConvert />
                 <Separator />
-                <Item className="!text-sm" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
+                <Item className="" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
+                <MenuItemFolding />
             </Content>
         </Menu>
     );
