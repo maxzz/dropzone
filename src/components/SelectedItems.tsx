@@ -4,8 +4,9 @@ import { IconDocument } from './UI/UiIcons';
 
 function SelectedItem({ selectedAtom }: { selectedAtom: Atom<string>; }) {
     const [selected] = useAtom(selectedAtom);
+    const mark = false;
     return (
-        <div className="w-24 h-auto ratio11 p-2 rounded border border-gray-500 text-xs grid overflow-hidden" title={`"${selected}"`}>
+        <div className={`w-[max(4rem,8vh)] h-auto ratio11 p-2 ${mark ? 'bg-gray-800':'bg-gray-600'} rounded border border-gray-500 text-xs grid overflow-hidden shadow-lg select-none cursor-pointer`} title={`"${selected}"`}>
             <IconDocument className="w-6 h-6 mb-1 place-self-center" />
             <div className="overflow-hidden whitespace-nowrap overflow-ellipsis text-center">{selected}</div>
         </div>
@@ -16,12 +17,12 @@ function SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [selected] = React.useState([atom('long filename A'), atom('file B')]);
 
-    // if (selected.length) {
-    //     return null;
-    // }
+    if (selected.length) {
+        return null;
+    }
 
     return (
-        <div className={`${className} p-4 min-h-[40px] flex items-center bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`} {...rest}
+        <div className={`${className} p-3 min-h-[40px] flex items-center bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`} {...rest}
             title="Action items"
         >
             <div className="flex space-x-2">
