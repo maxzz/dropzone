@@ -11,3 +11,13 @@
         @apply scrollbar-w-2 scrollbar-track-transparent scrollbar-thumb-rounded scrollbar-thumb-transparent;
     }
 }
+
+@layer utilities {
+    .ratio11 {
+        aspect-ratio: 1 / 1;
+    }
+
+    .ratio34 {
+        aspect-ratio: 3 / 4;
+    }
+}
