@@ -115,9 +115,9 @@ export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
 export const foldAllCardsAtom = atom(
     (get) => get(_foldAllCardsAtom),
     (get, set) => {
-        set(busyAtom, 'Folding...');
+        //set(busyAtom, 'Folding...');
         set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
-        set(busyAtom, '');
+        //set(busyAtom, '');
     }
 );
 
