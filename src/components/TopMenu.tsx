@@ -9,12 +9,25 @@ import {
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { foldAllCardsAtom, rightPanelValueAtom } from '../store/store';
+import toast from 'react-hot-toast';
+
+function MenuItemMarkSelected() {
+    const [rightPanelValue] = useAtom(rightPanelValueAtom);
+    const disabled = !rightPanelValue;
+    return (
+        <Item disabled={disabled} onClick={(event) => event.preventDefault()} title="Mark manifest. Select manifest first.">
+            Select / Deselect mainfest
+        </Item>
+    );
+}
 
 function MenuItemConvert() {
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
-    const isEnabled = !!rightPanelValue;
+    const disabled = !rightPanelValue;
     return (
-        <Item disabled title="Convert manual mode manifest to regular Chrome manifest">Convert Manual to Normal</Item>
+        <Item disabled={disabled} onClick={(event) => {event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } })}} title="Convert manual mode manifest to regular Chrome manifest. Select manifest first.">
+            Convert manual to normal
+        </Item>
     );
 }
 
@@ -27,10 +40,10 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
             </Trigger>
 
             <Content sideOffset={5}>
+                <MenuItemMarkSelected />
                 <MenuItemConvert />
-                <Item className="!text-sm" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
                 <Separator />
-                <Item>Help</Item>
+                <Item className="!text-sm" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
             </Content>
         </Menu>
     );
