@@ -216,3 +216,7 @@ export const busyAtom = atom(false);
 // Split pane position
 
 export const splitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplitPos, (get, _) => Storage.save(get));
+
+// Manifests to actions selection
+
+export const selected4Action = atom<FileUsAtom[]>([]);
