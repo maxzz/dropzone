@@ -115,7 +115,9 @@ export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
 export const foldAllCardsAtom = atom(
     (get) => get(_foldAllCardsAtom),
     (get, set) => {
+        set(busyAtom, 'Folding...');
         set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
+        set(busyAtom, '');
     }
 );
 
@@ -139,7 +141,7 @@ const updateCacheAtom = atom(
         set(totalNormalManiAtom, 0);
         set(totalManualManiAtom, 0);
         set(totalEmptyManiAtom, 0);
-        set(busyAtom, true);
+        set(busyAtom, 'Parsing...');
 
         const total = { normal: 0, manual: 0, empty: 0 };
 
@@ -184,7 +186,7 @@ const updateCacheAtom = atom(
             }
         } //for
 
-        set(busyAtom, false);
+        set(busyAtom, '');
     }
 );
 
@@ -211,7 +213,7 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
 
 // Busy indicator
 
-export const busyAtom = atom(false);
+export const busyAtom = atom('');
 
 // Split pane position
 
