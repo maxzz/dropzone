@@ -8,7 +8,7 @@ import {
 } from './UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { busyAtom, FileUsAtom, foldAllCardsAtom, rightPanelValueAtom, selected4Action } from '../store/store';
+import { FileUsAtom, foldAllCardsAtom, rightPanelValueAtom, selected4Action } from '../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
@@ -49,14 +49,10 @@ function MenuItemConvert() {
 
 function MenuItemFolding() {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
-    const setBusy = useUpdateAtom(busyAtom);
+    //const setBusy = useUpdateAtom(busyAtom);
     return (
         <Item className="" onSelect={async () => {
-            setBusy('Folding...');
-            setTimeout(() => {
-                toggleFolding();
-                setBusy('');
-            }, 0);
+            toggleFolding(); // setBusy('Folding...'); setTimeout(() => { toggleFolding(); setBusy(''); }, 0); // still reflow problem
         }}>Toggle cards folding</Item>
     );
 }
@@ -73,7 +69,6 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 <MenuItemMarkSelected />
                 <MenuItemConvert />
                 <Separator />
-                {/* <Item className="" onSelect={() => toggleFolding()}>Toggle cards folding</Item> */}
                 <MenuItemFolding />
             </Content>
         </Menu>
