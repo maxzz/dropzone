@@ -53,8 +53,10 @@ function MenuItemFolding() {
     return (
         <Item className="" onSelect={async () => {
             setBusy('Folding...');
-            toggleFolding();
-            setBusy('');
+            setTimeout(() => {
+                toggleFolding();
+                setBusy('');
+            }, 0);
         }}>Toggle cards folding</Item>
     );
 }
@@ -71,7 +73,7 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 <MenuItemMarkSelected />
                 <MenuItemConvert />
                 <Separator />
-                <Item className="" onSelect={() => toggleFolding()}>Toggle cards folding</Item>
+                {/* <Item className="" onSelect={() => toggleFolding()}>Toggle cards folding</Item> */}
                 <MenuItemFolding />
             </Content>
         </Menu>
