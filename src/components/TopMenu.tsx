@@ -8,14 +8,30 @@ import {
 } from './UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { foldAllCardsAtom, rightPanelValueAtom } from '../store/store';
+import { FileUsAtom, foldAllCardsAtom, rightPanelValueAtom, selected4Action } from '../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
+    const [selectedAtoms, setSelectedAtoms] = useAtom(selected4Action);
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     const disabled = !rightPanelValue;
+    function click() {
+        if (!disabled) {
+            const idx = selectedAtoms.find((atom) => rightPanelValueAtom === atom);
+            //console.log('items', selectedAtoms.map(_ => _.toString()), rightPanelValueAtom.toString());
+            
+            if (idx) {
+                const newSelection = selectedAtoms.filter((atom) => rightPanelValueAtom !== atom);
+                //console.log('add items', newSelection.map(_ => _.toString()), rightPanelValueAtom.toString());
+                setSelectedAtoms(newSelection);
+            } else {
+                //console.log('rem items', [...selectedAtoms, rightPanelValueAtom as FileUsAtom].map(_ => _.toString()), rightPanelValueAtom.toString());
+                setSelectedAtoms([...selectedAtoms, rightPanelValueAtom as FileUsAtom]);
+            }
+        }
+    }
     return (
-        <Item disabled={disabled} onClick={(event) => event.preventDefault()} title="Mark manifest. Select manifest first.">
+        <Item disabled={disabled} onClick={click} title="Mark manifest. Select manifest first.">
             Select / Deselect mainfest
         </Item>
     );
@@ -25,7 +41,7 @@ function MenuItemConvert() {
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     const disabled = !rightPanelValue;
     return (
-        <Item disabled={disabled} onClick={(event) => {event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } })}} title="Convert manual mode manifest to regular Chrome manifest. Select manifest first.">
+        <Item disabled={disabled} onClick={(event) => { event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } }); }} title="Convert manual mode manifest to regular Chrome manifest. Select manifest first.">
             Convert manual to normal
         </Item>
     );

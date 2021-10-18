@@ -21,9 +21,9 @@ function SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [selectedAtoms] = useAtom(selected4Action);
 
-    // if (!selectedAtoms.length) {
-    //     return null;
-    // }
+    if (!selectedAtoms.length) {
+        return null;
+    }
 
     return (
         <div className={`${className} p-3 min-h-[40px] flex items-center bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`} {...rest}
