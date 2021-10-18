@@ -8,7 +8,7 @@ import {
 } from './UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { FileUsAtom, foldAllCardsAtom, rightPanelValueAtom, selected4Action } from '../store/store';
+import { busyAtom, FileUsAtom, foldAllCardsAtom, rightPanelValueAtom, selected4Action } from '../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
@@ -49,9 +49,12 @@ function MenuItemConvert() {
 
 function MenuItemFolding() {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
+    const setBusy = useUpdateAtom(busyAtom);
     return (
         <Item className="" onSelect={async () => {
+            setBusy('Folding...');
             toggleFolding();
+            setBusy('');
         }}>Toggle cards folding</Item>
     );
 }
