@@ -76,10 +76,10 @@ export const setFilesAtom = atom(
                 file: file,
             });
         });
+        set(_foldAllCardsAtom, -1);
         set(filesAtom, dropped);
         set(updateCacheAtom);
         set(rightPanelAtom, undefined);
-        set(_foldAllCardsAtom, -1);
     }
 );
 
