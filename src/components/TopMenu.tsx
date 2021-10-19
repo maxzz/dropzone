@@ -38,8 +38,9 @@ function MenuItemMarkSelected() {
 }
 
 function MenuItemConvert() {
-    const [rightPanelValue] = useAtom(rightPanelValueAtom);
-    const disabled = !rightPanelValue;
+    const [rightPanel] = useAtom(rightPanelAtom);
+    //const disabled = !rightPanel;
+    const disabled = true;
     return (
         <Item disabled={disabled} onClick={(event) => { event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } }); }} title="Convert manual mode manifest to regular Chrome manifest. Select manifest first.">
             Convert manual to normal
@@ -76,3 +77,7 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
 };
 
 export default TopMenu;
+
+//TODO: show title in compact form by point of interset
+//sort titles
+//filter titles and sort by: filename, url, app/website title
