@@ -8,25 +8,25 @@ import {
 } from './UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { FileUsAtom, foldAllCardsAtom, rightPanelValueAtom, selected4Action } from '../store/store';
+import { FileUsAtom, foldAllCardsAtom, rightPanelAtom, rightPanelValueAtom, selected4Action } from '../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4Action);
-    const [rightPanelValue] = useAtom(rightPanelValueAtom);
-    const disabled = !rightPanelValue;
+    const [rightPanel] = useAtom(rightPanelAtom);
+    const disabled = !rightPanel;
     function click() {
-        if (!disabled) {
-            const idx = selectedAtoms.find((atom) => rightPanelValueAtom === atom);
-            //console.log('items', selectedAtoms.map(_ => _.toString()), rightPanelValueAtom.toString());
+        if (rightPanel) {
+            const idx = selectedAtoms.find((atom) => rightPanel === atom);
+            //console.log('items', selectedAtoms.map(_ => _.toString()), rightPanel.toString());
 
             if (idx) {
-                const newSelection = selectedAtoms.filter((atom) => rightPanelValueAtom !== atom);
-                //console.log('add items', newSelection.map(_ => _.toString()), rightPanelValueAtom.toString());
+                const newSelection = selectedAtoms.filter((atom) => rightPanel !== atom);
+                //console.log('add items', newSelection.map(_ => _.toString()), rightPanel.toString());
                 setSelectedAtoms(newSelection);
             } else {
-                //console.log('rem items', [...selectedAtoms, rightPanelValueAtom as FileUsAtom].map(_ => _.toString()), rightPanelValueAtom.toString());
-                setSelectedAtoms([...selectedAtoms, rightPanelValueAtom as FileUsAtom]);
+                //console.log('rem items', [...selectedAtoms, rightPanel as FileUsAtom].map(_ => _.toString()), rightPanel.toString());
+                setSelectedAtoms([...selectedAtoms, rightPanel]);
             }
         }
     }
