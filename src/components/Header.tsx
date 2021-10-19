@@ -12,20 +12,31 @@ import { IconMenuHamburger } from './UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from './UI/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
 
+// const rocketAnimation = keyframes({
+//     '0%': {transform: 'scale(1) translateY(0)'},
+//     '50%': {transform: 'scale(.5) translateY(15px)'},
+//     '100%': {transform: 'scale(.5) translateY(0px)'},
+// });
+
 const rocketAnimation = keyframes({
-    '0%': {transform: 'scale(1) translateY(0)'},
-    '50%': {transform: 'scale(.5) translateY(15px)'},
-    '100%': {transform: 'scale(.5) translateY(0px)'},
+    //'50%': {transform: 'scale(.7) translateY(-5px)', opacity: 1},
+    '0%': {transform: 'scale(1) translateY(0px)', opacity: 1},
+    '25%': {transform: 'scale(1) translateY(-5px)', opacity: 0},
+    '50%': {transform: 'scale(1) translateY(5px)', opacity: 0.3},
+    '70%': {transform: 'scale(1) translateY(0px)', opacity: 0.6},
+    // '100%': {transform: 'scale(1) translateY(5px)', opacity: 0.5},
 });
 
 function BusyIndicator() {
     const [busy] = useAtom(busyAtom);
+    //const busy = 'parsing...';
     const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
     return (
-        <a.div style={styles} className="flex items-center flex-col md:flex-row">
+        <a.div style={styles} className="grid">
+        {/* <a.div style={styles} className="flex items-center flex-col md:flex-row"> */}
         {/* <a.div style={styles} className="flex items-center"> */}
             <IconRocket style={{animation: busy ? `${rocketAnimation} 1.2s infinite` : ''}} className="ml-2 w-5 h-5 -mt-8 md:mt-0" />
-            <div className={`ml-1 text-xs text-green-400 rotate-90 translate-x-[3px] translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`} style={{ transition: 'opacity .5s 1s' }}>
+            <div className={`text-xs text-green-400 rotate-90 ${busy ?'translate-x-[-3px]':''} translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`} style={{ transition: 'opacity 1.2s 1s' }}>
                 {busy}
             </div>
         </a.div>
