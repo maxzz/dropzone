@@ -20,8 +20,7 @@ const rocketAnimation = keyframes({
 });
 
 function BusyIndicator() {
-    //const [busy] = useAtom(busyAtom); 
-    const busy = 'parsing...';
+    const [busy] = useAtom(busyAtom); //const busy = 'parsing...';
     const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
     return (
         <a.div style={styles} className="grid md:flex md:space-x-1">

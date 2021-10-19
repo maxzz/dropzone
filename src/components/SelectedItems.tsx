@@ -6,6 +6,9 @@ import { IconDocument } from './UI/UiIcons';
 function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
     const [selected] = useAtom(selectedAtom);
     const mark = false;
+    if (!selected) {
+        return null;
+    }
     return (
         <div
             className={`w-[max(4rem,8vh)] h-auto ratio11 p-2 ${mark ? 'bg-gray-800' : 'bg-gray-600'} rounded border border-gray-500 text-xs grid overflow-hidden shadow-lg select-none cursor-pointer`}
