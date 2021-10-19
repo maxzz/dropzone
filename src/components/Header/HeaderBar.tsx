@@ -1,8 +1,7 @@
 import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { busyAtom, clearFilesAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../../store/store';
-//import { IconAppLogo, IconMenuHamburger, IconRocket, IconTrash } from './UI/UiIcons';
-import { IconAppLogo, IconRocket, IconSearch, IconTrash } from '../UI/UiIcons';
+import { IconAppLogo, IconRocket, IconTrash } from '../UI/UiIcons';
 import DropzoneArea from './Dropzone';
 import LabeledSwitch from '../UI/UiSwitch';
 import TopMenu from './TopMenu';
@@ -11,6 +10,7 @@ import { useSpring, a } from '@react-spring/web';
 import { IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
+import Search from './Search';
 
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },
@@ -96,12 +96,12 @@ function AppFilter({ atomShow, atomCnt, label, title }: { atomShow: PrimitiveAto
     );
 }
 
-function Header(props: React.HTMLAttributes<HTMLElement>) {
+function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
             <LeftInfoBar>
                 <div className="p-2 md:p-0 flex flex-col md:flex-row items-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200">
-                    <IconSearch className="w-6 h-6" />
+                    <Search />
                     <AppFilter atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
                     <AppFilter atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
                     <AppFilter atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
@@ -111,4 +111,4 @@ function Header(props: React.HTMLAttributes<HTMLElement>) {
     );
 }
 
-export default Header;
+export default HeaderBar;

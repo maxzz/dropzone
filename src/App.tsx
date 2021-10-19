@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Toaster from './components/UI/UiToaster';
-import Header from './components/Header/TopHeader';
+import HeaderBar from './components/Header/HeaderBar';
 import FilesList from './components/FilesList';
 import RightPanel from './components/RightPanel';
 //import UISplitPane from './components/UI/UISplitPane';
@@ -15,7 +15,7 @@ function App() {
             <Toaster />
             <UISymbolsDefs />
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
-                <Header className="flex-none" />
+                <HeaderBar className="flex-none" />
 
                 <SelectedItems className="flex-none" />
 
