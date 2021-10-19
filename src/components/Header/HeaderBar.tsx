@@ -35,39 +35,25 @@ function BusyIndicator() {
     );
 }
 
-function LeftInfoBar({ children }: { children?: React.ReactNode; }) {
+function LeftHeader() {
     const [files, clearFiles] = useAtom(clearFilesAtom);
     const total = !!files.length;
     return (
-        <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}>
+        <div className="flex items-center my-0.5">
+            <DropzoneArea />
 
-            {/* Left header */}
-            <div className="flex items-center my-0.5">
-                <DropzoneArea />
-
-                {total && <>
-                    <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
-                        <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
-                    </div>
-
-                    <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
-                        <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
-                    </button>
-
-                    {/* <PopoverMenu /> */}
-
-                    <BusyIndicator />
-                </>}
-            </div>
-
-            {/* Right header */}
-            <div className="flex items-center justify-between">
-                {children}
-
-                <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
-                    <IconAppLogo />
+            {total && <>
+                <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer">
+                    <TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
                 </div>
-            </div>
+
+                <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
+                    <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
+                </button>
+
+                {/* <PopoverMenu /> */}
+                <BusyIndicator />
+            </>}
         </div>
     );
 }
@@ -99,14 +85,24 @@ function AppFilter({ atomShow, atomCnt, label, title }: { atomShow: PrimitiveAto
 function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
-            <LeftInfoBar>
-                <div className="p-2 md:p-0 flex flex-col md:flex-row items-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200">
-                    <Search />
-                    <AppFilter atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
-                    <AppFilter atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
-                    <AppFilter atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
+            <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}>
+                <LeftHeader />
+
+                {/* Right header */}
+                <div className="flex items-center justify-between">
+                    <div className="p-2 md:p-0 flex flex-col md:flex-row items-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200">
+                        <Search />
+                        <AppFilter atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
+                        <AppFilter atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
+                        <AppFilter atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
+                    </div>
+
+                    <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
+                        <IconAppLogo />
+                    </div>
                 </div>
-            </LeftInfoBar>
+
+            </div>
         </header>
     );
 }
