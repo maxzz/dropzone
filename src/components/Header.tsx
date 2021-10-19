@@ -79,6 +79,11 @@ function LabeWithNumber({ label, atomCnt }: { label: string; atomCnt: PrimitiveA
             <div className="inline-block">{label}</div>
             <div className="inline-block ml-1 pb-3">{total}</div>
         </div>
+        // version w/ frames
+        // <div className="ml-2 flex items-center">
+        //     <div className="inline-block">{label}</div>
+        //     <div className="inline-block ml-1 pb-3"><div className="border leading-3 text-[9px] px-1 py-[2px] rounded">{total}</div></div>
+        // </div>
     );
 }
 
