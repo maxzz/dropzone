@@ -14,17 +14,18 @@ import { keyframes } from '@stitches/react';
 
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },
-    '25%': { transform: 'scale(.5) translateY(-5px)', opacity: 0 },
-    '50%': { transform: 'scale(1) translateY(5px)', opacity: 0.3 },
-    '70%': { transform: 'scale(.7) translateY(0px)', opacity: 0.6 },
+    '25%': { transform: 'scale(.7) translateY(-2px)', opacity: 0 },
+    '50%': { transform: 'scale(1) translateY(2px)', opacity: 0.5 },
+    '70%': { transform: 'scale(.8) translateY(0px)', opacity: 0.7 },
 });
 
 function BusyIndicator() {
-    const [busy] = useAtom(busyAtom); //const busy = 'parsing...';
+    //const [busy] = useAtom(busyAtom); 
+    const busy = 'parsing...';
     const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
     return (
-        <a.div style={styles} className="grid">
-            <IconRocket style={{ animation: busy ? `${rocketAnimation} 1.2s infinite` : '' }} className="ml-2 w-5 h-5 -mt-8 md:mt-0" />
+        <a.div style={styles} className="grid md:flex md:space-x-1">
+            <IconRocket style={{ animation: busy ? `${rocketAnimation} 1.2s infinite` : '' }} className="ml-2 w-5 h-5 -mt-6 md:mt-0" />
             <div
                 className={`text-xs text-green-400 rotate-90 ${busy ? 'translate-x-[-3px]' : ''} translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`}
                 style={{ transition: 'opacity 1.2s 1s' }}
