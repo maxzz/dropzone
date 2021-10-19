@@ -5,10 +5,10 @@ import {
     DropdownMenuItem as Item,
     DropdownMenuSeparator as Separator,
     DropdownMenuTrigger as Trigger,
-} from './UI/UiDropdownMenu';
+} from '../UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { FileUsAtom, foldAllCardsAtom, rightPanelAtom, rightPanelValueAtom, selected4Action } from '../store/store';
+import { foldAllCardsAtom, rightPanelAtom, selected4Action } from '../../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Toaster from './components/UI/UiToaster';
-import Header from './components/Header';
+import Header from './components/Header/TopHeader';
 import FilesList from './components/FilesList';
 import RightPanel from './components/RightPanel';
 //import UISplitPane from './components/UI/UISplitPane';

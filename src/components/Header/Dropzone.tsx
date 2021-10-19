@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { clearFilesAtom, setFilesAtom } from '../store/store';
+import { clearFilesAtom, setFilesAtom } from '../../store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
-import { IconDocumentsAccepted } from './UI/UiIcons';
+import { IconDocumentsAccepted } from '../UI/UiIcons';
 import toast from 'react-hot-toast';
 
 function fileExt(filename: string = ''): string {
