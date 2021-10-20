@@ -64,10 +64,10 @@ function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
                 <LeftHeader />
 
                 {/* Right header */}
-                <div className="flex items-center justify-between">
+                <div className="flex-1 flex items-center justify-end">
                     <Filters />
 
-                    <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again'); }}>
+                    <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again', {style: {backgroundColor: 'tomato'}}); }}>
                         <IconAppLogo />
                     </div>
                 </div>
