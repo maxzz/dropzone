@@ -243,7 +243,6 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const domain = urlDomain(removeQuery(form.detection?.web_ourl));
         const isScript = isManual(fields);
         const isIe = isIeServer(form) || isIeProcess(form);
-        const bailOut = (isIe && isScript) || (isIe && !domain);
         const bailOuts = ((): string[] | undefined => {
             const rv: string[] = [];
             if (isIe && isScript) {
