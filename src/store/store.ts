@@ -104,7 +104,7 @@ export const filteredAtom = atom<FileUsAtom[]>(
                         if (title) {
                             useItNow = !!title.match(regex);
                         }
-                        
+
                         if (!useItNow) {
                             const meta0 = fileUs.meta?.[0];
                             if (meta0) {
@@ -225,6 +225,7 @@ export const totalNormalManiAtom = atom(0);
 export const totalEmptyManiAtom = atom(0);
 
 export const searchFilterAtom = atom('');
+export const searchFilterCSAtom = atom(false); // search case sensitive
 
 // Current atom for the right panel
 
