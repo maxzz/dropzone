@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUsAtom, rightPanelAtom } from '../../store/store';
 //import { IconAppWebIE, IconAppWindows, IconFolder, IconMenuHamburger } from '../UI/UiIcons';
-import { IconFolder } from '../UI/UiIcons';
+import { IconAttention, IconFolder } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
 import { IconAppWebIE, IconAppWindows, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
@@ -71,6 +71,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 </div>
                 <div className="flex-none flex items-center space-x-2 mr-1">
                     {isAnyWhy(fileUs) && <div className="text-red-500">*</div>}
+                    <IconAttention />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
             </div>
