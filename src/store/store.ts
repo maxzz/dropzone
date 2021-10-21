@@ -4,7 +4,7 @@ import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
-import { createRegexByFilter, delay, isEmpty, isManual, textFileReader } from './store-functions';
+import { createRegexByFilter, delay, isEmpty, isManual, textFileReader, useFileUs } from './store-functions';
 
 export type FileUs = {
     id: string;
@@ -88,13 +88,19 @@ export const filteredAtom = atom<FileUsAtom[]>(
         const sensitive = get(searchFilterCaseSensitiveAtom);
         const regex = createRegexByFilter(get(searchFilterAtom), sensitive);
 
-        const showNormal = get(showNormalManiAtom);
-        const showManual = get(showManualManiAtom);
-        const showEmpty = get(showEmptyManiAtom);
+        const options = {
+            showNormal: get(showNormalManiAtom),
+            showManual: get(showManualManiAtom),
+            showEmpty: get(showEmptyManiAtom),
+        }
+
         const files = get(filesAtom);
         return files.filter((fileAtom: FileUsAtom) => {
+
+            //useFileUs()
+
             const fileUs = get(fileAtom);
-            let useItNow = isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
+            let useItNow = isEmpty(fileUs) ? options.showEmpty : isManual(fileUs) ? options.showManual : options.showNormal;
             if (regex) {
                 if (useItNow) {
                     useItNow = !!fileUs.fname.match(regex);
