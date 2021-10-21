@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterAtom } from '../../store/store';
 import { useKey } from 'react-use';
-import { IconClose, IconSearch } from '../UI/UiIcons';
+import { IconCaseSensitive, IconClose, IconSearch } from '../UI/UiIcons';
 
 function FilterSearch() {
     const [filter, setFilter] = useAtom(searchFilterAtom);
@@ -20,7 +20,10 @@ function FilterSearch() {
                 />
                 {isEmpty
                     ? <IconSearch className="w-4 h-4 flex-none" />
-                    : <IconClose onClick={() => setFilter('')} className="w-6 h-6 p-0.5 cursor-pointer" />
+                    : <>
+                        <IconCaseSensitive className="w-4 h-4 border rounded-sm" />
+                        <IconClose onClick={() => setFilter('')} className="w-6 h-6 p-0.5 cursor-pointer" />
+                    </>
                 }
             </div>
         </div>
