@@ -30,22 +30,31 @@ function convertToRegex(s: string): string {
     return s.replace(reDefaultEscapeCharsRegex, '\\$&').replace(reQuestion, '.').replace(reWildcard, '.*');
 }
 
-export function createRegexByFilter(s?: string, casesensitive?: boolean): { winOnly: boolean; webOnly: boolean; regex: '' | RegExp | undefined; } {
+type FilterParams = {
+    winOnly: boolean;
+    webOnly: boolean;
+    whyOnly: boolean;
+    regex: '' | RegExp | undefined;
+};
+
+export function createRegexByFilter(s?: string, casesensitive?: boolean): FilterParams {
     let winOnly = !!(s && s.match(/^win\:/));
     let webOnly = !!(s && s.match(/^web\:/));
+    let whyOnly = !!(s && s.match(/^why\:/));
     if (winOnly || webOnly) {
         s = s?.replace(/^(win|web)\:/, '');
     }
     return {
         winOnly,
         webOnly,
+        whyOnly,
         regex: s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i')
     };
 }
 
 // Filter
 
-export function useFileUsByFilter(fileUs: FileUs, regex: RegExp) {
+export function useFileUsByFilter(fileUs: FileUs, regex: RegExp): boolean {
     let useItNow = !!fileUs.fname.match(regex);
 
     if (!useItNow) {
