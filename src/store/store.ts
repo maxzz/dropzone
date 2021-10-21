@@ -94,8 +94,16 @@ export const filteredAtom = atom<FileUsAtom[]>(
         return files.filter((fileAtom: FileUsAtom) => {
             const fileUs = get(fileAtom);
             let useItNow = isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
-            if (useItNow && regex) {
-                useItNow = !!fileUs.fname.match(regex);
+            if (regex) {
+                if (useItNow) {
+                    useItNow = !!fileUs.fname.match(regex);
+                }
+                if (!useItNow) {
+                    const title = fileUs.mani?.forms[0]?.options.choosename;
+                    if (title) {
+                        useItNow = !!title.match(regex);
+                    }
+                }
             }
             return useItNow;
         });
@@ -111,7 +119,7 @@ export const clearFilesAtom = atom(
         set(totalManualManiAtom, 0);
         set(totalEmptyManiAtom, 0);
     }
-)
+);
 
 // Files toggle folding.
 
@@ -132,7 +140,7 @@ export const foldAllCardsAtom = atom(
 export type SelectRow = {
     field: number;
     form: number;
-}
+};
 
 export type SelectRowAtoms = {
     loginAtom: PrimitiveAtom<SelectRow>;
@@ -184,7 +192,7 @@ const updateCacheAtom = atom(
                     } else {
                         set(totalNormalManiAtom, ++total.normal);
                     }
-            
+
                     //await delay(1000);
                 }
             } catch (error) {
