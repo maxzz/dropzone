@@ -4,7 +4,7 @@ import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
-import { delay, isEmpty, isManual, textFileReader } from './store-functions';
+import { createRegexByFilter, delay, isEmpty, isManual, textFileReader } from './store-functions';
 
 export type FileUs = {
     id: string;
@@ -83,18 +83,9 @@ export const setFilesAtom = atom(
     }
 );
 
-const reDefaultEscapeCharsRegex = /[-|\\{}()[\]^$+.]/g; // This is defult set but without *?
-const reQuestion = /[\?]/g;
-const reWildcard = /[\*]/g;
-function convertToRegex(s: string): string {
-    // 0. Wildcard to RegEx. First dot and only then star.
-    return s.replace(reDefaultEscapeCharsRegex, '\\$&').replace(reQuestion, '.').replace(reWildcard, '.*');
-}
-
 export const filteredAtom = atom<FileUsAtom[]>(
     (get) => {
-        const filter = get(searchFilterAtom);
-        const regex = filter && new RegExp(convertToRegex(filter));
+        const regex = createRegexByFilter(get(searchFilterAtom));
 
         const showNormal = get(showNormalManiAtom);
         const showManual = get(showManualManiAtom);

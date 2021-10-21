@@ -18,3 +18,19 @@ export const isObject = (value: any): boolean => value && typeof value === 'obje
 
 export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: Meta.Form) => form.disp.isScript);
 export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.isEmpty);
+
+// Regex
+
+const reDefaultEscapeCharsRegex = /[-|\\{}()[\]^$+.]/g; // This is defult set but without *?
+const reQuestion = /[\?]/g;
+const reWildcard = /[\*]/g;
+function convertToRegex(s: string): string {
+    // 0. Wildcard to RegEx. First dot and only then star.
+    return s.replace(reDefaultEscapeCharsRegex, '\\$&').replace(reQuestion, '.').replace(reWildcard, '.*');
+}
+
+export function createRegexByFilter(s?: string): RegExp | "" | undefined {
+    return s && new RegExp(convertToRegex(s));
+}
+
+// More to come...
