@@ -16,7 +16,7 @@ Experimenting with Data-Driven User Interfaces (DDUI).
 
 [**Dependencies**](https://github.com/maxzz/dropzone/network/dependencies)
 
-[![][img-demo]](https://maxzz.gihub.io/dropzone)
+[![][img-demo]](https://maxzz.github.io/dropzone)
 
 
 #### Creadits, links, references
