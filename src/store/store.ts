@@ -225,7 +225,7 @@ export const totalNormalManiAtom = atom(0);
 export const totalEmptyManiAtom = atom(0);
 
 export const searchFilterAtom = atom('');
-export const searchFilterCSAtom = atom(false); // search case sensitive
+export const searchFilterCaseSensitiveAtom = atom(false); // search case sensitive
 
 // Current atom for the right panel
 
