@@ -18,6 +18,7 @@ export const isObject = (value: any): boolean => value && typeof value === 'obje
 
 export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: Meta.Form) => form.disp.isScript);
 export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.isEmpty);
+export const isAnyWeb = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.mani?.detection?.web_ourl || !!fileUs.meta?.[1]?.mani?.detection?.web_ourl;
 
 // Regex
 
@@ -29,25 +30,34 @@ function convertToRegex(s: string): string {
     return s.replace(reDefaultEscapeCharsRegex, '\\$&').replace(reQuestion, '.').replace(reWildcard, '.*');
 }
 
-export function createRegexByFilter(s?: string, casesensitive?: boolean): RegExp | "" | undefined {
-    return s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i');
+export function createRegexByFilter(s?: string, casesensitive?: boolean): { winOnly: boolean; webOnly: boolean; regex: '' | RegExp | undefined; } {
+    let winOnly = !!(s && s.match(/^win\:/));
+    let webOnly = !!(s && s.match(/^web\:/));
+    if (winOnly || webOnly) {
+        s = s?.replace(/^(win|web)\:/, '');
+    }
+    return {
+        winOnly,
+        webOnly,
+        regex: s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i')
+    };
 }
 
 // Filter
 
 export function useFileUsByFilter(fileUs: FileUs, regex: RegExp) {
     let useItNow = !!fileUs.fname.match(regex);
-    
+
     if (!useItNow) {
-        useItNow = !!fileUs.mani?.forms[0]?.options.choosename?.match(regex);
+        useItNow = !!fileUs.mani?.forms?.[0]?.options?.choosename?.match(regex);
     }
 
     if (!useItNow) {
-        useItNow = !!fileUs.meta?.[0]?.mani.detection.web_ourl?.match(regex);
+        useItNow = !!fileUs.meta?.[0]?.mani.detection?.web_ourl?.match(regex);
     }
 
     if (!useItNow) {
-        useItNow = !!fileUs.meta?.[1]?.mani.detection.web_ourl?.match(regex);
+        useItNow = !!fileUs.meta?.[1]?.mani.detection?.web_ourl?.match(regex);
     }
 
     return useItNow;

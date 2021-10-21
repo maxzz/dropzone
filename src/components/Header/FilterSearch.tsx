@@ -63,4 +63,4 @@ function FilterSearch() {
 export default FilterSearch;
 
 //TODO: add history to UI and store history to the localStorage
-//TODO: win: and web: prefixes
+//TODO: win: and web: prefixes - done

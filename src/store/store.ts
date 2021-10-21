@@ -4,7 +4,7 @@ import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
-import { createRegexByFilter, delay, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
+import { createRegexByFilter, delay, isAnyWeb, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
 export type FileUs = {
     id: string;
@@ -85,8 +85,7 @@ export const setFilesAtom = atom(
 
 export const filteredAtom = atom<FileUsAtom[]>(
     (get) => {
-        const sensitive = get(searchFilterCaseSensitiveAtom);
-        const regex = createRegexByFilter(get(searchFilterAtom), sensitive);
+        const { regex, winOnly, webOnly } = createRegexByFilter(get(searchFilterAtom), get(searchFilterCaseSensitiveAtom));
 
         const showNormal = get(showNormalManiAtom);
         const showManual = get(showManualManiAtom);
@@ -95,6 +94,12 @@ export const filteredAtom = atom<FileUsAtom[]>(
         const files = get(filesAtom);
         return files.filter((fileAtom: FileUsAtom) => {
             const fileUs = get(fileAtom);
+
+            const isWeb = isAnyWeb(fileUs);
+            if ((winOnly && isWeb) || (webOnly && !isWeb)) {
+                return false;
+            }
+
             let useItNow = isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
             if (useItNow && regex) {
                 useItNow = useFileUsByFilter(fileUs, regex);
