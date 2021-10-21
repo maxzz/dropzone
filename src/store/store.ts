@@ -83,9 +83,19 @@ export const setFilesAtom = atom(
     }
 );
 
+const reDefaultEscapeCharsRegex = /[-|\\{}()[\]^$+.]/g; // This is defult set but without *?
+const reQuestion = /[\?]/g;
+const reWildcard = /[\*]/g;
+function convertToRegex(s: string): string {
+    // 0. Wildcard to RegEx. First dot and only then star.
+    return s.replace(reDefaultEscapeCharsRegex, '\\$&').replace(reQuestion, '.').replace(reWildcard, '.*');
+}
+
 export const filteredAtom = atom<FileUsAtom[]>(
     (get) => {
         const filter = get(searchFilterAtom);
+        const regex = filter && new RegExp(convertToRegex(filter));
+
         const showNormal = get(showNormalManiAtom);
         const showManual = get(showManualManiAtom);
         const showEmpty = get(showEmptyManiAtom);
@@ -93,8 +103,8 @@ export const filteredAtom = atom<FileUsAtom[]>(
         return files.filter((fileAtom: FileUsAtom) => {
             const fileUs = get(fileAtom);
             let useItNow = isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
-            if (useItNow && filter) {
-                useItNow = !!fileUs.fname.match(filter);
+            if (useItNow && regex) {
+                useItNow = !!fileUs.fname.match(regex);
             }
             return useItNow;
         });
