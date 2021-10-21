@@ -71,7 +71,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 </div>
                 <div className="flex-none flex items-center space-x-2 mr-1">
                     {isAnyWhy(fileUs) && <div className="text-red-500">*</div>}
-                    <IconAttention />
+                    <IconAttention className="text-red-500" />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
             </div>
