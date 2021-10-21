@@ -35,7 +35,7 @@ export function createRegexByFilter(s?: string, casesensitive?: boolean): RegExp
 
 //
 
-export function useFileUs(fileUs: FileUs, regex: RegExp) {
+export function useFileUsByFilter(fileUs: FileUs, regex: RegExp) {
 
     let useItNow = !!fileUs.fname.match(regex);
 
@@ -62,7 +62,7 @@ export function useFileUs(fileUs: FileUs, regex: RegExp) {
             }
         }
     }
-    
+
     return useItNow;
 }
 

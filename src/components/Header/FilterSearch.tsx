@@ -7,7 +7,11 @@ import { IconCaseSensitive, IconClose, IconSearch } from '../UI/UiIcons';
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterCaseSensitiveAtom);
     return (
-        <div className={`${cs ? 'bg-gray-500' : 'opacity-30'} cursor-pointer`} onClick={() => setCs(!cs)}>
+        <div 
+            className={`${cs ? 'bg-gray-500' : 'opacity-30'} cursor-pointer`} 
+            onClick={() => setCs(!cs)}
+            title="Match Case"
+        >
             <IconCaseSensitive className="w-4 h-4 border border-gray-400 rounded-sm" />
         </div>
     );
