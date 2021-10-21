@@ -21,7 +21,7 @@ Experimenting with Data-Driven User Interfaces (DDUI).
 
 #### Creadits, links, references
 
-- [**React hooks**](./docs/State.md)
+- [**React hooks**](https://github.com/streamich/react-use/blob/master/docs/useCss.md)
   - [`react-use`](https://github.com/streamich/react-use)
 
 <!-- <a href="http://streamich.github.io/react-use"><img src="https://img.shields.io/badge/demos-🚀-yellow.svg" alt="demos" /></a> -->
