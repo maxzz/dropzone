@@ -69,9 +69,8 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title={`${fileUs.fpath ? `Folder: "${fileUs.fpath}"` : `Filename: ${fileUs.fname}`}`}>
                     {fname}
                 </div>
-                <div className="flex-none flex items-center space-x-2 mr-1">
-                    {isAnyWhy(fileUs) && <div className="text-red-500">*</div>}
-                    <IconAttention className="text-red-500" />
+                <div className="flex-none flex items-center space-x-1 mr-1">
+                    {isAnyWhy(fileUs) && <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />}
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
             </div>
