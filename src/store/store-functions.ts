@@ -29,8 +29,8 @@ function convertToRegex(s: string): string {
     return s.replace(reDefaultEscapeCharsRegex, '\\$&').replace(reQuestion, '.').replace(reWildcard, '.*');
 }
 
-export function createRegexByFilter(s?: string): RegExp | "" | undefined {
-    return s && new RegExp(convertToRegex(s));
+export function createRegexByFilter(s?: string, casesensitive?: boolean): RegExp | "" | undefined {
+    return s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i');
 }
 
 // More to come...
