@@ -17,8 +17,8 @@ export const isObject = (value: any): boolean => value && typeof value === 'obje
 // Utilities
 
 export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: Meta.Form) => form.disp.isScript);
-export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.isEmpty);
-export const isAnyWeb = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.mani?.detection?.web_ourl || !!fileUs.meta?.[1]?.mani?.detection?.web_ourl;
+export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.noFields);
+export const isAnyWeb = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.domain || !!fileUs.meta?.[1]?.disp.domain;
 
 // Regex
 
@@ -42,7 +42,7 @@ export function createRegexByFilter(s?: string, casesensitive?: boolean): Filter
     let webOnly = !!(s && s.match(/^web\:/));
     let whyOnly = !!(s && s.match(/^why\:/));
     if (winOnly || webOnly) {
-        s = s?.replace(/^(win|web)\:/, '');
+        s = s?.replace(/^(win|web|why)\:/, '');
     }
     return {
         winOnly,

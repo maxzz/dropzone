@@ -16,7 +16,7 @@ function UICardFormButton({ disp, label, opened, onClick }: { disp: Meta.Disp | 
         domain: '',
         isIe: false,
         isScript: false,
-        isEmpty: true,
+        noFields: true,
     };
     const isIe = disp.isIe;
     const isScript = disp.isScript;

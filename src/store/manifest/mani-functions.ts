@@ -243,7 +243,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             disp: {
                 domain: urlDomain(removeQuery(form.detection?.web_ourl)),
                 isScript: isScript(fields),
-                isEmpty: !fields.length,
+                noFields: !fields.length,
                 isIe: isIe(form),
             },
             pool: pool,
