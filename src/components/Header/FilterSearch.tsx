@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '../../store/store';
 import { useKey } from 'react-use';
-import { IconCaseSensitive, IconClose, IconSearch } from '../UI/UiIcons';
+import { IconCaseSensitive, IconClose, IconCtrl, IconSearch } from '../UI/UiIcons';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterCaseSensitiveAtom);
@@ -24,24 +24,32 @@ function FilterSearch() {
     useKey((event) => {
         return event.ctrlKey && event.key === 'd';
     }, (event) => {
-        event.preventDefault()
-        keyboardRef.current && keyboardRef.current.focus()
+        event.preventDefault();
+        keyboardRef.current && keyboardRef.current.focus();
     });
     const isEmpty = !filter;
     return (
         <div className="flex-1 max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end">
             <div
                 className={`h-8 px-2 flex items-center bg-gray-700 focus-within:bg-gray-600 border-2 ${isEmpty ? 'w-12 rounded-full' : 'w-full rounded-md'}`}
-                title="Search. win: to show only Windows apps; web: to show only web apps"
+                title="Search (Ctrl+D). win: to show only Windows apps; web: to show only web apps"
             >
                 <input
-                    className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none"
+                    className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none group"
                     ref={keyboardRef}
                     value={filter}
                     onChange={(event) => setFilter(event.target.value)}
                 />
                 {isEmpty
-                    ? <IconSearch className="w-4 h-4 flex-none" />
+                    ?
+                    // Ctrl+D and Search icon
+                    <div className="flex-none relative">
+                        <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-500 pointer-events-none group-focus:bg-red-600">
+                            <IconCtrl className="w-3 h-3" />
+                            <div className="text-[.5rem] leading-[.5rem]">+D</div>
+                        </div>
+                        <IconSearch className="w-4 h-4" />
+                    </div>
                     : <>
                         <ToggleCaseSensitive />
                         <IconClose onClick={() => setFilter('')} className="w-6 h-6 p-0.5 cursor-pointer" />
