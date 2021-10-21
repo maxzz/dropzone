@@ -96,7 +96,7 @@ export const filteredAtom = atom<FileUsAtom[]>(
             const fileUs = get(fileAtom);
 
             const isWeb = isAnyWeb(fileUs);
-            if ((winOnly && isWeb) || (webOnly && !isWeb) || (whyOnly && isAnyWhy(fileUs))) {
+            if ((winOnly && isWeb) || (webOnly && !isWeb) || (whyOnly && !isAnyWhy(fileUs))) {
                 return false;
             }
 

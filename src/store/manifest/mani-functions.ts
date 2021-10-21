@@ -226,8 +226,11 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
     const isManual = (fields: Meta.Field[]): boolean => {
         return !!fields.length && fields.some(({ path }: { path: Meta.Path; }) => path.sn);
     };
-    const isWebIe = (form: Mani.Form): boolean => {
-        return !!form.detection?.names_ext?.match(/Internet Explorer_Server/); //old: return !!form.detection?.processname?.match(/iexplore\.exe$/);
+    const isIeServer = (form: Mani.Form): boolean => {
+        return !!form.detection?.names_ext?.match(/Internet Explorer_Server/);
+    };
+    const isIeProcess = (form: Mani.Form): boolean => {
+        return !!form.detection?.processname?.match(/iexplore\.exe"?$/i);
     };
     const createMetaForm = (form: Mani.Form, idx: number): Meta.Form => {
         const pool: string[] = getPool(form) || [];
@@ -237,18 +240,19 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             pidx: idx,
             ridx: 0,
         }));
+        const domain = urlDomain(removeQuery(form.detection?.web_ourl));
         const isScript = isManual(fields);
-        const isIe = isWebIe(form);
-        const bailOut = isScript && isIe; // TODO: add more checks and explanation why there are issues on each check.
+        const isIe = isIeServer(form) || isIeProcess(form);
+        const bailOut = (isIe && isScript) || (isIe && !domain);
         return {
             mani: form,
             type: idx,
             disp: {
-                domain: urlDomain(removeQuery(form.detection?.web_ourl)),
+                domain,
                 isScript,
                 noFields: !fields.length,
                 isIe,
-                bailOut: bailOut,
+                bailOut,
             },
             pool: pool,
             view: FieldPath.loc.utils.buildPreviewData(fields),
@@ -264,3 +268,5 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
     });
     return forms;
 }
+
+// TODO: bailOut: add more checks and explanation why there are issues on each check.

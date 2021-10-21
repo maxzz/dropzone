@@ -42,7 +42,7 @@ export function createRegexByFilter(s?: string, casesensitive?: boolean): Filter
     let winOnly = !!(s && s.match(/^win\:/));
     let webOnly = !!(s && s.match(/^web\:/));
     let whyOnly = !!(s && s.match(/^why\:/));
-    if (winOnly || webOnly) {
+    if (winOnly || webOnly || whyOnly) {
         s = s?.replace(/^(win|web|why)\:/, '');
     }
     return {
