@@ -33,34 +33,21 @@ export function createRegexByFilter(s?: string, casesensitive?: boolean): RegExp
     return s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i');
 }
 
-//
+// Filter
 
 export function useFileUsByFilter(fileUs: FileUs, regex: RegExp) {
-
     let useItNow = !!fileUs.fname.match(regex);
+    
+    if (!useItNow) {
+        useItNow = !!fileUs.mani?.forms[0]?.options.choosename?.match(regex);
+    }
 
     if (!useItNow) {
-        const form0 = fileUs.mani?.forms[0];
-        const title = form0?.options.choosename;
-        if (title) {
-            useItNow = !!title.match(regex);
-        }
+        useItNow = !!fileUs.meta?.[0]?.mani.detection.web_ourl?.match(regex);
+    }
 
-        if (!useItNow) {
-            const meta0 = fileUs.meta?.[0];
-            if (meta0) {
-                const url = meta0.mani.detection.web_ourl;
-                useItNow = !!url?.match(regex);
-            }
-
-            if (!useItNow) {
-                const meta0 = fileUs.meta?.[1];
-                if (meta0) {
-                    const url = meta0.mani.detection.web_ourl;
-                    useItNow = !!url?.match(regex);
-                }
-            }
-        }
+    if (!useItNow) {
+        useItNow = !!fileUs.meta?.[1]?.mani.detection.web_ourl?.match(regex);
     }
 
     return useItNow;
