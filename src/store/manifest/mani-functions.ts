@@ -244,6 +244,16 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const isScript = isManual(fields);
         const isIe = isIeServer(form) || isIeProcess(form);
         const bailOut = (isIe && isScript) || (isIe && !domain);
+        const bailOuts = ((): string[] | undefined => {
+            const rv: string[] = [];
+            if (isIe && isScript) {
+                rv.push("Script with IE");
+            };
+            if (isIe && !domain) {
+                rv.push("IE without domain");
+            }
+            return rv.length ? [] : undefined;
+        })();
         return {
             mani: form,
             type: idx,
@@ -252,7 +262,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
                 isScript,
                 noFields: !fields.length,
                 isIe,
-                bailOut,
+                ...(bailOuts && {bailOut: bailOuts}),
             },
             pool: pool,
             view: FieldPath.loc.utils.buildPreviewData(fields),
