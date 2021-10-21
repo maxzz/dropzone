@@ -46,7 +46,9 @@ function FieldRowPreview({ small, form, selected, onSelected, ...attrs }: Previe
     }
 
     const { className, ...rest } = attrs;
-    const styles: React.CSSProperties = { background: small ? 'transparent' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)' };
+    const styles: React.CSSProperties = { background: small ? '#ccc' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)' };
+    // const styles: React.CSSProperties = { background: small ? 'radial-gradient(circle, #c0c0c0 0%, #f5f5f5 100%)' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)' };
+    // const styles: React.CSSProperties = { background: small ? 'radial-gradient(circle, #d2d2d2 0%, #adadad 100%)' : 'radial-gradient(circle, #679dff 0%, #3478f4 100%)' };
     const stylesRect: React.CSSProperties = { transition: 'fill .5s .5s' };
 
     return (

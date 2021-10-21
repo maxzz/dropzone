@@ -28,11 +28,10 @@ function FilterSearch() {
         <div className="flex-1 max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end">
             <div
                 className={`h-8 px-2 flex items-center bg-gray-700 focus-within:bg-gray-600 border-2 ${isEmpty ? 'w-12 rounded-full' : 'w-full rounded-md'}`}
-                //title="Search (Ctrl+D). win: to show only Windows apps; web: to show only web apps"
-                title="Search (Ctrl+D). Search prefix to show only: 'win:' Windows apps; 'web:' web apps; 'why:' logins with problems to check why"
                 onFocus={() => setActive(true)}
                 onBlur={() => setActive(false)}
                 onClick={() => keyboardRef.current && keyboardRef.current.focus()}
+                title="Search (Ctrl+D). Search prefix to show only: 'win:' Windows apps; 'web:' web apps; 'why:' logins with problems to check why"
         >
                 <input
                     className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none"
