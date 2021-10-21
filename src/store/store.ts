@@ -85,13 +85,18 @@ export const setFilesAtom = atom(
 
 export const filteredAtom = atom<FileUsAtom[]>(
     (get) => {
+        const filter = get(searchFilterAtom);
         const showNormal = get(showNormalManiAtom);
         const showManual = get(showManualManiAtom);
         const showEmpty = get(showEmptyManiAtom);
         const files = get(filesAtom);
         return files.filter((fileAtom: FileUsAtom) => {
             const fileUs = get(fileAtom);
-            return isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
+            let useItNow = isEmpty(fileUs) ? showEmpty : isManual(fileUs) ? showManual : showNormal;
+            if (useItNow && filter) {
+                useItNow = !!fileUs.fname.match(filter);
+            }
+            return useItNow;
         });
     }
 );
