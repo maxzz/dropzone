@@ -154,6 +154,7 @@ declare module Meta {       // Manifest unpacked forms, as meta data
         isScript: boolean;  // Form has at least one script field.
         noFields: boolean;  // Form has no fields, i.e. excluded website.
         isIe: boolean;      // Form detection processname contains 'iexplore.exe' i.e. login was trained with IE as (manual or normal and this depends on isScript).
+        bailOut: boolean;   // Manifest needs extra attention
     }
 
     interface Bounds {

@@ -223,10 +223,10 @@ export namespace FieldPath {
 } //namespace FieldPath
 
 export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[] {
-    const isScript = (fields: Meta.Field[]): boolean => {
+    const isManual = (fields: Meta.Field[]): boolean => {
         return !!fields.length && fields.some(({ path }: { path: Meta.Path; }) => path.sn);
     };
-    const isIe = (form: Mani.Form): boolean => {
+    const isWebIe = (form: Mani.Form): boolean => {
         return !!form.detection?.names_ext?.match(/Internet Explorer_Server/); //old: return !!form.detection?.processname?.match(/iexplore\.exe$/);
     };
     const createMetaForm = (form: Mani.Form, idx: number): Meta.Form => {
@@ -237,14 +237,18 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             pidx: idx,
             ridx: 0,
         }));
+        const isScript = isManual(fields);
+        const isIe = isWebIe(form);
+        const bailOut = isScript && isIe; // TODO: add more checks and explanation why there are issues on each check.
         return {
             mani: form,
             type: idx,
             disp: {
                 domain: urlDomain(removeQuery(form.detection?.web_ourl)),
-                isScript: isScript(fields),
+                isScript,
                 noFields: !fields.length,
-                isIe: isIe(form),
+                isIe,
+                bailOut: bailOut,
             },
             pool: pool,
             view: FieldPath.loc.utils.buildPreviewData(fields),

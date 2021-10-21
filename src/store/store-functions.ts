@@ -19,6 +19,7 @@ export const isObject = (value: any): boolean => value && typeof value === 'obje
 export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: Meta.Form) => form.disp.isScript);
 export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.noFields);
 export const isAnyWeb = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.domain || !!fileUs.meta?.[1]?.disp.domain;
+export const isAnyWhy = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.bailOut || !!fileUs.meta?.[1]?.disp.bailOut;
 
 // Regex
 

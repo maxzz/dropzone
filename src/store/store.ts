@@ -4,7 +4,7 @@ import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
-import { createRegexByFilter, delay, isAnyWeb, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
+import { createRegexByFilter, delay, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
 export type FileUs = {
     id: string;
@@ -96,7 +96,7 @@ export const filteredAtom = atom<FileUsAtom[]>(
             const fileUs = get(fileAtom);
 
             const isWeb = isAnyWeb(fileUs);
-            if ((winOnly && isWeb) || (webOnly && !isWeb)) {
+            if ((winOnly && isWeb) || (webOnly && !isWeb) || (whyOnly && isAnyWhy(fileUs))) {
                 return false;
             }
 
