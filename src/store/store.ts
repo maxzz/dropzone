@@ -112,6 +112,14 @@ export const filteredAtom = atom<FileUsAtom[]>(
                                 const url = meta0.mani.detection.web_ourl;
                                 useItNow = !!url?.match(regex);
                             }
+
+                            if (!useItNow) {
+                                const meta0 = fileUs.meta?.[1];
+                                if (meta0) {
+                                    const url = meta0.mani.detection.web_ourl;
+                                    useItNow = !!url?.match(regex);
+                                }
+                            }
                         }
                     }
                 }
