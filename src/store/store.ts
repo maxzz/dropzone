@@ -200,6 +200,8 @@ export const totalManualManiAtom = atom(0);
 export const totalNormalManiAtom = atom(0);
 export const totalEmptyManiAtom = atom(0);
 
+export const searchFilterAtom = atom('');
+
 // Current atom for the right panel
 
 export const rightPanelAtom = atom<FileUsAtom | undefined>(undefined);

@@ -1,9 +1,11 @@
 import React from 'react';
+import { useAtom } from 'jotai';
+import { searchFilterAtom } from '../../store/store';
 import { useKey } from 'react-use';
 import { IconClose, IconSearch } from '../UI/UiIcons';
 
 function FilterSearch() {
-    const [filter, setFilter] = React.useState('');
+    const [filter, setFilter] = useAtom(searchFilterAtom);
     const keyboardRef = React.useRef<HTMLInputElement>(null);
     useKey('Escape', () => setFilter(''), { target: keyboardRef.current });
     const isEmpty = !filter;
@@ -26,3 +28,5 @@ function FilterSearch() {
 }
 
 export default FilterSearch;
+
+//TODO: add history to UI and store history to the localStorage
