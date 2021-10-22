@@ -2,15 +2,12 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
-//import { IconAppWebIE, IconAppWindows, IconFolder, IconMenuHamburger } from '../UI/UiIcons';
 import { IconAttention, IconFolder } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
 import { IconAppWebIE, IconAppWindows, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
-import { usePopper } from 'react-popper';
-import { useElementClickAway } from '../../hooks/useElementClickAway';
-import { UITooltip, UITooltipInline } from '../UI/UITooltip';
+import { UITooltip } from '../UI/UITooltip';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
@@ -26,48 +23,7 @@ function CardCaption({ domain, url }: { domain?: string; url: string | undefined
         </div>
     );
 }
-/*
-function CardAttention({ fileUs }: { fileUs: FileUs; }) {
-    const hasBailOut = isAnyWhy(fileUs);
-    if (!hasBailOut) {
-        return null;
-    }
-    const [referenceElm, setReferenceElm] = React.useState<HTMLDivElement | null>(null);
-    const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
-    const [open, setOpen] = React.useState(false);
 
-    useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
-    
-    return (
-        <div className="">
-            <div ref={setReferenceElm} onClick={(event) => { event.stopPropagation(); setOpen((v) => !v); }}>
-                <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />
-            </div>
-
-            {open &&
-                <div ref={setPopperElm}
-                    style={{ ...styles.popper, zIndex: 1 }} {...attributes.popper}
-                    className="w-20 h-20 bg-red-500"
-                    onClick={() => setOpen((v) => !v)}
-                >
-                    <div className="">111</div>
-                </div>
-            }
-
-        </div>
-    );
-}
-*/
-/*
-        <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
-            <div className="">
-                <div className="">The manifest has problems to check. Click to see issues.</div>
-                <div className="">11</div>
-            </div>
-        </UITooltipInline>
-
-*/
 function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     const hasBailOut = isAnyWhy(fileUs);
     if (!hasBailOut) {
@@ -131,23 +87,6 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    {/* <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />} arrow={false}>
-                        Body
-                    </UITooltipInline> */}
-
-                    <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
-                        <div className="">
-                            <div className="">The manifest has problems to check. Click to see issues.</div>
-                            <div className="">11</div>
-                        </div>
-                    </UITooltipInline>
-
-                    <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
-                        <div className="">
-                            <div className="">The manifest has problems to check. Click to see issues.</div>
-                        </div>
-                    </UITooltipInline>
-
                     <CardAttention fileUs={fileUs} />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
