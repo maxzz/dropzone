@@ -39,15 +39,15 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
     
     return (
-        <div className="relative">
+        <div className="">
             <div ref={setReferenceElm} onClick={(event) => { event.stopPropagation(); setOpen((v) => !v); }}>
-                <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />
+                <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />
             </div>
 
             {open &&
                 <div ref={setPopperElm}
-                    style={{ ...styles.popper, zIndex: 10 }} {...attributes.popper}
-                    className="absolute w-20 h-20 bg-red-500"
+                    style={{ ...styles.popper, zIndex: 1 }} {...attributes.popper}
+                    className="w-20 h-20 bg-red-500"
                     onClick={() => setOpen((v) => !v)}
                 >
                     <div className="">111</div>
