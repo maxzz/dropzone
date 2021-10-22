@@ -230,7 +230,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         return !!form.detection?.names_ext?.match(/Internet Explorer_Server/);
     };
     const isIeProcess = (form: Mani.Form): boolean => {
-        return !!form.detection?.processname?.match(/iexplore\.exe"?$/i);
+        return !!form.detection?.processname?.match(/(iexplore|msedge|microsoftedgecp)\.exe"?$/i);
     };
     const createMetaForm = (form: Mani.Form, idx: number): Meta.Form => {
         const pool: string[] = getPool(form) || [];
