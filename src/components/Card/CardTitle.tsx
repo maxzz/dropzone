@@ -10,6 +10,7 @@ import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../hooks/useElementClickAway';
+import UITooltip from '../UI/UITooltip';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
@@ -22,6 +23,38 @@ function CardCaption({ domain, url }: { domain?: string; url: string | undefined
     return (
         <div className="ml-1 uppercase">
             {url ? <a href={url} target="_blank" rel="noopener">{domain}</a> : <>{domain || 'Windows application'}</>}
+        </div>
+    );
+}
+
+function CardAttentionOld({ fileUs }: { fileUs: FileUs; }) {
+    const hasBailOut = isAnyWhy(fileUs);
+    if (!hasBailOut) {
+        return null;
+    }
+    const [referenceElm, setReferenceElm] = React.useState<HTMLDivElement | null>(null);
+    const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
+    const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
+    const [open, setOpen] = React.useState(false);
+
+    useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
+    
+    return (
+        <div className="">
+            <div ref={setReferenceElm} onClick={(event) => { event.stopPropagation(); setOpen((v) => !v); }}>
+                <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />
+            </div>
+
+            {open &&
+                <div ref={setPopperElm}
+                    style={{ ...styles.popper, zIndex: 1 }} {...attributes.popper}
+                    className="w-20 h-20 bg-red-500"
+                    onClick={() => setOpen((v) => !v)}
+                >
+                    <div className="">111</div>
+                </div>
+            }
+
         </div>
     );
 }
@@ -105,6 +138,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
+                    <UITooltip />
                     <CardAttention fileUs={fileUs} />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
