@@ -34,7 +34,9 @@ export function UITooltip({ trigger, children, arrow = false }: { trigger: React
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip();
+    } = usePopperTooltip(
+        //{ defaultVisible: true }
+    );
     return (
         <div className="">
             <div ref={setTriggerRef}>

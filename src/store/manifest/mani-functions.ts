@@ -251,7 +251,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             if (isIe && !domain) {
                 rv.push("IE without domain");
             }
-            return rv.length ? [] : undefined;
+            return rv.length ? rv : undefined;
         })();
         return {
             mani: form,

@@ -29,12 +29,21 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     if (!hasBailOut) {
         return null;
     }
-
+    const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
     return (
         <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
-            <div className="">
-                <div className="bg-red-500">The manifest has problems to check. Click to see issues.</div>
-                <div className="">11</div>
+            <div className="text-sm max-w-[16rem]">
+                <div className="mt-[-.4rem] mx-[-.4rem] p-[.4rem] rounded-sm rounded-b-none bg-gray-200">There are problems to check why</div>
+                {bailOuts.map((bailOut, idx) => <React.Fragment key={`bailout${idx}`}>
+                    {bailOut &&
+                        <div className="pt-1">
+                            <div className="font-bold">{idx === 0 ? 'Login:' : 'Password chnage:'}</div>
+                            {bailOut.map((item, key) => (
+                                <div className="" key={key}>{item}</div>
+                            ))}
+                        </div>
+                    }
+                </React.Fragment>)}
             </div>
         </UITooltip>
     );
