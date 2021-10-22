@@ -87,8 +87,6 @@ export const filteredAtom = atom<FileUsAtom[]>(
     (get) => {
         const { regex, winOnly, webOnly, whyOnly } = createRegexByFilter(get(searchFilterAtom), get(searchFilterCaseSensitiveAtom));
 
-        console.log('filteredAtom');
-
         const showNormal = get(showNormalManiAtom);
         const showManual = get(showManualManiAtom);
         const showEmpty = get(showEmptyManiAtom);

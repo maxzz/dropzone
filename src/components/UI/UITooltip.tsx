@@ -37,20 +37,13 @@ export function UITooltip({ trigger, children, arrow = false, portal = true }: {
     } = usePopperTooltip(
         //{ defaultVisible: true }
     );
-    const body = visible && (
-        portal ?
-            ReactDOM.createPortal((
-                <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
-                    {children}
-                    {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
-                </div>
-            ), document.getElementById('portal')!)
-            :
-            <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
-                {children}
-                {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
-            </div>
+    const main = visible && (
+        <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+            {children}
+            {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
+        </div>
     );
+    const body = visible && (portal ? ReactDOM.createPortal((<>{main}</>), document.getElementById('portal')!) : <>{main}</>);
     return (
         <div className="">
             <div ref={setTriggerRef}>
