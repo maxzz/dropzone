@@ -9,6 +9,7 @@ import { IconAppWebIE, IconAppWindows, IconMenuHamburger } from '../UI/UIIconsSy
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { usePopper } from 'react-popper';
+import { useElementClickAway } from '../../hooks/useElementClickAway';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
@@ -30,13 +31,29 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     if (!hasBailOut) {
         return null;
     }
-    // const [referenceElm, setReferenceElm] = React.useState<HTMLDivElement | null>(null);
-    // const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
-    // const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
+    const [referenceElm, setReferenceElm] = React.useState<HTMLDivElement | null>(null);
+    const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
+    const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
+    const [open, setOpen] = React.useState(false);
+
+    useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
+    
     return (
         <div className="relative">
-            <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />
-            <div className="absolute w-20 h-20 bg-red-500"></div>
+            <div ref={setReferenceElm} onClick={(event) => { event.stopPropagation(); setOpen((v) => !v); }}>
+                <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />
+            </div>
+
+            {open &&
+                <div ref={setPopperElm}
+                    style={{ ...styles.popper, zIndex: 10 }} {...attributes.popper}
+                    className="absolute w-20 h-20 bg-red-500"
+                    onClick={() => setOpen((v) => !v)}
+                >
+                    <div className="">111</div>
+                </div>
+            }
+
         </div>
     );
 }
