@@ -138,7 +138,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    <UITooltip trigger={<div className="">11</div>}>
+                    <UITooltip trigger={<div className="">11</div>} arrow={false}>
                         Body
                     </UITooltip>
                     <CardAttention fileUs={fileUs} />
