@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
-import { FileUsAtom, rightPanelAtom } from '../../store/store';
+import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 //import { IconAppWebIE, IconAppWindows, IconFolder, IconMenuHamburger } from '../UI/UiIcons';
 import { IconAttention, IconFolder } from '../UI/UiIcons';
 import CardTitleMenu from './CardTitleMenu';
@@ -24,6 +24,12 @@ function CardCaption({ domain, url }: { domain?: string; url: string | undefined
     );
 }
 
+function CardAttention({ fileUs }: { fileUs: FileUs; }) {
+    return (
+        <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />
+    );
+}
+
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const domain = fileUs.meta?.[0]?.disp.domain;
@@ -36,6 +42,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         const fname = !m ? fileUs.fname : <div className="text-[0.65rem]">
             <span className="opacity-75">{'{'}</span>
             <span className="px-1 text-sm text-gray-300 opacity-100">{m[1]}</span>
+            
             <span className="opacity-75">{m[2]}</span>
             <span className="px-1 text-sm text-gray-300 opacity-100">{m[3]}</span>
             <span className="opacity-75">{'}.dpm'}</span>
@@ -70,7 +77,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    {isAnyWhy(fileUs) && <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />}
+                    {isAnyWhy(fileUs) && <CardAttention fileUs={fileUs} />}
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
             </div>
