@@ -10,7 +10,7 @@ import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../hooks/useElementClickAway';
-import UITooltip from '../UI/UITooltip';
+import { UITooltip, UITooltipInline } from '../UI/UITooltip';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
@@ -59,6 +59,15 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 */
+/*
+        <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
+            <div className="">
+                <div className="">The manifest has problems to check. Click to see issues.</div>
+                <div className="">11</div>
+            </div>
+        </UITooltipInline>
+
+*/
 function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     const hasBailOut = isAnyWhy(fileUs);
     if (!hasBailOut) {
@@ -68,7 +77,7 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     return (
         <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
             <div className="">
-                <div className="">The manifest has problems to check. Click to see issues.</div>
+                <div className="bg-red-500">The manifest has problems to check. Click to see issues.</div>
                 <div className="">11</div>
             </div>
         </UITooltip>
@@ -122,9 +131,23 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    {/* <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />} arrow={false}>
+                    {/* <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />} arrow={false}>
                         Body
-                    </UITooltip> */}
+                    </UITooltipInline> */}
+
+                    <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
+                        <div className="">
+                            <div className="">The manifest has problems to check. Click to see issues.</div>
+                            <div className="">11</div>
+                        </div>
+                    </UITooltipInline>
+
+                    <UITooltipInline trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
+                        <div className="">
+                            <div className="">The manifest has problems to check. Click to see issues.</div>
+                        </div>
+                    </UITooltipInline>
+
                     <CardAttention fileUs={fileUs} />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>

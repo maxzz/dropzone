@@ -32,7 +32,7 @@ function FilterSearch() {
                 onBlur={() => setActive(false)}
                 onClick={() => keyboardRef.current && keyboardRef.current.focus()}
                 title="Search (Ctrl+D). Search prefix to show only: 'win:' Windows apps; 'web:' web apps; 'why:' logins with problems to check why"
-        >
+            >
                 <input
                     className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none"
                     spellCheck="false"
