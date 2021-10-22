@@ -26,8 +26,8 @@ function CardCaption({ domain, url }: { domain?: string; url: string | undefined
         </div>
     );
 }
-
-function CardAttentionOld({ fileUs }: { fileUs: FileUs; }) {
+/*
+function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     const hasBailOut = isAnyWhy(fileUs);
     if (!hasBailOut) {
         return null;
@@ -58,36 +58,20 @@ function CardAttentionOld({ fileUs }: { fileUs: FileUs; }) {
         </div>
     );
 }
-
+*/
 function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     const hasBailOut = isAnyWhy(fileUs);
     if (!hasBailOut) {
         return null;
     }
-    const [referenceElm, setReferenceElm] = React.useState<HTMLDivElement | null>(null);
-    const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
-    const [open, setOpen] = React.useState(false);
 
-    useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
-    
     return (
-        <div className="">
-            <div ref={setReferenceElm} onClick={(event) => { event.stopPropagation(); setOpen((v) => !v); }}>
-                <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />
+        <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
+            <div className="">
+                <div className="">The manifest has problems to check. Click to see issues.</div>
+                <div className="">11</div>
             </div>
-
-            {open &&
-                <div ref={setPopperElm}
-                    style={{ ...styles.popper, zIndex: 1 }} {...attributes.popper}
-                    className="w-20 h-20 bg-red-500"
-                    onClick={() => setOpen((v) => !v)}
-                >
-                    <div className="">111</div>
-                </div>
-            }
-
-        </div>
+        </UITooltip>
     );
 }
 
@@ -138,9 +122,9 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />} arrow={false}>
+                    {/* <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />} arrow={false}>
                         Body
-                    </UITooltip>
+                    </UITooltip> */}
                     <CardAttention fileUs={fileUs} />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>

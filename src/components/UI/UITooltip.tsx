@@ -10,20 +10,18 @@ function UITooltip({ trigger, children, arrow = false }: { trigger: React.ReactN
         setTriggerRef,
         visible,
     } = usePopperTooltip();
-
     return (
         <div className="">
             <div ref={setTriggerRef}>
                 {trigger}
             </div>
 
-            {visible && (
+            {visible && 
                 <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
                     {children}
-                    {/* Tooltip element */}
                     {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
                 </div>
-            )}
+            }
         </div>
     );
 }
