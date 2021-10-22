@@ -3,30 +3,6 @@ import ReactDOM from 'react-dom';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 
-export function UITooltipInline({ trigger, children, arrow = false }: { trigger: React.ReactNode; children?: React.ReactNode; arrow?: boolean; }) {
-    const {
-        getArrowProps,
-        getTooltipProps,
-        setTooltipRef,
-        setTriggerRef,
-        visible,
-    } = usePopperTooltip();
-    return (
-        <div className="">
-            <div ref={setTriggerRef}>
-                {trigger}
-            </div>
-
-            {visible &&
-                <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
-                    {children}
-                    {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
-                </div>
-            }
-        </div>
-    );
-}
-
 export function UITooltip({ trigger, children, arrow = false, portal = true }: { trigger: React.ReactNode; children?: React.ReactNode; arrow?: boolean; portal?: boolean; }) {
     const {
         getArrowProps,
@@ -37,29 +13,17 @@ export function UITooltip({ trigger, children, arrow = false, portal = true }: {
     } = usePopperTooltip(
         //{ defaultVisible: true }
     );
-    const main = visible && (
+    const poperBody = visible && (
         <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
             {children}
             {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
         </div>
     );
-    const body = visible && (portal ? ReactDOM.createPortal((<>{main}</>), document.getElementById('portal')!) : <>{main}</>);
+    const popper = visible && (portal ? ReactDOM.createPortal((<>{poperBody}</>), document.getElementById('portal')!) : <>{poperBody}</>);
     return (
         <div className="">
-            <div ref={setTriggerRef}>
-                {trigger}
-            </div>
-
-            {body}
-
-            {/* {visible &&
-                ReactDOM.createPortal((
-                    <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
-                        {children}
-                        {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
-                    </div>
-                ), document.getElementById('portal')!)
-            } */}
+            <div ref={setTriggerRef}> {trigger} </div>
+            {popper}
         </div>
     );
 }
