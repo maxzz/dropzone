@@ -138,7 +138,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    <UITooltip trigger={<div className="">11</div>} arrow={false}>
+                    <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check. Click to see issues." />} arrow={false}>
                         Body
                     </UITooltip>
                     <CardAttention fileUs={fileUs} />
