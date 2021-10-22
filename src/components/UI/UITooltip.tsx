@@ -17,9 +17,11 @@ function UITooltip({ trigger, children, arrow = false }: { trigger: React.ReactN
             </div>
 
             {visible && 
-                <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
-                    {children}
-                    {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
+                <div className="z-[1000]">
+                    <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+                        {children}
+                        {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
+                    </div>
                 </div>
             }
         </div>
