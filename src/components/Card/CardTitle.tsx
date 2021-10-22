@@ -8,6 +8,7 @@ import CardTitleMenu from './CardTitleMenu';
 import { IconAppWebIE, IconAppWindows, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
+import { usePopper } from 'react-popper';
 
 function CardIcon({ isWeb }: { isWeb: boolean; }) {
     const icon = isWeb
@@ -25,8 +26,18 @@ function CardCaption({ domain, url }: { domain?: string; url: string | undefined
 }
 
 function CardAttention({ fileUs }: { fileUs: FileUs; }) {
+    const hasBailOut = isAnyWhy(fileUs);
+    if (!hasBailOut) {
+        return null;
+    }
+    // const [referenceElm, setReferenceElm] = React.useState<HTMLDivElement | null>(null);
+    // const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
+    // const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
     return (
-        <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />
+        <div className="relative">
+            <IconAttention className="w-3.5 h-3.5 text-red-500" title="The manifest has problems to check" />
+            <div className="absolute w-20 h-20 bg-red-500"></div>
+        </div>
     );
 }
 
@@ -42,7 +53,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         const fname = !m ? fileUs.fname : <div className="text-[0.65rem]">
             <span className="opacity-75">{'{'}</span>
             <span className="px-1 text-sm text-gray-300 opacity-100">{m[1]}</span>
-            
+
             <span className="opacity-75">{m[2]}</span>
             <span className="px-1 text-sm text-gray-300 opacity-100">{m[3]}</span>
             <span className="opacity-75">{'}.dpm'}</span>
@@ -77,7 +88,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    {isAnyWhy(fileUs) && <CardAttention fileUs={fileUs} />}
+                    <CardAttention fileUs={fileUs} />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
             </div>
