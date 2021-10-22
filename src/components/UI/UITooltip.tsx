@@ -27,7 +27,7 @@ export function UITooltipInline({ trigger, children, arrow = false }: { trigger:
     );
 }
 
-export function UITooltip({ trigger, children, arrow = false }: { trigger: React.ReactNode; children?: React.ReactNode; arrow?: boolean; }) {
+export function UITooltip({ trigger, children, arrow = false, portal = true }: { trigger: React.ReactNode; children?: React.ReactNode; arrow?: boolean; portal?: boolean; }) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -37,20 +37,36 @@ export function UITooltip({ trigger, children, arrow = false }: { trigger: React
     } = usePopperTooltip(
         //{ defaultVisible: true }
     );
+    const body = visible && (
+        portal ?
+            ReactDOM.createPortal((
+                <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+                    {children}
+                    {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
+                </div>
+            ), document.getElementById('portal')!)
+            :
+            <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+                {children}
+                {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
+            </div>
+    );
     return (
         <div className="">
             <div ref={setTriggerRef}>
                 {trigger}
             </div>
 
-            {visible &&
+            {body}
+
+            {/* {visible &&
                 ReactDOM.createPortal((
                     <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
                         {children}
                         {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
                     </div>
                 ), document.getElementById('portal')!)
-            }
+            } */}
         </div>
     );
 }
