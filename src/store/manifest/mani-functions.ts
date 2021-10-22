@@ -245,12 +245,12 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const isIe = isIeServer(form) || isIeProcess(form);
         const bailOuts = ((): string[] | undefined => {
             const rv: string[] = [];
-            if (isIe && isScript) {
-                rv.push("Script with IE");
-            };
             if (isIe && !domain) {
-                rv.push("IE without domain");
+                rv.push("IE form without domain");
             }
+            if (isIe && isScript) {
+                rv.push("Manual mode manifest built for IE");
+            };
             return rv.length ? rv : undefined;
         })();
         return {
