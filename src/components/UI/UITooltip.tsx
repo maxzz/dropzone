@@ -2,7 +2,7 @@ import * as React from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 
-function UITooltip() {
+function UITooltip({trigger, children}: {trigger: React.ReactNode, children?: React.ReactNode}) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -14,13 +14,14 @@ function UITooltip() {
     return (
         <div className="">
             <button type="button" ref={setTriggerRef}>
-                trigger
+                {trigger}
             </button>
 
             {visible && (
                 <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
-                    Tooltip element
-                    <div {...getArrowProps({ className: 'tooltip-arrow' })} />
+                    {children}
+                    {/* Tooltip element */}
+                    {/* <div {...getArrowProps({ className: 'tooltip-arrow' })} /> */}
                 </div>
             )}
         </div>

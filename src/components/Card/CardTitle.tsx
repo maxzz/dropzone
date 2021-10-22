@@ -138,7 +138,9 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
-                    <UITooltip />
+                    <UITooltip trigger={<div className="">11</div>}>
+                        Body
+                    </UITooltip>
                     <CardAttention fileUs={fileUs} />
                     {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
                 </div>
