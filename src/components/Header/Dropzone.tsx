@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { clearFilesAtom, setFilesAtom } from '../../store/store';
+import { clearFilesAtom, filteredAtom, setFilesAtom } from '../../store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconDocumentsAccepted } from '../UI/UiIcons';
 import toast from 'react-hot-toast';
@@ -69,6 +69,7 @@ function DropzoneBase({ className, style = {}, classNameActive, stylesActive = {
 
 export default function DropzoneArea() {
     const [files] = useAtom(clearFilesAtom);
+    const [filtered] = useAtom(filteredAtom);
     const total = files.length;
     return (
         <DropzoneBase
@@ -82,7 +83,7 @@ export default function DropzoneArea() {
         >
             {total
                 ?
-                <div className="mr-4 my-2 uppercase text-xs flex items-center">
+                <div className="mr-4 my-2 uppercase text-xs flex items-center" title={`Showing now ${filtered.length}`}>
                     <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
                     {total} file{total === 1 ? '' : 's'}
                 </div>
