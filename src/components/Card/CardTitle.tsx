@@ -124,7 +124,7 @@ function CardTitleContent({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     );
 }
 
-const CardTitleContent_ = React.memo(CardTitleContent);
+const CardTitleContent_ = React.memo(CardTitleText);
 
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
