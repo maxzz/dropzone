@@ -299,6 +299,7 @@ export function IconDocument(props: SVGProps<SVGSVGElement>) { // temp for now a
     );
 }
 
+/*
 function IconChevronUp(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -315,7 +316,6 @@ function IconChevronDown(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-
 function IconPreview(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 36 36" fill="currentColor" {...props}>
@@ -326,7 +326,6 @@ function IconPreview(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-
 export function IconFolder(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { title, ...rest } = props;
     return (
@@ -336,6 +335,7 @@ export function IconFolder(props: SVGProps<SVGSVGElement> & { title?: string; })
         </svg>
     );
 }
+*/
 
 export function IconRocket(props: SVGProps<SVGSVGElement>) {
     return (
