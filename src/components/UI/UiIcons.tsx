@@ -12,7 +12,8 @@ export function IconAppLogo(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconManualMode0(props: SVGProps<SVGSVGElement>) {
+/*
+function IconManualMode0(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
             <circle cx="18.1" cy="8.8" r="2" />
@@ -23,7 +24,7 @@ export function IconManualMode0(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconManualMode1(props: SVGProps<SVGSVGElement>) {
+function IconManualMode1(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".5" {...props}>
             <path d="M10.3 7c-.4-.2-1 .2-1 .7a1.6 1.6 0 0 0 0 .3c0 1.2.7 2.5.5 3.6-1.5-2-2.2-4.7-3.3-7-2.5-.9.2 4 .6 5 0 .7.8 1 .4 1.8-1-1.7-1.9-4-3.1-5.6C4 5.2 3.3 5 3.2 6c-.3.4 1 2.3 1.3 2.8A12.2 12.2 0 0 0 6 11.6a1.8 1.8 0 0 0 .3.8l-.1.3C5.3 11.9 2.9 7 2 8.2c-.8 1.4 1 2.4 1.5 3.4A25.4 25.4 0 0 1 5 13.8c0 .4-.3.2-.5 0l-.1-.1c-.8-.6-2.8-4.1-3.3-1.9.1 1.6 1.8 2.3 2.5 3.6s0 0 .1 0c1.6 2.1 2.4 4.7 5 3.9 4-1.4 3.1-8.6 1.5-12.3Z" />
@@ -31,6 +32,7 @@ export function IconManualMode1(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+*/
 
 export function IconManualMode(props: SVGProps<SVGSVGElement>) {
     return (
@@ -40,7 +42,8 @@ export function IconManualMode(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-export function IconAutoMode0(props: SVGProps<SVGSVGElement>) {
+/*
+function IconAutoMode0(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" {...props}>
             <path d="m10.8 12.5.3.1a.5.5 0 0 1-.6 0ZM8.3 12.5l.3.1a.5.5 0 0 1-.6 0ZM15.4 12.5h.5c-.2.3-.4.3-.5 0ZM13.5 12.7H13l.1-.2c.1 0 .3 0 .4.2Z" />
@@ -50,7 +53,7 @@ export function IconAutoMode0(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+*/
 export function IconAutoMode(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8" {...props}>
@@ -59,6 +62,7 @@ export function IconAutoMode(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+
 /** /
 export function IconAppWindows(props: SVGProps<SVGSVGElement>) {
     return (
@@ -106,7 +110,7 @@ export function IconFormChangePsw(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+/*
 function IconInfo(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
@@ -132,6 +136,7 @@ function IconBack(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+*/
 
 export function IconTrash(props: SVGProps<SVGSVGElement>) {
     return (
@@ -140,9 +145,8 @@ export function IconTrash(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+/*
 // Field icons
-
 
 function IconInputFieldText(props: SVGProps<SVGSVGElement>) {
     return (
@@ -261,14 +265,13 @@ function IconButton(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth={5} {...props}>
             <path d="M9 72.6A11.43 11.43 0 0 0 20.43 84h59.14A11.43 11.43 0 0 0 91 72.6" stroke="#999" />
-            <rect x="6.56" y="15.97" width="86.87" height="63.19" rx="13.64" stroke="#0060c1" fill="#9bccfd" /> {/* #b7ffb7 */}
+            <rect x="6.56" y="15.97" width="86.87" height="63.19" rx="13.64" stroke="#0060c1" fill="#9bccfd" /> {/* #b7ffb7 * /}
             <path stroke="none" fill="#2a61ff"
                 d="M18.85 63.59c.1-1.49.2-3.72.2-5.68v-26.6h4.28v13.82h.1c1.53-2.45 4.28-4.05 8.13-4.05 5.91 0 10.1 4.55 10.05 11.24 0 7.86-5.37 11.78-10.69 11.78-3.45 0-6.21-1.23-8-4.14h-.14l-.2 3.63Zm4.48-8.82a7 7 0 0 0 .2 1.46A6.62 6.62 0 0 0 30 60.91c4.53 0 7.24-3.41 7.24-8.46 0-4.41-2.46-8.18-7.09-8.18a6.81 6.81 0 0 0-6.6 4.91 7.18 7.18 0 0 0-.25 1.64ZM52.3 35.26v6.32h6.21v3.05H52.3V56.5c0 2.73.84 4.28 3.26 4.28a10.2 10.2 0 0 0 2.51-.28l.19 3a11.29 11.29 0 0 1-3.84.55 6.29 6.29 0 0 1-4.68-1.68c-1.23-1.18-1.68-3.14-1.68-5.73v-12h-3.69v-3.06h3.69v-5.27ZM63.39 47.54c0-2.27 0-4.14-.2-6H67l.25 3.64h.1a8.9 8.9 0 0 1 7.88-4.14c3.3 0 8.42 1.82 8.42 9.37v13.18h-4.3V50.91c0-3.55-1.43-6.51-5.52-6.51A6.11 6.11 0 0 0 68 48.5a5.26 5.26 0 0 0-.3 1.86v13.23h-4.31Z"
             />
         </svg>
     );
 }
-
 
 function IconInOut(props: SVGProps<SVGSVGElement>) {
     return (
@@ -277,6 +280,7 @@ function IconInOut(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
+*/
 
 // Misc
 

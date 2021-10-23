@@ -246,7 +246,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const bailOuts = ((): string[] | undefined => {
             const rv: string[] = [];
             if (isIe && !domain) {
-                rv.push("IE form without domain");
+                rv.push("IE website form without site domain");
             }
             if (isIe && isScript) {
                 rv.push("Manual mode manifest built for IE");
