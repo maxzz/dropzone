@@ -11,25 +11,29 @@ const TagModeManual = <div key="TagModeManual" title="Manual mode"><IconManualMo
 const TagChgPsw = <div key="TagChgPsw" title="Password change form"><IconFormChangePsw className="w-5 h-5 ml-2 opacity-75" /></div>;
 const TagLogin = <div key="TagLogin" title="Login form"><IconFormLogin className="w-5 h-5 ml-2 opacity-75" /></div>;
 
-function UICardFormButton({ disp, label, opened, onClick }: { disp: Meta.Disp | undefined; label: string; opened: boolean; onClick: () => void; }) {
-    disp = disp || {
-        domain: '',
-        isIe: false,
-        isScript: false,
-        noFields: true,
-    };
-    const isIe = disp.isIe;
-    const isScript = disp.isScript;
-    const isWeb = !!disp.domain;
+type UICardFormButtonProps = {
+    disp: Meta.Disp | undefined;
+    label: string;
+    opened: boolean;
+    onClick: () => void;
+};
+
+function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
+    const isIe = disp?.isIe;
+    const isScript = disp?.isScript;
+    const isWeb = !!disp?.domain;
 
     const icons = [
         isWeb ? isIe ? TagWebIe : TagWeb : TagWinApp,
         !isWeb && isIe && TagWebIe,
         isScript && TagModeManual
     ];
-    
+
     return (
-        <button className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] select-none ${opened ? 'bg-gray-800 text-gray-100' : ''}`} onClick={onClick}>
+        <button
+            className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] select-none ${opened ? 'bg-gray-800 text-gray-100' : ''}`}
+            onClick={onClick}
+        >
             <span className="">{label}</span>
             {icons}
         </button>
