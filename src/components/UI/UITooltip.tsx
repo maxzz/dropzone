@@ -18,7 +18,7 @@ export function UITooltip({ trigger, children, arrow = false, portal = true }: U
         setTriggerRef,
         visible,
     } = usePopperTooltip(
-        { defaultVisible: true }
+        //{ defaultVisible: true }
     );
     const poperBody = visible && (
         <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}> {/* add -mx-4 to add right/left margin from viewport edge, but it will shift arrow */}

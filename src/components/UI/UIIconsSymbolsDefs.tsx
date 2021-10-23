@@ -98,13 +98,25 @@ function UISymbolsDefs() {
                 </symbol>
 
                 {/* chevrons */}
-                
+
                 <symbol id="icon-chevron-down" viewBox="0 0 24 24">
                     <path d="M5.843 9.593L11.5 15.25l5.657-5.657l-.707-.707l-4.95 4.95l-4.95-4.95l-.707.707z" />
                 </symbol>
 
                 <symbol id="icon-chevron-up" viewBox="0 0 24 24">
                     <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
+                </symbol>
+
+                {/* Info */}
+
+                <symbol id="icon-attantion" viewBox="0 0 48 48">
+                    <path d="M24 44a19.937 19.937 0 0 0 14.142-5.858A19.937 19.937 0 0 0 44 24a19.938 19.938 0 0 0-5.858-14.142A19.937 19.937 0 0 0 24 4A19.938 19.938 0 0 0 9.858 9.858A19.938 19.938 0 0 0 4 24a19.937 19.937 0 0 0 5.858 14.142A19.938 19.938 0 0 0 24 44z" />
+                    <path d="M24 37a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5z" fill="currentColor" stroke="none" />
+                    <path d="M24 12v16" />
+                </symbol>
+
+                <symbol id="icon-dot" viewBox="0 0 24 24">
+                    <path d="M12 16a4 4 0 1 1 0-8a4 4 0 0 1 0 8z" />
                 </symbol>
 
             </defs>
@@ -260,6 +272,25 @@ export function IconChevronUp(props: SVGProps<SVGSVGElement>) {
     return (
         <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
             <use xlinkHref="#icon-chevron-up" />
+        </svg>
+    );
+}
+
+export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className={`w-full h-full ${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-attantion" />
+        </svg>
+    );
+}
+
+export function IconDot(props: SVGProps<SVGSVGElement>) {
+    const { className = '', ...rest } = props;
+    return (
+        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+            <use xlinkHref="#icon-dot" />
         </svg>
     );
 }

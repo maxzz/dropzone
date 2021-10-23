@@ -392,8 +392,8 @@ export function IconCtrl(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-
-export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+/*
+function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { title, ...rest } = props;
     return (
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" {...rest}>
@@ -406,10 +406,11 @@ export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string;
 }
 
 
-export function IconDot(props: SVGProps<SVGSVGElement>) {
+function IconDot(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
             <path d="M12 16a4 4 0 1 1 0-8a4 4 0 0 1 0 8z" />
         </svg>
     );
 }
+*/
