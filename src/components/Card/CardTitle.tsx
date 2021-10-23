@@ -77,7 +77,8 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 <CardIcon isWeb={!!domain} />
 
                 {/* File index in all loaded files */}
-                <div className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
+                <div 
+                    className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
                     title="File index in all loaded files"
                 >
                     {fileUs.idx + 1}
@@ -93,7 +94,10 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
             {/* Filename */}
             <div className="flex items-center justify-between">
-                <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono" title={`${fileUs.fpath ? `Folder: "${fileUs.fpath}"` : `Filename: ${fileUs.fname}`}`}>
+                <div
+                    className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono"
+                    title={`${fileUs.fpath ? `Folder: "${fileUs.fpath}"` : `Filename: ${fileUs.fname}`}`}
+                >
                     {fname}
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
@@ -116,6 +120,17 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             onClick={() => setRightPanel(!isCurrent ? fileUsAtom : undefined)}
         >
             <CardTitleContent_ fileUsAtom={fileUsAtom} />
+
+            {/* Card actions */}
+            {isCurrent && <div className="absolute top-3 right-2 z-10 flex">
+                {/* <PopoverMenu /> */}
+                <CardTitleMenu icon={
+                    <div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]">
+                        <IconMenuHamburger />
+                    </div>}
+                />
+            </div>}
+
         </div>
     );
 }
