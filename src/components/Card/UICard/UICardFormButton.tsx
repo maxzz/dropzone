@@ -1,15 +1,14 @@
 import React from 'react';
-//import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAutoMode, IconFormChangePsw, IconFormLogin, IconManualMode } from '../../UI/UiIcons';
-import { IconAppWebChrome, IconAutoMode, IconFormChangePsw, IconFormLogin } from '../../UI/UiIcons';
-import { IconAppWebIE, IconAppWindows, IconManualMode } from '../../UI/UIIconsSymbolsDefs';
+import { IconAutoMode, IconFormChangePsw, IconFormLogin } from '../../UI/UiIcons';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconManualMode } from '../../UI/UIIconsSymbolsDefs';
 
-const TagWinApp = <div title="Windows application"><IconAppWindows className="w-5 h-5 ml-2 opacity-75" /></div>;
-const TagWebIe = <div title="Webiste trained with IE"><IconAppWebIE className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
-const TagWeb = <div title="Webiste trained with Chrome/Firefox"><IconAppWebChrome className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
-const TagModeNormal = <div title="Normal mode"><IconAutoMode className="w-5 h-5 ml-2 opacity-75" /></div>;
-const TagModeManual = <div title="Manual mode"><IconManualMode className="w-5 h-5 ml-2" strokeWidth={.9} /></div>;
-const TagChgPsw = <div title="Password change form"><IconFormChangePsw className="w-5 h-5 ml-2 opacity-75" /></div>;
-const TagLogin = <div title="Login form"><IconFormLogin className="w-5 h-5 ml-2 opacity-75" /></div>;
+const TagWinApp =     <IconAppWindows    key="TagWinApp"     title="Windows application"                  className="w-5 h-5 ml-2 opacity-75" />      ;
+const TagWebIe =      <IconAppWebIE      key="TagWebIe"      title="Webiste trained with IE"              className="w-5 h-5 ml-2" strokeWidth={.9} />;
+const TagWeb =        <IconAppWebChrome  key="TagWeb"        title="Webiste trained with Chrome/Firefox"  className="w-5 h-5 ml-2" strokeWidth={.9} />;
+const TagModeNormal = <IconAutoMode      key="TagModeNormal" title="Normal mode"                          className="w-5 h-5 ml-2 opacity-75" />      ;
+const TagModeManual = <IconManualMode    key="TagModeManual" title="Manual mode"                          className="w-5 h-5 ml-2" strokeWidth={.9} />;
+const TagLogin =      <IconFormLogin     key="TagLogin"      title="Login form"                           className="w-5 h-5 ml-2 opacity-75" />      ;
+const TagChgPsw =     <IconFormChangePsw key="TagChgPsw"     title="Password change form"                 className="w-5 h-5 ml-2 opacity-75" />      ;
 
 type UICardFormButtonProps = {
     disp: Meta.Disp | undefined;
@@ -41,3 +40,4 @@ function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProp
 }
 
 export default UICardFormButton;
+

@@ -36,6 +36,13 @@ function UISymbolsDefs() {
                     <path d="M27.7 8.813c2.445-6.243-2.302-5.805-2.302-5.805c-3.046 0-6.855 2.73-6.855 2.73S14 4.531 9.457 7.234c-4.95 3.106-4.785 8.621-4.785 8.621C8.695 10.184 14.3 7.88 14.3 7.88v.375C6.027 13.816 4.07 21.957 3.582 23.617C3.09 25.277 3.418 29 6.898 29c3.485 0 7.02-2.762 7.02-2.762s.762.164 2.828.164c8.707 0 10.774-7.55 10.774-7.55h-7.727s-.543 2.464-3.316 2.464c-3.813 0-3.594-3.91-3.594-3.91h14.746c.707-10.062-8.215-11.508-8.215-11.508s3.152-2.195 5.875-2.195c4.313 0 2.273 4.973 2.273 4.973zM13.483 26.128s-5.312 3.172-7.699.973c-1.273-2.2.8-5.313.8-5.313s1.759 3.207 6.9 4.34zm6.391-12.149h-7.012s-.09-3.363 3.594-3.363c3.559 0 3.418 3.363 3.418 3.363z" />
                 </symbol>
 
+                <symbol id="app-web-chrome" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M21.17 8H12"></path><path d="M3.95 6.06L8.54 14" />
+                    <path d="M10.88 21.94L15.46 14" />
+                </symbol>
+
                 <symbol id="icon-manual-mode" viewBox="0 0 24 24">
                     <path d="M9.86 7.28C9.56 7.07 9 7.46 9 8a1.51 1.51 0 0 0 0 .3c0 1.13.62 2.39.39 3.46C8 9.82 7.39 7.21 6.33 5c-2.33-.84.15 3.74.57 4.81-.07.65.71.93.35 1.69-1-1.66-1.8-3.82-3-5.36-.39-.61-1-.75-1.16.25-.24.47 1 2.23 1.26 2.7v-.05a12 12 0 0 0 1.47 2.56 1.76 1.76 0 0 0 .34.76c0 .26 0 .26-.17.27-.83-.72-3.15-5.3-3.92-4.23-.79 1.31 1 2.24 1.34 3.22A25.22 25.22 0 0 1 5 13.71c0 .37-.3.18-.44 0a.09.09 0 0 1-.06-.06.13.13 0 0 0-.06-.05c-.75-.54-2.68-3.9-3.19-1.77.13 1.52 1.69 2.17 2.39 3.37s.06.05.09.07c1.49 2 2.29 4.45 4.78 3.64 3.69-1.32 2.95-8.18 1.35-11.63ZM14.14 7.28c.3-.21.87.18.86.67a1.51 1.51 0 0 1 0 .3c0 1.13-.62 2.39-.39 3.46 1.35-1.89 2-4.5 3.06-6.68 2.38-.87-.15 3.71-.57 4.78.07.65-.71.93-.35 1.69 1.05-1.66 1.8-3.82 3-5.36.39-.61 1-.75 1.16.25.24.47-1.05 2.23-1.26 2.7v-.05a12 12 0 0 1-1.41 2.56 1.76 1.76 0 0 1-.34.76c0 .26 0 .26.17.27.83-.72 3.15-5.3 3.92-4.23.79 1.31-1 2.24-1.34 3.22A25.22 25.22 0 0 0 19 13.71c0 .37.3.18.44 0a.09.09 0 0 0 .06-.06.13.13 0 0 1 .06-.05c.75-.54 2.68-3.9 3.19-1.77-.17 1.54-1.73 2.19-2.43 3.39s-.06.05-.09.07c-1.49 2-2.29 4.45-4.78 3.64-3.65-1.34-2.91-8.2-1.31-11.65Z" />
                 </symbol>
@@ -133,7 +140,18 @@ function UISymbolsDefs() {
 }
 
 /*
-export function s(props: SVGProps<SVGSVGElement>) {
+export function d(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+    const { title, ...rest } = props;
+    return (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+        </svg>
+    );
+}
+*/
+
+/*
+export function s(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { className = '', title, ...rest } = props;
     return (
         <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
@@ -166,6 +184,16 @@ export function IconAppWebIE(props: SVGProps<SVGSVGElement> & { title?: string; 
         <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#app-web-ie" />
+        </svg>
+    );
+}
+
+export function IconAppWebChrome(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg fill="none" stroke="currentColor" strokeWidth="2" className={`w-full h-full ${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#app-web-chrome" />
         </svg>
     );
 }

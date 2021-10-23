@@ -54,9 +54,11 @@ function IconAutoMode0(props: SVGProps<SVGSVGElement>) {
     );
 }
 */
-export function IconAutoMode(props: SVGProps<SVGSVGElement>) {
+export function IconAutoMode(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+    const { title, ...rest } = props;
     return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8" {...props}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8" {...rest}>
+            {title && <title>{title}</title>}
             <path d="M11 4.9c1.8 0 4 .2 4.7 3.1 0 .3.1.4.3.5 3.3.5 5 1.1 6.3 6a2.8 2.8 0 0 0 .3.6c.2.3.2.8-.1 1a2.5 2.5 0 0 0-.4.2c-.6.4-.8 1.2-1.4 1.7a2.6 2.6 0 0 1-3.4-.2c-.5-.5-.8-.8-1.3-.8h-5.6c-1.8 0-1.8.4-3.2 1.2-1 .7-2.7.2-3.8-1.3a2.1 2.1 0 0 0-1.8-.9l-.1-.3c-.1-1 .3-.7.6-1.3a4.3 4.3 0 0 0 .2-1.2A9 9 0 0 1 3 11C4.9 7 7.9 4.7 11 5Z" />
             <path d="M10.7 6.4c0 .6-.1 3.3.2 3.1h3.5c.4 0 0-1.8-.2-2-1-1.5-2.3-1.4-3.5-1.1ZM6 13.5c-2.5.2-2.6 4.1 0 4.2 2.7 0 2.7-4 0-4.2ZM21 15.7a2 2 0 1 0-3.9 0 2 2 0 1 0 3.9 0ZM6 9.4h3.6V6.6C8 6.6 6 7.7 6 9.4Z" />
         </svg>
@@ -95,17 +97,21 @@ export function IconAppWebIE(props: SVGProps<SVGSVGElement>) {
 /**/
 
 
-export function IconFormLogin(props: SVGProps<SVGSVGElement>) {
+export function IconFormLogin(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+    const { title, ...rest } = props;
     return (
-        <svg viewBox="0 0 1025 1024" fill="currentColor" {...props}>
+        <svg viewBox="0 0 1025 1024" fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
             <path d="M960.356 1024h-896q-26 0-45-19t-19-45V640q0-27 19-45.5t45-18.5h896q26 0 45 18.5t19 45.5v320q0 26-19 45t-45 19zm0-352q0-13-9.5-22.5t-22.5-9.5h-832q-13 0-22.5 9.5t-9.5 22.5v256q0 13 9.5 22.5t22.5 9.5h832q13 0 22.5-9.5t9.5-22.5V672zm-192 224q-27 0-45.5-19t-18.5-45.5t18.5-45t45.5-18.5t45.5 18.5t18.5 45t-18.5 45.5t-45.5 19zm-191.5 0q-26.5 0-45.5-19t-19-45.5t19-45t45.5-18.5t45 18.5t18.5 45t-18.5 45.5t-45 19zm-192.5 0q-27 0-45.5-19t-18.5-45.5t18.5-45t45.5-18.5t45.5 18.5t18.5 45t-18.5 45.5t-45.5 19zm-192 0q-27 0-45.5-19t-18.5-45.5t18.5-45t45.5-18.5t45.5 18.5t18.5 45t-18.5 45.5t-45.5 19zm768-448h-896q-26 0-45-19t-19-45V64q0-27 19-45.5t45-18.5h896q26 0 45 18.5t19 45.5v320q0 26-19 45t-45 19zm0-352q0-13-9.5-22.5t-22.5-9.5h-832q-13 0-22.5 9.5t-9.5 22.5v256q0 13 9.5 22.5t22.5 9.5h832q13 0 22.5-9.5t9.5-22.5V96zm-800 224q-13 0-22.5-9.5t-9.5-22.5V160q0-13 9.5-22.5t22.5-9.5t22.5 9.5t9.5 22.5v128q0 13-9.5 22.5t-22.5 9.5z" />
         </svg>
     );
 }
 
-export function IconFormChangePsw(props: SVGProps<SVGSVGElement>) {
+export function IconFormChangePsw(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+    const { title, ...rest } = props;
     return (
-        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
             <path d="M17.66 9.53l-7.07 7.07l-4.24-4.24l1.41-1.41l2.83 2.83l5.66-5.66l1.41 1.41zM4 12c0-2.33 1.02-4.42 2.62-5.88L9 8.5v-6H3l2.2 2.2C3.24 6.52 2 9.11 2 12c0 5.19 3.95 9.45 9 9.95v-2.02c-3.94-.49-7-3.86-7-7.93zm18 0c0-5.19-3.95-9.45-9-9.95v2.02c3.94.49 7 3.86 7 7.93c0 2.33-1.02 4.42-2.62 5.88L15 15.5v6h6l-2.2-2.2c1.96-1.82 3.2-4.41 3.2-7.3z"
             />
         </svg>
