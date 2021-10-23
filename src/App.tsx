@@ -15,7 +15,7 @@ function App() {
         <React.Fragment>
             <Toaster />
             <UISymbolsDefs />
-            <SvgFontSpy />
+            
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
@@ -30,6 +30,8 @@ function App() {
                         {/* </UISplitPane> */}
                     </SimpleSplitPane>
                 </main>
+
+                <SvgFontSpy />
             </div>
         </React.Fragment>
     );
