@@ -9,11 +9,33 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 
+function TestSvgFont() {
+    const [ids, setIds] = React.useState<string[]>([]);
+    React.useEffect(() => {
+        const font = document.querySelector('#svgfont > defs')?.children;
+        const ids = (font ? [...font] : []).map(item => item.id);
+        setIds(ids);
+
+        console.log({ svgs: ids });
+    }, []);
+    return (
+        <div className="w-[80vw] mx-auto mt-4 flex space-x-2">
+            {ids.map((id, idx) =>
+                <svg fill="#c3b2d3" stroke="black" strokeWidth={.5} className={`w-8 h-8 border border-gray-500 bg-gray-200 shadow-lg`} key={idx}>
+                    <title>{`${id}`}</title>
+                    <use xlinkHref={`#${id}`} />
+                </svg>
+            )}
+        </div>
+    );
+}
+
 function App() {
     return (
         <React.Fragment>
             <Toaster />
             <UISymbolsDefs />
+            <TestSvgFont />
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
