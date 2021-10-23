@@ -404,3 +404,12 @@ export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string;
         </svg>
     );
 }
+
+
+export function IconDot(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <path d="M12 16a4 4 0 1 1 0-8a4 4 0 0 1 0 8z" />
+        </svg>
+    );
+}
