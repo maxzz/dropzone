@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { usePopperTooltip } from 'react-popper-tooltip';
+import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 
 type UITooltipProps = {
@@ -8,9 +8,10 @@ type UITooltipProps = {
     children?: React.ReactNode;
     arrow?: boolean;
     portal?: boolean;
+    popperOptions?: Config;
 };
 
-export function UITooltip({ trigger, children, arrow = false, portal = true }: UITooltipProps) {
+export function UITooltip({ trigger, children, arrow = false, portal = true, popperOptions }: UITooltipProps) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -19,6 +20,9 @@ export function UITooltip({ trigger, children, arrow = false, portal = true }: U
         visible,
     } = usePopperTooltip(
         //{ defaultVisible: true }
+        {
+            ...popperOptions,
+        }
     );
     const poperBody = visible && (
         <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}> {/* add -mx-4 to add right/left margin from viewport edge, but it will shift arrow */}
