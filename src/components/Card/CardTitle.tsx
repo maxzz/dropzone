@@ -33,15 +33,15 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     return (
         <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false}>
             <div className="text-sm max-w-[16rem]">
-                <div className="mt-[-.4rem] mx-[-.4rem] p-[.4rem] py-3 rounded-sm rounded-b-none bg-gray-900 text-gray-300">
+                <div className="mt-[-.4rem] mx-[-.4rem] p-[.4rem] py-3 px-2 rounded-sm rounded-b-none bg-gray-900 text-gray-300">
                     There are problems to check why
                 </div>
                 {bailOuts.map((bailOut, idx) => <React.Fragment key={`bailout${idx}`}>
                     {bailOut &&
-                        <div className="pt-1">
+                        <div className="pt-1 px-0.5">
                             <div className="font-bold">{idx === 0 ? 'Login:' : 'Password chnage:'}</div>
                             {bailOut.map((item, key) => (
-                                <div className="flex items-center" key={key}><IconDot className="w-4 h-4 pt-1" /> {item}</div>
+                                <div className="flex items-center" key={key}><IconDot className="w-4 h-4 pt-0.5" /> {item}</div>
                             ))}
                         </div>
                     }
