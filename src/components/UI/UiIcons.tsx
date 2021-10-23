@@ -54,7 +54,7 @@ function IconAutoMode0(props: SVGProps<SVGSVGElement>) {
     );
 }
 */
-export function IconAutoMode(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+export function IconAutoMode(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { title, ...rest } = props;
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8" {...rest}>
@@ -97,7 +97,7 @@ export function IconAppWebIE(props: SVGProps<SVGSVGElement>) {
 /**/
 
 
-export function IconFormLogin(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+export function IconFormLogin(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { title, ...rest } = props;
     return (
         <svg viewBox="0 0 1025 1024" fill="currentColor" {...rest}>
@@ -107,7 +107,7 @@ export function IconFormLogin(props: SVGProps<SVGSVGElement> & { title?: string;
     );
 }
 
-export function IconFormChangePsw(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+export function IconFormChangePsw(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { title, ...rest } = props;
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
@@ -403,25 +403,10 @@ export function IconCtrl(props: SVGProps<SVGSVGElement>) {
     );
 }
 
-/*
-function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { title, ...rest } = props;
+export function IconCatalog(props: SVGProps<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" {...rest}>
-            {title && <title>{title}</title>}
-            <path d="M24 44a19.937 19.937 0 0 0 14.142-5.858A19.937 19.937 0 0 0 44 24a19.938 19.938 0 0 0-5.858-14.142A19.937 19.937 0 0 0 24 4A19.938 19.938 0 0 0 9.858 9.858A19.938 19.938 0 0 0 4 24a19.937 19.937 0 0 0 5.858 14.142A19.938 19.938 0 0 0 24 44z" />
-            <path d="M24 37a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5z" fill="currentColor" stroke="none" />
-            <path d="M24 12v16" />
+        <svg viewBox="0 0 24 24" {...props}>
+            <path fill="none" stroke="currentColor" strokeWidth="2" d="M5.5 18a2.5 2.5 0 1 0 0 5H22M3 20.5v-17A2.5 2.5 0 0 1 5.5 1H21v17.007H5.492M20.5 18a2.5 2.5 0 1 0 0 5h0" />
         </svg>
     );
 }
-
-
-function IconDot(props: SVGProps<SVGSVGElement>) {
-    return (
-        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-            <path d="M12 16a4 4 0 1 1 0-8a4 4 0 0 1 0 8z" />
-        </svg>
-    );
-}
-*/
