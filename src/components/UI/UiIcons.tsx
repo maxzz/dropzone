@@ -33,7 +33,7 @@ function IconManualMode1(props: SVGProps<SVGSVGElement>) {
     );
 }
 */
-
+/*
 export function IconManualMode(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".6" {...props}>
@@ -41,7 +41,7 @@ export function IconManualMode(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+*/
 /*
 function IconAutoMode0(props: SVGProps<SVGSVGElement>) {
     return (
