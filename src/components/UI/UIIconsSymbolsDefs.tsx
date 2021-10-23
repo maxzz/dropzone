@@ -6,7 +6,6 @@ function UISymbolsDefs() {
             xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         >
             <defs>
-
                 <symbol id="icon-quill" viewBox="0 0 32 32">
                     <path d="M0 32c4-12 14.469-32 32-32-8.219 6.594-12 22-18 22s-6 0-6 0l-6 10h-2z"></path>
                 </symbol>
@@ -53,6 +52,10 @@ function UISymbolsDefs() {
                     <path d="M4.5 6.5h12"></path>
                     <path d="M4.498 10.5h11.997"></path>
                     <path d="M4.5 14.5h11.995"></path>
+                </symbol>
+
+                <symbol id="icon-catalog" viewBox="0 0 24 24">
+                    <path d="M5.5 18a2.5 2.5 0 1 0 0 5H22M3 20.5v-17A2.5 2.5 0 0 1 5.5 1H21v17.007H5.492M20.5 18a2.5 2.5 0 1 0 0 5h0" />
                 </symbol>
 
                 {/* field icons */}
@@ -218,6 +221,16 @@ export function IconMenuHamburger(props: SVGProps<SVGSVGElement> & { title?: str
         <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} className={`w-full h-full ${className}`} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#menu-hamburger" />
+        </svg>
+    );
+}
+
+export function IconCatalog(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg fill="none" stroke="currentColor" strokeWidth="2" className={`w-full h-full ${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-catalog" />
         </svg>
     );
 }

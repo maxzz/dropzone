@@ -47,8 +47,8 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
     const columnRefTitle = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
     function selectThisRow() {
-        if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.other) {
-            setThemSelectedRow({ field: rfieldindex && form.other[rfieldindex] || -1, form: 0 });
+        if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.rother) {
+            setThemSelectedRow({ field: rfieldindex && form.rother[rfieldindex] || -1, form: 0 });
         }
         setThisSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
     }

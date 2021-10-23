@@ -17,9 +17,10 @@ export type FileUs = {
     raw?: string;
     mani?: Mani.Manifest;
     meta?: Meta.Form[],
+    fcat?: Catalog.Field[]; // field catalog
     file?: File;
-    isGroupAtom: Atom<boolean>,  // this fileUs selected for bulk group operation
-    isCurrentAtom: Atom<boolean>,   // this fileUs is current and shown in the right panel
+    isGroupAtom: Atom<boolean>, // this fileUs selected for bulk group operation
+    isCurrentAtom: Atom<boolean>, // this fileUs is current and shown in the right panel
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
