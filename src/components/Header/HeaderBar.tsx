@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { busyAtom, clearFilesAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '../../store/store';
-import { IconAppLogo, IconRocket, IconTrash } from '../UI/UiIcons';
+import { busyAtom, clearFilesAtom } from '../../store/store';
+import { IconAppLogoMicroscope, IconRocket, IconTrash } from '../UI/UiIcons';
 import DropzoneArea from './Dropzone';
 import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
@@ -66,10 +66,7 @@ function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
                 {/* Right header */}
                 <div className="flex-1 flex items-center justify-end">
                     <Filters />
-
-                    <div className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again', {style: {backgroundColor: 'tomato'}}); }}>
-                        <IconAppLogo />
-                    </div>
+                    <IconAppLogoMicroscope className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } }); }} />
                 </div>
 
             </div>
