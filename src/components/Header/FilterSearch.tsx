@@ -4,6 +4,7 @@ import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '../../store/sto
 import { useKey } from 'react-use';
 import { IconCaseSensitive, IconClose, IconCtrl, IconSearch } from '../UI/UiIcons';
 import { UITooltip } from '../UI/UITooltip';
+import { IconDot } from '../UI/UIIconsSymbolsDefs';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterCaseSensitiveAtom);
@@ -34,7 +35,6 @@ function FilterSearch() {
                         onFocus={() => setActive(true)}
                         onBlur={() => setActive(false)}
                         onClick={() => keyboardRef.current && keyboardRef.current.focus()}
-                        title="Search (Ctrl+D). Search prefix to show only: 'win:' Windows apps; 'web:' web apps; 'why:' logins with problems to check why"
                     >
                         <input
                             className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none"
@@ -60,10 +60,19 @@ function FilterSearch() {
                         }
                     </div>
                 }
-                popperOptions={{ delayShow: 1000 }}
+                arrow
+                popperOptions={{
+                    delayShow: 700,
+                    offset: [0, 8],
+                    //defaultVisible: true,
+                }}
             >
-                <div className="">
-                    Search (Ctrl+D). Search prefix to show only: 'win:' Windows apps; 'web:' web apps; 'why:' logins with problems to check why
+                <div className="text-sm py-1 px-1">
+                    <div className="font-bold">Search (Ctrl+D)</div>
+                    <div className="pb-1">Use the search prefix to dispay only:</div>
+                    <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">win:</span> logins for Windows apps</div>
+                    <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">web:</span> logins for web apps</div>
+                    <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">why:</span> logins with problems to check why</div>
                 </div>
             </UITooltip>
         </div>
