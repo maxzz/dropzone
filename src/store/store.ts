@@ -1,4 +1,4 @@
-import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
+import { Atom, atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
 import atomWithCallback from '../hooks/atomsX';
 import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
@@ -18,6 +18,8 @@ export type FileUs = {
     mani?: Mani.Manifest;
     meta?: Meta.Form[],
     file?: File;
+    isGroupAtom: Atom<boolean>,  // this fileUs selected for bulk group operation
+    isCurrentAtom: Atom<boolean>,   // this fileUs is current and shown in the right panel
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
@@ -74,6 +76,8 @@ export const setFilesAtom = atom(
                 modified: file.lastModified,
                 size: file.size,
                 file: file,
+                isGroupAtom: atom(false),
+                isCurrentAtom: atom(false),
             });
         });
         set(_foldAllCardsAtom, -1);
