@@ -83,7 +83,7 @@ export default function DropzoneArea() {
         >
             {total
                 ?
-                <div className="relative mr-4 my-2 uppercase text-xs flex items-center" title={`Loaded ${total} file${plural(total)}`}>
+                <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${total} file${plural(total)}`}>
                     <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
                     {total} file{plural(total)}
                     {files.length !== filtered.length &&
