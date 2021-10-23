@@ -9,7 +9,7 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 
-function TestSvgFont() {
+function SvgFontSpy() {
     const [ids, setIds] = React.useState<string[]>([]);
     React.useEffect(() => {
         const font = document.querySelector('#svgfont > defs')?.children;
@@ -19,12 +19,14 @@ function TestSvgFont() {
         console.log({ svgs: ids });
     }, []);
     return (
-        <div className="w-[80vw] mx-auto mt-4 flex space-x-2">
+        <div className="w-[80vw] mx-auto mt-4 grid grid-cols-[repeat(auto-fill,minmax(0,64px))] gap-4">
             {ids.map((id, idx) =>
-                <svg fill="#c3b2d3" stroke="black" strokeWidth={.5} className={`w-8 h-8 border border-gray-500 bg-gray-200 shadow-lg`} key={idx}>
-                    <title>{`${id}`}</title>
-                    <use xlinkHref={`#${id}`} />
-                </svg>
+                <div className="w-16 h-16 border-4 border-gray-100 bg-gray-300 shadow-lg">
+                    <svg fill="#c3b2d3" stroke="black" strokeWidth={.5} className={`w-full h-full`} key={idx}>
+                        <title>{`${id}`}</title>
+                        <use xlinkHref={`#${id}`} />
+                    </svg>
+                </div>
             )}
         </div>
     );
@@ -35,7 +37,7 @@ function App() {
         <React.Fragment>
             <Toaster />
             <UISymbolsDefs />
-            <TestSvgFont />
+            <SvgFontSpy />
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
