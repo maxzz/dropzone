@@ -72,6 +72,7 @@ export function IconAppWindows(props: SVGProps<SVGSVGElement>) {
     );
 }
 /**/
+/*
 export function IconAppWebChrome(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
@@ -82,7 +83,7 @@ export function IconAppWebChrome(props: SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
+*/
 /** /
 export function IconAppWebIE(props: SVGProps<SVGSVGElement>) {
     return (
