@@ -86,9 +86,24 @@ declare module Mani {
 
 } //declare module Mani
 
-declare module Catalog {
-    interface Field {
+declare module Catalog {    // pmat/include/ots_storagecatalog_io.h
+    interface Descriptor {
+        id?: string;        // default as guid
+    }
 
+    interface Name {
+        dispname: string;
+        dbname: string;
+        value?: string;
+        ownernote?: string;
+        askalways?: boolean; // undefined : '1' 
+        onetvalue?: boolean; // undefined : '1'
+        password?: boolean;  // undefined : '1'
+    }
+
+    interface Root {
+        descriptor?: Descriptor;
+        names: Name[];
     }
 }
 

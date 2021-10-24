@@ -1,5 +1,4 @@
 import { parse } from 'fast-xml-parser';
-
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
@@ -44,6 +43,13 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
     return manifest as Mani.Manifest;
 }
 
+export function beautifyXMLCatalog(catalog: Catalog.Root): Catalog.Root {
+    catalog.names = (catalog as any)?.names?.name || [];
+    catalog.names = catalog.names.map((item: any) => item?._attributes).filter(Boolean);
+    console.log({catalog});
+    return catalog;
+}
+
 const parseOptions = {
     attributeNamePrefix: "",
     attrNodeName: "_attributes",
@@ -51,10 +57,15 @@ const parseOptions = {
     allowBooleanAttributes: true,
 };
 
-export function parseManifest(cnt: string): Mani.Manifest | undefined {
-    const obj = parse(cnt, parseOptions);
-    //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
+export type ParseManifestResult = {
+    mani?: Mani.Manifest;
+    fcat?: Catalog.Root;
+};
 
-    const res = obj?.manifest && beautifyXMLManifest(obj.manifest);
-    return res;
+export function parseManifest(cnt: string): ParseManifestResult {
+    const obj = parse(cnt, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
+    return {
+        mani: obj?.manifest && beautifyXMLManifest(obj.manifest),
+        fcat: obj?.storagecatalog && beautifyXMLCatalog(obj?.storagecatalog),
+    };
 }

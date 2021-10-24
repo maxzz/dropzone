@@ -17,7 +17,7 @@ export type FileUs = {
     raw?: string;
     mani?: Mani.Manifest;
     meta?: Meta.Form[],
-    fcat?: Catalog.Field[]; // field catalog
+    fcat?: Catalog.Root; // field catalog
     file?: File;
     isGroupAtom: Atom<boolean>, // this fileUs selected for bulk group operation
     isCurrentAtom: Atom<boolean>, // this fileUs is current and shown in the right panel
@@ -173,18 +173,23 @@ const updateCacheAtom = atom(
                     const raw = await textFileReader(file.file);
 
                     let mani: Mani.Manifest | undefined;
+                    let fcat: Catalog.Root | undefined;
                     let meta: Meta.Form[] | undefined;
                     try {
-                        mani = parseManifest(raw);
+                        const res = parseManifest(raw);
+                        console.log({res});
+                        mani = res.mani;
+                        fcat = res.fcat;
                         meta = buildManiMetaForms(mani);
                     } catch (error) {
-                        console.log('%ctm error', 'color: red', error, '\n', file.fname, raw);
+                        console.log('%ctm parse error', 'color: red', error, '\n', file.fname, raw);
                     }
 
                     const forNewAtom: FileUs = {
                         ...file,
                         raw,
                         mani,
+                        fcat,
                         meta,
                     };
                     set(fileAtom, forNewAtom);
@@ -200,7 +205,7 @@ const updateCacheAtom = atom(
                     //await delay(1000);
                 }
             } catch (error) {
-                console.log('error', error);
+                console.log('read file error', error);
             }
         } //for
 
