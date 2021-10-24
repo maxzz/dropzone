@@ -27,37 +27,47 @@ function FilterSearch() {
     useKey((event) => event.ctrlKey && event.key === 'd', (event) => { event.preventDefault(); keyboardRef.current && keyboardRef.current.focus(); });
     const isEmpty = !filter;
     return (
-        <div className="flex-1 max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end">
+        // <div className="flex-1 h-16 max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
+        <div className="flex-1 min-h-[32px] max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
             <UITooltip
                 trigger={
-                    <div
-                        className={`h-8 px-2 flex items-center bg-gray-700 focus-within:bg-gray-600 border-2 ${isEmpty ? 'w-12 rounded-full' : 'w-full rounded-md'}`}
-                        onFocus={() => setActive(true)}
-                        onBlur={() => setActive(false)}
-                        onClick={() => keyboardRef.current && keyboardRef.current.focus()}
-                    >
-                        <input
-                            className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none"
-                            spellCheck="false"
-                            ref={keyboardRef}
-                            value={filter}
-                            onChange={(event) => setFilter(event.target.value)}
-                        />
-                        {isEmpty
-                            ?
-                            // Ctrl+D and Search icon
-                            <div className="flex-none relative">
-                                {!active && <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-400 pointer-events-none">
-                                    <IconCtrl className="w-3 h-3" />
-                                    <div className="text-[.5rem] leading-[.5rem]">D</div>
-                                </div>}
-                                <IconSearch className="w-4 h-4" />
-                            </div>
-                            : <>
-                                <ToggleCaseSensitive />
-                                <IconClose onClick={() => setFilter('')} className="w-6 h-6 p-0.5 cursor-pointer" />
-                            </>
-                        }
+                    //h-8 flex align-center ${active ? '' : 'my-0.5'}
+                    //h-8 flex align-center
+                    <div className={``}>
+                        {/* h-8 pt-0 md:pt-1 lg:pt-0.5 ${active ? '' : 'md:-mt-0.5'} */}
+                        <div
+                            className={`${active ? 'h-8' : 'h-7 py-0.5'} px-2 flex items-center bg-gray-700 focus-within:bg-gray-600 border-2 ${isEmpty ? 'w-12 rounded-full' : 'w-full rounded-md'}`}
+                            // ${active ? 'h-8' : 'h-7 py-0.5'}
+                            onFocus={() => setActive(true)}
+                            onBlur={() => setActive(false)}
+                            onClick={() => keyboardRef.current && keyboardRef.current.focus()}
+                        >
+                            <input
+                                className="w-full h-6 text-sm text-gray-200 bg-transparent focus:outline-none"
+                                spellCheck="false"
+                                ref={keyboardRef}
+                                value={filter}
+                                onChange={(event) => setFilter(event.target.value)}
+                            />
+                            {isEmpty
+                                ?
+                                // Ctrl+D and Search icon
+                                <div className="flex-none relative">
+                                    {/* Ctrl+D */}
+
+                                    {!active && <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-400 pointer-events-none">
+                                        <IconCtrl className="w-3 h-3" />
+                                        <div className="text-[.5rem] leading-[.5rem]">D</div>
+                                    </div>}
+
+                                    <IconSearch className="w-4 h-4" />
+                                </div>
+                                : <>
+                                    <ToggleCaseSensitive />
+                                    <IconClose onClick={() => setFilter('')} className="w-6 h-6 p-0.5 cursor-pointer" />
+                                </>
+                            }
+                        </div>
                     </div>
                 }
                 arrow
