@@ -54,12 +54,12 @@ function FilterSearch() {
                                 // Ctrl+D and Search icon
                                 <div className="flex-none relative">
                                     {/* Ctrl+D */}
-
+                                    {/*
                                     {!active && <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-400 pointer-events-none">
                                         <IconCtrl className="w-3 h-3" />
                                         <div className="text-[.5rem] leading-[.5rem]">D</div>
                                     </div>}
-
+                                    */}
                                     <IconSearch className="w-4 h-4" />
                                 </div>
                                 : <>
