@@ -7,9 +7,9 @@ import { parseManifest } from './manifest/mani-io';
 import { createRegexByFilter, delay, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
 export type FileUsState = {
-    isGroupAtom: Atom<boolean>,     // this fileUs selected for bulk group operation
-    isCurrentAtom: Atom<boolean>,   // this fileUs is current and shown in the right panel
-}
+    isGroupAtom: PrimitiveAtom<boolean>, // this fileUs selected for bulk group operation
+    isCurrentAtom: PrimitiveAtom<boolean>, // this fileUs is current and shown in the right panel
+};
 
 export type FileUs = {
     id: string;
@@ -152,18 +152,6 @@ export const foldAllCardsAtom = atom(
     }
 );
 
-// Fields selection
-
-export type SelectRow = {
-    field: number;
-    form: number;
-};
-
-export type SelectRowAtoms = {
-    loginAtom: PrimitiveAtom<SelectRow>;
-    cpassAtom: PrimitiveAtom<SelectRow>;
-};
-
 // Cache
 
 const updateCacheAtom = atom(
@@ -248,6 +236,40 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
         return rpa ? get(rpa) : undefined;
     }
 );
+
+// Current card selection
+
+export const setCurrentCardAtom = atom(null,
+    (get, set, {fileUsAtom, setCurrent}: {fileUsAtom: FileUsAtom, setCurrent: boolean}) => {
+        const files = get(filesAtom);
+        files.forEach((currentFileUsAtom) => {
+            const fileUs = get(currentFileUsAtom);
+            const isCurrentNow = get(fileUs.state.isCurrentAtom);
+
+            if (currentFileUsAtom === fileUsAtom) {
+                if (isCurrentNow !== setCurrent) {
+                    set(fileUs.state.isCurrentAtom, setCurrent);
+                } 
+            } else {
+                if (isCurrentNow !== setCurrent) {
+                    set(fileUs.state.isCurrentAtom, false);
+                } 
+            }
+        })
+    }
+);
+
+// Fields selection
+
+export type SelectRow = {
+    field: number;
+    form: number;
+};
+
+export type SelectRowAtoms = {
+    loginAtom: PrimitiveAtom<SelectRow>;
+    cpassAtom: PrimitiveAtom<SelectRow>;
+};
 
 // Busy indicator
 
