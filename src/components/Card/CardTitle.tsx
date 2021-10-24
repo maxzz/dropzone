@@ -43,7 +43,7 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
                 {bailOuts.map((bailOut, idx) => <React.Fragment key={`bailout${idx}`}>
                     {bailOut &&
                         <div className="pt-1 px-0.5">
-                            <div className="font-bold">{idx === 0 ? 'Login:' : 'Password chnage:'}</div>
+                            <div className="font-bold">{idx === 0 ? 'Login:' : 'Password change:'}</div>
                             {bailOut.map((item, key) => (
                                 <div className="flex items-center" key={key}><IconDot className="w-4 h-4 pt-0.5" /> {item}</div>
                             ))}
