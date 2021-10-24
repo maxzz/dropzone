@@ -17,10 +17,13 @@ function CardIcon({ isWeb, isChrome, isFCat }: { isWeb: boolean; isChrome: boole
     return <div className="w-6 h-6" title={`${title} `}>{icon}</div>;
 }
 
-function CardCaption({ domain, url }: { domain?: string; url: string | undefined; }) {
+function CardCaption({ domain, url, isFCat }: { domain?: string; url: string | undefined; isFCat: boolean; }) {
     return (
         <div className="ml-1 uppercase">
-            {url ? <a href={url} target="_blank" rel="noopener">{domain}</a> : <>{domain || 'Windows application'}</>}
+            {url
+                ? <a href={url} target="_blank" rel="noopener">{domain}</a>
+                : <>{isFCat ? 'Field Catalog' : domain || 'Windows application'}</>
+            }
         </div>
     );
 }
@@ -56,7 +59,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const domain = fileUs.meta?.[0]?.disp.domain;
     const isWeb = !!domain;
-    const isChrome = !(isWeb && !fileUs.meta?.[0]?.disp.isIe);
+    const isChrome = isWeb && !fileUs.meta?.[0]?.disp.isIe;
     const isFCat = !!fileUs.fcat;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
@@ -89,12 +92,12 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fileUs.idx + 1}
                 </div>
 
-                <CardCaption domain={domain} url={url} />
+                <CardCaption isFCat={isFCat} domain={domain} url={url} />
             </div>
 
             {/* Login caption */}
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                {title || 'No login title'}
+                {isFCat ? <div className="">&nbsp;</div> : title || 'No login title'}
             </div>
 
             {/* Filename */}
