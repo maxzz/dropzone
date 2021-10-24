@@ -139,37 +139,14 @@ function UISymbolsDefs() {
                     <path d="M12 16a4 4 0 1 1 0-8a4 4 0 0 1 0 8z" />
                 </symbol>
 
+                <symbol id="open-link" viewBox="0 0 24 24">
+                    <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </symbol>
+
             </defs>
         </svg>
     );
 }
-
-/*
-export function d(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
-    const { title, ...rest } = props;
-    return (
-        <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
-            {title && <title>{title}</title>}
-        </svg>
-    );
-}
-*/
-
-/*
-export function s(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
-    return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#" />
-        </svg>
-    );
-}
-
-<symbol id="" viewBox="0 0 24 24">
-</symbol>
-
-*/
 
 // apps
 
@@ -385,4 +362,43 @@ export function IconDot(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     );
 }
 
+export function IconOpenLink(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" className={`w-full h-full ${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#open-link" />
+        </svg>
+    );
+}
+
 export default UISymbolsDefs;
+
+/*
+export function d(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
+    const { title, ...rest } = props;
+    return (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+        </svg>
+    );
+}
+*/
+
+/*
+export function s(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#" />
+        </svg>
+    );
+}
+
+<symbol id="" viewBox="0 0 24 24">
+</symbol>
+*/
+
+/*
+*/

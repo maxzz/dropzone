@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardTitleMenu from './CardTitleMenu';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
@@ -21,7 +21,7 @@ function CardCaption({ domain, url, isFCat, isCustomization }: { domain?: string
     return (
         <div className="ml-1 uppercase">
             {url
-                ? <a href={url} target="_blank" rel="noopener">{domain}</a>
+                ? <>{domain} {/* <a href={url} target="_blank" rel="noopener"> {domain} </a> */} </>
                 : <>{isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application'}</>
             }
         </div>
@@ -124,6 +124,18 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     );
 }
 
+function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+    const fileUs = useAtomValue(fileUsAtom);
+    const url = fileUs.mani?.forms[0]?.detection.web_ourl;
+    const domain = fileUs.meta?.[0]?.disp.domain;
+    if (!url) {
+        return null;
+    }
+    return (
+        <a href={url} target="_blank" rel="noopener" title={`Open ${domain}`}><IconOpenLink className="w-4 h-4 mr-2" /></a>
+    );
+}
+
 const CardTitleContent_ = React.memo(CardTitleText);
 
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
@@ -137,13 +149,11 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             <CardTitleContent_ fileUsAtom={fileUsAtom} />
 
             {/* Card actions */}
-            {isCurrent && <div className="absolute top-3 right-2 z-10 flex">
+            {isCurrent && <div className="absolute top-3 right-2 z-10 flex items-center">
                 {/* <PopoverMenu /> */}
-                <CardTitleMenu icon={
-                    <div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]">
-                        <IconMenuHamburger />
-                    </div>}
-                />
+                {/* <IconOpenLink className="w-4 h-4 mr-2" /> */}
+                <CardOpenUrl fileUsAtom={fileUsAtom} />
+                <CardTitleMenu icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
             </div>}
 
         </div>
