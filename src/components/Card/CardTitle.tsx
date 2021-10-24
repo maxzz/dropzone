@@ -21,7 +21,7 @@ function CardCaption({ domain, url, isFCat, isCustomization }: { domain?: string
     return (
         <div className="ml-1 uppercase">
             {url
-                ? <>{domain} {/* <a href={url} target="_blank" rel="noopener"> {domain} </a> */} </>
+                ? <>{domain}</>
                 : <>{isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application'}</>
             }
         </div>
@@ -136,7 +136,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     );
 }
 
-const CardTitleContent_ = React.memo(CardTitleText);
+const CardTitleTextMemo = React.memo(CardTitleText);
 
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
@@ -146,12 +146,11 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
             onClick={() => setRightPanel(!isCurrent ? fileUsAtom : undefined)}
         >
-            <CardTitleContent_ fileUsAtom={fileUsAtom} />
+            <CardTitleTextMemo fileUsAtom={fileUsAtom} />
 
             {/* Card actions */}
             {isCurrent && <div className="absolute top-3 right-2 z-10 flex items-center">
                 {/* <PopoverMenu /> */}
-                {/* <IconOpenLink className="w-4 h-4 mr-2" /> */}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
                 <CardTitleMenu icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
             </div>}
