@@ -61,6 +61,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const isWeb = !!domain;
     const isChrome = isWeb && !fileUs.meta?.[0]?.disp.isIe;
     const isFCat = !!fileUs.fcat;
+    const fcatLen = fileUs.fcat?.names.length;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
     const url = loginForm?.detection.web_ourl;
@@ -97,7 +98,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
             {/* Login caption */}
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                {isFCat ? <div className="">&nbsp;</div> : title || 'No login title'}
+                {isFCat ? <div className="">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</div> : title || 'No login title'}
             </div>
 
             {/* Filename */}
