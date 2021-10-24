@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '../../store/store';
 import { useKey } from 'react-use';
-import { IconCaseSensitive, IconClose, IconCtrl, IconSearch } from '../UI/UiIcons';
+import { IconCaseSensitive, IconClose, IconSearch } from '../UI/UiIcons';
 import { UITooltip } from '../UI/UITooltip';
 import { IconDot } from '../UI/UIIconsSymbolsDefs';
 
@@ -27,17 +27,12 @@ function FilterSearch() {
     useKey((event) => event.ctrlKey && event.key === 'd', (event) => { event.preventDefault(); keyboardRef.current && keyboardRef.current.focus(); });
     const isEmpty = !filter;
     return (
-        // <div className="flex-1 h-16 max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
         <div className="flex-1 min-h-[32px] max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
             <UITooltip
                 trigger={
-                    //h-8 flex align-center ${active ? '' : 'my-0.5'}
-                    //h-8 flex align-center
                     <div className={``}>
-                        {/* h-8 pt-0 md:pt-1 lg:pt-0.5 ${active ? '' : 'md:-mt-0.5'} */}
                         <div
                             className={`${active ? 'h-8' : 'h-7 py-0.5'} px-2 flex items-center bg-gray-700 focus-within:bg-gray-600 border-2 ${isEmpty ? 'w-12 rounded-full' : 'w-full rounded-md'}`}
-                            // ${active ? 'h-8' : 'h-7 py-0.5'}
                             onFocus={() => setActive(true)}
                             onBlur={() => setActive(false)}
                             onClick={() => keyboardRef.current && keyboardRef.current.focus()}
@@ -53,8 +48,7 @@ function FilterSearch() {
                                 ?
                                 // Ctrl+D and Search icon
                                 <div className="flex-none relative">
-                                    {/* Ctrl+D */}
-                                    {/*
+                                    {/* Ctrl+D */} {/*
                                     {!active && <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-400 pointer-events-none">
                                         <IconCtrl className="w-3 h-3" />
                                         <div className="text-[.5rem] leading-[.5rem]">D</div>
