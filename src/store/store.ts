@@ -6,6 +6,11 @@ import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
 import { createRegexByFilter, delay, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
+export type FileUsState = {
+    isGroupAtom: Atom<boolean>,     // this fileUs selected for bulk group operation
+    isCurrentAtom: Atom<boolean>,   // this fileUs is current and shown in the right panel
+}
+
 export type FileUs = {
     id: string;
     idx: number;        // index in the loaded list wo/ counting on filters, i.e. absolute index
@@ -19,8 +24,7 @@ export type FileUs = {
     meta?: Meta.Form[],
     fcat?: Catalog.Root; // field catalog
     file?: File;
-    isGroupAtom: Atom<boolean>, // this fileUs selected for bulk group operation
-    isCurrentAtom: Atom<boolean>, // this fileUs is current and shown in the right panel
+    state: FileUsState;
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
@@ -77,8 +81,10 @@ export const setFilesAtom = atom(
                 modified: file.lastModified,
                 size: file.size,
                 file: file,
-                isGroupAtom: atom(false),
-                isCurrentAtom: atom(false),
+                state: {
+                    isGroupAtom: atom(false),
+                    isCurrentAtom: atom(false),
+                }
             });
         });
         set(_foldAllCardsAtom, -1);
@@ -133,9 +139,8 @@ export const clearFilesAtom = atom(
     }
 );
 
-// Files toggle folding.
+// Files toggle folding. //TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
 
-//TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
 export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
 
 export const foldAllCardsAtom = atom(
