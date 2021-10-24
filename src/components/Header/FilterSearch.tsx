@@ -77,6 +77,8 @@ function FilterSearch() {
                     <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">win:</span> logins for Windows apps</div>
                     <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">web:</span> logins for web apps</div>
                     <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">why:</span> logins with problems to check why</div>
+                    <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">cap:</span> logins with window caption</div>
+                    <div className=""><IconDot className="w-3 h-3 inline" /><span className="inline-block font-bold font-mono tracking-tight w-8">cls:</span> logins with window classname</div>
                 </div>
             </UITooltip>
         </div>

@@ -4,7 +4,7 @@ import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-io';
-import { createRegexByFilter, delay, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
+import { createRegexByFilter, delay, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
 export type FileUs = {
     id: string;
@@ -90,7 +90,7 @@ export const setFilesAtom = atom(
 
 export const filteredAtom = atom<FileUsAtom[]>(
     (get) => {
-        const { regex, winOnly, webOnly, whyOnly } = createRegexByFilter(get(searchFilterAtom), get(searchFilterCaseSensitiveAtom));
+        const { regex, winOnly, webOnly, whyOnly, capOnly, clsOnly } = createRegexByFilter(get(searchFilterAtom), get(searchFilterCaseSensitiveAtom));
 
         const showNormal = get(showNormalManiAtom);
         const showManual = get(showManualManiAtom);
@@ -99,6 +99,14 @@ export const filteredAtom = atom<FileUsAtom[]>(
         const files = get(filesAtom);
         return files.filter((fileAtom: FileUsAtom) => {
             const fileUs = get(fileAtom);
+
+            if (capOnly && regex) {
+                return isAnyCap(fileUs, regex);
+            }
+
+            if (clsOnly && regex) {
+                return isAnyCls(fileUs, regex);
+            }
 
             const isWeb = isAnyWeb(fileUs);
             if ((winOnly && isWeb) || (webOnly && !isWeb) || (whyOnly && !isAnyWhy(fileUs))) {

@@ -20,6 +20,12 @@ export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: 
 export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.noFields);
 export const isAnyWeb = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.domain || !!fileUs.meta?.[1]?.disp.domain;
 export const isAnyWhy = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.bailOut || !!fileUs.meta?.[1]?.disp.bailOut;
+export function isAnyCap(fileUs: FileUs, regex: RegExp): boolean {
+    return !!fileUs.mani?.forms?.[0]?.detection?.caption?.match(regex) || !!fileUs.mani?.forms?.[1]?.detection?.caption?.match(regex);
+}
+export function isAnyCls(fileUs: FileUs, regex: RegExp): boolean {
+    return !!fileUs.mani?.forms?.[0]?.detection?.dlg_class?.match(regex) || !!fileUs.mani?.forms?.[1]?.detection?.dlg_class?.match(regex);
+}
 
 // Regex
 
@@ -35,6 +41,8 @@ type FilterParams = {
     winOnly: boolean;
     webOnly: boolean;
     whyOnly: boolean;
+    capOnly: boolean; // caption
+    clsOnly: boolean; // classname
     regex: '' | RegExp | undefined;
 };
 
@@ -42,13 +50,17 @@ export function createRegexByFilter(s?: string, casesensitive?: boolean): Filter
     let winOnly = !!(s && s.match(/^win\:/));
     let webOnly = !!(s && s.match(/^web\:/));
     let whyOnly = !!(s && s.match(/^why\:/));
-    if (winOnly || webOnly || whyOnly) {
-        s = s?.replace(/^(win|web|why)\:/, '');
+    let capOnly = !!(s && s.match(/^cap\:/));
+    let clsOnly = !!(s && s.match(/^cls\:/));
+    if (winOnly || webOnly || whyOnly || capOnly || clsOnly) {
+        s = s?.replace(/^(win|web|why|cap|cls)\:/, '');
     }
     return {
         winOnly,
         webOnly,
         whyOnly,
+        capOnly,
+        clsOnly,
         regex: s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i')
     };
 }
