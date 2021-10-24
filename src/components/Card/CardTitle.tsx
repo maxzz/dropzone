@@ -3,19 +3,18 @@ import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardTitleMenu from './CardTitleMenu';
-import { IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
 
-function CardIcon({ isWeb, isFCat }: { isWeb: boolean; isFCat: boolean; }) {
+function CardIcon({ isWeb, isChrome, isFCat }: { isWeb: boolean; isChrome: boolean; isFCat: boolean; }) {
     if (isFCat) {
-        return <IconCatalog className="w-6 h-4" />;
+        return <IconCatalog className="w-6 h-6 text-gray-300" title="Field catalog" />;
     }
-    const icon = isWeb
-        ? <IconAppWebIE /> //TODO: add Chrome trained detection 
-        : <IconAppWindows />;
-    return <div className="w-6 h-6" title={`${isWeb ? 'Webiste trained with IE' : 'Windows application'} `}>{icon}</div>;
+    const icon = isChrome ? <IconAppWebChrome /> : isWeb ? <IconAppWebIE /> : <IconAppWindows />;
+    const title = isChrome ? 'Webiste trained with Chrome' : isWeb ? 'Webiste trained with IE' : 'Windows application';
+    return <div className="w-6 h-6" title={`${title} `}>{icon}</div>;
 }
 
 function CardCaption({ domain, url }: { domain?: string; url: string | undefined; }) {
@@ -56,10 +55,12 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const domain = fileUs.meta?.[0]?.disp.domain;
+    const isWeb = !!domain;
+    const isChrome = !(isWeb && !fileUs.meta?.[0]?.disp.isIe);
+    const isFCat = !!fileUs.fcat;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
     const url = loginForm?.detection.web_ourl;
-    const isFCat = !!fileUs.fcat;
 
     const fname = React.useMemo(() => {
         const m = (fileUs.fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
@@ -78,7 +79,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         <>
             {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardIcon isWeb={!!domain} isFCat={isFCat} />
+                <CardIcon isWeb={isWeb} isChrome={isChrome} isFCat={isFCat} />
 
                 {/* File index in all loaded files */}
                 <div
