@@ -46,7 +46,6 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
 export function beautifyXMLCatalog(catalog: Catalog.Root): Catalog.Root {
     catalog.names = (catalog as any)?.names?.name || [];
     catalog.names = catalog.names.map((item: any) => item?._attributes).filter(Boolean);
-    console.log({catalog});
     return catalog;
 }
 

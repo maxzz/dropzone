@@ -228,7 +228,7 @@ export function IconMenuHamburger(props: SVGProps<SVGSVGElement> & { title?: str
 export function IconCatalog(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { className = '', title, ...rest } = props;
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth="2" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth="1" className={`w-full h-full ${className}`} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-catalog" />
         </svg>

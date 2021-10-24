@@ -177,7 +177,6 @@ const updateCacheAtom = atom(
                     let meta: Meta.Form[] | undefined;
                     try {
                         const res = parseManifest(raw);
-                        console.log({res});
                         mani = res.mani;
                         fcat = res.fcat;
                         meta = buildManiMetaForms(mani);

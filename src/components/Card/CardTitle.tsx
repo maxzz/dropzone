@@ -3,12 +3,15 @@ import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import { FileUs, FileUsAtom, rightPanelAtom } from '../../store/store';
 import CardTitleMenu from './CardTitleMenu';
-import { IconAppWebIE, IconAppWindows, IconAttention, IconDot, IconFolder, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
+import { IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
 
-function CardIcon({ isWeb }: { isWeb: boolean; }) {
+function CardIcon({ isWeb, isFCat }: { isWeb: boolean; isFCat: boolean; }) {
+    if (isFCat) {
+        return <IconCatalog className="w-6 h-4" />;
+    }
     const icon = isWeb
         ? <IconAppWebIE /> //TODO: add Chrome trained detection 
         : <IconAppWindows />;
@@ -56,6 +59,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
     const url = loginForm?.detection.web_ourl;
+    const isFCat = !!fileUs.fcat;
 
     const fname = React.useMemo(() => {
         const m = (fileUs.fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
@@ -74,10 +78,10 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         <>
             {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardIcon isWeb={!!domain} />
+                <CardIcon isWeb={!!domain} isFCat={isFCat} />
 
                 {/* File index in all loaded files */}
-                <div 
+                <div
                     className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
                     title="File index in all loaded files"
                 >
