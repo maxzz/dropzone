@@ -20,11 +20,17 @@ export const isManual = (fileUs: FileUs): boolean => !!fileUs.meta?.some((form: 
 export const isEmpty = (fileUs: FileUs): boolean => !fileUs.meta || !fileUs.meta.length || !!fileUs.meta?.some((form: Meta.Form) => form.disp.noFields);
 export const isAnyWeb = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.domain || !!fileUs.meta?.[1]?.disp.domain;
 export const isAnyWhy = (fileUs: FileUs): boolean => !!fileUs.meta?.[0]?.disp.bailOut || !!fileUs.meta?.[1]?.disp.bailOut;
-export function isAnyCap(fileUs: FileUs, regex: RegExp): boolean {
-    return !!fileUs.mani?.forms?.[0]?.detection?.caption?.match(regex) || !!fileUs.mani?.forms?.[1]?.detection?.caption?.match(regex);
+export function isAnyCap(fileUs: FileUs, regex: RegExp | undefined): boolean {
+    const forms = fileUs.mani?.forms;
+    const form0 = forms?.[0]?.detection?.caption;
+    const form1 = forms?.[1]?.detection?.caption;
+    return regex ? !!form0?.match(regex) || !!form1?.match(regex) : !!form0 || !!form1;
 }
-export function isAnyCls(fileUs: FileUs, regex: RegExp): boolean {
-    return !!fileUs.mani?.forms?.[0]?.detection?.dlg_class?.match(regex) || !!fileUs.mani?.forms?.[1]?.detection?.dlg_class?.match(regex);
+export function isAnyCls(fileUs: FileUs, regex: RegExp | undefined): boolean {
+    const forms = fileUs.mani?.forms;
+    const form0 = forms?.[0]?.detection?.dlg_class;
+    const form1 = forms?.[1]?.detection?.dlg_class;
+    return regex ? !!form0?.match(regex) || !!form1?.match(regex) : !!form0 || !!form1;
 }
 
 // Regex
@@ -43,7 +49,7 @@ type FilterParams = {
     whyOnly: boolean;
     capOnly: boolean; // caption
     clsOnly: boolean; // classname
-    regex: '' | RegExp | undefined;
+    regex: RegExp | undefined;
 };
 
 export function createRegexByFilter(s?: string, casesensitive?: boolean): FilterParams {
@@ -61,7 +67,7 @@ export function createRegexByFilter(s?: string, casesensitive?: boolean): Filter
         whyOnly,
         capOnly,
         clsOnly,
-        regex: s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i')
+        regex: s && new RegExp(convertToRegex(s), casesensitive ? '' : 'i') || undefined
     };
 }
 

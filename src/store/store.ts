@@ -100,11 +100,11 @@ export const filteredAtom = atom<FileUsAtom[]>(
         return files.filter((fileAtom: FileUsAtom) => {
             const fileUs = get(fileAtom);
 
-            if (capOnly && regex) {
+            if (capOnly) {
                 return isAnyCap(fileUs, regex);
             }
 
-            if (clsOnly && regex) {
+            if (clsOnly) {
                 return isAnyCls(fileUs, regex);
             }
 
