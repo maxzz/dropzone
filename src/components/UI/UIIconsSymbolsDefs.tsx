@@ -54,15 +54,6 @@ function UISymbolsDefs() {
                     <path d="M4.5 14.5h11.995"></path>
                 </symbol>
 
-                {/* <symbol id="icon-catalog-book" viewBox="0 0 24 24">
-                    <path d="M5.5 18a2.5 2.5 0 1 0 0 5H22M3 20.5v-17A2.5 2.5 0 0 1 5.5 1H21v17.007H5.492M20.5 18a2.5 2.5 0 1 0 0 5h0" />
-                </symbol> */}
-
-                {/* <symbol id="icon-catalog-book2" viewBox="0 0 24 24">
-                    <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5c-1.95 0-4.05.4-5.5 1.5c-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5c.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5c1.35-.85 3.8-1.5 5.5-1.5c1.65 0 3.35.3 4.75 1.05c.1.05.15.05.25.05c.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5c-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5c1.2 0 2.4.15 3.5.5v11.5z" />
-                    <path d="M17.5 10.5c.88 0 1.73.09 2.5.26V9.24c-.79-.15-1.64-.24-2.5-.24c-1.7 0-3.24.29-4.5.83v1.66c1.13-.64 2.7-.99 4.5-.99zM13 12.49v1.66c1.13-.64 2.7-.99 4.5-.99c.88 0 1.73.09 2.5.26V11.9c-.79-.15-1.64-.24-2.5-.24c-1.7 0-3.24.3-4.5.83zm4.5 1.84c-1.7 0-3.24.29-4.5.83v1.66c1.13-.64 2.7-.99 4.5-.99c.88 0 1.73.09 2.5.26v-1.52c-.79-.16-1.64-.24-2.5-.24z" />
-                </symbol> */}
-
                 <symbol id="icon-catalog" viewBox="0 0 24 24">
                     <path d="M12.17 5.2Q18 2.23 23 5.2V20a12.15 12.15 0 0 0-10.83.53" />
                     {/* <path d="M14.5 8.22c2.74-1.47 4.64-1.47 7 0M14.5 11.22c2.74-1.47 4.64-1.47 7 0M14.5 14.22c2.74-1.47 4.64-1.47 7 0M3 8.91q3.77-2.19 7 0M2.88 11.38q3.78-2.19 7 0M2.88 14q3.78-2.19 7 0M2.88 16.69q3.78-2.19 7 0" /> */}
@@ -235,39 +226,7 @@ export function IconMenuHamburger(props: SVGProps<SVGSVGElement> & { title?: str
         </svg>
     );
 }
-/*
-export function IconCatalogBook(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
-    return (
-        <svg fill="none" stroke="currentColor" strokeWidth="1" className={`w-full h-full ${className}`} {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#icon-catalog-book" />
-        </svg>
-    );
-}
-*/
-// export function IconCatalog(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-//     const { className = '', title, ...rest } = props;
-//     return (
-//         <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
-//             {title && <title>{title}</title>}
-//             <use xlinkHref="#icon-catalog-book2" />
-//         </svg>
-//     );
-// }
-/*
-<svg id="Layer_8" data-name="Layer 8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <defs>
-    <style>
-      .cls-2{fill:none;stroke:#999;stroke-miterlimit:10}
-    </style>
-  </defs>
-  <path fill="#ccc" d="M0 0h24v24H0z"/>
-  <path class="cls-2" d="M12.17 5.2Q18 2.23 23 5.2V20a12.15 12.15 0 0 0-10.83.53"/>
-  <path class="cls-2" d="M14.5 8.22c2.74-1.47 4.64-1.47 7 0M14.5 11.22c2.74-1.47 4.64-1.47 7 0M14.5 14.22c2.74-1.47 4.64-1.47 7 0M3 8.91q3.77-2.19 7 0M2.88 11.38q3.78-2.19 7 0M2.88 14q3.78-2.19 7 0M2.88 16.69q3.78-2.19 7 0"/>
-  <path class="cls-2" d="M12.17 5.2q-5.82-3-10.83 0V20a12.15 12.15 0 0 1 10.83.53ZM3.5 21.22a10.71 10.71 0 0 1 8.23 1.18.81.81 0 0 0 .87 0c2.3-1.5 5.08-2.07 8.9-1.17"/>
-</svg>
-*/
+
 export function IconCatalog(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { className = '', title, ...rest } = props;
     return (
