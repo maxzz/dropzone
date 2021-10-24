@@ -31,7 +31,7 @@ function App() {
                     </SimpleSplitPane>
                 </main>
 
-                <SvgFontSpy />
+                {/* <SvgFontSpy /> */}
             </div>
         </React.Fragment>
     );

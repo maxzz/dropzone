@@ -79,8 +79,19 @@ declare module Mani {
         version: string;    // "2.4.3"
     }
 
+    namespace Customization {   // Customization
+        interface Process {
+            name: string;       // process name like 'outlook.exe'
+            type: string;       // 'skip'
+        }
+        interface Options {
+            processes: Process[];
+        }
+    }
+
     interface Manifest {
         descriptor: Descriptor;
+        options?: Customization.Options;
         forms: Form[];
     }
 

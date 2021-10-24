@@ -8,7 +8,7 @@ import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
 
-function CardIcon({ isWeb, isChrome, isFCat }: { isWeb: boolean; isChrome: boolean; isFCat: boolean; }) {
+function CardIcon({ isWeb, isChrome, isFCat, isCustomization }: { isWeb: boolean; isChrome: boolean; isFCat: boolean; isCustomization: boolean; }) {
     if (isFCat) {
         return <div className="w-6 h-6 flex items-center justify-center"><IconCatalog className="w-5 h-5 text-gray-200" title="Field catalog" /></div>;
     }
@@ -17,12 +17,12 @@ function CardIcon({ isWeb, isChrome, isFCat }: { isWeb: boolean; isChrome: boole
     return <div className="w-6 h-6" title={`${title} `}>{icon}</div>;
 }
 
-function CardCaption({ domain, url, isFCat }: { domain?: string; url: string | undefined; isFCat: boolean; }) {
+function CardCaption({ domain, url, isFCat, isCustomization }: { domain?: string; url: string | undefined; isFCat: boolean; isCustomization: boolean; }) {
     return (
         <div className="ml-1 uppercase">
             {url
                 ? <a href={url} target="_blank" rel="noopener">{domain}</a>
-                : <>{isFCat ? 'Field Catalog' : domain || 'Windows application'}</>
+                : <>{isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application'}</>
             }
         </div>
     );
@@ -61,6 +61,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const isWeb = !!domain;
     const isChrome = isWeb && !fileUs.meta?.[0]?.disp.isIe;
     const isFCat = !!fileUs.fcat;
+    const isCustomization = !fileUs.meta?.length && !!fileUs.mani?.options;
     const fcatLen = fileUs.fcat?.names.length;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
@@ -83,7 +84,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         <>
             {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardIcon isWeb={isWeb} isChrome={isChrome} isFCat={isFCat} />
+                <CardIcon isWeb={isWeb} isChrome={isChrome} isFCat={isFCat} isCustomization={isCustomization} />
 
                 {/* File index in all loaded files */}
                 <div
@@ -93,12 +94,17 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fileUs.idx + 1}
                 </div>
 
-                <CardCaption isFCat={isFCat} domain={domain} url={url} />
+                <CardCaption isFCat={isFCat} isCustomization={isCustomization} domain={domain} url={url} />
             </div>
 
             {/* Login caption */}
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis" title="Login name">
-                {isFCat ? <div className="">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</div> : title || 'No login title'}
+                {isCustomization
+                    ? 'Excluded app'
+                    : isFCat
+                        ? <div>{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</div>
+                        : title || 'No login title'
+                }
             </div>
 
             {/* Filename */}

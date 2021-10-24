@@ -40,6 +40,14 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
         }
     });
 
+    if (manifest.options?.processes) {
+        manifest.options.processes = (manifest.options.processes as any).process || [];
+        if (!Array.isArray(manifest.options.processes)) {
+            manifest.options.processes = [manifest.options.processes];
+        }
+        manifest.options.processes = manifest.options.processes.map((process) => (process as any)._attributes);
+    }
+
     return manifest as Mani.Manifest;
 }
 
