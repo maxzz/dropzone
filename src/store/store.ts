@@ -240,22 +240,16 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
 // Current card selection
 
 export const setCurrentCardAtom = atom(null,
-    (get, set, {fileUsAtom, setCurrent}: {fileUsAtom: FileUsAtom, setCurrent: boolean}) => {
+    (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
         const files = get(filesAtom);
         files.forEach((currentFileUsAtom) => {
             const fileUs = get(currentFileUsAtom);
             const isCurrentNow = get(fileUs.state.isCurrentAtom);
-
-            if (currentFileUsAtom === fileUsAtom) {
-                if (isCurrentNow !== setCurrent) {
-                    set(fileUs.state.isCurrentAtom, setCurrent);
-                } 
-            } else {
-                if (isCurrentNow !== setCurrent) {
-                    set(fileUs.state.isCurrentAtom, false);
-                } 
+            if (isCurrentNow !== setCurrent) {
+                set(fileUs.state.isCurrentAtom, currentFileUsAtom === fileUsAtom ? setCurrent : false);
             }
-        })
+
+        });
     }
 );
 
