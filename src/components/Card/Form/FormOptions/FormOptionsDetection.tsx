@@ -13,20 +13,32 @@ function filterDetection(detection: Mani.Detection) {
     if (web_murl) {
         matchOptions = Matching.getMatchInfo(web_murl);
         if (matchOptions) {
-            matchOptions.join = `${matchOptions.join} ${matchOptions.prefix}`
+            matchOptions.join = `${matchOptions.join} ${matchOptions.prefix}`;
             web_murl = matchOptions.url;
         }
     }
 
     // 1. fix duplicated urls
-    let urlname = '';
+    let mUrlName = '';
     if (web_ourl === web_murl) {
         web_ourl = undefined;
-        urlname += '+o';
+        mUrlName += '+o';
     }
     if (web_qurl === web_murl) {
         web_qurl = undefined;
-        urlname += '+q';
+        mUrlName += '+q';
+    }
+
+    let oUrlName = '';
+    let oUrlValue = '';
+    if (web_ourl) {
+        oUrlName = 'url o';
+        if (web_ourl === web_qurl) {
+            web_qurl = undefined;
+            oUrlName += '+q';
+        }
+        oUrlValue = web_ourl;
+        web_ourl = undefined;
     }
 
     // 2. fix duplicated processnames
@@ -38,8 +50,9 @@ function filterDetection(detection: Mani.Detection) {
     commandline && (commandline = restoreXml(decodeURI(commandline)));
 
     return {
-        ...(matchOptions && {'match as': matchOptions.join}),
-        ...(web_murl && { [`url m${urlname}`]: web_murl }),
+        ...(matchOptions && { 'match as': matchOptions.join }),
+        ...(web_murl && { [`url m${mUrlName}`]: web_murl }),
+        ...(oUrlName && { [`${oUrlName}`]: oUrlValue }),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),
         ...(caption && { caption }),
@@ -63,7 +76,7 @@ function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
     //console.log('aa', MatchStyle.regex);
-    
+
     return (
         <ToggleWithPortal text="detection">
             <div className="mt-1 bg-gray-100 ring-1 ring-gray-400">

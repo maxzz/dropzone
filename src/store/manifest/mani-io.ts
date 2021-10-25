@@ -121,7 +121,7 @@ export namespace Matching {
                     break;
                 }
                 case 4: { // MatchStyle.skipDomainMatch
-                    resStyle = 'skip domain match';
+                    resStyle = 'don\'t match this in domain';
                     break;
                 }
                 default: {
