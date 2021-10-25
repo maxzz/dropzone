@@ -243,12 +243,13 @@ export const setCurrentCardAtom = atom(null,
     (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
         const files = get(filesAtom);
         files.forEach((currentFileUsAtom) => {
-            const fileUs = get(currentFileUsAtom);
-            const isCurrentNow = get(fileUs.state.isCurrentAtom);
-            if (isCurrentNow !== setCurrent) {
-                set(fileUs.state.isCurrentAtom, currentFileUsAtom === fileUsAtom ? setCurrent : false);
+            const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
+            const thisCurrentNow = get(thisCurrentAtom);
+            if (currentFileUsAtom === fileUsAtom) {
+                (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
+            } else {
+                (thisCurrentNow) && set(thisCurrentAtom, false);
             }
-
         });
     }
 );
