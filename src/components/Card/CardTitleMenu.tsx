@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -15,10 +16,24 @@ export const CardTitleMenu = ({ icon }: { icon: React.ReactNode; }) => {
             </Trigger>
 
             <Content sideOffset={5}>
-                <Item className="!text-sm" onSelect={() => console.log('selected 1')}>Convert manual to normal</Item>
-                <Item className="!text-sm" onSelect={() => console.log('selected 2')}>Merge two manifests </Item>
+                <Item className="!text-sm"
+                    onClick={(event) => {
+                        event.stopPropagation(); toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
+                    }}
+                >
+                    Convert manual to normal
+                </Item>
+
+                <Item className="!text-sm"
+                    onClick={(event) => {
+                        event.stopPropagation(); toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
+                    }}
+                >
+                    Merge two manifests
+                </Item>
+
                 <Separator />
-                <Item>Save</Item>
+                <Item disabled={true} >Save</Item>
             </Content>
         </Menu>
     );

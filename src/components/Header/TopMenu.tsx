@@ -42,7 +42,13 @@ function MenuItemConvert() {
     //const disabled = !rightPanel;
     const disabled = true;
     return (
-        <Item disabled={disabled} onClick={(event) => { event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } }); }} title="Convert manual mode manifest to regular Chrome manifest. Select manifest first.">
+        <Item
+            disabled={disabled}
+            onClick={(event) => {
+                event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } });
+            }}
+            title="Convert manual mode manifest to regular Chrome manifest. Select manifest first."
+        >
             Convert manual to normal
         </Item>
     );
@@ -52,9 +58,13 @@ function MenuItemFolding() {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
     //const setBusy = useUpdateAtom(busyAtom);
     return (
-        <Item className="" onSelect={async () => {
-            toggleFolding(); // setBusy('Folding...'); setTimeout(() => { toggleFolding(); setBusy(''); }, 0); // still reflow problem
-        }}>Toggle cards folding</Item>
+        <Item
+            onSelect={async () => {
+                toggleFolding(); // setBusy('Folding...'); setTimeout(() => { toggleFolding(); setBusy(''); }, 0); // still reflow problem
+            }}
+        >
+            Toggle cards folding
+        </Item>
     );
 }
 
