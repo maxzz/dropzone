@@ -162,7 +162,9 @@ function CardTitleOld({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     //const [currentCard, setCurrentCard] = useAtom(setCurrentCardAtom);
 
-    const [currentCard] = useAtom(getCurrentCardAtom);
+    //const [currentCard] = useAtom(getCurrentCardAtom);
+    const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
+
     const [_, setCurrentCard] = useAtom(setCurrentCardAtom);
 
     //const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
