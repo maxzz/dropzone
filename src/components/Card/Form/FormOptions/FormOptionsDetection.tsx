@@ -4,6 +4,7 @@ import { FileUsAtom } from '../../../../store/store';
 import { restoreXml } from '../../../../store/manifest/mani-functions';
 import { ToggleWithPortal } from './FormOptionsPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
+import { Matching } from '../../../../store/manifest/mani-io';
 
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, dlg_class, names_ext, processname, commandline, } = detection;
@@ -19,6 +20,11 @@ function filterDetection(detection: Mani.Detection) {
         urlname += '+q';
     }
 
+    let matchOptions = '';
+    if (web_murl) {
+        matchOptions = Matching.getMatchInfo(web_murl) || '';
+    }
+
     // 2. fix duplicated processnames
     if (processname === commandline) {
         commandline = undefined;
@@ -28,11 +34,12 @@ function filterDetection(detection: Mani.Detection) {
     commandline && (commandline = restoreXml(decodeURI(commandline)));
 
     return {
-        ...(caption && { caption }),
-        ...(dlg_class && { dlg_class }),
+        ...(matchOptions && {'match as': matchOptions}),
         ...(web_murl && { [`url m${urlname}`]: web_murl }),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),
+        ...(caption && { caption }),
+        ...(dlg_class && { dlg_class }),
         ...(processname && { processname }),
         ...(commandline && { commandline }),
         ...(web_checkurl && { checkurl: web_checkurl }),

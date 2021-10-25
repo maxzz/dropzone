@@ -78,7 +78,7 @@ export function parseManifest(cnt: string): ParseManifestResult {
     };
 }
 
-namespace Matching {
+export namespace Matching {
     const enum MatchStyle {
         undef = 0,
         makeDomainMatch = 1,    // That means match the url as string (i.e. not regex or wildcard). this should have prefix '[m0]:1:0:', but unfortunately it is used without prefix as raw murl.
@@ -95,33 +95,33 @@ namespace Matching {
 
     const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
-    function getMatchInfo(murl: string): string | undefined {
+    export function getMatchInfo(murl: string): string | undefined {
         let m = murl?.match(reOtsMatching);
         if (m) {
             let style = +m[1] as MatchStyle; // style
             let opt = +m[2] as MatchOptions; // options
-            let url = restoreCpp(m[3]);      // pattern
+            //let url = restoreCpp(m[3]);      // pattern
 
             let resOpt = [];
-            (opt & MatchOptions.caseinsensitive) !== 0 && (resOpt.push('caseinsensitive'));
-            (opt & MatchOptions.matchtext) !== 0 && (resOpt.push('matchtext'));
+            (opt & 1) !== 0 && (resOpt.push('case insensitive')); // MatchOptions.caseinsensitive
+            (opt & 2) !== 0 && (resOpt.push('match ext.')); // MatchOptions.matchtext
 
             let resStyle = '';
             switch (style) {
-                case MatchStyle.skipDomainMatch: {
-                    resStyle = 'skipDomainMatch';
+                case 1: { // MatchStyle.makeDomainMatch
+                    resStyle = 'use domain match';
                     break;
                 }
-                case MatchStyle.regex: {
+                case 2: { // MatchStyle.regex
                     resStyle = 'regex';
                     break;
                 }
-                case MatchStyle.wildcard: {
+                case 3: { // MatchStyle.wildcard
                     resStyle = 'wildcard';
                     break;
                 }
-                case MatchStyle.skipDomainMatch: {
-                    resStyle = 'skipDomainMatch';
+                case 4: { // MatchStyle.skipDomainMatch
+                    resStyle = 'skip domain match';
                     break;
                 }
                 default: {
@@ -129,7 +129,7 @@ namespace Matching {
                 }
             }//switch
 
-            return `${resStyle}${resOpt.length ? `${resOpt.join(' ')}` : ''}`;
+            return `Style: ${resStyle}${resOpt.length ? `; Options: ${resOpt.join(', ')}` : ''}`;
         }
     }
 
