@@ -6,6 +6,10 @@ import { ToggleWithPortal } from './FormOptionsPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
 import { Matching } from '../../../../store/manifest/mani-io';
 
+function woProtocol(url: string): string {
+    return url.replace(/^https?:\/\//, '');
+}
+
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, dlg_class, names_ext, processname, commandline, } = detection;
 
@@ -13,7 +17,7 @@ function filterDetection(detection: Mani.Detection) {
     if (web_murl) {
         matchOptions = Matching.getMatchInfo(web_murl);
         if (matchOptions) {
-            matchOptions.join = `${matchOptions.join} ${matchOptions.prefix}`;
+            matchOptions.join = matchOptions.join;
             web_murl = matchOptions.url;
         }
     }
@@ -29,7 +33,7 @@ function filterDetection(detection: Mani.Detection) {
         mUrlName += '+q';
     }
 
-    let oUrlName = '';
+    let oUrlName = ''; // case when o and q are the same but m has match options
     let oUrlValue = '';
     if (web_ourl) {
         oUrlName = 'url o';
@@ -51,10 +55,10 @@ function filterDetection(detection: Mani.Detection) {
 
     return {
         ...(matchOptions && { 'match as': matchOptions.join }),
-        ...(web_murl && { [`url m${mUrlName}`]: web_murl }),
-        ...(oUrlName && { [`${oUrlName}`]: oUrlValue }),
-        ...(web_ourl && { web_ourl }),
-        ...(web_qurl && { web_qurl }),
+        ...(web_murl && { [`url m${mUrlName}`]: woProtocol(web_murl) }),
+        ...(oUrlName && { [`${oUrlName}`]: woProtocol(oUrlValue) }),
+        ...(web_ourl && { 'url o': woProtocol(web_ourl) }),
+        ...(web_qurl && { 'url q': woProtocol(web_qurl) }),
         ...(caption && { caption }),
         ...(dlg_class && { dlg_class }),
         ...(processname && { processname }),
