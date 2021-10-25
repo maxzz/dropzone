@@ -51,6 +51,8 @@ function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom
     const form = fileUs.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
+    //console.log('aa', MatchStyle.regex);
+    
     return (
         <ToggleWithPortal text="detection">
             <div className="mt-1 bg-gray-100 ring-1 ring-gray-400">

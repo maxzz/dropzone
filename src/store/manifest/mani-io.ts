@@ -1,4 +1,5 @@
 import { parse } from 'fast-xml-parser';
+import { restoreCpp } from './mani-functions';
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
@@ -76,3 +77,60 @@ export function parseManifest(cnt: string): ParseManifestResult {
         fcat: obj?.storagecatalog && beautifyXMLCatalog(obj?.storagecatalog),
     };
 }
+
+namespace Matching {
+    const enum MatchStyle {
+        undef = 0,
+        makeDomainMatch = 1,    // That means match the url as string (i.e. not regex or wildcard). this should have prefix '[m0]:1:0:', but unfortunately it is used without prefix as raw murl.
+        regex = 2,
+        wildcard = 3,
+        skipDomainMatch = 4,    // This is exactly string content match i.e. skip domain match. this should have prefix '[m0]:4:0:'
+    }
+
+    const enum MatchOptions {
+        undef = 0,
+        caseinsensitive = 0x0001, // This option does not make sense for URLs.
+        matchtext = 0x0002,     // match text or don't; This option does not make sense for URLs.
+    }
+
+    const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
+
+    function getMatchInfo(murl: string): string | undefined {
+        let m = murl?.match(reOtsMatching);
+        if (m) {
+            let style = +m[1] as MatchStyle; // style
+            let opt = +m[2] as MatchOptions; // options
+            let url = restoreCpp(m[3]);      // pattern
+
+            let resOpt = [];
+            (opt & MatchOptions.caseinsensitive) !== 0 && (resOpt.push('caseinsensitive'));
+            (opt & MatchOptions.matchtext) !== 0 && (resOpt.push('matchtext'));
+
+            let resStyle = '';
+            switch (style) {
+                case MatchStyle.skipDomainMatch: {
+                    resStyle = 'skipDomainMatch';
+                    break;
+                }
+                case MatchStyle.regex: {
+                    resStyle = 'regex';
+                    break;
+                }
+                case MatchStyle.wildcard: {
+                    resStyle = 'wildcard';
+                    break;
+                }
+                case MatchStyle.skipDomainMatch: {
+                    resStyle = 'skipDomainMatch';
+                    break;
+                }
+                default: {
+                    resStyle = `${style}`;
+                }
+            }//switch
+
+            return `${resStyle}${resOpt.length ? `${resOpt.join(' ')}` : ''}`;
+        }
+    }
+
+} //namespace Matching
