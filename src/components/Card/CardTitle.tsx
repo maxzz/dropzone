@@ -137,7 +137,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         return null;
     }
     return (
-        <a href={url} target="_blank" rel="noopener" title={`Open ${domain}`}><IconOpenLink className="w-4 h-4 mr-2" /></a>
+        <a href={url} target="_blank" rel="noopener" title={`Open ${domain}`} onClick={(event) => event.stopPropagation()}><IconOpenLink className="w-4 h-4 mr-2" /></a>
     );
 }
 
