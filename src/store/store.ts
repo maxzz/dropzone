@@ -1,4 +1,4 @@
-import { Atom, atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
+import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
 import atomWithCallback from '../hooks/atomsX';
 import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
@@ -256,11 +256,9 @@ export const setCurrentCardAtom = atom(
             const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
             const thisCurrentNow = get(thisCurrentAtom);
             if (currentFileUsAtom === fileUsAtom) {
-                //(thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
-                set(thisCurrentAtom, setCurrent);
+                (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
             } else {
-                //(thisCurrentNow) && set(thisCurrentAtom, false);
-                set(thisCurrentAtom, false);
+                (thisCurrentNow) && set(thisCurrentAtom, false);
             }
         });
     }
