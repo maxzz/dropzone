@@ -252,11 +252,13 @@ export const setCurrentCardAtom = atom(
             const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
             const thisCurrentNow = get(thisCurrentAtom);
             if (currentFileUsAtom === fileUsAtom) {
-                (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
-                console.log('set cur', `${thisCurrentAtom}`, 'on', `${currentFileUsAtom}`, 'all', files.map((fileAtom) => `${fileAtom}`));
+                // (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
+                set(thisCurrentAtom, setCurrent);
+                console.log(thisCurrentNow !== setCurrent, 'set cur', `${thisCurrentAtom}`, 'on', `${currentFileUsAtom}`, 'all', files.map((fileAtom) => `${fileAtom}`));
             } else {
-                (thisCurrentNow) && set(thisCurrentAtom, false);
-                console.log('set not cur', `${thisCurrentAtom}`, 'on', `${currentFileUsAtom}`, 'all', files.map((fileAtom) => `${fileAtom}`));
+                // (thisCurrentNow) && set(thisCurrentAtom, false);
+                set(thisCurrentAtom, false);
+                console.log(thisCurrentNow, 'set not cur', `${thisCurrentAtom}`, 'on', `${currentFileUsAtom}`, 'all', files.map((fileAtom) => `${fileAtom}`));
             }
         });
     }
