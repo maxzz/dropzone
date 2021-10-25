@@ -239,13 +239,42 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
 
 // Current card selection
 
-export const setCurrentCardAtom = atom(
+// export const setCurrentCardAtom = atom(
+//     (get) => {
+//         const files = get(filesAtom);
+//         const sel = files.find((currentFileUsAtom) => get(get(currentFileUsAtom).state.isCurrentAtom));
+//         console.log('get selected', `${sel}`, 'all', files.map((fileAtom) => `${fileAtom}`));
+//         return sel;
+//     },
+//     (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
+//         const files = get(filesAtom);
+//         files.forEach((currentFileUsAtom) => {
+//             const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
+//             const thisCurrentNow = get(thisCurrentAtom);
+//             if (currentFileUsAtom === fileUsAtom) {
+//                 // (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
+//                 set(thisCurrentAtom, setCurrent);
+//                 console.log(thisCurrentNow !== setCurrent, 'set cur', `${thisCurrentAtom}`, 'on', `${currentFileUsAtom}`, 'all', files.map((fileAtom) => `${fileAtom}`));
+//             } else {
+//                 // (thisCurrentNow) && set(thisCurrentAtom, false);
+//                 set(thisCurrentAtom, false);
+//                 console.log(thisCurrentNow, 'set not cur', `${thisCurrentAtom}`, 'on', `${currentFileUsAtom}`, 'all', files.map((fileAtom) => `${fileAtom}`));
+//             }
+//         });
+//     }
+// );
+
+export const getCurrentCardAtom = atom(
     (get) => {
         const files = get(filesAtom);
         const sel = files.find((currentFileUsAtom) => get(get(currentFileUsAtom).state.isCurrentAtom));
         console.log('get selected', `${sel}`, 'all', files.map((fileAtom) => `${fileAtom}`));
         return sel;
-    },
+    }
+);
+
+export const setCurrentCardAtom = atom(
+    null,
     (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
         const files = get(filesAtom);
         files.forEach((currentFileUsAtom) => {

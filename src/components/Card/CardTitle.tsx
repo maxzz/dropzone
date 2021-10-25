@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
-import { FileUs, FileUsAtom, filteredAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
+import { FileUs, FileUsAtom, filteredAtom, getCurrentCardAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
 import CardTitleMenu from './CardTitleMenu';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
@@ -160,7 +160,10 @@ function CardTitleOld({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 }
 
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    const [currentCard, setCurrentCard] = useAtom(setCurrentCardAtom);
+    //const [currentCard, setCurrentCard] = useAtom(setCurrentCardAtom);
+
+    const [currentCard] = useAtom(getCurrentCardAtom);
+    const [_, setCurrentCard] = useAtom(setCurrentCardAtom);
 
     //const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
     //const isCurrent = fileUsAtom === rightPanel;
