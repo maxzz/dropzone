@@ -239,7 +239,8 @@ export const rightPanelValueAtom = atom<FileUs | undefined>(
 
 // Current card selection
 
-export const setCurrentCardAtom = atom(null,
+export const setCurrentCardAtom = atom(
+    (get) => get(filesAtom).find((currentFileUsAtom) => get(get(currentFileUsAtom).state.isCurrentAtom)),
     (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
         const files = get(filesAtom);
         files.forEach((currentFileUsAtom) => {
