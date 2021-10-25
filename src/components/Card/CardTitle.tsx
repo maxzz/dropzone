@@ -55,6 +55,10 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
+function stripFirstFolder(s: string): string {
+    return (s || '').split(/[\/\\]/).slice(1).join('/')
+}
+
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const domain = fileUs.meta?.[0]?.disp.domain;
@@ -66,6 +70,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
     const url = loginForm?.detection.web_ourl;
+    const isSubFolder = !!fileUs.fpath?.match(/\//);
 
     const fname = React.useMemo(() => {
         const m = (fileUs.fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
@@ -117,7 +122,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
                     <CardAttention fileUs={fileUs} />
-                    {fileUs.fpath && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${fileUs.fpath}"`} />}
+                    {isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stripFirstFolder(fileUs.fpath)}"`} />}
                 </div>
             </div>
         </>
