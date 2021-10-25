@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { useAtomValue } from 'jotai/utils';
-import { FileUs, FileUsAtom, filteredAtom, getCurrentCardAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { FileUs, FileUsAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
 import CardTitleMenu from './CardTitleMenu';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
@@ -160,22 +160,16 @@ function CardTitleOld({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 }
 
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    //const [currentCard, setCurrentCard] = useAtom(setCurrentCardAtom);
-
-    //const [currentCard] = useAtom(getCurrentCardAtom);
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
-
-    const [_, setCurrentCard] = useAtom(setCurrentCardAtom);
-
-    //const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
-    //const isCurrent = fileUsAtom === rightPanel;
+    const setCurrentCard = useUpdateAtom(setCurrentCardAtom);
+    const setRightPanel = useUpdateAtom(rightPanelAtom); //#091e4c
     return (
         <div
             className={`relative p-2 ${currentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
-            onClick={() =>
-                setCurrentCard({fileUsAtom, setCurrent: !currentCard})
-                //setRightPanel(!currentCard ? fileUsAtom : undefined)
-            }
+            onClick={() => {
+                setCurrentCard({ fileUsAtom, setCurrent: !currentCard });
+                setRightPanel(!currentCard ? fileUsAtom : undefined);
+            }}
         >
             <CardTitleTextMemo fileUsAtom={fileUsAtom} />
 
