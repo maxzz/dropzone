@@ -9,6 +9,15 @@ import { Matching } from '../../../../store/manifest/mani-io';
 function filterDetection(detection: Mani.Detection) {
     let { caption, web_ourl, web_murl, web_qurl, web_checkurl, dlg_class, names_ext, processname, commandline, } = detection;
 
+    let matchOptions;
+    if (web_murl) {
+        matchOptions = Matching.getMatchInfo(web_murl);
+        if (matchOptions) {
+            matchOptions.join = `${matchOptions.join} ${matchOptions.prefix}`
+            web_murl = matchOptions.url;
+        }
+    }
+
     // 1. fix duplicated urls
     let urlname = '';
     if (web_ourl === web_murl) {
@@ -20,11 +29,6 @@ function filterDetection(detection: Mani.Detection) {
         urlname += '+q';
     }
 
-    let matchOptions = '';
-    if (web_murl) {
-        matchOptions = Matching.getMatchInfo(web_murl) || '';
-    }
-
     // 2. fix duplicated processnames
     if (processname === commandline) {
         commandline = undefined;
@@ -34,7 +38,7 @@ function filterDetection(detection: Mani.Detection) {
     commandline && (commandline = restoreXml(decodeURI(commandline)));
 
     return {
-        ...(matchOptions && {'match as': matchOptions}),
+        ...(matchOptions && {'match as': matchOptions.join}),
         ...(web_murl && { [`url m${urlname}`]: web_murl }),
         ...(web_ourl && { web_ourl }),
         ...(web_qurl && { web_qurl }),

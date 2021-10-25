@@ -95,12 +95,12 @@ export namespace Matching {
 
     const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
-    export function getMatchInfo(murl: string): string | undefined {
+    export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
         let m = murl?.match(reOtsMatching);
         if (m) {
             let style = +m[1] as MatchStyle; // style
             let opt = +m[2] as MatchOptions; // options
-            //let url = restoreCpp(m[3]);      // pattern
+            let url = restoreCpp(m[3]);      // pattern
 
             let resOpt = [];
             (opt & 1) !== 0 && (resOpt.push('case insensitive')); // MatchOptions.caseinsensitive
@@ -129,7 +129,11 @@ export namespace Matching {
                 }
             }//switch
 
-            return `Style: ${resStyle}${resOpt.length ? `; Options: ${resOpt.join(', ')}` : ''}`;
+            return {
+                prefix: `[m0]:${m[1]}:${m[2]}`,
+                join: `${resStyle}${resOpt.length ? `; Options: ${resOpt.join(', ')}` : ''}`,
+                url,
+            };
         }
     }
 
