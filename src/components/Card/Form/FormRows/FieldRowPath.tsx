@@ -101,7 +101,7 @@ function PartString({ label, part }: { label: string; part: any; }) {
     return (<>
         {!!part &&
             <div>
-                <div className="font-bold">{label}</div>
+                <Section label={label} />
                 <div className="">{text}</div>
             </div>
         }
@@ -121,7 +121,7 @@ function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs;
 
 
     return (
-        <div className="text-xs bg-gray-200 px-2 py-1">
+        <div className="text-xs bg-gray-100 px-2 pb-1">
             <div className={`max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto ${className}`}>
                 {field.path.p4 && <PartP4 label={'p4'} part={field.path.p4} />}
                 {field.path.p4a && <PartP4 label={'p4a'} part={field.path.p4a} />}
