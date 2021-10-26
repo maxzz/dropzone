@@ -84,7 +84,7 @@ function PartSid({ label, part }: { label: string; part: MPath.sid; }) {
         {!!part &&
             <div>
                 <Section label={label} />
-                <div className="">
+                <div className="mx-2">
                     {items.map(([key, val]) => {
                         return <Fragment key={key}>
                             <div>{key}: {restoreXml(val) || `""`}</div>
