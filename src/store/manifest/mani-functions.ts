@@ -224,12 +224,9 @@ export namespace FieldPath {
 
 namespace bailouts {
     function noSIDs(meta: Meta.Form) { // scuonlinebanking.com clogin #89340
-        return !!meta.fields.find((field: Meta.Field) => {
-            console.log(`form: ${meta.type}`, field.path.sid, field.path.sn, !!field.path.sid && !!field.path.sn);
-            return !field.path.sid && !field.path.sn; // TODO: if useIt
-        })
+        return !!meta.fields.find((field: Meta.Field) => field.mani.useit && !field.path.sid && !field.path.sn);
     }
-    
+
     export function getBailouts(meta: Meta.Form): string[] | undefined {
         const rv: string[] = [];
         if (meta.disp.isIe && !meta.disp.domain) {
@@ -239,7 +236,7 @@ namespace bailouts {
             rv.push("Manual mode manifest built for IE");
         };
         if (noSIDs(meta)) {
-            rv.push("IE form without IDs");
+            rv.push("There are fields in the form without an ID. Check path that does no have SID."); // short: The form has fields with no ID
         }
         return rv.length ? rv : undefined;
     }
