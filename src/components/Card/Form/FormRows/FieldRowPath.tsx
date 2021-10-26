@@ -44,14 +44,23 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
 
 function PartLoc({ label, part }: { label: string; part: string; }) {
     const items = part.split('|');
+    function beautifyRect(item: string) {
+        return item.split(' ');
+    }
     return (<>
         {!!part &&
             <div>
-                <div className="font-bold">{label}</div>
-                <div className="">
+                <div className="flex space-x-2">
+                    <div className="font-bold">{label}</div>
+                    <div className="">(x, y; w x h)</div>
+                </div>
+                <div className="mx-2 grid grid-cols-[repeat(5,min-content)] gap-x-2">
                     {items.map((item, idx) => {
                         return <Fragment key={idx}>
-                            <div>{idx}: {item}</div>
+                            <div>{idx}:</div>
+                            {beautifyRect(item).map((pt, idx) =>
+                                <div className="text-right" key={idx}>{pt}</div>
+                            )}
                         </Fragment>;
                     })}
                 </div>
