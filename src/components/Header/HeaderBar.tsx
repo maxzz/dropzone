@@ -66,7 +66,12 @@ function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
                 {/* Right header */}
                 <div className="flex-1 flex items-center justify-end">
                     <Filters />
-                    <IconAppLogoMicroscope className="w-7 h-7 mx-4" onClick={(event) => { event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } }); }} />
+                    <IconAppLogoMicroscope
+                        className="w-7 h-7 mx-4"
+                        title="__DATE__"
+                        onClick={(event) => {
+                            event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } });
+                        }} />
                 </div>
 
             </div>
