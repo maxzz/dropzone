@@ -35,12 +35,12 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     }
     const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
     return (
-        <UITooltip 
-            trigger={<IconAttention className="w-3.5 h-3.5 text-red-500 cursor-default" onClick={(e) => {e.stopPropagation()}} />}
+        <UITooltip
+            trigger={<IconAttention className="w-3.5 h-3.5 text-red-500 cursor-default" onClick={(e) => { e.stopPropagation(); }} />}
             arrow={false}
             popperOptions={{ delayShow: 300 }}
         >
-            <div className="text-sm max-w-[16rem]">
+            <div className="max-w-[17rem] text-sm">
                 <div className="mt-[-.4rem] mx-[-.4rem] p-[.4rem] py-3 px-2 rounded-sm rounded-b-none bg-gray-900 text-gray-300">
                     There are problems to check why
                 </div>
@@ -49,7 +49,10 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
                         <div className="pt-1 px-0.5">
                             <div className="font-bold">{idx === 0 ? 'Login:' : 'Password change:'}</div>
                             {bailOut.map((item, key) => (
-                                <div className="flex items-center" key={key}><IconDot className="w-4 h-4 pt-0.5" /> {item}</div>
+                                <div className="flex items-top" key={key}>
+                                    <IconDot className="mr-0.5 w-4 h-4 flex-none self-start mt-0.5" />
+                                    {item}
+                                </div>
                             ))}
                         </div>
                     }
@@ -60,7 +63,7 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
 }
 
 function stripFirstFolder(s: string): string {
-    return (s || '').split(/[\/\\]/).slice(1).join('/')
+    return (s || '').split(/[\/\\]/).slice(1).join('/');
 }
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {

@@ -32,9 +32,9 @@ export function UITooltip({ trigger, children, arrow = false, portal = true, pop
     );
     const popper = visible && (portal ? ReactDOM.createPortal((<>{poperBody}</>), document.getElementById('portal')!) : <>{poperBody}</>);
     return (
-        <div className="">
+        <>
             <div ref={setTriggerRef}> {trigger} </div>
             {popper}
-        </div>
+        </>
     );
 }
