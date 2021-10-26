@@ -4,6 +4,11 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import url from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
 
+const buildAt = () => {
+    var d = new Date();
+    return `Build ${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()}`;
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
     base: '',
@@ -19,7 +24,10 @@ export default defineConfig({
         },
 
         replace({
-            __DATE__: new Date().toISOString(),
+            values: {
+                __BUILD_DATE__: buildAt(),
+            },
+            preventAssignment: true,
         }),
 
         visualizer({

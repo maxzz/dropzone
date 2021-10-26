@@ -68,7 +68,7 @@ function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
                     <Filters />
                     <IconAppLogoMicroscope
                         className="w-7 h-7 mx-4"
-                        title="__DATE__"
+                        title="__BUILD_DATE__"
                         onClick={(event) => {
                             event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } });
                         }} />
