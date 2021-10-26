@@ -223,8 +223,9 @@ export namespace FieldPath {
 } //namespace FieldPath
 
 namespace bailouts {
-    function noSIDs(meta: Meta.Form) { // scuonlinebanking.com clogin #89340
-        return !!meta.fields.find((field: Meta.Field) => field.mani.useit && !field.path.sid && !field.path.sn);
+    function noSIDs(meta: Meta.Form) { // web, not script, use it, no sid, and not button; scuonlinebanking.com clogin #89340
+        return !!meta.disp.domain && !meta.disp.isScript &&
+            !!meta.fields.find((field: Meta.Field) => field.mani.useit && !field.path.sid && field.mani.type !== 'button');
     }
 
     export function getBailouts(meta: Meta.Form): string[] | undefined {
@@ -236,7 +237,7 @@ namespace bailouts {
             rv.push("Manual mode manifest built for IE");
         };
         if (noSIDs(meta)) {
-            rv.push("There are fields in the form without an ID. Check path that does no have SID."); // short: The form has fields with no ID
+            rv.push("There are fields in the form without an ID. Check path that does not have SID."); // short: The form has fields with no ID
         }
         return rv.length ? rv : undefined;
     }
