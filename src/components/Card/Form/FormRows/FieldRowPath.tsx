@@ -3,11 +3,18 @@ import { restoreXml } from '../../../../store/manifest/mani-functions';
 import { FileUs } from '../../../../store/store';
 
 function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
+    function beautifyHint(item: MPath.p4a): string {
+        return `Role #: ${item.rnumber} | Role: ${item.roleString} | Classname: "${item.className}" | Name: "${item.name}"`;
+    }
+    function beautifyVal(item: MPath.p4a): string {
+        //console.log({item});
+        return `${item.className} | ${item.name}`;
+    }
     return (<>
         {!!part &&
             <div>
                 <div className="font-bold">{label}</div>
-                <div className="mx-2 grid grid-cols-[auto,1fr]">
+                <div className="mx-2 grid grid-cols-[auto,1fr] border-b border-b-gray-400">
                     {/* overflow-x-hidden */}
                     {part.map((item, idx) => {
                         return <Fragment key={idx}>
@@ -17,11 +24,15 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
                             {/* <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
                             <div className="pl-2 min-w-0 w-full leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div> */}
 
-                            <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
-                            <div className="px-4 overflow-x-hidden leading-5 border-r border-t border-gray-400"><div className="whitespace-nowrap overflow-ellipsis">{JSON.stringify(item)}</div></div>
-
                             {/* <div className="box-content border-l border-r border-t border-gray-400"><div className="box-content px-2 leading-5">{idx}</div></div>
                             <div className="box-content border-r border-t border-gray-400"><div className="box-content pl-2 leading-5">{JSON.stringify(item)}</div></div> */}
+
+                            <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
+                            <div className="px-2 overflow-x-hidden leading-5 border-r border-t border-gray-400" title={beautifyHint(item)}>
+                                <div className="overflow-x-hidden whitespace-nowrap overflow-ellipsis">
+                                    {beautifyVal(item)}
+                                </div>
+                            </div>
 
                         </Fragment>;
                     })}

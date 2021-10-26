@@ -42,3 +42,4 @@ export default App;
 //TODO: limit list width to 382
 //TODO: show file size and total files size
 //TODO: copy to clipboard filename
+//TODO: show build version
