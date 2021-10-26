@@ -2,6 +2,12 @@ import React, { Fragment } from 'react';
 import { restoreXml } from '../../../../store/manifest/mani-functions';
 import { FileUs } from '../../../../store/store';
 
+function Section({ label }: { label: React.ReactNode; }) {
+    return (
+        <div className="pt-2 pb-1 font-bold flex"><div className="px-2 py-1 bg-gray-300 rounded">{label}</div></div>
+    );
+}
+
 function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
     function beautifyHint(item: MPath.p4a): string {
         return `Role #: ${item.rnumber} | Role: ${item.roleString} | Classname: "${item.className}" | Name: "${item.name}"`;
@@ -13,7 +19,7 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
     return (<>
         {!!part &&
             <div>
-                <div className="font-bold pb-1">{label}</div>
+                <Section label={label} />
                 <div className="mx-2 grid grid-cols-[auto,1fr] border-b border-b-gray-400">
                     {/* overflow-x-hidden */}
                     {part.map((item, idx) => {
@@ -50,10 +56,11 @@ function PartLoc({ label, part }: { label: string; part: string; }) {
     return (<>
         {!!part &&
             <div>
-                <div className="pt-2 pb-1 flex space-x-2">
-                    <div className="font-bold">{label}</div>
-                    <div className="">(x, y; w x h)</div>
-                </div>
+                <Section label={<div className="flex space-x-2">
+                    <div>{label}</div>
+                    <div className="font-normal">(x, y; w x h)</div>
+                </div>} />
+
                 <div className="mx-2 grid grid-cols-[repeat(5,min-content)] gap-x-2">
                     {items.map((item, idx) => {
                         return <Fragment key={idx}>
@@ -76,7 +83,7 @@ function PartSid({ label, part }: { label: string; part: MPath.sid; }) {
     return (<>
         {!!part &&
             <div>
-                <div className="pt-2 pb-1 font-bold flex"><div className="px-2 py-1 bg-gray-300 rounded">{label}</div></div>
+                <Section label={label} />
                 <div className="">
                     {items.map(([key, val]) => {
                         return <Fragment key={key}>
