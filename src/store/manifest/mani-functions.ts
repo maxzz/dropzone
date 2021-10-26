@@ -222,6 +222,29 @@ export namespace FieldPath {
     }
 } //namespace FieldPath
 
+namespace bailouts {
+    function noSIDs(meta: Meta.Form) { // scuonlinebanking.com clogin #89340
+        return !!meta.fields.find((field: Meta.Field) => {
+            console.log(`form: ${meta.type}`, field.path.sid, field.path.sn, !!field.path.sid && !!field.path.sn);
+            return !field.path.sid && !field.path.sn; // TODO: if useIt
+        })
+    }
+    
+    export function getBailouts(meta: Meta.Form): string[] | undefined {
+        const rv: string[] = [];
+        if (meta.disp.isIe && !meta.disp.domain) {
+            rv.push("IE website form without site domain");
+        }
+        if (meta.disp.isIe && meta.disp.isScript) {
+            rv.push("Manual mode manifest built for IE");
+        };
+        if (noSIDs(meta)) {
+            rv.push("IE form without IDs");
+        }
+        return rv.length ? rv : undefined;
+    }
+} //namespace bailouts
+
 export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isManual = (fields: Meta.Field[]): boolean => {
         return !!fields.length && fields.some(({ path }: { path: Meta.Path; }) => path.sn);
@@ -243,16 +266,6 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const domain = urlDomain(removeQuery(form.detection?.web_ourl));
         const isScript = isManual(fields);
         const isIe = isIeServer(form) || isIeProcess(form);
-        const bailOuts = ((): string[] | undefined => {
-            const rv: string[] = [];
-            if (isIe && !domain) {
-                rv.push("IE website form without site domain");
-            }
-            if (isIe && isScript) {
-                rv.push("Manual mode manifest built for IE");
-            };
-            return rv.length ? rv : undefined;
-        })();
         const meta: Meta.Form = {
             mani: form,
             type: idx,
@@ -267,6 +280,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             fields,
             rother: [],
         };
+        const bailOuts = bailouts.getBailouts(meta);
         if (bailOuts) {
             meta.disp.bailOut = bailOuts;
         }
