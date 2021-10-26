@@ -342,7 +342,7 @@ export function IconFolder(props: SVGProps<SVGSVGElement> & { title?: string; })
     );
 }
 
-export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; } & React.HTMLAttributes<SVGSVGElement>) {
     const { className = '', title, ...rest } = props;
     return (
         <svg fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className={`w-full h-full ${className}`} {...rest}>

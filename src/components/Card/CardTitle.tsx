@@ -35,7 +35,7 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     }
     const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
     return (
-        <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500" />} arrow={false} popperOptions={{ delayShow: 300 }}>
+        <UITooltip trigger={<IconAttention className="w-3.5 h-3.5 text-red-500 cursor-default" onClick={(e) => {e.stopPropagation()}} />} arrow={false} popperOptions={{ delayShow: 300 }}>
             <div className="text-sm max-w-[16rem]">
                 <div className="mt-[-.4rem] mx-[-.4rem] p-[.4rem] py-3 px-2 rounded-sm rounded-b-none bg-gray-900 text-gray-300">
                     There are problems to check why
