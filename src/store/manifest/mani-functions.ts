@@ -253,7 +253,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             };
             return rv.length ? rv : undefined;
         })();
-        return {
+        const meta: Meta.Form = {
             mani: form,
             type: idx,
             disp: {
@@ -261,13 +261,16 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
                 isScript,
                 noFields: !fields.length,
                 isIe,
-                ...(bailOuts && {bailOut: bailOuts}),
             },
             pool: pool,
             view: FieldPath.loc.utils.buildPreviewData(fields),
             fields,
             rother: [],
         };
+        if (bailOuts) {
+            meta.disp.bailOut = bailOuts;
+        }
+        return meta;
     };
     const forms: Meta.Form[] = !mani || !mani.forms || !mani.forms.length ? [] : mani.forms.map(createMetaForm);
     [0, 1].forEach((type: number) => { // build xlinks
