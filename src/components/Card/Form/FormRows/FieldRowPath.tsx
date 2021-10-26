@@ -13,7 +13,7 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
     return (<>
         {!!part &&
             <div>
-                <div className="font-bold">{label}</div>
+                <div className="font-bold pb-1">{label}</div>
                 <div className="mx-2 grid grid-cols-[auto,1fr] border-b border-b-gray-400">
                     {/* overflow-x-hidden */}
                     {part.map((item, idx) => {
@@ -50,7 +50,7 @@ function PartLoc({ label, part }: { label: string; part: string; }) {
     return (<>
         {!!part &&
             <div>
-                <div className="flex space-x-2">
+                <div className="pt-2 pb-1 flex space-x-2">
                     <div className="font-bold">{label}</div>
                     <div className="">(x, y; w x h)</div>
                 </div>
@@ -70,15 +70,17 @@ function PartLoc({ label, part }: { label: string; part: string; }) {
 }
 
 function PartSid({ label, part }: { label: string; part: MPath.sid; }) {
+    const { version, ...rest } = part;
+    part = { ...rest, version };
     const items = Object.entries(part);
     return (<>
         {!!part &&
             <div>
-                <div className="font-bold">{label}</div>
+                <div className="pt-2 pb-1 font-bold flex"><div className="px-2 py-1 bg-gray-300 rounded">{label}</div></div>
                 <div className="">
                     {items.map(([key, val]) => {
                         return <Fragment key={key}>
-                            <div>{key}: {restoreXml(val)}</div>
+                            <div>{key}: {restoreXml(val) || `""`}</div>
                         </Fragment>;
                     })}
                 </div>
@@ -112,7 +114,7 @@ function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs;
 
 
     return (
-        <div className="text-xs bg-gray-200 px-1">
+        <div className="text-xs bg-gray-200 px-2 py-1">
             <div className={`max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto ${className}`}>
                 {field.path.p4 && <PartP4 label={'p4'} part={field.path.p4} />}
                 {field.path.p4a && <PartP4 label={'p4a'} part={field.path.p4a} />}
