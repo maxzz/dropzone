@@ -12,15 +12,16 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         };
     }
 
+    let xml = '';
     try {
         const obj = parse(fileUs.raw, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
+        xml = (new j2xParser({...parseOptions, format: true, indentBy: '\t'})).parse(obj);
+        console.log('raw', xml);
 
     } catch (error) {
         
     }
     
-
-    let xml = '';
     return {
         res: xml,
     };
