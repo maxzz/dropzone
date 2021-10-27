@@ -3,12 +3,7 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import { visualizer } from 'rollup-plugin-visualizer';
 import url from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
-
-const buildAt = () => {
-    var d = new Date();
-    //return `Build ${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()}`;
-    return `Build ${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
-};
+import { buildAt, __BUILD_DATE__ } from './src/utils/utils-build';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,7 +21,7 @@ export default defineConfig({
 
         replace({
             values: {
-                __BUILD_DATE__: buildAt(),
+                [__BUILD_DATE__]: buildAt(),
             },
             preventAssignment: true,
         }),
