@@ -149,7 +149,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 }
 
 const CardTitleTextMemo = React.memo(CardTitleText);
-
+/*
 function CardTitleOld({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
     const isCurrent = fileUsAtom === rightPanel;
@@ -160,17 +160,16 @@ function CardTitleOld({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         >
             <CardTitleTextMemo fileUsAtom={fileUsAtom} />
 
-            {/* Card actions */}
+            {/* Card actions * /}
             {isCurrent && <div className="absolute top-3 right-2 z-10 flex items-center">
-                {/* <PopoverMenu /> */}
+                {/* <PopoverMenu /> * /}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
-                <CardTitleMenu icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
+                <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
             </div>}
-
         </div>
     );
 }
-
+*/
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
     const setCurrentCard = useUpdateAtom(setCurrentCardAtom);
@@ -189,9 +188,8 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             {currentCard && <div className="absolute top-3 right-2 z-10 flex items-center">
                 {/* <PopoverMenu /> */}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
-                <CardTitleMenu icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
+                <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
             </div>}
-
         </div>
     );
 }

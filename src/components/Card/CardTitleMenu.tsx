@@ -1,5 +1,4 @@
 import React from 'react';
-import toast from 'react-hot-toast';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -7,8 +6,15 @@ import {
     DropdownMenuSeparator as Separator,
     DropdownMenuTrigger as Trigger
 } from '../UI/UiDropdownMenu';
+import toast from 'react-hot-toast';
+import { FileUsAtom } from '../../store/store';
+import { convertToXml } from '../../store/manifest/xml-to-js';
 
-export const CardTitleMenu = ({ icon }: { icon: React.ReactNode; }) => {
+function saveXmlFile(fileUsAtom: FileUsAtom) {
+    convertToXml(fileUsAtom);
+}
+
+export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) => {
     return (
         <Menu>
             <Trigger>
