@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAtom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { FileUs, FileUsAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
 import CardTitleMenu from './CardTitleMenu';
@@ -149,27 +148,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 }
 
 const CardTitleTextMemo = React.memo(CardTitleText);
-/*
-function CardTitleOld({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    const [rightPanel, setRightPanel] = useAtom(rightPanelAtom); //#091e4c
-    const isCurrent = fileUsAtom === rightPanel;
-    return (
-        <div
-            className={`relative p-2 ${isCurrent ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
-            onClick={() => setRightPanel(!isCurrent ? fileUsAtom : undefined)}
-        >
-            <CardTitleTextMemo fileUsAtom={fileUsAtom} />
 
-            {/* Card actions * /}
-            {isCurrent && <div className="absolute top-3 right-2 z-10 flex items-center">
-                {/* <PopoverMenu /> * /}
-                <CardOpenUrl fileUsAtom={fileUsAtom} />
-                <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
-            </div>}
-        </div>
-    );
-}
-*/
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
     const setCurrentCard = useUpdateAtom(setCurrentCardAtom);
