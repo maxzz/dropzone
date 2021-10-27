@@ -15,8 +15,12 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
     const [fileUs] = useAtom(fileUsAtom);
     
     function saveXmlFile() {
-        convertToXml(fileUs);
+        const res = convertToXml(fileUs);
+        if (res.err) {
+            toast(res.err, { style: { backgroundColor: 'tomato' } });
+        }
     }
+
     return (
         <Menu>
             <Trigger>
@@ -28,7 +32,6 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
                     onClick={(event) => {
                         event.stopPropagation();
                         saveXmlFile();
-                        toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
                     }}
                 >
                     Convert manual to normal

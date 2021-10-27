@@ -58,7 +58,7 @@ export function beautifyXMLCatalog(catalog: Catalog.Root): Catalog.Root {
     return catalog;
 }
 
-const parseOptions = {
+export const parseOptions = {
     attributeNamePrefix: "",
     attrNodeName: "_attributes",
     ignoreAttributes: false,
