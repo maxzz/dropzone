@@ -7,14 +7,16 @@ import {
     DropdownMenuTrigger as Trigger
 } from '../UI/UiDropdownMenu';
 import toast from 'react-hot-toast';
+import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../store/store';
 import { convertToXml } from '../../store/manifest/xml-to-js';
 
-function saveXmlFile(fileUsAtom: FileUsAtom) {
-    convertToXml(fileUsAtom);
-}
-
 export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) => {
+    const [fileUs] = useAtom(fileUsAtom);
+    
+    function saveXmlFile() {
+        convertToXml(fileUs);
+    }
     return (
         <Menu>
             <Trigger>
@@ -25,7 +27,7 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
                 <Item className="!text-sm"
                     onClick={(event) => {
                         event.stopPropagation();
-                        saveXmlFile(fileUsAtom);
+                        saveXmlFile();
                         toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
                     }}
                 >

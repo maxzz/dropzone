@@ -1,9 +1,8 @@
-import { useAtom } from 'jotai';
-import { FileUsAtom } from '../store';
+import { FileUs } from '../store';
 import { parse, j2xParser } from 'fast-xml-parser';
 
-export function convertToXml(fileUsAtom: FileUsAtom): string {
-    const [fileUs] = useAtom(fileUsAtom);
+export function convertToXml(fileUs: FileUs): string {
+    
 
     console.log('raw', fileUs.raw);
     
