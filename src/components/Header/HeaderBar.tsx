@@ -11,10 +11,6 @@ import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
 import Filters from './Filters';
 
-import { BUILD_DATE } from '../../utils/utils-build';
-console.log({'b': BUILD_DATE});
-
-
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },
     '25%': { transform: 'scale(.7) translateY(-2px)', opacity: 0 },
@@ -62,8 +58,6 @@ function LeftHeader() {
 }
 
 function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
-    //const buildDate = __BUILD_DATE__;
-
     return (
         <header className="" {...props}>
             <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}>
