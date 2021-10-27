@@ -34,8 +34,7 @@
         "react-popper-tooltip": "^4.3.1",
         "react-split-pane": "^0.1.92",
         "react-use": "^17.3.1",
-        "simplebar-react": "2.3.6",
-        "xml-js": "^1.6.11"
+        "simplebar-react": "2.3.6"
     },
     "devDependencies": {
         "@rollup/plugin-replace": "^3.0.0",
