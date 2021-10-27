@@ -24,7 +24,9 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
             <Content sideOffset={5}>
                 <Item className="!text-sm"
                     onClick={(event) => {
-                        event.stopPropagation(); toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
+                        event.stopPropagation();
+                        saveXmlFile(fileUsAtom);
+                        toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
                     }}
                 >
                     Convert manual to normal
@@ -32,7 +34,8 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
 
                 <Item className="!text-sm"
                     onClick={(event) => {
-                        event.stopPropagation(); toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
+                        event.stopPropagation();
+                        toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
                     }}
                 >
                     Merge two manifests
