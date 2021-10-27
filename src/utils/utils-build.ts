@@ -1,4 +1,4 @@
-export const __BUILD_DATE__ = '__BUILD_DATE__';
+export const BUILD_DATE = '__BUILD_DATE__';
 
 export const buildAt = () => {
     var d = new Date();
