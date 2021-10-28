@@ -44,6 +44,18 @@ function jsonToXml<T extends Object>(obj: T, os: string, itemKey: string, indent
     // }
 }
 
+function tag(s: string): string {
+    //console.log('-----------tag', s);
+    
+    return s;
+}
+
+function attr(s: string): string {
+    //console.log('    attr', s);
+
+    return escapeXml(s);
+}
+
 export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } | { res: string; err?: undefined; } {
 
     //console.log('raw', fileUs.raw);
@@ -64,7 +76,14 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         // jsonToXml({manifest: {
         // }}, rv, 'manifest', 0);
 
-        xml = (new j2xParser({ ...parseOptions, format: true, indentBy: '\t', attrValueProcessor: escapeXml })).parse(obj);
+        xml = (new j2xParser({
+            ...parseOptions,
+            format: true,
+            indentBy: '\t',
+            tagValueProcessor: tag,
+            attrValueProcessor: attr,
+        })).parse(obj);
+
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         console.log('raw\n', xml);
 
