@@ -17,7 +17,7 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
     try {
         const obj = parse(fileUs.raw, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
         console.log('obj\n', obj);
-        ((obj.manifest as Mani.Manifest).descriptor as any)._attributes.id += '<>><'
+        ((obj.manifest as Mani.Manifest).descriptor as any)._attributes.id += '<>><'; // <- fast-xml-parser can read it, but notepad complains on illegal characters.
 
         xml = (new j2xParser({ ...parseOptions, format: true, indentBy: '\t' })).parse(obj);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
@@ -26,7 +26,7 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         fileDownload({ data: xml, filename: 'test.txt', mime: 'text/plain;charset=utf-8' });
 
     } catch (error) {
-        console.log({error});
+        console.log({ error });
     }
 
     return {
