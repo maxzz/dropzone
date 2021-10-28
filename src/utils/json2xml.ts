@@ -67,18 +67,18 @@ export class Parser {
     replaceCDATAarr: (str: string, cdata: any) => string;
     processTextOrObjNode: (object: unknown, key: string, level: number) => unknown;
 
-    buildTextNode: (val: string, key: string, attrStr: string, level: number) => unknown;
-    buildObjNode: (val: string, key: string, attrStr: string, level: number) => unknown;
+    buildTextNode: (val: string, key: string, attrStr: string, level: number) => string;
+    buildObjNode: (val: string, key: string, attrStr: string, level: number) => string;
 
-    buildTextValNode: (val: string, key: string, attrStr: string, level: number) => unknown;
-    buildObjectNode: (val: string, key: string, attrStr: string, level: number) => unknown;
+    buildTextValNode: (val: string, key: string, attrStr: string, level: number) => string;
+    buildObjectNode: (val: string, key: string, attrStr: string, level: number) => string;
 
     indentate: (n: number) => string;
     tagEndChar: string = '>\n';
     newLine: string = '\n';
 
-    constructor(options: J2xOptionsOptional) {
-        this.options = buildOptions(options, defaultOptions, props);
+    constructor(options?: J2xOptionsOptional) {
+        this.options = buildOptions(options = {}, defaultOptions, props);
         if (this.options.ignoreAttributes || this.options.attrNodeName) {
             this.isAttribute = function (/*a*/) {
                 return false;
@@ -105,9 +105,7 @@ export class Parser {
             this.tagEndChar = '>\n';
             this.newLine = '\n';
         } else {
-            this.indentate = function () {
-                return '';
-            };
+            this.indentate = () => '';
             this.tagEndChar = '>';
             this.newLine = '';
         }
@@ -124,7 +122,7 @@ export class Parser {
         this.buildObjectNode = buildObjectNode;
     }
 
-    parse(jObj: unknown) {
+    parse(jObj: any) {
         if (Array.isArray(jObj) && this.options.rootNodeName && this.options.rootNodeName.length > 1) {
             jObj = {
                 [this.options.rootNodeName]: jObj
@@ -209,7 +207,7 @@ export class Parser {
 
 } //class Parser
 
-function processTextOrObjNode(this: Parser, object: any, key: string, level: number) {
+function processTextOrObjNode(this: Parser, object: any, key: string, level: number): string {
     const result = this.j2x(object, level + 1);
     if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
         return this.buildTextNode(result.val, key, result.attrStr, level);
@@ -218,28 +216,28 @@ function processTextOrObjNode(this: Parser, object: any, key: string, level: num
     }
 }
 
-function replaceCDATAstr(this: Parser, str: string, cdata: string) {
+function replaceCDATAstr(this: Parser, str: string, cdata: string): string {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
-        return str + '<![CDATA[' + cdata + ']]' + this.tagEndChar;
+        return `${str}<![CDATA[${cdata}]]${this.tagEndChar}`;
     } else {
-        return str.replace(this.options.cdataPositionChar, '<![CDATA[' + cdata + ']]' + this.tagEndChar);
+        return str.replace(this.options.cdataPositionChar, `<![CDATA[${cdata}]]${this.tagEndChar}`);
     }
 }
 
-function replaceCDATAarr(this: Parser, str: string, cdata: any) {
+function replaceCDATAarr(this: Parser, str: string, cdata: any): string {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
-        return str + '<![CDATA[' + cdata.join(']]><![CDATA[') + ']]' + this.tagEndChar;
+        return `${str}<![CDATA[${cdata.join(']]><![CDATA[')}]]${this.tagEndChar}`;
     } else {
         for (let v in cdata) {
-            str = str.replace(this.options.cdataPositionChar, '<![CDATA[' + cdata[v] + ']]>');
+            str = str.replace(this.options.cdataPositionChar, `<![CDATA[${cdata[v]}]]>`);
         }
         return str + this.newLine;
     }
 }
 
-function buildObjectNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
+function buildObjectNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     if (attrStr && val.indexOf('<') === -1) {
         return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
     } else {
@@ -247,34 +245,31 @@ function buildObjectNode(this: Parser, val: string, key: string, attrStr: string
     }
 }
 
-function buildEmptyObjNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
+function buildEmptyObjNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildObjectNode(val, key, attrStr, level);
     } else {
-        return this.indentate(level) + '<' + key + attrStr + '/' + this.tagEndChar;
-        //+ this.newLine
+        return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`; //+ this.newLine
     }
 }
 
-function buildTextValNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
-    return (
-        `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`
-    );
+function buildTextValNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+    return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
 }
 
-function buildEmptyTextNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
+function buildEmptyTextNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildTextValNode(val, key, attrStr, level);
     } else {
-        return this.indentate(level) + '<' + key + attrStr + '/' + this.tagEndChar;
+        return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`;
     }
 }
 
-function indentate(this: Parser, level: number) {
+function indentate(this: Parser, level: number): string {
     return this.options.indentBy.repeat(level);
 }
 
-function isAttribute(this: Parser, name: string /*, options*/) {
+function isAttribute(this: Parser, name: string /*, options*/): string | false {
     if (name.startsWith(this.options.attributeNamePrefix)) {
         return name.substr(this.attrPrefixLen);
     } else {
@@ -282,7 +277,7 @@ function isAttribute(this: Parser, name: string /*, options*/) {
     }
 }
 
-function isCDATA(this: Parser, name: string) {
+function isCDATA(this: Parser, name: string): boolean {
     return name === this.options.cdataTagName;
 }
 
