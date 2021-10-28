@@ -1,4 +1,19 @@
-function buildOptions(options, defaultOptions, props) {
+type J2xOptions = {
+    attributeNamePrefix: string;
+    attrNodeName: false | string;
+    textNodeName: string;
+    ignoreAttributes: boolean;
+    cdataTagName: false | string;
+    cdataPositionChar: string;
+    format: boolean;
+    indentBy: string;
+    supressEmptyNode: boolean;
+    tagValueProcessor: (tagValue: string) => string;
+    attrValueProcessor: (attrValue: string) => string;
+};
+type J2xOptionsOptional = Partial<J2xOptions>;
+
+function buildOptions(options: J2xOptionsOptional, defaultOptions: J2xOptionsOptional, props: any) {
     //parse Empty Node as self closing node
     let newOptions = {};
     if (!options) {
@@ -25,12 +40,8 @@ const defaultOptions = {
     format: false,
     indentBy: '  ',
     supressEmptyNode: false,
-    tagValueProcessor: function (a) {
-        return a;
-    },
-    attrValueProcessor: function (a) {
-        return a;
-    },
+    tagValueProcessor: function (a: string) { return a; },
+    attrValueProcessor: function (a: string) { return a; },
 };
 
 const props = [
@@ -48,7 +59,8 @@ const props = [
     'rootNodeName', //when array as root
 ];
 
-function Parser(options) {
+export function Parser(options: J2xOptionsOptional) {
+
     this.options = buildOptions(options, defaultOptions, props);
     if (this.options.ignoreAttributes || this.options.attrNodeName) {
         this.isAttribute = function (/*a*/) {
@@ -65,6 +77,7 @@ function Parser(options) {
             return false;
         };
     }
+
     this.replaceCDATAstr = replaceCDATAstr;
     this.replaceCDATAarr = replaceCDATAarr;
 
@@ -103,7 +116,7 @@ Parser.prototype.parse = function (jObj) {
     return this.j2x(jObj, 0).val;
 };
 
-Parser.prototype.j2x = function (jObj, level) {
+Parser.prototype.j2x = function (jObj, level: number) {
     let attrStr = '';
     let val = '';
     for (let key in jObj) {
@@ -209,33 +222,9 @@ function replaceCDATAarr(str, cdata) {
 
 function buildObjectNode(val, key, attrStr, level) {
     if (attrStr && val.indexOf('<') === -1) {
-        return (
-            this.indentate(level) +
-            '<' +
-            key +
-            attrStr +
-            '>' +
-            val +
-            //+ this.newLine
-            // + this.indentate(level)
-            '</' +
-            key +
-            this.tagEndChar
-        );
+        return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
     } else {
-        return (
-            this.indentate(level) +
-            '<' +
-            key +
-            attrStr +
-            this.tagEndChar +
-            val +
-            //+ this.newLine
-            this.indentate(level) +
-            '</' +
-            key +
-            this.tagEndChar
-        );
+        return `${this.indentate(level)}<${key}${attrStr}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
     }
 }
 
@@ -250,15 +239,7 @@ function buildEmptyObjNode(val, key, attrStr, level) {
 
 function buildTextValNode(val, key, attrStr, level) {
     return (
-        this.indentate(level) +
-        '<' +
-        key +
-        attrStr +
-        '>' +
-        this.options.tagValueProcessor(val) +
-        '</' +
-        key +
-        this.tagEndChar
+        `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`
     );
 }
 
@@ -290,4 +271,3 @@ function isCDATA(name) {
 //indentation
 //\n after each closing or self closing tag
 
-module.exports = Parser;
