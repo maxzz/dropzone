@@ -10,24 +10,23 @@ type J2xOptions = {
     supressEmptyNode: boolean;
     tagValueProcessor: (tagValue: string) => string;
     attrValueProcessor: (attrValue: string) => string;
+
+    rootNodeName?: string;
 };
 type J2xOptionsOptional = Partial<J2xOptions>;
 
-function buildOptions(options: J2xOptionsOptional, defaultOptions: J2xOptionsOptional, props: any): J2xOptions {
-    //parse Empty Node as self closing node
-    let newOptions = {};
+function buildOptions(options: J2xOptionsOptional, defaultOptions: J2xOptions, props: (keyof J2xOptions)[]): J2xOptions {
     if (!options) {
         return defaultOptions; //if there are not options
     }
 
+    //parse Empty Node as self closing node
+    let newOptions: J2xOptionsOptional = {};
     for (let i = 0; i < props.length; i++) {
-        if (options[props[i]] !== undefined) {
-            newOptions[props[i]] = options[props[i]];
-        } else {
-            newOptions[props[i]] = defaultOptions[props[i]];
-        }
+        const key = props[i];
+        (newOptions as any)[key] = options[key] !== undefined ? options[key] : defaultOptions[key];
     }
-    return newOptions;
+    return newOptions as J2xOptions;
 };
 
 const defaultOptions: J2xOptions = {
@@ -44,7 +43,7 @@ const defaultOptions: J2xOptions = {
     attrValueProcessor: function (a: string) { return a; },
 };
 
-const props = [
+const props: (keyof J2xOptions)[] = [
     'attributeNamePrefix',
     'attrNodeName',
     'textNodeName',
@@ -62,17 +61,17 @@ const props = [
 export class Parser {
     options: J2xOptions;
     attrPrefixLen: number = 0;
-    isAttribute: (name: string) => boolean;
+    isAttribute: (name: string) => boolean | string;
     isCDATA: (s: string) => boolean;
-    replaceCDATAstr: (str: string, cdata: string) => string;
-    replaceCDATAarr: (str: string, cdata: string) => string;
+    replaceCDATAstr: (str: string, cdata: any) => string;
+    replaceCDATAarr: (str: string, cdata: any) => string;
     processTextOrObjNode: (object: unknown, key: string, level: number) => unknown;
 
-    buildTextNode: (val: unknown, key: string, attrStr: string, level: number) => unknown;
-    buildObjNode: (val: unknown, key: string, attrStr: string, level: number) => unknown;
+    buildTextNode: (val: string, key: string, attrStr: string, level: number) => unknown;
+    buildObjNode: (val: string, key: string, attrStr: string, level: number) => unknown;
 
-    buildTextValNode: (val: unknown, key: string, attrStr: string, level: number) => unknown;
-    buildObjectNode: (val: unknown, key: string, attrStr: string, level: number) => unknown;
+    buildTextValNode: (val: string, key: string, attrStr: string, level: number) => unknown;
+    buildObjectNode: (val: string, key: string, attrStr: string, level: number) => unknown;
 
     indentate: (n: number) => string;
     tagEndChar: string = '>\n';
@@ -134,7 +133,7 @@ export class Parser {
         return this.j2x(jObj, 0).val;
     }
 
-    j2x(jObj: unknown, level: number) {
+    j2x(jObj: any, level: number) {
         let attrStr = '';
         let val = '';
         for (let key in jObj) {
@@ -210,7 +209,7 @@ export class Parser {
 
 } //class Parser
 
-function processTextOrObjNode(this: Parser, object: unknown, key: string, level: number) {
+function processTextOrObjNode(this: Parser, object: any, key: string, level: number) {
     const result = this.j2x(object, level + 1);
     if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
         return this.buildTextNode(result.val, key, result.attrStr, level);
@@ -228,7 +227,7 @@ function replaceCDATAstr(this: Parser, str: string, cdata: string) {
     }
 }
 
-function replaceCDATAarr(this: Parser, str: string, cdata: string) {
+function replaceCDATAarr(this: Parser, str: string, cdata: any) {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
         return str + '<![CDATA[' + cdata.join(']]><![CDATA[') + ']]' + this.tagEndChar;
@@ -240,7 +239,7 @@ function replaceCDATAarr(this: Parser, str: string, cdata: string) {
     }
 }
 
-function buildObjectNode(this: Parser, val: unknown, key: string, attrStr: string, level: number) {
+function buildObjectNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
     if (attrStr && val.indexOf('<') === -1) {
         return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
     } else {
@@ -248,7 +247,7 @@ function buildObjectNode(this: Parser, val: unknown, key: string, attrStr: strin
     }
 }
 
-function buildEmptyObjNode(this: Parser, val: unknown, key: string, attrStr: string, level: number) {
+function buildEmptyObjNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
     if (val !== '') {
         return this.buildObjectNode(val, key, attrStr, level);
     } else {
@@ -257,13 +256,13 @@ function buildEmptyObjNode(this: Parser, val: unknown, key: string, attrStr: str
     }
 }
 
-function buildTextValNode(this: Parser, val: unknown, key: string, attrStr: string, level: number) {
+function buildTextValNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
     return (
         `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`
     );
 }
 
-function buildEmptyTextNode(this: Parser, val: unknown, key: string, attrStr: string, level: number) {
+function buildEmptyTextNode(this: Parser, val: string, key: string, attrStr: string, level: number) {
     if (val !== '') {
         return this.buildTextValNode(val, key, attrStr, level);
     } else {
