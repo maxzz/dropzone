@@ -18,16 +18,25 @@ function escapeXml(unsafe: string) {
 
 const attributes: string = "_attributes";
 
-function jsonToXml<T extends Object>(obj: T, rv: string, indent: number): void {
-    const entries = Object.entries(obj);
+function jsonToXml<T extends Object>(obj: T, os: string, itemKey: string, indent: number): void {
 
-    for (let [key, val] of entries) {
-        if (Array.isArray(val)) {
+    if (typeof obj === 'object') {
+        const entries = Object.entries(obj);
 
-        } else if (typeof val === 'object') {
+        for (let [key, val] of entries) {
+            if (Array.isArray(val)) {
 
+            } else if (typeof val === 'object') {
+
+            }
         }
+    } else if (Array.isArray(obj)) {
+
+        // for (let elm of obj) {
+
+        // }
     }
+
 
     // for (let cur = 0; cur < entries.length; cur++) {
     //     if (typeof entries[cur][1] === 'string') {
@@ -51,8 +60,9 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         console.log('obj\n', obj);
         ((obj.manifest as Mani.Manifest).descriptor as any)._attributes.id += '<>><'; // <- fast-xml-parser can read it, but notepad complains on illegal characters.
 
-        let rv = '';
-        jsonToXml(1, rv, 0);
+        // let rv = '';
+        // jsonToXml({manifest: {
+        // }}, rv, 'manifest', 0);
 
         xml = (new j2xParser({ ...parseOptions, format: true, indentBy: '\t', attrValueProcessor: escapeXml })).parse(obj);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
