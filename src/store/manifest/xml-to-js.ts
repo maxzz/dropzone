@@ -4,7 +4,7 @@ import { parseOptions } from './mani-io';
 import { fileDownload } from '../../utils/file-download';
 
 export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } | { res: string; err?: undefined; } {
-    
+
     //console.log('raw', fileUs.raw);
 
     if (!fileUs.raw) {
@@ -16,15 +16,16 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
     let xml = '';
     try {
         const obj = parse(fileUs.raw, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
-        xml = (new j2xParser({...parseOptions, format: true, indentBy: '\t'})).parse(obj);
+        xml = (new j2xParser({ ...parseOptions, format: true, indentBy: '\t' })).parse(obj);
+        xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         console.log('raw', xml);
 
-        fileDownload({data: xml, filename: 'test.txt'})
+        fileDownload({ data: xml, filename: 'test.txt', mime: 'text/plain;charset=utf-8' });
 
     } catch (error) {
-        
+
     }
-    
+
     return {
         res: xml,
     };
