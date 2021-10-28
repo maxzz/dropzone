@@ -3,7 +3,7 @@ type J2xOptions = {
     attrNodeName: false | string;
     textNodeName: string;
     ignoreAttributes: boolean;
-    cdataTagName: false | string;
+    cdataTagName: string;
     cdataPositionChar: string;
     format: boolean;
     indentBy: string;
@@ -34,7 +34,7 @@ const defaultOptions: J2xOptions = {
     attrNodeName: false,
     textNodeName: '#text',
     ignoreAttributes: true,
-    cdataTagName: false,
+    cdataTagName: '',
     cdataPositionChar: '\\c',
     format: false,
     indentBy: '  ',
@@ -157,7 +157,7 @@ export class Parser {
                 } else {
                     //tag value
                     if (key === this.options.textNodeName) {
-                        if (jObj[this.options.cdataTagName]) {
+                        if (jObj[this.options.cdataTagName]) { //tm: this will not work
                             //value will added while processing cdata
                         } else {
                             val += this.options.tagValueProcessor('' + jObj[key]);
