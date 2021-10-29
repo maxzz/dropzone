@@ -58,6 +58,10 @@ const props: (keyof J2xOptions)[] = [
     'rootNodeName', //when array as root
 ];
 
+const doReduceEmptyValues = false;  // Reduce attrs closing on empty    values true: <field /> false: <field></field>
+const doAttrsIndent = true;         // Attribute indentation            true: <field \nattr ... \nattr /> false: <field attr attr />
+const doAttrsEndingIndent = false;  // Attrs ending indented            true: <field ... \n/> false: <field ... />
+
 export class J2xParser {
     options: J2xOptions;
     attrPrefixLen: number;
@@ -130,7 +134,7 @@ export class J2xParser {
                 //premitive type
                 const attr = this.isAttribute(key);
                 if (attr) {
-                    attrStr.push(` ${attr}="${this.options.attrValueProcessor(keyVal)}"`);
+                    attrStr.push(`${attr}="${this.options.attrValueProcessor(keyVal)}"`);
                 }
                 else if (this.isCDATA(key)) {
                     if (jObj[this.options.textNodeName]) {
@@ -183,7 +187,7 @@ export class J2xParser {
                     const L = Ks.length;
                     for (let j = 0; j < L; j++) {
                         const attrName = Ks[j];
-                        attrStr.push(` ${attrName}="${this.options.attrValueProcessor(keyVal[attrName])}"`);
+                        attrStr.push(`${attrName}="${this.options.attrValueProcessor(keyVal[attrName])}"`);
                     }
                 } else {
                     val += this.processTextOrObjNode(keyVal, key, level);
@@ -254,10 +258,6 @@ export class J2xParser {
     }
 
 } //class J2xParser
-
-const doReduceEmptyValues = true;
-const doAttrsIndent = false; // TODO: define as options
-const doAttrsEndingIndent = true; // TODO: define as options
 
 // replace CDATA
 
