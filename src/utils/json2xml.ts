@@ -116,7 +116,6 @@ export class J2xParser {
         let val = '';
         for (let key in jObj) {
             const keyVal = jObj[key];
-            //console.log(`--------key: ${key} keyVal:\n`, keyVal, '\n===val:\n', val);
 
             if (typeof keyVal === 'undefined') {
                 // supress undefined node
@@ -203,21 +202,17 @@ export class J2xParser {
         }
     }
 
-    // Formatted output //TODO: detect # of children
+    // Formatted output
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
         const reduce = doAttrsIndent && !val;
         const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
-        // if (!reduce) {
-        //     console.log(`1--------key: ${key}`, ' ===val: ', val);  
-        // }
         let ending;
-        //console.log(`--------key: ${key}`, ' ===val: ', val);
         if (attrStr.length && val.indexOf('<') === -1) {
-            ending = reduce ? front : `>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+            ending = reduce ? front : `>${val}</${key}${this.tagEndChar}`;
         } else {
-            ending = reduce ? front : `${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+            ending = reduce ? front : `${this.tagEndChar}${val}${this.indentate(level)}</${key}${this.tagEndChar}`;
         }
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
@@ -226,9 +221,6 @@ export class J2xParser {
         const attrs = this.attrsToStr(attrStr, level);
         const reduce = doAttrsIndent && !val;
         const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
-        // if (!reduce) {
-        //     console.log(`2--------key: ${key}`, ' ===val: ', val);  
-        // }
         const ending = reduce ? front : `>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
@@ -260,7 +252,7 @@ export class J2xParser {
 
 } //class J2xParser
 
-const doAttrsIndent = true; // TODO: define as options
+const doAttrsIndent = false; // TODO: define as options
 const doAttrsEndingIndent = true; // TODO: define as options
 
 // replace CDATA
