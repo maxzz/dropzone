@@ -60,7 +60,7 @@ const props: (keyof J2xOptions)[] = [
 
 export class Parser {
     options: J2xOptions;
-    attrPrefixLen: number = 0;
+    attrPrefixLen: number;
     isAttribute: (name: string) => boolean | string;
     isCDATA: (s: string) => boolean;
     replaceCDATAstr: (str: string, cdata: any) => string;
@@ -80,25 +80,19 @@ export class Parser {
     constructor(options?: J2xOptionsOptional) {
         this.options = buildOptions(options = {}, defaultOptions, props);
         if (this.options.ignoreAttributes || this.options.attrNodeName) {
-            this.isAttribute = function (/*a*/) {
-                return false;
-            };
+            this.attrPrefixLen = 0;
+            this.isAttribute = (/*a*/) =>false;
         } else {
             this.attrPrefixLen = this.options.attributeNamePrefix.length;
             this.isAttribute = isAttribute;
         }
-        if (this.options.cdataTagName) {
-            this.isCDATA = isCDATA;
-        } else {
-            this.isCDATA = function (/*a*/) {
-                return false;
-            };
-        }
 
-        this.replaceCDATAstr = replaceCDATAstr;
-        this.replaceCDATAarr = replaceCDATAarr;
+        this.isCDATA = this.options.cdataTagName ? isCDATA : (/*a*/) => false;
 
-        this.processTextOrObjNode = processTextOrObjNode;
+        this.replaceCDATAstr = _replaceCDATAstr;
+        this.replaceCDATAarr = _replaceCDATAarr;
+
+        this.processTextOrObjNode = _processTextOrObjNode;
 
         if (this.options.format) {
             this.indentate = indentate;
@@ -110,16 +104,10 @@ export class Parser {
             this.newLine = '';
         }
 
-        if (this.options.supressEmptyNode) {
-            this.buildTextNode = buildEmptyTextNode;
-            this.buildObjNode = buildEmptyObjNode;
-        } else {
-            this.buildTextNode = buildTextValNode;
-            this.buildObjNode = buildObjectNode;
-        }
-
-        this.buildTextValNode = buildTextValNode;
-        this.buildObjectNode = buildObjectNode;
+        this.buildTextNode = this.options.supressEmptyNode ? _buildTextNodeAsEmpty : _buildTextValNode;
+        this.buildObjNode =  this.options.supressEmptyNode ? _buildObjNodeAsEmpty : _buildObjectNode;
+        this.buildTextValNode = _buildTextValNode;
+        this.buildObjectNode = _buildObjectNode;
     }
 
     parse(jObj: any) {
@@ -135,22 +123,27 @@ export class Parser {
         let attrStr = '';
         let val = '';
         for (let key in jObj) {
-            if (typeof jObj[key] === 'undefined') {
+            const keyVal = jObj[key];
+            if (typeof keyVal === 'undefined') {
                 // supress undefined node
-            } else if (jObj[key] === null) {
-                val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
-            } else if (jObj[key] instanceof Date) {
-                val += this.buildTextNode(jObj[key], key, '', level);
-            } else if (typeof jObj[key] !== 'object') {
+            }
+            else if (keyVal === null) {
+                val += `${this.indentate(level)}<${key}/${this.tagEndChar}`;
+            }
+            else if (keyVal instanceof Date) {
+                val += this.buildTextNode(keyVal as any, key, '', level);
+            }
+            else if (typeof keyVal !== 'object') {
                 //premitive type
                 const attr = this.isAttribute(key);
                 if (attr) {
-                    attrStr += ' ' + attr + '="' + this.options.attrValueProcessor('' + jObj[key]) + '"';
-                } else if (this.isCDATA(key)) {
+                    attrStr += ` ${attr}="${this.options.attrValueProcessor('' + keyVal)}"`;
+                }
+                else if (this.isCDATA(key)) {
                     if (jObj[this.options.textNodeName]) {
-                        val += this.replaceCDATAstr(jObj[this.options.textNodeName], jObj[key]);
+                        val += this.replaceCDATAstr(jObj[this.options.textNodeName], keyVal);
                     } else {
-                        val += this.replaceCDATAstr('', jObj[key]);
+                        val += this.replaceCDATAstr('', keyVal);
                     }
                 } else {
                     //tag value
@@ -158,30 +151,31 @@ export class Parser {
                         if (jObj[this.options.cdataTagName]) { //tm: this will not work
                             //value will added while processing cdata
                         } else {
-                            val += this.options.tagValueProcessor('' + jObj[key]);
+                            val += this.options.tagValueProcessor('' + keyVal);
                         }
                     } else {
-                        val += this.buildTextNode(jObj[key], key, '', level);
+                        val += this.buildTextNode(keyVal, key, '', level);
                     }
                 }
-            } else if (Array.isArray(jObj[key])) {
+            }
+            else if (Array.isArray(keyVal)) {
                 //repeated nodes
                 if (this.isCDATA(key)) {
                     val += this.indentate(level);
                     if (jObj[this.options.textNodeName]) {
-                        val += this.replaceCDATAarr(jObj[this.options.textNodeName], jObj[key]);
+                        val += this.replaceCDATAarr(jObj[this.options.textNodeName], keyVal);
                     } else {
-                        val += this.replaceCDATAarr('', jObj[key]);
+                        val += this.replaceCDATAarr('', keyVal);
                     }
                 } else {
                     //nested nodes
-                    const arrLen = jObj[key].length;
+                    const arrLen = keyVal.length;
                     for (let j = 0; j < arrLen; j++) {
-                        const item = jObj[key][j];
+                        const item = keyVal[j];
                         if (typeof item === 'undefined') {
                             // supress undefined node
                         } else if (item === null) {
-                            val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
+                            val += `${this.indentate(level)}<${key}/${this.tagEndChar}`;
                         } else if (typeof item === 'object') {
                             val += this.processTextOrObjNode(item, key, level);
                         } else {
@@ -192,13 +186,13 @@ export class Parser {
             } else {
                 //nested node
                 if (this.options.attrNodeName && key === this.options.attrNodeName) {
-                    const Ks = Object.keys(jObj[key]);
+                    const Ks = Object.keys(keyVal);
                     const L = Ks.length;
                     for (let j = 0; j < L; j++) {
-                        attrStr += ' ' + Ks[j] + '="' + this.options.attrValueProcessor('' + jObj[key][Ks[j]]) + '"';
+                        attrStr += ` ${Ks[j]}="${this.options.attrValueProcessor('' + keyVal[Ks[j]])}"`;
                     }
                 } else {
-                    val += this.processTextOrObjNode(jObj[key], key, level);
+                    val += this.processTextOrObjNode(keyVal, key, level);
                 }
             }
         }
@@ -207,7 +201,7 @@ export class Parser {
 
 } //class Parser
 
-function processTextOrObjNode(this: Parser, object: any, key: string, level: number): string {
+function _processTextOrObjNode(this: Parser, object: any, key: string, level: number): string {
     const result = this.j2x(object, level + 1);
     if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
         return this.buildTextNode(result.val, key, result.attrStr, level);
@@ -216,7 +210,7 @@ function processTextOrObjNode(this: Parser, object: any, key: string, level: num
     }
 }
 
-function replaceCDATAstr(this: Parser, str: string, cdata: string): string {
+function _replaceCDATAstr(this: Parser, str: string, cdata: string): string {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
         return `${str}<![CDATA[${cdata}]]${this.tagEndChar}`;
@@ -225,7 +219,7 @@ function replaceCDATAstr(this: Parser, str: string, cdata: string): string {
     }
 }
 
-function replaceCDATAarr(this: Parser, str: string, cdata: any): string {
+function _replaceCDATAarr(this: Parser, str: string, cdata: any): string {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
         return `${str}<![CDATA[${cdata.join(']]><![CDATA[')}]]${this.tagEndChar}`;
@@ -237,7 +231,7 @@ function replaceCDATAarr(this: Parser, str: string, cdata: any): string {
     }
 }
 
-function buildObjectNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildObjectNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     if (attrStr && val.indexOf('<') === -1) {
         return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
     } else {
@@ -245,7 +239,7 @@ function buildObjectNode(this: Parser, val: string, key: string, attrStr: string
     }
 }
 
-function buildEmptyObjNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildObjNodeAsEmpty(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildObjectNode(val, key, attrStr, level);
     } else {
@@ -253,11 +247,11 @@ function buildEmptyObjNode(this: Parser, val: string, key: string, attrStr: stri
     }
 }
 
-function buildTextValNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildTextValNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
 }
 
-function buildEmptyTextNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildTextNodeAsEmpty(this: Parser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildTextValNode(val, key, attrStr, level);
     } else {
