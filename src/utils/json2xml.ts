@@ -208,15 +208,18 @@ export class J2xParser {
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrToStr(attrStr, level);
         if (attrStr.length && val.indexOf('<') === -1) {
-            return `${this.indentate(level)}<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+            const closeTag = `<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+            return `${this.indentate(level)}${closeTag}`;
         } else {
-            return `${this.indentate(level)}<${key}${attrs}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+            const closeTag = `<${key}${attrs}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+            return `${this.indentate(level)}${closeTag}`;
         }
     }
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrToStr(attrStr, level);
-        return `${this.indentate(level)}<${key}${attrs}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+        const closeTag = `<${key}${attrs}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+        return `${this.indentate(level)}${closeTag}`;
     }
 
     // Empty guards
@@ -226,7 +229,8 @@ export class J2xParser {
             return this._textofObjectNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
             const attrs = this.attrToStr(attrStr, level);
-            return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`; //+ this.newLine
+            const closeTag = `<${key}${attrs}/${this.tagEndChar}`;
+            return `${this.indentate(level)}${closeTag}`; //+ this.newLine
         }
     }
 
@@ -235,17 +239,19 @@ export class J2xParser {
             return this._textofTextValNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
             const attrs = this.attrToStr(attrStr, level);
-            return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`;
+            const closeTag = `<${key}${attrs}/${this.tagEndChar}`;
+            return `${this.indentate(level)}${closeTag}`;
         }
     }
 
     attrToStr(attrs: string[], level: number): string {
-        const doAttrsIndent = true;
         const indent = this.indentate(level + 1);
-        return attrs.map(attr =>  doAttrsIndent ? `\n${indent}${attr}`: ` ${attr}`).join('') ;
+        return attrs.map(attr => doAttrsIndent ? `\n${indent}${attr}` : ` ${attr}`).join('');
     }
-    
-    } //class J2xParser
+
+} //class J2xParser
+
+const doAttrsIndent = true; // TODO: define as options
 
 // replace CDATA
 
