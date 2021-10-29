@@ -54,7 +54,8 @@ function tag(s: string): string {
 function attr(s: string): string {
     //console.log('    attr', s);
 
-    return escapeXml(s);
+    //return escapeXml(s); // it's allready escaped
+    return s; 
 }
 
 export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } | { res: string; err?: undefined; } {
@@ -89,7 +90,7 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         console.log('---------raw\n', xml);
 
-        //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
+        fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
 
     } catch (error) {
         console.log({ error });
