@@ -8,8 +8,8 @@ type J2xOptions = {
     format: boolean;
     indentBy: string;
     supressEmptyNode: boolean;
-    tagValueProcessor: (tagValue: string) => string;
-    attrValueProcessor: (attrValue: string) => string;
+    tagValueProcessor: (tagValue: string | any) => string;
+    attrValueProcessor: (attrValue: string | any) => string;
 
     rootNodeName?: string;
 };
@@ -39,8 +39,8 @@ const defaultOptions: J2xOptions = {
     format: false,
     indentBy: '  ',
     supressEmptyNode: false,
-    tagValueProcessor: function (a: string) { return a; },
-    attrValueProcessor: function (a: string) { return a; },
+    tagValueProcessor: function (a: any): string { return '' + a; },
+    attrValueProcessor: function (a: any): string { return '' + a; },
 };
 
 const props: (keyof J2xOptions)[] = [
@@ -67,8 +67,8 @@ export class J2xParser {
     replaceCDATAarr: (str: string, cdata: any) => string;
     processTextOrObjNode: (object: unknown, key: string, level: number) => unknown;
 
-    buildTextNode: (val: string, key: string, attrStr: string, level: number) => string;
-    buildObjNode: (val: string, key: string, attrStr: string, level: number) => string;
+    buildTextValNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
+    buildObjectNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
 
     buildTextValNode: (val: string, key: string, attrStr: string, level: number) => string;
     buildObjectNode: (val: string, key: string, attrStr: string, level: number) => string;
@@ -81,7 +81,7 @@ export class J2xParser {
         this.options = buildOptions(options || {}, defaultOptions, props);
         if (this.options.ignoreAttributes || this.options.attrNodeName) {
             this.attrPrefixLen = 0;
-            this.isAttribute = (/*a*/) =>false;
+            this.isAttribute = (/*a*/) => false;
         } else {
             this.attrPrefixLen = this.options.attributeNamePrefix.length;
             this.isAttribute = isAttribute;
@@ -104,8 +104,8 @@ export class J2xParser {
             this.newLine = '';
         }
 
-        this.buildTextNode = this.options.supressEmptyNode ? _buildTextNodeAsEmpty : _buildTextValNode;
-        this.buildObjNode =  this.options.supressEmptyNode ? _buildObjNodeAsEmpty : _buildObjectNode;
+        this.buildTextValNodeWoEmpty = this.options.supressEmptyNode ? _buildTextNodeAsEmpty : _buildTextValNode;
+        this.buildObjectNodeWoEmpty = this.options.supressEmptyNode ? _buildObjNodeAsEmpty : _buildObjectNode;
         this.buildTextValNode = _buildTextValNode;
         this.buildObjectNode = _buildObjectNode;
     }
@@ -124,6 +124,8 @@ export class J2xParser {
         let val = '';
         for (let key in jObj) {
             const keyVal = jObj[key];
+            console.log('j2x', keyVal);
+
             if (typeof keyVal === 'undefined') {
                 // supress undefined node
             }
@@ -131,13 +133,13 @@ export class J2xParser {
                 val += `${this.indentate(level)}<${key}/${this.tagEndChar}`;
             }
             else if (keyVal instanceof Date) {
-                val += this.buildTextNode(keyVal as any, key, '', level);
+                val += this.buildTextValNodeWoEmpty(keyVal as any, key, '', level);
             }
             else if (typeof keyVal !== 'object') {
                 //premitive type
                 const attr = this.isAttribute(key);
                 if (attr) {
-                    attrStr += ` ${attr}="${this.options.attrValueProcessor('' + keyVal)}"`;
+                    attrStr += ` ${attr}="${this.options.attrValueProcessor(keyVal)}"`;
                 }
                 else if (this.isCDATA(key)) {
                     if (jObj[this.options.textNodeName]) {
@@ -151,10 +153,10 @@ export class J2xParser {
                         if (jObj[this.options.cdataTagName]) { //tm: this will not work
                             //value will added while processing cdata
                         } else {
-                            val += this.options.tagValueProcessor('' + keyVal);
+                            val += this.options.tagValueProcessor(keyVal);
                         }
                     } else {
-                        val += this.buildTextNode(keyVal, key, '', level);
+                        val += this.buildTextValNodeWoEmpty(keyVal, key, '', level);
                     }
                 }
             }
@@ -179,7 +181,7 @@ export class J2xParser {
                         } else if (typeof item === 'object') {
                             val += this.processTextOrObjNode(item, key, level);
                         } else {
-                            val += this.buildTextNode(item, key, '', level);
+                            val += this.buildTextValNodeWoEmpty(item, key, '', level);
                         }
                     }
                 }
@@ -189,7 +191,8 @@ export class J2xParser {
                     const Ks = Object.keys(keyVal);
                     const L = Ks.length;
                     for (let j = 0; j < L; j++) {
-                        attrStr += ` ${Ks[j]}="${this.options.attrValueProcessor('' + keyVal[Ks[j]])}"`;
+                        const attrName = Ks[j];
+                        attrStr += ` ${attrName}="${this.options.attrValueProcessor(keyVal[attrName])}"`;
                     }
                 } else {
                     val += this.processTextOrObjNode(keyVal, key, level);
@@ -204,30 +207,9 @@ export class J2xParser {
 function _processTextOrObjNode(this: J2xParser, object: any, key: string, level: number): string {
     const result = this.j2x(object, level + 1);
     if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
-        return this.buildTextNode(result.val, key, result.attrStr, level);
+        return this.buildTextValNodeWoEmpty(result.val, key, result.attrStr, level);
     } else {
-        return this.buildObjNode(result.val, key, result.attrStr, level);
-    }
-}
-
-function _replaceCDATAstr(this: J2xParser, str: string, cdata: string): string {
-    str = this.options.tagValueProcessor('' + str);
-    if (this.options.cdataPositionChar === '' || str === '') {
-        return `${str}<![CDATA[${cdata}]]${this.tagEndChar}`;
-    } else {
-        return str.replace(this.options.cdataPositionChar, `<![CDATA[${cdata}]]${this.tagEndChar}`);
-    }
-}
-
-function _replaceCDATAarr(this: J2xParser, str: string, cdata: any): string {
-    str = this.options.tagValueProcessor('' + str);
-    if (this.options.cdataPositionChar === '' || str === '') {
-        return `${str}<![CDATA[${cdata.join(']]><![CDATA[')}]]${this.tagEndChar}`;
-    } else {
-        for (let v in cdata) {
-            str = str.replace(this.options.cdataPositionChar, `<![CDATA[${cdata[v]}]]>`);
-        }
-        return str + this.newLine;
+        return this.buildObjectNodeWoEmpty(result.val, key, result.attrStr, level);
     }
 }
 
@@ -239,6 +221,10 @@ function _buildObjectNode(this: J2xParser, val: string, key: string, attrStr: st
     }
 }
 
+function _buildTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+}
+
 function _buildObjNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildObjectNode(val, key, attrStr, level);
@@ -247,15 +233,32 @@ function _buildObjNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr
     }
 }
 
-function _buildTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
-    return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
-}
-
 function _buildTextNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildTextValNode(val, key, attrStr, level);
     } else {
         return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`;
+    }
+}
+
+function _replaceCDATAstr(this: J2xParser, str: string, cdata: string): string {
+    str = this.options.tagValueProcessor(str);
+    if (this.options.cdataPositionChar === '' || str === '') {
+        return `${str}<![CDATA[${cdata}]]${this.tagEndChar}`;
+    } else {
+        return str.replace(this.options.cdataPositionChar, `<![CDATA[${cdata}]]${this.tagEndChar}`);
+    }
+}
+
+function _replaceCDATAarr(this: J2xParser, str: string, cdata: any): string {
+    str = this.options.tagValueProcessor(str);
+    if (this.options.cdataPositionChar === '' || str === '') {
+        return `${str}<![CDATA[${cdata.join(']]><![CDATA[')}]]${this.tagEndChar}`;
+    } else {
+        for (let v in cdata) {
+            str = str.replace(this.options.cdataPositionChar, `<![CDATA[${cdata[v]}]]>`);
+        }
+        return str + this.newLine;
     }
 }
 
