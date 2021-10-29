@@ -101,10 +101,10 @@ export class J2xParser {
             this.newLine = '';
         }
 
-        this.TextOfTextValNodeWoEmpty = this.options.supressEmptyNode ? _TextOfTextNodeAsEmpty : _TextOfTextValNode;
-        this.TextOfObjectNodeWoEmpty = this.options.supressEmptyNode ? _TextOfObjNodeAsEmpty : _TextOfObjectNode;
-        this.TextOfTextValNode = _TextOfTextValNode;
-        this.TextOfObjectNode = _TextOfObjectNode;
+        this.TextOfTextValNodeWoEmpty = this.options.supressEmptyNode ? _TextOfTextNodeAsEmpty : this._TextOfTextValNode;
+        this.TextOfObjectNodeWoEmpty = this.options.supressEmptyNode ? _TextOfObjNodeAsEmpty : this._TextOfObjectNode;
+        this.TextOfTextValNode = this._TextOfTextValNode;
+        this.TextOfObjectNode = this._TextOfObjectNode;
     }
 
     parse(jObj: any) {
@@ -208,21 +208,19 @@ export class J2xParser {
         }
     }
 
-} //class J2xParser
-
-// Builders
-
-function _TextOfObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
-    if (attrStr && val.indexOf('<') === -1) {
-        return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
-    } else {
-        return `${this.indentate(level)}<${key}${attrStr}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+    _TextOfObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+        if (attrStr && val.indexOf('<') === -1) {
+            return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+        } else {
+            return `${this.indentate(level)}<${key}${attrStr}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+        }
     }
-}
 
-function _TextOfTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
-    return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
-}
+    _TextOfTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+        return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+    }
+
+} //class J2xParser
 
 // Empty guards
 

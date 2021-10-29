@@ -87,7 +87,7 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         })).parse(obj);
 
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
-        //console.log('raw\n', xml);
+        console.log('---------raw\n', xml);
 
         //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
 
