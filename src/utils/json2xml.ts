@@ -65,7 +65,6 @@ export class J2xParser {
     isCDATA: (s: string) => boolean;
     replaceCDATAstr: (str: string, cdata: any) => string;
     replaceCDATAarr: (str: string, cdata: any) => string;
-    processTextOrObjNode: (object: unknown, key: string, level: number) => unknown;
 
     buildTextValNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
     buildObjectNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
@@ -91,8 +90,6 @@ export class J2xParser {
 
         this.replaceCDATAstr = _replaceCDATAstr;
         this.replaceCDATAarr = _replaceCDATAarr;
-
-        this.processTextOrObjNode = _processTextOrObjNode;
 
         if (this.options.format) {
             this.indentate = indentate;
@@ -202,16 +199,16 @@ export class J2xParser {
         return { attrStr: attrStr, val: val };
     };
 
-} //class J2xParser
-
-function _processTextOrObjNode(this: J2xParser, object: any, key: string, level: number): string {
-    const result = this.j2x(object, level + 1);
-    if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
-        return this.buildTextValNodeWoEmpty(result.val, key, result.attrStr, level);
-    } else {
-        return this.buildObjectNodeWoEmpty(result.val, key, result.attrStr, level);
+    processTextOrObjNode(this: J2xParser, object: any, key: string, level: number): string {
+        const result = this.j2x(object, level + 1);
+        if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
+            return this.buildTextValNodeWoEmpty(result.val, key, result.attrStr, level);
+        } else {
+            return this.buildObjectNodeWoEmpty(result.val, key, result.attrStr, level);
+        }
     }
-}
+
+} //class J2xParser
 
 function _buildObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (attrStr && val.indexOf('<') === -1) {
