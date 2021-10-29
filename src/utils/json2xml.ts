@@ -66,8 +66,8 @@ export class J2xParser {
     replaceCDATAstr: (str: string, cdata: any) => string;
     replaceCDATAarr: (str: string, cdata: any) => string;
 
-    TextOfTextValNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
-    TextOfObjectNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
+    textofTextValNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
+    textofObjectNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
 
     indentate: (n: number) => string;
     tagEndChar: string = '>\n';
@@ -77,13 +77,13 @@ export class J2xParser {
         this.options = buildOptions(options || {}, defaultOptions, props);
         if (this.options.ignoreAttributes || this.options.attrNodeName) {
             this.attrPrefixLen = 0;
-            this.isAttribute = (/*a*/) => false;
+            this.isAttribute = () => false;
         } else {
             this.attrPrefixLen = this.options.attributeNamePrefix.length;
             this.isAttribute = isAttribute;
         }
 
-        this.isCDATA = this.options.cdataTagName ? isCDATA : (/*a*/) => false;
+        this.isCDATA = this.options.cdataTagName ? isCDATA : () => false;
 
         this.replaceCDATAstr = _replaceCDATAstr;
         this.replaceCDATAarr = _replaceCDATAarr;
@@ -98,8 +98,8 @@ export class J2xParser {
             this.newLine = '';
         }
 
-        this.TextOfTextValNodeWoEmpty = this.options.supressEmptyNode ? _TextOfTextNodeAsEmpty : this.TextOfTextValNode;
-        this.TextOfObjectNodeWoEmpty = this.options.supressEmptyNode ? _TextOfObjNodeAsEmpty : this.TextOfObjectNode;
+        this.textofTextValNodeWoEmpty = this.options.supressEmptyNode ? _textofTextNodeAsEmpty : this.textofTextValNode;
+        this.textofObjectNodeWoEmpty = this.options.supressEmptyNode ? _textofObjNodeAsEmpty : this.textofObjectNode;
     }
 
     parse(jObj: any) {
@@ -116,7 +116,7 @@ export class J2xParser {
         let val = '';
         for (let key in jObj) {
             const keyVal = jObj[key];
-            console.log('j2x', keyVal);
+            console.log('j2x', keyVal, '\nval:\n', val);
 
             if (typeof keyVal === 'undefined') {
                 // supress undefined node
@@ -125,7 +125,7 @@ export class J2xParser {
                 val += `${this.indentate(level)}<${key}/${this.tagEndChar}`;
             }
             else if (keyVal instanceof Date) {
-                val += this.TextOfTextValNodeWoEmpty(keyVal as any, key, '', level);
+                val += this.textofTextValNodeWoEmpty(keyVal as any, key, '', level);
             }
             else if (typeof keyVal !== 'object') {
                 //premitive type
@@ -148,7 +148,7 @@ export class J2xParser {
                             val += this.options.tagValueProcessor(keyVal);
                         }
                     } else {
-                        val += this.TextOfTextValNodeWoEmpty(keyVal, key, '', level);
+                        val += this.textofTextValNodeWoEmpty(keyVal, key, '', level);
                     }
                 }
             }
@@ -173,7 +173,7 @@ export class J2xParser {
                         } else if (typeof item === 'object') {
                             val += this.processTextOrObjNode(item, key, level);
                         } else {
-                            val += this.TextOfTextValNodeWoEmpty(item, key, '', level);
+                            val += this.textofTextValNodeWoEmpty(item, key, '', level);
                         }
                     }
                 }
@@ -197,13 +197,13 @@ export class J2xParser {
     processTextOrObjNode(this: J2xParser, object: any, key: string, level: number): string {
         const result = this.j2x(object, level + 1);
         if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
-            return this.TextOfTextValNodeWoEmpty(result.val, key, result.attrStr, level);
+            return this.textofTextValNodeWoEmpty(result.val, key, result.attrStr, level);
         } else {
-            return this.TextOfObjectNodeWoEmpty(result.val, key, result.attrStr, level);
+            return this.textofObjectNodeWoEmpty(result.val, key, result.attrStr, level);
         }
     }
 
-    TextOfObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    textofObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         if (attrStr && val.indexOf('<') === -1) {
             return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
@@ -211,7 +211,7 @@ export class J2xParser {
         }
     }
 
-    TextOfTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    textofTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
     }
 
@@ -219,17 +219,17 @@ export class J2xParser {
 
 // Empty guards
 
-function _TextOfObjNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+function _textofObjNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
-        return this.TextOfObjectNode(val, key, attrStr, level);
+        return this.textofObjectNode(val, key, attrStr, level);
     } else {
         return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`; //+ this.newLine
     }
 }
 
-function _TextOfTextNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+function _textofTextNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
-        return this.TextOfTextValNode(val, key, attrStr, level);
+        return this.textofTextValNode(val, key, attrStr, level);
     } else {
         return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`;
     }
@@ -260,16 +260,16 @@ function _replaceCDATAarr(this: J2xParser, str: string, cdata: any): string {
 
 // Misc
 
-function isCDATA(this: J2xParser, name: string): boolean {
-    return name === this.options.cdataTagName;
-}
-
 function isAttribute(this: J2xParser, name: string /*, options*/): string | false {
     if (name.startsWith(this.options.attributeNamePrefix)) {
         return name.substr(this.attrPrefixLen);
     } else {
         return false;
     }
+}
+
+function isCDATA(this: J2xParser, name: string): boolean {
+    return name === this.options.cdataTagName;
 }
 
 function indentate(this: J2xParser, level: number): string {
