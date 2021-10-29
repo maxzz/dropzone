@@ -69,9 +69,6 @@ export class J2xParser {
     TextOfTextValNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
     TextOfObjectNodeWoEmpty: (val: string, key: string, attrStr: string, level: number) => string;
 
-    TextOfTextValNode: (val: string, key: string, attrStr: string, level: number) => string;
-    TextOfObjectNode: (val: string, key: string, attrStr: string, level: number) => string;
-
     indentate: (n: number) => string;
     tagEndChar: string = '>\n';
     newLine: string = '\n';
@@ -101,10 +98,8 @@ export class J2xParser {
             this.newLine = '';
         }
 
-        this.TextOfTextValNodeWoEmpty = this.options.supressEmptyNode ? _TextOfTextNodeAsEmpty : this._TextOfTextValNode;
-        this.TextOfObjectNodeWoEmpty = this.options.supressEmptyNode ? _TextOfObjNodeAsEmpty : this._TextOfObjectNode;
-        this.TextOfTextValNode = this._TextOfTextValNode;
-        this.TextOfObjectNode = this._TextOfObjectNode;
+        this.TextOfTextValNodeWoEmpty = this.options.supressEmptyNode ? _TextOfTextNodeAsEmpty : this.TextOfTextValNode;
+        this.TextOfObjectNodeWoEmpty = this.options.supressEmptyNode ? _TextOfObjNodeAsEmpty : this.TextOfObjectNode;
     }
 
     parse(jObj: any) {
@@ -208,7 +203,7 @@ export class J2xParser {
         }
     }
 
-    _TextOfObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    TextOfObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         if (attrStr && val.indexOf('<') === -1) {
             return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
@@ -216,7 +211,7 @@ export class J2xParser {
         }
     }
 
-    _TextOfTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    TextOfTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
     }
 
