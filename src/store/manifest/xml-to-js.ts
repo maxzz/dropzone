@@ -1,7 +1,8 @@
 import { FileUs } from '../store';
-import { parse, j2xParser } from 'fast-xml-parser';
+import { parse } from 'fast-xml-parser';
 import { parseOptions } from './mani-io';
 import { fileDownload } from '../../utils/file-download';
+import { J2xParser } from '../../utils/json2xml';
 
 function escapeXml(unsafe: string) {
     return unsafe.replace(/[<>&'"]/g, function (c: string): string {
@@ -70,13 +71,14 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
     try {
         const obj = parse(fileUs.raw, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
         console.log('obj\n', obj);
-        ((obj.manifest as Mani.Manifest).descriptor as any)._attributes.id += '<>><'; // <- fast-xml-parser can read it, but notepad complains on illegal characters.
+        
+        //((obj.manifest as Mani.Manifest).descriptor as any)._attributes.id += '<>><'; // <- fast-xml-parser can read it, but notepad complains on illegal characters.
 
         // let rv = '';
         // jsonToXml({manifest: {
         // }}, rv, 'manifest', 0);
 
-        xml = (new j2xParser({
+        xml = (new J2xParser({
             ...parseOptions,
             format: true,
             indentBy: '\t',

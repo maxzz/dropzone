@@ -78,7 +78,7 @@ export class J2xParser {
     newLine: string = '\n';
 
     constructor(options?: J2xOptionsOptional) {
-        this.options = buildOptions(options = {}, defaultOptions, props);
+        this.options = buildOptions(options || {}, defaultOptions, props);
         if (this.options.ignoreAttributes || this.options.attrNodeName) {
             this.attrPrefixLen = 0;
             this.isAttribute = (/*a*/) =>false;
