@@ -205,6 +205,10 @@ export class J2xParser {
 
     // Formatted output
 
+    attrToStr(attrs: string[]): string {
+        return attrs.map(attr => ` ${attr}`).join('');
+    }
+
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         if (attrStr && val.indexOf('<') === -1) {
             return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
