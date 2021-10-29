@@ -206,7 +206,7 @@ export class J2xParser {
     // Formatted output
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
-        const attrs = this.attrToStr(attrStr, level);
+        const attrs = this.attrsToStr(attrStr, level);
         if (attrStr.length && val.indexOf('<') === -1) {
             const closeTag = `<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
             return `${this.indentate(level)}${closeTag}`;
@@ -217,7 +217,7 @@ export class J2xParser {
     }
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
-        const attrs = this.attrToStr(attrStr, level);
+        const attrs = this.attrsToStr(attrStr, level);
         const closeTag = `<${key}${attrs}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
         return `${this.indentate(level)}${closeTag}`;
     }
@@ -228,9 +228,8 @@ export class J2xParser {
         if (val !== '') {
             return this._textofObjectNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
-            const attrs = this.attrToStr(attrStr, level);
-            const closeTag = `<${key}${attrs}/${this.tagEndChar}`;
-            return `${this.indentate(level)}${closeTag}`; //+ this.newLine
+            const attrs = this.attrsToStr(attrStr, level);
+            return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`; //+ this.newLine
         }
     }
 
@@ -238,13 +237,12 @@ export class J2xParser {
         if (val !== '') {
             return this._textofTextValNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
-            const attrs = this.attrToStr(attrStr, level);
-            const closeTag = `<${key}${attrs}/${this.tagEndChar}`;
-            return `${this.indentate(level)}${closeTag}`;
+            const attrs = this.attrsToStr(attrStr, level);
+            return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`;
         }
     }
 
-    attrToStr(attrs: string[], level: number): string {
+    attrsToStr(attrs: string[], level: number): string {
         const indent = this.indentate(level + 1);
         return attrs.map(attr => doAttrsIndent ? `\n${indent}${attr}` : ` ${attr}`).join('');
     }
