@@ -206,15 +206,17 @@ export class J2xParser {
     // Formatted output
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
+        const attrs = attrToStr(attrStr);
         if (attrStr.length && val.indexOf('<') === -1) {
-            return `${this.indentate(level)}<${key}${attrToStr(attrStr)}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+            return `${this.indentate(level)}<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
-            return `${this.indentate(level)}<${key}${attrToStr(attrStr)}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+            return `${this.indentate(level)}<${key}${attrs}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
         }
     }
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
-        return `${this.indentate(level)}<${key}${attrToStr(attrStr)}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+        const attrs = attrToStr(attrStr);
+        return `${this.indentate(level)}<${key}${attrs}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
     }
 
     // Empty guards
@@ -223,7 +225,8 @@ export class J2xParser {
         if (val !== '') {
             return this._textofObjectNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
-            return `${this.indentate(level)}<${key}${attrToStr(attrStr)}/${this.tagEndChar}`; //+ this.newLine
+            const attrs = attrToStr(attrStr);
+            return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`; //+ this.newLine
         }
     }
 
@@ -231,7 +234,8 @@ export class J2xParser {
         if (val !== '') {
             return this._textofTextValNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
-            return `${this.indentate(level)}<${key}${attrToStr(attrStr)}/${this.tagEndChar}`;
+            const attrs = attrToStr(attrStr);
+            return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`;
         }
     }
 } //class J2xParser
