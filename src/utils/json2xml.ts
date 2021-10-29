@@ -98,8 +98,8 @@ export class J2xParser {
             this.newLine = '';
         }
 
-        this.textofTextValNode = this.options.supressEmptyNode ? this._textofTextNode : this.textofTextValNodeWithoutEmptyCheck;
-        this.textofObjectNode = this.options.supressEmptyNode ? this._textofObjNode : this.textofObjectNodeWithoutEmptyCheck;
+        this.textofTextValNode = this.options.supressEmptyNode ? this._textofTextNode : this._textofTextValNodeWithoutEmptyCheck;
+        this.textofObjectNode = this.options.supressEmptyNode ? this._textofObjNode : this._textofObjectNodeWithoutEmptyCheck;
     }
 
     parse(jObj: any) {
@@ -116,7 +116,7 @@ export class J2xParser {
         let val = '';
         for (let key in jObj) {
             const keyVal = jObj[key];
-            console.log(`--------j2x key ${key}\n`, keyVal, '\nval:\n', val);
+            console.log(`--------key: ${key} keyVal:\n`, keyVal, '\n===val:\n', val);
 
             if (typeof keyVal === 'undefined') {
                 // supress undefined node
@@ -205,7 +205,7 @@ export class J2xParser {
 
     // Formatted output
 
-    textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         if (attrStr && val.indexOf('<') === -1) {
             return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
@@ -213,7 +213,7 @@ export class J2xParser {
         }
     }
 
-    textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
+    _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
     }
 
@@ -221,7 +221,7 @@ export class J2xParser {
 
     _textofObjNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         if (val !== '') {
-            return this.textofObjectNodeWithoutEmptyCheck(val, key, attrStr, level);
+            return this._textofObjectNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
             return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`; //+ this.newLine
         }
@@ -229,7 +229,7 @@ export class J2xParser {
 
     _textofTextNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
         if (val !== '') {
-            return this.textofTextValNodeWithoutEmptyCheck(val, key, attrStr, level);
+            return this._textofTextValNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
             return `${this.indentate(level)}<${key}${attrStr}/${this.tagEndChar}`;
         }
