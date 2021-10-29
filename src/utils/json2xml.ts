@@ -208,15 +208,16 @@ export class J2xParser {
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
         const reduce = doAttrsIndent && !val;
+        const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
         // if (!reduce) {
         //     console.log(`1--------key: ${key}`, ' ===val: ', val);  
         // }
         let ending;
         //console.log(`--------key: ${key}`, ' ===val: ', val);
         if (attrStr.length && val.indexOf('<') === -1) {
-            ending = reduce ? `/${this.tagEndChar}` : `>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+            ending = reduce ? front : `>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
-            ending = reduce ? `/${this.tagEndChar}` : `${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+            ending = reduce ? front : `${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
         }
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
@@ -224,10 +225,11 @@ export class J2xParser {
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
         const reduce = doAttrsIndent && !val;
+        const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
         // if (!reduce) {
         //     console.log(`2--------key: ${key}`, ' ===val: ', val);  
         // }
-        const ending = reduce ? ` /${this.tagEndChar}` : `>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+        const ending = reduce ? front : `>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
 
@@ -259,6 +261,7 @@ export class J2xParser {
 } //class J2xParser
 
 const doAttrsIndent = true; // TODO: define as options
+const doAttrsEndingIndent = true; // TODO: define as options
 
 // replace CDATA
 
