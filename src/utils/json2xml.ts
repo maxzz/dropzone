@@ -203,17 +203,17 @@ export class J2xParser {
         }
     }
 
-    // Formatted output
+    // Formatted output //TODO: detect # of children
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
+        let closeTag;
         if (attrStr.length && val.indexOf('<') === -1) {
-            const closeTag = `<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
-            return `${this.indentate(level)}${closeTag}`;
+            closeTag = `<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
-            const closeTag = `<${key}${attrs}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
-            return `${this.indentate(level)}${closeTag}`;
+            closeTag = `<${key}${attrs}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
         }
+        return `${this.indentate(level)}${closeTag}`;
     }
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
