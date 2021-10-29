@@ -12,6 +12,11 @@ type J2xOptions = {
     attrValueProcessor: (attrValue: string | any) => string;
 
     rootNodeName?: string;
+
+    doReduceEmptyValues: boolean;   // Reduce attrs closing on empty values.            true: <field /> false: <field></field>
+    doAttrsIndent: boolean;         // Attribute indentation.                           true: <field \nattr ... \nattr /> false: <field attr attr />
+    doAttrsEndingIndent: boolean;   // Attrs ending indented. valid if doAttrsIndent is true. true: <field ... \n/> false: <field ... />
+
 };
 type J2xOptionsOptional = Partial<J2xOptions>;
 
@@ -41,6 +46,10 @@ const defaultOptions: J2xOptions = {
     supressEmptyNode: false,
     tagValueProcessor: function (a: any): string { return '' + a; },
     attrValueProcessor: function (a: any): string { return '' + a; },
+
+    doReduceEmptyValues: false,
+    doAttrsIndent: true,
+    doAttrsEndingIndent: true,
 };
 
 const props: (keyof J2xOptions)[] = [
@@ -55,12 +64,17 @@ const props: (keyof J2xOptions)[] = [
     'supressEmptyNode',
     'tagValueProcessor',
     'attrValueProcessor',
+
     'rootNodeName', //when array as root
+
+    'doReduceEmptyValues',
+    'doAttrsIndent',
+    'doAttrsEndingIndent',
 ];
 
-const doReduceEmptyValues = false;  // Reduce attrs closing on empty    values true: <field /> false: <field></field>
-const doAttrsIndent = true;         // Attribute indentation            true: <field \nattr ... \nattr /> false: <field attr attr />
-const doAttrsEndingIndent = false;  // Attrs ending indented            true: <field ... \n/> false: <field ... />
+// const doReduceEmptyValues = false;  // Reduce attrs closing on empty    values true: <field /> false: <field></field>
+// const doAttrsIndent = true;         // Attribute indentation            true: <field \nattr ... \nattr /> false: <field attr attr />
+// const doAttrsEndingIndent = false;  // Attrs ending indented            true: <field ... \n/> false: <field ... />
 
 export class J2xParser {
     options: J2xOptions;
@@ -210,9 +224,9 @@ export class J2xParser {
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
-        const reduce = doAttrsIndent && !val;
-        const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
-        const doEmpty = doReduceEmptyValues && !val;
+        const reduce = this.options.doAttrsIndent && !val;
+        const front = reduce ? this.options.doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}` : ` /${this.tagEndChar}` : '';
+        const doEmpty = this.options.doReduceEmptyValues && !val;
         let ending;
         if (attrStr.length && val.indexOf('<') === -1) {
             ending = reduce ? front : doEmpty ? ` /${this.tagEndChar}` : `>${val}</${key}${this.tagEndChar}`;
@@ -224,10 +238,10 @@ export class J2xParser {
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
-        const reduce = doAttrsIndent && !val;
-        const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
+        const reduce = this.options.doAttrsIndent && !val;
+        const front = reduce ? this.options.doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}` : ` /${this.tagEndChar}` : '';
         const clearVal = this.options.tagValueProcessor(val);
-        const doEmpty = doReduceEmptyValues && !clearVal;
+        const doEmpty = this.options.doReduceEmptyValues && !clearVal;
         const ending = reduce ? front : doEmpty ? ` /${this.tagEndChar}` : `>${clearVal}</${key}${this.tagEndChar}`;
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
@@ -254,7 +268,7 @@ export class J2xParser {
 
     attrsToStr(attrs: string[], level: number): string {
         const indent = this.indentate(level + 1);
-        return attrs.map(attr => doAttrsIndent ? `\n${indent}${attr}` : ` ${attr}`).join('');
+        return attrs.map(attr => this.options.doAttrsIndent ? `\n${indent}${attr}` : ` ${attr}`).join('');
     }
 
 } //class J2xParser
@@ -300,6 +314,6 @@ function indentate(this: J2xParser, level: number): string {
     return this.options.indentBy.repeat(level);
 }
 
-//formatting
-//indentation
-//\n after each closing or self closing tag
+//formatting - done
+//indentation - done
+//\n after each closing or self closing tag - done
