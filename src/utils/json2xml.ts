@@ -208,11 +208,12 @@ export class J2xParser {
         const attrs = this.attrsToStr(attrStr, level);
         const reduce = doAttrsIndent && !val;
         const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
+        const doEmpty = doReduceEmptyValues && !val;
         let ending;
         if (attrStr.length && val.indexOf('<') === -1) {
-            ending = reduce ? front : `>${val}</${key}${this.tagEndChar}`;
+            ending = reduce ? front : doEmpty ? ` /${this.tagEndChar}` : `>${val}</${key}${this.tagEndChar}`;
         } else {
-            ending = reduce ? front : `${this.tagEndChar}${val}${this.indentate(level)}</${key}${this.tagEndChar}`;
+            ending = reduce ? front : doEmpty ? ` /${this.tagEndChar}` : `${this.tagEndChar}${val}${this.indentate(level)}</${key}${this.tagEndChar}`;
         }
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
@@ -221,7 +222,9 @@ export class J2xParser {
         const attrs = this.attrsToStr(attrStr, level);
         const reduce = doAttrsIndent && !val;
         const front = reduce ? doAttrsEndingIndent ? `${this.newLine}${this.indentate(level)}/${this.tagEndChar}`: ` /${this.tagEndChar}` : '';
-        const ending = reduce ? front : `>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+        const clearVal = this.options.tagValueProcessor(val);
+        const doEmpty = doReduceEmptyValues && !clearVal;
+        const ending = reduce ? front : doEmpty ? ` /${this.tagEndChar}` : `>${clearVal}</${key}${this.tagEndChar}`;
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
 
@@ -252,6 +255,7 @@ export class J2xParser {
 
 } //class J2xParser
 
+const doReduceEmptyValues = true;
 const doAttrsIndent = false; // TODO: define as options
 const doAttrsEndingIndent = true; // TODO: define as options
 
