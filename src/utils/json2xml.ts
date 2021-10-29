@@ -116,7 +116,7 @@ export class J2xParser {
         let val = '';
         for (let key in jObj) {
             const keyVal = jObj[key];
-            console.log(`--------key: ${key} keyVal:\n`, keyVal, '\n===val:\n', val);
+            //console.log(`--------key: ${key} keyVal:\n`, keyVal, '\n===val:\n', val);
 
             if (typeof keyVal === 'undefined') {
                 // supress undefined node
@@ -207,19 +207,28 @@ export class J2xParser {
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
-        let closeTag;
-        if (attrStr.length && val.indexOf('<') === -1) {
-            closeTag = `<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
-        } else {
-            closeTag = `<${key}${attrs}${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+        const reduce = doAttrsIndent && !key;
+        if (!reduce) {
+            console.log(`1--------key: ${key}`, ' ===val: ', val);  
         }
-        return `${this.indentate(level)}${closeTag}`;
+        let ending;
+        //console.log(`--------key: ${key}`, ' ===val: ', val);
+        if (attrStr.length && val.indexOf('<') === -1) {
+            ending = reduce ? `/${this.tagEndChar}` : `>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
+        } else {
+            ending = reduce ? `/${this.tagEndChar}` : `${this.tagEndChar}${val /*+ this.newLine*/}${this.indentate(level)}</${key}${this.tagEndChar}`;
+        }
+        return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
-        const closeTag = `<${key}${attrs}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
-        return `${this.indentate(level)}${closeTag}`;
+        const reduce = doAttrsIndent && !key;
+        if (!reduce) {
+            console.log(`2--------key: ${key}`, ' ===val: ', val);  
+        }
+        const ending = reduce ? ` /${this.tagEndChar}` : `>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
+        return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
 
     // Empty guards
