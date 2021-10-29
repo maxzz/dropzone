@@ -206,7 +206,7 @@ export class J2xParser {
     // Formatted output
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
-        const attrs = attrToStr(attrStr);
+        const attrs = this.attrToStr(attrStr, level);
         if (attrStr.length && val.indexOf('<') === -1) {
             return `${this.indentate(level)}<${key}${attrs}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
         } else {
@@ -215,7 +215,7 @@ export class J2xParser {
     }
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
-        const attrs = attrToStr(attrStr);
+        const attrs = this.attrToStr(attrStr, level);
         return `${this.indentate(level)}<${key}${attrs}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
     }
 
@@ -225,7 +225,7 @@ export class J2xParser {
         if (val !== '') {
             return this._textofObjectNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
-            const attrs = attrToStr(attrStr);
+            const attrs = this.attrToStr(attrStr, level);
             return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`; //+ this.newLine
         }
     }
@@ -234,15 +234,18 @@ export class J2xParser {
         if (val !== '') {
             return this._textofTextValNodeWithoutEmptyCheck(val, key, attrStr, level);
         } else {
-            const attrs = attrToStr(attrStr);
+            const attrs = this.attrToStr(attrStr, level);
             return `${this.indentate(level)}<${key}${attrs}/${this.tagEndChar}`;
         }
     }
-} //class J2xParser
 
-function attrToStr(attrs: string[]): string {
-    return attrs.map(attr => ` ${attr}`).join('');
-}
+    attrToStr(attrs: string[], level: number): string {
+        const doAttrsIndent = true;
+        const indent = this.indentate(level + 1);
+        return attrs.map(attr =>  doAttrsIndent ? `\n${indent}${attr}`: ` ${attr}`).join('') ;
+    }
+    
+    } //class J2xParser
 
 // replace CDATA
 

@@ -81,7 +81,7 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         xml = (new J2xParser({
             ...parseOptions,
             format: true,
-            indentBy: '\t',
+            indentBy: '    ',
             tagValueProcessor: tag,
             attrValueProcessor: attr,
         })).parse(obj);
