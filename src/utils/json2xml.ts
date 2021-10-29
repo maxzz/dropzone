@@ -207,10 +207,10 @@ export class J2xParser {
 
     _textofObjectNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
-        const reduce = doAttrsIndent && !key;
-        if (!reduce) {
-            console.log(`1--------key: ${key}`, ' ===val: ', val);  
-        }
+        const reduce = doAttrsIndent && !val;
+        // if (!reduce) {
+        //     console.log(`1--------key: ${key}`, ' ===val: ', val);  
+        // }
         let ending;
         //console.log(`--------key: ${key}`, ' ===val: ', val);
         if (attrStr.length && val.indexOf('<') === -1) {
@@ -223,10 +223,10 @@ export class J2xParser {
 
     _textofTextValNodeWithoutEmptyCheck(this: J2xParser, val: string, key: string, attrStr: string[], level: number): string {
         const attrs = this.attrsToStr(attrStr, level);
-        const reduce = doAttrsIndent && !key;
-        if (!reduce) {
-            console.log(`2--------key: ${key}`, ' ===val: ', val);  
-        }
+        const reduce = doAttrsIndent && !val;
+        // if (!reduce) {
+        //     console.log(`2--------key: ${key}`, ' ===val: ', val);  
+        // }
         const ending = reduce ? ` /${this.tagEndChar}` : `>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
         return `${this.indentate(level)}<${key}${attrs}${ending}`;
     }
