@@ -58,7 +58,7 @@ const props: (keyof J2xOptions)[] = [
     'rootNodeName', //when array as root
 ];
 
-export class Parser {
+export class J2xParser {
     options: J2xOptions;
     attrPrefixLen: number;
     isAttribute: (name: string) => boolean | string;
@@ -199,9 +199,9 @@ export class Parser {
         return { attrStr: attrStr, val: val };
     };
 
-} //class Parser
+} //class J2xParser
 
-function _processTextOrObjNode(this: Parser, object: any, key: string, level: number): string {
+function _processTextOrObjNode(this: J2xParser, object: any, key: string, level: number): string {
     const result = this.j2x(object, level + 1);
     if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
         return this.buildTextNode(result.val, key, result.attrStr, level);
@@ -210,7 +210,7 @@ function _processTextOrObjNode(this: Parser, object: any, key: string, level: nu
     }
 }
 
-function _replaceCDATAstr(this: Parser, str: string, cdata: string): string {
+function _replaceCDATAstr(this: J2xParser, str: string, cdata: string): string {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
         return `${str}<![CDATA[${cdata}]]${this.tagEndChar}`;
@@ -219,7 +219,7 @@ function _replaceCDATAstr(this: Parser, str: string, cdata: string): string {
     }
 }
 
-function _replaceCDATAarr(this: Parser, str: string, cdata: any): string {
+function _replaceCDATAarr(this: J2xParser, str: string, cdata: any): string {
     str = this.options.tagValueProcessor('' + str);
     if (this.options.cdataPositionChar === '' || str === '') {
         return `${str}<![CDATA[${cdata.join(']]><![CDATA[')}]]${this.tagEndChar}`;
@@ -231,7 +231,7 @@ function _replaceCDATAarr(this: Parser, str: string, cdata: any): string {
     }
 }
 
-function _buildObjectNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildObjectNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (attrStr && val.indexOf('<') === -1) {
         return `${this.indentate(level)}<${key}${attrStr}>${val /*+this.newLine+this.indentate(level)*/}</${key}${this.tagEndChar}`;
     } else {
@@ -239,7 +239,7 @@ function _buildObjectNode(this: Parser, val: string, key: string, attrStr: strin
     }
 }
 
-function _buildObjNodeAsEmpty(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildObjNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildObjectNode(val, key, attrStr, level);
     } else {
@@ -247,11 +247,11 @@ function _buildObjNodeAsEmpty(this: Parser, val: string, key: string, attrStr: s
     }
 }
 
-function _buildTextValNode(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildTextValNode(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     return `${this.indentate(level)}<${key}${attrStr}>${this.options.tagValueProcessor(val)}</${key}${this.tagEndChar}`;
 }
 
-function _buildTextNodeAsEmpty(this: Parser, val: string, key: string, attrStr: string, level: number): string {
+function _buildTextNodeAsEmpty(this: J2xParser, val: string, key: string, attrStr: string, level: number): string {
     if (val !== '') {
         return this.buildTextValNode(val, key, attrStr, level);
     } else {
@@ -259,11 +259,11 @@ function _buildTextNodeAsEmpty(this: Parser, val: string, key: string, attrStr: 
     }
 }
 
-function indentate(this: Parser, level: number): string {
+function indentate(this: J2xParser, level: number): string {
     return this.options.indentBy.repeat(level);
 }
 
-function isAttribute(this: Parser, name: string /*, options*/): string | false {
+function isAttribute(this: J2xParser, name: string /*, options*/): string | false {
     if (name.startsWith(this.options.attributeNamePrefix)) {
         return name.substr(this.attrPrefixLen);
     } else {
@@ -271,7 +271,7 @@ function isAttribute(this: Parser, name: string /*, options*/): string | false {
     }
 }
 
-function isCDATA(this: Parser, name: string): boolean {
+function isCDATA(this: J2xParser, name: string): boolean {
     return name === this.options.cdataTagName;
 }
 
