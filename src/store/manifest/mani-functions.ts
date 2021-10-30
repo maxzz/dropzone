@@ -63,6 +63,19 @@ export function restoreXml(s: string): string { //G: 'html escape characters': m
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::xml_remove()
 }
 
+export function escapeXml(unsafe: string) {
+    return unsafe.replace(/[<>&'"]/g, function (c: string): string {
+        switch (c) {
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case '\'': return '&apos;';
+            case '"': return '&quot;';
+            default: return c;
+        }
+    });
+}
+
 function getPool(form: Mani.Form): string[] {
     return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
 }
