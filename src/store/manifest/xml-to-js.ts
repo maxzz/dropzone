@@ -6,6 +6,10 @@ import { fileDownload } from '../../utils/file-download';
 
 const attributes: string = "_attributes";
 
+function isEmptyObject(obj?: object): boolean {
+    return !obj || obj?.constructor !== Object || !Reflect.ownKeys(obj).length;
+}
+
 function manifestToJsonForXml(mani: Mani.Manifest) {
     let rv: any = {
         manifest: {}
@@ -17,10 +21,10 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
         rv.manifest.forms = {};
         rv.manifest.forms.form = mani.forms.map((form) => {
             let newForm: any = {};
-            if (form.detection) {
+            if (!isEmptyObject(form.detection)) {
                 newForm.detection = { [attributes]: { ...form.detection } };
             }
-            if (form.options) {
+            if (!isEmptyObject(form.options)) {
                 newForm.options = { [attributes]: { ...form.options } };
             }
             return newForm;
@@ -39,22 +43,22 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
     let xml = '';
     try {
         // 1.
-        const obj = parse(fileUs.raw, parseOptions);
+        const jsFromXml = parse(fileUs.raw, parseOptions);
 
         // 2.
         let rv = fileUs.mani && manifestToJsonForXml(fileUs.mani) || '';
 
-        //console.log('%c---------source mani---------', 'color: green', `\n${JSON.stringify(fileUs.mani || 'undefiend', null, 4)}`);
-        console.log('%c---------raw---------', 'color: green', `\n${JSON.stringify(obj, null, 4)}`);
-        console.log('%c---------mani3Xml---------', 'color: yellow', `\n${JSON.stringify(rv, null, 4)}`);
+        console.log('%c---------internal mani---------', 'color: green', `\n${JSON.stringify(fileUs.mani || 'undefiend', null, 4)}`);
+        console.log('%c---------js from xml---------', 'color: green', `\n${JSON.stringify(jsFromXml, null, 4)}`);
+        console.log('%c---------mani for Xml---------', 'color: yellow', `\n${JSON.stringify(rv, null, 4)}`);
 
         // 3.
-        xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(obj);
+        xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(jsFromXml);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         //console.log('%c---------raw---------', 'color: green', `\n${xml}`);
 
         // 4.
-        fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
+        //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
     } catch (error) {
         console.log({ error });
     }
