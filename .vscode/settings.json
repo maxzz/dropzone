@@ -1,3 +1,5 @@
 {
-    "svg.preview.background": "transparent"
+    "svg.preview.background": "transparent",
+    "editor.matchBrackets": "never",
+    "editor.renderLineHighlight": "none"
 }
