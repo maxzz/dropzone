@@ -19,43 +19,8 @@ function escapeXml(unsafe: string) {
 
 const attributes: string = "_attributes";
 
-function jsonToXml<T extends Object>(obj: T, os: string, itemKey: string, indent: number): void {
+function manifestToJsonForXml(mani: Mani.Manifest) {
 
-    if (typeof obj === 'object') {
-        const entries = Object.entries(obj);
-
-        for (let [key, val] of entries) {
-            if (Array.isArray(val)) {
-
-            } else if (typeof val === 'object') {
-
-            }
-        }
-    } else if (Array.isArray(obj)) {
-
-        // for (let elm of obj) {
-
-        // }
-    }
-
-
-    // for (let cur = 0; cur < entries.length; cur++) {
-    //     if (typeof entries[cur][1] === 'string') {
-    //     }
-    // }
-}
-
-function tag(s: string): string {
-    //console.log('-----------tag', s);
-    
-    return s;
-}
-
-function attr(s: string): string {
-    //console.log('    attr', s);
-
-    //return escapeXml(s); // it's allready escaped
-    return s; 
 }
 
 export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } | { res: string; err?: undefined; } {
@@ -73,24 +38,19 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         const obj = parse(fileUs.raw, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
         console.log('obj\n', obj);
         
-        //((obj.manifest as Mani.Manifest).descriptor as any)._attributes.id += '<>><'; // <- fast-xml-parser can read it, but notepad complains on illegal characters.
-
-        // let rv = '';
-        // jsonToXml({manifest: {
-        // }}, rv, 'manifest', 0);
+        let rv = fileUs.mani && manifestToJsonForXml(fileUs.mani) || '';
+        console.log('mani3Xml', rv);
 
         xml = (new J2xParser({
             ...parseOptions,
             format: true,
             indentBy: '    ',
-            tagValueProcessor: tag,
-            attrValueProcessor: attr,
         })).parse(obj);
 
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         console.log('---------raw\n', xml);
 
-        fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
+        //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
 
     } catch (error) {
         console.log({ error });
