@@ -4,7 +4,7 @@ import { FileUsAtom } from '../../../../store/store';
 import { restoreXml } from '../../../../store/manifest/mani-functions';
 import { ToggleWithPortal } from './FormOptionsPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
-import { Matching } from '../../../../store/manifest/mani-io';
+import { Matching } from '../../../../store/manifest/mani-i';
 
 function woProtocol(url: string): string {
     return url.replace(/^https?:\/\//, '');
