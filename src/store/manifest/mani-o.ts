@@ -5,20 +5,15 @@ function hasKeys(obj?: object): boolean {
 }
 
 export function manifestToJsonForXml(mani: Mani.Manifest) {
-    let rv: any = {
-        manifest: {}
-    };
-
     const { options, descriptor, forms, ...rest } = mani;
+
+    let rv: any = { manifest: {}, };
 
     // 1. Customization
     if (options) {
         const { processes, ...rest } = options;
-        const xmlProcesses = processes?.length && processes.map((process) => ({ [attributes]: { ...process } }));
-        rv.manifest.options = {
-            ...(xmlProcesses && { processes: { process: xmlProcesses } }),
-            ...rest,
-        };
+        const xmlProcesses = processes?.length && {processes: { process: processes.map((process) => ({ [attributes]: { ...process } })) }};
+        rv.manifest.options = { ...xmlProcesses, ...rest, };
     }
 
     // 2. Manifest descriptor
