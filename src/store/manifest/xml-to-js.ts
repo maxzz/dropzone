@@ -14,14 +14,25 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
     let rv: any = {
         manifest: {}
     };
+
+    // for (const [key, val] of Object.entries(mani)) {
+    // }
+
     if (!isEmptyObject(mani.options)) {
-        if (!isEmptyObject(mani.options?.processes)) {
+        if (mani.options?.processes.length) {
+            rv.manifest.options = {
+                processes: {
+                    process: mani.options.processes.map((process) => ({ [attributes]: { ...process } }))
+                }
+            };
+
         }
-        rv.manifest.options = { [attributes]: { ...mani.options } };
     }
+
     if (!isEmptyObject(mani.descriptor)) {
         rv.manifest.descriptor = { [attributes]: { ...mani.descriptor } };
     }
+
     if (mani.forms?.length) {
         rv.manifest.forms = {};
         rv.manifest.forms.form = mani.forms.map((form) => {
@@ -60,7 +71,7 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         // 3.
         xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(jsFromXml);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
-        //console.log('%c---------raw---------', 'color: green', `\n${xml}`);
+        console.log('%c---------new xml---------', 'color: green', `\n${xml}`);
 
         // 4.
         //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
