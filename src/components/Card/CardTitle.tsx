@@ -111,10 +111,10 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             {/* Login caption */}
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
                 {isCustomization
-                    ? 'Excluded app'
+                    ? <span title="This is file for the app customization">Excluded app</span>
                     : isFCat
-                        ? <div title="Login name" className="w-min">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</div>
-                        : title || 'No login title'
+                        ? <div title="Number of items in Field Catalog" className="w-min">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</div>
+                        : <span title="Login name">{title || 'No login title'}</span>
                 }
             </div>
 
