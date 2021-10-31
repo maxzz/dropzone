@@ -1,3 +1,7 @@
+type Entries<T> = {
+    [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
 declare module Mani {
     type FieldType = 'edit' | 'button' | 'list' | 'combo' | 'check' | 'radio' | 'text';
 
@@ -86,7 +90,6 @@ declare module Mani {
         }
         interface Options {
             processes: Process[];
-            //tada: string;
         }
     }
 

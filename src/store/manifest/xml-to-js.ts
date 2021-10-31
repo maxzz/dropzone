@@ -6,10 +6,6 @@ import { fileDownload } from '../../utils/file-download';
 
 const attributes: string = "_attributes";
 
-type Entries<T> = {
-    [K in keyof T]: [K, T[K]];
-}[keyof T][];
-
 function isEmptyObject(obj?: object): boolean {
     return !obj || !Reflect.ownKeys(obj).length;
 }
@@ -20,29 +16,15 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
     };
 
     if (mani.options) {
-
-        //mani.options.tada = '111';
-
         let processes;
         let rest: any = {};
-
         for (const kv of Object.entries(mani.options) as Entries<Mani.Customization.Options>) {
-
             if (kv[0] === 'processes') {
-                if (kv[1].length) {
-                    processes = kv[1].map((process) => ({ [attributes]: { ...process } }));
-
-                    rv.manifest.options = {
-                        processes: {
-                            process: kv[1].map((process) => ({ [attributes]: { ...process } }))
-                        }
-                    };
-                }
+                processes = kv[1]?.length && kv[1].map((process) => ({ [attributes]: { ...process } }));
             } else {
                 rest[kv[0]] = kv[1];
             }
         }
-
         rv.manifest.options = {
             ...(processes && { processes: { process: processes } }),
             ...rest,
