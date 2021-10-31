@@ -45,8 +45,18 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
     if (mani.forms?.length) {
         rv.manifest.forms = {};
         rv.manifest.forms.form = mani.forms.map((form) => {
-            let newForm: any = {};
+            //let newForm: any = {};
 
+            const { fcontext, detection, options, fields } = form;
+
+            let newForm: any = {
+                ...(!isEmptyObject(fcontext) && { fcontext: { [attributes]: { ...form.fcontext } } }),
+                ...(!isEmptyObject(detection) && { detection: { [attributes]: { ...form.detection } } }),
+                ...(!isEmptyObject(options) && { options: { [attributes]: { ...form.options } } }),
+                ...(fields?.length && { fields: { field: form.fields.map((field) => ({ [attributes]: { ...field } })) } }),
+            };
+
+            /*
             // 3.1. Form detection
             if (!isEmptyObject(form.fcontext)) {
                 newForm.fcontext = { [attributes]: { ...form.fcontext } };
@@ -66,6 +76,7 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
             if (form.fields.length) {
                 newForm.fields = { field: form.fields.map((field) => ({ [attributes]: { ...field } })) };
             }
+            */
 
             return newForm;
         });
