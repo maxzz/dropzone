@@ -6,6 +6,10 @@ import { fileDownload } from '../../utils/file-download';
 
 const attributes: string = "_attributes";
 
+type Entries<T> = {
+    [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
 function isEmptyObject(obj?: object): boolean {
     return !obj || !Reflect.ownKeys(obj).length;
 }
@@ -15,32 +19,34 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
         manifest: {}
     };
 
-    // for (const [key, val] of Object.entries(mani)) {
-    // }
-
-    type Entries<T> = {
-        [K in keyof T]: [K, T[K]];
-    }[keyof T][];
-
     if (mani.options) {
-        type keys = keyof Mani.Customization.Options;
-        //type vals = typeof Mani.Customization.Options[keys];
-        //<Entries<Mani.Customization.Options>>
-        //type opts = Mani.Customization.Options;
-        type opts = Entries<Mani.Customization.Options>;
-        for (const k of Object.entries(mani.options) as Entries<Mani.Customization.Options>) {
-            if (k[0] === 'processes') {
-                if (k[1].length) {
+
+        mani.options.tada = '111';
+
+        let processes;
+        let rest: any = {};
+
+        for (const kv of Object.entries(mani.options) as Entries<Mani.Customization.Options>) {
+
+            if (kv[0] === 'processes') {
+                if (kv[1].length) {
+                    processes = kv[1].map((process) => ({ [attributes]: { ...process } }));
+
                     rv.manifest.options = {
                         processes: {
-                            process: k[1].map((process) => ({ [attributes]: { ...process } }))
+                            process: kv[1].map((process) => ({ [attributes]: { ...process } }))
                         }
                     };
                 }
+            } else {
+                rest[kv[0]] = kv[1];
             }
         }
 
-
+        rv.manifest.options = {
+            ...(processes && { processes: { process: processes } }),
+            ...rest,
+        };
     }
 
     if (!isEmptyObject(mani.descriptor)) {
@@ -83,7 +89,8 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         console.log('%c---------mani for Xml---------', 'color: yellow', `\n${JSON.stringify(rv, null, 4)}`);
 
         // 3.
-        xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(jsFromXml);
+        xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(rv);
+        // xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(jsFromXml);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         console.log('%c---------new xml---------', 'color: green', `\n${xml}`);
 
