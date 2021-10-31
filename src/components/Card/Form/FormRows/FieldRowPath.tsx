@@ -123,11 +123,11 @@ function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs;
     return (
         <div className="text-xs bg-gray-100 px-2 pb-1">
             <div className={`max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto ${className}`}>
+                {field.path.sid && <PartSid label={'sid'} part={field.path.sid} />}
+                {field.path.did2 && <PartString label={'did2'} part={field.path.did2} />}
                 {field.path.p4 && <PartP4 label={'p4'} part={field.path.p4} />}
                 {field.path.p4a && <PartP4 label={'p4a'} part={field.path.p4a} />}
                 {field.path.loc && <PartLoc label={'loc'} part={field.path.loc} />}
-                {field.path.sid && <PartSid label={'sid'} part={field.path.sid} />}
-                {field.path.did2 && <PartString label={'did2'} part={field.path.did2} />}
                 {field.path.sn && <PartString label={'sn'} part={field.path.sn} />}
             </div>
         </div>
