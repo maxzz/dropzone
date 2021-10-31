@@ -7,14 +7,19 @@ import { fileDownload } from '../../utils/file-download';
 const attributes: string = "_attributes";
 
 function isEmptyObject(obj?: object): boolean {
-    return !obj || obj?.constructor !== Object || !Reflect.ownKeys(obj).length;
+    return !obj || !Reflect.ownKeys(obj).length;
 }
 
 function manifestToJsonForXml(mani: Mani.Manifest) {
     let rv: any = {
         manifest: {}
     };
-    if (mani.descriptor) {
+    if (!isEmptyObject(mani.options)) {
+        if (!isEmptyObject(mani.options?.processes)) {
+        }
+        rv.manifest.options = { [attributes]: { ...mani.options } };
+    }
+    if (!isEmptyObject(mani.descriptor)) {
         rv.manifest.descriptor = { [attributes]: { ...mani.descriptor } };
     }
     if (mani.forms?.length) {
