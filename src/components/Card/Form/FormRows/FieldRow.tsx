@@ -71,7 +71,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
 
             <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
                 toggle={
-                    <IconPreview className={`w-[16px] h-[16px] ${hasPreview ? '' : 'opacity-25'}`} />
+                    <IconPreview className={`w-4 h-4 ${hasPreview ? '' : 'opacity-25'}`} />
                 }
             >
                 {hasPreview &&
@@ -126,7 +126,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                     </div>
                 }
             >
-                <div className="ml-4 bg-gray-100 p-0.5 border border-gray-700">
+                <div className="ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700">
                     <FieldRowPath className="" fileUs={fileUs} form={form} field={field} />
                 </div>
             </UIToggleWithPortal>
