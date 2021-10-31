@@ -83,10 +83,15 @@ function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom
 
     return (
         <ToggleWithPortal text="detection">
-            <div className="mt-1 bg-gray-100 ring-1 ring-gray-400">
-                <div className="px-2 text-xs w-96 max-w-sm max-h-[40vh] overflow-auto shadow-2xl">
+            <div className="mt-1 text-xs bg-gray-100 ring-1 ring-gray-400 shadow-2xl">
+                <div className="px-2 py-1 font-bold">summary</div>
+                <div className="px-2 w-96 max-w-sm max-h-[40vh] overflow-auto border-t border-b border-gray-400">
                     <UITableFromObject obj={toShowDetection} />
                     <UITableFromObject obj={toShowOptions} />
+                </div>
+                <div className="my-2">
+                    <div className="px-2 font-bold">matching</div>
+                    <button className="mx-2 my-2 h-6 px-2 font-bold bg-gray-200 border border-gray-500 rounded scale-[.97] shadow">edit</button>
                 </div>
             </div>
         </ToggleWithPortal>
