@@ -27,7 +27,7 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
         //type vals = typeof Mani.Customization.Options[keys];
         //<Entries<Mani.Customization.Options>>
         type opts = Mani.Customization.Options;
-        for (const [key, val] of Object.entries(mani.options) as [keys, opts[keys]]) {
+        for (const [key, val] of Object.entries(mani.options) as Entries<Mani.Customization.Options>) {
             if (key === 'processes') {
                 if (val.length) {
                     rv.manifest.options = {
