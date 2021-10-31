@@ -11,6 +11,7 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
 
     // 1. Customization
     if (mani.options) {
+        /*
         let processes;
         let rest: any = {};
         for (const kv of Object.entries(mani.options) as Entries<Mani.Customization.Options>) {
@@ -23,6 +24,14 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
         }
         rv.manifest.options = {
             ...(processes && { processes: { process: processes } }),
+            ...rest,
+        };
+        */
+
+        const { processes, ...rest } = mani.options;
+        const xmlProcesses = processes?.length && processes.map((process) => ({ [attributes]: { ...process } }));
+        rv.manifest.options = {
+            ...(xmlProcesses && { processes: { process: xmlProcesses } }),
             ...rest,
         };
     }
