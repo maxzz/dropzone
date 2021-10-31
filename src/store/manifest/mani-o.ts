@@ -12,13 +12,13 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
     // 1. Customization
     if (options) {
         const { processes, ...rest } = options;
-        const xmlProcesses = processes?.length && {processes: { process: processes.map((process) => ({ [attributes]: { ...process } })) }};
+        const xmlProcesses = processes?.length && {processes: { process: processes.map((process) => ({ [attributes]: process })) }};
         rv.manifest.options = { ...xmlProcesses, ...rest, };
     }
 
     // 2. Manifest descriptor
     if (hasKeys(descriptor)) {
-        rv.manifest.descriptor = { [attributes]: { ...descriptor } };
+        rv.manifest.descriptor = { [attributes]: descriptor };
     }
 
     // 3. Manifest forms
@@ -27,10 +27,10 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
             form: forms.map((form) => {
                 const { fcontext, detection, options, fields, ...rest } = form;
                 return {
-                    ...(hasKeys(fcontext) && { fcontext: { [attributes]: { ...form.fcontext } } }),
-                    ...(hasKeys(detection) && { detection: { [attributes]: { ...form.detection } } }),
-                    ...(hasKeys(options) && { options: { [attributes]: { ...form.options } } }),
-                    ...(fields?.length && { fields: { field: form.fields.map((field) => ({ [attributes]: { ...field } })) } }),
+                    ...(hasKeys(fcontext) && { fcontext: { [attributes]: form.fcontext } }),
+                    ...(hasKeys(detection) && { detection: { [attributes]: form.detection } }),
+                    ...(hasKeys(options) && { options: { [attributes]: form.options } }),
+                    ...(fields?.length && { fields: { field: form.fields.map((field) => ({ [attributes]: field })) } }),
                     ...rest,
                 };
             })
