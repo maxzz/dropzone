@@ -113,7 +113,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 {isCustomization
                     ? <span title="This is file for the app customization">Excluded app</span>
                     : isFCat
-                        ? <div title="Number of items in Field Catalog" className="w-min">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</div>
+                        ? <span title="Number of items in Field Catalog">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</span>
                         : <span title="Login name">{title || 'No login title'}</span>
                 }
             </div>
