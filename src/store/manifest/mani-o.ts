@@ -1,7 +1,7 @@
 const attributes: string = "_attributes";
 
-function isEmptyObject(obj?: object): boolean {
-    return !obj || !Reflect.ownKeys(obj).length;
+function hasKeys(obj?: object): boolean {
+    return !!obj && !!Reflect.ownKeys(obj).length;
 }
 
 export function manifestToJsonForXml(mani: Mani.Manifest) {
@@ -9,9 +9,11 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
         manifest: {}
     };
 
+    const { options, descriptor, forms, ...rest } = mani;
+
     // 1. Customization
-    if (mani.options) {
-        const { processes, ...rest } = mani.options;
+    if (options) {
+        const { processes, ...rest } = options;
         const xmlProcesses = processes?.length && processes.map((process) => ({ [attributes]: { ...process } }));
         rv.manifest.options = {
             ...(xmlProcesses && { processes: { process: xmlProcesses } }),
@@ -20,24 +22,25 @@ export function manifestToJsonForXml(mani: Mani.Manifest) {
     }
 
     // 2. Manifest descriptor
-    if (!isEmptyObject(mani.descriptor)) {
-        rv.manifest.descriptor = { [attributes]: { ...mani.descriptor } };
+    if (hasKeys(descriptor)) {
+        rv.manifest.descriptor = { [attributes]: { ...descriptor } };
     }
 
     // 3. Manifest forms
-    if (mani.forms?.length) {
-        rv.manifest.forms = {};
-        rv.manifest.forms.form = mani.forms.map((form) => {
-            const { fcontext, detection, options, fields, ...rest } = form;
-            return {
-                ...(!isEmptyObject(fcontext) && { fcontext: { [attributes]: { ...form.fcontext } } }),
-                ...(!isEmptyObject(detection) && { detection: { [attributes]: { ...form.detection } } }),
-                ...(!isEmptyObject(options) && { options: { [attributes]: { ...form.options } } }),
-                ...(fields?.length && { fields: { field: form.fields.map((field) => ({ [attributes]: { ...field } })) } }),
-                ...rest,
-            };
-        });
+    if (forms?.length) {
+        rv.manifest.forms = {
+            form: forms.map((form) => {
+                const { fcontext, detection, options, fields, ...rest } = form;
+                return {
+                    ...(hasKeys(fcontext) && { fcontext: { [attributes]: { ...form.fcontext } } }),
+                    ...(hasKeys(detection) && { detection: { [attributes]: { ...form.detection } } }),
+                    ...(hasKeys(options) && { options: { [attributes]: { ...form.options } } }),
+                    ...(fields?.length && { fields: { field: form.fields.map((field) => ({ [attributes]: { ...field } })) } }),
+                    ...rest,
+                };
+            })
+        };
     }
 
-    return rv;
+    return { ...rv, ...rest, };
 }
