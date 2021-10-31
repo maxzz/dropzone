@@ -18,15 +18,22 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
     // for (const [key, val] of Object.entries(mani)) {
     // }
 
-    if (!isEmptyObject(mani.options)) {
-        if (mani.options?.processes.length) {
-            rv.manifest.options = {
-                processes: {
-                    process: mani.options.processes.map((process) => ({ [attributes]: { ...process } }))
+    if (mani.options) {
+        type keys = keyof Mani.Customization.Options;
+        type vals = Mani.Customization.Options[keys];
+        for (const [key, val] of Object.entries<vals>(mani.options)) {
+            if (key === 'processes') {
+                if (val.length) {
+                    rv.manifest.options = {
+                        processes: {
+                            process: val.map((process) => ({ [attributes]: { ...process } }))
+                        }
+                    };
                 }
-            };
-
+            }
         }
+
+
     }
 
     if (!isEmptyObject(mani.descriptor)) {
