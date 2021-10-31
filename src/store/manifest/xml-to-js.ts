@@ -21,7 +21,7 @@ function manifestToJsonForXml(mani: Mani.Manifest) {
 
     if (mani.options) {
 
-        mani.options.tada = '111';
+        //mani.options.tada = '111';
 
         let processes;
         let rest: any = {};

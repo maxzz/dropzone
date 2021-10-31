@@ -86,7 +86,7 @@ declare module Mani {
         }
         interface Options {
             processes: Process[];
-            tada: string;
+            //tada: string;
         }
     }
 
