@@ -12,7 +12,7 @@ const Backdrop = styled('div', {
     left: "0",
     right: "0",
     backgroundColor: "#000",
-    opacity: 0.5
+    opacity: 0.4
 });
 
 // we use some pseudo random coords so nested modals
@@ -32,10 +32,13 @@ const RandomlyPositionedModal = styled(Modal, {
     padding: "20px"
 });
 
-function ModalExample() {
+function EditorMatch() {
     const [show, setShow] = React.useState(false);
 
     const renderBackdrop = (props: any) => <Backdrop {...props} />;
+
+    const containerRef = React.useRef<HTMLElement | null>(null);
+    React.useEffect(() => { containerRef.current = document.getElementById('portal'); }, []);
 
     return (
         <div className="modal-example">
@@ -45,30 +48,31 @@ function ModalExample() {
 
             <RandomlyPositionedModal
                 show={show}
-                onHide={() => setShow(false)}
+                onHide={() => {
+                    //setShow(false);
+                }}
+                onEscapeKeyDown={(e: KeyboardEvent) => {
+                    console.log('key', { e });
+                    setShow(false);
+                }}
+                onBackdropClick={(e: React.SyntheticEvent) => {
+                    console.log('bkg', { e });
+                    //e.preventDefault();
+                }}
                 renderBackdrop={renderBackdrop}
                 aria-labelledby="modal-label"
+                container={containerRef}
             >
                 <div>
-                    <h4 id="modal-label">Text in a modal</h4>
+                    <h4>Text in a modal</h4>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis nulla quod sint ad. Quia earum repellat optio explicabo alias amet, quibusdam ex ullam laborum totam pariatur quos facere deleniti!
-                        Dolor excepturi ratione modi quidem dolorem ab! Debitis illum repellendus vel cum doloribus, officiis nemo expedita nesciunt dolor reprehenderit laborum odit ab dignissimos magnam fugiat delectus nihil nam molestias impedit.
-                        Eveniet assumenda, explicabo exercitationem dolores voluptas fuga accusantium natus labore porro ipsa vero distinctio consequuntur odit inventore non hic voluptatem ipsum soluta itaque animi. Perspiciatis suscipit odit recusandae! Dolores, sapiente.
                     </p>
-                    <ModalExample />
+                    <EditorMatch />
                 </div>
             </RandomlyPositionedModal>
         </div>
     );
 }
 
-function EditorMatch() {
-    return (
-        <div>
-
-        </div>
-    );
-}
-
-export default ModalExample;
+export default EditorMatch;
