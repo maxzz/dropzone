@@ -10,7 +10,7 @@ import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
 import EditorMatchRadix from './components/Editors/EditorMatchRadix';
-import ModalExample from './components/Editors/EditorMatch';
+import EditorMatch from './components/Editors/EditorMatch';
 
 function App() {
     return (
@@ -22,7 +22,7 @@ function App() {
                 <HeaderBar className="flex-none" />
 
                 {/* <EditorMatchRadix /> */}
-                <ModalExample />
+                <EditorMatch />
 
                 <SelectedItems className="flex-none" />
 
