@@ -9,7 +9,6 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
-import EditorMatchRadix from './components/Editors/EditorMatchRadix';
 import EditorMatch from './components/Editors/EditorMatch';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
-                {/* <EditorMatchRadix /> */}
                 <EditorMatch />
 
                 <SelectedItems className="flex-none" />
