@@ -10,6 +10,7 @@ import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
 import EditorMatchRadix from './components/Editors/EditorMatchRadix';
+import ModalExample from './components/Editors/EditorMatch';
 
 function App() {
     return (
@@ -20,7 +21,8 @@ function App() {
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
-                <EditorMatchRadix />
+                {/* <EditorMatchRadix /> */}
+                <ModalExample />
 
                 <SelectedItems className="flex-none" />
 
