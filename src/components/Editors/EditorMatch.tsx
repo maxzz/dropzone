@@ -37,8 +37,8 @@ function EditorMatch() {
 
     const renderBackdrop = (props: any) => <Backdrop {...props} />;
 
-    const containerRef = React.useRef<HTMLElement | null>(null);
-    React.useEffect(() => { containerRef.current = document.getElementById('portal'); }, []);
+    const portalRef = React.useRef<HTMLElement | null>(null);
+    React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
 
     return (
         <div className="modal-example">
@@ -47,6 +47,10 @@ function EditorMatch() {
             </button>
 
             <RandomlyPositionedModal
+                css={{
+                    top: '25px',
+                    left: `${() => 50 + rand()}%`,
+                }}
                 show={show}
                 onHide={() => {
                     //setShow(false);
@@ -61,7 +65,7 @@ function EditorMatch() {
                 }}
                 renderBackdrop={renderBackdrop}
                 aria-labelledby="modal-label"
-                container={containerRef}
+                container={portalRef}
             >
                 <div>
                     <h4>Text in a modal</h4>
