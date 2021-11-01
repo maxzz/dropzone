@@ -20,10 +20,11 @@ const Backdrop = styled('div', {
 const RandomlyPositionedModal = styled(Modal, {
     position: "fixed",
     width: "400px",
-    // top: ${() => 50 + rand()}%;
-    // left: ${() => 50 + rand()}%;
-    top: '300px',
-    left: '300px',
+    // top: `${() => 50 + rand()}%`,
+    // left: `${() => 50 + rand()}%`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)',
     zIndex: 1040,
     border: "1px solid #e5e5e5",
     backgroundColor: "white",
