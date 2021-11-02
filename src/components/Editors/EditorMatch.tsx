@@ -31,25 +31,39 @@ function EditorMatch() {
 
                     <div className="px-4">
                         <div className="flex flex-col space-y-1">
-                            <div className="">Matching</div>
+                            <div className="">Matching URL</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
-                            <div className="flex space-x-2">
-                                <label className="flex items-center">
-                                    <input type="radio" name="how" />
-                                    regex
+                            <div className="flex flex-col">
+                                <label className="h-8 flex items-center space-x-1">
+                                    <input className="h-4" type="radio" name="how" />
+                                    <div className="">Do not match</div>
                                 </label>
-                                <label className="flex items-center">
-                                    <input type="radio" name="how" />
-                                    regex
+                                <label className="h-8 flex items-center space-x-1">
+                                    <input className="h-4" type="radio" name="how" />
+                                    <div className="">String match</div>
                                 </label>
-                                <label className="flex items-center">
-                                    <input type="radio" name="how" />
-                                    regex
+                                <label className="h-8 flex items-center space-x-1">
+                                    <input className="h-4" type="radio" name="how" />
+                                    <div className="">Wildcard match</div>
+                                </label>
+                                <label className="h-8 flex items-center space-x-1">
+                                    <input className="h-4" type="radio" name="how" />
+                                    <div className="">Regular expresssion</div>
+                                </label>
+                                <label className="h-8 flex items-center space-x-1">
+                                    <input className="h-4" type="radio" name="how" />
+                                    <div className="">No domain match</div>
                                 </label>
                             </div>
-                            <div className="">Quicklink</div>
+                            <div className="flex flex-col">
+                                <label className="h-8 flex items-center space-x-1">
+                                    <input className="h-4" type="checkbox" name="how" />
+                                    <div className="">Case sensitive</div>
+                                </label>
+                            </div>
+                            <div className="">Quicklink URL</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
-                            <div className="">Original</div>
+                            <div className="">Original URL</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
                         </div>
 
