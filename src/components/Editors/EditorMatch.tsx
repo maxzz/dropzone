@@ -33,6 +33,20 @@ function EditorMatch() {
                         <div className="flex flex-col space-y-1">
                             <div className="">Matching</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
+                            <div className="flex space-x-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="how" />
+                                    regex
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="how" />
+                                    regex
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="how" />
+                                    regex
+                                </label>
+                            </div>
                             <div className="">Quicklink</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
                             <div className="">Original</div>
