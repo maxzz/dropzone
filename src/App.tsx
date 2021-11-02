@@ -9,18 +9,20 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
-import EditorMatch from './components/Editors/EditorMatch';
+import Dialog, { EditorContent } from './components/Editors/EditorMatch';
 
 function App() {
     return (
         <React.Fragment>
             <Toaster />
             <UISymbolsDefs />
-            
+
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
-                <EditorMatch />
+                <Dialog>
+                    <EditorContent />
+                </Dialog>
 
                 <SelectedItems className="flex-none" />
 
