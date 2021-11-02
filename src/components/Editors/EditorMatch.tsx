@@ -22,7 +22,7 @@ function MatchTo() {
     );
 }
 
-export function EditorContent() {
+export function EditorMatch() {
     return (
         <div className="py-4 text-sm">
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
@@ -53,7 +53,17 @@ export function EditorContent() {
     );
 }
 
-function Dialog({children}: {children: React.ReactElement}) {
+export function EditorContent({ children, setShow }: { children: React.ReactElement; setShow: (v: boolean) => void; }) {
+    return (
+        <>
+            {children}
+        </>
+    );
+}
+
+
+
+function Dialog({ children }: { children: React.ReactElement; }) {
     const [show, setShow] = React.useState(false);
 
     const renderBackdrop = (props: any) => <div {...props} className="fixed inset-0 z-[1040] bg-black opacity-40" />;
