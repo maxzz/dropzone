@@ -1,6 +1,15 @@
 import React from 'react';
 import Modal from 'react-overlays/Modal';
 
+function MatchRow({ label, type = "radio", group }: { label: string; type?: string; group?: string; }) {
+    return (
+        <label className="h-8 flex items-center space-x-1">
+            <input className="h-4" type={type} {...(group && {name: group})} />
+            <div className="">{label}</div>
+        </label>
+    );
+}
+
 function EditorMatch() {
     const [show, setShow] = React.useState(false);
 
@@ -34,32 +43,14 @@ function EditorMatch() {
                             <div className="">Matching URL</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
                             <div className="flex flex-col">
-                                <label className="h-8 flex items-center space-x-1">
-                                    <input className="h-4" type="radio" name="how" />
-                                    <div className="">Do not match</div>
-                                </label>
-                                <label className="h-8 flex items-center space-x-1">
-                                    <input className="h-4" type="radio" name="how" />
-                                    <div className="">String match</div>
-                                </label>
-                                <label className="h-8 flex items-center space-x-1">
-                                    <input className="h-4" type="radio" name="how" />
-                                    <div className="">Wildcard match</div>
-                                </label>
-                                <label className="h-8 flex items-center space-x-1">
-                                    <input className="h-4" type="radio" name="how" />
-                                    <div className="">Regular expresssion</div>
-                                </label>
-                                <label className="h-8 flex items-center space-x-1">
-                                    <input className="h-4" type="radio" name="how" />
-                                    <div className="">No domain match</div>
-                                </label>
+                                <MatchRow group={"how"} label="Do not match" />
+                                <MatchRow group={"how"} label="String match" />
+                                <MatchRow group={"how"} label="Wildcard match" />
+                                <MatchRow group={"how"} label="Regular expresssion" />
+                                <MatchRow group={"how"} label="No domain match" />
                             </div>
                             <div className="flex flex-col">
-                                <label className="h-8 flex items-center space-x-1">
-                                    <input className="h-4" type="checkbox" name="how" />
-                                    <div className="">Case sensitive</div>
-                                </label>
+                                <MatchRow label="Case sensitive" type="checkbox" />
                             </div>
                             <div className="">Quicklink URL</div>
                             <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
