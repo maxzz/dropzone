@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactChildren } from 'react';
 import Modal from 'react-overlays/Modal';
 
 function MatchRow({ label, type = "radio", group, idx = 0 }: { label: string; type?: string; group?: string; idx?: number; }) {
@@ -22,7 +22,7 @@ function MatchTo() {
     );
 }
 
-function EditorContent() {
+export function EditorContent() {
     return (
         <div className="py-4 text-sm">
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
@@ -53,7 +53,7 @@ function EditorContent() {
     );
 }
 
-function EditorMatch() {
+function Dialog({children}: {children: React.ReactElement}) {
     const [show, setShow] = React.useState(false);
 
     const renderBackdrop = (props: any) => <div {...props} className="fixed inset-0 z-[1040] bg-black opacity-40" />;
@@ -78,10 +78,10 @@ function EditorMatch() {
                 aria-labelledby="modal-label"
                 container={portalRef}
             >
-                <EditorContent />
+                {children}
             </Modal>
         </div>
     );
 }
 
-export default EditorMatch;
+export default Dialog;
