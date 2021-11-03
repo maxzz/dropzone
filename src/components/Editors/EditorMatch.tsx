@@ -53,7 +53,7 @@ export function EditorMatch({ atom, setShow = (v: boolean) => { } }: { atom: num
     );
 }
 
-function Dialog({ children }: { children: JSX.Element; }) {
+function Dialog({ children, allowClickOutside }: { children: JSX.Element; allowClickOutside?: boolean; }) {
     const [show, setShow] = React.useState(false);
 
     const renderBackdrop = (props: any) => <div {...props} className="fixed inset-0 z-[1040] bg-black opacity-40" />;
@@ -71,7 +71,7 @@ function Dialog({ children }: { children: JSX.Element; }) {
                 className="fixed w-[400px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1040] bg-gray-200 rounded border border-gray-100 shadow"
                 show={show}
                 onHide={() => {
-                    //setShow(false);
+                    allowClickOutside && setShow(false);
                 }}
                 onEscapeKeyDown={(e: KeyboardEvent) => setShow(false)}
                 renderBackdrop={renderBackdrop}
