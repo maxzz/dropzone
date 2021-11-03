@@ -22,7 +22,7 @@ function MatchTo() {
     );
 }
 
-export function EditorMatch({setShow}: {setShow?: (v: boolean) => void}) {
+export function EditorMatch({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
     return (
         <div className="py-4 text-sm">
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
@@ -45,19 +45,11 @@ export function EditorMatch({setShow}: {setShow?: (v: boolean) => void}) {
                 </div>
 
                 <div className="!mt-4 flex justify-end space-x-2">
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow && setShow(false)}>OK</button>
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow && setShow(false)}>Cancel</button>
+                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(false)}>OK</button>
+                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(false)}>Cancel</button>
                 </div>
             </div>
         </div>
-    );
-}
-
-export function EditorContent({ children, setShow }: { children: JSX.Element; setShow: (v: boolean) => void; }) {
-    return (
-        <>
-            {React.cloneElement(children, {setShow}, [])}
-        </>
     );
 }
 
@@ -86,8 +78,7 @@ function Dialog({ children }: { children: JSX.Element; }) {
                 aria-labelledby="modal-label"
                 container={portalRef}
             >
-                <EditorContent children={children} setShow={setShow} />
-                {/* {children} */}
+                {React.cloneElement(children, { setShow })}
             </Modal>
         </div>
     );
