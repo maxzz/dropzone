@@ -12,6 +12,7 @@ import SvgFontSpy from './utils/SvgFontSpy';
 import Dialog, { EditorMatch } from './components/Editors/EditorMatch';
 
 function App() {
+    const atom = 1;
     return (
         <React.Fragment>
             <Toaster />
@@ -21,7 +22,7 @@ function App() {
                 <HeaderBar className="flex-none" />
 
                 <Dialog>
-                    <EditorMatch />
+                    <EditorMatch atom={atom} />
                 </Dialog>
 
                 <SelectedItems className="flex-none" />
