@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconAutoMode, IconFormChangePsw, IconFormLogin } from '../../UI/UiIcons';
+import { IconAutoMode, IconFormChangePsw, IconFormLogin } from '../../UI/UIIcons';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconManualMode } from '../../UI/UIIconsSymbolsDefs';
 
 const TagWinApp =     <IconAppWindows    key="TagWinApp"     title="Windows application"                  className="w-5 h-5 ml-2 opacity-75" />      ;

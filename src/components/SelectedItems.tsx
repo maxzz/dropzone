@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtom, selected4Action } from '../store/store';
-import { IconDocument } from './UI/UiIcons';
+import { IconDocument } from './UI/UIIcons';
 
 function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
     const [selected] = useAtom(selectedAtom);

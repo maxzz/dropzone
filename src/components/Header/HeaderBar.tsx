@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { busyAtom, clearFilesAtom } from '../../store/store';
-import { IconAppLogoMicroscope, IconRocket, IconTrash } from '../UI/UiIcons';
+import { IconAppLogoMicroscope, IconRocket, IconTrash } from '../UI/UIIcons';
 import DropzoneArea from './Dropzone';
 import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';

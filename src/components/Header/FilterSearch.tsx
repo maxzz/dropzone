@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '../../store/store';
 import { useKey } from 'react-use';
-import { IconCaseSensitive, IconClose, IconSearch } from '../UI/UiIcons';
+import { IconCaseSensitive, IconClose, IconSearch } from '../UI/UIIcons';
 import { UITooltip } from '../UI/UITooltip';
 import { IconDot } from '../UI/UIIconsSymbolsDefs';
 
