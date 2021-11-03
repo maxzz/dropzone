@@ -1,4 +1,4 @@
-import React, { ReactChildren } from 'react';
+import React, { ReactChildren, ReactComponentElement } from 'react';
 import Modal from 'react-overlays/Modal';
 
 function MatchRow({ label, type = "radio", group, idx = 0 }: { label: string; type?: string; group?: string; idx?: number; }) {
@@ -22,7 +22,7 @@ function MatchTo() {
     );
 }
 
-export function EditorMatch() {
+export function EditorMatch({setShow}: {setShow?: (v: boolean) => void}) {
     return (
         <div className="py-4 text-sm">
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
@@ -45,25 +45,23 @@ export function EditorMatch() {
                 </div>
 
                 <div className="!mt-4 flex justify-end space-x-2">
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(false)}>OK</button>
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(false)}>Cancel</button>
+                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow && setShow(false)}>OK</button>
+                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow && setShow(false)}>Cancel</button>
                 </div>
             </div>
         </div>
     );
 }
 
-export function EditorContent({ children, setShow }: { children: React.ReactElement; setShow: (v: boolean) => void; }) {
+export function EditorContent({ children, setShow }: { children: JSX.Element; setShow: (v: boolean) => void; }) {
     return (
         <>
-            {children}
+            {React.cloneElement(children, {setShow}, [])}
         </>
     );
 }
 
-
-
-function Dialog({ children }: { children: React.ReactElement; }) {
+function Dialog({ children }: { children: JSX.Element; }) {
     const [show, setShow] = React.useState(false);
 
     const renderBackdrop = (props: any) => <div {...props} className="fixed inset-0 z-[1040] bg-black opacity-40" />;
@@ -88,7 +86,8 @@ function Dialog({ children }: { children: React.ReactElement; }) {
                 aria-labelledby="modal-label"
                 container={portalRef}
             >
-                {children}
+                <EditorContent children={children} setShow={setShow} />
+                {/* {children} */}
             </Modal>
         </div>
     );
