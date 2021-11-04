@@ -22,14 +22,16 @@ function MatchTo() {
 }
 
 export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { atom: number; setShow?: (v: boolean) => void; }) {
+    const firstFocusRef = React.useRef<HTMLInputElement>(null);
+    React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
     return (
         <div className="py-4 text-sm">
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
 
             <div className="px-4">
                 <div className="flex flex-col space-y-1">
-                    <div className="">Matching URL {atom}</div>
-                    <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
+                    <div className="">Matching URL</div>
+                    <input ref={firstFocusRef} className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
 
                     <MatchTo />
                     <div className="flex flex-col">
