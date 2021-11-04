@@ -1,13 +1,13 @@
 import React from 'react';
 
-function MatchRow({ label, type = "radio", group, idx = 0, checked, onSet }:
-    { label: string; type?: string; group?: string; idx?: number; checked: boolean; onSet: (v: number) => void; }) {
+function MatchRow({ label, type = "radio", group, val = 0, checked, onSet }:
+    { label: string; type?: string; group?: string; val?: number; checked: boolean; onSet: (v: number) => void; }) {
     return (
         <label className="h-7 flex items-center space-x-1">
-            <input type={type} {...(group && { name: group })} value={idx} checked={checked} onChange={() => {
-                onSet(idx)
-                console.log({idx});
-                
+            <input type={type} {...(group && { name: group })} value={val} checked={checked} onChange={(e) => {
+                onSet(+e.target.value);
+                console.log({ idx: +e.target.value, checked });
+
             }} />
             <div>{label}</div>
         </label>
@@ -16,15 +16,18 @@ function MatchRow({ label, type = "radio", group, idx = 0, checked, onSet }:
 
 function MatchTo() {
     const [value, setValue] = React.useState(0);
-    console.log({value});
-    
+    console.log({ value });
+
     return (
-        <div className="flex flex-col">
-            <MatchRow group={"how"} idx={1} checked={value === 1} onSet={(v) => setValue(v)} label="Do not match" />
-            <MatchRow group={"how"} idx={2} checked={value === 2} onSet={(v) => setValue(v)} label="String match" />
-            <MatchRow group={"how"} idx={3} checked={value === 3} onSet={(v) => setValue(v)} label="Wildcard match" />
-            <MatchRow group={"how"} idx={4} checked={value === 4} onSet={(v) => setValue(v)} label="Regular expresssion" />
-            <MatchRow group={"how"} idx={5} checked={value === 5} onSet={(v) => setValue(v)} label="No domain match" />
+        <div className="flex flex-col"
+            onChange={(v: React.ChangeEvent<HTMLInputElement>) => {
+                console.log({group: v.target.value});
+            }}>
+            <MatchRow group={"how"} val={1} checked={value === 1} onSet={(v) => setValue(v)} label="Do not match" />
+            <MatchRow group={"how"} val={2} checked={value === 2} onSet={(v) => setValue(v)} label="String match" />
+            <MatchRow group={"how"} val={3} checked={value === 3} onSet={(v) => setValue(v)} label="Wildcard match" />
+            <MatchRow group={"how"} val={4} checked={value === 4} onSet={(v) => setValue(v)} label="Regular expresssion" />
+            <MatchRow group={"how"} val={5} checked={value === 5} onSet={(v) => setValue(v)} label="No domain match" />
         </div>
     );
 }
