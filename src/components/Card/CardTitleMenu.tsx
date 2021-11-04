@@ -10,10 +10,11 @@ import toast from 'react-hot-toast';
 import { useAtom } from 'jotai';
 import { FileUsAtom } from '../../store/store';
 import { convertToXml } from '../../store/manifest/xml-to-js';
+import Dialog from '../UI/UIDialog';
 
 export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) => {
     const [fileUs] = useAtom(fileUsAtom);
-    
+
     function saveXmlFile() {
         const res = convertToXml(fileUs);
         if (res.err) {
@@ -28,6 +29,20 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
             </Trigger>
 
             <Content sideOffset={5}>
+
+                <Dialog trigger={
+                    <Item className="!text-sm"
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            saveXmlFile();
+                        }}
+                    >
+                        Convert manual to normal
+                    </Item>
+                }>
+                    <div className="">aaa</div>
+                </Dialog>
+
                 <Item className="!text-sm"
                     onClick={(event) => {
                         event.stopPropagation();

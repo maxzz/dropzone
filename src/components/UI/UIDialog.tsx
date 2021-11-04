@@ -29,7 +29,7 @@ function Dialog({ children, allowClickOutside, trigger }: DialogProps) {
     React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
     return (
         <>
-            {trigger ? trigger : <ButtonTrigger onClick={() => setShow(true)} />}
+            {trigger ? React.cloneElement(trigger, {onClick: () => setShow(true)}) : <ButtonTrigger onClick={() => setShow(true)} />}
 
             {/* <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(true)}>
                 Open Modal
