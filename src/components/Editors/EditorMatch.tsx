@@ -26,6 +26,9 @@ function MatchTo() {
 export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { atom: number; setShow?: (v: boolean) => void; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
+    const [checked, setChecked] = React.useState(true);
+    console.log({checked});
+    
     return (
         <div className="py-4 text-sm">
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
@@ -36,9 +39,12 @@ export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { a
                     <input ref={firstFocusRef} className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
 
                     <MatchTo />
-                    {/* <div className="flex flex-col">
-                        <MatchRow label="Case sensitive" type="checkbox" />
-                    </div> */}
+                    <div className="flex flex-col" onChange={(v: React.ChangeEvent<HTMLInputElement>) => {
+                        setChecked(!!v.target.value)
+                        console.log({v: v.target.value});
+                    }}>
+                        <MatchRow label="Case sensitive" type="checkbox" checked={checked} />
+                    </div>
 
                     <div className="">Quicklink URL</div>
                     <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
