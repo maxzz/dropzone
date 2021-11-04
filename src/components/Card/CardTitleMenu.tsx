@@ -32,16 +32,22 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
 
                 <Dialog trigger={
                     <Item className="!text-sm"
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            event.preventDefault();
-                            saveXmlFile();
-                        }}
+                        // onClick={(event) => {
+                        //     event.stopPropagation();
+                        //     event.preventDefault();
+                        //     saveXmlFile();
+                        // }}
                     >
-                        Convert manual to normal
+                        trigger
                     </Item>
                 }>
-                    <div className="">aaa</div>
+                    <div className="">
+                        <div className="">-=------------------------</div>
+                        <div className="">-=------------------------</div>
+                        <div className="">-=------------------------</div>
+                        <div className="">-=------------------------</div>
+                        <div className="">-=------------------------</div>
+                    </div>
                 </Dialog>
 
                 <Item className="!text-sm"
