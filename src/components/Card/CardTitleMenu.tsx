@@ -12,6 +12,19 @@ import { FileUsAtom } from '../../store/store';
 import { convertToXml } from '../../store/manifest/xml-to-js';
 import Dialog from '../UI/UIDialog';
 
+function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
+    return (
+        <div className="">
+            <div className="">-=------------------------</div>
+            <div className="">-=------------------------</div>
+            <div className="">-=------------------------</div>
+            <div className="">-=------------------------</div>
+            <div className="">-=------------------------</div>
+        </div>
+
+    );
+}
+
 export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) => {
     const [fileUs] = useAtom(fileUsAtom);
 
@@ -32,22 +45,16 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
 
                 <Dialog trigger={
                     <Item className="!text-sm"
-                        // onClick={(event) => {
-                        //     event.stopPropagation();
-                        //     event.preventDefault();
-                        //     saveXmlFile();
-                        // }}
+                    // onClick={(event) => {
+                    //     event.stopPropagation();
+                    //     event.preventDefault();
+                    //     saveXmlFile();
+                    // }}
                     >
                         trigger
                     </Item>
                 }>
-                    <div className="">
-                        <div className="">-=------------------------</div>
-                        <div className="">-=------------------------</div>
-                        <div className="">-=------------------------</div>
-                        <div className="">-=------------------------</div>
-                        <div className="">-=------------------------</div>
-                    </div>
+                    <NewContent ></NewContent>
                 </Dialog>
 
                 <Item className="!text-sm"
