@@ -34,6 +34,7 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
                     <Item className="!text-sm"
                         onClick={(event) => {
                             event.stopPropagation();
+                            event.preventDefault();
                             saveXmlFile();
                         }}
                     >

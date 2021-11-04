@@ -1,22 +1,30 @@
 import React from 'react';
 
-function MatchRow({ label, type = "radio", group, idx = 0 }: { label: string; type?: string; group?: string; idx?: number; }) {
+function MatchRow({ label, type = "radio", group, idx = 0, checked, onSet }:
+    { label: string; type?: string; group?: string; idx?: number; checked: boolean; onSet: (v: number) => void; }) {
     return (
         <label className="h-7 flex items-center space-x-1">
-            <input type={type} {...(group && { name: group })} />
+            <input type={type} {...(group && { name: group })} value={idx} checked={checked} onChange={() => {
+                onSet(idx)
+                console.log({idx});
+                
+            }} />
             <div>{label}</div>
         </label>
     );
 }
 
 function MatchTo() {
+    const [value, setValue] = React.useState(0);
+    console.log({value});
+    
     return (
         <div className="flex flex-col">
-            <MatchRow group={"how"} idx={0} label="Do not match" />
-            <MatchRow group={"how"} idx={1} label="String match" />
-            <MatchRow group={"how"} idx={2} label="Wildcard match" />
-            <MatchRow group={"how"} idx={3} label="Regular expresssion" />
-            <MatchRow group={"how"} idx={4} label="No domain match" />
+            <MatchRow group={"how"} idx={1} checked={value === 1} onSet={(v) => setValue(v)} label="Do not match" />
+            <MatchRow group={"how"} idx={2} checked={value === 2} onSet={(v) => setValue(v)} label="String match" />
+            <MatchRow group={"how"} idx={3} checked={value === 3} onSet={(v) => setValue(v)} label="Wildcard match" />
+            <MatchRow group={"how"} idx={4} checked={value === 4} onSet={(v) => setValue(v)} label="Regular expresssion" />
+            <MatchRow group={"how"} idx={5} checked={value === 5} onSet={(v) => setValue(v)} label="No domain match" />
         </div>
     );
 }
@@ -34,9 +42,9 @@ export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { a
                     <input ref={firstFocusRef} className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
 
                     <MatchTo />
-                    <div className="flex flex-col">
+                    {/* <div className="flex flex-col">
                         <MatchRow label="Case sensitive" type="checkbox" />
-                    </div>
+                    </div> */}
 
                     <div className="">Quicklink URL</div>
                     <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
