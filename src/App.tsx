@@ -9,7 +9,8 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
-import Dialog, { EditorMatch } from './components/Editors/EditorMatch';
+import EditorMatch from './components/Editors/EditorMatch';
+import Dialog from './components/UI/UIDialog';
 
 function App() {
     const atom = 1;
