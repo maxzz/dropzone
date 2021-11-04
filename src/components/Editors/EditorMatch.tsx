@@ -15,19 +15,19 @@ function MatchRow({ label, type = "radio", group, val = 0, checked, onSet }:
 }
 
 function MatchTo() {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(3);
     console.log({ value });
 
     return (
         <div className="flex flex-col"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => {
-                console.log({group: v.target.value});
+                console.log({ group: v.target.value });
             }}>
-            <MatchRow group={"how"} val={1} checked={value === 1} onSet={(v) => setValue(v)} label="Do not match" />
-            <MatchRow group={"how"} val={2} checked={value === 2} onSet={(v) => setValue(v)} label="String match" />
-            <MatchRow group={"how"} val={3} checked={value === 3} onSet={(v) => setValue(v)} label="Wildcard match" />
-            <MatchRow group={"how"} val={4} checked={value === 4} onSet={(v) => setValue(v)} label="Regular expresssion" />
-            <MatchRow group={"how"} val={5} checked={value === 5} onSet={(v) => setValue(v)} label="No domain match" />
+            <MatchRow group={"how"} val={1} checked={(console.log('aaa_1', value, value === 1), value === 1)} onSet={(v) => setValue(v)} label="Do not match" />
+            <MatchRow group={"how"} val={2} checked={(console.log('aaa_2', value, value === 2), value === 2)} onSet={(v) => setValue(v)} label="String match" />
+            <MatchRow group={"how"} val={3} checked={(console.log('aaa_3', value, value === 3), value === 3)} onSet={(v) => setValue(v)} label="Wildcard match" />
+            <MatchRow group={"how"} val={4} checked={(console.log('aaa_4', value, value === 4), value === 4)} onSet={(v) => setValue(v)} label="Regular expresssion" />
+            <MatchRow group={"how"} val={5} checked={(console.log('aaa_5', value, value === 5), value === 5)} onSet={(v) => setValue(v)} label="No domain match" />
         </div>
     );
 }
