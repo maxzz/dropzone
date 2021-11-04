@@ -1,4 +1,4 @@
-import React, { ReactChildren, ReactComponentElement } from 'react';
+import React from 'react';
 import Modal from 'react-overlays/Modal';
 
 export const RenderBackdrop = (props: any) => <div className="fixed inset-0 z-[1040] bg-black opacity-40" {...props} />;
@@ -15,7 +15,7 @@ function Dialog({ children, allowClickOutside }: { children: JSX.Element; allowC
                 Open Modal
             </button>
 
-            <Modal
+            {show && <Modal
                 className={className}
                 show={show}
                 onHide={() => { allowClickOutside && setShow(false); }}
@@ -25,7 +25,7 @@ function Dialog({ children, allowClickOutside }: { children: JSX.Element; allowC
                 container={portalRef}
             >
                 {React.cloneElement(children, { setShow })}
-            </Modal>
+            </Modal>}
         </>
     );
 }
