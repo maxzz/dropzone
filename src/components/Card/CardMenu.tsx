@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dropdown, useDropdownMenu, useDropdownToggle } from "react-overlays";
 import { DropdownProps } from 'react-overlays/cjs/Dropdown';
-//import styled from 'styled-components';
 
 const Menu = ({ role }: { role: string; }) => {
     const [props, { toggle = () => { }, show }] = useDropdownMenu({ flip: true, offset: [0, 8], });
@@ -18,57 +17,39 @@ const Menu = ({ role }: { role: string; }) => {
     );
 };
 
-const Toggle = ({ id, children }: { id: string, children: React.ReactNode; }) => {
-    const [props, { show, toggle }] = useDropdownToggle();
+const Toggle = ({ children }: { children: React.ReactNode; }) => {
+    const [props] = useDropdownToggle();
     return (
-        // <button type="button" className="btn" {...props}>
-        <button type="button" className="btn" id={id} {...props}>
+        <button className="" {...props}>
             {children}
         </button>
     );
 };
 
-const DropdownButton = ({
+function DropdownButton({
     show,
     onToggle,
     drop,
     alignEnd,
     title,
     role = 'menu',
-}: Partial<DropdownProps> & { title: string; role?: string; }) => (
-    <Dropdown show={show} onToggle={onToggle!} drop={drop} alignEnd={alignEnd} itemSelector="button:not(:disabled)">
-        <span>
-            <Toggle id={`example-toggle-${title}`}>{title}</Toggle>
-            <Menu role={role} />
-        </span>
-    </Dropdown>
-);
-
-// const ButtonToolbar = styled("div")`
-//     & > * + * {
-//       margin-left: 12px;
-//     }
-//   `;
-
-function DropdownExample() {
-    const [show, setShow] = React.useState(false);
-
+}: Partial<DropdownProps> & { title: string; role?: string; }) {
     return (
-        <div className="space-x-2">
-            <DropdownButton show={show} onToggle={(nextShow) => setShow(nextShow)} title={`${show ? "Close" : "Open"} Dropdown`} />
-            <DropdownButton alignEnd title="Align right" />
+        <Dropdown show={show} onToggle={onToggle!} drop={drop} alignEnd={alignEnd} itemSelector="button:not(:disabled)">
+            <span>
+                <Toggle>{title}</Toggle>
 
-            <DropdownButton drop="up" title="Drop up" />
-            <DropdownButton role="menu" title="Role 'menu'" />
-        </div>
+                <Menu role={role} />
+            </span>
+        </Dropdown>
     );
 }
 
 function CardMenu() {
+    const [show, setShow] = React.useState(false);
     return (
-        <div className="relative">
-            btn
-            <DropdownExample />
+        <div className="">
+            <DropdownButton show={show} onToggle={(nextShow) => setShow(nextShow)} role="menu" title={`${show ? 'Close' : 'Open'}`} />
         </div>
     );
 }
