@@ -26,6 +26,10 @@ const convertPlacement = (placement: Placement) => {
     return placement.split(/\B(?=[A-Z])/);
 };
 
+type LivodDropdownGroup = typeof LivodDropdown & {
+    Menu: typeof DropdownMenu
+}
+
 const LivodDropdown: React.FC<LivodDropdownProps> = ({
     children,
     overlay,
@@ -52,6 +56,9 @@ const LivodDropdown: React.FC<LivodDropdownProps> = ({
     );
 };
 
-LivodDropdown.displayName = "Dropdown";
-(LivodDropdown as any).Menu = DropdownMenu;
-export default LivodDropdown;
+const DD = LivodDropdown as LivodDropdownGroup;
+
+DD.displayName = "Dropdown";
+DD.Menu = DropdownMenu;
+
+export default DD;

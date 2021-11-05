@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../UI/DropdownOverlay';
+import Dropdown, { Placement } from '../UI/DropdownOverlay';
 
 const Menu = (
     <Dropdown.Menu>
@@ -15,7 +15,7 @@ const Menu = (
     </Dropdown.Menu>
 );
 
-const placementArr = [
+const placementArr: Placement[] = [
     "up",
     "upEnd",
     "down",
