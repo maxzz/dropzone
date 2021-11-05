@@ -11,6 +11,7 @@ import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
 import EditorMatch from './components/Editors/EditorMatch';
 import Dialog from './components/UI/UIDialog';
+import CardMenu from './components/Card/CardMenu';
 
 function App() {
     const atom = 1;
@@ -25,6 +26,8 @@ function App() {
                 <Dialog>
                     <EditorMatch atom={atom} />
                 </Dialog>
+
+                <CardMenu />
 
                 <SelectedItems className="flex-none" />
 

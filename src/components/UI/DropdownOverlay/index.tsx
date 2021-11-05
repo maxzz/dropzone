@@ -3,7 +3,7 @@ import { Dropdown } from "react-overlays";
 import DropdownToggle from "./DropdownToggle";
 import DropdownMenu from "./DropdownMenu";
 
-import "./style/index.less";
+//import "./style/index.less";
 
 interface LivodDropdownProps {
     children: ReactElement;

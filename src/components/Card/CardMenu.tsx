@@ -4,11 +4,7 @@ import Dropdown, { Placement } from '../UI/DropdownOverlay';
 const Menu = (
     <Dropdown.Menu>
         <Dropdown.Menu.Item>
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.alipay.com/"
-            >
+            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
                 1st menu item
             </a>
         </Dropdown.Menu.Item>
@@ -26,17 +22,25 @@ const placementArr: Placement[] = [
     "rightEnd",
 ];
 
-<div>
-    {placementArr.map((placement) => {
-        return (
-            <Dropdown key={placement} overlay={Menu} placement={placement}>
-                <button
-                    onClick={(e) => e.preventDefault()}
-                    style={{ marginLeft: "100px", marginBottom: "10px" }}
-                >
-                    {placement}
-                </button>
-            </Dropdown>
-        );
-    })}
-</div>;
+function CardMenu() {
+    return (
+        <div>
+            {placementArr.map((placement) => {
+                return (
+                    <Dropdown key={placement} overlay={Menu} placement={placement}>
+                        <button
+                            onClick={(e) => e.preventDefault()}
+                            style={{ marginLeft: "100px", marginBottom: "10px" }}
+                        >
+                            <>
+                            {placement}
+                            </>
+                        </button>
+                    </Dropdown>
+                );
+            })}
+        </div>
+    );
+}
+
+export default CardMenu;
