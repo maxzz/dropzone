@@ -25,10 +25,7 @@ const DropdownToggle: React.FC<DropdownToggleProps> = ({ children, trigger, }) =
         }
     }, [trigger, toggle]);
 
-    return React.cloneElement(children, {
-        ...props,
-        ...specifiedToggle,
-    });
+    return React.cloneElement(children, { ...props, ...specifiedToggle, });
 };
 
 export default DropdownToggle;

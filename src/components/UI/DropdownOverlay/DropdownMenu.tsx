@@ -22,28 +22,24 @@ const LivodDropdownMenu: React.FC<LivodDropdownMenuProps> = ({ children }) => {
             {(props) => (
                 <ul {...props.props} className="livod-dropdown-menu">
                     {children}
+                    {/* <div className="">22222</div> */}
                 </ul>
             )}
         </DropdownMenu>
     );
 };
 
-const LivodDropdownMenuItem: React.FC<LivodDropdownMenuItemProps> = ({
-    children,
-    danger,
-    onClick,
-}) => {
+
+const LivodDropdownMenuItem: React.FC<LivodDropdownMenuItemProps> = ({ children, danger, onClick, }) => {
     const [, { toggle }] = useDropdownToggle();
     const close = (event: React.MouseEvent) => {
         onClick && onClick(event);
         toggle(false);
     };
     return (
-        <li
-            onClick={close}
-            className={"livod-dropdown-menu-item" + (danger ? " danger" : "")}
-        >
+        <li onClick={close} className={"livod-dropdown-menu-item" + (danger ? " danger" : "")}>
             {children}
+            {/* <div className="">33333333333</div> */}
         </li>
     );
 };

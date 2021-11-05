@@ -27,31 +27,19 @@ const convertPlacement = (placement: Placement) => {
 };
 
 type LivodDropdownGroup = typeof LivodDropdown & {
-    Menu: typeof DropdownMenu
-}
+    Menu: typeof DropdownMenu;
+};
 
-const LivodDropdown: React.FC<LivodDropdownProps> = ({
-    children,
-    overlay,
-    placement = "down",
-    trigger,
-}) => {
+const LivodDropdown: React.FC<LivodDropdownProps> = ({ children, overlay, placement = "down", trigger, }) => {
     const [drop, alignEnd] = convertPlacement(placement);
     const [show, setShow] = useState(false);
     const onToggle = (nextShow: boolean) => setShow(nextShow);
     return (
-        <Dropdown
-            show={show}
-            onToggle={onToggle}
-            drop={drop as any}
-            alignEnd={alignEnd === "End" ? true : false}
-        >
-            {() => (
-                <>
-                    <DropdownToggle trigger={trigger}>{children}</DropdownToggle>
-                    {overlay}
-                </>
-            )}
+        <Dropdown show={show} onToggle={onToggle} drop={drop as any} alignEnd={alignEnd === "End" ? true : false}>
+            <DropdownToggle trigger={trigger}>
+                {children}
+            </DropdownToggle>
+            {overlay}
         </Dropdown>
     );
 };
