@@ -8,11 +8,11 @@ import {
 } from '../UI/UiDropdownMenu';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
-import { foldAllCardsAtom, rightPanelAtom, selected4Action } from '../../store/store';
+import { foldAllCardsAtom, rightPanelAtom, selected4ActionAtom } from '../../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
-    const [selectedAtoms, setSelectedAtoms] = useAtom(selected4Action);
+    const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
     const [rightPanel] = useAtom(rightPanelAtom);
     const disabled = !rightPanel;
     function click() {

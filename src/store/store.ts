@@ -286,7 +286,7 @@ export const splitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplit
 
 // Manifests to actions selection
 
-export const selected4Action = atom<FileUsAtom[]>([]);
+export const selected4ActionAtom = atom<FileUsAtom[]>([]);
 
 // Dialog edit detection options
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUsAtom, selected4Action } from '../store/store';
+import { FileUsAtom, selected4ActionAtom } from '../store/store';
 import { IconDocument } from './UI/UIIcons';
 
 function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
@@ -22,7 +22,7 @@ function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
 
 function SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    const [selectedAtoms] = useAtom(selected4Action);
+    const [selectedAtoms] = useAtom(selected4ActionAtom);
 
     if (!selectedAtoms.length) {
         return null;
