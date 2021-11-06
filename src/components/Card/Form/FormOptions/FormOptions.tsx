@@ -1,6 +1,5 @@
-import { PrimitiveAtom, useAtom } from 'jotai';
-import { useAtomValue } from 'jotai/utils';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { FileUsAtom, SelectRowAtoms } from '../../../../store/store';
 import { IconGear } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
@@ -28,6 +27,14 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     return (
         <div className={`px-2 h-6 leading-6 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title} style={BtnShading}>
             QL
+        </div>
+    );
+}
+
+function FormDetectionEdit() {
+    return (
+        <div className={`px-1 h-6 flex items-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}>
+            <IconGear className="w-4 h-4 opacity-75" />
         </div>
     );
 }
@@ -62,7 +69,7 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
                 <FormOptionsPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
-                <IconGear className="w-5 h-5" />
+                <FormDetectionEdit />
             </div>
             {hasFormPreview && <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />}
         </div>
