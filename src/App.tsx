@@ -11,11 +11,11 @@ import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
 import EditorMatch from './components/Editors/EditorMatch';
 import Dialog from './components/UI/UIDialog';
-import CardMenu from './components/Card/CardMenu';
+// import CardMenu from './components/Card/CardMenu';
 // import CardMenuOverlays from './components/Card/CardMenuOverlays';
 
 function App() {
-    const atom = 1;
+    // const atom = 1;
     return (
         <React.Fragment>
             <Toaster />
@@ -24,12 +24,12 @@ function App() {
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
 
-                <Dialog>
+                {/* <Dialog>
                     <EditorMatch atom={atom} />
-                </Dialog>
+                </Dialog> */}
 
                 {/* <CardMenuOverlays /> */}
-                <CardMenu />
+                {/* <CardMenu /> */}
 
                 <SelectedItems className="flex-none" />
 

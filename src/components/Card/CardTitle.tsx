@@ -6,6 +6,7 @@ import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCata
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 import { isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
+import CardMenu from './CardMenu';
 
 function CardIcon({ isWeb, isChrome, isFCat, isCustomization }: { isWeb: boolean; isChrome: boolean; isFCat: boolean; isCustomization: boolean; }) {
     if (isFCat) {
@@ -168,6 +169,7 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 {/* <PopoverMenu /> */}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
                 <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
+                <CardMenu />
             </div>}
         </div>
     );
