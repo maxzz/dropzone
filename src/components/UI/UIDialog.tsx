@@ -13,10 +13,6 @@ function ButtonTrigger(props: React.HTMLAttributes<HTMLElement>) {
     );
 }
 
-// <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(true)}>
-// Open Modal
-// </button>
-
 type DialogProps = {
     children: JSX.Element;
     allowClickOutside?: boolean;
@@ -28,7 +24,29 @@ type ControlledDialogProps = DialogProps & {
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function ControlledDialog({ children, allowClickOutside, trigger, show, setShow }: ControlledDialogProps) {
+export function UncontrolledDialog({ children, allowClickOutside, show, setShow }: ControlledDialogProps) {
+    const portalRef = React.useRef<HTMLElement | null>(null);
+    React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
+    return (
+        <>
+            {show &&
+                <Modal
+                    className={className}
+                    show={show}
+                    onHide={() => { allowClickOutside && setShow(false); }}
+                    onEscapeKeyDown={() => setShow(false)}
+                    renderBackdrop={RenderBackdrop}
+                    aria-labelledby="modal-label"
+                    container={portalRef}
+                >
+                    {React.cloneElement(children, { setShow })}
+                </Modal>
+            }
+        </>
+    );
+}
+
+export function ControlledDialog({ trigger, show, setShow, ...rest }: ControlledDialogProps) {
     const portalRef = React.useRef<HTMLElement | null>(null);
     React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
     return (
@@ -46,21 +64,7 @@ export function ControlledDialog({ children, allowClickOutside, trigger, show, s
                 : <ButtonTrigger onClick={() => setShow(true)} />
             }
 
-            {/* <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(true)}>
-                Open Modal
-            </button> */}
-
-            {show && <Modal
-                className={className}
-                show={show}
-                onHide={() => { allowClickOutside && setShow(false); }}
-                onEscapeKeyDown={() => setShow(false)}
-                renderBackdrop={RenderBackdrop}
-                aria-labelledby="modal-label"
-                container={portalRef}
-            >
-                {React.cloneElement(children, { setShow })}
-            </Modal>}
+            <UncontrolledDialog {...rest} show={show} setShow={setShow} />
         </>
     );
 }
