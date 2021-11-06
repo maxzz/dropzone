@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUsAtom, SelectRowAtoms } from '../../../../store/store';
+import { detectionEditorAtom, FileUsAtom, SelectRowAtoms } from '../../../../store/store';
 import { IconGear } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
 import FormOptionsDetection from './FormOptionsDetection';
@@ -31,10 +31,11 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormDetectionEdit() {
+function FormDetectionEdit({fileUsAtom}: {fileUsAtom: FileUsAtom}) {
+    const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
     return (
-        <div className={`px-1 h-6 flex items-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}>
-            <IconGear className="w-4 h-4 opacity-75" />
+        <div className={`px-1 w-6 h-6 flex items-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}>
+            <IconGear />
         </div>
     );
 }
@@ -69,7 +70,7 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
                 <FormOptionsPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
-                <FormDetectionEdit />
+                <FormDetectionEdit fileUsAtom={fileUsAtom} />
             </div>
             {hasFormPreview && <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />}
         </div>
