@@ -31,10 +31,13 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormDetectionEdit({fileUsAtom}: {fileUsAtom: FileUsAtom}) {
+function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
     return (
-        <div className={`px-1 w-6 h-6 flex items-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}>
+        <div
+            className={`px-1 w-6 h-6 flex items-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
+            onClick={() => setEditorAtom(editorAtom === fileUsAtom ? undefined : fileUsAtom)}
+        >
             <IconGear />
         </div>
     );

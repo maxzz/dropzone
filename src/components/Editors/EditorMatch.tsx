@@ -1,4 +1,5 @@
 import React from 'react';
+import { FileUsAtom } from '../../store/store';
 
 function RadioButton({ label, type = "radio", group, val = 0, checked }: { label: string; type?: string; group?: string; val?: number; checked: boolean; }) {
     return (
@@ -22,7 +23,7 @@ function RadioGroup() {
     );
 }
 
-export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { atom: number; setShow?: (v: boolean) => void; }) {
+export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { atom: FileUsAtom; setShow?: (v: boolean) => void; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
