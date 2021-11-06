@@ -11,6 +11,7 @@ import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
 import EditorMatch from './components/Editors/EditorMatch';
 import Dialog from './components/UI/UIDialog';
+import CardMenu from './components/Card/CardMenu';
 // import CardMenuOverlays from './components/Card/CardMenuOverlays';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 </Dialog>
 
                 {/* <CardMenuOverlays /> */}
+                <CardMenu />
 
                 <SelectedItems className="flex-none" />
 
