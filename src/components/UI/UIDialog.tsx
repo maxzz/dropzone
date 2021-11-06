@@ -10,7 +10,7 @@ function ButtonTrigger(props: React.HTMLAttributes<HTMLElement>) {
         <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" {...props}>
             Open Modal
         </button>
-    )
+    );
 }
 
 // <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(true)}>
@@ -23,19 +23,28 @@ type DialogProps = {
     trigger?: JSX.Element;
 };
 
-function Dialog({ children, allowClickOutside, trigger }: DialogProps) {
-    const [show, setShow] = React.useState(false);
+type ControlledDialogProps = DialogProps & {
+    show: boolean;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export function ControlledDialog({ children, allowClickOutside, trigger, show, setShow }: ControlledDialogProps) {
     const portalRef = React.useRef<HTMLElement | null>(null);
     React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
     return (
         <>
-            {trigger ? React.cloneElement(trigger, {onClick: (event: Event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                console.log('triiger');
-                
-                setShow(true)
-            }}) : <ButtonTrigger onClick={() => setShow(true)} />}
+            {trigger
+                ? React.cloneElement(trigger, {
+                    onClick: (event: Event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        console.log('triiger');
+
+                        setShow(true);
+                    }
+                })
+                : <ButtonTrigger onClick={() => setShow(true)} />
+            }
 
             {/* <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(true)}>
                 Open Modal
@@ -53,6 +62,13 @@ function Dialog({ children, allowClickOutside, trigger }: DialogProps) {
                 {React.cloneElement(children, { setShow })}
             </Modal>}
         </>
+    );
+}
+
+function Dialog(props: DialogProps) {
+    const [show, setShow] = React.useState(false);
+    return (
+        <ControlledDialog {...props} show={show} setShow={setShow} />
     );
 }
 
