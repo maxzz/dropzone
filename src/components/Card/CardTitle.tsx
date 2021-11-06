@@ -171,7 +171,8 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 {/* <PopoverMenu /> */}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
                 <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
-                <CardMenu />
+                
+                {/* <CardMenu /> */}
             </div>}
         </div>
     );
