@@ -13,18 +13,20 @@ function ButtonTrigger(props: React.HTMLAttributes<HTMLElement>) {
     );
 }
 
-type DialogProps = {
+type PortalModalProps = {
     children: JSX.Element;
     allowClickOutside?: boolean;
+    show: boolean;
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+type ControlledDialogProps = PortalModalProps & {
     trigger?: JSX.Element;
 };
 
-type ControlledDialogProps = DialogProps & {
-    show: boolean;
-    setShow: React.Dispatch<React.SetStateAction<boolean>>;
-};
+type DialogProps = Omit<ControlledDialogProps, 'show' | 'setShow'>;
 
-export function UncontrolledDialog({ children, allowClickOutside, show, setShow }: ControlledDialogProps) {
+export function PortalModal({ children, allowClickOutside, show, setShow }: PortalModalProps) {
     const portalRef = React.useRef<HTMLElement | null>(null);
     React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
     return (
@@ -64,7 +66,7 @@ export function ControlledDialog({ trigger, show, setShow, ...rest }: Controlled
                 : <ButtonTrigger onClick={() => setShow(true)} />
             }
 
-            <UncontrolledDialog {...rest} show={show} setShow={setShow} />
+            <PortalModal {...rest} show={show} setShow={setShow} />
         </>
     );
 }
