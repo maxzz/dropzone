@@ -34,9 +34,15 @@ function DropdownButton({
     title,
     role = 'menu',
 }: Partial<DropdownProps> & { title: string; role?: string; }) {
+    const [toggleProps] = useDropdownToggle();
     return (
         <Dropdown show={show} onToggle={onToggle!} drop={drop} alignEnd={alignEnd} itemSelector="button:not(:disabled)">
             <span>
+                <br />
+                <button className="" {...toggleProps}>
+                    {title}
+                </button>
+
                 <Toggle>{title}</Toggle>
 
                 <Menu role={role} />
