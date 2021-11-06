@@ -155,14 +155,16 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const setCurrentCard = useUpdateAtom(setCurrentCardAtom);
     const setRightPanel = useUpdateAtom(rightPanelAtom); //#091e4c
     return (
-        <div
-            className={`relative p-2 ${currentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100 overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none`}
-            onClick={() => {
-                setCurrentCard({ fileUsAtom, setCurrent: !currentCard });
-                setRightPanel(!currentCard ? fileUsAtom : undefined);
-            }}
-        >
-            <CardTitleTextMemo fileUsAtom={fileUsAtom} />
+        <div className={`relative p-2 ${currentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100`}>
+            <div
+                className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none"
+                onClick={() => {
+                    setCurrentCard({ fileUsAtom, setCurrent: !currentCard });
+                    setRightPanel(!currentCard ? fileUsAtom : undefined);
+                }}
+            >
+                <CardTitleTextMemo fileUsAtom={fileUsAtom} />
+            </div>
 
             {/* Card actions */}
             {currentCard && <div className="absolute top-3 right-2 z-10 flex items-center">
