@@ -11,7 +11,7 @@ import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
 import EditorMatch from './components/Editors/EditorMatch';
 import Dialog from './components/UI/UIDialog';
-import CardMenuOverlays from './components/Card/CardMenuOverlays';
+// import CardMenuOverlays from './components/Card/CardMenuOverlays';
 
 function App() {
     const atom = 1;
@@ -27,7 +27,7 @@ function App() {
                     <EditorMatch atom={atom} />
                 </Dialog>
 
-                <CardMenuOverlays />
+                {/* <CardMenuOverlays /> */}
 
                 <SelectedItems className="flex-none" />
 
