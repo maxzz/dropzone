@@ -7,8 +7,6 @@ import EditorMatch from './EditorMatch';
 function DetectionGroupEditor() {
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
     const show = !!editorAtom;
-    console.log({atom: `${editorAtom}`}, show);
-    
     return (
         <>
             {show &&
