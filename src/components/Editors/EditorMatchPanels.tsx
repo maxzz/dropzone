@@ -49,7 +49,8 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
     });
 
     return (
-        <div className="px-2 sm:px-0 w-[460px]">
+        <div className="px-2 sm:px-0 w-[460px] h-[600px]">
+
             <Tab.Group>
                 <Tab.List className="p-1 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
                     {Object.keys(categories).map((category) => (
@@ -67,6 +68,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                         </Tab>
                     ))}
                 </Tab.List>
+
                 <Tab.Panels className="">
                     {Object.values(categories).map((posts, idx) => (
                         <Tab.Panel key={idx}
@@ -76,8 +78,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                             )}
                         >
                             {idx === 0
-                                ?
-                                <EditorMatch fileUsAtom={fileUsAtom} setShow={setShow} />
+                                ? <EditorMatch fileUsAtom={fileUsAtom} />
                                 :
                                 <ul>
                                     {posts.map((post) => (
@@ -107,6 +108,20 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                     ))}
                 </Tab.Panels>
             </Tab.Group>
+
+            <div className="!mt-4 flex justify-end space-x-2">
+                <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded"
+                    onClick={() => {
+                        setShow(false);
+                    }}
+                >OK</button>
+                <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded"
+                    onClick={() => {
+                        setShow(false);
+                    }}
+                >Cancel</button>
+            </div>
+
         </div>
     );
 }

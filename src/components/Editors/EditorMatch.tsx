@@ -51,19 +51,6 @@ export default function EditorMatch({ fileUsAtom, setShow = (v: boolean) => { } 
                     <div className="">Original URL</div>
                     <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
                 </div>
-
-                <div className="!mt-4 flex justify-end space-x-2">
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded"
-                        onClick={() => {
-                            setShow(false);
-                        }}
-                    >OK</button>
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded"
-                        onClick={() => {
-                            setShow(false);
-                        }}
-                    >Cancel</button>
-                </div>
             </div>
         </div>
     );
