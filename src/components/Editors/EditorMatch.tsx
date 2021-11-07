@@ -24,7 +24,7 @@ function RadioGroup() {
     );
 }
 
-export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { atom: FileUsAtom; setShow?: (v: boolean) => void; }) {
+export default function EditorMatch({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUsAtom: FileUsAtom; setShow?: (v: boolean) => void; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
