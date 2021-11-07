@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import { detectionEditorAtom } from '../store/store';
 import { PortalModal } from './UI/UIDialog';
 import EditorMatch from './Editors/EditorMatch';
+import EditorMatchPanels from './Editors/EditorMatchPanels';
 
 function DetectionGroupEditor() {
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
@@ -11,7 +12,7 @@ function DetectionGroupEditor() {
         <>
             {show &&
                 <PortalModal show={show} setShow={(v: boolean) => !v && setEditorAtom(undefined)}>
-                    <EditorMatch fileUsAtom={editorAtom} />
+                    <EditorMatchPanels fileUsAtom={editorAtom} />
                 </PortalModal>
             }
         </>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../utils/classnames';
+import { FileUsAtom } from '../../store/store';
+import EditorMatch from './EditorMatch';
 
 type PostType = {
     id: number,
@@ -10,7 +12,7 @@ type PostType = {
     shareCount: number,
 };
 
-export default function Example() {
+export default function EditorMatchPanels({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     let [categories] = useState<Record<string, PostType[]>>({
         Recent: [
             {
@@ -44,46 +46,28 @@ export default function Example() {
                 shareCount: 12,
             },
         ],
-        Trending: [
-            {
-                id: 1,
-                title: 'Ask Me Anything: 10 answers to your questions about coffee',
-                date: '2d ago',
-                commentCount: 9,
-                shareCount: 5,
-            },
-            {
-                id: 2,
-                title: "The worst advice we've ever heard about coffee",
-                date: '4d ago',
-                commentCount: 1,
-                shareCount: 2,
-            },
-        ],
     });
 
     return (
-        <div className="px-2 sm:px-0 w-full max-w-md">
+        <div className="px-2 sm:px-0 w-[460px]">
             <Tab.Group>
-                <Tab.List className="p-1 flex space-x-1 bg-blue-900/20 rounded-t">
+                <Tab.List className="p-1 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
                     {Object.keys(categories).map((category) => (
                         <Tab
                             key={category}
-                            className={({ selected }) =>
-                                classNames(
-                                    'py-2.5 leading-5 w-full text-sm font-medium text-gray-700 rounded-lg',
-                                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                                    selected
-                                        ? 'bg-white shadow'
-                                        : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
-                                )
-                            }
+                            className={({ selected }) => classNames(
+                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded-lg',
+                                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+                                selected
+                                    ? 'bg-white shadow'
+                                    : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
+                            )}
                         >
                             {category}
                         </Tab>
                     ))}
                 </Tab.List>
-                <Tab.Panels className="mt-2">
+                <Tab.Panels className="">
                     {Object.values(categories).map((posts, idx) => (
                         <Tab.Panel key={idx}
                             className={classNames(
@@ -91,28 +75,34 @@ export default function Example() {
                                 'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
                             )}
                         >
-                            <ul>
-                                {posts.map((post) => (
-                                    <li className="relative p-3 rounded-md hover:bg-coolGray-100" key={post.id}>
-                                        <h3 className="text-sm font-medium leading-5"> {post.title} </h3>
+                            {idx === 0
+                                ?
+                                <EditorMatch fileUsAtom={fileUsAtom} />
+                                :
+                                <ul>
+                                    {posts.map((post) => (
+                                        <li className="relative p-3 rounded-md hover:bg-coolGray-100" key={post.id}>
+                                            <h3 className="text-sm font-medium leading-5"> {post.title} </h3>
 
-                                        <ul className="mt-1 flex space-x-1 text-xs leading-4 font-normal text-gray-500">
-                                            <li>{post.date}</li>
-                                            <li>&middot;</li>
-                                            <li>{post.commentCount} comments</li>
-                                            <li>&middot;</li>
-                                            <li>{post.shareCount} shares</li>
-                                        </ul>
+                                            <ul className="mt-1 flex space-x-1 text-xs leading-4 font-normal text-gray-500">
+                                                <li>{post.date}</li>
+                                                <li>&middot;</li>
+                                                <li>{post.commentCount} comments</li>
+                                                <li>&middot;</li>
+                                                <li>{post.shareCount} shares</li>
+                                            </ul>
 
-                                        <a href="#"
-                                            className={classNames(
-                                                'absolute inset-0 rounded-md',
-                                                'focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'
-                                            )}
-                                        />
-                                    </li>
-                                ))}
-                            </ul>
+                                            <a href="#"
+                                                className={classNames(
+                                                    'absolute inset-0 rounded-md',
+                                                    'focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'
+                                                )}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            }
+
                         </Tab.Panel>
                     ))}
                 </Tab.Panels>

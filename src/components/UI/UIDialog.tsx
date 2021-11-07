@@ -3,7 +3,7 @@ import Modal from 'react-overlays/Modal';
 
 export const RenderBackdrop = (props: any) => <div className="fixed inset-0 z-[1040] bg-black opacity-40" {...props} />;
 
-const className = "fixed w-[460px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1040] bg-gray-200 rounded border border-gray-300 shadow";
+const className = "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1040] bg-gray-200 rounded border border-gray-300 shadow";
 
 function ButtonTrigger(props: React.HTMLAttributes<HTMLElement>) {
     return (

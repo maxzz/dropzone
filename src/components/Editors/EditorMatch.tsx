@@ -1,6 +1,5 @@
 import React from 'react';
 import { FileUsAtom } from '../../store/store';
-import Example from './EditorMatchPanels';
 
 function RadioButton({ label, type = "radio", group, val = 0, checked }: { label: string; type?: string; group?: string; val?: number; checked: boolean; }) {
     return (
@@ -31,8 +30,6 @@ export default function EditorMatch({ fileUsAtom, setShow = (v: boolean) => { } 
     const [checked, setChecked] = React.useState(true);
     return (
         <div className="pb-4 text-sm">
-
-            <Example />
 
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
 
