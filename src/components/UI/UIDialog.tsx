@@ -27,13 +27,13 @@ type ControlledDialogProps = PortalModalProps & {
 type DialogProps = Omit<ControlledDialogProps, 'show' | 'setShow'>;
 
 export function PortalModal({ children, allowClickOutside, show, setShow }: PortalModalProps) {
-    const portalRef = React.useRef<HTMLElement | null>(null);
+    const portalRef = React.useRef<HTMLElement | undefined>(undefined);
     React.useEffect(() => { 
-        portalRef.current = document.getElementById('portal');
+        portalRef.current = document.getElementById('portal') || undefined;
         console.log('eff', show, portalRef.current, document.getElementById('portal'));
     }, []);
     console.log('modal', show, portalRef.current, document.getElementById('portal'));
-    
+
     return (
         <>
             {show &&
@@ -44,7 +44,8 @@ export function PortalModal({ children, allowClickOutside, show, setShow }: Port
                     onEscapeKeyDown={() => setShow(false)}
                     renderBackdrop={RenderBackdrop}
                     aria-labelledby="modal-label"
-                    container={document.getElementById('portal')}
+                    container={portalRef.current}
+                    // container={document.getElementById('portal')}
                 >
                     {React.cloneElement(children, { setShow })}
                 </Modal>
