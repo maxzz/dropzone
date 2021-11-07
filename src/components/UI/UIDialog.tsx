@@ -17,7 +17,7 @@ type PortalModalProps = {
     children: JSX.Element;
     allowClickOutside?: boolean;
     show: boolean;
-    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+    setShow: (v: boolean) => void;
 }
 
 type ControlledDialogProps = PortalModalProps & {
@@ -28,7 +28,12 @@ type DialogProps = Omit<ControlledDialogProps, 'show' | 'setShow'>;
 
 export function PortalModal({ children, allowClickOutside, show, setShow }: PortalModalProps) {
     const portalRef = React.useRef<HTMLElement | null>(null);
-    React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
+    React.useEffect(() => { 
+        portalRef.current = document.getElementById('portal');
+        console.log('eff', show, portalRef.current, document.getElementById('portal'));
+    }, []);
+    console.log('modal', show, portalRef.current, document.getElementById('portal'));
+    
     return (
         <>
             {show &&
@@ -39,9 +44,13 @@ export function PortalModal({ children, allowClickOutside, show, setShow }: Port
                     onEscapeKeyDown={() => setShow(false)}
                     renderBackdrop={RenderBackdrop}
                     aria-labelledby="modal-label"
-                    container={portalRef}
+                    //container={portalRef}
                 >
-                    {React.cloneElement(children, { setShow })}
+                    {/* {React.cloneElement(children, { setShow })} */}
+                    <>
+                    {(console.log('111'), "")}
+                    <div className="">3333333333</div>                    
+                    </>
                 </Modal>
             }
         </>
@@ -58,7 +67,7 @@ export function ControlledDialog({ trigger, show, setShow, ...rest }: Controlled
                     onClick: (event: Event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        console.log('triiger');
+                        //console.log('triiger');
 
                         setShow(true);
                     }

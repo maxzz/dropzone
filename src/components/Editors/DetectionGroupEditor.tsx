@@ -1,17 +1,20 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { detectionEditorAtom } from '../../store/store';
-import Dialog from '../UI/UIDialog';
+import { PortalModal } from '../UI/UIDialog';
 import EditorMatch from './EditorMatch';
 
 function DetectionGroupEditor() {
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
+    const show = !!editorAtom;
+    console.log({atom: `${editorAtom}`}, show);
+    
     return (
         <>
-            {editorAtom &&
-                <Dialog>
+            {show &&
+                <PortalModal show={show} setShow={(v: boolean) => v && setEditorAtom(undefined)}>
                     <EditorMatch atom={editorAtom} />
-                </Dialog>
+                </PortalModal>
             }
         </>
     );
