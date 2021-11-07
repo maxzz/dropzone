@@ -11,21 +11,21 @@ function DetectionGroupEditor() {
     return (
         <>
             {show &&
-                <Transition
-                    show={show}
-                    enter="transition duration-1000 ease-out"
-                    enterFrom="transform scale-[.5] opacity-0"
-                    enterTo="transform scale-25 opacity-100"
-                    leave="transition duration-1000 ease-out"
-                    leaveFrom="transform scale-100 opacity-100"
-                    leaveTo="transform scale-95 opacity-0"
-                >
-                    <div className="w-96 h-96">
                         <PortalModal show={show} setShow={(v: boolean) => !v && setEditorAtom(undefined)}>
+                            <Transition
+                                show={show}
+                                enter="transition duration-[12000] ease-out"
+                                enterFrom="transform scale-[.5] opacity-0"
+                                enterTo="transform scale-25 opacity-100"
+                                leave="transition duration-1000 ease-out"
+                                leaveFrom="transform scale-100 opacity-100"
+                                leaveTo="transform scale-95 opacity-0"
+                            >
+                    {/* <div className="w-96 h-96"> */}
                             <EditorMatch atom={editorAtom} />
-                        </PortalModal>
-                    </div>
+                    {/* </div> */}
                 </Transition>
+                        </PortalModal>
             }
         </>
     );
