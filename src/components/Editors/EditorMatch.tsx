@@ -30,8 +30,10 @@ export default function EditorMatch({ fileUsAtom, setShow = (v: boolean) => { } 
 
     const [checked, setChecked] = React.useState(true);
     return (
-        <div className="py-4 text-sm">
+        <div className="pb-4 text-sm">
+
             <Example />
+
             <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
 
             <div className="px-4">

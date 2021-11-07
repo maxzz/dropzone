@@ -63,19 +63,19 @@ export default function Example() {
     });
 
     return (
-        <div className="w-full max-w-md px-2 py-16 sm:px-0">
+        <div className="px-2 sm:px-0 w-full max-w-md">
             <Tab.Group>
-                <Tab.List className="p-1 flex space-x-1 bg-blue-900/20">
+                <Tab.List className="p-1 flex space-x-1 bg-blue-900/20 rounded-t">
                     {Object.keys(categories).map((category) => (
                         <Tab
                             key={category}
                             className={({ selected }) =>
                                 classNames(
-                                    'py-2.5 leading-5 w-full text-sm font-medium text-blue-700 rounded-lg',
+                                    'py-2.5 leading-5 w-full text-sm font-medium text-gray-700 rounded-lg',
                                     'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
                                     selected
                                         ? 'bg-white shadow'
-                                        : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                                        : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
                                 )
                             }
                         >
