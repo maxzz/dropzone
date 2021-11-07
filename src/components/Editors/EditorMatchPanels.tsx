@@ -12,7 +12,7 @@ type PostType = {
     shareCount: number,
 };
 
-export default function EditorMatchPanels({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUsAtom: FileUsAtom; setShow?: (v: boolean) => void; }) {
     let [categories] = useState<Record<string, PostType[]>>({
         Recent: [
             {
@@ -77,7 +77,7 @@ export default function EditorMatchPanels({ fileUsAtom }: { fileUsAtom: FileUsAt
                         >
                             {idx === 0
                                 ?
-                                <EditorMatch fileUsAtom={fileUsAtom} />
+                                <EditorMatch fileUsAtom={fileUsAtom} setShow={setShow} />
                                 :
                                 <ul>
                                     {posts.map((post) => (
