@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { detectionEditorAtom } from '../../store/store';
-import { PortalModal } from '../UI/UIDialog';
-import EditorMatch from './EditorMatch';
+import { detectionEditorAtom } from '../store/store';
+import { PortalModal } from './UI/UIDialog';
+import EditorMatch from './Editors/EditorMatch';
 
 function DetectionGroupEditor() {
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
@@ -18,4 +18,10 @@ function DetectionGroupEditor() {
     );
 }
 
-export default DetectionGroupEditor;
+function Dialogs() {
+    return (
+        <DetectionGroupEditor />
+    );
+}
+
+export default Dialogs;
