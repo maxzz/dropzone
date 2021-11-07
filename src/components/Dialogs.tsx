@@ -14,15 +14,17 @@ function DetectionGroupEditor() {
                 <Transition
                     show={show}
                     enter="transition duration-1000 ease-out"
-                    enterFrom="transform scale-95 opacity-0"
-                    enterTo="transform scale-100 opacity-100"
+                    enterFrom="transform scale-[.5] opacity-0"
+                    enterTo="transform scale-25 opacity-100"
                     leave="transition duration-1000 ease-out"
                     leaveFrom="transform scale-100 opacity-100"
                     leaveTo="transform scale-95 opacity-0"
                 >
-                    <PortalModal show={show} setShow={(v: boolean) => !v && setEditorAtom(undefined)}>
-                        <EditorMatch atom={editorAtom} />
-                    </PortalModal>
+                    <div className="w-96 h-96">
+                        <PortalModal show={show} setShow={(v: boolean) => !v && setEditorAtom(undefined)}>
+                            <EditorMatch atom={editorAtom} />
+                        </PortalModal>
+                    </div>
                 </Transition>
             }
         </>
