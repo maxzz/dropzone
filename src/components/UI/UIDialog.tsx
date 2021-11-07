@@ -44,13 +44,9 @@ export function PortalModal({ children, allowClickOutside, show, setShow }: Port
                     onEscapeKeyDown={() => setShow(false)}
                     renderBackdrop={RenderBackdrop}
                     aria-labelledby="modal-label"
-                    //container={portalRef}
+                    container={document.getElementById('portal')}
                 >
-                    {/* {React.cloneElement(children, { setShow })} */}
-                    <>
-                    {(console.log('111'), "")}
-                    <div className="">3333333333</div>                    
-                    </>
+                    {React.cloneElement(children, { setShow })}
                 </Modal>
             }
         </>

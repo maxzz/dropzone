@@ -52,7 +52,11 @@ export default function EditorMatch({ atom, setShow = (v: boolean) => { } }: { a
                 </div>
 
                 <div className="!mt-4 flex justify-end space-x-2">
-                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(false)}>OK</button>
+                    <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => {
+                        console.log('OK');
+                        
+                        setShow(false)
+                    }}>OK</button>
                     <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded" onClick={() => setShow(false)}>Cancel</button>
                 </div>
             </div>
