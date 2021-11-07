@@ -35,10 +35,10 @@ function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
     return (
         <div
-            className={`px-1 w-6 h-6 flex items-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
+            className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
             onClick={() => setEditorAtom(editorAtom === fileUsAtom ? undefined : fileUsAtom)}
         >
-            <IconGear />
+            <IconGear className="w-4" />
         </div>
     );
 }
