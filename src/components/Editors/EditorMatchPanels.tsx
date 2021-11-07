@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../utils/classnames';
 
+type PostType = {
+    id: number,
+    title: string,
+    date: string,
+    commentCount: number,
+    shareCount: number,
+};
+
 export default function Example() {
-    let [categories] = useState({
+    let [categories] = useState<Record<string, PostType[]>>({
         Recent: [
             {
                 id: 1,
@@ -86,13 +94,8 @@ export default function Example() {
                         >
                             <ul>
                                 {posts.map((post) => (
-                                    <li
-                                        key={post.id}
-                                        className="relative p-3 rounded-md hover:bg-coolGray-100"
-                                    >
-                                        <h3 className="text-sm font-medium leading-5">
-                                            {post.title}
-                                        </h3>
+                                    <li className="relative p-3 rounded-md hover:bg-coolGray-100" key={post.id}>
+                                        <h3 className="text-sm font-medium leading-5"> {post.title} </h3>
 
                                         <ul className="flex mt-1 space-x-1 text-xs font-normal leading-4 text-coolGray-500">
                                             <li>{post.date}</li>
@@ -102,8 +105,7 @@ export default function Example() {
                                             <li>{post.shareCount} shares</li>
                                         </ul>
 
-                                        <a
-                                            href="#"
+                                        <a href="#"
                                             className={classNames(
                                                 'absolute inset-0 rounded-md',
                                                 'focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'

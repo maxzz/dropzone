@@ -7,10 +7,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import ReactDOM from 'react-dom';
-
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ');
-}
+import { classNames } from '../../utils/classnames';
 
 export function Example() {
     return (
