@@ -49,73 +49,71 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
     });
 
     return (
-        <div className="px-2 sm:px-0 w-[460px] h-[600px]">
+        <div className="px-2 sm:px-0 w-[460px] h-[600px] grid grid-rows-[1fr,auto]">
 
-            <Tab.Group>
-                <Tab.List className="p-1 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
-                    {Object.keys(categories).map((category) => (
-                        <Tab
-                            key={category}
-                            className={({ selected }) => classNames(
-                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded-lg',
-                                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                                selected
-                                    ? 'bg-white shadow'
-                                    : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
-                            )}
-                        >
-                            {category}
-                        </Tab>
-                    ))}
-                </Tab.List>
+            <div className="grid grid-rows-[auto,1fr]">
+                <Tab.Group>
+                    <Tab.List className="p-1 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
+                        {Object.keys(categories).map((category) => (
+                            <Tab
+                                key={category}
+                                className={({ selected }) => classNames(
+                                    'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded-lg',
+                                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+                                    selected
+                                        ? 'bg-white shadow'
+                                        : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
+                                )}
+                            >
+                                {category}
+                            </Tab>
+                        ))}
+                    </Tab.List>
+                    <Tab.Panels>
+                        {Object.values(categories).map((posts, idx) => (
+                            <Tab.Panel key={idx}
+                                className={classNames(
+                                    'p-3 h-full bg-white',
+                                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+                                )}
+                            >
+                                {idx === 0
+                                    ? <EditorMatch fileUsAtom={fileUsAtom} />
+                                    :
+                                    <ul>
+                                        {posts.map((post) => (
+                                            <li className="relative p-3 rounded-md hover:bg-coolGray-100" key={post.id}>
+                                                <h3 className="text-sm font-medium leading-5"> {post.title} </h3>
+                                                <ul className="mt-1 flex space-x-1 text-xs leading-4 font-normal text-gray-500">
+                                                    <li>{post.date}</li>
+                                                    <li>&middot;</li>
+                                                    <li>{post.commentCount} comments</li>
+                                                    <li>&middot;</li>
+                                                    <li>{post.shareCount} shares</li>
+                                                </ul>
+                                                <a href="#"
+                                                    className={classNames(
+                                                        'absolute inset-0 rounded-md',
+                                                        'focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'
+                                                    )}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                }
+                            </Tab.Panel>
+                        ))}
+                    </Tab.Panels>
+                </Tab.Group>
+            </div>
 
-                <Tab.Panels className="">
-                    {Object.values(categories).map((posts, idx) => (
-                        <Tab.Panel key={idx}
-                            className={classNames(
-                                'p-3 bg-white',
-                                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                            )}
-                        >
-                            {idx === 0
-                                ? <EditorMatch fileUsAtom={fileUsAtom} />
-                                :
-                                <ul>
-                                    {posts.map((post) => (
-                                        <li className="relative p-3 rounded-md hover:bg-coolGray-100" key={post.id}>
-                                            <h3 className="text-sm font-medium leading-5"> {post.title} </h3>
-
-                                            <ul className="mt-1 flex space-x-1 text-xs leading-4 font-normal text-gray-500">
-                                                <li>{post.date}</li>
-                                                <li>&middot;</li>
-                                                <li>{post.commentCount} comments</li>
-                                                <li>&middot;</li>
-                                                <li>{post.shareCount} shares</li>
-                                            </ul>
-
-                                            <a href="#"
-                                                className={classNames(
-                                                    'absolute inset-0 rounded-md',
-                                                    'focus:z-10 focus:outline-none focus:ring-2 ring-blue-400'
-                                                )}
-                                            />
-                                        </li>
-                                    ))}
-                                </ul>
-                            }
-
-                        </Tab.Panel>
-                    ))}
-                </Tab.Panels>
-            </Tab.Group>
-
-            <div className="!mt-4 flex justify-end space-x-2">
-                <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded"
+            <div className="px-4 py-4 flex justify-end space-x-2 bg-white">
+                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-200 bg-gray-900 rounded"
                     onClick={() => {
                         setShow(false);
                     }}
                 >OK</button>
-                <button className="px-4 py-2 min-w-[5rem] h-8 leading-4 text-gray-200 bg-gray-600 rounded"
+                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-200 bg-gray-900 rounded"
                     onClick={() => {
                         setShow(false);
                     }}
