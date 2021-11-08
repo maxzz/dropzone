@@ -9,7 +9,7 @@ import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import SvgFontSpy from './utils/SvgFontSpy';
-import EditorMatch from './components/Editors/EditorMatch';
+import MatchWeb from './components/Editors/EditorMatch';
 import Dialog from './components/UI/UIDialog';
 import Dialogs from './components/Dialogs';
 // import CardMenu from './components/Card/CardMenu';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../utils/classnames';
 import { FileUsAtom } from '../../store/store';
-import EditorMatch from './EditorMatch';
+import { MatchWeb, MatchWindows } from './EditorMatch';
 
 type PostType = {
     id: number,
@@ -49,12 +49,12 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
     });
 
     const pages = {
-        'Web': <EditorMatch fileUsAtom={fileUsAtom} />,
-        'Windows': <EditorMatch fileUsAtom={fileUsAtom} />,
+        'Web': <MatchWeb fileUsAtom={fileUsAtom} />,
+        'Windows': <MatchWindows fileUsAtom={fileUsAtom} />,
     };
 
     return (
-        <div className="px-2 sm:px-0 w-[460px] h-[600px] grid grid-rows-[1fr,auto]">
+        <div className="px-2 sm:px-0 w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]">
 
             <div className="grid grid-rows-[auto,1fr]">
                 <Tab.Group>
@@ -73,7 +73,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                     </Tab.List>
                     <Tab.Panels>
                         {Object.values(pages).map((page, idx) => (
-                            <Tab.Panel key={idx} className={'h-full bg-white'}>
+                            <Tab.Panel key={idx} className={'h-full bg-white text-sm'}>
                                 {page}
 
                                 {/*

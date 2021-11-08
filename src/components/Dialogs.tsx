@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { detectionEditorAtom } from '../store/store';
 import { PortalModal } from './UI/UIDialog';
-import EditorMatch from './Editors/EditorMatch';
+import MatchWeb from './Editors/EditorMatch';
 import EditorMatchPanels from './Editors/EditorMatchPanels';
 
 function DetectionGroupEditor() {
