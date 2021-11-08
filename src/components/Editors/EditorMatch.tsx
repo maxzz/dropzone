@@ -13,7 +13,10 @@ function RadioButton({ label, type = "radio", group, val = 0, checked }: { label
 function RadioGroup() {
     const [value, setValue] = React.useState(3);
     return (
-        <div className="max-w-max flex flex-col" onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}>
+        <div
+            className="mt-2 px-3 py-2 max-w-max flex flex-col border border-gray-300 rounded"
+            onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
+        >
             <RadioButton group={"how"} val={1} checked={value === 1} label="Do not match" />
             <RadioButton group={"how"} val={2} checked={value === 2} label="String match" />
             <RadioButton group={"how"} val={3} checked={value === 3} label="Wildcard match" />
@@ -29,28 +32,24 @@ export default function EditorMatch({ fileUsAtom, setShow = (v: boolean) => { } 
 
     const [checked, setChecked] = React.useState(true);
     return (
-        <div className="pb-4 text-sm">
+        <div className="p-4 text-sm">
 
-            <h4 className="px-4 py-2 text-base font-bold">URL matching</h4>
+            <div className="flex flex-col">
+                <div className="">Matching URL</div>
+                <input ref={firstFocusRef} className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
 
-            <div className="px-4">
-                <div className="flex flex-col space-y-1">
-                    <div className="">Matching URL</div>
-                    <input ref={firstFocusRef} className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
+                <RadioGroup />
 
-                    <RadioGroup />
+                <label className="mt-2 h-6 flex items-center space-x-1">
+                    <input type="checkbox" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                    <div>Case sensitive</div>
+                </label>
 
-                    <label className="h-6 flex items-center space-x-1">
-                        <input type="checkbox" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
-                        <div>Case sensitive</div>
-                    </label>
+                <div className="mt-2">Quicklink URL</div>
+                <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
 
-                    <div className="">Quicklink URL</div>
-                    <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
-
-                    <div className="">Original URL</div>
-                    <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
-                </div>
+                <div className="mt-2">Original URL</div>
+                <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
             </div>
         </div>
     );

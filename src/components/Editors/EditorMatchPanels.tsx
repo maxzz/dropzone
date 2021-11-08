@@ -49,8 +49,8 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
     });
 
     const pages = {
-        'matching': <EditorMatch fileUsAtom={fileUsAtom} />,
-        'windows': <EditorMatch fileUsAtom={fileUsAtom} />,
+        'Web': <EditorMatch fileUsAtom={fileUsAtom} />,
+        'Windows': <EditorMatch fileUsAtom={fileUsAtom} />,
     };
 
     return (
@@ -58,7 +58,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
 
             <div className="grid grid-rows-[auto,1fr]">
                 <Tab.Group>
-                    <Tab.List className="px-3 pt-4 pb-2 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
+                    <Tab.List className="px-4 pt-4 pb-2 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
                         {Object.keys(pages).map((page) => (
                             <Tab
                                 key={page}
@@ -73,7 +73,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                     </Tab.List>
                     <Tab.Panels>
                         {Object.values(pages).map((page, idx) => (
-                            <Tab.Panel key={idx} className={'p-3 h-full bg-white'}>
+                            <Tab.Panel key={idx} className={'h-full bg-white'}>
                                 {page}
 
                                 {/*
