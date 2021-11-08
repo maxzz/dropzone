@@ -1,4 +1,4 @@
-import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
+import { Atom, atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
 import atomWithCallback from '../hooks/atomsX';
 import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
@@ -290,5 +290,10 @@ export const selected4ActionAtom = atom<FileUsAtom[]>([]);
 
 // Dialog edit detection options
 
+type EditorAtom = {
+    fileUsAtom: Atom<FileUsAtom> | undefined;
+    formIdx: number; // 0 - login (even if login does not exist); 1 - pchange; 2 - both
+};
+
 export const detectionEditorAtomAtom = atom<FileUsAtom | undefined>(undefined);
-export const detectionEditorformAtom = atom<number>(0); // 0 - login (even if login does not exist); 1 - pchange; 2 - both
+export const detectionEditorformAtom = atom<number>(0);
