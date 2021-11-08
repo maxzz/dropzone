@@ -4,7 +4,7 @@ import { FileUsAtom } from '../../store/store';
 function RadioButton({ label, type = "radio", group, val = 0, checked }: { label: string; type?: string; group?: string; val?: number; checked: boolean; }) {
     return (
         <label className="h-6 flex items-center space-x-1.5">
-            <input type={type} {...(group && { name: group })} value={val} defaultChecked={checked} />
+            <input type={type} className="w-3 h-3 checked:bg-gray-400 focus:ring-indigo-500 focus:ring-offset-0" {...(group && { name: group })} value={val} defaultChecked={checked} />
             <div >{label}</div>
         </label>
     );
@@ -41,7 +41,7 @@ export function MatchWeb({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUs
                 <RadioGroup />
 
                 <label className="mt-2 h-6 flex items-center space-x-1">
-                    <input type="checkbox" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
                     <div>Case sensitive</div>
                 </label>
 
