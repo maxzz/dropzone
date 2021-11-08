@@ -53,16 +53,13 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
 
             <div className="grid grid-rows-[auto,1fr]">
                 <Tab.Group>
-                    <Tab.List className="p-1 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
+                    <Tab.List className="px-3 pt-4 pb-2 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
                         {Object.keys(categories).map((category) => (
                             <Tab
                                 key={category}
                                 className={({ selected }) => classNames(
-                                    'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded-lg',
-                                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                                    selected
-                                        ? 'bg-white shadow'
-                                        : 'text-blue-50 hover:bg-white/[0.12] hover:text-white'
+                                    'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
+                                    selected ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                                 )}
                             >
                                 {category}
