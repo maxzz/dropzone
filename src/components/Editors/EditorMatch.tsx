@@ -5,7 +5,7 @@ function RadioButton({ label, type = "radio", group, val = 0, checked }: { label
     return (
         <label className="h-6 flex items-center space-x-1">
             <input type={type} {...(group && { name: group })} value={val} defaultChecked={checked} />
-            <div>{label}</div>
+            <div >{label}</div>
         </label>
     );
 }
@@ -13,7 +13,7 @@ function RadioButton({ label, type = "radio", group, val = 0, checked }: { label
 function RadioGroup() {
     const [value, setValue] = React.useState(3);
     return (
-        <div className="flex flex-col" onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}>
+        <div className="max-w-max flex flex-col" onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}>
             <RadioButton group={"how"} val={1} checked={value === 1} label="Do not match" />
             <RadioButton group={"how"} val={2} checked={value === 2} label="String match" />
             <RadioButton group={"how"} val={3} checked={value === 3} label="Wildcard match" />
