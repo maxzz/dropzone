@@ -103,12 +103,12 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
             </div>
 
             <div className="px-4 py-4 flex justify-end space-x-2 bg-white">
-                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-400 rounded"
+                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                     onClick={() => {
                         setShow(false);
                     }}
                 >OK</button>
-                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-400 rounded"
+                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                     onClick={() => {
                         setShow(false);
                     }}
