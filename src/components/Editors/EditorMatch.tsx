@@ -1,10 +1,18 @@
 import React from 'react';
 import { FileUsAtom } from '../../store/store';
 
+//background-image: url(data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e);
+
 function RadioButton({ label, type = "radio", group, val = 0, checked }: { label: string; type?: string; group?: string; val?: number; checked: boolean; }) {
     return (
         <label className="h-6 flex items-center space-x-1.5">
-            <input type={type} className="w-3 h-3 checked:bg-gray-400 focus:ring-indigo-500 focus:ring-offset-0" {...(group && { name: group })} value={val} defaultChecked={checked} />
+            <input
+                className="w-3 h-3 checked:bg-gray-400 focus:ring-indigo-500 focus:ring-offset-0"
+                type={type}
+                value={val}
+                defaultChecked={checked}
+                {...(group && { name: group })}
+            />
             <div >{label}</div>
         </label>
     );
