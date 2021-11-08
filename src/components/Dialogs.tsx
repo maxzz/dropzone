@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { detectionEditorAtom } from '../store/store';
+import { detectionEditorAtomAtom } from '../store/store';
 import { PortalModal } from './UI/UIDialog';
 import EditorMatchPanels from './Editors/EditorMatchPanels';
 
 function DetectionGroupEditor() {
-    const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
+    const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtomAtom);
     const show = !!editorAtom;
     return (
         <>

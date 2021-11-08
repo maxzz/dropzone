@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { detectionEditorAtom, FileUsAtom, SelectRowAtoms } from '../../../../store/store';
+import { detectionEditorAtomAtom, FileUsAtom, SelectRowAtoms } from '../../../../store/store';
 import { IconGear } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
 import FormOptionsDetection from './FormOptionsDetection';
@@ -32,7 +32,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
 }
 
 function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtom);
+    const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtomAtom);
     return (
         <div
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
