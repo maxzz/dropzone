@@ -99,6 +99,7 @@ module.exports = {
                     ...bridge
                 },
             });
-        },        
+        },
+        require('@tailwindcss/forms'),       
     ],
 }
