@@ -71,12 +71,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                     </Tab.List>
                     <Tab.Panels>
                         {Object.values(categories).map((posts, idx) => (
-                            <Tab.Panel key={idx}
-                                className={classNames(
-                                    'p-3 h-full bg-white',
-                                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                                )}
-                            >
+                            <Tab.Panel key={idx} className={'p-3 h-full bg-white'}>
                                 {idx === 0
                                     ? <EditorMatch fileUsAtom={fileUsAtom} />
                                     :
@@ -108,12 +103,12 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
             </div>
 
             <div className="px-4 py-4 flex justify-end space-x-2 bg-white">
-                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-200 bg-gray-900 rounded"
+                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-400 rounded"
                     onClick={() => {
                         setShow(false);
                     }}
                 >OK</button>
-                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-200 bg-gray-900 rounded"
+                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-400 rounded"
                     onClick={() => {
                         setShow(false);
                     }}
