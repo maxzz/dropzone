@@ -48,6 +48,9 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
         ],
     });
 
+    const ft = <EditorMatch fileUsAtom={fileUsAtom} />;
+    // const ft = EditorMatch;
+
     return (
         <div className="px-2 sm:px-0 w-[460px] h-[600px] grid grid-rows-[1fr,auto]">
 
@@ -70,7 +73,9 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                         {Object.values(categories).map((posts, idx) => (
                             <Tab.Panel key={idx} className={'p-3 h-full bg-white'}>
                                 {idx === 0
-                                    ? <EditorMatch fileUsAtom={fileUsAtom} />
+                                    ? ft
+                                    // ? {ft({fileUsAtom: fileUsAtom})}
+                                    // ? <EditorMatch fileUsAtom={fileUsAtom} />
                                     :
                                     <ul>
                                         {posts.map((post) => (
