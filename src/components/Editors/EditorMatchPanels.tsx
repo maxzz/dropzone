@@ -61,8 +61,6 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                     <Tab.List className="px-3 pt-4 pb-2 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
                         {Object.keys(pages).map((page) => (
                             <Tab
-                                as='div'
-                                tabIndex={-1}
                                 key={page}
                                 className={({ selected }) => classNames(
                                     'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
@@ -77,6 +75,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                         {Object.values(pages).map((page, idx) => (
                             <Tab.Panel key={idx} className={'p-3 h-full bg-white'}>
                                 {page}
+
                                 {/*
                                 {idx === 0
                                     ? ft
@@ -105,6 +104,7 @@ export default function EditorMatchPanels({ fileUsAtom, setShow = (v: boolean) =
                                     </ul>
                                 }
                             */}
+
                             </Tab.Panel>
                         ))}
                     </Tab.Panels>
