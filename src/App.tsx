@@ -8,10 +8,8 @@ import RightPanel from './components/RightPanel';
 import SimpleSplitPane from './components/UI/SimpleSplitPane';
 import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
-import SvgFontSpy from './utils/SvgFontSpy';
-import MatchWeb from './components/Editors/EditorMatch';
-import Dialog from './components/UI/UIDialog';
 import Dialogs from './components/Dialogs';
+import SvgFontSpy from './utils/SvgFontSpy';
 // import CardMenu from './components/Card/CardMenu';
 // import CardMenuOverlays from './components/Card/CardMenuOverlays';
 
@@ -24,10 +22,6 @@ function App() {
 
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />
-
-                {/* <Dialog>
-                    <EditorMatch atom={atom} />
-                </Dialog> */}
 
                 {/* <CardMenuOverlays /> */}
                 {/* <CardMenu /> */}
