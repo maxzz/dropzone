@@ -79,7 +79,7 @@ export function MatchWeb({ setShow = (v: boolean) => { } }: { setShow?: (v: bool
 export function MatchWindows({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
     const [editorAtom, setEditorAtom] = useAtom(formEditorDataAtom);
     return (
-        <div className="p-4">Windows match comming soon...</div>
+        <div className="p-4">Windows match is comming soon...</div>
     );
 }
 
