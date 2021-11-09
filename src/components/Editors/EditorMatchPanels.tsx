@@ -1,13 +1,14 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../utils/classnames';
-import { FileUsAtom, FormEditorDataAtom } from '../../store/store';
+import { FileUsAtom, formEditorDataAtom, FormEditorDataAtom } from '../../store/store';
 import { MatchWeb, MatchWindows } from './EditorMatch';
+import { useAtom } from 'jotai';
 
-export default function EditorMatchPanels({ editorAtom, setShow = (v: boolean) => { } }: { editorAtom: FormEditorDataAtom; setShow?: (v: boolean) => void; }) {
+export default function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
     const pages = {
-        'Web': <MatchWeb editorAtom={editorAtom} />,
-        'Windows': <MatchWindows editorAtom={editorAtom} />,
+        'Web': <MatchWeb />,
+        'Windows': <MatchWindows />,
     };
     return (
         <div className="px-2 sm:px-0 w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]">

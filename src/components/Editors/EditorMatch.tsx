@@ -1,5 +1,6 @@
+import { useAtom } from 'jotai';
 import React from 'react';
-import { FileUsAtom, FormEditorDataAtom } from '../../store/store';
+import { FileUsAtom, formEditorDataAtom, FormEditorDataAtom } from '../../store/store';
 
 type RadioButtonProps = {
     label: string;
@@ -42,7 +43,8 @@ function RadioGroup() {
     );
 }
 
-export function MatchWeb({ editorAtom, setShow = (v: boolean) => { } }: { editorAtom: FormEditorDataAtom; setShow?: (v: boolean) => void; }) {
+export function MatchWeb({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
+    const [editorAtom, setEditorAtom] = useAtom(formEditorDataAtom);
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
@@ -74,7 +76,8 @@ export function MatchWeb({ editorAtom, setShow = (v: boolean) => { } }: { editor
     );
 }
 
-export function MatchWindows({ editorAtom, setShow = (v: boolean) => { } }: { editorAtom: FormEditorDataAtom; setShow?: (v: boolean) => void; }) {
+export function MatchWindows({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
+    const [editorAtom, setEditorAtom] = useAtom(formEditorDataAtom);
     return (
         <div className="p-4">Windows match comming soon...</div>
     );

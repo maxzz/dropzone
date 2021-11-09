@@ -11,7 +11,7 @@ function DetectionGroupEditor() {
         <>
             {show &&
                 <PortalModal show={show} setShow={(v: boolean) => !v && setEditorAtom(null)}>
-                    <EditorMatchPanels editorAtom={editorAtom} />
+                    <EditorMatchPanels />
                 </PortalModal>
             }
         </>
