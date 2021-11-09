@@ -29,7 +29,7 @@ function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: bo
                         </button>
                     ))}
                 </div>
-                
+
                 <div>
                     {Object.values(pages).map((pageContent, idx) => (
                         <React.Fragment key={idx}>
@@ -67,3 +67,7 @@ function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: bo
 }
 
 export default EditorMatchPanels;
+
+//TODO: events onTabChange w/ ability to cancel
+//TODO: state is tab dirty
+//TODO: allow to close dialog if there is nothing dirty
