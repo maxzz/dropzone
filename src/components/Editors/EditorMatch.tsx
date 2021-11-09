@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileUsAtom } from '../../store/store';
+import { FileUsAtom, FormEditorDataAtom } from '../../store/store';
 
 type RadioButtonProps = {
     label: string;
@@ -42,7 +42,7 @@ function RadioGroup() {
     );
 }
 
-export function MatchWeb({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUsAtom: FileUsAtom; setShow?: (v: boolean) => void; }) {
+export function MatchWeb({ editorAtom, setShow = (v: boolean) => { } }: { editorAtom: FormEditorDataAtom; setShow?: (v: boolean) => void; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
@@ -74,7 +74,7 @@ export function MatchWeb({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUs
     );
 }
 
-export function MatchWindows({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUsAtom: FileUsAtom; setShow?: (v: boolean) => void; }) {
+export function MatchWindows({ editorAtom, setShow = (v: boolean) => { } }: { editorAtom: FormEditorDataAtom; setShow?: (v: boolean) => void; }) {
     return (
         <div className="p-4">Windows match comming soon...</div>
     );

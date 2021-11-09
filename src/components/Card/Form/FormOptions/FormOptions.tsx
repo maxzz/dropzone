@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { detectionEditorAtomAtom, FileUsAtom, SelectRowAtoms } from '../../../../store/store';
+import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '../../../../store/store';
 import { IconGear } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
 import FormOptionsDetection from './FormOptionsDetection';
@@ -32,12 +32,11 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
 }
 
 function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) { //TODO: check if we have forms
-    const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtomAtom);
-    //TODO: use formEditorAtom
+    const [formEditorData, setFormEditorData] = useAtom(formEditorDataAtom);
     return (
         <div
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
-            onClick={() => setEditorAtom(editorAtom === fileUsAtom ? undefined : fileUsAtom)}
+            onClick={() => setFormEditorData(formEditorData ? null : { fileUsAtom, formIdx: 0 })}
         >
             <IconGear className="w-4" />
         </div>
