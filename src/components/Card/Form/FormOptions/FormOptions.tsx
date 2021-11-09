@@ -31,7 +31,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) { //TODO: check if we have forms
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtomAtom);
     return (
         <div
@@ -89,3 +89,5 @@ export default FormOptions;
 
 //TODO: preview for all fields and highlight on click
 //TODO: save split pane position
+
+//TODO: check if we have forms in FormDetectionEdit()
