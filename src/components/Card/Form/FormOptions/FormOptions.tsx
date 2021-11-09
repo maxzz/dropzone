@@ -33,6 +33,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
 
 function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) { //TODO: check if we have forms
     const [editorAtom, setEditorAtom] = useAtom(detectionEditorAtomAtom);
+    //TODO: use formEditorAtom
     return (
         <div
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}

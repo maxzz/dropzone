@@ -295,5 +295,7 @@ type EditorAtom = {
     formIdx: number; // 0 - login (even if login does not exist); 1 - pchange; 2 - both
 };
 
+export const formEditorAtom = atom<EditorAtom | undefined>(undefined);
+
 export const detectionEditorAtomAtom = atom<FileUsAtom | undefined>(undefined);
 export const detectionEditorformAtom = atom<number>(0);
