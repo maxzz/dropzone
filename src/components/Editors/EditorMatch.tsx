@@ -79,3 +79,5 @@ export function MatchWindows({ fileUsAtom, setShow = (v: boolean) => { } }: { fi
         <div className="p-4">Windows match comming soon...</div>
     );
 }
+
+//TODO: add checks for other urls: the same as original url
