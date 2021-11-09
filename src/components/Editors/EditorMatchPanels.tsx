@@ -1,9 +1,7 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../utils/classnames';
-import { FileUsAtom, formEditorDataAtom, FormEditorDataAtom } from '../../store/store';
 import { MatchWeb, MatchWindows } from './EditorMatch';
-import { useAtom } from 'jotai';
 
 export default function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
     const pages = {
@@ -23,8 +21,14 @@ export default function EditorMatchPanels({ setShow = (v: boolean) => { } }: { s
                                     selected ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                                 )}
                                 key={pageTitle}
+                                onClick={() => {
+                                    console.log('clicked', pageTitle);
+                                }}
                             >
+                                <>
+                                {console.log('tab')}
                                 {pageTitle}
+                                </>
                             </Tab>
                         ))}
                     </Tab.List>
