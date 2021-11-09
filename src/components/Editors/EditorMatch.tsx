@@ -1,9 +1,17 @@
 import React from 'react';
 import { FileUsAtom } from '../../store/store';
 
+type RadioButtonProps = {
+    label: string;
+    type?: string;
+    group?: string;
+    val?: number;
+    checked: boolean;
+};
+
 //background-image: url(data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e);
 
-function RadioButton({ label, type = "radio", group, val = 0, checked }: { label: string; type?: string; group?: string; val?: number; checked: boolean; }) {
+function RadioButton({ label, type = "radio", group, val = 0, checked }: RadioButtonProps) {
     return (
         <label className="h-6 flex items-center space-x-1.5">
             <input
@@ -25,7 +33,7 @@ function RadioGroup() {
             className="mt-2 px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            <RadioButton group={"how"} val={1} checked={value === 1} label="Do not match" />
+            {/* <RadioButton group={"how"} val={1} checked={value === 1} label="Do not match" /> */}
             <RadioButton group={"how"} val={2} checked={value === 2} label="String match" />
             <RadioButton group={"how"} val={3} checked={value === 3} label="Wildcard match" />
             <RadioButton group={"how"} val={4} checked={value === 4} label="Regular expresssion" />
@@ -44,7 +52,7 @@ export function MatchWeb({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUs
 
             <div className="flex flex-col">
                 <div className="mb-1">Website url to match</div>
-                <input ref={firstFocusRef} className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
+                <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" />
 
                 <RadioGroup />
 
@@ -56,10 +64,10 @@ export function MatchWeb({ fileUsAtom, setShow = (v: boolean) => { } }: { fileUs
                 <div className="mt-2 mb-4 w-full border-t border-gray-300" />
 
                 <div className="mt-2 mb-1">Website original url</div>
-                <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
+                <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" />
 
                 <div className="mt-2 mb-1">Quicklink url</div>
-                <input className="px-2 py-1 w-full border border-gray-400 rounded shadow-inner" />
+                <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" />
 
             </div>
         </div>
