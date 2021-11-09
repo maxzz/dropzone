@@ -7,13 +7,13 @@ type RadioButtonProps = {
     group?: string;
     val?: number;
     checked: boolean;
-};
+} & React.HTMLAttributes<HTMLLabelElement>;
 
 //background-image: url(data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e);
 
-function RadioButton({ label, type = "radio", group, val = 0, checked }: RadioButtonProps) {
+function RadioButton({ label, type = "radio", group, val = 0, checked, ...rest }: RadioButtonProps) {
     return (
-        <label className="h-6 flex items-center space-x-1.5">
+        <label className="h-6 flex items-center space-x-1.5" {...rest}>
             <input
                 className="w-3 h-3 checked:bg-gray-400 focus:ring-indigo-500 focus:ring-offset-0"
                 type={type}
@@ -37,7 +37,7 @@ function RadioGroup() {
             <RadioButton group={"how"} val={2} checked={value === 2} label="String match" />
             <RadioButton group={"how"} val={3} checked={value === 3} label="Wildcard match" />
             <RadioButton group={"how"} val={4} checked={value === 4} label="Regular expresssion" />
-            <RadioButton group={"how"} val={5} checked={value === 5} label="No domain match" />
+            <RadioButton group={"how"} val={5} checked={value === 5} label="No domain match" title="Exclude this login from domain match" />
         </div>
     );
 }
