@@ -45,9 +45,8 @@ function RadioGroup() {
 
 function MatchHow({ open }: { open: boolean; }) {
     const [checked, setChecked] = React.useState(true);
-    const styles = useSpring({ height: open ? '100px' : 0, config: { duration: 5000 } });
     return (
-        <a.div style={styles} className="flex space-x-4">
+        <div className="flex space-x-4">
             {/* How match */}
             <RadioGroup />
             {/* Match case */}
@@ -55,7 +54,7 @@ function MatchHow({ open }: { open: boolean; }) {
                 <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
                 <div>Case sensitive</div>
             </label>
-        </a.div>
+        </div>
 
     );
 }
@@ -73,6 +72,8 @@ export function MatchWeb() {
     }
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
+
+    const styles = useSpring({ height: !sameMurl ? '100px' : 0, config: { duration: 5000 } });
 
     return (
         <div className="p-4">
@@ -93,10 +94,12 @@ export function MatchWeb() {
                     </label>
                 </div>
 
-                {!sameMurl && <>
-                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
-                    <MatchHow open={sameMurl} />
-                </>}
+                {!sameMurl &&
+                    <a.div style={styles}>
+                        <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
+                        <MatchHow open={sameMurl} />
+                    </a.div>
+                }
 
                 {/* Qiucklink url */}
                 <div className="mt-6 mb-1 flex items-center">
