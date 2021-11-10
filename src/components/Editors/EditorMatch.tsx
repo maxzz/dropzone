@@ -57,8 +57,8 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
                     !isValid ? 'border-gray-400' : 'border-red-400',
                 )}
                 value={murl} onChange={(e) => setMurl(e.target.value)}
-                {...(isValid && {title: errorHint})}
-                // title={errorHint}
+                {...(isValid && { title: errorHint })}
+            // title={errorHint}
             />
             <div className="flex space-x-4">
                 {/* How match */}
@@ -69,6 +69,31 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
                     <div>Case sensitive</div>
                 </label>
             </div>
+        </>
+    );
+}
+
+function MatchUrlGroup({maniMurl}: {maniMurl: string}) {
+    const [sameMurl, setSameMurl] = React.useState(true);
+    const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
+    const [murlAtom] = React.useState(atomWithCallback(maniMurl, ({ nextValue }) => {
+        console.log('updated', nextValue);
+    }));
+    return (
+        <>
+            <div className="mt-6 mb-1 flex items-center">
+                <div className="w-28 font-bold text-gray-600">Matching url</div>
+                <label className="h-6 flex items-center space-x-1">
+                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)} />
+                    <div>Same as original url</div>
+                </label>
+            </div>
+
+            {!sameMurl &&
+                <a.div style={stylesHow}>
+                    <MatchHow murlAtom={murlAtom} />
+                </a.div>
+            }
         </>
     );
 }
@@ -85,18 +110,14 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
-    const [sameMurl, setSameMurl] = React.useState(true);
+
     const [sameQurl, setSameQurl] = React.useState(true);
 
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
-    const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
-    const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
-    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', ({ nextValue }) => {
-        console.log('updated', nextValue);
-    }));
+    const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
     return (
         <div className="p-4">
@@ -108,20 +129,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
                 {/* Separator */}
                 {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
 
-                {/* Match url */}
-                <div className="mt-6 mb-1 flex items-center">
-                    <div className="w-28 font-bold text-gray-600">Matching url</div>
-                    <label className="h-6 flex items-center space-x-1">
-                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)} />
-                        <div>Same as original url</div>
-                    </label>
-                </div>
-
-                {!sameMurl &&
-                    <a.div style={stylesHow}>
-                        <MatchHow murlAtom={murlAtom} />
-                    </a.div>
-                }
+                <MatchUrlGroup maniMurl={detection?.web_murl || ''} />
 
                 {/* Qiucklink url */}
                 <div className="mt-6 mb-1 flex items-center">
