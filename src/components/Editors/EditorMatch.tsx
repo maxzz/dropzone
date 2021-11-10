@@ -3,6 +3,7 @@ import { useAtom, WritableAtom } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
 import atomWithCallback from '../../hooks/atomsX';
+import { classNames } from '../../utils/classnames';
 
 type RadioButtonProps = {
     label: string;
@@ -46,9 +47,19 @@ function RadioGroup() {
 function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [checked, setChecked] = React.useState(true);
     const [murl, setMurl] = useAtom(murlAtom);
+    const isValid = true;
+    const errorHint = 'This pattern is invalid';
     return (
         <>
-            <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={murl} onChange={(e) => setMurl(e.target.value)} />
+            <input
+                className={classNames(
+                    "px-2 py-1.5 w-full border rounded shadow-inner",
+                    !isValid ? 'border-gray-400' : 'border-red-400',
+                )}
+                value={murl} onChange={(e) => setMurl(e.target.value)}
+                {...(isValid && {title: errorHint})}
+                // title={errorHint}
+            />
             <div className="flex space-x-4">
                 {/* How match */}
                 <RadioGroup />
@@ -83,7 +94,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
-    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', ({nextValue}) => {
+    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', ({ nextValue }) => {
         console.log('updated', nextValue);
     }));
 
