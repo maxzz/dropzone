@@ -43,7 +43,7 @@ function RadioGroup() {
     );
 }
 
-function MatchHow({ open }: { open: boolean; }) {
+function MatchHow() {
     const [checked, setChecked] = React.useState(true);
     return (
         <div className="flex space-x-4">
@@ -55,9 +55,16 @@ function MatchHow({ open }: { open: boolean; }) {
                 <div>Case sensitive</div>
             </label>
         </div>
-
     );
 }
+
+type MatchWebProps = {
+    urls: {
+        o?: string;
+        m?: string;
+        q?: string;
+    },
+};
 
 export function MatchWeb() {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
@@ -88,7 +95,7 @@ export function MatchWeb() {
 
                 {/* Match url */}
                 <div className="mt-6 mb-1 flex items-center">
-                    <div className="w-24 font-bold text-gray-600">Matching url</div>
+                    <div className="w-28 font-bold text-gray-600">Matching url</div>
                     <label className="h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)} />
                         <div>Same as original url</div>
@@ -98,13 +105,13 @@ export function MatchWeb() {
                 {!sameMurl &&
                     <a.div style={stylesHow}>
                         <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
-                        <MatchHow open={sameMurl} />
+                        <MatchHow />
                     </a.div>
                 }
 
                 {/* Qiucklink url */}
                 <div className="mt-6 mb-1 flex items-center">
-                    <div className="w-24 font-bold text-gray-600">Quicklink url</div>
+                    <div className="w-28 font-bold text-gray-600">Quicklink url</div>
                     <label className="h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)} />
                         <div>Same as original url</div>
