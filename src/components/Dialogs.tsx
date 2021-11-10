@@ -5,13 +5,12 @@ import { PortalModal } from './UI/UIDialog';
 import EditorMatchPanels from './Editors/EditorMatchPanels';
 
 function DetectionGroupEditor() {
-    const [editorAtom, setEditorAtom] = useAtom(formEditorDataAtom);
-    const show = !!editorAtom;
+    const [editorData, setEditorData] = useAtom(formEditorDataAtom);
     return (
         <>
-            {show &&
-                <PortalModal show={show} setShow={(v: boolean) => !v && setEditorAtom(null)}>
-                    <EditorMatchPanels />
+            {editorData &&
+                <PortalModal show={true} setShow={(v: boolean) => !v && setEditorData(null)}>
+                    <EditorMatchPanels editorData={editorData} />
                 </PortalModal>
             }
         </>

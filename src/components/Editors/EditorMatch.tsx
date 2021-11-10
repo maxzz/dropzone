@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/web';
-import { formEditorDataAtom } from '../../store/store';
+import { EditorData, formEditorDataAtom } from '../../store/store';
 
 type RadioButtonProps = {
     label: string;
@@ -66,22 +66,20 @@ type MatchWebProps = {
     },
 };
 
-export function MatchWeb() {
+export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
     const [sameMurl, setSameMurl] = React.useState(true);
     const [sameQurl, setSameQurl] = React.useState(true);
 
-    const [editorData, setEditorData] = useAtom(formEditorDataAtom);
-    if (!editorData) {
-        return null;
-    }
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
+
+    //atomWithCallback
 
     return (
         <div className="p-4">
@@ -128,7 +126,7 @@ export function MatchWeb() {
     );
 }
 
-export function MatchWindows() {
+export function MatchWindows({ editorData }: { editorData: EditorData; }) {
     const [editorAtom, setEditorAtom] = useAtom(formEditorDataAtom);
     if (!editorAtom) {
         return null;

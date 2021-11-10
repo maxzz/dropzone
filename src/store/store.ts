@@ -290,7 +290,7 @@ export const selected4ActionAtom = atom<FileUsAtom[]>([]);
 
 // Dialog edit detection options
 
-type EditorData = {
+export type EditorData = {
     fileUsAtom: FileUsAtom;
     formIdx: number; // 0 - login (even if login does not exist); 1 - pchange; 2 - both
 };

@@ -1,12 +1,13 @@
 import React from 'react';
+import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { MatchWeb, MatchWindows } from './EditorMatch';
 
-function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
+function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
     const pages = {
-        'Match Web': <MatchWeb />,
-        'Match Windows': <MatchWindows />,
+        'Match Web': <MatchWeb editorData={editorData} />,
+        'Match Windows': <MatchWindows editorData={editorData} />,
     };
     return (
         <div className="px-2 sm:px-0 w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]">
