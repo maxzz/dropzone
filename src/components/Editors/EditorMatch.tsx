@@ -1,5 +1,5 @@
 import React from 'react';
-import { Getter, Setter, useAtom, WritableAtom } from 'jotai';
+import { useAtom, WritableAtom } from 'jotai';
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
@@ -84,7 +84,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
-    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', (get: Getter, set: Setter, nextValue: string) => {
+    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', ({nextValue}) => {
         console.log('updated', nextValue);
     }));
 
