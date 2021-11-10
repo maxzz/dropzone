@@ -2,6 +2,12 @@ import React from 'react';
 import { classNames } from '../../utils/classnames';
 import { MatchWeb, MatchWindows } from './EditorMatch';
 
+type MatchWebProps = {
+    ourl: string;
+    murl: string;
+    qurl: string;
+};
+
 function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
     const pages = {
