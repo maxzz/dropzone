@@ -1,8 +1,9 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { PrimitiveAtom, useAtom } from 'jotai';
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
+import atomWithCallback, { AtomWithCallback } from '../../hooks/atomsX';
 
 type RadioButtonProps = {
     label: string;
@@ -43,18 +44,22 @@ function RadioGroup() {
     );
 }
 
-function MatchHow() {
+function MatchHow({ murlAtom }: { murlAtom: AtomWithCallback<string>; }) {
     const [checked, setChecked] = React.useState(true);
+    const [murl, setMurl] = useAtom(murlAtom);
     return (
-        <div className="flex space-x-4">
-            {/* How match */}
-            <RadioGroup />
-            {/* Match case */}
-            <label className="mt-1 h-6 flex items-center space-x-1">
-                <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
-                <div>Case sensitive</div>
-            </label>
-        </div>
+        <>
+            <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
+            <div className="flex space-x-4">
+                {/* How match */}
+                <RadioGroup />
+                {/* Match case */}
+                <label className="mt-1 h-6 flex items-center space-x-1">
+                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                    <div>Case sensitive</div>
+                </label>
+            </div>
+        </>
     );
 }
 
@@ -79,7 +84,9 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
-    //atomWithCallback
+    const murlAtom = React.useState(atomWithCallback('', () => {
+        console.log('updated');
+    }));
 
     return (
         <div className="p-4">
@@ -102,8 +109,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
 
                 {!sameMurl &&
                     <a.div style={stylesHow}>
-                        <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
-                        <MatchHow />
+                        <MatchHow murlAtom={murlAtom} />
                     </a.div>
                 }
 

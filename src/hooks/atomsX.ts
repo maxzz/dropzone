@@ -1,5 +1,7 @@
 import { atom, Getter, Setter, WritableAtom } from 'jotai';
 
+export type AtomWithCallback<Value> = [WritableAtom<Value, Value, void>, React.Dispatch<React.SetStateAction<WritableAtom<Value, Value, void>>>];
+
 export default function atomWithCallback<Value>(initialValue: Value, onValueChange: (get: Getter, set: Setter, nextValue: Value) => void): WritableAtom<Value, Value> {
     const baseAtom = atom(initialValue);
     const derivedAtom = atom<Value, Value>(
