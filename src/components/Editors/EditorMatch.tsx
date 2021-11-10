@@ -73,7 +73,7 @@ export function MatchWeb() {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
-    const styles = useSpring({ height: !sameMurl ? '100px' : 0, config: { duration: 5000 } });
+    const styles = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
 
     return (
         <div className="p-4">
