@@ -20,7 +20,7 @@ const UIMultilineEdit = ({ value, setValue }: { value: string, setValue: (v: str
     };
 
     const onInput = (target?: HTMLTextAreaElement) => {
-        if (target && target?.scrollHeight > 34) {
+        if (target && target?.scrollHeight > 33) {
             target.style.height = "5px";
             target.style.height = target.scrollHeight - 16 + "px";
         }
@@ -51,3 +51,46 @@ export default UIMultilineEdit;
 
 // const [mLine, setMLine] = React.useState('');
 // <MultilineEdit value={mLine} setValue={setMLine} />
+
+// www.emgoto.com/react-inline-edit
+/*
+input, textarea {
+  background-color: transparent;
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 3px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #D8DEE9;
+  border: 2px solid #161822;
+}
+
+input:hover {
+  background-color: #161822;
+  cursor: pointer;
+}
+
+textarea {
+  margin-top: 24px;
+  resize: none;
+  overflow: hidden;
+  min-height: 14px;
+  max-height: 100px;
+  font-size: 14px;
+}
+
+textarea:focus {
+  outline: 5px auto Highlight; /* Firefox * /
+  outline: 5px auto -webkit-focus-ring-color; /* Chrome, Safari * /
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  width: 300px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #D8DEE9;
+}
+*/
