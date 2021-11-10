@@ -41,7 +41,7 @@ function RadioGroup() {
     );
 }
 
-function MatchHow() {
+function MatchHow({open}: {open: boolean}) {
     const [checked, setChecked] = React.useState(true);
     return (
         <div className="flex space-x-4">
@@ -92,7 +92,7 @@ export function MatchWeb() {
 
                 {!sameMurl && <>
                     <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
-                    <MatchHow />
+                    <MatchHow open={sameMurl} />
                 </>}
 
                 {/* Qiucklink url */}
