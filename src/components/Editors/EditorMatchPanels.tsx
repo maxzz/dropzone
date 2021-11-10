@@ -5,14 +5,15 @@ import { MatchWeb, MatchWindows } from './EditorMatch';
 function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
     const pages = {
-        'Web': <MatchWeb />,
-        'Windows': <MatchWindows />,
+        'Match Web': <MatchWeb />,
+        'Match Windows': <MatchWindows />,
     };
     return (
         <div className="px-2 sm:px-0 w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]">
 
+            {/* Editor body */}
             <div className="grid grid-rows-[auto,1fr]">
-
+                {/* Tabs */}
                 <div className="px-4 pt-4 pb-2 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
                     {Object.keys(pages).map((pageTitle, idx) => (
                         <button
@@ -29,7 +30,7 @@ function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: bo
                         </button>
                     ))}
                 </div>
-
+                {/* Pages */}
                 <div>
                     {Object.values(pages).map((pageContent, idx) => (
                         <React.Fragment key={idx}>
@@ -43,7 +44,7 @@ function EditorMatchPanels({ setShow = (v: boolean) => { } }: { setShow?: (v: bo
                 </div>
             </div>
 
-
+            {/* Editor buttons */}
             <div className="px-4 py-4 flex justify-end space-x-2 bg-white">
                 <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                     onClick={() => {
@@ -71,3 +72,5 @@ export default EditorMatchPanels;
 //TODO: events onTabChange w/ ability to cancel
 //TODO: state is tab dirty
 //TODO: allow to close dialog if there is nothing dirty
+
+//TODO: should be only one 'Match Web': <MatchWeb /> or 'Match Windows': <MatchWindows /> (but the user should be able to switch Windows to Web?)
