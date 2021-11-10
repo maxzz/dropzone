@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAtom, WritableAtom } from 'jotai';
-import { useSpring } from '@react-spring/core';
-import { a } from '@react-spring/web';
+import { a, useSpring } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
 import atomWithCallback from '../../hooks/atomsX';
 
