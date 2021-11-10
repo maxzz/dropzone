@@ -61,7 +61,6 @@ export function MatchWeb() {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
-    const [checked, setChecked] = React.useState(true);
     const [sameMurl, setSameMurl] = React.useState(true);
     const [sameQurl, setSameQurl] = React.useState(true);
 
@@ -77,7 +76,7 @@ export function MatchWeb() {
             <div className="flex flex-col">
                 {/* Original url */}
                 <div className="mb-1 font-bold text-gray-600">Original url</div>
-                <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_ourl} readOnly />
+                <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_ourl} readOnly />
 
                 {/* Separator */}
                 {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
@@ -92,7 +91,7 @@ export function MatchWeb() {
                 </div>
 
                 {!sameMurl && <>
-                    <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
+                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
                     <MatchHow />
                 </>}
 
