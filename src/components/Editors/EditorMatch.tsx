@@ -57,8 +57,22 @@ export function MatchWeb() {
     return (
         <div className="p-4">
             <div className="flex flex-col">
+                {/* Original url */}
+                <div className="mb-1">Website original url</div>
+
+                <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_ourl} readOnly />
+
+                {/* Separator */}
+                <div className="mt-2 mb-4 w-full border-t border-gray-300" />
+
                 {/* Match url */}
-                <div className="mb-1">Website url to match</div>
+                <div className="mt-2 mb-1 flex items-center space-x-2">
+                    <div className="">Website url to match</div>
+                    <label className="h-6 flex items-center space-x-1">
+                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                        <div>Same as original</div>
+                    </label>
+                </div>
                 <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
 
                 {/* How match */}
@@ -70,20 +84,14 @@ export function MatchWeb() {
                     <div>Case sensitive</div>
                 </label>
 
-                {/* Separator */}
-                <div className="mt-2 mb-4 w-full border-t border-gray-300" />
-
-                {/* Original url */}
-                <div className="mt-2 mb-1">Website original url</div>
-                <label className="mt-2 h-6 flex items-center space-x-1">
-                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
-                    <div>Same as original</div>
-                </label>
-
-                <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_ourl} readOnly />
-
                 {/* Qiucklink url */}
-                <div className="mt-2 mb-1">Quicklink url</div>
+                <div className="mt-4 mb-1 flex items-center space-x-2">
+                    <div className="">Quicklink url</div>
+                    <label className="h-6 flex items-center space-x-1">
+                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                        <div>Same as original</div>
+                    </label>
+                </div>
                 <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_qurl} readOnly />
             </div>
         </div>
