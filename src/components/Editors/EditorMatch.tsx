@@ -41,52 +41,6 @@ function RadioGroup() {
     );
 }
 
-const MultilineEdit = ({ value, setValue }: { value: string, setValue: (v: string) => void; }) => {
-    const [editingValue, setEditingValue] = React.useState(value);
-
-    const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => setEditingValue(event.target.value);
-
-    const onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
-        if (event.key === "Enter" || event.key === "Escape") {
-            (event.target as HTMLTextAreaElement)?.blur && (event.target as HTMLTextAreaElement)?.blur();
-        }
-    };
-
-    const onBlur: React.FocusEventHandler<HTMLTextAreaElement> = (event) => {
-        if (event.target?.value.trim() === "") {
-            setEditingValue(value);
-        } else {
-            setValue(event.target.value);
-        }
-    };
-
-    const onInput = (target?: HTMLTextAreaElement) => {
-        if (target && target?.scrollHeight > 33) {
-            target.style.height = "5px";
-            target.style.height = target.scrollHeight - 16 + "px";
-        }
-    };
-
-    const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-
-    React.useEffect(() => {
-        textareaRef.current && onInput(textareaRef.current);
-    }, [onInput, textareaRef]);
-
-    return (
-        <textarea
-            ref={textareaRef}
-            rows={1}
-            aria-label="Field name"
-            value={editingValue}
-            onBlur={onBlur}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            onInput={(event) => onInput(event.target as HTMLTextAreaElement)}
-        />
-    );
-};
-
 export function MatchWeb() {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
@@ -100,15 +54,11 @@ export function MatchWeb() {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
-    const [mLine, setMLine] = React.useState('');
-
     return (
         <div className="p-4">
             <div className="flex flex-col">
                 <div className="mb-1">Website url to match</div>
                 <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
-
-                <MultilineEdit value={mLine} setValue={setMLine} />
 
                 <RadioGroup />
 
