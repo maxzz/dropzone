@@ -48,7 +48,7 @@ function MatchHow() {
             {/* How match */}
             <RadioGroup />
             {/* Match case */}
-            <label className="mt-4 h-6 flex items-center space-x-1">
+            <label className="mt-1 h-6 flex items-center space-x-1">
                 <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
                 <div>Case sensitive</div>
             </label>
@@ -62,6 +62,8 @@ export function MatchWeb() {
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
     const [checked, setChecked] = React.useState(true);
+    const [sameMurl, setSameMurl] = React.useState(true);
+    const [sameQurl, setSameQurl] = React.useState(true);
 
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);
     if (!editorData) {
@@ -84,23 +86,28 @@ export function MatchWeb() {
                 <div className="mt-6 mb-1 flex items-center space-x-2">
                     <div className="font-bold text-gray-600">Matching url</div>
                     <label className="h-6 flex items-center space-x-1">
-                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)} />
                         <div>Same as original url</div>
                     </label>
                 </div>
-                <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
 
-                <MatchHow />
+                {!sameMurl && <>
+                    <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
+                    <MatchHow />
+                </>}
 
                 {/* Qiucklink url */}
                 <div className="mt-6 mb-1 flex items-center space-x-2">
                     <div className="font-bold text-gray-600">Quicklink url</div>
                     <label className="h-6 flex items-center space-x-1">
-                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)} />
                         <div>Same as original url</div>
                     </label>
                 </div>
-                <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_qurl} readOnly />
+
+                {!sameQurl &&
+                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_qurl} readOnly />
+                }
             </div>
         </div>
     );
