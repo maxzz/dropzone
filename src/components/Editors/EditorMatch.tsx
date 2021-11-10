@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
+import { PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
@@ -44,12 +44,12 @@ function RadioGroup() {
     );
 }
 
-function MatchHow({ murlAtom }: { murlAtom: AtomWithCallback<string>; }) {
+function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [checked, setChecked] = React.useState(true);
     const [murl, setMurl] = useAtom(murlAtom);
     return (
         <>
-            <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
+            <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={murl} onChange={(e) => setMurl(e.target.value)} />
             <div className="flex space-x-4">
                 {/* How match */}
                 <RadioGroup />
@@ -84,7 +84,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
-    const murlAtom = React.useState(atomWithCallback('', () => {
+    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', () => {
         console.log('updated');
     }));
 
