@@ -1,9 +1,9 @@
 import React from 'react';
-import { PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
+import { Getter, Setter, useAtom, WritableAtom } from 'jotai';
 import { useSpring } from '@react-spring/core';
 import { a } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
-import atomWithCallback, { AtomWithCallback } from '../../hooks/atomsX';
+import atomWithCallback from '../../hooks/atomsX';
 
 type RadioButtonProps = {
     label: string;
@@ -84,8 +84,8 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
-    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', () => {
-        console.log('updated');
+    const [murlAtom] = React.useState(atomWithCallback(detection?.web_murl || '', (get: Getter, set: Setter, nextValue: string) => {
+        console.log('updated', nextValue);
     }));
 
     return (

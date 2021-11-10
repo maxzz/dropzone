@@ -1,6 +1,4 @@
-import { atom, Getter, SetStateAction, Setter, WritableAtom } from 'jotai';
-
-export type AtomWithCallback<Value> = WritableAtom<Value, SetStateAction<Value>>;
+import { atom, Getter, Setter, WritableAtom } from 'jotai';
 
 export default function atomWithCallback<Value>(initialValue: Value, onValueChange: (get: Getter, set: Setter, nextValue: Value) => void): WritableAtom<Value, Value> {
     const baseAtom = atom(initialValue);
