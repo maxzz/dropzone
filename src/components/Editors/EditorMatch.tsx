@@ -1,6 +1,8 @@
+import React from 'react';
 import { useAtom } from 'jotai';
-import React, { ChangeEvent } from 'react';
-import { FileUsAtom, formEditorDataAtom, FormEditorDataAtom } from '../../store/store';
+import { useSpring } from '@react-spring/core';
+import { a } from '@react-spring/web';
+import { formEditorDataAtom } from '../../store/store';
 
 type RadioButtonProps = {
     label: string;
@@ -41,10 +43,11 @@ function RadioGroup() {
     );
 }
 
-function MatchHow({open}: {open: boolean}) {
+function MatchHow({ open }: { open: boolean; }) {
     const [checked, setChecked] = React.useState(true);
+    const styles = useSpring({ height: open ? '100px' : 0, config: { duration: 5000 } });
     return (
-        <div className="flex space-x-4">
+        <a.div style={styles} className="flex space-x-4">
             {/* How match */}
             <RadioGroup />
             {/* Match case */}
@@ -52,7 +55,7 @@ function MatchHow({open}: {open: boolean}) {
                 <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
                 <div>Case sensitive</div>
             </label>
-        </div>
+        </a.div>
 
     );
 }
@@ -82,8 +85,8 @@ export function MatchWeb() {
                 {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
 
                 {/* Match url */}
-                <div className="mt-6 mb-1 flex items-center space-x-2">
-                    <div className="font-bold text-gray-600">Matching url</div>
+                <div className="mt-6 mb-1 flex items-center">
+                    <div className="w-24 font-bold text-gray-600">Matching url</div>
                     <label className="h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)} />
                         <div>Same as original url</div>
@@ -96,8 +99,8 @@ export function MatchWeb() {
                 </>}
 
                 {/* Qiucklink url */}
-                <div className="mt-6 mb-1 flex items-center space-x-2">
-                    <div className="font-bold text-gray-600">Quicklink url</div>
+                <div className="mt-6 mb-1 flex items-center">
+                    <div className="w-24 font-bold text-gray-600">Quicklink url</div>
                     <label className="h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)} />
                         <div>Same as original url</div>
