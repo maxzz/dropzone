@@ -73,7 +73,8 @@ export function MatchWeb() {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
-    const styles = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
+    const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
+    const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
 
     return (
         <div className="p-4">
@@ -95,7 +96,7 @@ export function MatchWeb() {
                 </div>
 
                 {!sameMurl &&
-                    <a.div style={styles}>
+                    <a.div style={stylesHow}>
                         <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_murl} readOnly />
                         <MatchHow open={sameMurl} />
                     </a.div>
@@ -111,7 +112,9 @@ export function MatchWeb() {
                 </div>
 
                 {!sameQurl &&
-                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_qurl} readOnly />
+                    <a.div style={stylesQL} className="">
+                        <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_qurl} readOnly />
+                    </a.div>
                 }
             </div>
         </div>
