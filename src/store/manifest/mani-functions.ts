@@ -39,13 +39,15 @@ export namespace transform { // encode/decode functions
         "%0a": "\n",
     };
     const reverseCpp = swapKeyValPairs(forwardCpp);
+    const reForwardCpp = /(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g;
+    const reReverseCpp = /[\^@\.:\x1b\r\n]/g;
     
     export function cppRestore(s: string): string { // C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
-        return s ? s.replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => forwardCpp[m as keyof typeof forwardCpp]) : '';
+        return s ? s.replace(reForwardCpp, (m) => forwardCpp[m as keyof typeof forwardCpp]) : '';
     }
     
     export function cppEscape(s: string): string {
-        return s ? s.replace(/[\^@\.:\x1b\r\n]/g, (m) => reverseCpp[m]) : '';
+        return s ? s.replace(reReverseCpp, (m) => reverseCpp[m]) : '';
     }
     
     const forwardXml = {
