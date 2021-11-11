@@ -23,69 +23,36 @@ function removeEscapeChars(s: string, escapeChar: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
 }
 
-/* https://www.typescriptlang.org/play?ts=4.0.5
-enum ConvertCpp {
-    "^up;" = "^",
-    "^escape;" = '\x1b',
-    "^escape1;" = 0x1b,
-    "^escape12" = '0x1b',
-}
-
-console.log(JSON.stringify(ConvertCpp, null, 4))
-console.log(ConvertCpp["^escape;"])
-
-ConvertCpp["^up;"]
-*/
-
-// enum ConvertCpp {
-//     "^up;" = "^",
-//     "^at;" = "@",
-//     "^dot;" = ".",
-//     "^2dot;" = ":",
-//     // "^escape;" = 0x1b,
-//     "^escape;" = '\x1b',
-//     "%0d"= "\r",
-//     "%0a"= "\n",
-// }
-
 const ConvertCpp = {
-    "^up;" : "^",
-    "^at;" : "@",
-    "^dot;" : ".",
-    "^2dot;" : ":",
-    // "^escape;" : 0x1b,
-    "^escape;" : '\x1b',
+    "^up;": "^",
+    "^at;": "@",
+    "^dot;": ".",
+    "^2dot;": ":",
+    "^escape;": '\x1b',
     "%0d": "\r",
     "%0a": "\n",
-}
-
+};
 const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]) => [val, key]));
 
-console.log('ConvertCpp', JSON.stringify(ConvertCpp, null, 4));
-console.log('ReverseCpp', JSON.stringify(ReverseCpp, null, 4));
+function encodeCpp(s: string): string {
+    return (s || '').replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]);
+}
 
 function decodeCpp(s: string): string {
-    return s.replace(/[\^@\.:\x1b\r\n]/g, (...rest) => {
-        console.log(rest);
-        return ReverseCpp[rest[0]];
-    })
+    return (s || '').replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]);
 }
+
+
+///
 let de = decodeCpp('\^@\.:\x1b\r\n');
 console.log('decode:', de); //decode: ^up;^at;^dot;^2dot;^escape;%0d%0a
-
-function encodeCpp(s: string): string {
-    return s.replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (...rest): string => {
-        console.log(rest);
-        let ss = rest[0] as keyof typeof ConvertCpp;
-        return ConvertCpp[ss];
-    })
-}
 
 let en = encodeCpp('^up;^at;^dot;^2dot;^escape;%0d%0a');
 console.log('encode:', en); //encode: encode: ^@.:
 
 console.log('re-decode:', decodeCpp(en)); //re-decode: ^up;^at;^dot;^2dot;^escape;%0d%0a
 console.log('re-decode:', encodeCpp(de)); //re-encode: ^@.:
+////
 
 export function restoreCpp2(s: string): string {
     if (!s) {
