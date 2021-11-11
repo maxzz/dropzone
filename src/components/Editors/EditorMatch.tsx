@@ -47,21 +47,19 @@ function RadioGroup() {
 function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [checked, setChecked] = React.useState(true);
     const [murl, setMurl] = useAtom(murlAtom);
-    const isValid = true;
-    const errorHint = 'This pattern is invalid';
+    const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     return (
         <>
             <input
                 className={classNames(
                     "px-2 py-1.5 w-full border rounded shadow-inner",
-                    !isValid ? 'border-gray-400' : 'border-red-400',
+                    errorHint ? 'border-red-400' : 'border-gray-400',
                 )}
+                {...(errorHint && { title: errorHint })}
                 value={murl} onChange={(e) => setMurl(e.target.value)}
-                {...(isValid && { title: errorHint })}
-            // title={errorHint}
             />
             <div className="flex space-x-4">
-                {/* How match */}
+                {/* How match radio buttons */}
                 <RadioGroup />
                 {/* Match case */}
                 <label className="mt-1 h-6 flex items-center space-x-1">
