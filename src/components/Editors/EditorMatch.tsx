@@ -56,6 +56,7 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
                     errorHint ? 'border-red-400' : 'border-gray-400',
                 )}
                 {...(errorHint && { title: errorHint })}
+                spellCheck={false}
                 value={murl} onChange={(e) => setMurl(e.target.value)}
             />
             <div className="flex space-x-4">
@@ -111,7 +112,7 @@ function QLGroup({ maniQurl }: { maniQurl: string; }) {
 
             {!sameQurl &&
                 <a.div style={stylesQL} className="">
-                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={maniQurl} readOnly />
+                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" spellCheck={false} value={maniQurl} readOnly />
                 </a.div>
             }
         </>
@@ -141,7 +142,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
             <div className="flex flex-col">
                 {/* Original url */}
                 <div className="mb-1 font-bold text-gray-600">Original url</div>
-                <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_ourl} readOnly />
+                <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" spellCheck={false} value={detection?.web_ourl} readOnly />
 
                 {/* Separator */}
                 {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
