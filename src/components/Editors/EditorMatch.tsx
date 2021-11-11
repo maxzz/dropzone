@@ -7,65 +7,61 @@ import { classNames } from '../../utils/classnames';
 
 type RadioButtonProps = {
     label: string;
-    type?: string;
-    group?: string;
-    val?: number;
+    groupName?: string;
+    value?: number;
     checked: boolean;
 } & React.HTMLAttributes<HTMLLabelElement>;
 
-function RadioButton({ label, type = "radio", group, val = 0, checked, ...rest }: RadioButtonProps) {
+function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonProps) {
     return (
         <label className="h-6 flex items-center space-x-1.5" {...rest}>
             <input
                 className="w-3 h-3 checked:bg-gray-400 focus:ring-indigo-500 focus:ring-offset-0"
-                type={type}
-                value={val}
+                type="radio"
+                value={value}
                 defaultChecked={checked}
-                {...(group && { name: group })}
+                {...(groupName && { name: groupName })}
             />
             <div >{label}</div>
         </label>
     );
 }
 
-function RadioGroup({value, setValue}: {value: number, setValue: (v: number) => void}) {
+function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) => void; }) {
     return (
         <div
             className="mt-2 px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            {/* <RadioButton group={"how"} val={0} checked={value === 0} label="String match" /> */}
-            <RadioButton group={"how"} val={1} checked={value === 1} label="Match domain from original url" />
-            <RadioButton group={"how"} val={2} checked={value === 2} label="Wildcard match" />
-            <RadioButton group={"how"} val={3} checked={value === 3} label="Regular expresssion" />
-            <RadioButton group={"how"} val={4} checked={value === 4} label="No domain match" title="Exclude this login from domain match" />
+            {/* <RadioButton groupName={"how"} value={0} checked={value === 0} label="String match" /> */}
+            <RadioButton groupName={"how"} value={1} checked={value === 1} label="Match domain from original url" />
+            <RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />
+            <RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />
+            <RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" title="Exclude this login from domain match" />
         </div>
     );
 }
 
 function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [murl, setMurl] = useAtom(murlAtom);
+    const [vStyle, setVStyle] = React.useState(3);
+    const [vOpt, setVOpt] = React.useState(true);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
-    const [value, setValue] = React.useState(3);
-    const [checked, setChecked] = React.useState(true);
     return (
         <>
             <input
-                className={classNames(
-                    "px-2 py-1.5 w-full border rounded shadow-inner",
-                    errorHint ? 'border-red-400' : 'border-gray-400',
-                )}
+                className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
                 {...(errorHint && { title: errorHint })}
                 spellCheck={false}
                 value={murl} onChange={(e) => setMurl(e.target.value)}
             />
             <div className="flex space-x-4">
                 {/* How match radio buttons */}
-                <RadioGroup value={value} setValue={setValue} />
+                <RadioGroup value={vStyle} setValue={setVStyle} />
 
                 {/* Match case */}
                 <label className="mt-1 h-6 flex items-center space-x-1">
-                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
+                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={vOpt} onChange={(event) => setVOpt(event.target.checked)} />
                     <div>Case sensitive</div>
                 </label>
             </div>
