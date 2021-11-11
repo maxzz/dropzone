@@ -1,5 +1,5 @@
 import { parse } from 'fast-xml-parser';
-import { restoreCpp } from './mani-functions';
+import { removeCpp, restoreCpp } from './mani-functions';
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
@@ -102,7 +102,7 @@ export namespace Matching {
     };
 
     export function getMatchRawData(murl: string): RawMatchData {
-        let rv = { style: 0, opt: 0, url: '', };
+        let rv = { style: 0, opt: 0, url: murl || '', }; // don't need call restoreCpp(murl) here.
         let m = murl?.match(reOtsMatching);
         if (m) {
             rv.style = +m[1] as Style; // style
@@ -113,7 +113,7 @@ export namespace Matching {
     }
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData): string | undefined {
-        return url && `m0:${style}:${opt}:${url}`;
+        return url && `m0:${style}:${opt}:${removeCpp(url)}`;
     }
 
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
