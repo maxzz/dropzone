@@ -107,13 +107,13 @@ export namespace Matching {
         if (m) {
             rv.style = +m[1] as Style; // style
             rv.opt = +m[2] as Options; // options
-            rv.url = transform.restoreCpp(m[3]); // pattern
+            rv.url = transform.cppRestore(m[3]); // pattern
         }
         return rv;
     }
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData): string | undefined {
-        return url && `m0:${style}:${opt}:${transform.escapeCpp(url)}`;
+        return url && `m0:${style}:${opt}:${transform.cppEscape(url)}`;
     }
 
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {

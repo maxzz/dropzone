@@ -18,9 +18,7 @@ function filetimeFromDate(date: Date): number {
     return date.getTime() * 1e4 + 116444736000000000;
 }
 
-// encode/decode functions
-
-export namespace transform {
+export namespace transform { // encode/decode functions
 
     export function removeEscapeChars(s: string, escapeChar: string): string {
         // 0. '\1\\ab\2\.3' --> '1\ab2.3' with escapeChar: '\' i.e. remove non duplicated.
@@ -31,7 +29,7 @@ export namespace transform {
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [val, key]));
     }
     
-    const ConvertCpp = {
+    const forwardCpp = {
         "^up;": "^",
         "^at;": "@",
         "^dot;": ".",
@@ -40,17 +38,17 @@ export namespace transform {
         "%0d": "\r",
         "%0a": "\n",
     };
-    const ReverseCpp = swapKeyValPairs(ConvertCpp);
+    const reverseCpp = swapKeyValPairs(forwardCpp);
     
-    export function restoreCpp(s: string): string { // C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
-        return s ? s.replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]) : '';
+    export function cppRestore(s: string): string { // C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
+        return s ? s.replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => forwardCpp[m as keyof typeof forwardCpp]) : '';
     }
     
-    export function escapeCpp(s: string): string {
-        return s ? s.replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]) : '';
+    export function cppEscape(s: string): string {
+        return s ? s.replace(/[\^@\.:\x1b\r\n]/g, (m) => reverseCpp[m]) : '';
     }
     
-    const ConvertXml = {
+    const forwardXml = {
         "&lt;": "<",
         "&gt;": ">",
         "&amp;": "&",
@@ -59,14 +57,14 @@ export namespace transform {
         "%0d": "\r",
         "%0a": "\n",
     };
-    const ReverseXml = swapKeyValPairs(ConvertXml);
+    const reverseXml = swapKeyValPairs(forwardXml);
     
-    export function restoreXml(s: string): string { //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::xml_remove()
-        return s ? s.replace(/(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]) : '';
+    export function xmlRestore(s: string): string { //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::xml_remove()
+        return s ? s.replace(/(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g, (m) => forwardXml[m as keyof typeof forwardXml]) : '';
     }
     
-    export function escapeXml(s: string): string {
-        return s ? s.replace(/[<>&"'\r\n]/g, (m) => ReverseCpp[m]) : '';
+    export function xmlEscape(s: string): string {
+        return s ? s.replace(/[<>&"'\r\n]/g, (m) => reverseXml[m]) : '';
     }
     
 } //namespace transform
@@ -94,8 +92,8 @@ export namespace FieldPath {
         let rv: MPath.p4a = {
             rnumber: 0,
             roleString: getPoolName(pool, ss[1]),
-            className: transform.restoreCpp(getPoolName(pool, ss[2])),
-            name: transform.restoreCpp(getPoolName(pool, ss[3]))
+            className: transform.cppRestore(getPoolName(pool, ss[2])),
+            name: transform.cppRestore(getPoolName(pool, ss[3]))
         };
         return rv;
     }
@@ -103,7 +101,7 @@ export namespace FieldPath {
     function sid(pool: string[], v: string): MPath.sid {
         let sid = {} as any;
         v.split('.').forEach((_, index) => {
-            let s = transform.restoreCpp(getPoolName(pool, _));
+            let s = transform.cppRestore(getPoolName(pool, _));
             switch (index) {
                 case 0: sid.version = s; break;
                 case 1: sid.generatedId = s; break;

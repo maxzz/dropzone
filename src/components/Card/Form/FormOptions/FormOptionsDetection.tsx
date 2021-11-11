@@ -51,7 +51,7 @@ function filterDetection(detection: Mani.Detection) {
     }
 
     processname && (processname = decodeURI(processname));
-    commandline && (commandline = transform.restoreXml(decodeURI(commandline)));
+    commandline && (commandline = transform.xmlRestore(decodeURI(commandline)));
 
     return {
         ...(matchOptions && { 'match as': matchOptions.join }),
