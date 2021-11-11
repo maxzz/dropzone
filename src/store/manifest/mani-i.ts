@@ -95,27 +95,24 @@ export namespace Matching {
 
     const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
-    export function getMatchRawInfo(murl: string): { opt: number; style: number; url: string; } | undefined {
+    export function getMatchRawData(murl: string): { style: number; opt: number; url: string; } | undefined {
         let m = murl?.match(reOtsMatching);
         if (m) {
             let style = +m[1] as MatchStyle; // style
             let opt = +m[2] as MatchOptions; // options
             let url = restoreCpp(m[3]);      // pattern
-
             return {
-                opt,
                 style,
+                opt,
                 url,
             };
         }
     }
 
-    export function getMatchInfo(murl: string): { prefix: string; join: string; opt: number; style: number; url: string; } | undefined {
-        let m = murl?.match(reOtsMatching);
-        if (m) {
-            let style = +m[1] as MatchStyle; // style
-            let opt = +m[2] as MatchOptions; // options
-            let url = restoreCpp(m[3]);      // pattern
+    export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
+        const raw = getMatchRawData(murl);
+        if (raw) {
+            const {style, opt, url} = raw;
 
             let resOpt = [];
             (opt & 1) !== 0 && (resOpt.push('case insensitive')); // MatchOptions.caseinsensitive
@@ -145,10 +142,8 @@ export namespace Matching {
             }//switch
 
             return {
-                prefix: `[m0]:${m[1]}:${m[2]}`,
+                prefix: `[m0]:${style}:${opt}`,
                 join: `${resStyle}${resOpt.length ? `; Options: ${resOpt.join(', ')}` : ''}`,
-                opt,
-                style,
                 url,
             };
         }
