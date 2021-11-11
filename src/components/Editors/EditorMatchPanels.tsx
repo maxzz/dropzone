@@ -10,29 +10,29 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
         'Match Windows': <MatchWindows editorData={editorData} />,
     };
     return (
-        <div className={classNames(
-            "w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]",
-            "bg-gray-200 rounded overflow-hidden",
-        )}>
+        <div className={classNames("w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
 
             {/* Editor body */}
             <div className="grid grid-rows-[auto,1fr]">
                 {/* Tabs */}
-                <div className="px-4 pt-4 pb-2 flex justify-items-start space-x-1 bg-blue-900/20 rounded-t">
-                    {Object.keys(pages).map((pageTitle, idx) => (
-                        <button
-                            className={classNames(
-                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
-                                selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                            )}
-                            key={pageTitle}
-                            onClick={() => {
-                                setSelected(idx);
-                            }}
-                        >
-                            {pageTitle}
-                        </button>
-                    ))}
+                <div className="px-4 pb-2 bg-blue-900/20 rounded-t">
+                    <div className="pt-2 pb-2">Manifest name</div>
+                    <div className="flex justify-items-start space-x-1">
+                        {Object.keys(pages).map((pageTitle, idx) => (
+                            <button
+                                className={classNames(
+                                    'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
+                                    selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                                )}
+                                key={pageTitle}
+                                onClick={() => {
+                                    setSelected(idx);
+                                }}
+                            >
+                                {pageTitle}
+                            </button>
+                        ))}
+                    </div>
                 </div>
                 {/* Pages */}
                 <div>
