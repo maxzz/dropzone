@@ -79,7 +79,7 @@ export function parseManifest(cnt: string): ParseManifestResult {
 }
 
 export namespace Matching {
-    export enum MatchStyle {    // cannot use const w/ esbuild
+    export enum Style {         // cannot use const w/ esbuild
         undef = 0,
         makeDomainMatch = 1,    // That means match the url as string (i.e. not regex or wildcard). this should have prefix '[m0]:1:0:', but unfortunately it is used without prefix as raw murl.
         regex = 2,
@@ -87,7 +87,7 @@ export namespace Matching {
         skipDomainMatch = 4,    // This is exactly string content match i.e. skip domain match. this should have prefix '[m0]:4:0:'
     }
 
-    export enum MatchOptions {  // cannot use const w/ esbuild
+    export enum Options {       // cannot use const w/ esbuild
         undef = 0,
         caseinsensitive = 0x0001, // This option does not make sense for URLs.
         matchtext = 0x0002,     // match text or don't; This option does not make sense for URLs.
@@ -96,17 +96,17 @@ export namespace Matching {
     const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
     export type RawMatchData = {
-        style: number;
-        opt: number;
+        style: Style;
+        opt: Options;
         url: string;
     };
 
     export function getMatchRawData(murl: string): RawMatchData | undefined {
         let m = murl?.match(reOtsMatching);
         if (m) {
-            let style = +m[1] as MatchStyle; // style
-            let opt = +m[2] as MatchOptions; // options
-            let url = restoreCpp(m[3]);      // pattern
+            let style = +m[1] as Style; // style
+            let opt = +m[2] as Options; // options
+            let url = restoreCpp(m[3]); // pattern
             return {
                 style,
                 opt,
@@ -125,24 +125,24 @@ export namespace Matching {
             const {style, opt, url} = raw;
 
             let resOpt = [];
-            (opt & 1) !== 0 && (resOpt.push('case insensitive')); // MatchOptions.caseinsensitive
-            (opt & 2) !== 0 && (resOpt.push('match ext.')); // MatchOptions.matchtext
+            (opt & 1) !== 0 && (resOpt.push('case insensitive'));   // Options.caseinsensitive
+            (opt & 2) !== 0 && (resOpt.push('match ext.'));         // Options.matchtext
 
             let resStyle = '';
             switch (style) {
-                case 1: { // MatchStyle.makeDomainMatch
+                case 1: { // Style.makeDomainMatch
                     resStyle = 'use domain match';
                     break;
                 }
-                case 2: { // MatchStyle.regex
+                case 2: { // Style.regex
                     resStyle = 'regex';
                     break;
                 }
-                case 3: { // MatchStyle.wildcard
+                case 3: { // Style.wildcard
                     resStyle = 'wildcard';
                     break;
                 }
-                case 4: { // MatchStyle.skipDomainMatch
+                case 4: { // Style.skipDomainMatch
                     resStyle = 'don\'t match this in domain';
                     break;
                 }
