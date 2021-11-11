@@ -1,7 +1,10 @@
 import { useAtom } from 'jotai';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
+import { IconInfo } from '../UI/UIIcons';
+import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { MatchWeb, MatchWindows } from './EditorMatch';
 
 function ManifestName({ editorData }: { editorData: EditorData; }) {
@@ -57,22 +60,30 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
             </div>
 
             {/* Editor buttons */}
-            <div className="px-4 py-4 flex justify-end space-x-2 bg-white">
-                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
-                    onClick={() => {
-                        setShow(false);
-                    }}
-                >
-                    OK
-                </button>
+            <div className="px-4 py-4 flex justify-between bg-white">
+                
+                <div className="flex items-center space-x-1">
+                    <IconInfo className="w-7 h-7 text-gray-500" strokeWidth={1.7} />
+                    <IconAttention className="w-6 h-6 text-red-600" />
+                </div>
 
-                <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
-                    onClick={() => {
-                        setShow(false);
-                    }}
-                >
-                    Cancel
-                </button>
+                <div className="flex space-x-2">
+                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
+                        onClick={() => {
+                            setShow(false);
+                        }}
+                    >
+                        OK
+                    </button>
+                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
+                        onClick={() => {
+                            setShow(false);
+                            //toast('Not yet', {style: {backgroundColor: 'tomato'}});
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
             </div>
 
         </div>

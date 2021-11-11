@@ -119,15 +119,15 @@ export function IconFormChangePsw(props: SVGProps<SVGSVGElement> & { title?: str
         </svg>
     );
 }
-/*
-function IconInfo(props: SVGProps<SVGSVGElement>) {
+
+export function IconInfo(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...props}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
     );
 }
-
+/*
 function IconMenuHamburger(props: SVGProps<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 21 21" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...props}>
