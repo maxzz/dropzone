@@ -34,32 +34,12 @@ const ConvertCpp = {
 };
 const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]) => [val, key]));
 
-function decodeCpp(s: string): string { // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
+export function restoreCpp(s: string): string { // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
     return (s || '').replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]);
 }
 
-function encodeCpp(s: string): string {
+export function removeCpp(s: string): string {
     return (s || '').replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]);
-}
-
-export function restoreCpp(s: string): string {
-    if (!s) {
-        return '';
-    }
-    const html = [
-        [/\^up;/g, "^"],
-        [/\^at;/g, "@"],
-        [/\^dot;/g, "."],
-        [/\^2dot;/g, ":"],
-        [/\^escape;/g, '' + 0x1b],
-
-        [/%0d/gi, "\r"],
-        [/%0a/gi, "\n"],
-    ];
-    html.forEach(_ => {
-        s = s.replace(_[0], _[1] as string);
-    });
-    return s; 
 }
 
 export function restoreXml(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
