@@ -1,5 +1,5 @@
 import { parse } from 'fast-xml-parser';
-import { removeCpp, restoreCpp } from './mani-functions';
+import { escapeCpp, restoreCpp } from './mani-functions';
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
@@ -113,7 +113,7 @@ export namespace Matching {
     }
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData): string | undefined {
-        return url && `m0:${style}:${opt}:${removeCpp(url)}`;
+        return url && `m0:${style}:${opt}:${escapeCpp(url)}`;
     }
 
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {

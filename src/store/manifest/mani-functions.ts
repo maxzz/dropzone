@@ -1,6 +1,6 @@
 import { removeQuery, urlDomain } from './url';
 
-export function fileTimeToDate(fileTime: number | string): Date {
+function fileTimeToDate(fileTime: number | string): Date {
     /**
      * fileTimeToDate()
      * Convert a Windows FILETIME to a Javascript Date
@@ -14,13 +14,17 @@ export function fileTimeToDate(fileTime: number | string): Date {
     return new Date(fileTime / 10000 - 11644473600000);
 }
 
-export function filetimeFromDate(date: Date): number {
+function filetimeFromDate(date: Date): number {
     return date.getTime() * 1e4 + 116444736000000000;
 }
 
 function removeEscapeChars(s: string, escapeChar: string): string {
     // 0. '\1\\ab\2\.3' --> '1\ab2.3' with escapeChar: '\' i.e. remove non duplicated.
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
+}
+
+function swapKeyValPairs<T extends object>(obj: T) {
+    return Object.fromEntries(Object.entries(obj).map(([key, val]) => [val, key]));
 }
 
 const ConvertCpp = {
@@ -32,15 +36,25 @@ const ConvertCpp = {
     "%0d": "\r",
     "%0a": "\n",
 };
-const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]) => [val, key]));
+const ReverseCpp = swapKeyValPairs(ConvertCpp);
 
 export function restoreCpp(s: string): string { // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
     return (s || '').replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]);
 }
 
-export function removeCpp(s: string): string {
+export function escapeCpp(s: string): string {
     return (s || '').replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]);
 }
+
+const ConvertXml = {
+    "^up;": "^",
+    "^at;": "@",
+    "^dot;": ".",
+    "^2dot;": ":",
+    "^escape;": '\x1b',
+    "%0d": "\r",
+    "%0a": "\n",
+};
 
 export function restoreXml(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
     if (!s) {
