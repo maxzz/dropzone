@@ -29,6 +29,7 @@ enum ConvertCpp {
     "^dot;" = ".",
     "^2dot;" = ":",
     "^escape;" = 0x1b,
+    // "^escape;" = '\x1b',
     "%0d"= "\r",
     "%0a"= "\n",
 }
@@ -37,6 +38,17 @@ const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]
 console.log('ConvertCpp', JSON.stringify(ConvertCpp, null, 4));
 console.log('ReverseCpp', JSON.stringify(ReverseCpp, null, 4));
 
+/*
+enum ConvertCpp {
+    "^up;" = "^",
+    "^escape;" = '\x1b',
+    "^escape1;" = 0x1b,
+    "^escape12" = '0x1b',
+}
+
+console.log(JSON.stringify(ConvertCpp, null, 4))
+console.log(ConvertCpp["^escape;"])
+*/
 
 // function decodeCpp(s: string): string {
 //     Object.entries(ConvertCpp).find([key, val])
