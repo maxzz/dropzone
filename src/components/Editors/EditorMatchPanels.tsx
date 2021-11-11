@@ -10,7 +10,10 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
         'Match Windows': <MatchWindows editorData={editorData} />,
     };
     return (
-        <div className="px-2 sm:px-0 w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]">
+        <div className={classNames(
+            "w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]",
+            "bg-gray-200 rounded border border-gray-500 shadow",
+        )}>
 
             {/* Editor body */}
             <div className="grid grid-rows-[auto,1fr]">
