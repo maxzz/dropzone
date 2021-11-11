@@ -73,7 +73,7 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     );
 }
 
-function MatchUrlGroup({maniMurl}: {maniMurl: string}) {
+function MatchUrlGroup({ maniMurl }: { maniMurl: string; }) {
     const [sameMurl, setSameMurl] = React.useState(true);
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     const [murlAtom] = React.useState(atomWithCallback(maniMurl, ({ nextValue }) => {
@@ -98,6 +98,28 @@ function MatchUrlGroup({maniMurl}: {maniMurl: string}) {
     );
 }
 
+function QLGroup({ maniQurl }: { maniQurl: string; }) {
+    const [sameQurl, setSameQurl] = React.useState(true);
+    const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
+    return (
+        <>
+            <div className="mt-6 mb-1 flex items-center">
+                <div className="w-28 font-bold text-gray-600">Quicklink url</div>
+                <label className="h-6 flex items-center space-x-1">
+                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)} />
+                    <div>Same as original url</div>
+                </label>
+            </div>
+
+            {!sameQurl &&
+                <a.div style={stylesQL} className="">
+                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={maniQurl} readOnly />
+                </a.div>
+            }
+        </>
+    );
+}
+
 type MatchWebProps = {
     urls: {
         o?: string;
@@ -110,14 +132,11 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
-
-    const [sameQurl, setSameQurl] = React.useState(true);
-
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
 
-    const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
+
 
     return (
         <div className="p-4">
@@ -130,21 +149,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
                 {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
 
                 <MatchUrlGroup maniMurl={detection?.web_murl || ''} />
-
-                {/* Qiucklink url */}
-                <div className="mt-6 mb-1 flex items-center">
-                    <div className="w-28 font-bold text-gray-600">Quicklink url</div>
-                    <label className="h-6 flex items-center space-x-1">
-                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)} />
-                        <div>Same as original url</div>
-                    </label>
-                </div>
-
-                {!sameQurl &&
-                    <a.div style={stylesQL} className="">
-                        <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" value={detection?.web_qurl} readOnly />
-                    </a.div>
-                }
+                <QLGroup maniQurl={detection?.web_qurl || ''} />
             </div>
         </div>
     );
