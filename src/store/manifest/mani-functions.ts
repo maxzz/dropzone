@@ -39,11 +39,11 @@ const ConvertCpp = {
 const ReverseCpp = swapKeyValPairs(ConvertCpp);
 
 export function restoreCpp(s: string): string { // C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
-    return (s || '').replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]);
+    return s ? s.replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]) : '';
 }
 
 export function escapeCpp(s: string): string {
-    return (s || '').replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]);
+    return s ? s.replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]) : '';
 }
 
 const ConvertXml = {
@@ -58,11 +58,11 @@ const ConvertXml = {
 const ReverseXml = swapKeyValPairs(ConvertXml);
 
 export function restoreXml(s: string): string { //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::xml_remove()
-    return (s || '').replace(/(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]);
+    return s ? s.replace(/(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]) : '';
 }
 
 export function escapeXml(s: string): string {
-    return (s || '').replace(/[<>&"'\r\n]/g, (m) => ReverseCpp[m]);
+    return s ? s.replace(/[<>&"'\r\n]/g, (m) => ReverseCpp[m]) : '';
 }
 
 export function restoreXml2(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
