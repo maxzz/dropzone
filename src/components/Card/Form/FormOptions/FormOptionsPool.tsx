@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../../hooks/useElementClickAway';
-import { restoreCpp } from '../../../../store/manifest/mani-functions';
+import { transform } from '../../../../store/manifest/mani-functions';
 import UIUpDownIcon from '../../../UI/UIUpDownIcon';
 import { BtnShading } from './FormOptions';
 
@@ -58,7 +58,7 @@ function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
         return <DropDownButton text={"pool"} />;
     }
-    names_ext && (names_ext = decodeURI(restoreCpp(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
+    names_ext && (names_ext = decodeURI(transform.cppRestore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
     let items = (names_ext || '').split('●');
     return (
         <ToggleWithPortal text={"pool"}>

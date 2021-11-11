@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { restoreXml } from '../../../../store/manifest/mani-functions';
+import { transform } from '../../../../store/manifest/mani-functions';
 import { FileUs } from '../../../../store/store';
 
 function Section({ label }: { label: React.ReactNode; }) {
@@ -87,7 +87,7 @@ function PartSid({ label, part }: { label: string; part: MPath.sid; }) {
                 <div className="mx-2">
                     {items.map(([key, val]) => {
                         return <Fragment key={key}>
-                            <div>{key}: {restoreXml(val) || `""`}</div>
+                            <div>{key}: {transform.xmlRestore(val) || `""`}</div>
                         </Fragment>;
                     })}
                 </div>
