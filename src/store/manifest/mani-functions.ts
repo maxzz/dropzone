@@ -23,6 +23,20 @@ function removeEscapeChars(s: string, escapeChar: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
 }
 
+/* https://www.typescriptlang.org/play?ts=4.0.5
+enum ConvertCpp {
+    "^up;" = "^",
+    "^escape;" = '\x1b',
+    "^escape1;" = 0x1b,
+    "^escape12" = '0x1b',
+}
+
+console.log(JSON.stringify(ConvertCpp, null, 4))
+console.log(ConvertCpp["^escape;"])
+
+ConvertCpp["^up;"]
+*/
+
 // enum ConvertCpp {
 //     "^up;" = "^",
 //     "^at;" = "@",
