@@ -65,38 +65,7 @@ export function escapeXml(s: string): string {
     return s ? s.replace(/[<>&"'\r\n]/g, (m) => ReverseCpp[m]) : '';
 }
 
-export function restoreXml2(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
-    if (!s) {
-        return '';
-    }
-    const html = [
-        [/&lt;/g, "<"],
-        [/&gt;/g, ">"],
-        [/&amp;/g, "&"],
-        [/&quot;/g, "\""],
-        [/&apos;/g, "\'"],
-
-        [/%0d/gi, "\r"],
-        [/%0a/g, "\n"],
-    ];
-    html.forEach(_ => {
-        s = s.replace(_[0], _[1] as string);
-    });
-    return s; 
-}
-
-export function escapeXml2(unsafe: string) {
-    return unsafe.replace(/[<>&'"]/g, function (c: string): string {
-        switch (c) {
-            case '<': return '&lt;';
-            case '>': return '&gt;';
-            case '&': return '&amp;';
-            case '\'': return '&apos;';
-            case '"': return '&quot;';
-            default: return c;
-        }
-    });
-}
+// Manifest specific functions
 
 function getPool(form: Mani.Form): string[] {
     return form && form.detection && form.detection.names_ext ? form.detection.names_ext.split(':') : [];
