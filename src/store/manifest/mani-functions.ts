@@ -24,11 +24,11 @@ export namespace transform { // encode/decode functions
         // 0. '\1\\ab\2\.3' --> '1\ab2.3' with escapeChar: '\' i.e. remove non duplicated.
         return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
     }
-    
+
     function swapKeyValPairs<T extends object>(obj: T) {
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [val, key]));
     }
-    
+
     const forwardCpp = {
         "^up;": "^",
         "^at;": "@",
@@ -39,17 +39,24 @@ export namespace transform { // encode/decode functions
         "%0a": "\n",
     };
     const reverseCpp = swapKeyValPairs(forwardCpp);
-    const reForwardCpp = /(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g;
+    const reForwardCpp = /(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g; // I don't know why, but we don't need to reset regex.lastIndex; it's working fine
     const reReverseCpp = /[\^@\.:\x1b\r\n]/g;
-    
+
     export function cppRestore(s: string): string { // C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
         return s ? s.replace(reForwardCpp, (m) => forwardCpp[m as keyof typeof forwardCpp]) : '';
     }
-    
+
     export function cppEscape(s: string): string {
         return s ? s.replace(reReverseCpp, (m) => reverseCpp[m]) : '';
     }
-    
+
+    let a = cppRestore('^up;^up;^up;^up;');
+    console.log('restore', a);
+    a = cppRestore('^up;^up;^up;^up;');
+    console.log('restore', a);
+    a = cppRestore('^up;^up;^up;^up;');
+    console.log('restore', a);
+
     const forwardXml = {
         "&lt;": "<",
         "&gt;": ">",
@@ -60,15 +67,15 @@ export namespace transform { // encode/decode functions
         "%0a": "\n",
     };
     const reverseXml = swapKeyValPairs(forwardXml);
-    
+
     export function xmlRestore(s: string): string { //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::xml_remove()
         return s ? s.replace(/(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g, (m) => forwardXml[m as keyof typeof forwardXml]) : '';
     }
-    
+
     export function xmlEscape(s: string): string {
         return s ? s.replace(/[<>&"'\r\n]/g, (m) => reverseXml[m]) : '';
     }
-    
+
 } //namespace transform
 
 // Manifest specific functions
