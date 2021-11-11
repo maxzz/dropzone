@@ -95,7 +95,13 @@ export namespace Matching {
 
     const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
-    export function getMatchRawData(murl: string): { style: number; opt: number; url: string; } | undefined {
+    export type RawMatchData = {
+        style: number;
+        opt: number;
+        url: string;
+    };
+
+    export function getMatchRawData(murl: string): RawMatchData | undefined {
         let m = murl?.match(reOtsMatching);
         if (m) {
             let style = +m[1] as MatchStyle; // style
@@ -107,6 +113,10 @@ export namespace Matching {
                 url,
             };
         }
+    }
+
+    export function makeRawMatchData({style, opt, url}: RawMatchData): string | undefined {
+        return url && `m0:${style}:${opt}:${url}`;
     }
 
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
