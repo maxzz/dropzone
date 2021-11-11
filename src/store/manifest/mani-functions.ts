@@ -27,6 +27,8 @@ export function restoreCpp(s: string): string {
     if (!s) {
         return '';
     }
+    //(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d;|%0a;)
+    //['^', '@', '.', ':', ''+0x1b, '\r', '\n',]
     const html = [
         [/\^up;/g, "^"],
         [/\^at;/g, "@"],
@@ -35,12 +37,12 @@ export function restoreCpp(s: string): string {
         [/\^escape;/g, '' + 0x1b],
 
         [/%0d/gi, "\r"],
-        [/%0a/g, "\n"],
+        [/%0a/gi, "\n"],
     ];
     html.forEach(_ => {
         s = s.replace(_[0], _[1] as string);
     });
-    return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::cpp_restore()
+    return s; // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
 }
 
 export function restoreXml(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
