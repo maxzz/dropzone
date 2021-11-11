@@ -14,6 +14,16 @@ function ManifestName({ editorData }: { editorData: EditorData; }) {
     );
 }
 
+function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
+    const [fileUs] = useAtom(editorData.fileUsAtom);
+    return (
+        <>
+            <IconInfo className="w-7 h-7 text-gray-500" strokeWidth={1.7} title={`Filename: ${fileUs.fname}`} />
+            <IconAttention className="w-6 h-6 text-yellow-500" title="Modified" />
+        </>
+    );
+}
+
 function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
     const pages = {
@@ -61,10 +71,9 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
 
             {/* Editor buttons */}
             <div className="px-4 py-4 flex justify-between bg-white">
-                
+
                 <div className="flex items-center space-x-0.5">
-                    <IconInfo className="w-7 h-7 text-gray-500" strokeWidth={1.7} />
-                    <IconAttention className="w-6 h-6 text-yellow-500" title="Modified" />
+                    <ManifestStateButtons editorData={editorData} />
                 </div>
 
                 <div className="flex space-x-2">
