@@ -28,31 +28,25 @@ enum ConvertCpp {
     "^at;" = "@",
     "^dot;" = ".",
     "^2dot;" = ":",
-    "^escape;" = 0x1b,
-    // "^escape;" = '\x1b',
+    // "^escape;" = 0x1b,
+    "^escape;" = '\x1b',
     "%0d"= "\r",
     "%0a"= "\n",
 }
 
 const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]) => [val, key]));
+
 console.log('ConvertCpp', JSON.stringify(ConvertCpp, null, 4));
 console.log('ReverseCpp', JSON.stringify(ReverseCpp, null, 4));
 
-/*
-enum ConvertCpp {
-    "^up;" = "^",
-    "^escape;" = '\x1b',
-    "^escape1;" = 0x1b,
-    "^escape12" = '0x1b',
+function decodeCpp(s: string): string {
+    return s.replace(/[\^@\.:\x1b\r\n]/g, (...rest) => {
+        console.log(rest);
+        return ReverseCpp[rest[0]];
+    })
 }
+console.log('decode', decodeCpp('\^@\.:\x1b\r\n'));
 
-console.log(JSON.stringify(ConvertCpp, null, 4))
-console.log(ConvertCpp["^escape;"])
-*/
-
-// function decodeCpp(s: string): string {
-//     Object.entries(ConvertCpp).find([key, val])
-// }
 
 export function restoreCpp2(s: string): string {
     if (!s) {
