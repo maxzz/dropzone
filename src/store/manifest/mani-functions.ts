@@ -50,12 +50,10 @@ export namespace transform { // encode/decode functions
         return s ? s.replace(reReverseCpp, (m) => reverseCpp[m]) : '';
     }
 
-    let a = cppRestore('^up;^up;^up;^up;');
-    console.log('restore', a);
-    a = cppRestore('^up;^up;^up;^up;');
-    console.log('restore', a);
-    a = cppRestore('^up;^up;^up;^up;');
-    console.log('restore', a);
+    console.log('restore', cppRestore('^up;^at;^up;'));
+    console.log('restore', cppRestore('^up;^up;^up;^up;^up;^up;'));
+    console.log('restore', cppRestore('^up;^up;^up;'));
+    console.log('restore', cppRestore('^up;^up;^at;^up;'));
 
     const forwardXml = {
         "&lt;": "<",
