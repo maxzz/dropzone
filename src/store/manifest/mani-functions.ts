@@ -23,12 +23,51 @@ function removeEscapeChars(s: string, escapeChar: string): string {
     return s; // TODO: //C:\Y\git\pm\Include\atl\atl_strings.h::removeEscapeChars()
 }
 
-export function restoreCpp(s: string): string {
+enum ConvertCpp {
+    "^up;" = "^",
+    "^at;" = "@",
+    "^dot;" = ".",
+    "^2dot;" = ":",
+    "^escape;" = 0x1b,
+    "%0d"= "\r",
+    "%0a"= "\n",
+}
+
+const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]) => [val, key]));
+console.log('ConvertCpp', JSON.stringify(ConvertCpp, null, 4));
+console.log('ReverseCpp', JSON.stringify(ReverseCpp, null, 4));
+
+
+// function decodeCpp(s: string): string {
+//     Object.entries(ConvertCpp).find([key, val])
+// }
+
+export function restoreCpp2(s: string): string {
     if (!s) {
         return '';
     }
     //(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d;|%0a;)
     //['^', '@', '.', ':', ''+0x1b, '\r', '\n',]
+    const html = [
+        [/\^up;/g, "^"],
+        [/\^at;/g, "@"],
+        [/\^dot;/g, "."],
+        [/\^2dot;/g, ":"],
+        [/\^escape;/g, '' + 0x1b],
+
+        [/%0d/gi, "\r"],
+        [/%0a/gi, "\n"],
+    ];
+    html.forEach(_ => {
+        s = s.replace(_[0], _[1] as string);
+    });
+    return s; // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
+}
+
+export function restoreCpp(s: string): string {
+    if (!s) {
+        return '';
+    }
     const html = [
         [/\^up;/g, "^"],
         [/\^at;/g, "@"],
