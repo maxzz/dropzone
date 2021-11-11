@@ -4,6 +4,7 @@ import { a, useSpring } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
 import atomWithCallback from '../../hooks/atomsX';
 import { classNames } from '../../utils/classnames';
+import { Matching } from '../../store/manifest/mani-i';
 
 type RadioButtonProps = {
     label: string;
@@ -47,6 +48,7 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [vStyle, setVStyle] = React.useState(3);
     const [vOpt, setVOpt] = React.useState(true);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
+    const {style = 0, opt = 0, url} = Matching.getMatchRawData(murl) || {};
     return (
         <>
             <input
