@@ -1,7 +1,15 @@
+import { useAtom } from 'jotai';
 import React from 'react';
 import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { MatchWeb, MatchWindows } from './EditorMatch';
+
+function ManifestName({ editorData }: { editorData: EditorData; }) {
+    const [fileUs] = useAtom(editorData.fileUsAtom);
+    return (
+        <div className="py-2 pb-1 text-[.65rem] text-gray-700/80 cursor-default" title="Manifest filename">{fileUs.fname}</div>
+    );
+}
 
 function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
@@ -16,7 +24,7 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
             <div className="grid grid-rows-[auto,1fr]">
                 {/* Tabs */}
                 <div className="px-4 pb-2 bg-blue-900/20 rounded-t">
-                    <div className="pt-2 pb-2">Manifest name</div>
+                    <ManifestName editorData={editorData} />
                     <div className="flex justify-items-start space-x-1">
                         {Object.keys(pages).map((pageTitle, idx) => (
                             <button
