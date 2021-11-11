@@ -101,28 +101,25 @@ export namespace Matching {
         url: string;
     };
 
-    export function getMatchRawData(murl: string): RawMatchData | undefined {
+    export function getMatchRawData(murl: string): RawMatchData {
+        let rv = { style: 0, opt: 0, url: '', };
         let m = murl?.match(reOtsMatching);
         if (m) {
-            let style = +m[1] as Style; // style
-            let opt = +m[2] as Options; // options
-            let url = restoreCpp(m[3]); // pattern
-            return {
-                style,
-                opt,
-                url,
-            };
+            rv.style = +m[1] as Style; // style
+            rv.opt = +m[2] as Options; // options
+            rv.url = restoreCpp(m[3]); // pattern
         }
+        return rv;
     }
 
-    export function makeRawMatchData({style, opt, url}: RawMatchData): string | undefined {
+    export function makeRawMatchData({ style, opt, url }: RawMatchData): string | undefined {
         return url && `m0:${style}:${opt}:${url}`;
     }
 
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
         const raw = getMatchRawData(murl);
-        if (raw) {
-            const {style, opt, url} = raw;
+        if (raw.style && raw.opt) {
+            const { style, opt, url } = raw;
 
             let resOpt = [];
             (opt & 1) !== 0 && (resOpt.push('case insensitive'));   // Options.caseinsensitive
