@@ -34,46 +34,12 @@ const ConvertCpp = {
 };
 const ReverseCpp = Object.fromEntries(Object.entries(ConvertCpp).map(([key, val]) => [val, key]));
 
-function encodeCpp(s: string): string {
+function decodeCpp(s: string): string { // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
     return (s || '').replace(/(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g, (m) => ConvertCpp[m as keyof typeof ConvertCpp]);
 }
 
-function decodeCpp(s: string): string {
+function encodeCpp(s: string): string {
     return (s || '').replace(/[\^@\.:\x1b\r\n]/g, (m) => ReverseCpp[m]);
-}
-
-
-///
-let de = decodeCpp('\^@\.:\x1b\r\n');
-console.log('decode:', de); //decode: ^up;^at;^dot;^2dot;^escape;%0d%0a
-
-let en = encodeCpp('^up;^at;^dot;^2dot;^escape;%0d%0a');
-console.log('encode:', en); //encode: encode: ^@.:
-
-console.log('re-decode:', decodeCpp(en)); //re-decode: ^up;^at;^dot;^2dot;^escape;%0d%0a
-console.log('re-decode:', encodeCpp(de)); //re-encode: ^@.:
-////
-
-export function restoreCpp2(s: string): string {
-    if (!s) {
-        return '';
-    }
-    //(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d;|%0a;)
-    //['^', '@', '.', ':', ''+0x1b, '\r', '\n',]
-    const html = [
-        [/\^up;/g, "^"],
-        [/\^at;/g, "@"],
-        [/\^dot;/g, "."],
-        [/\^2dot;/g, ":"],
-        [/\^escape;/g, '' + 0x1b],
-
-        [/%0d/gi, "\r"],
-        [/%0a/gi, "\n"],
-    ];
-    html.forEach(_ => {
-        s = s.replace(_[0], _[1] as string);
-    });
-    return s; // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
 }
 
 export function restoreCpp(s: string): string {
@@ -93,7 +59,7 @@ export function restoreCpp(s: string): string {
     html.forEach(_ => {
         s = s.replace(_[0], _[1] as string);
     });
-    return s; // TODO: //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
+    return s; 
 }
 
 export function restoreXml(s: string): string { //G: 'html escape characters': markup sensitive in certain contexts
