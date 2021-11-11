@@ -43,12 +43,28 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
     );
 }
 
+const defaultMurl = () => {
+    return {
+        style: Matching.Style.undef,
+        opt: Matching.Options.undef,
+        url: '',
+    };
+};
+
 function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [murl, setMurl] = useAtom(murlAtom);
-    const [vStyle, setVStyle] = React.useState(3);
-    const [vOpt, setVOpt] = React.useState(true);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
-    const {style = 0, opt = 0, url} = Matching.getMatchRawData(murl) || {};
+    const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(murl) || defaultMurl());
+    React.useEffect(() => {
+        const newRaw = Matching.getMatchRawData(murl) || defaultMurl()
+        
+        console.log('newRaw', newRaw);
+
+        setRaw(newRaw);
+    }, [murl]);
+
+    console.log('raw', raw);
+    
     return (
         <>
             <input
@@ -59,11 +75,16 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
             />
             <div className="flex space-x-4">
                 {/* How match radio buttons */}
-                <RadioGroup value={vStyle} setValue={setVStyle} />
+                <RadioGroup value={raw.style} setValue={(v: number) => setRaw(prev => ({ ...prev, style: v }))} />
 
                 {/* Match case */}
                 <label className="mt-1 h-6 flex items-center space-x-1">
-                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={vOpt} onChange={(event) => setVOpt(event.target.checked)} />
+                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                        checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
+                        onChange={(event) => {
+                            setRaw(prev => ({ ...prev, opt: event.target.checked ? prev.opt | Matching.Options.caseinsensitive : prev.opt & ~Matching.Options.caseinsensitive }))
+                        }}
+                    />
                     <div>Case sensitive</div>
                 </label>
             </div>
@@ -74,6 +95,7 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
 function MatchUrlGroup({ maniMurl }: { maniMurl: string; }) {
     const [sameMurl, setSameMurl] = React.useState(true);
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
+
     const [murlAtom] = React.useState(atomWithCallback(maniMurl, ({ nextValue }) => {
         console.log('updated', nextValue);
     }));
