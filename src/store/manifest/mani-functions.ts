@@ -50,11 +50,6 @@ export namespace transform { // encode/decode functions
         return s ? s.replace(reReverseCpp, (m) => reverseCpp[m]) : '';
     }
 
-    console.log('restore', cppRestore('^up;^at;^up;'));
-    console.log('restore', cppRestore('^up;^up;^up;^up;^up;^up;'));
-    console.log('restore', cppRestore('^up;^up;^up;'));
-    console.log('restore', cppRestore('^up;^up;^at;^up;'));
-
     const forwardXml = {
         "&lt;": "<",
         "&gt;": ">",
@@ -65,13 +60,15 @@ export namespace transform { // encode/decode functions
         "%0a": "\n",
     };
     const reverseXml = swapKeyValPairs(forwardXml);
+    const reForwardXml = /(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g;
+    const reReverseXml = /[<>&"'\r\n]/g;
 
     export function xmlRestore(s: string): string { //C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::xml_remove()
-        return s ? s.replace(/(&lt;|&gt;|&amp;|&quot;|&apos;|%0d|%0a)/g, (m) => forwardXml[m as keyof typeof forwardXml]) : '';
+        return s ? s.replace(reForwardXml, (m) => forwardXml[m as keyof typeof forwardXml]) : '';
     }
 
     export function xmlEscape(s: string): string {
-        return s ? s.replace(/[<>&"'\r\n]/g, (m) => reverseXml[m]) : '';
+        return s ? s.replace(reReverseXml, (m) => reverseXml[m]) : '';
     }
 
 } //namespace transform
