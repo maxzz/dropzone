@@ -28,26 +28,26 @@ function RadioButton({ label, type = "radio", group, val = 0, checked, ...rest }
     );
 }
 
-function RadioGroup() {
-    const [value, setValue] = React.useState(3);
+function RadioGroup({value, setValue}: {value: number, setValue: (v: number) => void}) {
     return (
         <div
             className="mt-2 px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            {/* <RadioButton group={"how"} val={1} checked={value === 1} label="Do not match" /> */}
-            <RadioButton group={"how"} val={2} checked={value === 2} label="String match" />
-            <RadioButton group={"how"} val={3} checked={value === 3} label="Wildcard match" />
-            <RadioButton group={"how"} val={4} checked={value === 4} label="Regular expresssion" />
-            <RadioButton group={"how"} val={5} checked={value === 5} label="No domain match" title="Exclude this login from domain match" />
+            {/* <RadioButton group={"how"} val={0} checked={value === 0} label="String match" /> */}
+            <RadioButton group={"how"} val={1} checked={value === 1} label="Match domain from original url" />
+            <RadioButton group={"how"} val={2} checked={value === 2} label="Wildcard match" />
+            <RadioButton group={"how"} val={3} checked={value === 3} label="Regular expresssion" />
+            <RadioButton group={"how"} val={4} checked={value === 4} label="No domain match" title="Exclude this login from domain match" />
         </div>
     );
 }
 
 function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
-    const [checked, setChecked] = React.useState(true);
     const [murl, setMurl] = useAtom(murlAtom);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
+    const [value, setValue] = React.useState(3);
+    const [checked, setChecked] = React.useState(true);
     return (
         <>
             <input
@@ -61,7 +61,8 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
             />
             <div className="flex space-x-4">
                 {/* How match radio buttons */}
-                <RadioGroup />
+                <RadioGroup value={value} setValue={setValue} />
+
                 {/* Match case */}
                 <label className="mt-1 h-6 flex items-center space-x-1">
                     <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={(event) => setChecked(event.target.checked)} />
