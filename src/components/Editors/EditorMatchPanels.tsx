@@ -12,7 +12,7 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
     return (
         <div className={classNames(
             "w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]",
-            "bg-gray-200 rounded border border-gray-500 shadow",
+            "bg-gray-200 rounded overflow-hidden",
         )}>
 
             {/* Editor body */}
