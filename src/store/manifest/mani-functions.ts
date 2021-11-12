@@ -29,6 +29,8 @@ export namespace Transform { // encode/decode functions
         return Object.fromEntries(Object.entries(obj).map(([key, val]) => [val, key]));
     }
 
+    // C++
+
     const forwardCpp = {
         "^up;": "^",
         "^at;": "@",
@@ -50,6 +52,8 @@ export namespace Transform { // encode/decode functions
         return s ? s.replace(reReverseCpp, (m) => reverseCpp[m]) : '';
     }
 
+    // XML
+
     const forwardXml = {
         "&lt;": "<",
         "&gt;": ">",
@@ -69,6 +73,17 @@ export namespace Transform { // encode/decode functions
 
     export function xmlEscape(s: string): string {
         return s ? s.replace(reReverseXml, (m) => reverseXml[m]) : '';
+    }
+
+    // Persent encoding
+
+    export function persentRemove(s: string): string {
+        // decodeURI will fail on: &lt;input name=&quot;Sign in name&quot; tabindex=&quot;1&quot; id=&quot;signInName&quot; type=&quot;email&quot; placeholder=&quot;Email Address&quot; pattern=&quot;^[a-zA-Z0-9.!#$%&amp;amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$&quot; value=&quot;&quot;&gt;
+        try {
+            return decodeURI(s); //TODO: decodeURI does not do all % encodings //TODO: decodeURI will not work on URL params
+        } catch (error) {
+            return s;
+        }
     }
 
 } //namespace Transform

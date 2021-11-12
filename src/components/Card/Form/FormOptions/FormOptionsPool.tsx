@@ -58,7 +58,7 @@ function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
         return <DropDownButton text={"pool"} />;
     }
-    names_ext && (names_ext = decodeURI(Transform.cppRestore(names_ext.replace(/:/g, '●')))); // fix packed names //TODO: decodeURI does not do all % encodings
+    names_ext && (names_ext = Transform.persentRemove(Transform.xmlRestore(Transform.cppRestore(names_ext.replace(/:/g, '●'))))); // fix packed names
     let items = (names_ext || '').split('●');
     return (
         <ToggleWithPortal text={"pool"}>
@@ -68,7 +68,8 @@ function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
                         {items.map((item, idx) =>
                             <React.Fragment key={idx}>
                                 <div className="px-1 text-right border-r border-r-gray-400">{idx}</div>
-                                <div className="">{Transform.xmlRestore(decodeURI(item))}</div> {/* decodeURI will not work on URL params */}
+                                {console.log('decode', item)}
+                                <div className="">{item}</div>
                             </React.Fragment>)
                         }
                     </div>

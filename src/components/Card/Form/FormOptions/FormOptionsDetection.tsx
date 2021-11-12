@@ -50,8 +50,8 @@ function filterDetection(detection: Mani.Detection) {
         commandline = undefined;
     }
 
-    processname && (processname = decodeURI(processname));
-    commandline && (commandline = Transform.xmlRestore(decodeURI(commandline)));
+    processname && (processname = Transform.persentRemove(processname));
+    commandline && (commandline = Transform.xmlRestore(Transform.persentRemove(commandline)));
 
     return {
         ...(matchOptions && { 'match as': matchOptions.join }),
