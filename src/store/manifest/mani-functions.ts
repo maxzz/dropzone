@@ -39,7 +39,7 @@ export namespace transform { // encode/decode functions
         "%0a": "\n",
     };
     const reverseCpp = swapKeyValPairs(forwardCpp);
-    const reForwardCpp = /(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g; // I don't know why, but we don't need to reset regex.lastIndex; it's working fine
+    const reForwardCpp = /(\^up;|\^at;|\^dot;|\^2dot;|\^escape;|%0d|%0a)/g; // regex.lastIndex specifies the index at which to start the next match, not for replace all.
     const reReverseCpp = /[\^@\.:\x1b\r\n]/g;
 
     export function cppRestore(s: string): string { // C:\Y\c\dp\pm\Components\Include\atl\atl_strings.h::cpp_restore()
