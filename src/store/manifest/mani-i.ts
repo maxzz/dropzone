@@ -112,8 +112,8 @@ export namespace Matching {
         return rv;
     }
 
-    export function makeRawMatchData({ style, opt, url }: RawMatchData): string | undefined {
-        return url && `m0:${style}:${opt}:${Transform.cppEscape(url)}`;
+    export function makeRawMatchData({ style, opt, url }: RawMatchData): string {
+        return url ? `[m0]:${style}:${opt}:${Transform.cppEscape(url)}` : url;
     }
 
     function styleName(style: number): string {

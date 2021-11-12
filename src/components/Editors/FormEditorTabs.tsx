@@ -50,15 +50,13 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     React.useEffect(() => {
         const newRaw = Matching.getMatchRawData(urls.m);
 
-        console.log('newRaw', newRaw);
+        //console.log('newRaw', newRaw);
 
         setRaw(newRaw);
     }, [urls]);
 
-    React.useEffect(() => {
-    }, [raw]);
-
-    console.log('raw', raw);
+    //console.log('raw', raw);
+    //console.log('urls', urls);
 
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     return (<>
@@ -76,7 +74,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             <RadioGroup
                 value={raw.style}
                 setValue={(v: number) => {
-                    setRaw(prev => ({ ...prev, style: v }));
+                    setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, style: v, }) });
                 }} />
 
             {/* Match case */}
