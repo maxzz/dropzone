@@ -148,7 +148,7 @@ type MatchWebProps = {
     },
 };
 
-export function MatchWeb({ editorData }: { editorData: EditorData; }) {
+export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
 
@@ -172,7 +172,7 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-export function MatchWindows({ editorData }: { editorData: EditorData; }) {
+export function TabMatchWindows({ editorData }: { editorData: EditorData; }) {
     return (
         <div className="p-4">
             Windows match is comming soon...
@@ -180,7 +180,7 @@ export function MatchWindows({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function PageFieldsScript({ editorData }: { editorData: EditorData; }) {
+function TabFieldsScript({ editorData }: { editorData: EditorData; }) {
     return (
         <div className="p-4">
             Windows form script fields editor is comming soon...
@@ -188,13 +188,13 @@ function PageFieldsScript({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-export function PageFields({ editorData }: { editorData: EditorData; }) {
+export function TabFields({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const isScript = fileUs.meta?.[editorData.formIdx]?.disp.isScript;
     return (
         <>
             {isScript
-                ? <PageFieldsScript editorData={editorData} />
+                ? <TabFieldsScript editorData={editorData} />
                 :
                 <div className="p-4">
                     Web form fields editor is comming soon...

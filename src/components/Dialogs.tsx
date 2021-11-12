@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { formEditorDataAtom } from '../store/store';
 import { PortalModal } from './UI/UIDialog';
-import EditorMatchPanels from './Editors/EditorMatchPanels';
+import { formEditorDataAtom } from '../store/store';
+import FormEditor from './Editors/FormEditor';
 
 function DetectionGroupEditor() {
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);
@@ -10,7 +10,7 @@ function DetectionGroupEditor() {
         <>
             {editorData &&
                 <PortalModal show={true} setShow={(v: boolean) => !v && setEditorData(null)}>
-                    <EditorMatchPanels editorData={editorData} />
+                    <FormEditor editorData={editorData} />
                 </PortalModal>
             }
         </>

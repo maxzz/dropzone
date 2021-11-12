@@ -5,7 +5,7 @@ import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
-import { MatchWeb, MatchWindows, PageFields } from './EditorMatch';
+import { TabMatchWeb, TabMatchWindows, TabFields } from './FormEditorTabs';
 
 function ManifestName({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -24,12 +24,12 @@ function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
     const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
-        'Web': <MatchWeb editorData={editorData} />,
-        'Win32': <MatchWindows editorData={editorData} />,
-        'Fields': <PageFields editorData={editorData} />
+        'Web': <TabMatchWeb editorData={editorData} />,
+        'Win32': <TabMatchWindows editorData={editorData} />,
+        'Fields': <TabFields editorData={editorData} />
     };
     return (
         <div className={classNames("w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
@@ -100,7 +100,7 @@ function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { edit
     );
 }
 
-export default EditorMatchPanels;
+export default FormEditor;
 
 //TODO: events onTabChange w/ ability to cancel
 //TODO: state is tab dirty
