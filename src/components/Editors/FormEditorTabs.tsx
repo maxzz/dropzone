@@ -1,5 +1,5 @@
 import React from 'react';
-import { atom, useAtom, WritableAtom } from 'jotai';
+import { atom, PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
 import atomWithCallback from '../../hooks/atomsX';
@@ -123,9 +123,12 @@ function OurlGroup({ maniOurl }: { maniOurl: string; }) {
     </>);
 }
 
-function QurlGroup({ maniQurl }: { maniQurl: string; }) {
+function QurlGroup({ matchWebStateAtom }: { matchWebStateAtom: MatchWebStateAtom; }) {
+    const [urls, setUrls] = useAtom(matchWebStateAtom);
+
     const [sameQurl, setSameQurl] = React.useState(true);
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
+
     return (
         <>
             <div className="mt-6 mb-1 flex items-center">
@@ -142,20 +145,24 @@ function QurlGroup({ maniQurl }: { maniQurl: string; }) {
 
             {!sameQurl &&
                 <a.div style={stylesQL} className="">
-                    <input className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" spellCheck={false} value={maniQurl} readOnly />
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false} 
+                        value={urls.q} readOnly
+                    />
                 </a.div>
             }
         </>
     );
 }
 
-type MatchWebProps = {
-    urls: {
-        o?: string;
-        m?: string;
-        q?: string;
-    },
+type MatchWebState = {
+    o: string;
+    m: string;
+    q: string;
 };
+
+type MatchWebStateAtom = PrimitiveAtom<MatchWebState>;
 
 export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
@@ -166,9 +173,9 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const qurl = detection?.web_qurl || '';
 
     const [urlsAtom, setUrlsAtom] = React.useState(atom({
-        o: ourl,
-        m: murl,
-        q: qurl,
+        o: detection?.web_ourl || '',
+        m: detection?.web_murl || '',
+        q: detection?.web_qurl || '',
     }));
 
     return (
@@ -177,7 +184,7 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
                 <OurlGroup maniOurl={ourl} />
                 {/* Separator */} {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
                 <MurlGroup maniMurl={murl} />
-                <QurlGroup maniQurl={qurl} />
+                <QurlGroup matchWebStateAtom={urlsAtom} />
             </div>
         </div>
     );
