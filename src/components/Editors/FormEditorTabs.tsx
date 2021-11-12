@@ -64,9 +64,10 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
             {...(errorHint && { title: errorHint })}
             spellCheck={false}
-            value={urls.m}
+            value={raw.url}
+            title={urls.m}
             onChange={(e) => {
-                setUrls({ ...urls, m: e.target.value });
+                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, url: e.target.value }) });
             }}
         />
         <div className="flex space-x-4">
@@ -89,6 +90,9 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <div>Case sensitive</div>
             </label>
         </div>
+        {/* <div className="px-2 w-full text-[.65rem] bg-yellow-300">
+            <p className="overflow-x-auto">{urls.m}{urls.m}</p>
+        </div> */}
     </>);
 }
 
@@ -174,10 +178,6 @@ type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
 export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
-
-    const ourl = detection?.web_ourl || '';
-    const murl = detection?.web_murl || '';
-    const qurl = detection?.web_qurl || '';
 
     const [urlsAtom, setUrlsAtom] = React.useState(atomWithCallback<MatchWebState>({
         o: detection?.web_ourl || '',
