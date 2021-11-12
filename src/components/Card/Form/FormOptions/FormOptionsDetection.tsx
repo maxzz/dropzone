@@ -89,13 +89,15 @@ function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom
                     <UITableFromObject obj={toShowDetection} />
                     <UITableFromObject obj={toShowOptions} />
                 </div>
+                {/*
                 <button className="mx-2 my-2 h-6 px-2 font-bold bg-gray-200 border border-gray-500 rounded active:scale-[.97] shadow"
                     onClick={((e) => {
                         e.stopPropagation();
                     })}
                 >
-                    matching controls {/* edit */}
+                    matching controls {/* edit * /}
                 </button>
+                */}
             </div>
         </ToggleWithPortal>
     );
