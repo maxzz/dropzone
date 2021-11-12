@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom, WritableAtom } from 'jotai';
+import { atom, useAtom, WritableAtom } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
 import { EditorData, formEditorDataAtom } from '../../store/store';
 import atomWithCallback from '../../hooks/atomsX';
@@ -164,6 +164,12 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const ourl = detection?.web_ourl || '';
     const murl = detection?.web_murl || '';
     const qurl = detection?.web_qurl || '';
+
+    const [urlsAtom, setUrlsAtom] = React.useState(atom({
+        o: ourl,
+        m: murl,
+        q: qurl,
+    }));
 
     return (
         <div className="p-4">
