@@ -31,12 +31,12 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormDetectionEdit({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) { //TODO: check if we have forms
+function FormDetectionEdit({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
     const [formEditorData, setFormEditorData] = useAtom(formEditorDataAtom);
     return (
         <div
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
-            onClick={() => setFormEditorData(formEditorData ? null : { fileUsAtom, formIdx: 0 })}
+            onClick={() => setFormEditorData(formEditorData ? null : { fileUsAtom, formIdx: formType })}
         >
             <IconGear className="w-4" />
         </div>
@@ -73,7 +73,7 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
                 <FormOptionsPool names_ext={detection.names_ext} />
                 <FormOptionQuickLink ql={options.usequicklink} />
                 <FormOptionLockFields lockfields={options.lockfields} />
-                <FormDetectionEdit fileUsAtom={fileUsAtom} />
+                <FormDetectionEdit fileUsAtom={fileUsAtom} formType={formType} />
             </div>
             {hasFormPreview && <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />}
         </div>
