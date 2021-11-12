@@ -155,9 +155,6 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
 
-
-
-
     return (
         <div className="p-4">
             <div className="flex flex-col">
@@ -176,10 +173,22 @@ export function MatchWeb({ editorData }: { editorData: EditorData; }) {
 }
 
 export function MatchWindows({ editorData }: { editorData: EditorData; }) {
-    const [editorAtom, setEditorAtom] = useAtom(formEditorDataAtom);
-    if (!editorAtom) {
-        return null;
-    }
+    return (
+        <div className="p-4">
+            Windows match is comming soon...
+        </div>
+    );
+}
+
+export function PageFieldsScript({ editorData }: { editorData: EditorData; }) {
+    return (
+        <div className="p-4">
+            Windows match is comming soon...
+        </div>
+    );
+}
+
+export function PageFields({ editorData }: { editorData: EditorData; }) {
     return (
         <div className="p-4">
             Windows match is comming soon...
