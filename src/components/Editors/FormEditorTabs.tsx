@@ -90,9 +90,10 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <div>Case sensitive</div>
             </label>
         </div>
-        {/* <div className="px-2 w-full text-[.65rem] bg-yellow-300">
-            <p className="overflow-x-auto">{urls.m}{urls.m}</p>
-        </div> */}
+        <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm">
+            <div className="-mt-4 "><span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm">Final raw format</span></div>
+            <div className="overflow-x-auto break-all">{urls.m}</div>
+        </div>
     </>);
 }
 
@@ -184,12 +185,12 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
         m: detection?.web_murl || '',
         q: detection?.web_qurl || '',
     }, ({ nextValue }) => {
-        console.log('updated', nextValue);
+        //console.log('updated', nextValue);
     }));
 
     return (
         <div className="p-4">
-            <div className="flex flex-col">
+            <div className="grid grid-cols-1">
                 <OurlGroup urlsAtom={urlsAtom} />
                 {/* Separator */} {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
                 <MurlGroup urlsAtom={urlsAtom} />
