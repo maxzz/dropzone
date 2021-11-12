@@ -45,8 +45,6 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
 
 function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-
-    //const [murl, setMurl] = useAtom(murlAtom);
     const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
 
     React.useEffect(() => {
@@ -57,6 +55,9 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         setRaw(newRaw);
     }, [urls]);
 
+    React.useEffect(() => {
+    }, [raw]);
+
     console.log('raw', raw);
 
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
@@ -66,11 +67,17 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             {...(errorHint && { title: errorHint })}
             spellCheck={false}
             value={urls.m}
-            onChange={(e) => setUrls({ ...urls, m: e.target.value })}
+            onChange={(e) => {
+                setUrls({ ...urls, m: e.target.value });
+            }}
         />
         <div className="flex space-x-4">
             {/* How match radio buttons */}
-            <RadioGroup value={raw.style} setValue={(v: number) => setRaw(prev => ({ ...prev, style: v }))} />
+            <RadioGroup
+                value={raw.style}
+                setValue={(v: number) => {
+                    setRaw(prev => ({ ...prev, style: v }));
+                }} />
 
             {/* Match case */}
             <label className="mt-1 h-6 flex items-center space-x-1">
