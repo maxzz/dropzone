@@ -88,6 +88,6 @@ export default FormOptions;
 //TODO: form preview: use hover over preview icon instead of click
 
 //TODO: preview for all fields and highlight on click
-//TODO: save split pane position
+//TODO: save split pane position - done
 
-//TODO: check if we have forms in FormDetectionEdit()
+//TODO: check if we have forms in FormDetectionEdit(). (i.e. we have web, win, fields, script, or exclude manifest)

@@ -26,7 +26,7 @@ function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
 
 function EditorMatchPanels({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
     const [selected, setSelected] = React.useState(0);
-    const pages = { //TODO: check if we have forms or what we have at all
+    const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
         'Match Web': <MatchWeb editorData={editorData} />,
         'Match Windows': <MatchWindows editorData={editorData} />,
     };
