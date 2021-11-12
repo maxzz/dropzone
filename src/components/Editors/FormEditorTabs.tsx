@@ -84,7 +84,7 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     );
 }
 
-function MatchUrlGroup({ maniMurl }: { maniMurl: string; }) {
+function MurlGroup({ maniMurl }: { maniMurl: string; }) {
     const [sameMurl, setSameMurl] = React.useState(true);
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
 
@@ -114,7 +114,16 @@ function MatchUrlGroup({ maniMurl }: { maniMurl: string; }) {
     );
 }
 
-function QLGroup({ maniQurl }: { maniQurl: string; }) {
+function OurlGroup({ maniOurl }: { maniOurl: string; }) {
+    const firstFocusRef = React.useRef<HTMLInputElement>(null);
+    // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
+    return (<>
+        <div className="mb-1 font-bold text-gray-600">Original url</div>
+        <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" spellCheck={false} value={maniOurl} readOnly />
+    </>);
+}
+
+function QurlGroup({ maniQurl }: { maniQurl: string; }) {
     const [sameQurl, setSameQurl] = React.useState(true);
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
     return (
@@ -149,24 +158,20 @@ type MatchWebProps = {
 };
 
 export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
-    const firstFocusRef = React.useRef<HTMLInputElement>(null);
-    // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
-
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
+
+    const ourl = detection?.web_ourl || '';
+    const murl = detection?.web_murl || '';
+    const qurl = detection?.web_qurl || '';
 
     return (
         <div className="p-4">
             <div className="flex flex-col">
-                {/* Original url */}
-                <div className="mb-1 font-bold text-gray-600">Original url</div>
-                <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" spellCheck={false} value={detection?.web_ourl} readOnly />
-
-                {/* Separator */}
-                {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
-
-                <MatchUrlGroup maniMurl={detection?.web_murl || ''} />
-                <QLGroup maniQurl={detection?.web_qurl || ''} />
+                <OurlGroup maniOurl={ourl} />
+                {/* Separator */} {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
+                <MurlGroup maniMurl={murl} />
+                <QurlGroup maniQurl={qurl} />
             </div>
         </div>
     );
