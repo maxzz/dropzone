@@ -56,15 +56,15 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(murl) || defaultMurl());
     React.useEffect(() => {
-        const newRaw = Matching.getMatchRawData(murl) || defaultMurl()
-        
+        const newRaw = Matching.getMatchRawData(murl) || defaultMurl();
+
         console.log('newRaw', newRaw);
 
         setRaw(newRaw);
     }, [murl]);
 
     console.log('raw', raw);
-    
+
     return (
         <>
             <input
@@ -82,7 +82,7 @@ function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
                     <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                         checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
                         onChange={(event) => {
-                            setRaw(prev => ({ ...prev, opt: event.target.checked ? prev.opt | Matching.Options.caseinsensitive : prev.opt & ~Matching.Options.caseinsensitive }))
+                            setRaw(prev => ({ ...prev, opt: event.target.checked ? prev.opt | Matching.Options.caseinsensitive : prev.opt & ~Matching.Options.caseinsensitive }));
                         }}
                     />
                     <div>Case sensitive</div>
@@ -180,19 +180,27 @@ export function MatchWindows({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-export function PageFieldsScript({ editorData }: { editorData: EditorData; }) {
+function PageFieldsScript({ editorData }: { editorData: EditorData; }) {
     return (
         <div className="p-4">
-            Windows match is comming soon...
+            Windows form script fields editor is comming soon...
         </div>
     );
 }
 
 export function PageFields({ editorData }: { editorData: EditorData; }) {
+    const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
+    const isScript = fileUs.meta?.[editorData.formIdx]?.disp.isScript;
     return (
-        <div className="p-4">
-            Windows match is comming soon...
-        </div>
+        <>
+            {isScript
+                ? <PageFieldsScript editorData={editorData} />
+                :
+                <div className="p-4">
+                    Web form fields editor is comming soon...
+                </div>
+            }
+        </>
     );
 }
 
