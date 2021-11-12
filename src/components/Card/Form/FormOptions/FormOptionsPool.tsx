@@ -68,7 +68,7 @@ function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
                         {items.map((item, idx) =>
                             <React.Fragment key={idx}>
                                 <div className="px-1 text-right border-r border-r-gray-400">{idx}</div>
-                                <div className="">{item}</div>
+                                <div className="">{Transform.xmlRestore(decodeURI(item))}</div> {/* decodeURI will not work on URL params */}
                             </React.Fragment>)
                         }
                     </div>
