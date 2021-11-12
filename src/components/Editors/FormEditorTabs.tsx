@@ -82,7 +82,8 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                     checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
                     onChange={(event) => {
-                        setRaw(prev => ({ ...prev, opt: event.target.checked ? prev.opt | Matching.Options.caseinsensitive : prev.opt & ~Matching.Options.caseinsensitive }));
+                        let opt = event.target.checked ? raw.opt | Matching.Options.caseinsensitive : raw.opt & ~Matching.Options.caseinsensitive;
+                        setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, opt }) });
                     }}
                 />
                 <div>Case sensitive</div>
