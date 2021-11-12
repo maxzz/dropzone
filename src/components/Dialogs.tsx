@@ -4,7 +4,7 @@ import { PortalModal } from './UI/UIDialog';
 import { formEditorDataAtom } from '../store/store';
 import FormEditor from './Editors/FormEditor';
 
-function DetectionGroupEditor() {
+function FormEditorTrigger() {
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);
     return (
         <>
@@ -19,7 +19,7 @@ function DetectionGroupEditor() {
 
 function Dialogs() {
     return (
-        <DetectionGroupEditor />
+        <FormEditorTrigger />
     );
 }
 

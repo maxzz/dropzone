@@ -288,7 +288,7 @@ export const splitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplit
 
 export const selected4ActionAtom = atom<FileUsAtom[]>([]);
 
-// Dialog edit detection options
+// Form editor data
 
 export type EditorData = {
     fileUsAtom: FileUsAtom;
@@ -299,5 +299,4 @@ export type FormEditorDataAtom = PrimitiveAtom<EditorData | null>;
 
 export const formEditorDataAtom = atom<EditorData | null>(null);
 
-// export const detectionEditorAtomAtom = atom<FileUsAtom | undefined>(undefined);
-// export const detectionEditorformAtom = atom<number>(0);
+//
