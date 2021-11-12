@@ -116,6 +116,16 @@ export namespace Matching {
         return url && `m0:${style}:${opt}:${transform.cppEscape(url)}`;
     }
 
+    function styleName(style: number): string {
+        const names: Record<number, string> = {
+            1: 'use domain match',            // Style.makeDomainMatch
+            2: 'regex',                       // Style.regex
+            3: 'wildcard',                    // Style.wildcard
+            4: 'don\'t match this in domain', // Style.skipDomainMatch
+        };
+        return names[style] || `${style}`;
+    }
+
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
         const raw = getMatchRawData(murl);
         if (raw.style && raw.opt) {
@@ -125,29 +135,7 @@ export namespace Matching {
             (opt & 1) !== 0 && (resOpt.push('case insensitive'));   // Options.caseinsensitive
             (opt & 2) !== 0 && (resOpt.push('match ext.'));         // Options.matchtext
 
-            let resStyle = '';
-            switch (style) {
-                case 1: { // Style.makeDomainMatch
-                    resStyle = 'use domain match';
-                    break;
-                }
-                case 2: { // Style.regex
-                    resStyle = 'regex';
-                    break;
-                }
-                case 3: { // Style.wildcard
-                    resStyle = 'wildcard';
-                    break;
-                }
-                case 4: { // Style.skipDomainMatch
-                    resStyle = 'don\'t match this in domain';
-                    break;
-                }
-                default: {
-                    resStyle = `${style}`;
-                }
-            }//switch
-
+            let resStyle = styleName(style);
             return {
                 prefix: `[m0]:${style}:${opt}`,
                 join: `${resStyle}${resOpt.length ? `; Options: ${resOpt.join(', ')}` : ''}`,
