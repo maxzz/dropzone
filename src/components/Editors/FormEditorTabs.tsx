@@ -97,8 +97,8 @@ function MurlGroup({ maniMurl }: { maniMurl: string; }) {
                 <div className="w-28 font-bold text-gray-600">Matching url</div>
                 <label className="h-6 flex items-center space-x-1">
                     <input
-                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                         type="checkbox"
+                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                         checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)}
                     />
                     <div>same as original url</div>
@@ -114,17 +114,22 @@ function MurlGroup({ maniMurl }: { maniMurl: string; }) {
     );
 }
 
-function OurlGroup({ maniOurl }: { maniOurl: string; }) {
+function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+    const [urls, setUrls] = useAtom(urlsAtom);
     const firstFocusRef = React.useRef<HTMLInputElement>(null);
     // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
     return (<>
         <div className="mb-1 font-bold text-gray-600">Original url</div>
-        <input ref={firstFocusRef} className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner" spellCheck={false} value={maniOurl} readOnly />
+        <input ref={firstFocusRef}
+            className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+            spellCheck={false}
+            value={urls.o} readOnly
+        />
     </>);
 }
 
-function QurlGroup({ matchWebStateAtom }: { matchWebStateAtom: MatchWebStateAtom; }) {
-    const [urls, setUrls] = useAtom(matchWebStateAtom);
+function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+    const [urls, setUrls] = useAtom(urlsAtom);
 
     const [sameQurl, setSameQurl] = React.useState(true);
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
@@ -135,8 +140,8 @@ function QurlGroup({ matchWebStateAtom }: { matchWebStateAtom: MatchWebStateAtom
                 <div className="w-28 font-bold text-gray-600">Quicklink url</div>
                 <label className="h-6 flex items-center space-x-1">
                     <input
-                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                         type="checkbox"
+                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                         checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)}
                     />
                     <div>same as original url</div>
@@ -147,7 +152,7 @@ function QurlGroup({ matchWebStateAtom }: { matchWebStateAtom: MatchWebStateAtom
                 <a.div style={stylesQL} className="">
                     <input
                         className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false} 
+                        spellCheck={false}
                         value={urls.q} readOnly
                     />
                 </a.div>
@@ -181,10 +186,10 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     return (
         <div className="p-4">
             <div className="flex flex-col">
-                <OurlGroup maniOurl={ourl} />
+                <OurlGroup urlsAtom={urlsAtom} />
                 {/* Separator */} {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
                 <MurlGroup maniMurl={murl} />
-                <QurlGroup matchWebStateAtom={urlsAtom} />
+                <QurlGroup urlsAtom={urlsAtom} />
             </div>
         </div>
     );
