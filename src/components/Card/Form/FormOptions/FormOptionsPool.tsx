@@ -68,7 +68,6 @@ function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
                         {items.map((item, idx) =>
                             <React.Fragment key={idx}>
                                 <div className="px-1 text-right border-r border-r-gray-400">{idx}</div>
-                                {console.log('decode', item)}
                                 <div className="">{item}</div>
                             </React.Fragment>)
                         }
