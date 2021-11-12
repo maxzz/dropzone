@@ -43,20 +43,12 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
     );
 }
 
-const defaultMurl = () => {
-    return {
-        style: Matching.Style.undef,
-        opt: Matching.Options.undef,
-        url: '',
-    };
-};
-
 function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
     const [murl, setMurl] = useAtom(murlAtom);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
-    const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(murl) || defaultMurl());
+    const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(murl));
     React.useEffect(() => {
-        const newRaw = Matching.getMatchRawData(murl) || defaultMurl();
+        const newRaw = Matching.getMatchRawData(murl);
 
         console.log('newRaw', newRaw);
 
@@ -104,8 +96,12 @@ function MatchUrlGroup({ maniMurl }: { maniMurl: string; }) {
             <div className="mt-6 mb-1 flex items-center">
                 <div className="w-28 font-bold text-gray-600">Matching url</div>
                 <label className="h-6 flex items-center space-x-1">
-                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)} />
-                    <div>Same as original url</div>
+                    <input
+                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                        type="checkbox"
+                        checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)}
+                    />
+                    <div>same as original url</div>
                 </label>
             </div>
 
@@ -126,8 +122,12 @@ function QLGroup({ maniQurl }: { maniQurl: string; }) {
             <div className="mt-6 mb-1 flex items-center">
                 <div className="w-28 font-bold text-gray-600">Quicklink url</div>
                 <label className="h-6 flex items-center space-x-1">
-                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)} />
-                    <div>Same as original url</div>
+                    <input
+                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                        type="checkbox"
+                        checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)}
+                    />
+                    <div>same as original url</div>
                 </label>
             </div>
 
