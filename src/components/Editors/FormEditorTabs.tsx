@@ -66,7 +66,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             {...(errorHint && { title: errorHint })}
             spellCheck={false}
             value={urls.m}
-            onChange={(e) => setUrls((prev) => ({ ...prev, m: e.target.value }))}
+            onChange={(e) => setUrls({ ...urls, m: e.target.value })}
         />
         <div className="flex space-x-4">
             {/* How match radio buttons */}
@@ -163,7 +163,7 @@ type MatchWebState = {
     q: string;
 };
 
-type MatchWebStateAtom = PrimitiveAtom<MatchWebState>;
+type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
 
 export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
@@ -173,15 +173,13 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const murl = detection?.web_murl || '';
     const qurl = detection?.web_qurl || '';
 
-    const [urlsAtom, setUrlsAtom] = React.useState(atom({
+    const [urlsAtom, setUrlsAtom] = React.useState(atomWithCallback<MatchWebState>({
         o: detection?.web_ourl || '',
         m: detection?.web_murl || '',
         q: detection?.web_qurl || '',
+    }, ({ nextValue }) => {
+        console.log('updated', nextValue);
     }));
-
-    // const [murlAtom] = React.useState(atomWithCallback(maniMurl, ({ nextValue }) => {
-    //     console.log('updated', nextValue);
-    // }));
 
     return (
         <div className="p-4">
