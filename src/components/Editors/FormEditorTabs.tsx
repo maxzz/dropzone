@@ -43,75 +43,71 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
     );
 }
 
-function MatchHow({ murlAtom }: { murlAtom: WritableAtom<string, string>; }) {
-    const [murl, setMurl] = useAtom(murlAtom);
-    const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
-    const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(murl));
+function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+    const [urls, setUrls] = useAtom(urlsAtom);
+
+    //const [murl, setMurl] = useAtom(murlAtom);
+    const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+
     React.useEffect(() => {
-        const newRaw = Matching.getMatchRawData(murl);
+        const newRaw = Matching.getMatchRawData(urls.m);
 
         console.log('newRaw', newRaw);
 
         setRaw(newRaw);
-    }, [murl]);
+    }, [urls]);
 
     console.log('raw', raw);
 
-    return (
-        <>
-            <input
-                className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
-                {...(errorHint && { title: errorHint })}
-                spellCheck={false}
-                value={murl} onChange={(e) => setMurl(e.target.value)}
-            />
-            <div className="flex space-x-4">
-                {/* How match radio buttons */}
-                <RadioGroup value={raw.style} setValue={(v: number) => setRaw(prev => ({ ...prev, style: v }))} />
+    const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
+    return (<>
+        <input
+            className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
+            {...(errorHint && { title: errorHint })}
+            spellCheck={false}
+            value={urls.m}
+            onChange={(e) => setUrls((prev) => ({ ...prev, m: e.target.value }))}
+        />
+        <div className="flex space-x-4">
+            {/* How match radio buttons */}
+            <RadioGroup value={raw.style} setValue={(v: number) => setRaw(prev => ({ ...prev, style: v }))} />
 
-                {/* Match case */}
-                <label className="mt-1 h-6 flex items-center space-x-1">
-                    <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                        checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
-                        onChange={(event) => {
-                            setRaw(prev => ({ ...prev, opt: event.target.checked ? prev.opt | Matching.Options.caseinsensitive : prev.opt & ~Matching.Options.caseinsensitive }));
-                        }}
-                    />
-                    <div>Case sensitive</div>
-                </label>
-            </div>
-        </>
-    );
+            {/* Match case */}
+            <label className="mt-1 h-6 flex items-center space-x-1">
+                <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                    checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
+                    onChange={(event) => {
+                        setRaw(prev => ({ ...prev, opt: event.target.checked ? prev.opt | Matching.Options.caseinsensitive : prev.opt & ~Matching.Options.caseinsensitive }));
+                    }}
+                />
+                <div>Case sensitive</div>
+            </label>
+        </div>
+    </>);
 }
 
-function MurlGroup({ maniMurl }: { maniMurl: string; }) {
+function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [sameMurl, setSameMurl] = React.useState(true);
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
+    return (<>
+        <div className="mt-6 mb-1 flex items-center">
+            <div className="w-28 font-bold text-gray-600">Matching url</div>
+            <label className="h-6 flex items-center space-x-1">
+                <input
+                    type="checkbox"
+                    className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                    checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)}
+                />
+                <div>same as original url</div>
+            </label>
+        </div>
 
-    const [murlAtom] = React.useState(atomWithCallback(maniMurl, ({ nextValue }) => {
-        console.log('updated', nextValue);
-    }));
-    return (
-        <>
-            <div className="mt-6 mb-1 flex items-center">
-                <div className="w-28 font-bold text-gray-600">Matching url</div>
-                <label className="h-6 flex items-center space-x-1">
-                    <input
-                        type="checkbox"
-                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                        checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)}
-                    />
-                    <div>same as original url</div>
-                </label>
-            </div>
-
-            {!sameMurl &&
-                <a.div style={stylesHow}>
-                    <MatchHow murlAtom={murlAtom} />
-                </a.div>
-            }
-        </>
-    );
+        {!sameMurl &&
+            <a.div style={stylesHow}>
+                <MatchHow urlsAtom={urlsAtom} />
+            </a.div>
+        }
+    </>);
 }
 
 function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
@@ -183,12 +179,16 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
         q: detection?.web_qurl || '',
     }));
 
+    // const [murlAtom] = React.useState(atomWithCallback(maniMurl, ({ nextValue }) => {
+    //     console.log('updated', nextValue);
+    // }));
+
     return (
         <div className="p-4">
             <div className="flex flex-col">
                 <OurlGroup urlsAtom={urlsAtom} />
                 {/* Separator */} {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
-                <MurlGroup maniMurl={murl} />
+                <MurlGroup urlsAtom={urlsAtom} />
                 <QurlGroup urlsAtom={urlsAtom} />
             </div>
         </div>
