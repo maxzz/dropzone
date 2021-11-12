@@ -18,7 +18,7 @@ function filetimeFromDate(date: Date): number {
     return date.getTime() * 1e4 + 116444736000000000;
 }
 
-export namespace transform { // encode/decode functions
+export namespace Transform { // encode/decode functions
 
     export function removeEscapeChars(s: string, escapeChar: string): string {
         // 0. '\1\\ab\2\.3' --> '1\ab2.3' with escapeChar: '\' i.e. remove non duplicated.
@@ -71,7 +71,7 @@ export namespace transform { // encode/decode functions
         return s ? s.replace(reReverseXml, (m) => reverseXml[m]) : '';
     }
 
-} //namespace transform
+} //namespace Transform
 
 // Manifest specific functions
 
@@ -85,7 +85,7 @@ function getPoolName(pool: string[], index: string): string {
     }
     let n: number = index !== '' ? parseInt(`0x${index}`, 16) : -1;
     if (n < pool.length && n >= 0) {
-        return transform.removeEscapeChars(pool[n], '\\');
+        return Transform.removeEscapeChars(pool[n], '\\');
     }
     return '????????????';
 }
@@ -96,8 +96,8 @@ export namespace FieldPath {
         let rv: MPath.p4a = {
             rnumber: 0,
             roleString: getPoolName(pool, ss[1]),
-            className: transform.cppRestore(getPoolName(pool, ss[2])),
-            name: transform.cppRestore(getPoolName(pool, ss[3]))
+            className: Transform.cppRestore(getPoolName(pool, ss[2])),
+            name: Transform.cppRestore(getPoolName(pool, ss[3]))
         };
         return rv;
     }
@@ -105,7 +105,7 @@ export namespace FieldPath {
     function sid(pool: string[], v: string): MPath.sid {
         let sid = {} as any;
         v.split('.').forEach((_, index) => {
-            let s = transform.cppRestore(getPoolName(pool, _));
+            let s = Transform.cppRestore(getPoolName(pool, _));
             switch (index) {
                 case 0: sid.version = s; break;
                 case 1: sid.generatedId = s; break;
@@ -234,7 +234,7 @@ export namespace FieldPath {
     }
 } //namespace FieldPath
 
-namespace bailouts {
+namespace Bailouts {
     function noSIDs(meta: Meta.Form) { // web, not script, use it, no sid, and not button; scuonlinebanking.com clogin #89340
         return !!meta.disp.domain && !meta.disp.isScript &&
             !!meta.fields.find((field: Meta.Field) => field.mani.useit && !field.path.sid && field.mani.type !== 'button');
@@ -253,7 +253,7 @@ namespace bailouts {
         }
         return rv.length ? rv : undefined;
     }
-} //namespace bailouts
+} //namespace Bailouts
 
 export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[] {
     const isManual = (fields: Meta.Field[]): boolean => {
@@ -290,7 +290,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
             fields,
             rother: [],
         };
-        const bailOuts = bailouts.getBailouts(meta);
+        const bailOuts = Bailouts.getBailouts(meta);
         if (bailOuts) {
             meta.disp.bailOut = bailOuts;
         }

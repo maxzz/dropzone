@@ -1,5 +1,5 @@
 import { parse } from 'fast-xml-parser';
-import { transform } from './mani-functions';
+import { Transform } from './mani-functions';
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
@@ -93,27 +93,27 @@ export namespace Matching {
         matchtext = 0x0002,     // match text or don't; This option does not make sense for URLs.
     }
 
-    const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
-
     export type RawMatchData = {
         style: Style;
         opt: Options;
         url: string;
     };
 
+    const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
+
     export function getMatchRawData(murl: string): RawMatchData {
         let rv = { style: 0, opt: 0, url: murl || '', }; // don't need call restoreCpp(murl) here.
-        let m = murl?.match(reOtsMatching);
+        let m = murl?.match(reOtsMatching); // TODO: do we need to resrt reOtsMatching.lastIndex before match?
         if (m) {
             rv.style = +m[1] as Style; // style
             rv.opt = +m[2] as Options; // options
-            rv.url = transform.cppRestore(m[3]); // pattern
+            rv.url = Transform.cppRestore(m[3]); // pattern
         }
         return rv;
     }
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData): string | undefined {
-        return url && `m0:${style}:${opt}:${transform.cppEscape(url)}`;
+        return url && `m0:${style}:${opt}:${Transform.cppEscape(url)}`;
     }
 
     function styleName(style: number): string {

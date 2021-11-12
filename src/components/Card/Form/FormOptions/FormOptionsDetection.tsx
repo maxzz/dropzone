@@ -4,7 +4,7 @@ import { FileUsAtom } from '../../../../store/store';
 import { ToggleWithPortal } from './FormOptionsPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
 import { Matching } from '../../../../store/manifest/mani-i';
-import { transform } from '../../../../store/manifest/mani-functions';
+import { Transform } from '../../../../store/manifest/mani-functions';
 
 function woProtocol(url: string): string {
     return url.replace(/^https?:\/\//, '');
@@ -51,7 +51,7 @@ function filterDetection(detection: Mani.Detection) {
     }
 
     processname && (processname = decodeURI(processname));
-    commandline && (commandline = transform.xmlRestore(decodeURI(commandline)));
+    commandline && (commandline = Transform.xmlRestore(decodeURI(commandline)));
 
     return {
         ...(matchOptions && { 'match as': matchOptions.join }),
