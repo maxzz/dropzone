@@ -34,7 +34,7 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
             className="mt-2 px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            {/* <RadioButton groupName={"how"} value={0} checked={value === 0} label="String match" /> */}
+            <RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />
             <RadioButton groupName={"how"} value={1} checked={value === 1} label="Match domain from original url" />
             <RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />
             <RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />
