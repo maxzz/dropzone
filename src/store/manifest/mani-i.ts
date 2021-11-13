@@ -89,7 +89,7 @@ export namespace Matching {
 
     export enum Options {       // cannot use const w/ esbuild
         undef = 0,
-        caseinsensitive = 0x0001, // This option does not make sense for URLs.
+        caseinsensitive = 0x0001, // This option does not make sense for URLs (even for wildcards).
         matchtext = 0x0002,     // match text or don't; This option does not make sense for URLs.
     }
 
@@ -97,6 +97,7 @@ export namespace Matching {
         style: Style;
         opt: Options;
         url: string;
+        //ourl?: string;          // used only when we make packed url from style, opt, and url
     };
 
     const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
@@ -112,8 +113,9 @@ export namespace Matching {
         return rv;
     }
 
-    export function makeRawMatchData({ style, opt, url }: RawMatchData): string {
-        return url ? `[m0]:${style}:${opt}:${Transform.cppEscape(url)}` : url;
+    export function makeRawMatchData({ style, opt, url }: RawMatchData, ourl: string): string {
+        url = (url || '').trim();
+        return style === Style.undef && !opt ? ourl : url ? `[m0]:${style}:${opt}:${Transform.cppEscape(url)}` : url;
     }
 
     function styleName(style: number): string {

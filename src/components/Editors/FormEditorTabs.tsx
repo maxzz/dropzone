@@ -65,7 +65,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             <RadioGroup
                 value={raw.style}
                 setValue={(v: number) => {
-                    setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, style: v, }) });
+                    setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, style: v, }, urls.o) });
                 }} />
 
             {/* Match case */}
@@ -74,7 +74,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                     checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
                     onChange={(event) => {
                         let opt = event.target.checked ? raw.opt | Matching.Options.caseinsensitive : raw.opt & ~Matching.Options.caseinsensitive;
-                        setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, opt }) });
+                        setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, opt }, urls.o) });
                     }}
                 />
                 <div>Case sensitive</div>
@@ -87,7 +87,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             value={raw.url}
             title={urls.m}
             onChange={(e) => {
-                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, url: e.target.value }) });
+                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, url: e.target.value }, urls.o) });
             }}
         />
         <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm">
