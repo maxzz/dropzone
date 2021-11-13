@@ -31,7 +31,7 @@ function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonP
 function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) => void; }) {
     return (
         <div
-            className="mt-2 px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
+            className="px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
             <RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />
@@ -60,16 +60,6 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     return (<>
-        <input
-            className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
-            {...(errorHint && { title: errorHint })}
-            spellCheck={false}
-            value={raw.url}
-            title={urls.m}
-            onChange={(e) => {
-                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, url: e.target.value }) });
-            }}
-        />
         <div className="flex space-x-4">
             {/* How match radio buttons */}
             <RadioGroup
@@ -90,6 +80,16 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <div>Case sensitive</div>
             </label>
         </div>
+        <input
+            className={classNames("mt-2 px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
+            {...(errorHint && { title: errorHint })}
+            spellCheck={false}
+            value={raw.url}
+            title={urls.m}
+            onChange={(e) => {
+                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, url: e.target.value }) });
+            }}
+        />
         <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm">
             <div className="-mt-4 "><span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm">Final raw format</span></div>
             <div className="overflow-x-auto break-all">{urls.m}</div>

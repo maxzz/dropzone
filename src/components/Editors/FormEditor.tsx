@@ -32,7 +32,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
         'Fields': <TabFields editorData={editorData} />
     };
     return (
-        <div className={classNames("w-[460px] min-h-[560px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
+        <div className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
 
             {/* Editor body */}
             <div className="grid grid-rows-[auto,1fr]">
