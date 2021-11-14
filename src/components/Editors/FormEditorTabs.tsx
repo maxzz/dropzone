@@ -5,6 +5,7 @@ import { EditorData, formEditorDataAtom } from '../../store/store';
 import atomWithCallback from '../../hooks/atomsX';
 import { classNames } from '../../utils/classnames';
 import { Matching } from '../../store/manifest/mani-i';
+import UIUpDownIcon from '../UI/UIUpDownIcon';
 
 type RadioButtonProps = {
     label: string;
@@ -83,16 +84,17 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 </div>
             }
         </div>
+        <div className="mt-1 mb-1">Name</div>
         <input
-            className={classNames("mt-2 px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
+            className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
             {...(errorHint && { title: errorHint })}
             spellCheck={false}
             value={rawMD.url}
             title={urls.m}
             onChange={(e) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, url: e.target.value }, urls.o) })}
         />
-        <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm">
-            <div className="-mt-4 "><span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm">Final raw format</span></div>
+        <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm cursor-default" title="This is how url will be stored">
+            <div className="-mt-4 "><span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm select-none">Final raw format</span></div>
             <div className="overflow-x-auto break-all">{urls.m}</div>
         </div>
     </>);
@@ -103,7 +105,11 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
-            <div className="w-28 font-bold text-gray-600">Matching url</div>
+            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1">
+                <div className="">Matching url</div>
+                <UIUpDownIcon open={false} className="w-5 h-5 border rounded" />
+            </div>
+
             <label className="h-6 flex items-center space-x-1">
                 <input
                     type="checkbox"
