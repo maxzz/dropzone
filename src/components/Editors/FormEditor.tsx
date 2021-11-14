@@ -63,11 +63,6 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                             <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
                                 {pageContent}
                             </div>
-                            {/* {selected === idx &&
-                                <div key={idx} className={'h-full bg-white text-sm'}>
-                                    {pageContent}
-                                </div>
-                            } */}
                         </React.Fragment >
                     ))}
                 </div>
