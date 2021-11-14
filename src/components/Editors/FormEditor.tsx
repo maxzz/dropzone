@@ -7,10 +7,10 @@ import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { TabMatchWeb, TabMatchWindows, TabFields } from './FormEditorTabs';
 
-function ManifestName({ editorData }: { editorData: EditorData; }) {
+function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     return (
-        <div className="py-2 pb-1 text-[.65rem] text-gray-700/80 cursor-default" title="Manifest filename">{fileUs.fname}</div>
+        <div className="px-4 py-2 pb-1 text-[.65rem] text-gray-700/80 bg-blue-900/20 rounded-t cursor-default" title="Manifest filename">{fileUs.fname}</div>
     );
 }
 
@@ -24,7 +24,7 @@ function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+function EditorTabs({ editorData }: { editorData: EditorData; }) {
     const [selected, setSelected] = React.useState(0);
     const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
         'Web': <TabMatchWeb editorData={editorData} />,
@@ -32,40 +32,51 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
         'Fields': <TabFields editorData={editorData} />
     };
     return (
+        <>
+            <div className="px-4 pb-2 bg-blue-900/20 ">
+
+                <div className="flex justify-items-start space-x-1">
+                    {Object.keys(pages).map((pageTitle, idx) => (
+                        <button
+                            className={classNames(
+                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
+                                selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                            )}
+                            key={pageTitle}
+                            onClick={() => {
+                                setSelected(idx);
+                            }}
+                        >
+                            {pageTitle}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            {/* Pages */}
+            <div>
+                {Object.values(pages).map((pageContent, idx) => (
+                    <React.Fragment key={idx}>
+                        <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
+                            {pageContent}
+                        </div>
+                    </React.Fragment >
+                ))}
+            </div>
+
+        </>
+
+    );
+}
+
+function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+    return (
         <div className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
 
             {/* Editor body */}
-            <div className="grid grid-rows-[auto,1fr]">
+            <div className="grid grid-rows-[auto,auto,1fr]">
                 {/* Tabs */}
-                <div className="px-4 pb-2 bg-blue-900/20 rounded-t">
-                    <ManifestName editorData={editorData} />
-                    <div className="flex justify-items-start space-x-1">
-                        {Object.keys(pages).map((pageTitle, idx) => (
-                            <button
-                                className={classNames(
-                                    'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
-                                    selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                                )}
-                                key={pageTitle}
-                                onClick={() => {
-                                    setSelected(idx);
-                                }}
-                            >
-                                {pageTitle}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-                {/* Pages */}
-                <div>
-                    {Object.values(pages).map((pageContent, idx) => (
-                        <React.Fragment key={idx}>
-                            <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
-                                {pageContent}
-                            </div>
-                        </React.Fragment >
-                    ))}
-                </div>
+                <EditorCaption editorData={editorData} />
+                <EditorTabs editorData={editorData} />
             </div>
 
             {/* Editor buttons */}

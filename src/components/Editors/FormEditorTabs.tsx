@@ -94,7 +94,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 </div>
             }
         </div>
-        <div className="mt-1 mb-1">Name</div>
+        <div className="mt-1 mb-1">TODO: Name of url now</div>
         <input
             className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
             {...(errorHint && { title: errorHint })}
@@ -122,7 +122,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
             </div>
 
-            {!dirty && <label className="h-6 flex items-center text-xs">
+            {!dirty && <label className="flex items-center text-xs">
                 <div className="ml-5">same as original url</div>
             </label>}
         </div>
@@ -190,14 +190,11 @@ type UrlsState = {
 
 type MatchWebState = UrlsState & {
     initial: UrlsState;
-    dirtyAtom: PrimitiveAtom<boolean>;
+    dirtyAtom: PrimitiveAtom<boolean>; // it should be not dirty but: is initial value?
 };
 
 function urlsDirty(urls: MatchWebState): boolean {
-    const a = urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
-    console.log({ a });
-
-    return a;
+    return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
 }
 
 type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
