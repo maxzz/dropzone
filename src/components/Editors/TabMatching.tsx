@@ -137,18 +137,25 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
+    const setDirty = useUpdateAtom(urls.dirtyAtom);
     return (<>
         <div className="mb-1 font-bold text-gray-600">Original url</div>
         <input
             className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
             spellCheck={false}
-            value={urls.o} readOnly
+            value={urls.o}
+            onChange={(event) => {
+                const newState = { ...urls, o: event.target.value };
+                setUrls(newState);
+                setDirty(urlsDirty(newState));
+            }}
         />
     </>);
 }
 
 function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
+    const setDirty = useUpdateAtom(urls.dirtyAtom);
 
     const [sameQurl, setSameQurl] = React.useState(true);
     const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
@@ -172,7 +179,12 @@ function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                     <input
                         className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
                         spellCheck={false}
-                        value={urls.q} readOnly
+                        value={urls.q}
+                        onChange={(event) => {
+                            const newState = { ...urls, q: event.target.value };
+                            setUrls(newState);
+                            setDirty(urlsDirty(newState));
+                        }}
                     />
                 </a.div>
             }
