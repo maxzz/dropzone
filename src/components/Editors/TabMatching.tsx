@@ -131,15 +131,13 @@ function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initia
 function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
     const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
-    const [sameMurl, setSameMurl] = React.useState(urls.o === urls.m);
-    //React.useEffect(() => setSameMurl(urls.o === urls.m), [urls]);
-    const dirty = useAtomValue(urls.dirtyAtom);
-    const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
+    const [isClosed, setIsClosed] = React.useState(urls.o === urls.m);
+    const stylesHow = useSpring({ height: !isClosed ? 'auto' : 0, opacity: !isClosed ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
-            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setSameMurl(!sameMurl)}>
+            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsClosed(!isClosed)}>
                 <div className="">Matching url</div>
-                <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
+                <UIUpDownIcon double={true} open={isClosed} className="w-5 h-5 border rounded" />
             </div>
 
             {urls.o === urls.m && <label className="flex items-center text-xs">
@@ -147,7 +145,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             </label>}
         </div>
 
-        {!sameMurl &&
+        {!isClosed &&
             <a.div style={stylesHow}>
                 <MatchHow urlsAtom={urlsAtom} initialMD={initialMD} />
             </a.div>
