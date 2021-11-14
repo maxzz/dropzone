@@ -45,52 +45,37 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
 
 function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const [raw, setRaw] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
-
-    React.useEffect(() => {
-        const newRaw = Matching.getMatchRawData(urls.m);
-
-        console.log('newRaw', newRaw);
-
-        setRaw(newRaw);
-    }, [urls]);
-
-    //console.log('raw', raw);
-    //console.log('urls', urls);
-
+    const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+    React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     return (<>
         <div className="flex space-x-4">
             {/* How match radio buttons */}
             <RadioGroup
-                value={raw.style}
-                setValue={(v: number) => {
-                    setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, style: v, }, urls.o) });
-                }} />
+                value={rawMD.style}
+                setValue={(v: number) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) })}
+            />
 
             {/* Match case */}
             <label className="mt-1 h-6 flex items-center space-x-1">
                 <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                    checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
+                    checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
                     onChange={(event) => {
-                        let opt = event.target.checked ? raw.opt | Matching.Options.caseinsensitive : raw.opt & ~Matching.Options.caseinsensitive;
-                        console.log('opt', opt);
-                        
-                        setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, opt }, urls.o) });
+                        let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
+                        setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
                     }}
                 />
                 <div>Case sensitive</div>
             </label>
+            
         </div>
         <input
             className={classNames("mt-2 px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
             {...(errorHint && { title: errorHint })}
             spellCheck={false}
-            value={raw.url}
+            value={rawMD.url}
             title={urls.m}
-            onChange={(e) => {
-                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, url: e.target.value }, urls.o) });
-            }}
+            onChange={(e) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, url: e.target.value }, urls.o) })}
         />
         <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm">
             <div className="-mt-4 "><span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm">Final raw format</span></div>

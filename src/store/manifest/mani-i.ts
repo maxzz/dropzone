@@ -97,7 +97,6 @@ export namespace Matching {
         style: Style;
         opt: Options;
         url: string;
-        //ourl?: string;          // used only when we make packed url from style, opt, and url
     };
 
     const reOtsMatching = /^\[m0\]:([0-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
