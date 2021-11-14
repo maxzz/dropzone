@@ -299,11 +299,4 @@ export type FormEditorDataAtom = PrimitiveAtom<EditorData | null>;
 
 export const formEditorDataAtom = atom<EditorData | null>(null);
 
-// export const setFormEditorDataAtom = atom(null,
-//     (get, set) => {
-//         const current = get(formEditorDataAtom);
-//         set(formEditorDataAtom)
-//     }
-// );
-
 //

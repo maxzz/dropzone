@@ -34,12 +34,10 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
 
 function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
     const setFormEditorData = useUpdateAtom(formEditorDataAtom);
-    // const [formEditorData, setFormEditorData] = useAtom(formEditorDataAtom);
     return (
         <div
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
             onClick={() => setFormEditorData({ fileUsAtom, formIdx: formType })}
-            // onClick={() => setFormEditorData(formEditorData ? null : { fileUsAtom, formIdx: formType })}
         >
             <IconGear className="w-4" />
         </div>
