@@ -58,16 +58,30 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             />
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
-            {!!initialMD.opt && <label className="mt-1 h-6 flex items-center space-x-1">
-                <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                    checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
-                    onChange={(event) => {
-                        let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
-                        setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
-                    }}
-                />
-                <div>Case sensitive</div>
-            </label>}
+            {!!initialMD.opt &&
+                <div>
+                    <label className="mt-1 h-6 flex items-center space-x-1">
+                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                            checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
+                            onChange={(event) => {
+                                let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
+                                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
+                            }}
+                        />
+                        <div>Case sensitive</div>
+                    </label>
+                    <label className="mt-1 h-6 flex items-center space-x-1">
+                        <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                            checked={(rawMD.opt & Matching.Options.matchtext) !== 0}
+                            onChange={(event) => {
+                                let opt = event.target.checked ? rawMD.opt | Matching.Options.matchtext : rawMD.opt & ~Matching.Options.matchtext;
+                                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
+                            }}
+                        />
+                        <div>Match text</div>
+                    </label>
+                </div>
+            }
         </div>
         <input
             className={classNames("mt-2 px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
