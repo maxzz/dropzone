@@ -105,9 +105,9 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
-            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1">
+            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setSameMurl(!sameMurl)}>
                 <div className="">Matching url</div>
-                <UIUpDownIcon open={false} className="w-5 h-5 border rounded" />
+                <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
             </div>
 
             <label className="h-6 flex items-center space-x-1">

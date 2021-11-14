@@ -123,6 +123,10 @@ function UISymbolsDefs() {
                     <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
                 </symbol>
 
+                <symbol id="icon-doubledown" viewBox="0 0 24 24">
+                    <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />
+                </symbol>
+
                 {/* Info */}
 
                 <symbol id="icon-folder" viewBox="0 0 256 256">
@@ -335,6 +339,16 @@ export function IconChevronUp(props: SVGProps<SVGSVGElement> & { title?: string;
     );
 }
 
+export function IconDoubleDown(props: SVGProps<SVGSVGElement> & { title?: string; }) {
+    const { className = '', title, ...rest } = props;
+    return (
+        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-doubledown" />
+        </svg>
+    );
+}
+
 // info
 
 export function IconFolder(props: SVGProps<SVGSVGElement> & { title?: string; }) {
@@ -413,7 +427,4 @@ export function s(props: SVGProps<SVGSVGElement> & { title?: string; }) {
 
 <symbol id="" viewBox="0 0 24 24">
 </symbol>
-*/
-
-/*
 */
