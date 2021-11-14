@@ -114,7 +114,7 @@ export namespace Matching {
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData, ourl: string): string {
         url = (style !== Style.undef ? url || '' : ourl).trim();
-        return style !== Style.undef || opt !== Options.undef ? `[m0]:${style}:${opt}:${Transform.cppEscape(url)}` : url;
+        return style !== Style.undef || opt !== Options.undef ? `[m0]:${style}:${opt}:${Transform.colonEscape(url)}` : url;
     }
 
     function styleName(style: number): string {

@@ -52,6 +52,10 @@ export namespace Transform { // encode/decode functions
         return s ? s.replace(reReverseCpp, (m) => reverseCpp[m]) : '';
     }
 
+    export function colonEscape(s: string): string { // this is used for matching url options
+        return s ? s.replace(/:/g, '^2dot;') : '';
+    }
+
     // XML
 
     const forwardXml = {
