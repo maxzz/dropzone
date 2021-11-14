@@ -56,10 +56,9 @@ function messageStyle(style: Matching.Style) {
     return names[style] || 'No way';
 }
 
-function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData }) {
     const [urls, setUrls] = useAtom(urlsAtom);
     const setDirty = useUpdateAtom(urls.dirtyAtom);
-    const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
     React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
@@ -131,6 +130,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
+    const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
     const [sameMurl, setSameMurl] = React.useState(urls.o === urls.m);
     //React.useEffect(() => setSameMurl(urls.o === urls.m), [urls]);
     const dirty = useAtomValue(urls.dirtyAtom);
@@ -149,7 +149,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
         {!sameMurl &&
             <a.div style={stylesHow}>
-                <MatchHow urlsAtom={urlsAtom} />
+                <MatchHow urlsAtom={urlsAtom} initialMD={initialMD} />
             </a.div>
         }
     </>);
