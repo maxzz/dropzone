@@ -4,9 +4,9 @@ import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
+import { toastWarning } from '../UI/UIToasts';
 import { TabMatchWindows, TabFields } from './Tabs';
 import { TabMatchWeb } from './TabMatching';
-import toast from 'react-hot-toast';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -89,7 +89,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                         onClick={() => {
                             setShow(false);
-                            //toast('Not yet', {style: {backgroundColor: 'tomato'}});
+                            toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, {style: {backgroundColor: 'tomato'}});
                         }}
                     >Cancel</button>
                 </div>
