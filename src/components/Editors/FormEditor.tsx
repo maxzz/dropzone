@@ -1,11 +1,12 @@
-import { useAtom } from 'jotai';
 import React from 'react';
-import toast from 'react-hot-toast';
+import { useAtom } from 'jotai';
 import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
-import { TabMatchWeb, TabMatchWindows, TabFields } from './FormEditorTabs';
+import { TabMatchWindows, TabFields } from './Tabs';
+import { TabMatchWeb } from './TabMatching';
+import toast from 'react-hot-toast';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
