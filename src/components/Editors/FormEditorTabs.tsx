@@ -47,6 +47,7 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
 
 function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
+    const [dirty, setDirty] = useAtom(urls.dirtyAtom);
     const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
     React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
@@ -68,6 +69,9 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                             onChange={(event) => {
                                 let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
                                 setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
+                                if (!dirty && urls.m !== urls.initial.m) {
+                                    setDirty(true);
+                                }
                             }}
                         />
                         <div>Case sensitive</div>
@@ -179,7 +183,7 @@ type UrlsState = {
 
 type MatchWebState = UrlsState & {
     initial: UrlsState;
-    dirty: boolean;
+    dirtyAtom: PrimitiveAtom<boolean>;
 };
 
 type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
@@ -188,7 +192,7 @@ export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({...initial, initial, dirty: false}, ({ nextValue }) => {
+    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({...initial, initial, dirtyAtom: atom<boolean>(false)}, ({ nextValue }) => {
         console.log('updated', nextValue);
     }));
 
