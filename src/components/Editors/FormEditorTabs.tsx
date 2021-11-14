@@ -45,7 +45,8 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
 
 function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+    const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+    const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
     React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     return (<>
@@ -56,8 +57,8 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 setValue={(v: number) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) })}
             />
 
-            {/* Match case */}
-            <label className="mt-1 h-6 flex items-center space-x-1">
+            {/* Match case: show only for legacy manifests to allow reset this to none */}
+            {!!initialMD.opt && <label className="mt-1 h-6 flex items-center space-x-1">
                 <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                     checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
                     onChange={(event) => {
@@ -66,8 +67,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                     }}
                 />
                 <div>Case sensitive</div>
-            </label>
-            
+            </label>}
         </div>
         <input
             className={classNames("mt-2 px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
