@@ -60,11 +60,14 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                 <div>
                     {Object.values(pages).map((pageContent, idx) => (
                         <React.Fragment key={idx}>
-                            {selected === idx &&
+                            <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
+                                {pageContent}
+                            </div>
+                            {/* {selected === idx &&
                                 <div key={idx} className={'h-full bg-white text-sm'}>
                                     {pageContent}
                                 </div>
-                            }
+                            } */}
                         </React.Fragment >
                     ))}
                 </div>
