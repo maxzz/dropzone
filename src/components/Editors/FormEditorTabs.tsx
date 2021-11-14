@@ -1,12 +1,12 @@
 import React from 'react';
 import { atom, PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
-import { a, useSpring } from '@react-spring/web';
-import { EditorData, formEditorDataAtom } from '../../store/store';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
+import { a, useSpring } from '@react-spring/web';
+import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { Matching } from '../../store/manifest/mani-i';
 import UIUpDownIcon from '../UI/UIUpDownIcon';
-import { useAtomValue } from 'jotai/utils';
 
 type RadioButtonProps = {
     label: string;
@@ -47,7 +47,7 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
 
 function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const [dirty, setDirty] = useAtom(urls.dirtyAtom);
+    const setDirty = useUpdateAtom(urls.dirtyAtom);
     const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
     React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
@@ -57,7 +57,10 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             {/* How match radio buttons */}
             <RadioGroup
                 value={rawMD.style}
-                setValue={(v: number) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) })}
+                setValue={(v: number) => {
+                    setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) });
+                    setDirty(urlsDirty(urls));
+                }}
             />
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
@@ -69,9 +72,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                             onChange={(event) => {
                                 let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
                                 setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
-                                if (!dirty && urls.m !== urls.initial.m) {
-                                    setDirty(true);
-                                }
+                                setDirty(urlsDirty(urls));
                             }}
                         />
                         <div>Case sensitive</div>
@@ -82,6 +83,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                             onChange={(event) => {
                                 let opt = event.target.checked ? rawMD.opt | Matching.Options.matchtext : rawMD.opt & ~Matching.Options.matchtext;
                                 setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
+                                setDirty(urlsDirty(urls));
                             }}
                         />
                         <div>Match text</div>
@@ -107,6 +109,8 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [sameMurl, setSameMurl] = React.useState(true);
+    const urls = useAtomValue(urlsAtom);
+    const dirty = useAtomValue(urls.dirtyAtom);
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
@@ -115,9 +119,9 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
             </div>
 
-            <label className="h-6 flex items-center text-xs">
+            {!dirty && <label className="h-6 flex items-center text-xs">
                 <div className="ml-5">same as original url</div>
-            </label>
+            </label>}
         </div>
 
         {!sameMurl &&
@@ -186,13 +190,17 @@ type MatchWebState = UrlsState & {
     dirtyAtom: PrimitiveAtom<boolean>;
 };
 
+function urlsDirty(urls: MatchWebState): boolean {
+    return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
+}
+
 type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
 
 export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({...initial, initial, dirtyAtom: atom<boolean>(false)}, ({ nextValue }) => {
+    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
         console.log('updated', nextValue);
     }));
 
