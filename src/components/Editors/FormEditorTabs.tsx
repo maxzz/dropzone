@@ -110,7 +110,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
             </div>
 
-            <label className="h-6 flex items-center">
+            <label className="h-6 flex items-center text-xs">
                 <div className="ml-5">same as original url</div>
             </label>
         </div>
@@ -170,24 +170,24 @@ function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     );
 }
 
-type MatchWebState = {
+type UrlsState = {
     o: string;
     m: string;
     q: string;
+};
+
+type MatchWebState = UrlsState & {
+    initial: UrlsState;
 };
 
 type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
 
 export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
-    const detection = fileUs.meta?.[editorData.formIdx]?.mani?.detection;
-
-    const [urlsAtom, setUrlsAtom] = React.useState(atomWithCallback<MatchWebState>({
-        o: detection?.web_ourl || '',
-        m: detection?.web_murl || '',
-        q: detection?.web_qurl || '',
-    }, ({ nextValue }) => {
-        //console.log('updated', nextValue);
+    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
+    const initial = { o, m, q, };
+    const [urlsAtom, setUrlsAtom] = React.useState(atomWithCallback<MatchWebState>({...initial, initial}, ({ nextValue }) => {
+        console.log('updated', nextValue);
     }));
 
     return (
