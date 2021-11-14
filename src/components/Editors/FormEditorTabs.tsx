@@ -58,8 +58,9 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             <RadioGroup
                 value={rawMD.style}
                 setValue={(v: number) => {
-                    setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) });
-                    setDirty(urlsDirty(urls));
+                    const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) };
+                    setUrls(newState);
+                    setDirty(urlsDirty(newState));
                 }}
             />
 
@@ -71,8 +72,9 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                             checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
                             onChange={(event) => {
                                 let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
-                                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
-                                setDirty(urlsDirty(urls));
+                                const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
+                                setUrls(newState);
+                                setDirty(urlsDirty(newState));
                             }}
                         />
                         <div>Case sensitive</div>
@@ -82,8 +84,9 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                             checked={(rawMD.opt & Matching.Options.matchtext) !== 0}
                             onChange={(event) => {
                                 let opt = event.target.checked ? rawMD.opt | Matching.Options.matchtext : rawMD.opt & ~Matching.Options.matchtext;
-                                setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) });
-                                setDirty(urlsDirty(urls));
+                                const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
+                                setUrls(newState);
+                                setDirty(urlsDirty(newState));
                             }}
                         />
                         <div>Match text</div>
@@ -191,7 +194,10 @@ type MatchWebState = UrlsState & {
 };
 
 function urlsDirty(urls: MatchWebState): boolean {
-    return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
+    const a = urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
+    console.log({ a });
+
+    return a;
 }
 
 type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
