@@ -132,7 +132,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
     const [sameMurl, setSameMurl] = React.useState(urls.o === urls.m);
-    React.useEffect(() => setSameMurl(urls.o === urls.m), [urls]);
+    //React.useEffect(() => setSameMurl(urls.o === urls.m), [urls]);
     const dirty = useAtomValue(urls.dirtyAtom);
     const stylesHow = useSpring({ height: !sameMurl ? 'auto' : 0, opacity: !sameMurl ? 1 : 0, config: { duration: 200 } });
     return (<>
@@ -142,7 +142,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
             </div>
 
-            {sameMurl && <label className="flex items-center text-xs">
+            {urls.o === urls.m && <label className="flex items-center text-xs">
                 <div className="ml-5">same as original url</div>
             </label>}
         </div>
