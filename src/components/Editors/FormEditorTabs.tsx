@@ -137,11 +137,9 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const firstFocusRef = React.useRef<HTMLInputElement>(null);
-    // React.useEffect(() => { firstFocusRef.current?.focus(); }, []);
     return (<>
         <div className="mb-1 font-bold text-gray-600">Original url</div>
-        <input ref={firstFocusRef}
+        <input
             className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
             spellCheck={false}
             value={urls.o} readOnly
