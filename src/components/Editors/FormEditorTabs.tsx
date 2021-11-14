@@ -50,7 +50,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     React.useEffect(() => {
         const newRaw = Matching.getMatchRawData(urls.m);
 
-        //console.log('newRaw', newRaw);
+        console.log('newRaw', newRaw);
 
         setRaw(newRaw);
     }, [urls]);
@@ -74,6 +74,8 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                     checked={(raw.opt & Matching.Options.caseinsensitive) !== 0}
                     onChange={(event) => {
                         let opt = event.target.checked ? raw.opt | Matching.Options.caseinsensitive : raw.opt & ~Matching.Options.caseinsensitive;
+                        console.log('opt', opt);
+                        
                         setUrls({ ...urls, m: Matching.makeRawMatchData({ ...raw, opt }, urls.o) });
                     }}
                 />

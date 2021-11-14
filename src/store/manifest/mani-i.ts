@@ -100,7 +100,7 @@ export namespace Matching {
         //ourl?: string;          // used only when we make packed url from style, opt, and url
     };
 
-    const reOtsMatching = /^\[m0\]:([1-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
+    const reOtsMatching = /^\[m0\]:([0-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
     export function getMatchRawData(murl: string): RawMatchData {
         let rv = { style: 0, opt: 0, url: murl || '', }; // don't need call restoreCpp(murl) here.
@@ -114,8 +114,8 @@ export namespace Matching {
     }
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData, ourl: string): string {
-        url = (url || '').trim();
-        return style === Style.undef && !opt ? ourl : url ? `[m0]:${style}:${opt}:${Transform.cppEscape(url)}` : url;
+        url = (style !== Style.undef ? url || '' : ourl).trim();
+        return style !== Style.undef || opt !== Options.undef ? `[m0]:${style}:${opt}:${Transform.cppEscape(url)}` : url;
     }
 
     function styleName(style: number): string {
@@ -130,7 +130,7 @@ export namespace Matching {
 
     export function getMatchInfo(murl: string): { prefix: string; join: string; url: string; } | undefined {
         const raw = getMatchRawData(murl);
-        if (raw.style && raw.opt) {
+        if (raw.style || raw.opt) {
             const { style, opt, url } = raw;
 
             let resOpt = [];
