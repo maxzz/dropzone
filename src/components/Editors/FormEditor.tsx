@@ -31,41 +31,35 @@ function EditorTabs({ editorData }: { editorData: EditorData; }) {
         'Win32': <TabMatchWindows editorData={editorData} />,
         'Fields': <TabFields editorData={editorData} />
     };
-    return (
-        <>
-            <div className="px-4 pb-2 bg-blue-900/20 ">
-
-                <div className="flex justify-items-start space-x-1">
-                    {Object.keys(pages).map((pageTitle, idx) => (
-                        <button
-                            className={classNames(
-                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
-                                selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                            )}
-                            key={pageTitle}
-                            onClick={() => {
-                                setSelected(idx);
-                            }}
-                        >
-                            {pageTitle}
-                        </button>
-                    ))}
-                </div>
-            </div>
-            {/* Pages */}
-            <div>
-                {Object.values(pages).map((pageContent, idx) => (
-                    <React.Fragment key={idx}>
-                        <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
-                            {pageContent}
-                        </div>
-                    </React.Fragment >
+    return (<>
+        {/* Tabs */}
+        <div className="px-4 pb-2 bg-blue-900/20 ">
+            <div className="flex justify-items-start space-x-1">
+                {Object.keys(pages).map((pageTitle, idx) => (
+                    <button
+                        className={classNames(
+                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
+                            selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                        )}
+                        key={pageTitle}
+                        onClick={() => setSelected(idx)}
+                    >
+                        {pageTitle}
+                    </button>
                 ))}
             </div>
-
-        </>
-
-    );
+        </div>
+        {/* Pages */}
+        <div>
+            {Object.values(pages).map((pageContent, idx) => (
+                <React.Fragment key={idx}>
+                    <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
+                        {pageContent}
+                    </div>
+                </React.Fragment >
+            ))}
+        </div>
+    </>);
 }
 
 function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
@@ -74,7 +68,6 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
 
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
-                {/* Tabs */}
                 <EditorCaption editorData={editorData} />
                 <EditorTabs editorData={editorData} />
             </div>
@@ -91,17 +84,13 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                         onClick={() => {
                             setShow(false);
                         }}
-                    >
-                        OK
-                    </button>
+                    >OK</button>
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                         onClick={() => {
                             setShow(false);
                             //toast('Not yet', {style: {backgroundColor: 'tomato'}});
                         }}
-                    >
-                        Cancel
-                    </button>
+                    >Cancel</button>
                 </div>
             </div>
 
