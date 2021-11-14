@@ -37,12 +37,23 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
             <RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />
-            <RadioButton groupName={"how"} value={1} checked={value === 1} label="Match domain from original url" />
+            <RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" />
             <RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />
             <RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />
             <RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" title="Exclude this login from domain match" />
         </div>
     );
+}
+
+function messageStyle(style: Matching.Style) {
+    const names = [
+        "Original url",
+        "Match only domain of original url",
+        "Wildcard string",
+        "Regular expresssion",
+        <>Match original url <span className="text-xs">(url params will be ignored)</span></>, // without params
+    ];
+    return names[style] || 'No way';
 }
 
 function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
@@ -52,6 +63,7 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
     React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
+    const disabled = rawMD.style === Matching.Style.undef;
     return (<>
         <div className="flex space-x-4">
             {/* How match radio buttons */}
@@ -94,10 +106,17 @@ function MatchHow({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 </div>
             }
         </div>
-        <div className="mt-1 mb-1">TODO: Name of url now</div>
+        <div className={`mt-1 mb-1 ${disabled ? 'opacity-50' : ''}`}>
+            {messageStyle(rawMD.style)}
+        </div>
         <input
-            className={classNames("px-2 py-1.5 w-full border rounded shadow-inner", errorHint ? 'border-red-400' : 'border-gray-400',)}
+            className={classNames(
+                "px-2 py-1.5 w-full border rounded shadow-inner",
+                errorHint ? 'border-red-400' : 'border-gray-400',
+                disabled ? 'opacity-50' : '',
+            )}
             {...(errorHint && { title: errorHint })}
+            disabled={disabled}
             spellCheck={false}
             value={rawMD.url}
             title={urls.m}
