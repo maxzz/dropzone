@@ -110,13 +110,8 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <UIUpDownIcon double={true} open={sameMurl} className="w-5 h-5 border rounded" />
             </div>
 
-            <label className="h-6 flex items-center space-x-1">
-                <input
-                    type="checkbox"
-                    className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                    checked={sameMurl} onChange={(event) => setSameMurl(event.target.checked)}
-                />
-                <div>same as original url</div>
+            <label className="h-6 flex items-center">
+                <div className="ml-5">same as original url</div>
             </label>
         </div>
 
