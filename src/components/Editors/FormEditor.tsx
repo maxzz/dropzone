@@ -9,6 +9,7 @@ import { TabMatchWindows, TabFields } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
+import { UITooltip } from '../UI/UITooltip';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -20,7 +21,10 @@ function EditorCaption({ editorData }: { editorData: EditorData; }) {
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     return (<>
-        <IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} title={`Filename: ${fileUs.fname}`} />
+        <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>
+            Filename: ${fileUs.fname}
+        </UITooltip>
+
     </>);
 }
 
@@ -32,7 +36,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
-function EditorTabs({ pages, stateIndicator }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element }) {
+function EditorTabs({ pages, stateIndicator }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (<>
         {/* Tabs */}
@@ -107,12 +111,12 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                         onClick={() => {
                             setShow(false);
+                            toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >OK</button>
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                         onClick={() => {
                             setShow(false);
-                            toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >Cancel</button>
                 </div>
