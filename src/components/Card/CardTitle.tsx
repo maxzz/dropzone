@@ -8,7 +8,7 @@ import { isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
 import CardMenu from './CardMenu';
 
-function CardIcon({ isWeb, isChrome, isFCat, isCustomization }: { isWeb: boolean; isChrome: boolean; isFCat: boolean; isCustomization: boolean; }) {
+function CardIcon({stats: { isWeb, isChrome, isFCat, isCustomization }}: {stats: AppStats}) {
     if (isFCat) {
         return <div className="w-6 h-6 flex items-center justify-center"><IconCatalog className="w-5 h-5 text-gray-200" title="Field catalog" /></div>;
     }
@@ -18,6 +18,8 @@ function CardIcon({ isWeb, isChrome, isFCat, isCustomization }: { isWeb: boolean
 }
 
 function CardCaption({stats: { domain, url, isFCat, isCustomization }}: {stats: AppStats}) {
+    console.log({domain, url, isFCat, isCustomization});
+    
     return (
         <div className="ml-1 uppercase">
             {url
@@ -124,7 +126,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fileUs.idx + 1}
                 </div>
 
-                <CardCaption isFCat={stats.isFCat} isCustomization={stats.isCustomization} domain={stats.domain} url={stats.url} />
+                <CardCaption stats={stats} />
             </div>
 
             {/* Login caption */}
