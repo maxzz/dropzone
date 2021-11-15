@@ -1,16 +1,16 @@
 import React from 'react';
 import { atom, useAtom } from 'jotai';
+import { useAtomValue } from 'jotai/utils';
+import atomWithCallback from '../../hooks/atomsX';
 import { EditorData } from '../../store/store';
+import { appStats } from '../../store/store-functions';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { toastWarning } from '../UI/UIToasts';
+import { UITooltip } from '../UI/UITooltip';
 import { TabMatchWindows, TabFields } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
-import { useAtomValue } from 'jotai/utils';
-import atomWithCallback from '../../hooks/atomsX';
-import { UITooltip } from '../UI/UITooltip';
-import { appStats } from '../../store/store-functions';
 import { parsedFname } from '../Card/CardTitle';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
@@ -24,7 +24,7 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     const stats = appStats(fileUs);
     const formName = `${editorData.formIdx === 0 ? 'Login' : 'Password change'} form`;
-    const fname = parsedFname(fileUs.fname);
+    const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (<>
         <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
@@ -95,7 +95,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     const initial = { o, m, q, };
     const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) },
         ({ nextValue }) => {
-            console.log('updated', nextValue);
+            console.log('urls updated', nextValue);
         }));
 
     // Pages
@@ -108,7 +108,6 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
 
     return (
         <div className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
-
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
@@ -117,10 +116,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
 
             {/* Editor buttons */}
             <div className="px-4 py-4 flex justify-between bg-white">
-
-                <div className="flex items-center space-x-0.5">
-                    <EditorInfo editorData={editorData} />
-                </div>
+                <EditorInfo editorData={editorData} />
 
                 <div className="flex space-x-2">
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
