@@ -91,4 +91,29 @@ export function useFileUsByFilter(fileUs: FileUs, regex: RegExp): boolean {
     return useItNow;
 }
 
+// App statistics
+
+export type AppStats = {
+    domain: string | undefined;
+    isWeb: boolean;
+    isChrome: boolean;
+    isFCat: boolean;
+    isCustomization: boolean;
+    url?: string;
+};
+
+export function appStats(fileUs: FileUs): AppStats {
+    const loginForm = fileUs.mani?.forms[0];
+    const domain = fileUs.meta?.[0]?.disp.domain;
+    const isWeb = !!domain;
+    return {
+        domain,
+        isWeb,
+        isChrome: isWeb && !fileUs.meta?.[0]?.disp.isIe,
+        isFCat: !!fileUs.fcat,
+        isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
+        url: loginForm?.detection.web_ourl,
+    };
+}
+
 // More to come...

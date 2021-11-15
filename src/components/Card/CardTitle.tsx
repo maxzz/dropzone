@@ -4,7 +4,7 @@ import { FileUs, FileUsAtom, rightPanelAtom, setCurrentCardAtom } from '../../st
 import CardTitleMenu from './CardTitleMenu';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
-import { isAnyWhy } from '../../store/store-functions';
+import { appStats, AppStats, isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
 import CardMenu from './CardMenu';
 
@@ -18,8 +18,6 @@ function CardIcon({stats: { isWeb, isChrome, isFCat, isCustomization }}: {stats:
 }
 
 function CardCaption({stats: { domain, url, isFCat, isCustomization }}: {stats: AppStats}) {
-    console.log({domain, url, isFCat, isCustomization});
-    
     return (
         <div className="ml-1 uppercase">
             {url
@@ -66,29 +64,6 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
 
 function stripFirstFolder(s: string): string {
     return (s || '').split(/[\/\\]/).slice(1).join('/');
-}
-
-export type AppStats = {
-    domain: string | undefined;
-    isWeb: boolean;
-    isChrome: boolean;
-    isFCat: boolean;
-    isCustomization: boolean;
-    url?: string;
-};
-
-export function appStats(fileUs: FileUs): AppStats {
-    const loginForm = fileUs.mani?.forms[0];
-    const domain = fileUs.meta?.[0]?.disp.domain;
-    const isWeb = !!domain;
-    return {
-        domain,
-        isWeb,
-        isChrome: isWeb && !fileUs.meta?.[0]?.disp.isIe,
-        isFCat: !!fileUs.fcat,
-        isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
-        url: loginForm?.detection.web_ourl,
-    };
 }
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
