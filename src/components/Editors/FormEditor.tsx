@@ -11,6 +11,7 @@ import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
 import { UITooltip } from '../UI/UITooltip';
 import { appStats } from '../../store/store-functions';
+import { parsedFname } from '../Card/CardTitle';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -23,11 +24,12 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     const stats = appStats(fileUs);
     const formName = `${editorData.formIdx === 0 ? 'Login' : 'Password change'} form`;
+    const fname = parsedFname(fileUs.fname);
     return (<>
         <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
                 <div className="font-bold">Filename</div>
-                <div className="">{fileUs.fname}</div>
+                <div className="">{fname}</div>
 
                 {stats.domain && <>
                     <div className="font-bold">Domain</div>
