@@ -30,9 +30,9 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (<>
         <UITooltip trigger={<IconInfo
-            className="w-7 h-7 text-gray-300" 
-            strokeWidth={1.2} 
-            fill="#e5e7eb" 
+            className="w-7 h-7 text-gray-300"
+            strokeWidth={1.2}
+            fill="#e5e7eb"
             stroke="#8e8e8e"
             style={{ filter: 'drop-shadow(#49f8e887 0px 0px 1rem)' }}
         />} arrow={true}>
@@ -56,7 +56,14 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls] = useAtom(urlsAtom);
     const [dirty] = useAtom(urls.dirtyAtom);
     return (<>
-        {dirty && <IconAttention className="w-6 h-6 text-red-100" style={{ filter: 'drop-shadow(#ff0000af 0px 0px 0.05rem)' }} title="Modified" />}
+        {dirty &&
+            <IconAttention
+                className="w-6 h-6 text-[#f6673b]"
+                fill="#ffad42" // #ff5400 stroke="#f6673b" strokeWidth={0.8}
+                style={{ filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' }}
+                title="Modified"
+            />
+        }
     </>);
 }
 
