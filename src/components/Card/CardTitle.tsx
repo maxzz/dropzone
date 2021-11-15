@@ -62,10 +62,10 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
-export function parsedFname(fname: string, styleSm: string = "opacity-75", styleLg: string = "px-1 text-sm text-gray-300 opacity-100") {
+export function parsedFname(fname: string, styleMisc: string = "text-[0.65rem]", styleSm: string = "opacity-75", styleLg: string = "px-1 text-sm text-gray-300 opacity-100") {
     const m = (fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
     const rv = !m ? fname :
-        <div className="text-[0.65rem]">
+        <div className={styleMisc}>
             <span className={styleSm}>{'{'}</span>
             <span className={styleLg}>{m[1]}</span>
 
