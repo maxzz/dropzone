@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { FileUs, FileUsAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
-import CardTitleMenu from './CardTitleMenu';
+import { appStats, AppStats, formCaption, isAnyWhy } from '../../store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
-import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
-import { appStats, AppStats, isAnyWhy } from '../../store/store-functions';
 import { UITooltip } from '../UI/UITooltip';
+import CardTitleMenu from './CardTitleMenu';
 import CardMenu from './CardMenu';
+import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 
 function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: AppStats; }) {
     if (isFCat) {
@@ -17,13 +17,10 @@ function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { sta
     return <div className="w-6 h-6" title={`${title} `}>{icon}</div>;
 }
 
-function CardCaption({ stats: { domain, url, isFCat, isCustomization } }: { stats: AppStats; }) {
+function CardCaption({ stats }: { stats: AppStats; }) {
     return (
         <div className="ml-1 uppercase">
-            {url
-                ? <>{domain}</>
-                : <>{isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application'}</>
-            }
+            {formCaption(stats)}
         </div>
     );
 }
@@ -168,7 +165,6 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 {/* <PopoverMenu /> */}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
                 <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
-
                 {/* <CardMenu /> */}
             </div>}
         </div>

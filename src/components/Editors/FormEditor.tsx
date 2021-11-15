@@ -3,7 +3,7 @@ import { atom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
 import { EditorData } from '../../store/store';
-import { appStats } from '../../store/store-functions';
+import { appStats, formIdxName } from '../../store/store-functions';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
@@ -15,15 +15,18 @@ import { parsedFname } from '../Card/CardTitle';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
+    //<div className="px-4 py-2 pb-1 text-[.65rem] text-gray-700/80 bg-blue-900/20 rounded-t cursor-default" title="Manifest filename">{fileUs.fname}</div>
     return (
-        <div className="px-4 py-2 pb-1 text-[.65rem] text-gray-700/80 bg-blue-900/20 rounded-t cursor-default" title="Manifest filename">{fileUs.fname}</div>
+        <div className="px-4 py-2 pb-2 text-[.65rem] text-gray-700/80 bg-blue-900/20 rounded-t cursor-default">
+            {/* {`${formIdxName(editorData.formIdx)} form from ${fileUs.fname}`} */}
+        </div>
     );
 }
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     const stats = appStats(fileUs);
-    const formName = `${editorData.formIdx === 0 ? 'Login' : 'Password change'} form`;
+    const formName = `${formIdxName(editorData.formIdx)} form`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (<>
         <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>

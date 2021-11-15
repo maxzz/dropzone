@@ -91,6 +91,17 @@ export function useFileUsByFilter(fileUs: FileUs, regex: RegExp): boolean {
     return useItNow;
 }
 
+// Miscellaneous
+
+export function formIdxName(idx: number) {
+    return idx === 0 ? 'Login' : 'Password change';
+}
+
+export function formCaption({ domain, url, isFCat, isCustomization }: AppStats) {
+    return url ? domain : isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application';
+}
+
+
 // App statistics
 
 export type AppStats = {
