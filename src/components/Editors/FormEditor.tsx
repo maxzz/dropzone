@@ -26,21 +26,27 @@ function EditorCaption({ editorData }: { editorData: EditorData; }) {
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     const stats = appStats(fileUs);
-    const formName = `${formIdxName(editorData.formIdx)} form`;
+    const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (<>
-        <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>
+        <UITooltip trigger={<IconInfo
+            className="w-7 h-7 text-gray-300" 
+            strokeWidth={1.2} 
+            fill="#e5e7eb" 
+            stroke="#8e8e8e"
+            style={{ filter: 'drop-shadow(#49f8e887 0px 0px 1rem)' }}
+        />} arrow={true}>
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
-                <div className="font-bold">Filename</div>
-                <div className="">{fname}</div>
+                <div className="font-bold">Form</div>
+                <div className="">{formName}</div>
 
                 {stats.domain && <>
                     <div className="font-bold">Domain</div>
                     <div className="">{stats.domain}</div>
                 </>}
 
-                <div className="font-bold">Form</div>
-                <div className="">{formName}</div>
+                <div className="font-bold">Filename</div>
+                <div className="">{fname}</div>
             </div>
         </UITooltip>
     </>);
@@ -118,14 +124,14 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             </div>
 
             {/* Editor buttons */}
-            <div className="px-4 py-4 flex justify-between bg-white">
+            <div className="px-4 py-4 flex items-center justify-between bg-white">
                 <EditorInfo editorData={editorData} />
 
                 <div className="flex space-x-2">
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                         onClick={() => {
                             setShow(false);
-                            toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
+                            // toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >OK</button>
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
