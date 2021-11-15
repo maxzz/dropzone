@@ -25,7 +25,7 @@ export const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>
                 {text}
             </div>
 
-            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIUpDownIcon open={open} className="list-owner w-4 h-4 pt-0.5" />}
+            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIUpDownIcon isUp={open} className="list-owner w-4 h-4 pt-0.5" />}
         </button>
     );
 });
