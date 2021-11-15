@@ -12,6 +12,7 @@ import { UITooltip } from '../UI/UITooltip';
 import { TabMatchWindows, TabFields } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
+import { TabOptions } from './TabOptions';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -119,7 +120,8 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
         'Web': <TabMatchWeb urlsAtom={urlsAtom} />,
         'Win32': <TabMatchWindows editorData={editorData} />,
-        'Fields': <TabFields editorData={editorData} />
+        'Options': <TabOptions editorData={editorData} />,
+        'Fields': <TabFields editorData={editorData} />,
     };
 
     return (
