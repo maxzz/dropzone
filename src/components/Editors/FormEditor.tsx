@@ -17,10 +17,10 @@ function EditorCaption({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
+function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     return (<>
-        <IconInfo className="w-7 h-7 text-gray-500" strokeWidth={1.7} title={`Filename: ${fileUs.fname}`} />
+        <IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} title={`Filename: ${fileUs.fname}`} />
     </>);
 }
 
@@ -28,7 +28,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls] = useAtom(urlsAtom);
     const [dirty] = useAtom(urls.dirtyAtom);
     return (<>
-        {dirty && <IconAttention className="w-6 h-6 text-yellow-500" title="Modified" />}
+        {dirty && <IconAttention className="w-6 h-6 text-red-100" style={{ filter: 'drop-shadow(#ff0000af 0px 0px 0.05rem)' }} title="Modified" />}
     </>);
 }
 
@@ -100,7 +100,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             <div className="px-4 py-4 flex justify-between bg-white">
 
                 <div className="flex items-center space-x-0.5">
-                    <ManifestStateButtons editorData={editorData} />
+                    <EditorInfo editorData={editorData} />
                 </div>
 
                 <div className="flex space-x-2">
