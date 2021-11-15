@@ -38,6 +38,8 @@ function EditorTabs({ editorData }: { editorData: EditorData; }) {
     const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
         console.log('updated', nextValue);
     }));
+    const [urls] = useAtom(urlsAtom)
+    const [dirty] = useAtom(urls.dirtyAtom);
 
     // Pages
 
