@@ -13,6 +13,8 @@ import { TabMatchWindows, TabFields } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
 import { TabOptions } from './TabOptions';
+import { useDrag } from '@use-gesture/react';
+import { a, useSpring } from '@react-spring/web';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -105,6 +107,11 @@ function EditorTabs({ pages, stateIndicator }: { pages: Record<string, JSX.Eleme
 
 function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
 
+    const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
+    const bind = useDrag(({ down, movement: [mx, my] }) => {
+        api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down });
+    });
+
     // Page Web Matching
 
     const fileUs = useAtomValue(editorData.fileUsAtom);
@@ -125,7 +132,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     };
 
     return (
-        <div className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
+        <a.div {...bind()} style={{ x, y, touchAction: 'none' }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
@@ -151,7 +158,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                 </div>
             </div>
 
-        </div>
+        </a.div>
     );
 }
 
