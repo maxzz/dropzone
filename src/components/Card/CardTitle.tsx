@@ -62,7 +62,14 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
-export function parsedFname(fname: string, styleMisc: string = "text-[0.65rem]", styleSm: string = "opacity-75", styleLg: string = "px-1 text-sm text-gray-300 opacity-100") {
+export type ParsedFname = {
+    fname: string;
+    styleMisc?: string;
+    styleSm?: string;
+    styleLg?: string;
+};
+
+export function parsedFname({ fname, styleMisc = "text-[0.65rem]", styleSm = "opacity-75", styleLg = "px-1 text-sm text-gray-300 opacity-100" }: ParsedFname) {
     const m = (fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
     const rv = !m ? fname :
         <div className={styleMisc}>
@@ -81,7 +88,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = appStats(fileUs);
     const fcatLen = fileUs.fcat?.names.length;
-    const fname = React.useMemo(() => parsedFname(fileUs.fname), [fileUs.fname]);
+    const fname = React.useMemo(() => parsedFname({ fname: fileUs.fname }), [fileUs.fname]);
     return (
         <>
             {/* Icon and caption */}
