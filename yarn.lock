@@ -761,6 +761,18 @@
   resolved "https://registry.yarnpkg.com/@types/warning/-/warning-3.0.0.tgz#0d2501268ad8f9962b740d387c4654f5f8e23e52"
   integrity sha1-DSUBJorY+ZYrdA04fEZU9fjiPlI=
 
+"@use-gesture/core@10.1.5":
+  version "10.1.5"
+  resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.1.5.tgz#4b956bc8aa6354c20c668930c5cacb16fe4415e4"
+  integrity sha512-Kr3POvOFEfyHyC3MStavQdXdXg8Ys3elJBpxty9tFhNQwOC0+hK/ZHp9vABkre9PCBB/4rtk5Y2t0RG4YUhCpw==
+
+"@use-gesture/react@^10.1.5":
+  version "10.1.5"
+  resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.1.5.tgz#078d2c4f399e6451ee9ff169d447b543397d0e67"
+  integrity sha512-Lg3LcQa93MmBt+r2HzmtM+OCWsZ2oOE7jpwfHjXZGlhUWHnv5ZhLrtvNr8rAV2GlKRIjbF8q4BQmP7ahpIlZSQ==
+  dependencies:
+    "@use-gesture/core" "10.1.5"
+
 "@vitejs/plugin-react-refresh@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react-refresh/-/plugin-react-refresh-1.3.6.tgz#19818392db01e81746cfeb04e096ab3010e79fe3"
