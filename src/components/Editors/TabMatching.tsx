@@ -130,9 +130,9 @@ function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initia
 
 function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
-    const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
     const [isOpen, setIsOpen] = React.useState(urls.o !== urls.m);
-    const stylesHow = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
+    const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+    const stylesDropdown = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
             <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
@@ -148,7 +148,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         </div>
 
         {isOpen &&
-            <a.div style={stylesHow}>
+            <a.div style={stylesDropdown}>
                 <MatchHow urlsAtom={urlsAtom} initialMD={initialMD} />
             </a.div>
         }
@@ -175,28 +175,15 @@ function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const isOrul = urls.o === urls.m;
     const setDirty = useUpdateAtom(urls.dirtyAtom);
-
     const [isOpen, setIsOpen] = React.useState(false);
-    const stylesQL = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
-
+    const stylesDropdown = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
             <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div className="">Quicklink url</div>
                 <UIUpDownIcon double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
             </div>
-
-            {/* <label className="h-6 flex items-center space-x-1">
-                <input
-                    type="checkbox"
-                    className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                    checked={!isOpen}
-                    onChange={(event) => setIsOpen(!event.target.checked)}
-                />
-                <div>same as original url</div>
-            </label> */}
 
             {urls.o === urls.q &&
                 <label className="flex items-center text-xs">
@@ -206,7 +193,7 @@ function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         </div>
 
         {isOpen &&
-            <a.div style={stylesQL}>
+            <a.div style={stylesDropdown}>
                 <input
                     className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
                     spellCheck={false}
