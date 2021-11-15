@@ -62,11 +62,9 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
-export function parsedFname(filename: string) {
-    const m = (filename || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
-    const fname = !m
-        ? filename
-        :
+export function parsedFname(fname: string) {
+    const m = (fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
+    const rv = !m ? fname :
         <div className="text-[0.65rem]">
             <span className="opacity-75">{'{'}</span>
             <span className="px-1 text-sm text-gray-300 opacity-100">{m[1]}</span>
@@ -76,7 +74,7 @@ export function parsedFname(filename: string) {
             <span className="px-1 text-sm text-gray-300 opacity-100">{m[3]}</span>
             <span className="opacity-75">{'}.dpm'}</span>
         </div>;
-    return fname;
+    return rv;
 }
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
