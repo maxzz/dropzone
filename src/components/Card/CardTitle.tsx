@@ -10,11 +10,17 @@ import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 
 function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: AppStats; }) {
     if (isFCat) {
-        return <div className="w-6 h-6 flex items-center justify-center"><IconCatalog className="w-5 h-5 text-gray-200" title="Field catalog" /></div>;
+        return <div className="w-6 h-6 flex items-center justify-center">
+            <IconCatalog className="w-5 h-5 text-gray-200" title="Field catalog" />
+        </div>;
     }
     const icon = isChrome ? <IconAppWebChrome /> : isWeb ? <IconAppWebIE /> : <IconAppWindows />;
     const title = isChrome ? 'Webiste trained with Chrome' : isWeb ? 'Webiste trained with IE' : 'Windows application';
-    return <div className="w-6 h-6" title={`${title} `}>{icon}</div>;
+    return (
+        <div className="w-6 h-6" title={`${title} `}>
+            {icon}
+        </div>
+    );
 }
 
 function CardCaption({ stats }: { stats: AppStats; }) {
@@ -138,7 +144,9 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         return null;
     }
     return (
-        <a href={url} target="_blank" rel="noopener" title={`Open ${domain}`} onClick={(event) => event.stopPropagation()}><IconOpenLink className="w-4 h-4 mr-2" /></a>
+        <a href={url} target="_blank" rel="noopener" title={`Open ${domain}`} onClick={(event) => event.stopPropagation()}>
+            <IconOpenLink className="w-4 h-4 mr-2" />
+        </a>
     );
 }
 
