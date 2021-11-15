@@ -17,7 +17,7 @@ function CardIcon({ isWeb, isChrome, isFCat, isCustomization }: { isWeb: boolean
     return <div className="w-6 h-6" title={`${title} `}>{icon}</div>;
 }
 
-function CardCaption({ domain, url, isFCat, isCustomization }: { domain?: string; url: string | undefined; isFCat: boolean; isCustomization: boolean; }) {
+function CardCaption({stats: { domain, url, isFCat, isCustomization }}: {stats: AppStats}) {
     return (
         <div className="ml-1 uppercase">
             {url
@@ -72,9 +72,11 @@ export type AppStats = {
     isChrome: boolean;
     isFCat: boolean;
     isCustomization: boolean;
+    url?: string;
 };
 
 export function appStats(fileUs: FileUs): AppStats {
+    const loginForm = fileUs.mani?.forms[0];
     const domain = fileUs.meta?.[0]?.disp.domain;
     const isWeb = !!domain;
     return {
@@ -83,6 +85,7 @@ export function appStats(fileUs: FileUs): AppStats {
         isChrome: isWeb && !fileUs.meta?.[0]?.disp.isIe,
         isFCat: !!fileUs.fcat,
         isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
+        url: loginForm?.detection.web_ourl,
     };
 }
 
@@ -92,7 +95,6 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fcatLen = fileUs.fcat?.names.length;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
-    const url = loginForm?.detection.web_ourl;
     const isSubFolder = !!fileUs.fpath?.match(/\//);
 
     const fname = React.useMemo(() => {
@@ -112,7 +114,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         <>
             {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardIcon isWeb={stats.isWeb} isChrome={stats.isChrome} isFCat={stats.isFCat} isCustomization={stats.isCustomization} />
+                <CardIcon stats={stats} />
 
                 {/* File index in all loaded files */}
                 <div
@@ -122,7 +124,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fileUs.idx + 1}
                 </div>
 
-                <CardCaption isFCat={stats.isFCat} isCustomization={stats.isCustomization} domain={stats.domain} url={url} />
+                <CardCaption isFCat={stats.isFCat} isCustomization={stats.isCustomization} domain={stats.domain} url={stats.url} />
             </div>
 
             {/* Login caption */}
