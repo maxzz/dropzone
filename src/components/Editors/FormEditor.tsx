@@ -42,6 +42,7 @@ function EditorTabs({ editorData }: { editorData: EditorData; }) {
                             'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
                             selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                         )}
+                        style={{filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)'}}
                         key={pageTitle}
                         onClick={() => setSelected(idx)}
                     >
