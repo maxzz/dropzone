@@ -6,7 +6,7 @@ import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { toastWarning } from '../UI/UIToasts';
 import { TabMatchWindows, TabFields } from './Tabs';
-import { MatchWebState, TabMatchWeb } from './TabMatching';
+import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
 
@@ -27,7 +27,17 @@ function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function EditorTabs({pages}: {pages: Record<string, JSX.Element>}) {
+function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+    const [urls] = useAtom(urlsAtom);
+    const [dirty] = useAtom(urls.dirtyAtom);
+    return (
+        <>
+        {dirty && <IconAttention className="w-6 h-6 text-yellow-500" title="Modified" />}
+        </>
+    );
+}
+
+function EditorTabs({ pages }: { pages: Record<string, JSX.Element>; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (<>
         {/* Tabs */}
@@ -39,7 +49,7 @@ function EditorTabs({pages}: {pages: Record<string, JSX.Element>}) {
                             'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
                             selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                         )}
-                        style={{filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)'}}
+                        style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
                         key={pageTitle}
                         onClick={() => setSelectedTab(idx)}
                     >
@@ -68,11 +78,10 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
-        console.log('updated', nextValue);
-    }));
-    const [urls] = useAtom(urlsAtom)
-    const [dirty] = useAtom(urls.dirtyAtom);
+    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) },
+        ({ nextValue }) => {
+            console.log('updated', nextValue);
+        }));
 
     // Pages
 
@@ -88,6 +97,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
+                <ManifestState urlsAtom={urlsAtom} />
                 <EditorTabs pages={pages} />
             </div>
 
@@ -107,7 +117,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                     <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
                         onClick={() => {
                             setShow(false);
-                            toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, {style: {backgroundColor: 'tomato'}});
+                            toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >Cancel</button>
                 </div>
