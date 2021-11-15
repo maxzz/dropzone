@@ -36,7 +36,7 @@ function EditorTabs({ pages, stateIndicator }: { pages: Record<string, JSX.Eleme
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (<>
         {/* Tabs */}
-        <div className="px-4 pb-2 bg-blue-900/20 ">
+        <div className="px-4 pb-2 bg-blue-900/20 flex items-center justify-between">
             <div className="flex justify-items-start space-x-1">
                 {Object.keys(pages).map((pageTitle, idx) => (
                     <button
@@ -93,7 +93,6 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
-                <ManifestState urlsAtom={urlsAtom} />
                 <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} />
             </div>
 
