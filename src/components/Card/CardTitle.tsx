@@ -62,10 +62,6 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
-function stripFirstFolder(s: string): string {
-    return (s || '').split(/[\/\\]/).slice(1).join('/');
-}
-
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = appStats(fileUs);
@@ -121,7 +117,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 </div>
                 <div className="flex-none flex items-center space-x-1 mr-1">
                     <CardAttention fileUs={fileUs} />
-                    {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stripFirstFolder(fileUs.fpath)}"`} />}
+                    {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
                 </div>
             </div>
         </>
