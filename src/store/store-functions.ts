@@ -101,6 +101,7 @@ export type AppStats = {
     isCustomization: boolean;
     url?: string;
     title?: string;
+    isSubFolder?: boolean;
 };
 
 export function appStats(fileUs: FileUs): AppStats {
@@ -115,6 +116,7 @@ export function appStats(fileUs: FileUs): AppStats {
         isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
         url: loginForm?.detection.web_ourl,
         title: loginForm?.options.choosename,
+        isSubFolder: !!fileUs.fpath?.match(/\//),
     };
 }
 
