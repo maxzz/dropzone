@@ -27,27 +27,8 @@ function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function EditorTabs({ editorData }: { editorData: EditorData; }) {
+function EditorTabs({pages}: {pages: Record<string, JSX.Element>}) {
     const [selectedTab, setSelectedTab] = React.useState(0);
-
-    // Page Web Matching
-
-    const fileUs = useAtomValue(editorData.fileUsAtom);
-    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
-    const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
-        console.log('updated', nextValue);
-    }));
-    const [urls] = useAtom(urlsAtom)
-    const [dirty] = useAtom(urls.dirtyAtom);
-
-    // Pages
-
-    const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
-        'Web': <TabMatchWeb urlsAtom={urlsAtom} />,
-        'Win32': <TabMatchWindows editorData={editorData} />,
-        'Fields': <TabFields editorData={editorData} />
-    };
     return (<>
         {/* Tabs */}
         <div className="px-4 pb-2 bg-blue-900/20 ">
@@ -81,13 +62,33 @@ function EditorTabs({ editorData }: { editorData: EditorData; }) {
 }
 
 function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+
+    // Page Web Matching
+
+    const fileUs = useAtomValue(editorData.fileUsAtom);
+    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
+    const initial = { o, m, q, };
+    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
+        console.log('updated', nextValue);
+    }));
+    const [urls] = useAtom(urlsAtom)
+    const [dirty] = useAtom(urls.dirtyAtom);
+
+    // Pages
+
+    const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
+        'Web': <TabMatchWeb urlsAtom={urlsAtom} />,
+        'Win32': <TabMatchWindows editorData={editorData} />,
+        'Fields': <TabFields editorData={editorData} />
+    };
+
     return (
         <div className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
 
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
-                <EditorTabs editorData={editorData} />
+                <EditorTabs pages={pages} />
             </div>
 
             {/* Editor buttons */}
