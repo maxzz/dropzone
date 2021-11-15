@@ -66,13 +66,29 @@ function stripFirstFolder(s: string): string {
     return (s || '').split(/[\/\\]/).slice(1).join('/');
 }
 
-export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    const fileUs = useAtomValue(fileUsAtom);
+export type AppStats = {
+    domain: string | undefined;
+    isWeb: boolean;
+    isChrome: boolean;
+    isFCat: boolean;
+    isCustomization: boolean;
+};
+
+export function appStats(fileUs: FileUs): AppStats {
     const domain = fileUs.meta?.[0]?.disp.domain;
     const isWeb = !!domain;
-    const isChrome = isWeb && !fileUs.meta?.[0]?.disp.isIe;
-    const isFCat = !!fileUs.fcat;
-    const isCustomization = !fileUs.meta?.length && !!fileUs.mani?.options;
+    return {
+        domain,
+        isWeb,
+        isChrome: isWeb && !fileUs.meta?.[0]?.disp.isIe,
+        isFCat: !!fileUs.fcat,
+        isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
+    };
+}
+
+export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+    const fileUs = useAtomValue(fileUsAtom);
+    const { domain, isWeb, isChrome, isFCat, isCustomization, } = appStats(fileUs);
     const fcatLen = fileUs.fcat?.names.length;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
@@ -171,7 +187,7 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                 {/* <PopoverMenu /> */}
                 <CardOpenUrl fileUsAtom={fileUsAtom} />
                 <CardTitleMenu fileUsAtom={fileUsAtom} icon={<div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]"> <IconMenuHamburger /> </div>} />
-                
+
                 {/* <CardMenu /> */}
             </div>}
         </div>
