@@ -70,8 +70,6 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = appStats(fileUs);
     const fcatLen = fileUs.fcat?.names.length;
-    const loginForm = fileUs.mani?.forms[0];
-    const title = loginForm?.options.choosename;
     const isSubFolder = !!fileUs.fpath?.match(/\//);
 
     const fname = React.useMemo(() => {
@@ -110,7 +108,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     ? <span title="This file is for configuring the application">Excluded app</span>
                     : stats.isFCat
                         ? <span title="Number of items in the Field Catalog">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</span>
-                        : <span title="Login name">{title || 'No login title'}</span>
+                        : <span title="Login name">{stats.title || 'No login title'}</span>
                 }
             </div>
 

@@ -10,6 +10,7 @@ import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
 import { UITooltip } from '../UI/UITooltip';
+import { appStats } from '../../store/store-functions';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -20,17 +21,17 @@ function EditorCaption({ editorData }: { editorData: EditorData; }) {
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
+    const stats = appStats(fileUs);
     const formName = `${editorData.formIdx === 0 ? 'Login' : 'Password change'} form`;
-    const domain = fileUs.meta?.[0]?.disp.domain;
     return (<>
         <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
                 <div className="font-bold">Filename</div>
                 <div className="">{fileUs.fname}</div>
 
-                {domain && <>
+                {stats.domain && <>
                     <div className="font-bold">Domain</div>
-                    <div className="">{domain}</div>
+                    <div className="">{stats.domain}</div>
                 </>}
 
                 <div className="font-bold">Form</div>

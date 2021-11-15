@@ -100,6 +100,7 @@ export type AppStats = {
     isFCat: boolean;
     isCustomization: boolean;
     url?: string;
+    title?: string;
 };
 
 export function appStats(fileUs: FileUs): AppStats {
@@ -113,6 +114,7 @@ export function appStats(fileUs: FileUs): AppStats {
         isFCat: !!fileUs.fcat,
         isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
         url: loginForm?.detection.web_ourl,
+        title: loginForm?.options.choosename,
     };
 }
 
