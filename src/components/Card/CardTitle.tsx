@@ -62,28 +62,28 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
+export function parsedFname(filename: string) {
+    const m = (filename || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
+    const fname = !m
+        ? filename
+        :
+        <div className="text-[0.65rem]">
+            <span className="opacity-75">{'{'}</span>
+            <span className="px-1 text-sm text-gray-300 opacity-100">{m[1]}</span>
+
+            <span className="opacity-75">{m[2]}</span>
+
+            <span className="px-1 text-sm text-gray-300 opacity-100">{m[3]}</span>
+            <span className="opacity-75">{'}.dpm'}</span>
+        </div>;
+    return fname;
+}
+
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = appStats(fileUs);
     const fcatLen = fileUs.fcat?.names.length;
-
-    const fname = React.useMemo(() => {
-        const m = (fileUs.fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
-        const fname = !m
-            ? fileUs.fname
-            :
-            <div className="text-[0.65rem]">
-                <span className="opacity-75">{'{'}</span>
-                <span className="px-1 text-sm text-gray-300 opacity-100">{m[1]}</span>
-
-                <span className="opacity-75">{m[2]}</span>
-
-                <span className="px-1 text-sm text-gray-300 opacity-100">{m[3]}</span>
-                <span className="opacity-75">{'}.dpm'}</span>
-            </div>;
-        return fname;
-    }, [fileUs.fname]);
-
+    const fname = React.useMemo(() => parsedFname(fileUs.fname), [fileUs.fname]);
     return (
         <>
             {/* Icon and caption */}

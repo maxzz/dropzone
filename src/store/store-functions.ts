@@ -102,12 +102,18 @@ export type AppStats = {
     url?: string;
     title?: string;
     isSubFolder?: boolean;
+    subFolder?: string;
 };
+
+function stripFirstFolder(s: string): string {
+    return (s || '').split(/[\/\\]/).slice(1).join('/');
+}
 
 export function appStats(fileUs: FileUs): AppStats {
     const loginForm = fileUs.mani?.forms[0];
     const domain = fileUs.meta?.[0]?.disp.domain;
     const isWeb = !!domain;
+    const isSubFolder = !!fileUs.fpath?.match(/\//);
     return {
         domain,
         isWeb,
@@ -116,7 +122,8 @@ export function appStats(fileUs: FileUs): AppStats {
         isCustomization: !fileUs.meta?.length && !!fileUs.mani?.options,
         url: loginForm?.detection.web_ourl,
         title: loginForm?.options.choosename,
-        isSubFolder: !!fileUs.fpath?.match(/\//),
+        isSubFolder: isSubFolder,
+        subFolder: isSubFolder ? stripFirstFolder(fileUs.fpath) : '',
     };
 }
 
