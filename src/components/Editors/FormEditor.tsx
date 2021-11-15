@@ -132,7 +132,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     };
 
     return (
-        <a.div {...bind()} style={{ x, y, touchAction: 'none' }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
+        <a.div style={{ x, y, touchAction: 'none' }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
@@ -140,7 +140,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             </div>
 
             {/* Editor buttons */}
-            <div className="px-4 py-4 flex items-center justify-between bg-white">
+            <div {...bind()} className="px-4 py-4 flex items-center justify-between bg-white">
                 <EditorInfo editorData={editorData} />
 
                 <div className="flex space-x-2">
