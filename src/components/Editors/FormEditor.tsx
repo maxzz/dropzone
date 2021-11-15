@@ -19,25 +19,20 @@ function EditorCaption({ editorData }: { editorData: EditorData; }) {
 
 function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
-    return (
-        <>
-            <IconInfo className="w-7 h-7 text-gray-500" strokeWidth={1.7} title={`Filename: ${fileUs.fname}`} />
-            <IconAttention className="w-6 h-6 text-yellow-500" title="Modified" />
-        </>
-    );
+    return (<>
+        <IconInfo className="w-7 h-7 text-gray-500" strokeWidth={1.7} title={`Filename: ${fileUs.fname}`} />
+    </>);
 }
 
 function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls] = useAtom(urlsAtom);
     const [dirty] = useAtom(urls.dirtyAtom);
-    return (
-        <>
+    return (<>
         {dirty && <IconAttention className="w-6 h-6 text-yellow-500" title="Modified" />}
-        </>
-    );
+    </>);
 }
 
-function EditorTabs({ pages }: { pages: Record<string, JSX.Element>; }) {
+function EditorTabs({ pages, stateIndicator }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (<>
         {/* Tabs */}
@@ -57,6 +52,7 @@ function EditorTabs({ pages }: { pages: Record<string, JSX.Element>; }) {
                     </button>
                 ))}
             </div>
+            {stateIndicator}
         </div>
         {/* Pages */}
         <div>
@@ -98,7 +94,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
                 <ManifestState urlsAtom={urlsAtom} />
-                <EditorTabs pages={pages} />
+                <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} />
             </div>
 
             {/* Editor buttons */}
