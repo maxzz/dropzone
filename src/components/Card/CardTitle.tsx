@@ -88,7 +88,7 @@ export function appStats(fileUs: FileUs): AppStats {
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const { domain, isWeb, isChrome, isFCat, isCustomization, } = appStats(fileUs);
+    const stats = appStats(fileUs);
     const fcatLen = fileUs.fcat?.names.length;
     const loginForm = fileUs.mani?.forms[0];
     const title = loginForm?.options.choosename;
@@ -112,7 +112,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         <>
             {/* Icon and caption */}
             <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardIcon isWeb={isWeb} isChrome={isChrome} isFCat={isFCat} isCustomization={isCustomization} />
+                <CardIcon isWeb={stats.isWeb} isChrome={stats.isChrome} isFCat={stats.isFCat} isCustomization={stats.isCustomization} />
 
                 {/* File index in all loaded files */}
                 <div
@@ -122,14 +122,14 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
                     {fileUs.idx + 1}
                 </div>
 
-                <CardCaption isFCat={isFCat} isCustomization={isCustomization} domain={domain} url={url} />
+                <CardCaption isFCat={stats.isFCat} isCustomization={stats.isCustomization} domain={stats.domain} url={url} />
             </div>
 
             {/* Login caption */}
             <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
-                {isCustomization
+                {stats.isCustomization
                     ? <span title="This file is for configuring the application">Excluded app</span>
-                    : isFCat
+                    : stats.isFCat
                         ? <span title="Number of items in the Field Catalog">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</span>
                         : <span title="Login name">{title || 'No login title'}</span>
                 }
