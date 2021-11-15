@@ -20,11 +20,17 @@ function EditorCaption({ editorData }: { editorData: EditorData; }) {
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
+    const formName = `${editorData.formIdx === 0 ? 'Login' : 'Password change'} form`;
     return (<>
         <UITooltip trigger={<IconInfo className="w-7 h-7 text-gray-300" strokeWidth={1.7} />} arrow={true}>
-            Filename: ${fileUs.fname}
-        </UITooltip>
+            <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
+                <div className="font-bold">Form</div>
+                <div className="">{formName}</div>
 
+                <div className="font-bold">Filename</div>
+                <div className="">{fileUs.fname}</div>
+            </div>
+        </UITooltip>
     </>);
 }
 
