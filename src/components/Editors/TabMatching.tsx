@@ -56,7 +56,7 @@ function messageStyle(style: Matching.Style) {
     return names[style] || 'No way';
 }
 
-function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData }) {
+function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
     const setDirty = useUpdateAtom(urls.dirtyAtom);
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
@@ -140,9 +140,11 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                 <UIUpDownIcon double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
             </div>
 
-            {urls.o === urls.m && <label className="flex items-center text-xs">
-                <div className="ml-5">same as original url</div>
-            </label>}
+            {urls.o === urls.m &&
+                <label className="flex items-center text-xs">
+                    <div className="ml-5">same as original url</div>
+                </label>
+            }
         </div>
 
         {isOpen &&
@@ -176,39 +178,48 @@ function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const isOrul = urls.o === urls.m;
     const setDirty = useUpdateAtom(urls.dirtyAtom);
 
-    const [sameQurl, setSameQurl] = React.useState(true);
-    const stylesQL = useSpring({ height: !sameQurl ? 'auto' : 0, opacity: !sameQurl ? 1 : 0, config: { duration: 200 } });
+    const [isOpen, setIsOpen] = React.useState(false);
+    const stylesQL = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
 
-    return (
-        <>
-            <div className="mt-6 mb-1 flex items-center">
-                <div className="w-28 font-bold text-gray-600">Quicklink url</div>
-                <label className="h-6 flex items-center space-x-1">
-                    <input
-                        type="checkbox"
-                        className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                        checked={sameQurl} onChange={(event) => setSameQurl(event.target.checked)}
-                    />
-                    <div>same as original url</div>
-                </label>
+    return (<>
+        <div className="mt-6 mb-1 flex items-center">
+            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
+                <div className="">Quicklink url</div>
+                <UIUpDownIcon double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
             </div>
 
-            {!sameQurl &&
-                <a.div style={stylesQL} className="">
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={urls.q}
-                        onChange={(event) => {
-                            const newState = { ...urls, q: event.target.value };
-                            setUrls(newState);
-                            setDirty(urlsDirty(newState));
-                        }}
-                    />
-                </a.div>
+            {/* <label className="h-6 flex items-center space-x-1">
+                <input
+                    type="checkbox"
+                    className="rounded focus:ring-indigo-500 focus:ring-offset-0"
+                    checked={!isOpen}
+                    onChange={(event) => setIsOpen(!event.target.checked)}
+                />
+                <div>same as original url</div>
+            </label> */}
+
+            {urls.o === urls.q &&
+                <label className="flex items-center text-xs">
+                    <div className="ml-5">same as original url</div>
+                </label>
             }
-        </>
-    );
+        </div>
+
+        {isOpen &&
+            <a.div style={stylesQL}>
+                <input
+                    className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                    spellCheck={false}
+                    value={urls.q}
+                    onChange={(event) => {
+                        const newState = { ...urls, q: event.target.value };
+                        setUrls(newState);
+                        setDirty(urlsDirty(newState));
+                    }}
+                />
+            </a.div>
+        }
+    </>);
 }
 
 type UrlsState = {
