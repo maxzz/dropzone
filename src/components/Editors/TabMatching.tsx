@@ -215,7 +215,7 @@ type UrlsState = {
     q: string;
 };
 
-type MatchWebState = UrlsState & {
+export type MatchWebState = UrlsState & {
     initial: UrlsState;
     dirtyAtom: PrimitiveAtom<boolean>; // it should be not dirty but: is initial value?
 };
@@ -224,20 +224,9 @@ function urlsDirty(urls: MatchWebState): boolean {
     return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
 }
 
-function isOrul(urls: MatchWebState, url: string): boolean {
-    return urls.o === url;
-}
-
 type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
 
-export function TabMatchWeb({ editorData }: { editorData: EditorData; }) {
-    const fileUs = useAtomValue(editorData.fileUsAtom);
-    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
-    const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
-        console.log('updated', nextValue);
-    }));
-
+export function TabMatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     return (
         <div className="p-4">
             <div className="grid grid-cols-1">

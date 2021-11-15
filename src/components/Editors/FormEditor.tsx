@@ -1,12 +1,14 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { toastWarning } from '../UI/UIToasts';
 import { TabMatchWindows, TabFields } from './Tabs';
-import { TabMatchWeb } from './TabMatching';
+import { MatchWebState, TabMatchWeb } from './TabMatching';
+import { useAtomValue } from 'jotai/utils';
+import atomWithCallback from '../../hooks/atomsX';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -26,9 +28,21 @@ function ManifestStateButtons({ editorData }: { editorData: EditorData; }) {
 }
 
 function EditorTabs({ editorData }: { editorData: EditorData; }) {
-    const [selected, setSelected] = React.useState(0);
+    const [selectedTab, setSelectedTab] = React.useState(0);
+
+    // Page Web Matching
+
+    const fileUs = useAtomValue(editorData.fileUsAtom);
+    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
+    const initial = { o, m, q, };
+    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) }, ({ nextValue }) => {
+        console.log('updated', nextValue);
+    }));
+
+    // Pages
+
     const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
-        'Web': <TabMatchWeb editorData={editorData} />,
+        'Web': <TabMatchWeb urlsAtom={urlsAtom} />,
         'Win32': <TabMatchWindows editorData={editorData} />,
         'Fields': <TabFields editorData={editorData} />
     };
@@ -40,11 +54,11 @@ function EditorTabs({ editorData }: { editorData: EditorData; }) {
                     <button
                         className={classNames(
                             'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
-                            selected === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                            selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                         )}
                         style={{filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)'}}
                         key={pageTitle}
-                        onClick={() => setSelected(idx)}
+                        onClick={() => setSelectedTab(idx)}
                     >
                         {pageTitle}
                     </button>
@@ -55,7 +69,7 @@ function EditorTabs({ editorData }: { editorData: EditorData; }) {
         <div>
             {Object.values(pages).map((pageContent, idx) => (
                 <React.Fragment key={idx}>
-                    <div key={idx} className={`h-full bg-white text-sm ${selected === idx ? '' : 'hidden'}`}>
+                    <div key={idx} className={`h-full bg-white text-sm ${selectedTab === idx ? '' : 'hidden'}`}>
                         {pageContent}
                     </div>
                 </React.Fragment >
