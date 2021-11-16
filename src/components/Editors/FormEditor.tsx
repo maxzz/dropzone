@@ -75,7 +75,7 @@ function EditorTabs({ pages, stateIndicator, dragProps }: { pages: Record<string
     return (<>
         {/* Tabs */}
         <div {...dragProps()} style={{ touchAction: 'none' }}>
-            <div className="px-4 pb-2 bg-blue-900/20 flex items-center justify-between">
+            <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between">
                 <div className="flex justify-items-start space-x-1">
                     {Object.keys(pages).map((pageTitle, idx) => (
                         <button
@@ -137,7 +137,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
         <a.div style={{ x, y }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
             <div className="grid grid-rows-[auto,auto,1fr]">
-                <EditorCaption editorData={editorData} />
+                {/* <EditorCaption editorData={editorData} /> */}
                 <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragProps={bind} />
             </div>
 
