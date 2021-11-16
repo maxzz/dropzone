@@ -108,8 +108,8 @@ function EditorTabs({ pages, stateIndicator, dragProps }: { pages: Record<string
 function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
 
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
-    const bind = useDrag(({ down, movement: [mx, my] }) => {
-        api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down });
+    const bind = useDrag(({ down, offset: [mx, my] }) => {
+        api.start({ x: mx, y: my, immediate: down });
     });
 
     // Page Web Matching
