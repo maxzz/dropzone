@@ -16,16 +16,6 @@ import { parsedFname } from '../Card/CardTitle';
 import { TabOptions } from './TabOptions';
 import { ReactDOMAttributes, useDrag } from '@use-gesture/react';
 
-function EditorCaption({ editorData }: { editorData: EditorData; }) {
-    const [fileUs] = useAtom(editorData.fileUsAtom);
-    //<div className="px-4 py-2 pb-1 text-[.65rem] text-gray-700/80 bg-blue-900/20 rounded-t cursor-default" title="Manifest filename">{fileUs.fname}</div>
-    return (
-        <div className="px-4 py-2 pb-2 text-[.65rem] text-gray-700/80 bg-blue-900/20 rounded-t cursor-default">
-            {/* {`${formIdxName(editorData.formIdx)} form from ${fileUs.fname}`} */}
-        </div>
-    );
-}
-
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
     const stats = appStats(fileUs);
