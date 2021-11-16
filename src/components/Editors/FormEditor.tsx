@@ -74,25 +74,23 @@ function EditorTabs({ pages, stateIndicator, dragProps }: { pages: Record<string
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (<>
         {/* Tabs */}
-        <div {...dragProps()} style={{ touchAction: 'none' }}>
-            <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between">
-                <div className="flex justify-items-start space-x-1">
-                    {Object.keys(pages).map((pageTitle, idx) => (
-                        <button
-                            className={classNames(
-                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
-                                selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                            )}
-                            style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                            key={pageTitle}
-                            onClick={() => setSelectedTab(idx)}
-                        >
-                            {pageTitle}
-                        </button>
-                    ))}
-                </div>
-                {stateIndicator}
+        <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragProps()} style={{ touchAction: 'none' }}>
+            <div className="flex justify-items-start space-x-1">
+                {Object.keys(pages).map((pageTitle, idx) => (
+                    <button
+                        className={classNames(
+                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
+                            selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                        )}
+                        style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                        key={pageTitle}
+                        onClick={() => setSelectedTab(idx)}
+                    >
+                        {pageTitle}
+                    </button>
+                ))}
             </div>
+            {stateIndicator}
         </div>
         {/* Pages */}
         <div>
@@ -136,7 +134,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     return (
         <a.div style={{ x, y }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
-            <div className="grid grid-rows-[auto,auto,1fr]">
+            <div className="">
                 {/* <EditorCaption editorData={editorData} /> */}
                 <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragProps={bind} />
             </div>
