@@ -2,6 +2,7 @@ import React from 'react';
 import { atom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
+import { a, useSpring } from '@react-spring/web';
 import { EditorData } from '../../store/store';
 import { appStats, formIdxName } from '../../store/store-functions';
 import { classNames } from '../../utils/classnames';
@@ -14,7 +15,6 @@ import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
 import { TabOptions } from './TabOptions';
 import { ReactDOMAttributes, useDrag } from '@use-gesture/react';
-import { a, useSpring } from '@react-spring/web';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
@@ -73,7 +73,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragBind: (...args: any[]) => ReactDOMAttributes; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (
-        <div>
+        <div className="grid grid-rows-[auto,1fr]">
             {/* Tabs */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
                 <div className="flex justify-items-start space-x-1">
@@ -94,10 +94,10 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                 {stateIndicator}
             </div>
             {/* Pages */}
-            <div>
+            <div className="text-sm bg-white">
                 {Object.values(pages).map((pageContent, idx) => (
                     <React.Fragment key={idx}>
-                        <div key={idx} className={`h-full bg-white text-sm ${selectedTab === idx ? '' : 'hidden'}`}>
+                        <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
                             {pageContent}
                         </div>
                     </React.Fragment >
@@ -136,7 +136,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
             {/* Editor body */}
             <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragBind={dragBind} />
             {/* Editor footer */}
-            <div className="px-4 py-4 flex items-center justify-between bg-white">
+            <div className="px-4 py-4 bg-white flex items-center justify-between">
                 <EditorInfo editorData={editorData} />
 
                 <div className="flex space-x-2">
