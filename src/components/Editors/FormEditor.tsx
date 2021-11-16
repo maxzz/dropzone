@@ -70,47 +70,47 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
-function EditorTabs({ pages, stateIndicator, dragProps }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragProps: (...args: any[]) => ReactDOMAttributes; }) {
+function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragBind: (...args: any[]) => ReactDOMAttributes; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
-    return (<>
-        {/* Tabs */}
-        <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragProps()} style={{ touchAction: 'none' }}>
-            <div className="flex justify-items-start space-x-1">
-                {Object.keys(pages).map((pageTitle, idx) => (
-                    <button
-                        className={classNames(
-                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
-                            selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                        )}
-                        style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                        key={pageTitle}
-                        onClick={() => setSelectedTab(idx)}
-                    >
-                        {pageTitle}
-                    </button>
+    return (
+        <div>
+            {/* Tabs */}
+            <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
+                <div className="flex justify-items-start space-x-1">
+                    {Object.keys(pages).map((pageTitle, idx) => (
+                        <button
+                            className={classNames(
+                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
+                                selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                            )}
+                            style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                            key={pageTitle}
+                            onClick={() => setSelectedTab(idx)}
+                        >
+                            {pageTitle}
+                        </button>
+                    ))}
+                </div>
+                {stateIndicator}
+            </div>
+            {/* Pages */}
+            <div>
+                {Object.values(pages).map((pageContent, idx) => (
+                    <React.Fragment key={idx}>
+                        <div key={idx} className={`h-full bg-white text-sm ${selectedTab === idx ? '' : 'hidden'}`}>
+                            {pageContent}
+                        </div>
+                    </React.Fragment >
                 ))}
             </div>
-            {stateIndicator}
         </div>
-        {/* Pages */}
-        <div>
-            {Object.values(pages).map((pageContent, idx) => (
-                <React.Fragment key={idx}>
-                    <div key={idx} className={`h-full bg-white text-sm ${selectedTab === idx ? '' : 'hidden'}`}>
-                        {pageContent}
-                    </div>
-                </React.Fragment >
-            ))}
-        </div>
-    </>);
+    );
 }
 
 function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
 
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
-    const bind = useDrag(({ down, offset: [mx, my] }) => {
-        api.start({ x: mx, y: my, immediate: down });
-    });
+    const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
 
     // Page Web Matching
 
@@ -134,12 +134,8 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     return (
         <a.div style={{ x, y }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
-            <div className="">
-                {/* <EditorCaption editorData={editorData} /> */}
-                <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragProps={bind} />
-            </div>
-
-            {/* Editor buttons */}
+            <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragBind={dragBind} />
+            {/* Editor footer */}
             <div className="px-4 py-4 flex items-center justify-between bg-white">
                 <EditorInfo editorData={editorData} />
 
