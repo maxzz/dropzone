@@ -13,7 +13,7 @@ import { TabMatchWindows, TabFields } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
 import { TabOptions } from './TabOptions';
-import { useDrag } from '@use-gesture/react';
+import { ReactDOMAttributes, useDrag } from '@use-gesture/react';
 import { a, useSpring } from '@react-spring/web';
 
 function EditorCaption({ editorData }: { editorData: EditorData; }) {
@@ -70,11 +70,11 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
-function EditorTabs({ pages, stateIndicator }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; }) {
+function EditorTabs({ pages, stateIndicator, dragProps }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragProps: (...args: any[]) => ReactDOMAttributes; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (<>
         {/* Tabs */}
-        <div className="px-4 pb-2 bg-blue-900/20 flex items-center justify-between">
+        <div className="px-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragProps()} style={{ touchAction: 'none' }} >
             <div className="flex justify-items-start space-x-1">
                 {Object.keys(pages).map((pageTitle, idx) => (
                     <button
@@ -134,9 +134,9 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     return (
         <a.div style={{ x, y }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
-            <div {...bind()} style={{ touchAction: 'none' }} className="grid grid-rows-[auto,auto,1fr]">
+            <div className="grid grid-rows-[auto,auto,1fr]">
                 <EditorCaption editorData={editorData} />
-                <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} />
+                <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragProps={bind} />
             </div>
 
             {/* Editor buttons */}
