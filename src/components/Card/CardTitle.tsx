@@ -91,7 +91,11 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = appStats(fileUs);
     const fcatLen = fileUs.fcat?.names.length;
-    const fname = React.useMemo(() => parsedFname({ fname: fileUs.fname }), [fileUs.fname]);
+    const dateCreated = fileUs.mani?.descriptor?.created;
+    const dateModified = fileUs.mani?.descriptor?.modified;
+    const fname = React.useMemo(() => {
+        return parsedFname({ fname: fileUs.fname });
+    }, [fileUs.fname, dateCreated, dateModified]);
     return (
         <>
             {/* Icon and caption */}
