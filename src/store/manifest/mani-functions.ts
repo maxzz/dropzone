@@ -14,6 +14,10 @@ function fileTimeToDate(fileTime?: number | string): Date {
     return !!fileTime ? new Date(fileTime / 10000 - 11644473600000) : new Date;
 }
 
+export function dpTimeToShow(fileTime?: number | string): string {
+    return fileTime ? fileTimeToDate(fileTime).toLocaleString() : '';
+}
+
 function filetimeFromDate(date: Date): number {
     return date.getTime() * 1e4 + 116444736000000000;
 }
