@@ -4,11 +4,27 @@ import debounce from '../utils/debounce';
 import uuid from '../utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-i';
-import { createRegexByFilter, delay, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
+import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
 export type FileUsState = {
     isGroupAtom: PrimitiveAtom<boolean>, // this fileUs selected for bulk group operation
     isCurrentAtom: PrimitiveAtom<boolean>, // this fileUs is current and shown in the right panel
+};
+
+// App statistics
+
+export type FileUsStats = {
+    domain?: string;
+    isWeb: boolean;
+    isChrome: boolean;
+    isFCat: boolean;
+    isCustomization: boolean;
+    url?: string;
+    title?: string;
+    isSubFolder?: boolean;
+    subFolder?: string;
+    dateCreated?: string;
+    dateModified?: string;
 };
 
 export type FileUs = {
@@ -25,6 +41,7 @@ export type FileUs = {
     fcat?: Catalog.Root;    // field catalog
     file?: File;            // file OS handle
     state: FileUsState;     // local state atoms: is currnet; is selected
+    stats: FileUsStats;     // quick access statistics
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
@@ -72,7 +89,7 @@ export const setFilesAtom = atom(
         const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
             const path = ((file as any).path as string || '').replace(/^\//, '').split(/[\\\/]/);
             path.pop();
-            return atom<FileUs>({
+            const at: FileUs = {
                 id: uuid(),
                 idx,
                 fname: file.name,
@@ -82,10 +99,13 @@ export const setFilesAtom = atom(
                 size: file.size,
                 file: file,
                 state: {
-                    isGroupAtom: atom(false),
-                    isCurrentAtom: atom(false),
-                }
-            });
+                    isGroupAtom: atom<boolean>(false),
+                    isCurrentAtom: atom<boolean>(false),
+                },
+                stats: {} as FileUsStats,
+            };
+            at.stats = fileUsStats(at);
+            return atom<FileUs>(at);
         });
         set(_foldAllCardsAtom, -1);
         set(filesAtom, dropped);
