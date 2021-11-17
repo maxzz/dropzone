@@ -21,6 +21,7 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const stats = appStats(fileUs);
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
+    const dateCreated = fileUs.mani?.descriptor.created
     return (<>
         <UITooltip trigger={<IconInfo
             className="w-7 h-7 text-gray-300"
