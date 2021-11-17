@@ -5,6 +5,7 @@ import atomWithCallback from '../../hooks/atomsX';
 import { a, useSpring } from '@react-spring/web';
 import { EditorData } from '../../store/store';
 import { appStats, formIdxName } from '../../store/store-functions';
+import { dpTimeToShow } from '../../store/manifest/mani-functions';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
@@ -21,7 +22,8 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const stats = appStats(fileUs);
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
-    const dateCreated = fileUs.mani?.descriptor.created
+    const dateCreated = dpTimeToShow(fileUs.mani?.descriptor?.created);
+    const dateModified = dpTimeToShow(fileUs.mani?.descriptor?.modified);
     return (<>
         <UITooltip trigger={<IconInfo
             className="w-7 h-7 text-gray-300"
@@ -41,6 +43,16 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
 
                 <div className="font-bold">Filename</div>
                 <div className="">{fname}</div>
+
+                {dateCreated && <>
+                    <div className="font-bold">Created</div>
+                    <div className="">{dateCreated}</div>
+                </>}
+
+                {dateModified && <>
+                    <div className="font-bold">Modified</div>
+                    <div className="">{dateModified}</div>
+                </>}
             </div>
         </UITooltip>
     </>);
