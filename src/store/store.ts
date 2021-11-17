@@ -13,18 +13,18 @@ export type FileUsState = {
 
 export type FileUs = {
     id: string;
-    idx: number;        // index in the loaded list wo/ counting on filters, i.e. absolute index
-    fname: string;
-    fpath: string;      // file relative path to the dropped folder
-    fmodi: number;      // lastModified
-    modified: number;   // last modified
-    size: number;
-    raw?: string;
-    mani?: Mani.Manifest;
-    meta?: Meta.Form[],
-    fcat?: Catalog.Root; // field catalog
-    file?: File;
-    state: FileUsState;
+    idx: number;            // index in the loaded list wo/ counting on filters, i.e. absolute index
+    fname: string;          // filename
+    fpath: string;          // file relative path to the dropped folder
+    fmodi: number;          // lastModified
+    modified: number;       // last modified
+    size: number;           // file size
+    raw?: string;           // raw manifest as it was loaded
+    mani?: Mani.Manifest;   // json raw manifest
+    meta?: Meta.Form[],     // meta data on manifest
+    fcat?: Catalog.Root;    // field catalog
+    file?: File;            // file OS handle
+    state: FileUsState;     // local state atoms: is currnet; is selected
 };
 
 export type FileUsAtom = WritableAtom<FileUs, FileUs>;
