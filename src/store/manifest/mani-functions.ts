@@ -1,6 +1,6 @@
 import { removeQuery, urlDomain } from './url';
 
-function fileTimeToDate(fileTime: number | string): Date {
+function fileTimeToDate(fileTime?: number | string): Date {
     /**
      * fileTimeToDate()
      * Convert a Windows FILETIME to a Javascript Date
@@ -9,9 +9,9 @@ function fileTimeToDate(fileTime: number | string): Date {
      * @returns {Date}
      **/
     if (typeof fileTime === 'string') {
-        fileTime = Number('0x' + fileTime.split(' ').join('')); // dwHighDateTime + ' ' + dwLowDateTime 
+        fileTime = fileTime ? Number('0x' + fileTime.split(' ').join('')) : 0; // dwHighDateTime + ' ' + dwLowDateTime 
     }
-    return new Date(fileTime / 10000 - 11644473600000);
+    return !!fileTime ? new Date(fileTime / 10000 - 11644473600000) : new Date;
 }
 
 function filetimeFromDate(date: Date): number {
