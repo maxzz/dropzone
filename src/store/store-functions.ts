@@ -105,7 +105,7 @@ export function formCaption({ domain, url, isFCat, isCustomization }: AppStats) 
 // App statistics
 
 export type AppStats = {
-    domain: string | undefined;
+    domain?: string;
     isWeb: boolean;
     isChrome: boolean;
     isFCat: boolean;
@@ -114,6 +114,8 @@ export type AppStats = {
     title?: string;
     isSubFolder?: boolean;
     subFolder?: string;
+    dateCreated?: string;
+    dateModified?: string;
 };
 
 function stripFirstFolder(s: string): string {
@@ -135,6 +137,8 @@ export function appStats(fileUs: FileUs): AppStats {
         title: loginForm?.options.choosename,
         isSubFolder: isSubFolder,
         subFolder: isSubFolder ? stripFirstFolder(fileUs.fpath) : '',
+        dateCreated: fileUs.mani?.descriptor?.created,
+        dateModified: fileUs.mani?.descriptor?.modified,
     };
 }
 
