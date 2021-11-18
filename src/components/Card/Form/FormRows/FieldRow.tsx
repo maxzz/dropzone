@@ -66,9 +66,8 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                 }
             </div>
 
-            {/* 2. icon type */}
+            {/* 2. icon and text for field type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
-
             <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
 
             {/* 3. icon preview and preview */}
@@ -125,7 +124,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
             {/* 8. id */}
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`}
-                title={dbname}
+                title={`Value ID: ${dbname}`}
             >
                 id
             </div>
@@ -134,16 +133,19 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
             <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
                 toggle={
                     <div
-                        className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`}
-                        {...(hasPath && { title: path_ext })}
+                        className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded ${hasPath ? 'text-gray-900' : 'text-red-500 opacity-50'} cursor-default`}
+                        title={hasPath ? path_ext : 'no path'}
                     >
                         path
                     </div>
                 }
             >
-                <div className={`ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700 ${hasPath ? '' : 'opacity-25'}`}>
-                    <FieldRowPath className="" fileUs={fileUs} form={form} field={field} />
-                </div>
+                {hasPath ?
+                    <div className={`ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700`}>
+                        {<FieldRowPath className="" fileUs={fileUs} form={form} field={field} />}
+                    </div>
+                    :
+                    <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">This field has no path and cannot be used.</div> }
             </UIToggleWithPortal>
 
             {/* 10.done */}
