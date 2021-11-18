@@ -14,12 +14,23 @@ function fileTimeToDate(fileTime?: number | string): Date {
     return !!fileTime ? new Date(fileTime / 10000 - 11644473600000) : new Date;
 }
 
-export function dpTimeToShow(fileTime?: number | string): string {
-    return fileTime ? fileTimeToDate(fileTime).toLocaleString().replace(/\//g, '.') : '';
-}
-
 function filetimeFromDate(date: Date): number {
     return date.getTime() * 1e4 + 116444736000000000;
+}
+
+export function dpTimeToShow(fileTime?: number | string): string {
+    const d = fileTimeToDate(fileTime).toLocaleString();
+    const m = /^(\d\d??)\/(\d\d??)\/(\d\d\d\d)([\s\S]*$)/.exec(d);
+    if (m) {
+        console.log('m', m);
+    }
+    return fileTime ? d : '';
+}
+
+function zeros(v: string | number, total: number): string {
+    // Returns v prefixed with '0's with length <= total or v as is.
+    v = v ? '' + v : '';
+    return v.length < total ? '0000000000'.slice(0, total - v.length) + v : v;
 }
 
 export namespace Transform { // encode/decode functions
