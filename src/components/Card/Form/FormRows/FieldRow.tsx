@@ -26,6 +26,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
 
     const hasPreview = !!field.path.loc;
     const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
+    const hasPath = !!Object.keys(field.path).length;
     //console.log(`isSelected: ${isSelected} field.ridx: ${field.ridx} thisSelectedRow.field: ${thisSelectedRow.field}`);
 
     const columnDispText = type === 'text'
@@ -57,6 +58,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
         <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
             onClick={selectThisRow}
         >
+            {/* 1. use it */}
             <div className="" title={`To use or not to use. Field index: ${field.pidx}`}>
                 {useit
                     ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
@@ -64,11 +66,12 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                 }
             </div>
 
-            {/* bg-blue-200 */}
+            {/* 2. icon type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
             <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
 
+            {/* 3. icon preview and preview */}
             <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
                 toggle={
                     <IconPreview className={`w-4 h-4 ${hasPreview ? '' : 'opacity-25'}`} />
@@ -86,6 +89,7 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                 }
             </UIToggleWithPortal>
 
+            {/* 4. display text */}
             <div className="flex-1 cursor-default">
                 {columnDispText}
             </div>
@@ -94,24 +98,31 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                 <div className="whitespace-nowrap overflow-ellipsis">{disp}</div>
             </div> */}
 
+            {/* 5. policy */}
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '' : 'opacity-25'}`}
                 title={`Field policy: ${policy}`}
             >
                 policy
             </div>
+
+            {/* 6. value */}
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '' : 'opacity-25'}`}
                 title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
             >
                 value
             </div>
+
+            {/* 7. ref */}
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rfield || rfieldform ? '' : 'opacity-25'}`}
                 title={columnRefTitle}
             >
                 <div className=""><IconInOut className="w-3 h-4" /></div>
             </div>
+
+            {/* 8. id */}
             <div
                 className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`}
                 title={dbname}
@@ -119,17 +130,23 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                 id
             </div>
 
+            {/* 9. path */}
             <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
                 toggle={
-                    <div className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`} title={path_ext}>
+                    <div
+                        className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`}
+                        {...(hasPath && { title: path_ext })}
+                    >
                         path
                     </div>
                 }
             >
-                <div className="ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700">
+                <div className={`ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700 ${hasPath ? '' : 'opacity-25'}`}>
                     <FieldRowPath className="" fileUs={fileUs} form={form} field={field} />
                 </div>
             </UIToggleWithPortal>
+
+            {/* 10.done */}
         </div>
     );
 }
