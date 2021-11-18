@@ -1,14 +1,14 @@
 import React from 'react';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
-import { FileUs, FileUsAtom, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
-import { appStats, AppStats, formCaption, isAnyWhy } from '../../store/store-functions';
+import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
+import { formCaption, isAnyWhy } from '../../store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
 import { UITooltip } from '../UI/UITooltip';
 import CardTitleMenu from './CardTitleMenu';
 import CardMenu from './CardMenu';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
 
-function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: AppStats; }) {
+function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
     if (isFCat) {
         return <div className="w-6 h-6 flex items-center justify-center">
             <IconCatalog className="w-5 h-5 text-gray-200" title="Field catalog" />
@@ -23,7 +23,7 @@ function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { sta
     );
 }
 
-function CardCaption({ stats }: { stats: AppStats; }) {
+function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
         <div className="ml-1 uppercase">
             {formCaption(stats)}
@@ -89,13 +89,13 @@ export function parsedFname({ fname, styleMisc = "text-[0.65rem]", styleSm = "op
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const stats = appStats(fileUs);
+    const stats = fileUs.stats;
     const fcatLen = fileUs.fcat?.names.length;
     const dateCreated = fileUs.mani?.descriptor?.created;
     const dateModified = fileUs.mani?.descriptor?.modified;
     const fname = React.useMemo(() => {
         return parsedFname({ fname: fileUs.fname });
-    }, [fileUs.fname, dateCreated, dateModified]);
+    }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified]);
     return (
         <>
             {/* Icon and caption */}
