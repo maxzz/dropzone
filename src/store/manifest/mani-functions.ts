@@ -19,19 +19,13 @@ function filetimeFromDate(date: Date): number {
 }
 
 export function dpTimeToShow(fileTime?: number | string): string {
-    const d = fileTimeToDate(fileTime).toLocaleString();
-    const m = /^(\d\d??)\/(\d\d??)\/(\d\d\d\d), (\d\d??):(\d\d??):(\d\d?)([\s\S]*$)/.exec(d);
-    if (m) {
-        [1,2,4,5,6].forEach((idx) => m[idx] = zeros(m[idx], 2));
-        // m[1] = zeros(m[1], 2);
-        // m[2] = zeros(m[2], 2);
-        // m[4] = zeros(m[4], 2);
-        // m[5] = zeros(m[5], 2);
-        // m[6] = zeros(m[6], 2);
-
-        console.log('d', d, '\nm', m);
+    if (fileTime) {
+        const d = fileTimeToDate(fileTime).toLocaleString();
+        const m = /^(\d\d??)\/(\d\d??)\/(\d\d\d\d), (\d\d??):(\d\d??):(\d\d?)([\s\S]*$)/.exec(d);
+        m && [1, 2, 4, 5, 6].forEach((idx) => m[idx] = zeros(m[idx], 2));
+        return m ? `${m[1]}.${m[2]}.${m[3]} ${m[4]}:${m[5]}:${m[6]} ${m[7]}` : d;
     }
-    return fileTime ? d : '';
+    return '';
 }
 
 function zeros(v: string | number, total: number): string {
