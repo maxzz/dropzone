@@ -15,7 +15,7 @@ function fileTimeToDate(fileTime?: number | string): Date {
 }
 
 export function dpTimeToShow(fileTime?: number | string): string {
-    return fileTime ? fileTimeToDate(fileTime).toLocaleString() : '';
+    return fileTime ? fileTimeToDate(fileTime).toLocaleString().replace(/\//g, '.') : '';
 }
 
 function filetimeFromDate(date: Date): number {
