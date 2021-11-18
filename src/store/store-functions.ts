@@ -1,5 +1,5 @@
-import { dpTimeToShow } from './manifest/mani-functions';
 import { FileUs, FileUsStats } from './store';
+import { dpTimeToShow } from './manifest/mani-functions';
 
 export function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
