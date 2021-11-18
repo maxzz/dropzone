@@ -102,9 +102,8 @@ export const setFilesAtom = atom(
                     isGroupAtom: atom<boolean>(false),
                     isCurrentAtom: atom<boolean>(false),
                 },
-                stats: {} as FileUsStats,
+                stats: {} as FileUsStats, // the real one will be assigned after caching content
             };
-            at.stats = fileUsStats(at);
             return atom<FileUs>(at);
         });
         set(_foldAllCardsAtom, -1);
@@ -212,6 +211,7 @@ const updateCacheAtom = atom(
                         fcat,
                         meta,
                     };
+                    forNewAtom.stats = fileUsStats(forNewAtom);
                     set(fileAtom, forNewAtom);
 
                     if (isEmpty(forNewAtom)) {
