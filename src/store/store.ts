@@ -6,12 +6,12 @@ import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-i';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 
+// FileUs
+
 export type FileUsState = {
     isGroupAtom: PrimitiveAtom<boolean>, // this fileUs selected for bulk group operation
     isCurrentAtom: PrimitiveAtom<boolean>, // this fileUs is current and shown in the right panel
 };
-
-// App statistics
 
 export type FileUsStats = {
     domain?: string;

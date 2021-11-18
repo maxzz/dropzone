@@ -1,4 +1,5 @@
-import { FileUs } from './store';
+import { dpTimeToShow } from './manifest/mani-functions';
+import { FileUs, FileUsStats } from './store';
 
 export function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -93,36 +94,19 @@ export function useFileUsByFilter(fileUs: FileUs, regex: RegExp): boolean {
 
 // Miscellaneous
 
-export function formIdxName(idx: number) {
+export function formIdxName(idx: number): string {
     return idx === 0 ? 'Login' : 'Password change';
 }
 
-export function formCaption({ domain, url, isFCat, isCustomization }: AppStats) {
-    return url ? domain : isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application';
+export function formCaption({ domain, url, isFCat, isCustomization }: FileUsStats): string {
+    return url ? domain || '' : isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application';
 }
-
-
-// App statistics
-
-export type AppStats = {
-    domain?: string;
-    isWeb: boolean;
-    isChrome: boolean;
-    isFCat: boolean;
-    isCustomization: boolean;
-    url?: string;
-    title?: string;
-    isSubFolder?: boolean;
-    subFolder?: string;
-    dateCreated?: string;
-    dateModified?: string;
-};
 
 function stripFirstFolder(s: string): string {
     return (s || '').split(/[\/\\]/).slice(1).join('/');
 }
 
-export function appStats(fileUs: FileUs): AppStats {
+export function fileUsStats(fileUs: FileUs): FileUsStats {
     const loginForm = fileUs.mani?.forms[0];
     const domain = fileUs.meta?.[0]?.disp.domain;
     const isWeb = !!domain;
@@ -137,8 +121,8 @@ export function appStats(fileUs: FileUs): AppStats {
         title: loginForm?.options.choosename,
         isSubFolder: isSubFolder,
         subFolder: isSubFolder ? stripFirstFolder(fileUs.fpath) : '',
-        dateCreated: fileUs.mani?.descriptor?.created,
-        dateModified: fileUs.mani?.descriptor?.modified,
+        dateCreated: dpTimeToShow(fileUs.mani?.descriptor?.created),
+        dateModified: dpTimeToShow(fileUs.mani?.descriptor?.modified),
     };
 }
 

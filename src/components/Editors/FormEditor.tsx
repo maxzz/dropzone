@@ -4,8 +4,7 @@ import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
 import { a, useSpring } from '@react-spring/web';
 import { EditorData } from '../../store/store';
-import { appStats, formIdxName } from '../../store/store-functions';
-import { dpTimeToShow } from '../../store/manifest/mani-functions';
+import { formIdxName } from '../../store/store-functions';
 import { classNames } from '../../utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
@@ -19,11 +18,9 @@ import { ReactDOMAttributes, useDrag } from '@use-gesture/react';
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
-    const stats = appStats(fileUs);
+    const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
-    const dateCreated = dpTimeToShow(fileUs.mani?.descriptor?.created);
-    const dateModified = dpTimeToShow(fileUs.mani?.descriptor?.modified);
     return (<>
         <UITooltip trigger={<IconInfo
             className="w-7 h-7 text-gray-300"
@@ -44,14 +41,14 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
                 <div className="font-bold">Filename</div>
                 <div className="">{fname}</div>
 
-                {dateCreated && <>
+                {stats.dateCreated && <>
                     <div className="font-bold">Created</div>
-                    <div className="">{dateCreated}</div>
+                    <div className="">{stats.dateCreated}</div>
                 </>}
 
-                {dateModified && <>
+                {stats.dateModified && <>
                     <div className="font-bold">Modified</div>
-                    <div className="">{dateModified}</div>
+                    <div className="">{stats.dateModified}</div>
                 </>}
             </div>
         </UITooltip>
