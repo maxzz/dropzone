@@ -93,7 +93,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fcatLen = fileUs.fcat?.names.length;
     const fname = React.useMemo(() => {
         return (
-            <UITooltip trigger={parsedFname({ fname: fileUs.fname })} arrow={true} popperOptions={{ delayShow: 750 }} >
+            <UITooltip trigger={parsedFname({ fname: fileUs.fname })} arrow={true} popperOptions={{ delayShow: 750, placement: 'auto' }} >
                 <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
 
                     {fileUs.fpath && <>
