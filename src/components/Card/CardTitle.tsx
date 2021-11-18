@@ -94,10 +94,15 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fname = React.useMemo(() => {
         return (
             <UITooltip trigger={parsedFname({ fname: fileUs.fname })} arrow={true} popperOptions={{ delayShow: 750 }} >
-                <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
+                <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
 
-                    <div className="font-bold">{fileUs.fpath ? 'Folder' : 'Filename:'}</div>
-                    <div className="">{fileUs.fpath ? fileUs.fpath : fileUs.fname}</div>
+                    {fileUs.fpath && <>
+                        <div className="font-bold">Sub-folder</div>
+                        <div className="">{fileUs.fpath}</div>
+                    </>}
+
+                    <div className="font-bold">Filename</div>
+                    <div className="">{fileUs.fname}</div>
 
                     {stats.dateCreated && <>
                         <div className="font-bold">Created</div>
