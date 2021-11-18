@@ -92,19 +92,25 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const stats = fileUs.stats;
     const fcatLen = fileUs.fcat?.names.length;
     const fname = React.useMemo(() => {
-        return <UITooltip trigger={parsedFname({ fname: fileUs.fname })} arrow={true} popperOptions={{ delayShow: 750 }} >
-            <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
-                {stats.dateCreated && <>
-                    <div className="font-bold">Created</div>
-                    <div className="">{stats.dateCreated}</div>
-                </>}
-                {stats.dateModified && <>
-                    <div className="font-bold">Modified</div>
-                    <div className="">{stats.dateModified}</div>
-                </>}
-            </div>
-        </UITooltip>;
-    }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified]);
+        return (
+            <UITooltip trigger={parsedFname({ fname: fileUs.fname })} arrow={true} popperOptions={{ delayShow: 750 }} >
+                <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
+
+                    <div className="font-bold">{fileUs.fpath ? 'Folder' : 'Filename:'}</div>
+                    <div className="">{fileUs.fpath ? fileUs.fpath : fileUs.fname}</div>
+
+                    {stats.dateCreated && <>
+                        <div className="font-bold">Created</div>
+                        <div className="">{stats.dateCreated}</div>
+                    </>}
+                    {stats.dateModified && <>
+                        <div className="font-bold">Modified</div>
+                        <div className="">{stats.dateModified}</div>
+                    </>}
+                </div>
+            </UITooltip>
+        );
+    }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]);
     return (
         <>
             {/* Icon and caption */}
@@ -134,10 +140,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
             {/* Filename */}
             <div className="flex items-center justify-between">
-                <div
-                    className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono"
-                    title={`${fileUs.fpath ? `Folder: "${fileUs.fpath}"` : `Filename: ${fileUs.fname}`}`}
-                >
+                <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono">
                     {fname}
                 </div>
 
