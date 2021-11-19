@@ -98,9 +98,16 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     const [{ x, y, width, height }, api] = useSpring(() => ({ x: 0, y: 0, width: 10, height: 40 }));
 
     const animate = () => {
-        const menuOffset = root.current!.getBoundingClientRect();
+        const menuOffset = root.current?.getBoundingClientRect();
         const activeItem = items.current[active].current;
-        const { top, left, width, height } = activeItem!.getBoundingClientRect();
+        if (!menuOffset || !activeItem) {
+            console.log('null');
+            return;
+        }
+        const { top, left, width, height } = activeItem.getBoundingClientRect();
+        console.log({a: active}, { t: top.toFixed(2), l: left.toFixed(2), w: width.toFixed(2), h: height.toFixed(2) }, {x: menuOffset.left.toFixed(2), y: menuOffset.top.toFixed(2)});
+        
+
 
         // const settings = {
         //     x: left - menuOffset.x,
@@ -118,13 +125,14 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             y: top - menuOffset.y,
             width: width,
             height: height,
-            config: { duration: 800 },
+            config: { duration: 100 },
         });
     };
 
     React.useEffect(() => {
+        //console.log('active', active);
         animate();
-    }, [active]);
+    }, [active, root.current, indicator.current, items.current, ]);
 
     return (
         <div ref={root} className="relative flex">
@@ -133,10 +141,10 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     <button
                         ref={items.current[idx]}
                         className={classNames(
-                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
-                            active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none ',
+                            active === idx ? 'shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                         )}
-                        style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                        //style={{ filter: 'drop-shadow(#f00f 0px 0px 1rem)' }}
                         key={pageTitle}
                         onClick={() => setActive(idx)}
                     >
