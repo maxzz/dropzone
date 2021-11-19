@@ -2,7 +2,7 @@ import React from 'react';
 import { atom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
-import { a, useSpring } from '@react-spring/web';
+import { a, config, useSpring } from '@react-spring/web';
 import { EditorData } from '../../store/store';
 import { formIdxName } from '../../store/store-functions';
 import { classNames } from '../../utils/classnames';
@@ -123,7 +123,8 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             y: top - menuOffset.y,
             width: width,
             height: height,
-            config: { duration: 100 },
+            // config: { duration: 100 },
+            config: { mass: .3, tension: 280, friction: 14 },
         });
     };
 
