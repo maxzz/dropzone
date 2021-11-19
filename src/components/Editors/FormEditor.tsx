@@ -93,40 +93,41 @@ function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: n
 */
 
 function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
-    const root = React.useRef<HTMLDivElement>(null);
-    const indicator = React.useRef<HTMLDivElement>(null);
-    const items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
+    const $root = React.useRef<HTMLDivElement>(null);
+    const $indicator = React.useRef<HTMLDivElement>(null);
+    const $items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
 
-    const [indiStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0 }));
+    const [indicatorStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0 }));
 
     React.useEffect(() => {
-        const animate = () => {
-            const menuOffset = root.current?.getBoundingClientRect();
-            const activeItem = items.current[active].current;
-            if (!menuOffset || !activeItem) {
-                return;
+        function animate() {
+            const menuOffset = $root.current?.getBoundingClientRect();
+            const activeItem = $items.current[active].current;
+            if (menuOffset && activeItem) {
+                const { top, left, width, height } = activeItem.getBoundingClientRect();
+                api.start({
+                    x: left - menuOffset.x,
+                    y: top - menuOffset.y,
+                    width: width,
+                    height: height,
+                    config: { mass: .3, tension: 280, friction: 14 },
+                });
             }
-            const { top, left, width, height } = activeItem.getBoundingClientRect();
-
-            api.start({
-                x: left - menuOffset.x,
-                y: top - menuOffset.y,
-                width: width,
-                height: height,
-                config: { mass: .3, tension: 280, friction: 14 },
-            });
-        };
+        }
         animate();
-    }, [active, root.current, indicator.current, items.current,]);
+    }, [active, $root.current, $indicator.current, $items.current,]);
 
     return (
-        <div ref={root} className="relative flex">
-            <a.div ref={indicator} style={{ ...indiStyles, filter: 'drop-shadow(#0003 0px 0px .15rem)' }} className="absolute bg-gray-100 rounded z-[1] shadow">
-            </a.div>
+        <div ref={$root} className="relative flex">
+            <a.div
+                ref={$indicator}
+                style={{ ...indicatorStyles, filter: 'drop-shadow(#0003 0px 0px .15rem)' }}
+                className="absolute bg-gray-100 rounded z-[1] shadow"
+            />
             <div className="flex justify-items-start space-x-1">
                 {tabs.map((pageTitle, idx) => (
                     <button
-                        ref={items.current[idx]}
+                        ref={$items.current[idx]}
                         className={classNames(
                             'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none z-10',
                             active === idx ? '' : 'text-gray-700/80 hover:bg-white/[0.2] hover:text-white/75'
