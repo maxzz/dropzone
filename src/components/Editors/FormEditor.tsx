@@ -70,6 +70,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
+/*
 function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
     return (
         <div className="flex justify-items-start space-x-1">
@@ -89,6 +90,7 @@ function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: n
         </div>
     );
 }
+*/
 
 function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
     const root = React.useRef<HTMLDivElement>(null);
@@ -105,31 +107,17 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             return;
         }
         const { top, left, width, height } = activeItem.getBoundingClientRect();
-        console.log({ a: active }, { t: top.toFixed(2), l: left.toFixed(2), w: width.toFixed(2), h: height.toFixed(2) }, { x: menuOffset.left.toFixed(2), y: menuOffset.top.toFixed(2) });
-
-        // const settings = {
-        //     x: left - menuOffset.x,
-        //     y: top - menuOffset.y,
-        //     width: width,
-        //     height: height,
-        //     backgroundColor: 'red',
-        //     ease: 'elastic.out(.7, .7)',
-        //     duration: 0.8,
-        // };
-        //gsap.to(indicator.current, { ...settings });
 
         api.start({
             x: left - menuOffset.x,
             y: top - menuOffset.y,
             width: width,
             height: height,
-            // config: { duration: 100 },
             config: { mass: .3, tension: 280, friction: 14 },
         });
     };
 
     React.useEffect(() => {
-        //console.log('active', active);
         animate();
     }, [active, root.current, indicator.current, items.current,]);
 
@@ -145,7 +133,6 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                             'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none z-10',
                             active === idx ? '' : 'text-gray-700/80 hover:bg-white/[0.2] hover:text-white/75'
                         )}
-                        //style={{ filter: 'drop-shadow(#f00f 0px 0px .15rem)' }}
                         key={pageTitle}
                         onClick={() => setActive(idx)}
                     >
