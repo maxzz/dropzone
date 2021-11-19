@@ -100,7 +100,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     const animate = () => {
         const menuOffset = root.current!.getBoundingClientRect();
         const activeItem = items.current[active].current;
-        const { width, height, top, left } = activeItem!.getBoundingClientRect();
+        const { top, left, width, height } = activeItem!.getBoundingClientRect();
 
         // const settings = {
         //     x: left - menuOffset.x,
@@ -118,6 +118,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             y: top - menuOffset.y,
             width: width,
             height: height,
+            config: { duration: 100 },
         });
     };
 
@@ -126,22 +127,24 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     }, [active]);
 
     return (
-        <div ref={root} className="relative flex justify-items-start space-x-1">
-            {tabs.map((pageTitle, idx) => (
-                <button
-                    ref={items.current[idx]}
-                    className={classNames(
-                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
-                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                    )}
-                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                    key={pageTitle}
-                    onClick={() => setActive(idx)}
-                >
-                    {pageTitle}
-                </button>
-            ))}
-            <a.div ref={indicator} style={{ x, y, width, height }} className="absolute bg-red-500 z-[-1]"></a.div>
+        <div ref={root} className="relative flex">
+            <div className="flex justify-items-start space-x-1">
+                {tabs.map((pageTitle, idx) => (
+                    <button
+                        ref={items.current[idx]}
+                        className={classNames(
+                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
+                            active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                        )}
+                        style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                        key={pageTitle}
+                        onClick={() => setActive(idx)}
+                    >
+                        {pageTitle}
+                    </button>
+                ))}
+            </div>
+            <a.div ref={indicator} style={{ x, y, width, height }} className="absolute bg-red-500 az-[-1]"></a.div>
         </div>
     );
 }
