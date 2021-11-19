@@ -70,6 +70,26 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
+function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
+    return (
+        <div className="flex justify-items-start space-x-1">
+            {tabs.map((pageTitle, idx) => (
+                <button
+                    className={classNames(
+                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
+                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                    )}
+                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                    key={pageTitle}
+                    onClick={() => setActive(idx)}
+                >
+                    {pageTitle}
+                </button>
+            ))}
+        </div>
+    );
+}
+
 function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragBind: (...args: any[]) => ReactDOMAttributes; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (
@@ -77,6 +97,9 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
             {/* Tabs */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
                 <div className="flex justify-items-start space-x-1">
+                    <TabSelector tabs={Object.keys(pages)} active={selectedTab} setActive={setSelectedTab} />
+                </div>
+                {/* <div className="flex justify-items-start space-x-1">
                     {Object.keys(pages).map((pageTitle, idx) => (
                         <button
                             className={classNames(
@@ -90,7 +113,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                             {pageTitle}
                         </button>
                     ))}
-                </div>
+                </div> */}
                 {stateIndicator}
             </div>
             {/* Pages */}
