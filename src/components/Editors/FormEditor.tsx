@@ -99,21 +99,6 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                 <div className="flex justify-items-start space-x-1">
                     <TabSelector tabs={Object.keys(pages)} active={selectedTab} setActive={setSelectedTab} />
                 </div>
-                {/* <div className="flex justify-items-start space-x-1">
-                    {Object.keys(pages).map((pageTitle, idx) => (
-                        <button
-                            className={classNames(
-                                'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
-                                selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                            )}
-                            style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                            key={pageTitle}
-                            onClick={() => setSelectedTab(idx)}
-                        >
-                            {pageTitle}
-                        </button>
-                    ))}
-                </div> */}
                 {stateIndicator}
             </div>
             {/* Pages */}
