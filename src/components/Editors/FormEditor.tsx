@@ -105,9 +105,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             return;
         }
         const { top, left, width, height } = activeItem.getBoundingClientRect();
-        console.log({a: active}, { t: top.toFixed(2), l: left.toFixed(2), w: width.toFixed(2), h: height.toFixed(2) }, {x: menuOffset.left.toFixed(2), y: menuOffset.top.toFixed(2)});
-        
-
+        console.log({ a: active }, { t: top.toFixed(2), l: left.toFixed(2), w: width.toFixed(2), h: height.toFixed(2) }, { x: menuOffset.left.toFixed(2), y: menuOffset.top.toFixed(2) });
 
         // const settings = {
         //     x: left - menuOffset.x,
@@ -132,19 +130,21 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     React.useEffect(() => {
         //console.log('active', active);
         animate();
-    }, [active, root.current, indicator.current, items.current, ]);
+    }, [active, root.current, indicator.current, items.current,]);
 
     return (
         <div ref={root} className="relative flex">
+            <a.div ref={indicator} style={{ x, y, width, height, filter: 'drop-shadow(#0003 0px 0px .15rem)' }} className="absolute bg-gray-100 rounded z-[1] shadow">
+            </a.div>
             <div className="flex justify-items-start space-x-1">
                 {tabs.map((pageTitle, idx) => (
                     <button
                         ref={items.current[idx]}
                         className={classNames(
-                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none ',
-                            active === idx ? 'shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                            'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none z-10',
+                            active === idx ? '' : 'text-gray-700/80 hover:bg-white/[0.2] hover:text-white/75'
                         )}
-                        //style={{ filter: 'drop-shadow(#f00f 0px 0px 1rem)' }}
+                        //style={{ filter: 'drop-shadow(#f00f 0px 0px .15rem)' }}
                         key={pageTitle}
                         onClick={() => setActive(idx)}
                     >
@@ -152,7 +152,6 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     </button>
                 ))}
             </div>
-            <a.div ref={indicator} style={{ x, y, width, height }} className="absolute bg-red-500/20 rounded az-[-1]"></a.div>
         </div>
     );
 }

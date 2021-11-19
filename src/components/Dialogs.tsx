@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { PortalModal } from './UI/UIDialog';
 import { formEditorDataAtom } from '../store/store';
+import { PortalModal } from './UI/UIDialog';
 import FormEditor from './Editors/FormEditor';
 
 function FormEditorTrigger() {
