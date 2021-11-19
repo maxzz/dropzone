@@ -118,7 +118,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             y: top - menuOffset.y,
             width: width,
             height: height,
-            config: { duration: 100 },
+            config: { duration: 800 },
         });
     };
 
@@ -144,7 +144,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     </button>
                 ))}
             </div>
-            <a.div ref={indicator} style={{ x, y, width, height }} className="absolute bg-red-500 az-[-1]"></a.div>
+            <a.div ref={indicator} style={{ x, y, width, height }} className="absolute bg-red-500/20 rounded az-[-1]"></a.div>
         </div>
     );
 }
