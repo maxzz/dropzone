@@ -70,7 +70,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
-function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
+function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
     return (
         <div className="flex justify-items-start space-x-1">
             {tabs.map((pageTitle, idx) => (
@@ -86,6 +86,57 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     {pageTitle}
                 </button>
             ))}
+        </div>
+    );
+}
+
+function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
+    const root = React.useRef<HTMLDivElement>(null);
+    const indicator = React.useRef<HTMLDivElement>(null);
+    const items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
+    // const items = React.useRef(tabs.map<typeof React.createRef>(React.createRef));
+    //<HTMLButtonElement>
+    //<Array<typeof React.createRef>>
+
+    const animate = () => {
+        const menuOffset = root.current!.getBoundingClientRect();
+        const activeItem = items.current[active].current;
+        const { width, height, top, left } = activeItem!.getBoundingClientRect();
+
+        const settings = {
+            x: left - menuOffset.x,
+            y: top - menuOffset.y,
+            width: width,
+            height: height,
+            backgroundColor: 'red',
+            ease: 'elastic.out(.7, .7)',
+            duration: 0.8,
+        };
+
+        //gsap.to(indicator.current, { ...settings });
+    };    
+
+    React.useEffect(() => {
+        animate();
+    }, [active]);
+
+    return (
+        <div ref={root} className="flex justify-items-start space-x-1">
+            {tabs.map((pageTitle, idx) => (
+                <button
+                    ref={items.current[idx]}
+                    className={classNames(
+                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
+                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                    )}
+                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                    key={pageTitle}
+                    onClick={() => setActive(idx)}
+                >
+                    {pageTitle}
+                </button>
+            ))}
+            <div ref={indicator} className=""></div>
         </div>
     );
 }
