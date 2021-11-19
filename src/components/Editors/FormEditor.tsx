@@ -97,7 +97,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     const $indicator = React.useRef<HTMLDivElement>(null);
     const $items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
 
-    const [indicatorStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0, config: { mass: 2.3, tension: 280, friction: 14 } }));
+    const [indicatorStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0, config: { mass: .3, tension: 280, friction: 14 } }));
 
     React.useEffect(() => {
         function animate() {
