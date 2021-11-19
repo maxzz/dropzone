@@ -99,25 +99,23 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
 
     const [indiStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0 }));
 
-    const animate = () => {
-        const menuOffset = root.current?.getBoundingClientRect();
-        const activeItem = items.current[active].current;
-        if (!menuOffset || !activeItem) {
-            console.log('null');
-            return;
-        }
-        const { top, left, width, height } = activeItem.getBoundingClientRect();
-
-        api.start({
-            x: left - menuOffset.x,
-            y: top - menuOffset.y,
-            width: width,
-            height: height,
-            config: { mass: .3, tension: 280, friction: 14 },
-        });
-    };
-
     React.useEffect(() => {
+        const animate = () => {
+            const menuOffset = root.current?.getBoundingClientRect();
+            const activeItem = items.current[active].current;
+            if (!menuOffset || !activeItem) {
+                return;
+            }
+            const { top, left, width, height } = activeItem.getBoundingClientRect();
+
+            api.start({
+                x: left - menuOffset.x,
+                y: top - menuOffset.y,
+                width: width,
+                height: height,
+                config: { mass: .3, tension: 280, friction: 14 },
+            });
+        };
         animate();
     }, [active, root.current, indicator.current, items.current,]);
 
