@@ -94,34 +94,39 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     const root = React.useRef<HTMLDivElement>(null);
     const indicator = React.useRef<HTMLDivElement>(null);
     const items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
-    // const items = React.useRef(tabs.map<typeof React.createRef>(React.createRef));
-    //<HTMLButtonElement>
-    //<Array<typeof React.createRef>>
+
+    const [{ x, y, width, height }, api] = useSpring(() => ({ x: 0, y: 0, width: 10, height: 40 }));
 
     const animate = () => {
         const menuOffset = root.current!.getBoundingClientRect();
         const activeItem = items.current[active].current;
         const { width, height, top, left } = activeItem!.getBoundingClientRect();
 
-        const settings = {
+        // const settings = {
+        //     x: left - menuOffset.x,
+        //     y: top - menuOffset.y,
+        //     width: width,
+        //     height: height,
+        //     backgroundColor: 'red',
+        //     ease: 'elastic.out(.7, .7)',
+        //     duration: 0.8,
+        // };
+        //gsap.to(indicator.current, { ...settings });
+
+        api.start({
             x: left - menuOffset.x,
             y: top - menuOffset.y,
             width: width,
             height: height,
-            backgroundColor: 'red',
-            ease: 'elastic.out(.7, .7)',
-            duration: 0.8,
-        };
-
-        //gsap.to(indicator.current, { ...settings });
-    };    
+        });
+    };
 
     React.useEffect(() => {
         animate();
     }, [active]);
 
     return (
-        <div ref={root} className="flex justify-items-start space-x-1">
+        <div ref={root} className="relative flex justify-items-start space-x-1">
             {tabs.map((pageTitle, idx) => (
                 <button
                     ref={items.current[idx]}
@@ -136,7 +141,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     {pageTitle}
                 </button>
             ))}
-            <div ref={indicator} className=""></div>
+            <a.div ref={indicator} style={{ x, y, width, height }} className="absolute bg-red-500 z-[-1]"></a.div>
         </div>
     );
 }
