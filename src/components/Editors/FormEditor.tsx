@@ -83,7 +83,8 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                                 'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none',
                                 selectedTab === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
                             )}
-                            //style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px' }}
+                            //style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 2px 2px 5px -1px, rgba(0, 0, 0, 0.15) 1px 1px 3px -1px' }} //decreasing
+                            //style={{ boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px' }} //increasing
                             style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
                             key={pageTitle}
                             onClick={() => setSelectedTab(idx)}
