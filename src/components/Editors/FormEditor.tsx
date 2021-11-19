@@ -97,7 +97,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     const indicator = React.useRef<HTMLDivElement>(null);
     const items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
 
-    const [{ x, y, width, height }, api] = useSpring(() => ({ x: 0, y: 0, width: 10, height: 40 }));
+    const [indiStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0 }));
 
     const animate = () => {
         const menuOffset = root.current?.getBoundingClientRect();
@@ -123,7 +123,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
 
     return (
         <div ref={root} className="relative flex">
-            <a.div ref={indicator} style={{ x, y, width, height, filter: 'drop-shadow(#0003 0px 0px .15rem)' }} className="absolute bg-gray-100 rounded z-[1] shadow">
+            <a.div ref={indicator} style={{ ...indiStyles, filter: 'drop-shadow(#0003 0px 0px .15rem)' }} className="absolute bg-gray-100 rounded z-[1] shadow">
             </a.div>
             <div className="flex justify-items-start space-x-1">
                 {tabs.map((pageTitle, idx) => (
