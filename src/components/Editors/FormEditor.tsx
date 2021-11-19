@@ -24,10 +24,10 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
     return (<>
         <UITooltip trigger={<IconInfo
             className="w-7 h-7 text-gray-300"
-            strokeWidth={1.2}
-            fill="#e5e7eb"
-            stroke="#8e8e8e"
-            style={{ filter: 'drop-shadow(#49f8e887 0px 0px 1rem)' }}
+            style={{ filter: 'drop-shadow(#907bdab0 0px 0px .2rem)' }}
+            fill="#fff"
+            stroke="#0004"
+            strokeWidth={1}
         />} arrow={true}>
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
                 <div className="font-bold">Form</div>
@@ -97,10 +97,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     const $indicator = React.useRef<HTMLDivElement>(null);
     const $items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
 
-    const [indicatorStyles, api] = useSpring(() => ({
-        to: { x: 0, y: 0, width: 0, height: 0, },
-        config: { mass: .3, tension: 280, friction: 14 }
-    }));
+    const [indicatorStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0, config: { mass: .3, tension: 280, friction: 14 } }));
 
     React.useEffect(() => {
         function animate() {
@@ -114,6 +111,21 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     width: width,
                     height: height,
                 });
+                
+                // api.start([{
+                //     x: left - menuOffset.x,
+                //     y: top - menuOffset.y,
+                //     width: width,
+                //     height: height,
+                // }
+                // ]);
+
+                // api.start(async (next, cancel) => ({
+                //     x: left - menuOffset.x,
+                //     y: top - menuOffset.y,
+                //     width: width,
+                //     height: height,
+                // }));
             }
         }
         animate();
@@ -203,13 +215,13 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                 <EditorInfo editorData={editorData} />
 
                 <div className="flex space-x-2">
-                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
+                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
                         onClick={() => {
                             setShow(false);
                             // toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >OK</button>
-                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow"
+                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
                         onClick={() => {
                             setShow(false);
                         }}
