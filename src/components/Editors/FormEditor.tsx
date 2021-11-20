@@ -136,7 +136,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
             <a.div
                 ref={$indicator}
                 style={{ ...indicatorStyles, filter: 'drop-shadow(#0003 0px 0px .05rem)' }}
-                className="absolute bg-gray-100 rounded border border-gray-900/50 z-[1] shadow"
+                className="absolute bg-gray-50 rounded border border-gray-900/50 z-[1] shadow"
             />
             <div className="flex justify-items-start space-x-1">
                 {tabs.map((pageTitle, idx) => (
