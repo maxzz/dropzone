@@ -3,7 +3,7 @@ import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
 import { formCaption, isAnyWhy } from '../../store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
-import { UITooltip } from '../UI/UITooltip';
+import { uitooltipSmall, UITooltip } from '../UI/UITooltip';
 import CardTitleMenu from './CardTitleMenu';
 import CardMenu from './CardMenu';
 import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
@@ -93,7 +93,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const fcatLen = fileUs.fcat?.names.length;
     const fname = React.useMemo(() => {
         return (
-            <UITooltip trigger={parsedFname({ fname: fileUs.fname })} arrow={true} popperOptions={{ delayShow: 750, placement: 'auto' }} >
+            <UITooltip trigger={parsedFname({ fname: fileUs.fname })} {...uitooltipSmall()} >
                 <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
 
                     {fileUs.fpath && <>
