@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 
-type UITooltipProps = {
-    trigger: React.ReactNode;
-    children?: React.ReactNode;
+type UITooltipOptions = {
     arrow?: boolean;
     portal?: boolean;
     popperOptions?: Config;
 };
+
+type UITooltipProps = {
+    trigger: React.ReactNode;
+    children?: React.ReactNode;
+} & UITooltipOptions;
 
 export function UITooltip({ trigger, children, arrow = false, portal = true, popperOptions }: UITooltipProps) {
     const {
@@ -25,7 +28,10 @@ export function UITooltip({ trigger, children, arrow = false, portal = true, pop
         }
     );
     const poperBody = visible && (
-        <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}> {/* add -mx-4 to add right/left margin from viewport edge, but it will shift arrow */}
+        <div
+            ref={setTooltipRef}
+            {...getTooltipProps({ className: 'tooltip-container' })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
+        >
             {children}
             {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
         </div>
@@ -37,4 +43,11 @@ export function UITooltip({ trigger, children, arrow = false, portal = true, pop
             {popper}
         </>
     );
+}
+
+export function uitooltipSmall(): UITooltipOptions {
+    return {
+        arrow: true,
+        popperOptions: { delayShow: 750, placement: 'auto' }
+    };
 }
