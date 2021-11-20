@@ -60,7 +60,16 @@ function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initia
     const [urls, setUrls] = useAtom(urlsAtom);
     const setDirty = useUpdateAtom(urls.dirtyAtom);
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
-    React.useEffect(() => setRawMD(Matching.getMatchRawData(urls.m)), [urls]);
+    React.useEffect(() => {
+        setRawMD(Matching.getMatchRawData(urls.m));
+    }, [urls.m]);
+    React.useEffect(() => {
+        if (rawMD.style === Matching.Style.undef) {
+            const newState = { ...urls, m: urls.o };
+            setUrls(newState);
+            setDirty(urlsDirty(newState));
+        }
+    }, [urls.o]);
     const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
     const disabled = rawMD.style === Matching.Style.undef;
     return (<>
