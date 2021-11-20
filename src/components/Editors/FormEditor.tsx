@@ -161,7 +161,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
 function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragBind: (...args: any[]) => ReactDOMAttributes; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
     return (
-        <div className="grid grid-rows-[auto,1fr]">
+        <div className="grid grid-rows-[auto,minmax(0,1fr)]">
             {/* Tabs */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
                 <div className="flex justify-items-start space-x-1">
@@ -173,7 +173,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
             <div className="text-sm bg-white">
                 {Object.values(pages).map((pageContent, idx) => (
                     <React.Fragment key={idx}>
-                        <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
+                        <div key={idx} className={`h-full bg-red-400 ${selectedTab === idx ? '' : 'hidden'}`}>
                             {pageContent}
                         </div>
                     </React.Fragment >
@@ -208,7 +208,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     };
 
     return (
-        <a.div style={{ x, y }} className={classNames("w-[460px] min-h-[640px] grid grid-rows-[1fr,auto]", "bg-gray-200 rounded overflow-hidden")}>
+        <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
             {/* Editor body */}
             <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragBind={dragBind} />
             {/* Editor footer */}
