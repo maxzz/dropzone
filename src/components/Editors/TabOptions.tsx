@@ -29,6 +29,123 @@ export function TabOptions({ editorData }: { editorData: EditorData; }) {
                 value={''} readOnly
             />
 
+
+
+
+
+
+
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+            <input
+                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                spellCheck={false}
+                value={''} readOnly
+            />
+
         </div>
     );
 }
