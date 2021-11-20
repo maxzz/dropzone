@@ -61,7 +61,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     return (<>
         {dirty &&
             <IconAttention
-                className="w-4 h-4 text-[#f6673b]"
+                className="self-end w-4 h-4 text-[#f6673b]"
                 fill="#ffad42" // #ff5400 stroke="#f6673b" strokeWidth={0.8}
                 style={{ filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' }}
                 title="Modified"
