@@ -7,6 +7,8 @@ import { EditorData } from '../../store/store';
 import { classNames } from '../../utils/classnames';
 import { Matching } from '../../store/manifest/mani-i';
 import UIUpDownIcon from '../UI/UIUpDownIcon';
+import { UITooltip, uitooltipSmall } from '../UI/UITooltip';
+import { arrow } from '@popperjs/core';
 
 type RadioButtonProps = {
     label: string;
@@ -36,11 +38,25 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
             className="px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            <RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />
-            <RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" />
-            <RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />
-            <RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />
-            <RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" title="Exclude this login from domain match" />
+            <UITooltip trigger={<RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" /> } {...uitooltipSmall()}>
+                <div className="text-xs">Same as original url</div>
+            </UITooltip>
+            
+            <UITooltip trigger={<RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" /> } {...uitooltipSmall()}>
+                <div className="text-xs">Match only domain of original url</div>
+            </UITooltip>
+
+            <UITooltip trigger={<RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" /> } {...uitooltipSmall()}>
+                <div className="text-xs">Wildcard match</div>
+            </UITooltip>
+
+            <UITooltip trigger={<RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" /> } {...uitooltipSmall()}>
+                <div className="text-xs">Regular expresssion</div>
+            </UITooltip>
+
+            <UITooltip trigger={<RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" /> } {...uitooltipSmall()}>
+                <div className="text-xs">Exclude this login from domain match</div>
+            </UITooltip>
         </div>
     );
 }
@@ -247,3 +263,7 @@ export function TabMatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         </div>
     );
 }
+function tooltipSmall(): JSX.IntrinsicAttributes & { trigger: React.ReactNode; children?: React.ReactNode; } & { arrow?: boolean | undefined; portal?: boolean | undefined; popperOptions?: import("react-popper-tooltip").Config | undefined; } {
+    throw new Error('Function not implemented.');
+}
+
