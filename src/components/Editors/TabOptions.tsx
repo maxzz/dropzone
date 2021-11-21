@@ -3,6 +3,17 @@ import { useAtom } from 'jotai';
 import { EditorData } from '../../store/store';
 import UIUpDownIcon from '../UI/UIUpDownIcon';
 
+export function DummyPlaceholder() {
+    return (<>
+        <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+        <input
+            className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+            spellCheck={false}
+            value={''} readOnly
+        />
+    </>);
+}
+
 export function TabOptions({ editorData }: { editorData: EditorData; }) {
     const [isOpen1, setIsOpen1] = React.useState(false);
     const [isOpen2, setIsOpen2] = React.useState(false);
@@ -43,43 +54,12 @@ export function TabOptions({ editorData }: { editorData: EditorData; }) {
             </div>
             {isOpen1 &&
                 <>
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
                 </>
             }
 
@@ -91,42 +71,12 @@ export function TabOptions({ editorData }: { editorData: EditorData; }) {
             </div>
             {isOpen2 &&
                 <>
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
-                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-                    <input
-                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                        spellCheck={false}
-                        value={''} readOnly
-                    />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
+                    <DummyPlaceholder />
                 </>
             }
 
