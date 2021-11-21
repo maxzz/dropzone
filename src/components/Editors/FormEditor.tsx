@@ -168,6 +168,10 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
     const pageScrollOfs = React.useRef<number[]>([...new Array(Object.keys(pages).length)].map((_, idx) => 0));
     console.log('arr', pageScrollOfs);
 
+    React.useLayoutEffect(() => {
+        scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]);
+    }, [selectedTab]);
+
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
             {/* Tabs */}
@@ -178,9 +182,6 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                         setActive={(v: number) => {
                             pageScrollOfs.current[selectedTab] = scrollableNodeRef.current?.scrollTop || 0;
                             setSelectedTab(v);
-                            if (scrollableNodeRef.current) {
-                                scrollableNodeRef.current.scrollTop = pageScrollOfs.current[v];
-                            }
                         }}
                     />
                 </div>
@@ -196,11 +197,6 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                             </div>
                         </React.Fragment >
                     ))}
-
-                    {
-                        (scrollableNodeRef.current) && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]) && null
-                    }
-
                 </UISimpleBar>
             </div>
         </div>
