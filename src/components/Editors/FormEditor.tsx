@@ -183,7 +183,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
             </div>
             {/* Pages */}
             <div className="text-sm bg-white">
-                <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }}>
+                <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
                     {Object.values(pages).map((pageContent, idx) => (
                         <React.Fragment key={idx}>
                             <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
