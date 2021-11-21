@@ -4,7 +4,7 @@ import { EditorData } from '../../store/store';
 
 export function TabOptions({ editorData }: { editorData: EditorData; }) {
     return (
-        <div className="p-4 h-full overflow-y-auto">
+        <div className="p-4">
             <div className="mb-1 font-bold text-gray-600">Choice name</div>
             <input
                 className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"

@@ -10,6 +10,7 @@ import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { toastWarning } from '../UI/UIToasts';
 import { UITooltip } from '../UI/UITooltip';
+import UISimpleBar from '../UI/UIScrollbar';
 import { TabMatchWindows, TabFields } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
@@ -171,13 +172,15 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
             </div>
             {/* Pages */}
             <div className="text-sm bg-white">
-                {Object.values(pages).map((pageContent, idx) => (
-                    <React.Fragment key={idx}>
-                        <div key={idx} className={`h-full bg-red-400 ${selectedTab === idx ? '' : 'hidden'}`}>
-                            {pageContent}
-                        </div>
-                    </React.Fragment >
-                ))}
+                <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`} style={{height: '100%'}}>
+                    {Object.values(pages).map((pageContent, idx) => (
+                        <React.Fragment key={idx}>
+                            <div key={idx} className={`h-full bg-red-400 ${selectedTab === idx ? '' : 'hidden'}`}>
+                                {pageContent}
+                            </div>
+                        </React.Fragment >
+                    ))}
+                </UISimpleBar>
             </div>
         </div>
     );
