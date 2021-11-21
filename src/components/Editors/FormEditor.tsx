@@ -163,14 +163,8 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
     const [selectedTab, setSelectedTab] = React.useState(0);
 
     const scrollableNodeRef = React.useRef<HTMLDivElement>();
-    //console.log('ref', scrollableNodeRef);
-
     const pageScrollOfs = React.useRef<number[]>([...new Array(Object.keys(pages).length)].map((_, idx) => 0));
-    console.log('arr', pageScrollOfs);
-
-    React.useLayoutEffect(() => {
-        scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]);
-    }, [selectedTab]);
+    React.useLayoutEffect(() => { scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]); }, [selectedTab]);
 
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
@@ -195,7 +189,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                             <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
                                 {pageContent}
                             </div>
-                        </React.Fragment >
+                        </React.Fragment>
                     ))}
                 </UISimpleBar>
             </div>
@@ -204,6 +198,8 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
 }
 
 function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+
+    // Caption dragging
 
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
     const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
