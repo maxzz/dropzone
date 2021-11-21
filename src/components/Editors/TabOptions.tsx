@@ -1,8 +1,11 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '../../store/store';
+import UIUpDownIcon from '../UI/UIUpDownIcon';
 
 export function TabOptions({ editorData }: { editorData: EditorData; }) {
+    const [isOpen1, setIsOpen1] = React.useState(false);
+    const [isOpen2, setIsOpen2] = React.useState(false);
     return (
         <div className="p-4">
             <div className="mb-1 font-bold text-gray-600">Choice name</div>
@@ -32,118 +35,100 @@ export function TabOptions({ editorData }: { editorData: EditorData; }) {
 
 
 
-            {/* Test below */}
+            {/* Test group 1 below */}
 
-            {/* <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            /> */}
+            <div className="mt-4 w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen1(!isOpen1)}>
+                <div className="">Group 1</div>
+                <UIUpDownIcon double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
+            </div>
+            {isOpen1 &&
+                <>
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
 
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
+                </>
+            }
 
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
-            <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
-            <input
-                className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
-                spellCheck={false}
-                value={''} readOnly
-            />
+            {/* Test group 2 below */}
+
+            <div className="mt-4 w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen2(!isOpen2)}>
+                <div className="">Group 2</div>
+                <UIUpDownIcon double={true} isUp={isOpen2} className="w-5 h-5 border rounded" />
+            </div>
+            {isOpen2 &&
+                <>
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                    <div className="mt-1 mb-1 font-bold text-gray-600">Quicklink name</div>
+                    <input
+                        className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
+                        spellCheck={false}
+                        value={''} readOnly
+                    />
+                </>
+            }
 
         </div>
     );
