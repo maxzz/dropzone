@@ -11,11 +11,12 @@ import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { toastWarning } from '../UI/UIToasts';
 import { UITooltip } from '../UI/UITooltip';
 import UISimpleBar from '../UI/UIScrollbar';
-import { TabMatchWindows, TabFields } from './Tabs';
+import { TabMatchWindows } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
 import { TabOptions } from './TabOptions';
 import { ReactDOMAttributes, useDrag } from '@use-gesture/react';
+import { TabFields } from './TabFields';
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);
