@@ -168,7 +168,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
 
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
-            {/* Tabs */}
+            {/* Tabs */} {/*  As alternative to style={{ touchAction: 'none' }} we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
                 <div className="flex justify-items-start space-x-1">
                     <TabSelector tabs={Object.keys(pages)}
