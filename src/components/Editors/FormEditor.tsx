@@ -164,7 +164,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
     const [selectedTab, setSelectedTab] = React.useState(0);
 
     const scrollableNodeRef = React.useRef<HTMLDivElement>();
-    const pageScrollOfs = React.useRef<number[]>([...new Array(Object.keys(pages).length)].map((_, idx) => 0));
+    const pageScrollOfs = React.useRef<number[]>(Array(Object.keys(pages).length).fill(0));
     React.useLayoutEffect(() => { scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]); }, [selectedTab]);
 
     return (
