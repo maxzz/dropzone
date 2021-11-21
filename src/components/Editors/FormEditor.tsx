@@ -112,7 +112,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     width: width,
                     height: height,
                 });
-                
+
                 // api.start([{
                 //     x: left - menuOffset.x,
                 //     y: top - menuOffset.y,
@@ -147,7 +147,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                             'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none z-10',
                             active === idx ? '' : 'text-gray-700/80 hover:bg-white/[0.2] hover:text-white/75'
                         )}
-                        style={{filter: 'drop-shadow(#0005 0px 0px .1rem)'}}
+                        style={{ filter: 'drop-shadow(#0005 0px 0px .1rem)' }}
                         key={pageTitle}
                         onClick={() => setActive(idx)}
                     >
@@ -161,18 +161,34 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
 
 function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragBind: (...args: any[]) => ReactDOMAttributes; }) {
     const [selectedTab, setSelectedTab] = React.useState(0);
+
+    const scrollableNodeRef = React.useRef<HTMLDivElement>();
+    //console.log('ref', scrollableNodeRef);
+
+    const pageScrollOfs = React.useRef<number[]>([...new Array(Object.keys(pages).length)].map((_, idx) => 0));
+    console.log('arr', pageScrollOfs);
+
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
             {/* Tabs */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
                 <div className="flex justify-items-start space-x-1">
-                    <TabSelector tabs={Object.keys(pages)} active={selectedTab} setActive={setSelectedTab} />
+                    <TabSelector tabs={Object.keys(pages)}
+                        active={selectedTab}
+                        setActive={(v: number) => {
+                            pageScrollOfs.current[selectedTab] = scrollableNodeRef.current?.scrollTop || 0;
+                            setSelectedTab(v);
+                            if (scrollableNodeRef.current) {
+                                scrollableNodeRef.current.scrollTop = pageScrollOfs.current[v];
+                            }
+                        }}
+                    />
                 </div>
                 {stateIndicator}
             </div>
             {/* Pages */}
             <div className="text-sm bg-white">
-                <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`}>
+                <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }}>
                     {Object.values(pages).map((pageContent, idx) => (
                         <React.Fragment key={idx}>
                             <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
@@ -180,6 +196,11 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                             </div>
                         </React.Fragment >
                     ))}
+
+                    {
+                        (scrollableNodeRef.current) && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]) && null
+                    }
+
                 </UISimpleBar>
             </div>
         </div>
@@ -203,7 +224,7 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
 
     // Pages
 
-    const pages = { //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
+    const pages = {
         'Web': <TabMatchWeb urlsAtom={urlsAtom} />,
         'Win32': <TabMatchWindows editorData={editorData} />,
         'Options': <TabOptions editorData={editorData} />,
@@ -244,3 +265,5 @@ export default FormEditor;
 //TODO: allow to close dialog if there is nothing dirty
 
 //TODO: should be only one 'Match Web': <MatchWeb /> or 'Match Windows': <MatchWindows /> (but the user should be able to switch Windows to Web?)
+
+//TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
