@@ -131,9 +131,9 @@ function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initia
 
                     <label className="mt-1 h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
-                            checked={(rawMD.opt & Matching.Options.matchtext) !== 0}
+                            checked={(rawMD.opt & Matching.Options.usequery) !== 0}
                             onChange={(event) => {
-                                let opt = event.target.checked ? rawMD.opt | Matching.Options.matchtext : rawMD.opt & ~Matching.Options.matchtext;
+                                let opt = event.target.checked ? rawMD.opt | Matching.Options.usequery : rawMD.opt & ~Matching.Options.usequery;
                                 const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
                                 setUrls(newState);
                                 setDirty(urlsDirty(newState));

@@ -91,6 +91,7 @@ export namespace Matching {
         undef = 0,
         caseinsensitive = 0x0001, // This option does not make sense for URLs (even for wildcards).
         matchtext = 0x0002,     // match text or don't; This option does not make sense for URLs.
+        usequery = 0x0004,      // match text or don't; This option does not make sense for URLs.
     }
 
     export type RawMatchData = {
