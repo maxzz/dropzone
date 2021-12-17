@@ -1,7 +1,8 @@
-export default function cx(...configs: any[]): string {
-    return configs.map(config => typeof config === 'string'
-        ? config
-        : Object.keys(config).filter(k => config[k]).join(' '),
+export default function cx(...configs: Array<string | Record<string, boolean>>): string {
+    return configs.map((config) => (
+        typeof config === 'string'
+            ? config
+            : Object.keys(config).filter((subKey: string) => config[subKey]).join(' ')),
     ).join(' ');
 }
 
