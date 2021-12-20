@@ -23,7 +23,7 @@
         "@use-gesture/react": "10.2.4",
         "clipboard-copy": "^4.0.1",
         "fast-xml-parser": "3.21.1",
-        "framer-motion": "5.5.3",
+        "framer-motion": "5.5.5",
         "jotai": "1.4.7",
         "react": "^17.0.0",
         "react-cool-virtual": "^0.5.5",
