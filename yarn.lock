@@ -1611,10 +1611,10 @@ isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-jotai@1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.4.7.tgz#ee6b6b1ae427240b223b88e834b15b60364edb69"
-  integrity sha512-EZFmhovnufIVoH0OAW6kuOv8RLjCX2HvHEqzwRG79l/LDeyp1BI+85vrEpR/fQmqh3jUhY4SyjhboEItd4+reQ==
+jotai@1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.4.8.tgz#39778920d51974962937da0556fcfac040901832"
+  integrity sha512-6rMXCoaB/Bx4MH4hO+kbCfq9n1xo1TtjA0MfjV4W7ShJLEpdJvTlF69AaiMjJkVmw38zX7v3d0pe3E4XswM+Xg==
 
 js-cookie@^2.2.1:
   version "2.2.1"
