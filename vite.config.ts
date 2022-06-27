@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import url from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
@@ -14,7 +14,7 @@ const buildAt = () => {
 export default defineConfig({
     base: '',
     plugins: [
-        reactRefresh(),
+        react(),
 
         {
             ...url({
