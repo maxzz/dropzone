@@ -1,16 +1,16 @@
 import React from 'react';
+import { useAtom } from 'jotai';
+import { FileUsAtom } from '@/store/store';
+import { convertToXml } from '@/store/manifest/xml-to-js';
+import Dialog from '@ui/UIDialog';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
     DropdownMenuItem as Item,
     DropdownMenuSeparator as Separator,
     DropdownMenuTrigger as Trigger
-} from '../UI/UiDropdownMenu';
+} from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
-import { useAtom } from 'jotai';
-import { FileUsAtom } from '@/store/store';
-import { convertToXml } from '@/store/manifest/xml-to-js';
-import Dialog from '../UI/UIDialog';
 
 function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     return (

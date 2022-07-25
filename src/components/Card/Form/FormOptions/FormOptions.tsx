@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '@/store/store';
-import { IconGear } from '../../../UI/UIIconsSymbolsDefs';
+import { IconGear } from '@ui/UIIconsSymbolsDefs';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
 import FormOptionsDetection from './FormOptionsDetection';
 import FormOptionsPool from './FormOptionsPool';

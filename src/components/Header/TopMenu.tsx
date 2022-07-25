@@ -8,7 +8,7 @@ import {
     DropdownMenuItem as Item,
     DropdownMenuSeparator as Separator,
     DropdownMenuTrigger as Trigger,
-} from '../UI/UiDropdownMenu';
+} from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {

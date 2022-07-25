@@ -2,12 +2,12 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { busyAtom, clearFilesAtom } from '@/store/store';
 import { useSpring, a } from '@react-spring/web';
-import { IconAppLogoMicroscope, IconRocket, IconTrash } from '../UI/UIIcons';
+import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
 import DropzoneArea from './Dropzone';
 import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
-import { IconMenuHamburger } from '../UI/UIIconsSymbolsDefs';
-//import { PopoverMenu } from '../UI/UIDropdownMenuLaag';
+import { IconMenuHamburger } from '@ui/UIIconsSymbolsDefs';
+//import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
 import Filters from './Filters';
 

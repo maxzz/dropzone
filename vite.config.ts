@@ -1,9 +1,9 @@
+import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { visualizer } from 'rollup-plugin-visualizer';
 import url from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
-import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const buildAt = () => {
     var d = new Date();
@@ -42,6 +42,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
+            '@ui': path.resolve(__dirname, './src/components/UI'),
             '@': path.resolve(__dirname, './src'),
         },
     },

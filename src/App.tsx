@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.scss';
-import Toaster from './components/UI/UiToaster';
+import Toaster from '@ui/UiToaster';
 import HeaderBar from './components/Header/HeaderBar';
-//import UISplitPane from './components/UI/UISplitPane';
-//import SimpleSplitPane from './components/UI/SimpleSplitPane';
-import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
+//import UISplitPane from '@ui/UISplitPane';
+//import SimpleSplitPane from '@ui/SimpleSplitPane';
+import UISymbolsDefs from '@ui/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import Dialogs from './components/Dialogs';
 //import SvgFontSpy from './utils/SvgFontSpy';

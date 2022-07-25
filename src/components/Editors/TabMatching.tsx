@@ -1,13 +1,13 @@
 import React from 'react';
 import { atom, PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
-import atomWithCallback from '../../hooks/atomsX';
-import { a, useSpring } from '@react-spring/web';
+import atomWithCallback from '@/hooks/atomsX';
 import { EditorData } from '@/store/store';
 import { Matching } from '@/store/manifest/mani-i';
-import UIUpDownIcon from '../UI/UIUpDownIcon';
-import { UITooltip, uitooltipSmall } from '../UI/UITooltip';
-import { classNames } from '../../utils/classnames';
+import { a, useSpring } from '@react-spring/web';
+import UIUpDownIcon from '@ui/UIUpDownIcon';
+import { UITooltip, uitooltipSmall } from '@ui/UITooltip';
+import { classNames } from '@/utils/classnames';
 import { arrow } from '@popperjs/core';
 
 type RadioButtonProps = {
