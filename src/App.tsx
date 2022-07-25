@@ -10,6 +10,7 @@ import UISymbolsDefs from './components/UI/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import Dialogs from './components/Dialogs';
 import SvgFontSpy from './utils/SvgFontSpy';
+import { Section2_Main } from './components/Section2_Main';
 // import CardMenu from './components/Card/CardMenu';
 // import CardMenuOverlays from './components/Card/CardMenuOverlays';
 
@@ -28,15 +29,7 @@ function App() {
 
                 <SelectedItems className="flex-none" />
 
-                <main className="flex-1 relative flex min-w-0 min-h-0">
-                    <SimpleSplitPane vertical={false} className="splitpane" minPersent={24}>
-                        {/* <UISplitPane split="vertical" defaultSize="50%"> */}
-                        {/* minSize={382} */}
-                        <FilesList />
-                        <RightPanel />
-                        {/* </UISplitPane> */}
-                    </SimpleSplitPane>
-                </main>
+                <Section2_Main />
 
                 <Dialogs />
 
