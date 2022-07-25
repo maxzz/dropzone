@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { EditorData } from '../../store/store';
+import { EditorData } from '@/store/store';
 import UIUpDownIcon from '../UI/UIUpDownIcon';
 
 export function DummyPlaceholder() {

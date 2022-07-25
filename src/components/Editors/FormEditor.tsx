@@ -3,9 +3,9 @@ import { atom, useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import atomWithCallback from '../../hooks/atomsX';
 import { a, useSpring } from '@react-spring/web';
-import { EditorData } from '../../store/store';
-import { formIdxName } from '../../store/store-functions';
-import { classNames } from '../../utils/classnames';
+import { EditorData } from '@/store/store';
+import { formIdxName } from '@/store/store-functions';
+import { classNames } from '@/utils/classnames';
 import { IconInfo } from '../UI/UIIcons';
 import { IconAttention } from '../UI/UIIconsSymbolsDefs';
 import { toastWarning } from '../UI/UIToasts';
@@ -15,8 +15,9 @@ import { TabMatchWindows } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';
 import { TabOptions } from './TabOptions';
-import { ReactDOMAttributes, useDrag } from '@use-gesture/react';
+import { useDrag } from '@use-gesture/react';
 import { TabFields } from './TabFields';
+import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const [fileUs] = useAtom(editorData.fileUsAtom);

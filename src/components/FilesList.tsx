@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { filteredAtom } from '../store/store';
+import { filteredAtom } from '@/store/store';
 import Card, { CardWRef } from './Card/Card';
 import UISimpleBar from './UI/UIScrollbar';
 //import useVirtual, { Item } from 'react-cool-virtual';

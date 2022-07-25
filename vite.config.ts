@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import url from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
+import path from 'path';
 
 const buildAt = () => {
     var d = new Date();
@@ -38,5 +39,19 @@ export default defineConfig({
             brotliSize: true,
         }),
 
-    ]
+    ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        },
+    },
+
+    build: {
+        minify: "esbuild",
+        target: "esnext",
+    },
+
+    server: {
+        port: 3000,
+    },
 });

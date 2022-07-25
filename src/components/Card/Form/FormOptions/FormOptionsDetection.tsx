@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUsAtom } from '../../../../store/store';
+import { FileUsAtom } from '@/store/store';
+import { Matching } from '@/store/manifest/mani-i';
+import { Transform } from '@/store/manifest/mani-functions';
 import { ToggleWithPortal } from './FormOptionsPool';
 import UITableFromObject from '../../UICard/UITableFromObject';
-import { Matching } from '../../../../store/manifest/mani-i';
-import { Transform } from '../../../../store/manifest/mani-functions';
 
 function woProtocol(url: string): string {
     return url.replace(/^https?:\/\//, '');

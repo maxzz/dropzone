@@ -8,8 +8,8 @@ import {
 } from '../UI/UiDropdownMenu';
 import toast from 'react-hot-toast';
 import { useAtom } from 'jotai';
-import { FileUsAtom } from '../../store/store';
-import { convertToXml } from '../../store/manifest/xml-to-js';
+import { FileUsAtom } from '@/store/store';
+import { convertToXml } from '@/store/manifest/xml-to-js';
 import Dialog from '../UI/UIDialog';
 
 function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {

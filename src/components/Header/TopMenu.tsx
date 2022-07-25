@@ -1,4 +1,7 @@
 import React from 'react';
+import { useAtom } from 'jotai';
+import { useUpdateAtom } from 'jotai/utils';
+import { foldAllCardsAtom, rightPanelAtom, selected4ActionAtom } from '@/store/store';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -6,9 +9,6 @@ import {
     DropdownMenuSeparator as Separator,
     DropdownMenuTrigger as Trigger,
 } from '../UI/UiDropdownMenu';
-import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
-import { foldAllCardsAtom, rightPanelAtom, selected4ActionAtom } from '../../store/store';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {

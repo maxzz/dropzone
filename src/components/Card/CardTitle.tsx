@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
-import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '../../store/store';
-import { formCaption, isAnyWhy } from '../../store/store-functions';
+import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '@/store/store';
+import { formCaption, isAnyWhy } from '@/store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '../UI/UIIconsSymbolsDefs';
 import { uitooltipSmall, UITooltip } from '../UI/UITooltip';
 import CardTitleMenu from './CardTitleMenu';

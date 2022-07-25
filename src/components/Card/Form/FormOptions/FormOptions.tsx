@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '../../../../store/store';
+import { useUpdateAtom } from 'jotai/utils';
+import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '@/store/store';
 import { IconGear } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from '../FormRows/FieldRowPreview';
 import FormOptionsDetection from './FormOptionsDetection';
 import FormOptionsPool from './FormOptionsPool';
-import { useUpdateAtom } from 'jotai/utils';
 
 export const BtnShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',

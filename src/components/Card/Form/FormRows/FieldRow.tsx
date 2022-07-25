@@ -1,12 +1,12 @@
 import React from 'react';
+import { useAtom } from 'jotai';
+import { useUpdateAtom } from 'jotai/utils';
 //import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UiIcons';
 import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '../../../UI/UIIconsSymbolsDefs';
 import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
-import { useAtom } from 'jotai';
-import { FileUs, SelectRowAtoms } from '../../../../store/store';
-import { useUpdateAtom } from 'jotai/utils';
+import { FileUs, SelectRowAtoms } from '@/store/store';
 import FieldRowPath from './FieldRowPath';
 
 type FieldRowProps = {
