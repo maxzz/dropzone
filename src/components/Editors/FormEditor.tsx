@@ -10,7 +10,7 @@ import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconsSymbolsDefs';
 import { toastWarning } from '@ui/UIToasts';
 import { UITooltip } from '@ui/UITooltip';
-import UISimpleBar from '@ui/UIScrollbar';
+import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 import { TabMatchWindows } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../Card/CardTitle';

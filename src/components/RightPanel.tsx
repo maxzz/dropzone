@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 //import { useUpdateAtom } from 'jotai/utils';
 import { FileUsAtom, rightPanelValueAtom } from '@/store/store';
 //import { IconBack } from '@ui/UiIcons';
-import UISimpleBar from '@ui/UIScrollbar';
+import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 import { CardTitleText } from './Card/CardTitle';
 
 function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {

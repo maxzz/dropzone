@@ -1,8 +1,6 @@
 import React from 'react';
 import Toaster from '@ui/UiToaster';
 import HeaderBar from './components/Header/HeaderBar';
-//import UISplitPane from '@ui/UISplitPane';
-//import SimpleSplitPane from '@ui/SimpleSplitPane';
 import UISymbolsDefs from '@ui/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import Dialogs from './components/Dialogs';
@@ -13,7 +11,6 @@ import { Section2_Main } from './components/Section2_Main';
 import './App.scss';
 
 function App() {
-    // const atom = 1;
     return (
         <React.Fragment>
             <Toaster />

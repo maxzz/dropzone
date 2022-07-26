@@ -1,7 +1,8 @@
 import React from 'react';
 import FilesList from './FilesList';
 import RightPanel from './RightPanel';
-import SimpleSplitPane from '@ui/SimpleSplitPane';
+//import UISplitPane from '@ui/nun/UISplitPane';
+import SimpleSplitPane from '@ui/SimpleSplitPane/SimpleSplitPane';
 
 export function Section2_Main() {
     return (
