@@ -1,13 +1,12 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
+import { useAtom, useSetAtom } from 'jotai';
 import { FileUs, SelectRowAtoms } from '@/store/store';
+import { FieldRowPreview } from './FieldRowPreview';
+import { FormRowTypeIcon } from './FieldRowTypeIcon';
+import { FieldRowPath } from './FieldRowPath';
+import { UIToggleWithPortal } from '../../UICard/UIToggleWithPortal';
 //import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UiIcons';
 import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UIIconSymbols';
-import FieldRowPreview from './FieldRowPreview';
-import FormRowTypeIcon from './FieldRowTypeIcon';
-import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';
-import FieldRowPath from './FieldRowPath';
 
 type FieldRowProps = {
     fileUs: FileUs;
@@ -16,13 +15,13 @@ type FieldRowProps = {
     selectRowAtoms: SelectRowAtoms;
 };
 
-function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
+export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
 
     const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const selectThemFormAtom = form.type === 0 ? selectRowAtoms.cpassAtom : selectRowAtoms.loginAtom;
     const [thisSelectedRow, setThisSelectedRow] = useAtom(selectThisFormAtom);
-    const setThemSelectedRow = useUpdateAtom(selectThemFormAtom);
+    const setThemSelectedRow = useSetAtom(selectThemFormAtom);
 
     const hasPreview = !!field.path.loc;
     const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
@@ -55,7 +54,8 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
     }
 
     return (
-        <div className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
+        <div
+            className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
             onClick={selectThisRow}
         >
             {/* 1. use it */}
@@ -145,15 +145,13 @@ function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.E
                         {<FieldRowPath className="" fileUs={fileUs} form={form} field={field} />}
                     </div>
                     :
-                    <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">This field has no path and cannot be used.</div> }
+                    <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">This field has no path and cannot be used.</div>}
             </UIToggleWithPortal>
 
             {/* 10.done */}
         </div>
     );
 }
-
-export default FieldRow;
 
 //TODO: policy field
 //TODO: rfield (in out), rfieldrindex

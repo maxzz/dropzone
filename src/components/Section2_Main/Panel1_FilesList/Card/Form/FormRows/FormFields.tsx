@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtom, SelectRowAtoms } from '@/store/store';
-import FieldRow from './FieldRow';
+import { FieldRow } from './FieldRow';
 
 type FormFieldsProps = {
     fileUsAtom: FileUsAtom;
@@ -9,17 +9,15 @@ type FormFieldsProps = {
     selectRowAtoms: SelectRowAtoms;
 };
 
-function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
-    const [fileUs] = useAtom(fileUsAtom);
+export function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
+    const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
     if (!metaForm) {
         return null;
     }
     return (<>{
         metaForm.fields?.map((field, idx) =>
-            <FieldRow fileUs={fileUs}form={metaForm} field={field} selectRowAtoms={selectRowAtoms} key={idx} />
+            <FieldRow fileUs={fileUs} form={metaForm} field={field} selectRowAtoms={selectRowAtoms} key={idx} />
         )
     }</>);
 }
-
-export default FormFields;

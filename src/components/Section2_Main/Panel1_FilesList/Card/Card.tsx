@@ -1,10 +1,10 @@
 import React, { forwardRef, HTMLAttributes, memo, useEffect, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms } from '@/store/store';
-import CardTitle from './CardTitle';
+import { CardTitle } from './CardTitle';
 import { FormOptions } from './Form/FormOptions/FormOptions';
-import FormFields from './Form/FormRows/FormFields';
-import UICardFormButton from './UICard/UICardFormButton';
+import { FormFields } from './Form/FormRows/FormFields';
+import { UICardFormButton } from './UICard/UICardFormButton';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }) {
     return (<>

@@ -31,7 +31,7 @@ type PreviewProps = {
     onSelected?: (selected: number) => void;
 } & React.HTMLAttributes<SVGSVGElement>;
 
-function FieldRowPreview({ small, form, selected, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
+export function FieldRowPreview({ small, form, selected, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
     const view = form.view;
     if (!view || !view.rects.length) {
         return null;
@@ -71,8 +71,6 @@ function FieldRowPreview({ small, form, selected, onSelected, ...attrs }: Previe
         </svg>
     );
 }
-
-export default FieldRowPreview;
 
 //TODO: remove rect outside fields rect: {5cd5ac7d-7d6e-4395-94a6-36be1d6beea0}.dpm
 //TODO: add abs switch

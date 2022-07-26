@@ -17,7 +17,7 @@ type UICardFormButtonProps = {
     onClick: () => void;
 };
 
-function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
+export function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
     const isWeb = !!disp?.domain;
@@ -38,6 +38,3 @@ function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProp
         </button>
     );
 }
-
-export default UICardFormButton;
-

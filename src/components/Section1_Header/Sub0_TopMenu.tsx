@@ -1,6 +1,5 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { foldAllCardsAtom, rightPanelAtom, selected4ActionAtom } from '@/store/store';
 import {
     DropdownMenu as Menu,
@@ -13,7 +12,7 @@ import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
-    const [rightPanel] = useAtom(rightPanelAtom);
+    const rightPanel = useAtomValue(rightPanelAtom);
     const disabled = !rightPanel;
     function click() {
         if (rightPanel) {
@@ -38,14 +37,15 @@ function MenuItemMarkSelected() {
 }
 
 function MenuItemConvert() {
-    const [rightPanel] = useAtom(rightPanelAtom);
+    //const rightPanel = useAtomValue(rightPanelAtom);
     //const disabled = !rightPanel;
     const disabled = true;
     return (
         <Item
             disabled={disabled}
             onClick={(event) => {
-                event.preventDefault(); toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } });
+                event.preventDefault();
+                toast('Not implemented yet.', { style: { backgroundColor: '#f19700' } });
             }}
             title="Convert manual mode manifest to regular Chrome manifest. Select manifest first."
         >
@@ -55,8 +55,8 @@ function MenuItemConvert() {
 }
 
 function MenuItemFolding() {
-    const toggleFolding = useUpdateAtom(foldAllCardsAtom);
-    //const setBusy = useUpdateAtom(busyAtom);
+    const toggleFolding = useSetAtom(foldAllCardsAtom);
+    //const setBusy = useSetAtom(busyAtom);
     return (
         <Item
             onSelect={async () => {
@@ -69,7 +69,7 @@ function MenuItemFolding() {
 }
 
 export const Sub0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
-    const toggleFolding = useUpdateAtom(foldAllCardsAtom);
+    //const toggleFolding = useSetAtom(foldAllCardsAtom);
     return (
         <Menu>
             <Trigger>

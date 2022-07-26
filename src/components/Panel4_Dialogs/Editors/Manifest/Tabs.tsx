@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAtom } from 'jotai';
 import { EditorData } from '@/store/store';
 
 export function TabMatchWindows({ editorData }: { editorData: EditorData; }) {

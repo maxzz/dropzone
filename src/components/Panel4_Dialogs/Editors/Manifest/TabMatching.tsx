@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, HTMLAttributes, useEffect, useState } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from 'jotai';
 import { EditorData } from '@/store/store';
 import { Matching } from '@/store/manifest/mani-i';
@@ -13,7 +13,7 @@ type RadioButtonProps = {
     groupName?: string;
     value?: number;
     checked: boolean;
-} & React.HTMLAttributes<HTMLLabelElement>;
+} & HTMLAttributes<HTMLLabelElement>;
 
 function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonProps) {
     return (
@@ -34,7 +34,7 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
     return (
         <div
             className="px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
-            onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
+            onChange={(v: ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
             <UITooltip trigger={<RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />} {...uitooltipSmall()}>
                 <div className="text-xs">Same as original url</div>
@@ -74,17 +74,17 @@ function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initia
     const [urls, setUrls] = useAtom(urlsAtom);
     const setDirty = useSetAtom(urls.dirtyAtom);
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
-    React.useEffect(() => {
+    useEffect(() => {
         setRawMD(Matching.getMatchRawData(urls.m));
     }, [urls.m]);
-    React.useEffect(() => {
+    useEffect(() => {
         if (rawMD.style === Matching.Style.undef) {
             const newState = { ...urls, m: urls.o };
             setUrls(newState);
             setDirty(urlsDirty(newState));
         }
     }, [urls.o]);
-    const [errorHint, setErrorHint] = React.useState(''); // 'This pattern is not valid'
+    const [errorHint, setErrorHint] = useState(''); // 'This pattern is not valid'
     const disabled = rawMD.style === Matching.Style.undef;
     return (<>
         <div className="flex space-x-4">
@@ -169,8 +169,8 @@ function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initia
 
 function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
-    const [isOpen, setIsOpen] = React.useState(urls.o !== urls.m);
-    const [initialMD] = React.useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+    const [isOpen, setIsOpen] = useState(urls.o !== urls.m);
+    const [initialMD] = useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
     const stylesDropdown = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">
@@ -215,7 +215,7 @@ function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
     const setDirty = useSetAtom(urls.dirtyAtom);
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const stylesDropdown = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
     return (<>
         <div className="mt-6 mb-1 flex items-center">

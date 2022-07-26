@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '@/store/store';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
@@ -15,8 +15,8 @@ export function DummyPlaceholder() {
 }
 
 export function TabOptions({ editorData }: { editorData: EditorData; }) {
-    const [isOpen1, setIsOpen1] = React.useState(false);
-    const [isOpen2, setIsOpen2] = React.useState(false);
+    const [isOpen1, setIsOpen1] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
     return (
         <div className="p-4">
             <div className="mb-1 font-bold text-gray-600">Choice name</div>

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { UIToaster } from '@ui/UIToaster';
 import { Section1_Header } from './components/Section1_Header/Section1_Header';
-import { UISymbolDefs } from '@ui/UIIconSymbols';
+import { Section2_Main } from './components/Section2_Main/Section2_Main';
 import { Panel3_SelectedItems } from './components/Section2_Main/Panel3_SelectedItems/Panel3_SelectedItems';
 import { Panel4_Dialogs } from './components/Panel4_Dialogs/Panel4_Dialogs';
-import { Section2_Main } from './components/Section2_Main/Section2_Main';
-// import CardMenu from './components/Card/CardMenu';
-// import CardMenuOverlays from './components/Card/CardMenuOverlays';
+import { UISymbolDefs } from '@ui/UIIconSymbols';
+// import { CardMenu } from './components/Card/CardMenu';
+// import { CardMenuOverlays } from './components/Card/CardMenuOverlays';
 import './App.scss';
 // import { SvgFontSpy } from './utils/SvgFontSpy';
 

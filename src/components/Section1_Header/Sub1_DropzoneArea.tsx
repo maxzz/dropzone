@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
-import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
+import { useAtom, useSetAtom } from 'jotai';
 import { clearFilesAtom, filteredAtom, setFilesAtom } from '@/store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconDocumentsAccepted } from '@ui/UIIcons';
@@ -38,7 +37,7 @@ type DropzoneBaseProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 function DropzoneBase({ className, style = {}, classNameActive, stylesActive = {}, children }: DropzoneBaseProps) {
-    const setFiles = useUpdateAtom(setFilesAtom);
+    const setFiles = useSetAtom(setFilesAtom);
 
     const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[], event: DropEvent) => {
         //console.log('dropped', acceptedFiles, rejectedFiles, event);

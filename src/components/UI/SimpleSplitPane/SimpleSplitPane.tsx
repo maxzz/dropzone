@@ -34,10 +34,10 @@ function cx(...configs: any[]) {
 
 function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.Element {
     const { vertical = true, minPersent = 1, maxPersent = 99, className, children, position, setPosition, onResize } = props;
-   
+
     const container = React.useRef<HTMLDivElement | null>(null);
 
-    const onMouseDown = React.useCallback(function (event) {
+    const onMouseDown = React.useCallback(function (event: React.MouseEvent) {
         if (!container.current) {
             return;
         }
@@ -48,7 +48,7 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.El
         const offset = vertical ? container.current.offsetTop + containerOfs.y : container.current.offsetLeft + containerOfs.x;
         const size = vertical ? container.current.offsetHeight : container.current.offsetWidth;
 
-        let moveHandler = (event: MouseEvent) => {
+        const moveHandler = (event: MouseEvent) => {
             event.preventDefault();
 
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
@@ -56,7 +56,7 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.El
             setPosition(Math.min(Math.max(minPersent, newPosition), maxPersent));
         };
 
-        let upHandler = () => {
+        const upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
             onResize && onResize(position);
@@ -95,7 +95,7 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.El
     );
 }
 
-function SimpleSplitPane(props: SplitPaneProps): JSX.Element {
+export function SimpleSplitPane(props: SplitPaneProps): JSX.Element {
     // Position is really the size (width or height) of the first (left or top)
     // panel, as percentage of the parent containers size. The remaining elements
     // are sized and layed out through flexbox.
@@ -104,8 +104,6 @@ function SimpleSplitPane(props: SplitPaneProps): JSX.Element {
         <SimpleSplitPaneBody position={position} setPosition={setPosition} {...props} />
     );
 }
-
-export default SimpleSplitPane;
 
 //TODO: styles
 //TODO: highlight moving bar by timer

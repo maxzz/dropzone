@@ -1,7 +1,7 @@
 import React from 'react';
 import clipboardCopy from 'clipboard-copy';
 
-export default function useClipcoardCopy(options: { msOk?: number, msError?: number; } = {}): readonly [{ error: boolean; message: string; }, (text?: string) => Promise<void>] {
+export function useClipcoardCopy(options: { msOk?: number, msError?: number; } = {}): readonly [{ error: boolean; message: string; }, (text?: string) => Promise<void>] {
     const [copyResult, setCopyResult] = React.useState({ error: false, message: '' });
 
     async function copy(text?: string) {
@@ -13,7 +13,7 @@ export default function useClipcoardCopy(options: { msOk?: number, msError?: num
             } catch (error) {
                 showtime = options.msError || 1000;
                 console.error(error);
-                setCopyResult({ error: true, message: error });
+                setCopyResult({ error: true, message: (error as Error).message });
             }
             setTimeout(() => { setCopyResult({ error: false, message: '' }); }, showtime); // reset. re-entrancy is OK here.
         }

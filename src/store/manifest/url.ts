@@ -271,8 +271,8 @@ export namespace tmurl {
 
 export function urlDomain(url: string): string {
     // 0. DP manual mode and win32 apps don't have url, but Navi sent these manifests anyway. 'fake.domain' returned for all empty strings.
-    let u = url ? (tmurl.url(url) as IUrlParts) : {}; //TODO: This can be regex and tmurl.url() will fail.
-    return u.domain || u.hostname || u.path || ''; // path is specified for 'file' protocol.
+    let u = url ? (tmurl.url(url) as IUrlParts) : {};   //TODO: This can be regex and tmurl.url() will fail.
+    return u.domain || u.hostname || u.path || '';      // path is specified for 'file' protocol.
 }
 
 export function removeQuery(url: string | undefined): string {

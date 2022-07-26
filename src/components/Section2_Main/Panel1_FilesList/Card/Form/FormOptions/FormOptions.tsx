@@ -1,11 +1,10 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
+import { useAtom, useSetAtom } from 'jotai';
 import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '@/store/store';
 import { IconGear } from '@ui/UIIconSymbols';
-import FieldRowPreview from '../FormRows/FieldRowPreview';
-import FormOptionsDetection from './FormOptionsDetection';
-import FormOptionsPool from './FormOptionsPool';
+import { FieldRowPreview } from '../FormRows/FieldRowPreview';
+import { FormOptionsDetection } from './FormOptionsDetection';
+import { FormOptionsPool } from './FormOptionsPool';
 
 export const BtnShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
@@ -33,7 +32,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
 }
 
 function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
-    const setFormEditorData = useUpdateAtom(formEditorDataAtom);
+    const setFormEditorData = useSetAtom(formEditorDataAtom);
     return (
         <div
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}

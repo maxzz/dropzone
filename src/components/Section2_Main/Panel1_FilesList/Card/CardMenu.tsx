@@ -82,12 +82,10 @@ export function Example() {
     );
 }
 
-function CardMenu() {
+export function CardMenu() {
     return (
         <div className="">
             <Example />
         </div>
     );
 }
-
-export default CardMenu;

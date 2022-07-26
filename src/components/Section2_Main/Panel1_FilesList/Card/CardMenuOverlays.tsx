@@ -51,7 +51,7 @@ function DropdownButton({
     );
 }
 
-function CardMenuOverlays() {
+export function CardMenuOverlays() {
     const [show, setShow] = React.useState(false);
     return (
         <div className="">
@@ -59,5 +59,3 @@ function CardMenuOverlays() {
         </div>
     );
 }
-
-export default CardMenuOverlays;

@@ -2,9 +2,9 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '@/store/store';
 import { useKey } from 'react-use';
-import { IconCaseSensitive, IconClose, IconSearch } from '@ui/UIIcons';
 import { UITooltip } from '@ui/UITooltip';
 import { IconDot } from '@ui/UIIconSymbols';
+import { IconCaseSensitive, IconClose, IconSearch } from '@ui/UIIcons';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterCaseSensitiveAtom);

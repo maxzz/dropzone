@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { FileUsAtom } from '@/store/store';
 import { convertToXml } from '@/store/manifest/xml-to-js';
-import Dialog from '@ui/UIDialog';
+import { Dialog } from '@ui/UIDialog';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -24,8 +24,8 @@ function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     );
 }
 
-export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) => {
-    const [fileUs] = useAtom(fileUsAtom);
+export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) {
+    const fileUs = useAtomValue(fileUsAtom);
 
     function saveXmlFile() {
         const res = convertToXml(fileUs);
@@ -79,6 +79,4 @@ export const CardTitleMenu = ({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; ic
             </Content>
         </Menu>
     );
-};
-
-export default CardTitleMenu;
+}

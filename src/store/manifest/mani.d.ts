@@ -76,11 +76,11 @@ declare module Mani {
     }
 
     interface Descriptor {
-        id: string;         // "{fe94ea4f-ac76-4f7d-9c74-fa14abca889b}"
-        created: string;    // "1d57495 61c6f733"
-        modified: string;   // "1d57496 87bed3e8",
-        integrity?: string; // "OTS2.056a41167041b1ea2c529494aeb606d0e"
-        version: string;    // "2.4.3"
+        id: string;             // "{fe94ea4f-ac76-4f7d-9c74-fa14abca889b}"
+        created: string;        // "1d57495 61c6f733"
+        modified: string;       // "1d57496 87bed3e8",
+        integrity?: string;     // "OTS2.056a41167041b1ea2c529494aeb606d0e"
+        version: string;        // "2.4.3"
     }
 
     namespace Customization {   // Customization
@@ -101,9 +101,9 @@ declare module Mani {
 
 } //declare module Mani
 
-declare module Catalog {    // pmat/include/ots_storagecatalog_io.h
+declare module Catalog {        // pmat/include/ots_storagecatalog_io.h
     interface Descriptor {
-        id?: string;        // default as guid
+        id?: string;            // default as guid
     }
 
     interface Name {
@@ -111,9 +111,9 @@ declare module Catalog {    // pmat/include/ots_storagecatalog_io.h
         dbname: string;
         value?: string;
         ownernote?: string;
-        askalways?: boolean; // undefined : '1' 
-        onetvalue?: boolean; // undefined : '1'
-        password?: boolean;  // undefined : '1'
+        askalways?: boolean;    // undefined : '1' 
+        onetvalue?: boolean;    // undefined : '1'
+        password?: boolean;     // undefined : '1'
     }
 
     interface Root {
@@ -122,18 +122,18 @@ declare module Catalog {    // pmat/include/ots_storagecatalog_io.h
     }
 }
 
-declare module MPath {      // Meta path. Manifest unpacked path data
+declare module MPath {          // Meta path. Manifest unpacked path data
 
-    interface p4a {         // Chunk: p4a (from: unpack_fromstring())
+    interface p4a {             // Chunk: p4a (from: unpack_fromstring())
         rnumber: number;
         roleString: string;
         className: string;
         name?: string;
     }
 
-    type p4 = p4a;          // Chunk: p4
+    type p4 = p4a;              // Chunk: p4
 
-    interface sid {         // Chunk: sid
+    interface sid {             // Chunk: sid
         version: string;
         generatedId: string;
         formName: string;
@@ -141,39 +141,39 @@ declare module MPath {      // Meta path. Manifest unpacked path data
         outerHtml?: string;
     }
 
-    interface did2 {        // Chunk: did2
+    interface did2 {            // Chunk: did2
         s1: string;
         s2: string;
         s3: string;
         s4?: string;
     }
 
-    interface loc {         // Chunk: loc (size is in client area or against 1920x1200 or 1600x1200?)
+    interface loc {             // Chunk: loc (size is in client area or against 1920x1200 or 1600x1200?)
         x: number;
         y: number;
         w: number;
         h: number;
-        f?: number;         // 0 | 1 if the last element in field (this is internal and not saved).
-        i?: number;         // index of rect before dedupe (this is internal and not saved).
+        f?: number;             // 0 | 1 if the last element in field (this is internal and not saved).
+        i?: number;             // index of rect before dedupe (this is internal and not saved).
     }
 
-    interface sn {          // Chunk: sn
-        total: number;      // total blocks
-        current: number;    // current block
-        parts: string[];    // block parts
+    interface sn {              // Chunk: sn
+        total: number;          // total blocks
+        current: number;        // current block
+        parts: string[];        // block parts
     }
 
 } //declare module MPath
 
-declare module Meta {       // Manifest unpacked forms, as meta data
+declare module Meta {           // Manifest unpacked forms, as meta data
 
-    interface Path {        // Collection of path items (chunks)
+    interface Path {            // Collection of path items (chunks)
         p4a?: MPath.p4a[];
         p4?: MPath.p4[];
-        loc?: string;       // "x y w h | x y w h ... | x y w h"
+        loc?: string;           // "x y w h | x y w h ... | x y w h"
         sid?: MPath.sid;
         did2?: string;
-        sn?: MPath.sn;      // script number
+        sn?: MPath.sn;          // script number
     }
 
     type Chunk = keyof Meta.Path; //type ChunkName = 'p4a' | 'p4' | 'loc' | 'sid' | 'did2' | 'sn';
@@ -181,22 +181,22 @@ declare module Meta {       // Manifest unpacked forms, as meta data
     interface Field {
         mani: Mani.Field,
         path: Path;
-        pidx: number;       // index in the form
-        ridx: number;       // for preview index in form.view.rects (or -1 if no found, but it should never happens if view exist)
+        pidx: number;           // index in the form
+        ridx: number;           // for preview index in form.view.rects (or -1 if no found, but it should never happens if view exist)
     }
 
-    interface Disp {        // Display information about form
-        domain?: string;    // Form website domain if website.
-        isScript: boolean;  // Form has at least one script field.
-        noFields: boolean;  // Form has no fields, i.e. excluded website.
-        isIe: boolean;      // Form detection processname contains 'iexplore.exe' i.e. login was trained with IE as (manual or normal and this depends on isScript).
-        bailOut?: string[]; // Manifest needs extra attention
+    interface Disp {            // Display information about form
+        domain?: string;        // Form website domain if website.
+        isScript: boolean;      // Form has at least one script field.
+        noFields: boolean;      // Form has no fields, i.e. excluded website.
+        isIe: boolean;          // Form detection processname contains 'iexplore.exe' i.e. login was trained with IE as (manual or normal and this depends on isScript).
+        bailOut?: string[];     // Manifest needs extra attention
     }
 
     interface Bounds {
-        x1: number;         // x1,y1 ┌──────┐
-        y1: number;         //       │      │
-        x2: number;         //       └──────┘ x2,y2
+        x1: number;             // x1,y1 ┌──────┐
+        y1: number;             //       │      │
+        x2: number;             //       └──────┘ x2,y2
         y2: number;
     }
 
@@ -207,12 +207,12 @@ declare module Meta {       // Manifest unpacked forms, as meta data
 
     interface Form {
         mani: Mani.Form;
-        type: number;       // 0 - login; 1 - password change
+        type: number;           // 0 - login; 1 - password change
         disp: Disp;
         pool: string[];
-        view?: View;        // view exists only for IE and win32
-        fields: Field[];    // each item corresponds to each field
-        rother: number[];   // array of ridx from another form, i.e for form.type 0 its rects indices of form.type 1, and vice versa
+        view?: View;            // view exists only for IE and win32
+        fields: Field[];        // each item corresponds to each field
+        rother: number[];       // array of ridx from another form, i.e for form.type 0 its rects indices of form.type 1, and vice versa
     }
 
 } //declare module Meta

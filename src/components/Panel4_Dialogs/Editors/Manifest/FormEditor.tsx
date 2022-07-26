@@ -1,22 +1,22 @@
 import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
-import { a, useSpring } from '@react-spring/web';
 import { EditorData } from '@/store/store';
 import { formIdxName } from '@/store/store-functions';
 import { classNames } from '@/utils/classnames';
-import { IconInfo } from '@ui/UIIcons';
-import { IconAttention } from '@ui/UIIconSymbols';
-//import { toastWarning } from '@ui/UIToaster';
 import { UITooltip } from '@ui/UITooltip';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 import { TabMatchWindows } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
 import { parsedFname } from '../../../Section2_Main/Panel1_FilesList/Card/CardTitle';
 import { TabOptions } from './TabOptions';
-import { useDrag } from '@use-gesture/react';
 import { TabFields } from './TabFields';
+import { a, useSpring } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
+import { IconInfo } from '@ui/UIIcons';
+import { IconAttention } from '@ui/UIIconSymbols';
+//import { toastWarning } from '@ui/UIToaster';
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);

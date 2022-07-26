@@ -1,7 +1,7 @@
-import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
+import { PrimitiveAtom, useAtom } from 'jotai';
 import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '@/store/store';
-import LabeledSwitch from '@ui/UiSwitch';
+import { LabeledSwitch } from '@ui/UiSwitch';
 import { Sub2_FilterSearch } from './Sub2_FilterSearch';
 
 function LabeWithNumber({ label, atomCnt }: { label: string; atomCnt: PrimitiveAtom<number>; }) {

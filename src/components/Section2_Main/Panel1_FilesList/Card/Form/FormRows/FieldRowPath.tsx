@@ -108,7 +108,7 @@ function PartString({ label, part }: { label: string; part: any; }) {
     </>);
 }
 
-function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs; form: Meta.Form; field: Meta.Field; } & React.HTMLAttributes<HTMLDivElement>) {
+export function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs; form: Meta.Form; field: Meta.Field; } & React.HTMLAttributes<HTMLDivElement>) {
 
     // p4a?: MPath.p4a[];
     // p4?: MPath.p4[];
@@ -133,5 +133,3 @@ function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs;
         </div>
     );
 }
-
-export default FieldRowPath;

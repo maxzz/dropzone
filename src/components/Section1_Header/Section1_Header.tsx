@@ -6,10 +6,10 @@ import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
 import { Sub0_TopMenu } from './Sub0_TopMenu';
 import { Sub1_DropzoneArea } from './Sub1_DropzoneArea';
 import { Sub3_Filters } from './Sub3_Filters';
-import toast from 'react-hot-toast';
 import { IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
+import toast from 'react-hot-toast';
 
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },

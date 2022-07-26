@@ -2,7 +2,7 @@ import React from 'react';
 import { Panel1_FilesList } from './Panel1_FilesList/Panel1_FilesList';
 import { Panel2_Right } from './Panel2_Right/Panel2_Right';
 //import UISplitPane from '@ui/nun/UISplitPane';
-import SimpleSplitPane from '@ui/SimpleSplitPane/SimpleSplitPane';
+import { SimpleSplitPane } from '@ui/SimpleSplitPane/SimpleSplitPane';
 
 export function Section2_Main() {
     return (

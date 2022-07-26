@@ -2,7 +2,7 @@ import React from 'react';
 //import { IconButton, IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText } from '@ui/UiIcons';
 import { IconButton, IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText } from '@ui/UIIconSymbols';
 
-function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {
+export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }): JSX.Element {
     return (
         <div className={`w-4 h-4 mr-1 ${className}`} title={`Field type: ${field.type}`}>
             {field.type === "edit" && (field.password ? <IconInputFieldPsw fill="#38a000" /> : <IconInputFieldText className="opacity-75" />)}
@@ -13,5 +13,3 @@ function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: 
         </div>
     );
 }
-
-export default FormRowTypeIcon;

@@ -66,7 +66,7 @@ type LabeledSwitchProps = {
     onChange: () => void;
 } & React.HTMLAttributes<HTMLLabelElement>;
 
-function LabeledSwitch({ children, className, title, value, onChange }: LabeledSwitchProps) {
+export function LabeledSwitch({ children, className, title, value, onChange }: LabeledSwitchProps) {
     return (
         <label className={`flex flex-row items-center md:flex-col md:text-[.65rem] md:pb-2 lg:flex-row lg:text-sm lg:pb-0 select-none ${className}`} title={title}>
             {children}
@@ -81,5 +81,3 @@ function LabeledSwitch({ children, className, title, value, onChange }: LabeledS
         </label>
     );
 }
-
-export default LabeledSwitch;

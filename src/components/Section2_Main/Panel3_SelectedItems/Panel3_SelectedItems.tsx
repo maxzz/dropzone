@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { FileUsAtom, selected4ActionAtom } from '@/store/store';
 import { IconDocument } from '@ui/UIIcons';
 
 function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
-    const [selected] = useAtom(selectedAtom);
+    const selected = useAtomValue(selectedAtom);
     const mark = false;
     if (!selected) {
         return null;
@@ -22,7 +22,7 @@ function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
 
 export function Panel3_SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    const [selectedAtoms] = useAtom(selected4ActionAtom);
+    const selectedAtoms = useAtomValue(selected4ActionAtom);
 
     if (!selectedAtoms.length) {
         return null;

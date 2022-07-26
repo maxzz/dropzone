@@ -54,7 +54,7 @@ export function ToggleWithPortal({ children, text }: { children?: React.ReactNod
     );
 }
 
-function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
+export function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
         return <DropDownButton text={"pool"} />;
     }
@@ -77,5 +77,3 @@ function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
         </ToggleWithPortal>
     );
 }
-
-export default FormOptionsPool;

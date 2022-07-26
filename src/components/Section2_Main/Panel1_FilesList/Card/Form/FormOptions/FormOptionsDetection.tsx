@@ -4,7 +4,7 @@ import { FileUsAtom } from '@/store/store';
 import { Matching } from '@/store/manifest/mani-i';
 import { Transform } from '@/store/manifest/mani-functions';
 import { ToggleWithPortal } from './FormOptionsPool';
-import UITableFromObject from '../../UICard/UITableFromObject';
+import { UITableFromObject } from '../../UICard/UITableFromObject';
 
 function woProtocol(url: string): string {
     return url.replace(/^https?:\/\//, '');
@@ -74,7 +74,7 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
+export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
     const [fileUs] = useAtom(fileUsAtom);
     const form = fileUs.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});
@@ -102,5 +102,3 @@ function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom
         </ToggleWithPortal>
     );
 }
-
-export default FormOptionsDetection;

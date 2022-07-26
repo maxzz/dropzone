@@ -4,8 +4,8 @@ import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } f
 import { formCaption, isAnyWhy } from '@/store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '@ui/UIIconSymbols';
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
-import CardTitleMenu from './CardTitleMenu';
-import CardMenu from './CardMenu';
+import { CardTitleMenu } from './CardTitleMenu';
+//import { CardMenu } from './CardMenu';
 //import { PopoverMenu } from '@ui/nun/UIDropdownMenuLaag';
 
 function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
@@ -116,46 +116,45 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
             </UITooltip>
         );
     }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]);
-    return (
-        <>
-            {/* Icon and caption */}
-            <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardIcon stats={stats} />
 
-                {/* File index in all loaded files */}
-                <div
-                    className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
-                    title="File index in all loaded files"
-                >
-                    {fileUs.idx + 1}
-                </div>
+    return (<>
+        {/* Icon and caption */}
+        <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <CardIcon stats={stats} />
 
-                <CardCaption stats={stats} />
+            {/* File index in all loaded files */}
+            <div
+                className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
+                title="File index in all loaded files"
+            >
+                {fileUs.idx + 1}
             </div>
 
-            {/* Login caption */}
-            <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
-                {stats.isCustomization
-                    ? <span title="This file is for configuring the application">Excluded app</span>
-                    : stats.isFCat
-                        ? <span title="Number of items in the Field Catalog">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</span>
-                        : <span title="Login name">{stats.title || 'No login title'}</span>
-                }
+            <CardCaption stats={stats} />
+        </div>
+
+        {/* Login caption */}
+        <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
+            {stats.isCustomization
+                ? <span title="This file is for configuring the application">Excluded app</span>
+                : stats.isFCat
+                    ? <span title="Number of items in the Field Catalog">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</span>
+                    : <span title="Login name">{stats.title || 'No login title'}</span>
+            }
+        </div>
+
+        {/* Filename */}
+        <div className="flex items-center justify-between">
+            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono">
+                {fname}
             </div>
 
-            {/* Filename */}
-            <div className="flex items-center justify-between">
-                <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono">
-                    {fname}
-                </div>
-
-                <div className="flex-none flex items-center space-x-1 mr-1">
-                    <CardAttention fileUs={fileUs} />
-                    {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
-                </div>
+            <div className="flex-none flex items-center space-x-1 mr-1">
+                <CardAttention fileUs={fileUs} />
+                {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
             </div>
-        </>
-    );
+        </div>
+    </>);
 }
 
 function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
@@ -174,7 +173,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
 const CardTitleTextMemo = React.memo(CardTitleText);
 
-function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+export function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
     const setCurrentCard = useSetAtom(setCurrentCardAtom);
     const setRightPanel = useSetAtom(rightPanelAtom); //#091e4c
@@ -200,5 +199,3 @@ function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         </div>
     );
 }
-
-export default CardTitle;

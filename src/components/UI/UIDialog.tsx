@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { cloneElement, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import Modal from 'react-overlays/Modal';
 
 export const RenderBackdrop = (props: any) => <div className="fixed inset-0 z-[1040] bg-black opacity-40" {...props} />;
 
 const className = "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1040] focus:outline-none";
 
-function ButtonTrigger(props: React.HTMLAttributes<HTMLElement>) {
+function ButtonTrigger(props: HTMLAttributes<HTMLElement>) {
     return (
         <button type="button" className="px-2 py-1 text-gray-200 bg-gray-600 rounded" {...props}>
             Open Modal
@@ -39,7 +39,7 @@ export function PortalModal({ children, allowClickOutside, show, setShow }: Port
                     aria-labelledby="modal-label"
                     container={document.getElementById('portal')}
                 >
-                    {React.cloneElement(children, { setShow })}
+                    {cloneElement(children, { setShow })}
                 </Modal>
             }
         </>
@@ -47,12 +47,12 @@ export function PortalModal({ children, allowClickOutside, show, setShow }: Port
 }
 
 export function ControlledDialog({ trigger, show, setShow, ...rest }: ControlledDialogProps) {
-    const portalRef = React.useRef<HTMLElement | null>(null);
-    React.useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
+    const portalRef = useRef<HTMLElement | null>(null);
+    useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
     return (
         <>
             {trigger
-                ? React.cloneElement(trigger, {
+                ? cloneElement(trigger, {
                     onClick: (event: Event) => {
                         event.preventDefault();
                         event.stopPropagation();
@@ -69,11 +69,9 @@ export function ControlledDialog({ trigger, show, setShow, ...rest }: Controlled
     );
 }
 
-function Dialog(props: DialogProps) {
-    const [show, setShow] = React.useState(false);
+export function Dialog(props: DialogProps) {
+    const [show, setShow] = useState(false);
     return (
         <ControlledDialog {...props} show={show} setShow={setShow} />
     );
 }
-
-export default Dialog;
