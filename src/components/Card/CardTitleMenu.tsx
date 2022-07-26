@@ -21,7 +21,6 @@ function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
             <div className="">-=------------------------</div>
             <div className="">-=------------------------</div>
         </div>
-
     );
 }
 

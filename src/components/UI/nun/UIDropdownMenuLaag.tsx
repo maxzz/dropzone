@@ -2,8 +2,8 @@ import React from 'react';
 import { useLayer } from 'react-laag';
 import { PlacementType } from 'react-laag/dist/PlacementType';
 import { Options } from 'react-laag/dist/types';
-import { styled } from '../../stitches.config';
-import { IconMenuHamburger } from './UIIconsSymbolsDefs';
+import { styled } from '../../../stitches.config';
+import { IconMenuHamburger } from '../UIIconsSymbolsDefs';
 
 const MenuBase = styled('ul', {
     // position: 'absolute',

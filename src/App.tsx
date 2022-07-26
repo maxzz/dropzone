@@ -1,5 +1,5 @@
-import React from 'react';
-import Toaster from '@ui/UiToaster';
+import React, { Fragment } from 'react';
+import { UIToaster } from '@ui/UIToaster';
 import HeaderBar from './components/Header/HeaderBar';
 import UISymbolsDefs from '@ui/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
@@ -12,8 +12,8 @@ import './App.scss';
 
 function App() {
     return (
-        <React.Fragment>
-            <Toaster />
+        <Fragment>
+            <UIToaster />
             <UISymbolsDefs />
 
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
@@ -30,7 +30,7 @@ function App() {
 
                 {/* <SvgFontSpy /> */}
             </div>
-        </React.Fragment>
+        </Fragment>
     );
 }
 

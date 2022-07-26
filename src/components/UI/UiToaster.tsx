@@ -1,10 +1,10 @@
 import React from 'react';
-import { Toaster as OrgToaster } from 'react-hot-toast';
+import toast, { Toaster as ToasterComponent } from 'react-hot-toast';
 
-function Toaster() {
+export function UIToaster() {
     return (
         <div className="toaser">
-            <OrgToaster
+            <ToasterComponent
                 position="bottom-right"
                 reverseOrder={false}
                 gutter={8}
@@ -32,4 +32,8 @@ function Toaster() {
     );
 }
 
-export default Toaster;
+export const toastWarning: typeof toast.custom = (message, options) => {
+    return toast(message,
+        {...{ style: { backgroundColor: 'tomato' } }, ...options}
+    );
+};

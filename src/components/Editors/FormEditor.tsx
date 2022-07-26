@@ -8,7 +8,7 @@ import { formIdxName } from '@/store/store-functions';
 import { classNames } from '@/utils/classnames';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconsSymbolsDefs';
-import { toastWarning } from '@ui/UIToasts';
+import { toastWarning } from '@ui/UIToaster';
 import { UITooltip } from '@ui/UITooltip';
 import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 import { TabMatchWindows } from './Tabs';
