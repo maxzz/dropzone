@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { formEditorDataAtom } from '@/store/store';
 import { PortalModal } from '@ui/UIDialog';
-import FormEditor from '../Editors/FormEditor';
+import FormEditor from './Editors/FormEditor';
 
 function FormEditorTrigger() {
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);

@@ -13,7 +13,7 @@ import { UITooltip } from '@ui/UITooltip';
 import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 import { TabMatchWindows } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
-import { parsedFname } from '../Panel1_FilesList/Card/CardTitle';
+import { parsedFname } from '../../Section2_Main/Panel1_FilesList/Card/CardTitle';
 import { TabOptions } from './TabOptions';
 import { useDrag } from '@use-gesture/react';
 import { TabFields } from './TabFields';

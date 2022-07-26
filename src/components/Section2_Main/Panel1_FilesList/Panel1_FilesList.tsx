@@ -4,7 +4,7 @@ import { filteredAtom } from '@/store/store';
 import Card, { CardWRef } from './Card/Card';
 import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 //import useVirtual, { Item } from 'react-cool-virtual';
-import useVirtual from '../../hooks/useVirtual/useVirtual';
+import useVirtual from '../../../hooks/useVirtual/useVirtual';
 
 export function Panel1_FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
