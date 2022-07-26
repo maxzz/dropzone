@@ -4,9 +4,9 @@ import { filteredAtom } from '@/store/store';
 import Card, { CardWRef } from './Card/Card';
 import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 //import useVirtual, { Item } from 'react-cool-virtual';
-import useVirtual from '../hooks/useVirtual/useVirtual';
+import useVirtual from '../../hooks/useVirtual/useVirtual';
 
-function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+export function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
     return (
@@ -18,7 +18,7 @@ function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compa
     );
 }
 
-function FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+function Panel1_FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
 
@@ -65,8 +65,6 @@ function FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO: add co
         </>
     );
 }
-
-export default FilesList;
 
 //TODO: we can use alternative solutins: virtual list; pagination; popup; right panel; ...
 //TODO: add filter by website domain

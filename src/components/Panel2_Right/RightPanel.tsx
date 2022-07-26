@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { FileUsAtom, rightPanelValueAtom } from '@/store/store';
 //import { IconBack } from '@ui/UiIcons';
 import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
-import { CardTitleText } from './Card/CardTitle';
+import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
 
 function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;

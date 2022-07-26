@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { UIToaster } from '@ui/UIToaster';
-import HeaderBar from './components/Header/HeaderBar';
+import { Section1_Header } from './components/Section1_Header/Section1_Header';
 import { UISymbolDefs } from '@ui/UIIconSymbols';
-import SelectedItems from './components/SelectedItems';
-import Dialogs from './components/Dialogs';
+import SelectedItems from './components/Panel3_SelectedItems/SelectedItems';
+import Dialogs from './components/Panel4_Dialogs/Dialogs';
 // import { SvgFontSpy } from './utils/SvgFontSpy';
 import { Section2_Main } from './components/Section2_Main';
 // import CardMenu from './components/Card/CardMenu';
@@ -17,7 +17,7 @@ function App() {
             <UISymbolDefs />
 
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
-                <HeaderBar className="flex-none" />
+                <Section1_Header className="flex-none" />
 
                 {/* <CardMenuOverlays /> */}
                 {/* <CardMenu /> */}

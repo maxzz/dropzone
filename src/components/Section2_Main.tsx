@@ -1,6 +1,6 @@
 import React from 'react';
-import FilesList from './FilesList';
-import RightPanel from './RightPanel';
+import { FilesList } from './Panel1_FilesList/Panel1_FilesList';
+import RightPanel from './Panel2_Right/RightPanel';
 //import UISplitPane from '@ui/nun/UISplitPane';
 import SimpleSplitPane from '@ui/SimpleSplitPane/SimpleSplitPane';
 

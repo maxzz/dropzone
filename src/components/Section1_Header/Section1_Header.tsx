@@ -57,7 +57,7 @@ function LeftHeader() {
     );
 }
 
-function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
+export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
             <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}>
@@ -73,10 +73,7 @@ function HeaderBar(props: React.HTMLAttributes<HTMLElement>) {
                             event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } });
                         }} />
                 </div>
-
             </div>
         </header>
     );
 }
-
-export default HeaderBar;
