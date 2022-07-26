@@ -1,4 +1,4 @@
-import { parse } from 'fast-xml-parser';
+import { XMLParser } from 'fast-xml-parser';
 import { Transform } from './mani-functions';
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
@@ -60,7 +60,7 @@ export function beautifyXMLCatalog(catalog: Catalog.Root): Catalog.Root {
 
 export const parseOptions = {
     attributeNamePrefix: "",
-    attrNodeName: "_attributes",
+    attributesGroupName: "_attributes",
     ignoreAttributes: false,
     allowBooleanAttributes: true,
 };
@@ -71,7 +71,8 @@ export type ParseManifestResult = {
 };
 
 export function parseManifest(cnt: string): ParseManifestResult {
-    const obj = parse(cnt, parseOptions); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
+    const parser = new XMLParser(parseOptions);
+    const obj = parser.parse(cnt); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
     return {
         mani: obj?.manifest && beautifyXMLManifest(obj.manifest),
         fcat: obj?.storagecatalog && beautifyXMLCatalog(obj?.storagecatalog),

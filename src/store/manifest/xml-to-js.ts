@@ -1,5 +1,5 @@
 import { FileUs } from '../store';
-import { parse } from 'fast-xml-parser';
+import { XMLParser } from 'fast-xml-parser';
 import { J2xParser } from '../../utils/json2xml';
 import { parseOptions } from './mani-i';
 import { fileDownload } from '../../utils/file-download';
@@ -14,7 +14,8 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
     let xml = '';
     try {
         // 1.
-        const jsFromXml = parse(fileUs.raw, parseOptions);
+        const parser = new XMLParser(parseOptions);
+        const jsFromXml = parser.parse(fileUs.raw);
 
         // 2.
         let rv = fileUs.mani && manifestToJsonForXml(fileUs.mani) || '';
@@ -28,7 +29,8 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         // xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         //console.log('%c---------new xml from---------', 'color: green', `\n${xml}`);
 
-        xml = (new J2xParser({ ...parseOptions, format: true, indentBy: '    ', })).parse(rv);
+        const j2xParser = new J2xParser({ ...parseOptions, format: true, indentBy: '    ', });
+        xml = j2xParser.parse(rv);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
         console.log('%c---------new xml from converted---------', 'color: green', `\n${xml}`);
 
