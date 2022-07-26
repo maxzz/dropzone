@@ -28,7 +28,7 @@
         "react": "^17.0.0",
         "react-cool-virtual": "0.7.0",
         "react-dom": "^17.0.0",
-        "react-dropzone": "11.5.1",
+        "react-dropzone": "14.2.2",
         "react-hot-toast": "2.3.0",
         "react-laag": "2.0.4",
         "react-merge-refs": "2.0.1",
