@@ -71,7 +71,7 @@ function plural(n: number): string {
     return n === 1 ? '' : 's';
 }
 
-export default function DropzoneArea() {
+export function Sub1_DropzoneArea() {
     const [files] = useAtom(clearFilesAtom);
     const [filtered] = useAtom(filteredAtom);
     const total = files.length;
@@ -101,7 +101,6 @@ export default function DropzoneArea() {
                 </div>
             }
         </DropzoneBase>
-
     );
 }
 

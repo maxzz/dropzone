@@ -2,7 +2,7 @@ import { PrimitiveAtom, useAtom } from 'jotai';
 import React from 'react';
 import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '@/store/store';
 import LabeledSwitch from '@ui/UiSwitch';
-import FilterSearch from './FilterSearch';
+import { Sub2_FilterSearch } from './Sub2_FilterSearch';
 
 function LabeWithNumber({ label, atomCnt }: { label: string; atomCnt: PrimitiveAtom<number>; }) {
     const [total] = useAtom(atomCnt);
@@ -28,15 +28,13 @@ function ManiFilter({ atomShow, atomCnt, label, title }: { atomShow: PrimitiveAt
     );
 }
 
-function Filters() {
+export function Sub3_Filters() {
     return (
         <div className="flex-1 p-2 md:p-0 flex flex-col md:flex-row items-end justify-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200">
-            <FilterSearch />
+            <Sub2_FilterSearch />
             <ManiFilter atomShow={showNormalManiAtom} atomCnt={totalNormalManiAtom} label="Normal" title="Show normal mode manifests" />
             <ManiFilter atomShow={showManualManiAtom} atomCnt={totalManualManiAtom} label="Manual" title="Show manual mode manifests" />
             <ManiFilter atomShow={showEmptyManiAtom} atomCnt={totalEmptyManiAtom} label="Empty" title="Show excluded manifests" />
         </div>
     );
 }
-
-export default Filters;

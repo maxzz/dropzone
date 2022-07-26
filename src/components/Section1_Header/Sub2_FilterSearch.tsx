@@ -19,7 +19,7 @@ function ToggleCaseSensitive() {
     );
 }
 
-function FilterSearch() {
+export function Sub2_FilterSearch() {
     const [filter, setFilter] = useAtom(searchFilterAtom);
     const keyboardRef = React.useRef<HTMLInputElement>(null);
     const [active, setActive] = React.useState(false);
@@ -84,8 +84,6 @@ function FilterSearch() {
         </div>
     );
 }
-
-export default FilterSearch;
 
 //TODO: add history to UI and store history to the localStorage
 //TODO: win: and web: prefixes - done

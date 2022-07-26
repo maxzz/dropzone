@@ -68,7 +68,7 @@ function MenuItemFolding() {
     );
 }
 
-export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
+export const Sub0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     const toggleFolding = useUpdateAtom(foldAllCardsAtom);
     return (
         <Menu>
@@ -85,8 +85,6 @@ export const TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
         </Menu>
     );
 };
-
-export default TopMenu;
 
 //TODO: show title in compact form by point of interset
 //sort titles
