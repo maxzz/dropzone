@@ -20,7 +20,7 @@ function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtom; }) {
     );
 }
 
-function SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
+export function Panel3_SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [selectedAtoms] = useAtom(selected4ActionAtom);
 
@@ -38,5 +38,3 @@ function SelectedItems(props: React.HTMLAttributes<HTMLDivElement>) {
         </div>
     );
 }
-
-export default SelectedItems;

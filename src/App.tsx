@@ -2,13 +2,13 @@ import React, { Fragment } from 'react';
 import { UIToaster } from '@ui/UIToaster';
 import { Section1_Header } from './components/Section1_Header/Section1_Header';
 import { UISymbolDefs } from '@ui/UIIconSymbols';
-import SelectedItems from './components/Panel3_SelectedItems/SelectedItems';
-import Dialogs from './components/Panel4_Dialogs/Dialogs';
-// import { SvgFontSpy } from './utils/SvgFontSpy';
+import { Panel3_SelectedItems } from './components/Panel3_SelectedItems/Panel3_SelectedItems';
+import { Panel4_Dialogs } from './components/Panel4_Dialogs/Panel4_Dialogs';
 import { Section2_Main } from './components/Section2_Main';
 // import CardMenu from './components/Card/CardMenu';
 // import CardMenuOverlays from './components/Card/CardMenuOverlays';
 import './App.scss';
+// import { SvgFontSpy } from './utils/SvgFontSpy';
 
 function App() {
     return (
@@ -22,11 +22,11 @@ function App() {
                 {/* <CardMenuOverlays /> */}
                 {/* <CardMenu /> */}
 
-                <SelectedItems className="flex-none" />
+                <Panel3_SelectedItems className="flex-none" />
 
                 <Section2_Main />
 
-                <Dialogs />
+                <Panel4_Dialogs />
 
                 {/* <SvgFontSpy /> */}
             </div>

@@ -6,7 +6,7 @@ import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 //import useVirtual, { Item } from 'react-cool-virtual';
 import useVirtual from '../../hooks/useVirtual/useVirtual';
 
-export function FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+export function Panel1_FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
     return (

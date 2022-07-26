@@ -6,7 +6,7 @@ import { FileUsAtom, rightPanelValueAtom } from '@/store/store';
 import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
 
-function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
+export function Panel2_Right(props: React.HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     return (
@@ -33,4 +33,3 @@ function RightPanel(props: React.HTMLAttributes<HTMLDivElement>) {
     );
 }
 
-export default RightPanel;

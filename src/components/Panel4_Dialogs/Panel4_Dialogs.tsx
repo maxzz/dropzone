@@ -17,10 +17,8 @@ function FormEditorTrigger() {
     );
 }
 
-function Dialogs() {
+export function Panel4_Dialogs() {
     return (
         <FormEditorTrigger />
     );
 }
-
-export default Dialogs;
