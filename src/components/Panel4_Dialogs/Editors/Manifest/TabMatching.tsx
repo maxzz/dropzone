@@ -1,6 +1,5 @@
 import React from 'react';
-import { atom, PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from 'jotai';
 import { EditorData } from '@/store/store';
 import { Matching } from '@/store/manifest/mani-i';
 import { a, useSpring } from '@react-spring/web';
@@ -73,7 +72,7 @@ function messageStyle(style: Matching.Style) {
 
 function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const setDirty = useUpdateAtom(urls.dirtyAtom);
+    const setDirty = useSetAtom(urls.dirtyAtom);
     const [rawMD, setRawMD] = React.useState<Matching.RawMatchData>(initialMD);
     React.useEffect(() => {
         setRawMD(Matching.getMatchRawData(urls.m));
@@ -197,7 +196,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const setDirty = useUpdateAtom(urls.dirtyAtom);
+    const setDirty = useSetAtom(urls.dirtyAtom);
     return (<>
         <div className="mb-1 font-bold text-gray-600">Original url</div>
         <input
@@ -215,7 +214,7 @@ function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
 function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const setDirty = useUpdateAtom(urls.dirtyAtom);
+    const setDirty = useSetAtom(urls.dirtyAtom);
     const [isOpen, setIsOpen] = React.useState(false);
     const stylesDropdown = useSpring({ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0, config: { duration: 200 } });
     return (<>
@@ -278,7 +277,3 @@ export function TabMatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         </div>
     );
 }
-function tooltipSmall(): JSX.IntrinsicAttributes & { trigger: React.ReactNode; children?: React.ReactNode; } & { arrow?: boolean | undefined; portal?: boolean | undefined; popperOptions?: import("react-popper-tooltip").Config | undefined; } {
-    throw new Error('Function not implemented.');
-}
-

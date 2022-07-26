@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef, HTMLAttributes, memo, useEffect, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms } from '@/store/store';
 import CardTitle from './CardTitle';
-import FormOptions from './Form/FormOptions/FormOptions';
+import { FormOptions } from './Form/FormOptions/FormOptions';
 import FormFields from './Form/FormRows/FormFields';
 import UICardFormButton from './UICard/UICardFormButton';
 
@@ -15,15 +15,15 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
 }
 
 function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const [openAll] = useAtom(foldAllCardsAtom);
-    const [selectRowAtoms] = React.useState<SelectRowAtoms>({
+    const [selectRowAtoms] = useState<SelectRowAtoms>({
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
     });
     const Toogle = () => setOpen((v) => !v);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (openAll >= 0) {
             const collapse = openAll % 2 === 0;
             setOpen(collapse);
@@ -52,7 +52,7 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
 type CardProps = {
     fileUsAtom: FileUsAtom;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLDivElement>;
 
 function Card_({ fileUsAtom, ...props }: CardProps) {
     const { className, ...rest } = props;
@@ -64,11 +64,9 @@ function Card_({ fileUsAtom, ...props }: CardProps) {
     );
 }
 
-const Card = React.memo(Card_);
+export const Card = memo(Card_);
 
-export default Card;
-
-export const CardWRef = React.forwardRef<HTMLDivElement, CardProps>((props, ref) => {
+export const CardWRef = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     const { fileUsAtom, className, ...rest } = props;
     return (
         <div ref={ref} className={`grid grid-rows-[min-content,minmax(auto,1fr)] overflow-hidden rounded shadow-md select-none ${className}`} {...rest}>
@@ -76,7 +74,7 @@ export const CardWRef = React.forwardRef<HTMLDivElement, CardProps>((props, ref)
             <CardTopButtons fileUsAtom={fileUsAtom} />
         </div>
     );
-})
+});
 
 //TODO: add card index of total - done
 //TODO: compact view - tbd

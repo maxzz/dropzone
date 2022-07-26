@@ -1,6 +1,5 @@
-import React from 'react';
-import { atom, useAtom } from 'jotai';
-import { useAtomValue } from 'jotai/utils';
+import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
+import { atom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
 import { a, useSpring } from '@react-spring/web';
 import { EditorData } from '@/store/store';
@@ -8,19 +7,19 @@ import { formIdxName } from '@/store/store-functions';
 import { classNames } from '@/utils/classnames';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
-import { toastWarning } from '@ui/UIToaster';
+//import { toastWarning } from '@ui/UIToaster';
 import { UITooltip } from '@ui/UITooltip';
-import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
+import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 import { TabMatchWindows } from './Tabs';
 import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
-import { parsedFname } from '../../Section2_Main/Panel1_FilesList/Card/CardTitle';
+import { parsedFname } from '../../../Section2_Main/Panel1_FilesList/Card/CardTitle';
 import { TabOptions } from './TabOptions';
 import { useDrag } from '@use-gesture/react';
 import { TabFields } from './TabFields';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 
 function EditorInfo({ editorData }: { editorData: EditorData; }) {
-    const [fileUs] = useAtom(editorData.fileUsAtom);
+    const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
@@ -59,8 +58,8 @@ function EditorInfo({ editorData }: { editorData: EditorData; }) {
 }
 
 function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
-    const [urls] = useAtom(urlsAtom);
-    const [dirty] = useAtom(urls.dirtyAtom);
+    const urls = useAtomValue(urlsAtom);
+    const dirty = useAtomValue(urls.dirtyAtom);
     return (<>
         {dirty &&
             <IconAttention
@@ -162,11 +161,11 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
 }
 
 function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string, JSX.Element>; stateIndicator: JSX.Element; dragBind: (...args: any[]) => ReactDOMAttributes; }) {
-    const [selectedTab, setSelectedTab] = React.useState(0);
+    const [selectedTab, setSelectedTab] = useState(0);
 
-    const scrollableNodeRef = React.useRef<HTMLDivElement>();
-    const pageScrollOfs = React.useRef<number[]>(Array(Object.keys(pages).length).fill(0));
-    React.useLayoutEffect(() => { scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]); }, [selectedTab]);
+    const scrollableNodeRef = useRef<HTMLDivElement>();
+    const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
+    useLayoutEffect(() => { scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]); }, [selectedTab]);
 
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
@@ -187,11 +186,11 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
             <div className="text-sm bg-white">
                 <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
                     {Object.values(pages).map((pageContent, idx) => (
-                        <React.Fragment key={idx}>
+                        <Fragment key={idx}>
                             <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
                                 {pageContent}
                             </div>
-                        </React.Fragment>
+                        </Fragment>
                     ))}
                 </UISimpleBar>
             </div>
@@ -199,7 +198,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
     );
 }
 
-function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+export function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
 
     // Caption dragging
 
@@ -211,7 +210,12 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>({ ...initial, initial, dirtyAtom: atom<boolean>(false) },
+    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>(
+        {
+            ...initial,
+            initial,
+            dirtyAtom: atom<boolean>(false)
+        },
         ({ nextValue }) => {
             console.log('urls updated', nextValue);
         }));
@@ -234,13 +238,15 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
                 <EditorInfo editorData={editorData} />
 
                 <div className="flex space-x-2">
-                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
+                    <button
+                        className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
                         onClick={() => {
                             setShow(false);
                             // toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >OK</button>
-                    <button className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
+                    <button
+                        className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
                         onClick={() => {
                             setShow(false);
                         }}
@@ -251,8 +257,6 @@ function FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData:
         </a.div>
     );
 }
-
-export default FormEditor;
 
 //TODO: events onTabChange w/ ability to cancel
 //TODO: state is tab dirty

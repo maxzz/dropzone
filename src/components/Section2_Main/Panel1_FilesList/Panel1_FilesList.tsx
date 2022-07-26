@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtom } from 'jotai';
 import { filteredAtom } from '@/store/store';
-import Card, { CardWRef } from './Card/Card';
-import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
-//import useVirtual, { Item } from 'react-cool-virtual';
-import useVirtual from '../../../hooks/useVirtual/useVirtual';
+import { Card } from './Card/Card';
+import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
+//old: import Card, { CardWRef } from './Card/Card';
+//old: import useVirtual, { Item } from 'react-cool-virtual';
+//import useVirtual from '../../../hooks/useVirtual/useVirtual';
 
-export function Panel1_FilesList(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+export function Panel1_FilesList(props: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
     return (
@@ -17,14 +18,14 @@ export function Panel1_FilesList(props: React.HTMLAttributes<HTMLElement>) { //T
         </UISimpleBar>
     );
 }
-
-function Panel1_FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO: add compact view
+/*
+function Panel1_FilesListNew(props: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
     const [files] = useAtom(filteredAtom);
 
-    //const [len, setLen] = React.useState(files.length);
+    //const [len, setLen] = useState(files.length);
 
-    // React.useEffect(() => {
+    // useEffect(() => {
     //     setLen(files.length);
     //  }, [files.length]);
 
@@ -44,7 +45,7 @@ function Panel1_FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO:
     return (
         <>
             <div ref={outerRef} className="w-full h-full overflow-auto">
-                {/* <div ref={innerRef} className="relative grid grid-flow-row gap-4 text-sm"> */}
+                {/* <div ref={innerRef} className="relative grid grid-flow-row gap-4 text-sm"> * /}
                 <div ref={innerRef} className="text-sm">
                     {items.map(({ index, measureRef }) => {
                         const atom = files[index];
@@ -54,10 +55,10 @@ function Panel1_FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO:
                         }
 
                         return (
-                        //<div ref={measureRef} className="">
+                            //<div ref={measureRef} className="">
                             <CardWRef ref={measureRef} fileUsAtom={atom} className="mb-4" key={`${atom}`} />
                             // <CardWRef fileUsAtom={atom} className="mb-4" key={`${atom}`} />
-                        //</div>
+                            //</div>
                         );
                     })}
                 </div>
@@ -65,6 +66,6 @@ function Panel1_FilesListNew(props: React.HTMLAttributes<HTMLElement>) { //TODO:
         </>
     );
 }
-
+*/
 //TODO: we can use alternative solutins: virtual list; pagination; popup; right panel; ...
 //TODO: add filter by website domain

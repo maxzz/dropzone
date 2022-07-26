@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '@/store/store';
 import { formCaption, isAnyWhy } from '@/store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '@ui/UIIconSymbols';
@@ -176,8 +176,8 @@ const CardTitleTextMemo = React.memo(CardTitleText);
 
 function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
-    const setCurrentCard = useUpdateAtom(setCurrentCardAtom);
-    const setRightPanel = useUpdateAtom(rightPanelAtom); //#091e4c
+    const setCurrentCard = useSetAtom(setCurrentCardAtom);
+    const setRightPanel = useSetAtom(rightPanelAtom); //#091e4c
     return (
         <div className={`relative p-2 ${currentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100`}>
             <div

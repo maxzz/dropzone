@@ -1,7 +1,7 @@
-import React from 'react';
-import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
+import React, { Fragment, HTMLAttributes, ReactNode } from 'react';
+import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 
-export function FieldFirstCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+export function FieldFirstCol({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
     return (
         <div className={`h-5 leading-5 ${className}`} {...attrs}>
@@ -10,7 +10,7 @@ export function FieldFirstCol({ children, ...rest }: { children?: React.ReactNod
     );
 }
 
-export function FieldSecondCol({ children, ...rest }: { children?: React.ReactNode; } & React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+export function FieldSecondCol({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
     return (
         <UISimpleBar>
@@ -27,10 +27,10 @@ function UITableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
     return (
         <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
             {values.map(([key, val]) => {
-                return (<React.Fragment key={key}>
+                return (<Fragment key={key}>
                     <FieldFirstCol>{key}</FieldFirstCol>
                     <FieldSecondCol>{`${val}`}</FieldSecondCol>
-                </React.Fragment>);
+                </Fragment>);
             })}
         </div>
     );

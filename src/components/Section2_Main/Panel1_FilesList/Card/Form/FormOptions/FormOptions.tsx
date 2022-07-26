@@ -56,7 +56,7 @@ function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }:
     );
 }
 
-function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
+export function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
     const [fileUs] = useAtom(fileUsAtom);
     const meta = fileUs.meta?.[formType];
     if (!meta) {
@@ -80,8 +80,6 @@ function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
         </div>
     );
 }
-
-export default FormOptions;
 
 //TODO: form preview: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
 //TODO: form preview: show one preview per form?

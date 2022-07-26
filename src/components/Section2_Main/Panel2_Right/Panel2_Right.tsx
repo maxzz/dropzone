@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtom } from 'jotai';
-//import { useUpdateAtom } from 'jotai/utils';
 import { FileUsAtom, rightPanelValueAtom } from '@/store/store';
 //import { IconBack } from '@ui/UiIcons';
-import UISimpleBar from '@ui/UIScrollbar/UIScrollbar';
+import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
 
-export function Panel2_Right(props: React.HTMLAttributes<HTMLDivElement>) {
+export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const [rightPanelValue] = useAtom(rightPanelValueAtom);
     return (
