@@ -2,11 +2,11 @@ import React from 'react';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '@/store/store';
 import { formCaption, isAnyWhy } from '@/store/store-functions';
-import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '@ui/UIIconsSymbolsDefs';
+import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '@ui/UIIconSymbols';
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
 import CardTitleMenu from './CardTitleMenu';
 import CardMenu from './CardMenu';
-import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
+//import { PopoverMenu } from '@ui/nun/UIDropdownMenuLaag';
 
 function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
     if (isFCat) {

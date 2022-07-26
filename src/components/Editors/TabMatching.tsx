@@ -1,11 +1,10 @@
 import React from 'react';
 import { atom, PrimitiveAtom, useAtom, WritableAtom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
-import atomWithCallback from '@/hooks/atomsX';
 import { EditorData } from '@/store/store';
 import { Matching } from '@/store/manifest/mani-i';
 import { a, useSpring } from '@react-spring/web';
-import UIUpDownIcon from '@ui/UIUpDownIcon';
+import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { UITooltip, uitooltipSmall } from '@ui/UITooltip';
 import { classNames } from '@/utils/classnames';
 import { arrow } from '@popperjs/core';
@@ -38,23 +37,23 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
             className="px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: React.ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            <UITooltip trigger={<RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" /> } {...uitooltipSmall()}>
+            <UITooltip trigger={<RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />} {...uitooltipSmall()}>
                 <div className="text-xs">Same as original url</div>
             </UITooltip>
-            
-            <UITooltip trigger={<RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" /> } {...uitooltipSmall()}>
+
+            <UITooltip trigger={<RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" />} {...uitooltipSmall()}>
                 <div className="text-xs">Match only domain of original url</div>
             </UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" /> } {...uitooltipSmall()}>
+            <UITooltip trigger={<RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />} {...uitooltipSmall()}>
                 <div className="text-xs">Wildcard match</div>
             </UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" /> } {...uitooltipSmall()}>
+            <UITooltip trigger={<RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />} {...uitooltipSmall()}>
                 <div className="text-xs">Regular expresssion</div>
             </UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" /> } {...uitooltipSmall()}>
+            <UITooltip trigger={<RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" />} {...uitooltipSmall()}>
                 <div className="text-xs">Exclude this login from domain match</div>
             </UITooltip>
         </div>
@@ -178,7 +177,7 @@ function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         <div className="mt-6 mb-1 flex items-center">
             <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div className="">Matching url</div>
-                <UIUpDownIcon double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
             </div>
 
             {urls.o === urls.m &&
@@ -223,7 +222,7 @@ function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
         <div className="mt-6 mb-1 flex items-center">
             <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div className="">Quicklink url</div>
-                <UIUpDownIcon double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
             </div>
 
             {urls.o === urls.q &&

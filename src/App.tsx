@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { UIToaster } from '@ui/UIToaster';
 import HeaderBar from './components/Header/HeaderBar';
-import UISymbolsDefs from '@ui/UIIconsSymbolsDefs';
+import { UISymbolDefs } from '@ui/UIIconSymbols';
 import SelectedItems from './components/SelectedItems';
 import Dialogs from './components/Dialogs';
 // import { SvgFontSpy } from './utils/SvgFontSpy';
@@ -14,7 +14,7 @@ function App() {
     return (
         <Fragment>
             <UIToaster />
-            <UISymbolsDefs />
+            <UISymbolDefs />
 
             <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
                 <HeaderBar className="flex-none" />

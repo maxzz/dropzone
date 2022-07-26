@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { FileUs, SelectRowAtoms } from '@/store/store';
 //import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UiIcons';
-import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UIIconsSymbolsDefs';
+import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UIIconSymbols';
 import FieldRowPreview from './FieldRowPreview';
 import FormRowTypeIcon from './FieldRowTypeIcon';
 import UIToggleWithPortal from '../../UICard/UIToggleWithPortal';

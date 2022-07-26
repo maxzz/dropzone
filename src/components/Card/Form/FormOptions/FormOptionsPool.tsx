@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../../hooks/useElementClickAway';
 import { Transform } from '../../../../store/manifest/mani-functions';
-import UIUpDownIcon from '@ui/UIUpDownIcon';
+import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { BtnShading } from './FormOptions';
 
 type DropDownButtonProps = {
@@ -25,7 +25,7 @@ export const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>
                 {text}
             </div>
 
-            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIUpDownIcon isUp={open} className="list-owner w-4 h-4 pt-0.5" />}
+            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIIconUpDown isUp={open} className="list-owner w-4 h-4 pt-0.5" />}
         </button>
     );
 });

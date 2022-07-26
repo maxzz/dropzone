@@ -1,6 +1,6 @@
 import React, { SVGProps } from 'react';
 
-function UISymbolsDefs() {
+export function UISymbolDefs() {
     return (
         <svg id="svgfont" aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -400,8 +400,6 @@ export function IconGear(props: SVGProps<SVGSVGElement> & { title?: string; }) {
         </svg>
     );
 }
-
-export default UISymbolsDefs;
 
 /*
 export function d(props: SVGProps<SVGSVGElement> & { title?: string;} ) {

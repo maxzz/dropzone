@@ -6,7 +6,7 @@ import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
 import DropzoneArea from './Dropzone';
 import TopMenu from './TopMenu';
 import toast from 'react-hot-toast';
-import { IconMenuHamburger } from '@ui/UIIconsSymbolsDefs';
+import { IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
 import Filters from './Filters';

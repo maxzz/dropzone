@@ -34,6 +34,6 @@ export function UIToaster() {
 
 export const toastWarning: typeof toast.custom = (message, options) => {
     return toast(message,
-        {...{ style: { backgroundColor: 'tomato' } }, ...options}
+        { ...{ style: { backgroundColor: 'tomato' } }, ...options }
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '@/store/store';
-import UIUpDownIcon from '@ui/UIUpDownIcon';
+import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { DummyPlaceholder } from './TabOptions';
 
 function TabFieldsScript({ editorData }: { editorData: EditorData; }) {
@@ -27,7 +27,7 @@ export function TabFields({ editorData }: { editorData: EditorData; }) {
 
                 <div className="mt-4 w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen1(!isOpen1)}>
                     <div className="">Policy</div>
-                    <UIUpDownIcon double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
+                    <UIIconUpDown double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
                 </div>
                 {isOpen1 &&
                     <>

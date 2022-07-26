@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '@/store/store';
-import UIUpDownIcon from '@ui/UIUpDownIcon';
+import { UIIconUpDown } from '@ui/UIIconUpDown';
 
 export function DummyPlaceholder() {
     return (<>
@@ -50,7 +50,7 @@ export function TabOptions({ editorData }: { editorData: EditorData; }) {
 
             <div className="mt-4 w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen1(!isOpen1)}>
                 <div className="">Group 1</div>
-                <UIUpDownIcon double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
             </div>
             {isOpen1 &&
                 <>
@@ -67,7 +67,7 @@ export function TabOptions({ editorData }: { editorData: EditorData; }) {
 
             <div className="mt-4 w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen2(!isOpen2)}>
                 <div className="">Group 2</div>
-                <UIUpDownIcon double={true} isUp={isOpen2} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen2} className="w-5 h-5 border rounded" />
             </div>
             {isOpen2 &&
                 <>

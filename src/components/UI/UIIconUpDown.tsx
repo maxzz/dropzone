@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconChevronDown, IconChevronUp, IconDoubleDown } from './UIIconsSymbolsDefs';
+import { IconChevronDown, IconChevronUp, IconDoubleDown } from './UIIconSymbols';
 // import { IconChevronDown, IconChevronUp } from './UiIcons';
 
-function UIUpDownIcon({ isUp, double = false, className }: { isUp: boolean; double?: boolean; className: string; }) {
+export function UIIconUpDown({ isUp, double = false, className }: { isUp: boolean; double?: boolean; className: string; }) {
     if (double) {
         const icon = IconDoubleDown;
         return icon({ className, style: { transform: `rotateX(${isUp ? '180deg' : '0deg'})`} });
@@ -11,5 +11,3 @@ function UIUpDownIcon({ isUp, double = false, className }: { isUp: boolean; doub
         return icon({ className });
     }
 }
-
-export default UIUpDownIcon;
