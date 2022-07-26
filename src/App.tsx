@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.scss';
 import Toaster from '@ui/UiToaster';
 import HeaderBar from './components/Header/HeaderBar';
 //import UISplitPane from '@ui/UISplitPane';
@@ -7,10 +6,11 @@ import HeaderBar from './components/Header/HeaderBar';
 import UISymbolsDefs from '@ui/UIIconsSymbolsDefs';
 import SelectedItems from './components/SelectedItems';
 import Dialogs from './components/Dialogs';
-//import SvgFontSpy from './utils/SvgFontSpy';
+// import { SvgFontSpy } from './utils/SvgFontSpy';
 import { Section2_Main } from './components/Section2_Main';
 // import CardMenu from './components/Card/CardMenu';
 // import CardMenuOverlays from './components/Card/CardMenuOverlays';
+import './App.scss';
 
 function App() {
     // const atom = 1;

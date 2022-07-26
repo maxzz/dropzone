@@ -1,7 +1,7 @@
 import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
-import atomWithCallback from '../hooks/atomsX';
-import debounce from '../utils/debounce';
-import uuid from '../utils/uuid';
+import { atomWithCallback } from '@/hooks/atomsX';
+import { debounce } from '@/utils/debounce';
+import { uuid } from '@/utils/uuid';
 import { buildManiMetaForms } from './manifest/mani-functions';
 import { parseManifest } from './manifest/mani-i';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';

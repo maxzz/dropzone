@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function SvgFontSpy({ fontID = 'svgfont' }: { fontID?: string; }) {
-    const [ids, setIds] = React.useState<string[]>([]);
-    React.useEffect(() => {
+export function SvgFontSpy({ fontID = 'svgfont' }: { fontID?: string; }) {
+    const [ids, setIds] = useState<string[]>([]);
+    useEffect(() => {
         const font = document.querySelector(`#${fontID} > defs`)?.children;
         const ids = (font ? [...font] : []).map(item => item.id);
         setIds(ids);
@@ -22,5 +22,3 @@ function SvgFontSpy({ fontID = 'svgfont' }: { fontID?: string; }) {
         }
     </>);
 }
-
-export default SvgFontSpy;
