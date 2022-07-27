@@ -2,6 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { splitPaneAtom } from '@/store';
 import './SimpleSplitPane.css';
+import { withDigits } from '@/utils/numbers';
 
 const baseStyle: React.CSSProperties = {
     flex: '1',
@@ -13,6 +14,10 @@ const styleB: React.CSSProperties = {
     minWidth: 0,
     minHeight: 0,
 };
+
+function cx(...configs: any[]) {
+    return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '),).join(' ');
+}
 
 type SplitPaneProps = {
     vertical?: boolean;
@@ -27,10 +32,6 @@ type SplitPaneDataProps = {
     position: number;
     setPosition: (value: number) => void,
 };
-
-function cx(...configs: any[]) {
-    return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '),).join(' ');
-}
 
 function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.Element {
     const { vertical = true, minPersent = 1, maxPersent = 99, className, children, position, setPosition, onResize } = props;
@@ -53,7 +54,7 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.El
 
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             // Using 99% as the max value prevents the divider from disappearing
-            setPosition(Math.min(Math.max(minPersent, newPosition), maxPersent));
+            setPosition(+withDigits(Math.min(Math.max(minPersent, newPosition), maxPersent)));
         };
 
         const upHandler = () => {
