@@ -197,7 +197,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
     );
 }
 
-export function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+export default function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
 
     // Caption dragging
 
