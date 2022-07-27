@@ -1,8 +1,8 @@
 import { FileUs } from '../store';
 import { XMLParser } from 'fast-xml-parser';
-import { J2xParser } from '../../utils/json2xml';
+import { J2xParser } from '@/utils/json2xml';
 import { parseOptions } from './mani-i';
-import { fileDownload } from '../../utils/file-download';
+import { fileDownload } from '@/utils/file-download';
 import { manifestToJsonForXml } from './mani-o';
 
 export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } | { res: string; err?: undefined; } {

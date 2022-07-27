@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtom } from '@/store/store';
-import { Matching } from '@/store/manifest/mani-i';
-import { Transform } from '@/store/manifest/mani-functions';
+import { Matching, Transform } from '@/store/manifest';
 import { ToggleWithPortal } from './FormOptionsPool';
 import { UITableFromObject } from '../../UICard/UITableFromObject';
 

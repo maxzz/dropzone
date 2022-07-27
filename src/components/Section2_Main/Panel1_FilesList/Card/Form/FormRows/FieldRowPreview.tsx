@@ -1,6 +1,6 @@
 import React from 'react';
-import { css } from '../../../../../../stitches.config';
-import { FieldPath } from '../../../../../../store/manifest/mani-functions';
+import { FieldPath } from '@/store/manifest';
+import { css } from '@/stitches.config';
 
 const stylesSvg = css({
     // '--size-div': 4,

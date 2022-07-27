@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtom } from '@/store/store';
-import { convertToXml } from '@/store/manifest/xml-to-js';
+import { convertToXml } from '@/store/manifest';
 import { Dialog } from '@ui/UIDialog';
 import {
     DropdownMenu as Menu,

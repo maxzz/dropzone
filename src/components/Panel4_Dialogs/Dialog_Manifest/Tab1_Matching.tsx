@@ -1,7 +1,7 @@
 import React, { ChangeEvent, HTMLAttributes, useEffect, useState } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from 'jotai';
 import { EditorData } from '@/store/store';
-import { Matching } from '@/store/manifest/mani-i';
+import { Matching } from '@/store/manifest';
 import { a, useSpring } from '@react-spring/web';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { UITooltip, uitooltipSmall } from '@ui/UITooltip';

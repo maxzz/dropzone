@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { FileUs } from '@/store/store';
-import { Transform } from '@/store/manifest/mani-functions';
+import { Transform } from '@/store/manifest';
 
 function Section({ label }: { label: React.ReactNode; }) {
     return (
