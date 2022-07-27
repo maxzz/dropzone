@@ -3,7 +3,7 @@ import { atomWithCallback } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { uuid } from '@/utils/uuid';
 import { LocalStorage } from './store-localstorage';
-import { FileUs, FileUsAtom, FileUsStats } from './store-types';
+import { FileUs, FileUsAtomType, FileUsStats } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
 import { rightPanelAtom, searchFilterAtom, searchFilterCaseSensitiveAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store-filters';
@@ -19,17 +19,17 @@ export namespace LocalStorageSave {
         localStorage.setItem(LocalStorage.KEY, JSON.stringify(newStore));
     }, 1000);
 
-    //export const save = ({ get }: { get: Getter; }) => saveDebounced(get);
+    export const save = ({ get }: { get: Getter; }) => saveDebounced(get);
 }
 
 // Files
 
-export const filesAtom = atom<FileUsAtom[]>([]);
+export const filesAtom = atom<FileUsAtomType[]>([]);
 
 export const setFilesAtom = atom(
     null,
     (get, set, accepterFiles: File[]) => {
-        const dropped: FileUsAtom[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
+        const dropped: FileUsAtomType[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
             const path = ((file as any).path as string || '').replace(/^\//, '').split(/[\\\/]/);
             path.pop();
             const at: FileUs = {
@@ -56,7 +56,7 @@ export const setFilesAtom = atom(
     }
 );
 
-export const filteredAtom = atom<FileUsAtom[]>(
+export const filteredAtom = atom<FileUsAtomType[]>(
     (get) => {
         const { regex, winOnly, webOnly, whyOnly, capOnly, clsOnly } = createRegexByFilter(get(searchFilterAtom), get(searchFilterCaseSensitiveAtom));
 
@@ -65,7 +65,7 @@ export const filteredAtom = atom<FileUsAtom[]>(
         const showEmpty = get(showEmptyManiAtom);
 
         const files = get(filesAtom);
-        return files.filter((fileAtom: FileUsAtom) => {
+        return files.filter((fileAtom: FileUsAtomType) => {
             const fileUs = get(fileAtom);
 
             if (capOnly) {

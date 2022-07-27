@@ -2,7 +2,7 @@
 
 import { atom } from "jotai";
 import { filesAtom } from "./store";
-import { FileUs, FileUsAtom } from "./store-types";
+import { FileUs, FileUsAtomType } from "./store-types";
 
 export const showNormalManiAtom = atom(true);
 export const showManualManiAtom = atom(true);
@@ -17,7 +17,7 @@ export const searchFilterCaseSensitiveAtom = atom(false); // search case sensiti
 
 // Current atom for the right panel
 
-export const rightPanelAtom = atom<FileUsAtom | undefined>(undefined);
+export const rightPanelAtom = atom<FileUsAtomType | undefined>(undefined);
 
 export const rightPanelValueAtom = atom<FileUs | undefined>(
     (get) => {
@@ -39,7 +39,7 @@ const getCurrentCardAtom = atom( // TODO: it should be function instead of atom,
 
 export const setCurrentCardAtom = atom(
     null,
-    (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
+    (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtomType, setCurrent: boolean; }) => {
         const files = get(filesAtom);
         files.forEach((currentFileUsAtom) => {
             const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;

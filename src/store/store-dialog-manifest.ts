@@ -1,10 +1,10 @@
 import { atom, PrimitiveAtom } from "jotai";
-import { FileUsAtom } from "./store-types";
+import { FileUsAtomType } from "./store-types";
 
 // Form editor data
 
 export type EditorData = {
-    fileUsAtom: FileUsAtom;
+    fileUsAtom: FileUsAtomType;
     formIdx: number; // 0 - login (even if login does not exist); 1 - pchange; 2 - both
 };
 

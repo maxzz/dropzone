@@ -1,4 +1,4 @@
-export type { FileUsState, FileUsStats, FileUs, FileUsAtom } from './store-types';
+export type { FileUsState, FileUsStats, FileUs, FileUsAtomType as FileUsAtom } from './store-types';
 
 export {
     rightPanelAtom,
@@ -40,7 +40,7 @@ export {
     selected4ActionAtom, 
 } from './store-ui-state';
 
-export type { SelectRowAtoms, } from './store-types';
+export type { SelectRowAtomsType as SelectRowAtoms, } from './store-types';
 
 export {
     filteredAtom,

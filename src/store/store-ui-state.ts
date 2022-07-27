@@ -3,7 +3,7 @@ import { atomWithCallback } from "@/hooks/atomsX";
 import { LocalStorage } from "./store-localstorage";
 import { filesAtom, LocalStorageSave, } from "./store";
 import { rightPanelAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from "./store-filters";
-import { FileUsAtom } from "./store-types";
+import { FileUsAtomType } from "./store-types";
 
 // Files toggle folding. //TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
 
@@ -20,7 +20,7 @@ export const foldAllCardsAtom = atom(
 
 // Manifests to actions selection
 
-export const selected4ActionAtom = atom<FileUsAtom[]>([]);
+export const selected4ActionAtom = atom<FileUsAtomType[]>([]);
 
 // Busy indicator
 

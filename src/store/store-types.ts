@@ -38,16 +38,16 @@ export type FileUs = {
 
 // FileUs
 
-export type FileUsAtom = WritableAtom<FileUs, FileUs>;
+export type FileUsAtomType = WritableAtom<FileUs, FileUs>;
 
 // Fields selection
 
-export type SelectRow = {
+export type SelectRowType = {
     field: number;
     form: number;
 };
 
-export type SelectRowAtoms = {
-    loginAtom: PrimitiveAtom<SelectRow>;
-    cpassAtom: PrimitiveAtom<SelectRow>;
+export type SelectRowAtomsType = {
+    loginAtom: PrimitiveAtom<SelectRowType>;
+    cpassAtom: PrimitiveAtom<SelectRowType>;
 };
