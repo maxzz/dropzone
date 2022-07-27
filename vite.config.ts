@@ -13,15 +13,6 @@ const buildAt = () => {
     return `Build: ${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
 };
 
-function renderChunks(deps: Record<string, string>) {
-    let chunks = {};
-    Object.keys(deps).forEach((key) => {
-        if (['react', 'react-router-dom', 'react-dom'].includes(key)) return;
-        chunks[key] = [key];
-    });
-    return chunks;
-}
-
 // https://vitejs.dev/config/
 export default defineConfig({
     base: '',
@@ -61,22 +52,6 @@ export default defineConfig({
     build: {
         minify: "esbuild",
         target: "esnext",
-
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    vendor: ['react', 'react-router-dom', 'react-dom'],
-                    ...renderChunks(dependencies),
-                },
-            },
-        },
-
-        // manualChunks(id) {
-        //     if (id.includes('node_modules')) {
-        //       return 'vendor';
-        //     }
-        //   },    
-
     },
 
     server: {
