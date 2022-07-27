@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { filesAtom, busyAtom, clearFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
@@ -36,7 +36,7 @@ function BusyIndicator() {
 
 function LeftHeader() {
     const clearFiles = useSetAtom(clearFilesAtom);
-    const files = useAtom(filesAtom);
+    const files = useAtomValue(filesAtom);
     const total = !!files.length;
     return (
         <div className="flex items-center my-0.5">
@@ -61,7 +61,7 @@ function LeftHeader() {
 export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
-            <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-100 ring-2 ring-primary-300 rounded`}>
+            <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-200 ring-1 ring-primary-500 rounded`}>
                 <LeftHeader />
 
                 {/* Right header */}
@@ -78,3 +78,5 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
         </header>
     );
 }
+
+//TODO: show build version

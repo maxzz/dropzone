@@ -14,7 +14,7 @@ import toast from 'react-hot-toast';
 
 function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     return (
-        <div className="">
+        <div className="text-primary-300">
             <div className="">-=------------------------</div>
             <div className="">-=------------------------</div>
             <div className="">-=------------------------</div>

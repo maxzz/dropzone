@@ -4,7 +4,7 @@ import { formEditorDataAtom } from '@/store';
 import { PortalModal } from '@ui/UIDialog';
 const Manifest_FormEditor = React.lazy(() => import('./Dialog_Manifest/Dialog_Manifest'));
 
-function FormEditorTrigger() {
+function ManifestFormEditorTrigger() {
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);
     return (<>
         {editorData &&
@@ -17,8 +17,8 @@ function FormEditorTrigger() {
     </>);
 }
 
-export function Panel4_Dialogs() {
+export function Section4_Dialogs() {
     return (
-        <FormEditorTrigger />
+        <ManifestFormEditorTrigger />
     );
 }

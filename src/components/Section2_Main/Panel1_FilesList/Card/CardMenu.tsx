@@ -4,10 +4,10 @@ import React from 'react';
 
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import { Menu, Transition } from '@headlessui/react';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
-import ReactDOM from 'react-dom';
-import { classNames } from '../../../../utils/classnames';
+import { classNames } from '@/utils/classnames';
 
 export function Example() {
     return (

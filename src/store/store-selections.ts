@@ -13,7 +13,7 @@ const getCurrentCardAtom = atom( // TODO: it should be function instead of atom,
     }
 );
 
-export const setCurrentCardAtom = atom(
+export const doSetCurrentCardAtom = atom(
     null,
     (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtomType, setCurrent: boolean; }) => {
         const files = get(filesAtom);

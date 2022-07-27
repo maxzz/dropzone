@@ -1,8 +1,7 @@
 export type { FileUsState, FileUsStats, FileUs, FileUsAtomType as FileUsAtom } from './store-types';
 
 export {
-    setCurrentCardAtom,
-
+    doSetCurrentCardAtom,
 } from './store-selections';
 
 export type {

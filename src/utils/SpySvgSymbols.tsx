@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export function SvgFontSpy({ fontID = 'svgfont' }: { fontID?: string; }) {
+export function SpySvgSymbols({ fontID = 'svgfont' }: { fontID?: string; }) {
     const [ids, setIds] = useState<string[]>([]);
     useEffect(() => {
         const font = document.querySelector(`#${fontID} > defs`)?.children;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, setCurrentCardAtom } from '@/store';
+import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, doSetCurrentCardAtom } from '@/store';
 import { formCaption, isAnyWhy } from '@/store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '@ui/UIIconSymbols';
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
@@ -175,14 +175,14 @@ const CardTitleTextMemo = React.memo(CardTitleText);
 
 export function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
-    const setCurrentCard = useSetAtom(setCurrentCardAtom);
+    const doSetCurrentCard = useSetAtom(doSetCurrentCardAtom);
     const setRightPanel = useSetAtom(rightPanelAtom); //#091e4c
     return (
         <div className={`relative p-2 ${currentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100`}>
             <div
                 className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none"
                 onClick={() => {
-                    setCurrentCard({ fileUsAtom, setCurrent: !currentCard });
+                    doSetCurrentCard({ fileUsAtom, setCurrent: !currentCard });
                     setRightPanel(!currentCard ? fileUsAtom : undefined);
                 }}
             >
