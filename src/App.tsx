@@ -16,7 +16,7 @@ function App() {
             <UIToaster />
             <UISymbolDefs />
 
-            <div className="h-screen p-4 space-y-3 flex flex-col overflow-hidden">
+            <div className="h-screen p-2 pt-3 space-y-2 flex flex-col overflow-hidden">
                 <Section1_Header className="flex-none" />
 
                 {/* <CardMenuOverlays /> */}

@@ -231,8 +231,10 @@ export function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } 
 
     return (
         <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
+
             {/* Editor body */}
             <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragBind={dragBind} />
+
             {/* Editor footer */}
             <div className="px-4 py-4 bg-white flex items-center justify-between">
                 <EditorInfo editorData={editorData} />
@@ -253,7 +255,7 @@ export function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } 
                     >Cancel</button>
                 </div>
             </div>
-
+            
         </a.div>
     );
 }

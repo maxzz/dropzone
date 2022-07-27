@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { CSSProperties, useCallback } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { clearFilesAtom, filteredAtom, setFilesAtom } from '@/store/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconDocumentsAccepted } from '@ui/UIIcons';
 import toast from 'react-hot-toast';
+import { classNames } from '@/utils/classnames';
 
 function fileExt(filename: string = ''): string {
     return /[.]/.exec(filename) ? /([^.]+$)/.exec(filename)?.[0] || '' : '';
@@ -70,21 +71,30 @@ function plural(n: number): string {
     return n === 1 ? '' : 's';
 }
 
+const dropzoneBg: CSSProperties = {
+    backgroundImage: "conic-gradient(at right 0%, #5d6a81 214deg, #28446f 264deg, #a4a4a4 274deg)",
+};
+
 export function Sub1_DropzoneArea() {
     const [files] = useAtom(clearFilesAtom);
     const [filtered] = useAtom(filteredAtom);
     const total = files.length;
     return (
         <DropzoneBase
-            className={`ml-0.5 rounded-l self-stretch flex items-stretch ${total ? 'bg-gray-600' : 'bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900 border-r border-gray-500'} cursor-pointer select-none`}
-            style={total ? {} : { backgroundImage: 'conic-gradient(at right 0%, rgb(93, 106, 129) 214deg, rgb(40, 68, 111) 264deg, rgb(164, 164, 164) 274deg)' }}
+            className={classNames(
+                "ml-0.5 rounded-l-sm self-stretch flex items-stretch cursor-pointer select-none",
+                total ? "bg-gray-600" : "bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900 border-r border-gray-500"
+            )}
+            style={total ? {} : dropzoneBg}
             stylesActive={{ background: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
         >
             {total
                 ?
                 <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${total} file${plural(total)}`}>
                     <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
+                    
                     {total} file{plural(total)}
+
                     {files.length !== filtered.length &&
                         <div
                             className="absolute -right-3 -bottom-1 px-1 text-[.65rem] bg-gray-600 rounded"

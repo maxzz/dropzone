@@ -42,11 +42,11 @@ function LeftHeader() {
             <Sub1_DropzoneArea />
 
             {total && <>
-                <div className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center cursor-pointer z-50">
-                    <Sub0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-gray-700" />} />
+                <div className="px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center cursor-pointer z-50">
+                    <Sub0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-primary-700" />} />
                 </div>
 
-                <button className="px-2 self-stretch border-l rounded-none border-gray-500 bg-gray-600 flex items-center justify-center">
+                <button className="px-2 self-stretch border-l rounded-none border-primary-500 bg-primary-600 flex items-center justify-center">
                     <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
                 </button>
 
@@ -60,7 +60,7 @@ function LeftHeader() {
 export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header className="" {...props}>
-            <div className={`min-h-[40px] flex justify-between bg-gray-700 text-gray-100 ring-2 ring-gray-50 rounded-md`}>
+            <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-100 ring-2 ring-primary-300 rounded`}>
                 <LeftHeader />
 
                 {/* Right header */}
