@@ -1,7 +1,7 @@
 // Filters
 
 import { atom } from "jotai";
-import { filesAtom } from "./store";
+import { filesAtom } from "./store-files";
 import { FileUs, FileUsAtomType } from "./store-types";
 
 export const showNormalManiAtom = atom(true);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { filesAtom } from '@/store/store';
-import { busyAtom, clearFilesAtom } from '@/store';
+import { filesAtom, busyAtom, clearFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
 import { Part0_TopMenu } from './Part0_TopMenu';

@@ -43,6 +43,7 @@ export {
 export type { SelectRowAtomsType as SelectRowAtoms, } from './store-types';
 
 export {
-    filteredAtom,
+    filesAtom,
     setFilesAtom,
-} from './store';
+    filteredAtom,
+} from './store-files';

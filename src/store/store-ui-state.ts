@@ -1,7 +1,8 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
 import { LocalStorage } from "./store-localstorage";
-import { filesAtom, LocalStorageSave, } from "./store";
+import { LocalStorageSave, } from "./store";
+import { filesAtom, } from "./store-files";
 import { rightPanelAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from "./store-filters";
 import { FileUsAtomType } from "./store-types";
 
