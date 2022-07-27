@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '@/store/store';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
-import { DummyPlaceholder } from './TabOptions';
+import { DummyPlaceholder } from './Tab3_Options';
 
 function TabFieldsScript({ editorData }: { editorData: EditorData; }) {
     return (
@@ -12,7 +12,7 @@ function TabFieldsScript({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-export function TabFields({ editorData }: { editorData: EditorData; }) {
+export function Tab4_Fields({ editorData }: { editorData: EditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const isScript = fileUs.meta?.[editorData.formIdx]?.disp.isScript;
 

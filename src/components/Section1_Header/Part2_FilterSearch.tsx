@@ -19,7 +19,7 @@ function ToggleCaseSensitive() {
     );
 }
 
-export function Sub2_FilterSearch() {
+export function Part2_FilterSearch() {
     const [filter, setFilter] = useAtom(searchFilterAtom);
     const keyboardRef = React.useRef<HTMLInputElement>(null);
     const [active, setActive] = React.useState(false);

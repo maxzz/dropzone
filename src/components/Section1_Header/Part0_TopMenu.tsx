@@ -68,7 +68,7 @@ function MenuItemFolding() {
     );
 }
 
-export const Sub0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
+export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     //const toggleFolding = useSetAtom(foldAllCardsAtom);
     return (
         <Menu>

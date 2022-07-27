@@ -1,7 +1,7 @@
 import React from 'react';
 import { EditorData } from '@/store/store';
 
-export function TabMatchWindows({ editorData }: { editorData: EditorData; }) {
+export function Tab2_MatchWindows({ editorData }: { editorData: EditorData; }) {
     return (
         <div className="p-4">
             Windows match is comming soon...

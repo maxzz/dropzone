@@ -6,11 +6,11 @@ import { formIdxName } from '@/store/store-functions';
 import { classNames } from '@/utils/classnames';
 import { UITooltip } from '@ui/UITooltip';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
-import { TabMatchWindows } from './Tabs';
-import { MatchWebState, MatchWebStateAtom, TabMatchWeb } from './TabMatching';
-import { parsedFname } from '../../../Section2_Main/Panel1_FilesList/Card/CardTitle';
-import { TabOptions } from './TabOptions';
-import { TabFields } from './TabFields';
+import { Tab2_MatchWindows } from './Tab2_MatchWindows';
+import { MatchWebState, MatchWebStateAtom, Tab1_MatchWeb } from './Tab1_Matching';
+import { parsedFname } from '../../Section2_Main/Panel1_FilesList/Card/CardTitle';
+import { Tab3_Options } from './Tab3_Options';
+import { Tab4_Fields } from './Tab4_Fields';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
@@ -223,10 +223,10 @@ export function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } 
     // Pages
 
     const pages = {
-        'Web': <TabMatchWeb urlsAtom={urlsAtom} />,
-        'Win32': <TabMatchWindows editorData={editorData} />,
-        'Options': <TabOptions editorData={editorData} />,
-        'Fields': <TabFields editorData={editorData} />,
+        'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
+        'Win32': <Tab2_MatchWindows editorData={editorData} />,
+        'Options': <Tab3_Options editorData={editorData} />,
+        'Fields': <Tab4_Fields editorData={editorData} />,
     };
 
     return (

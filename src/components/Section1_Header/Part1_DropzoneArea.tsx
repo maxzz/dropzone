@@ -75,7 +75,7 @@ const dropzoneBg: CSSProperties = {
     backgroundImage: "conic-gradient(at right 0%, #5d6a81 214deg, #28446f 264deg, #a4a4a4 274deg)",
 };
 
-export function Sub1_DropzoneArea() {
+export function Part1_DropzoneArea() {
     const [files] = useAtom(clearFilesAtom);
     const [filtered] = useAtom(filteredAtom);
     const total = files.length;

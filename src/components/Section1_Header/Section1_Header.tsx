@@ -3,9 +3,9 @@ import { useAtom } from 'jotai';
 import { busyAtom, clearFilesAtom } from '@/store/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
-import { Sub0_TopMenu } from './Sub0_TopMenu';
-import { Sub1_DropzoneArea } from './Sub1_DropzoneArea';
-import { Sub3_Filters } from './Sub3_Filters';
+import { Part0_TopMenu } from './Part0_TopMenu';
+import { Part1_DropzoneArea } from './Part1_DropzoneArea';
+import { Part3_Filters } from './Part3_Filters';
 import { IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
@@ -39,11 +39,11 @@ function LeftHeader() {
     const total = !!files.length;
     return (
         <div className="flex items-center my-0.5">
-            <Sub1_DropzoneArea />
+            <Part1_DropzoneArea />
 
             {total && <>
                 <div className="px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center cursor-pointer z-50">
-                    <Sub0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-primary-700" />} />
+                    <Part0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-primary-700" />} />
                 </div>
 
                 <button className="px-2 self-stretch border-l rounded-none border-primary-500 bg-primary-600 flex items-center justify-center">
@@ -65,7 +65,7 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
 
                 {/* Right header */}
                 <div className="flex-1 flex items-center justify-end">
-                    <Sub3_Filters />
+                    <Part3_Filters />
                     <IconAppLogoMicroscope
                         className="w-7 h-7 mx-4"
                         title="__BUILD_DATE__"

@@ -265,7 +265,7 @@ function urlsDirty(urls: MatchWebState): boolean {
     return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
 }
 
-export function TabMatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+export function Tab1_MatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     return (
         <div className="p-4">
             <div className="grid grid-cols-1">

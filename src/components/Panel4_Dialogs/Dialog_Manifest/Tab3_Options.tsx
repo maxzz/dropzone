@@ -14,7 +14,7 @@ export function DummyPlaceholder() {
     </>);
 }
 
-export function TabOptions({ editorData }: { editorData: EditorData; }) {
+export function Tab3_Options({ editorData }: { editorData: EditorData; }) {
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     return (
