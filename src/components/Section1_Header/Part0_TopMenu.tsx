@@ -56,12 +56,12 @@ function MenuItemConvert() {
 }
 
 function MenuItemFolding() {
-    const toggleFolding = useSetAtom(foldAllCardsAtom);
+    const doToggleFolding = useSetAtom(foldAllCardsAtom);
     //const setBusy = useSetAtom(busyAtom);
     return (
         <Item
             onSelect={async () => {
-                toggleFolding(); // setBusy('Folding...'); setTimeout(() => { toggleFolding(); setBusy(''); }, 0); // still reflow problem
+                doToggleFolding(); // setBusy('Folding...'); setTimeout(() => { doToggleFolding(); setBusy(''); }, 0); // still reflow problem
             }}
         >
             Toggle cards folding
@@ -70,7 +70,6 @@ function MenuItemFolding() {
 }
 
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
-    //const toggleFolding = useSetAtom(foldAllCardsAtom);
     return (
         <Menu>
             <Trigger>

@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes, memo, useEffect, useState } from 'react';
-import { atom, useAtom } from 'jotai';
+import { atom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms, } from '@/store';
 import { CardTitle } from './CardTitle';
 import { FormOptions } from './Form/FormOptions/FormOptions';
@@ -16,7 +16,7 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
 
 function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     const [open, setOpen] = useState(false);
-    const [openAll] = useAtom(foldAllCardsAtom);
+    const openAll = useAtomValue(foldAllCardsAtom);
     const [selectRowAtoms] = useState<SelectRowAtoms>({
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
@@ -30,7 +30,7 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
         }
     }, [openAll]);
 
-    const [fileUs] = useAtom(fileUsAtom);
+    const fileUs = useAtomValue(fileUsAtom);
     const nForms = fileUs.mani?.forms.length || 0;
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
