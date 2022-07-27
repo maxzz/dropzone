@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, memo, useEffect, useState } from 'react';
 import { atom, useAtom } from 'jotai';
-import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms } from '@/store/store';
+import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms, } from '@/store';
 import { CardTitle } from './CardTitle';
 import { FormOptions } from './Form/FormOptions/FormOptions';
 import { FormFields } from './Form/FormRows/FormFields';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { FileUsAtom } from '@/store/store';
+import { FileUsAtom } from '@/store';
 import { Matching, Transform } from '@/store/manifest';
 import { ToggleWithPortal } from './FormOptionsPool';
 import { UITableFromObject } from '../../UICard/UITableFromObject';

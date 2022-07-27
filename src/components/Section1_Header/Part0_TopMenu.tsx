@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { foldAllCardsAtom, rightPanelAtom, selected4ActionAtom } from '@/store/store';
+import { foldAllCardsAtom, selected4ActionAtom } from '@/store';
+import { rightPanelAtom } from '@/store';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,

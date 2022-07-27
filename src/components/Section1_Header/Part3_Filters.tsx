@@ -1,6 +1,6 @@
 import React from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
-import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '@/store/store';
+import { showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from '@/store';
 import { LabeledSwitch } from '@ui/UiSwitch';
 import { Part2_FilterSearch } from './Part2_FilterSearch';
 

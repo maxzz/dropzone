@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { splitPaneAtom } from '@/store/store';
+import { splitPaneAtom } from '@/store';
 import './SimpleSplitPane.css';
 
 const baseStyle: React.CSSProperties = {

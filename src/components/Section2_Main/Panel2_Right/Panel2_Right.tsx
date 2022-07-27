@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
-import { FileUsAtom, rightPanelValueAtom } from '@/store/store';
+import { FileUsAtom, rightPanelValueAtom } from '@/store';
 //import { IconBack } from '@ui/UiIcons';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';

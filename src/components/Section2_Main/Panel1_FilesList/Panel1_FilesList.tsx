@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtom } from 'jotai';
-import { filteredAtom } from '@/store/store';
+import { filteredAtom } from '@/store';
 import { Card } from './Card/Card';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 //old: import Card, { CardWRef } from './Card/Card';

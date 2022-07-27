@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditorData } from '@/store/store';
+import { EditorData } from '@/store';
 
 export function Tab2_MatchWindows({ editorData }: { editorData: EditorData; }) {
     return (

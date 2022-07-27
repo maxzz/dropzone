@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '@/store/store';
+import { searchFilterAtom, searchFilterCaseSensitiveAtom } from '@/store';
 import { useKey } from 'react-use';
 import { UITooltip } from '@ui/UITooltip';
 import { IconDot } from '@ui/UIIconSymbols';

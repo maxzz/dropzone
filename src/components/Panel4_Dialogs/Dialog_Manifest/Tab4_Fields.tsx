@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { EditorData } from '@/store/store';
+import { EditorData } from '@/store';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { DummyPlaceholder } from './Tab3_Options';
 

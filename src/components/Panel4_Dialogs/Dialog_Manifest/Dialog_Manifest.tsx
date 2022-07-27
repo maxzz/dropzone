@@ -1,8 +1,7 @@
 import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
-import { EditorData } from '@/store/store';
-import { formIdxName } from '@/store/store-functions';
+import { EditorData, formIdxName } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { UITooltip } from '@ui/UITooltip';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';

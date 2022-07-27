@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { FileUsAtom, SelectRowAtoms } from '@/store/store';
+import { FileUsAtom, SelectRowAtoms } from '@/store';
 import { FieldRow } from './FieldRow';
 
 type FormFieldsProps = {

@@ -1,4 +1,4 @@
-import { FileUs, FileUsStats } from './store';
+import { FileUs, FileUsStats } from './store-types';
 import { dpTimeToShow } from './manifest';
 
 export function textFileReader(file: File): Promise<string> {

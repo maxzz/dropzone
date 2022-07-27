@@ -1,81 +1,25 @@
-import { atom, Getter, PrimitiveAtom, WritableAtom } from 'jotai';
+import { atom, Getter, PrimitiveAtom } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
 import { debounce } from '@/utils/debounce';
 import { uuid } from '@/utils/uuid';
+import { LocalStorage } from './store-localstorage';
+import { FileUs, FileUsAtom, FileUsStats } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
-
-// FileUs
-
-export type FileUsState = {
-    isGroupAtom: PrimitiveAtom<boolean>, // this fileUs selected for bulk group operation
-    isCurrentAtom: PrimitiveAtom<boolean>, // this fileUs is current and shown in the right panel
-};
-
-export type FileUsStats = {
-    domain?: string;
-    isWeb: boolean;
-    isChrome: boolean;
-    isFCat: boolean;
-    isCustomization: boolean;
-    url?: string;
-    title?: string;
-    isSubFolder?: boolean;
-    subFolder?: string;
-    dateCreated?: string;
-    dateModified?: string;
-};
-
-export type FileUs = {
-    id: string;
-    idx: number;            // index in the loaded list wo/ counting on filters, i.e. absolute index
-    fname: string;          // filename
-    fpath: string;          // file relative path to the dropped folder
-    fmodi: number;          // lastModified
-    modified: number;       // last modified
-    size: number;           // file size
-    raw?: string;           // raw manifest as it was loaded
-    mani?: Mani.Manifest;   // json raw manifest
-    meta?: Meta.Form[],     // meta data on manifest
-    fcat?: Catalog.Root;    // field catalog
-    file?: File;            // file OS handle
-    state: FileUsState;     // local state atoms: is currnet; is selected
-    stats: FileUsStats;     // quick access statistics
-};
-
-export type FileUsAtom = WritableAtom<FileUs, FileUs>;
+import { rightPanelAtom, searchFilterAtom, searchFilterCaseSensitiveAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store-filters';
+import { busyAtom, splitPaneAtom, _foldAllCardsAtom } from './store-ui-state';
 
 // Local storage
 
-namespace Storage {
-    const KEY = 'pmit-01';
-
-    type Store = {
-        vSplitPos: number;
-    };
-
-    export let initialData: Store = {
-        vSplitPos: 44,
-    };
-
-    function load() {
-        const s = localStorage.getItem(KEY);
-        if (s) {
-            try {
-                let obj = JSON.parse(s) as Store;
-                initialData = {...initialData, ...obj};
-            } catch (error) {
-            }
-        }
-    }
-    load();
-
-    export const save = debounce(function _save(get: Getter) {
-        let newStore: Store = {
+export namespace LocalStorageSave {
+    export const saveDebounced = debounce(function _save(get: Getter) {
+        let newStore: LocalStorage.Store = {
             vSplitPos: get(splitPaneAtom),
         };
-        localStorage.setItem(KEY, JSON.stringify(newStore));
+        localStorage.setItem(LocalStorage.KEY, JSON.stringify(newStore));
     }, 1000);
+
+    //export const save = ({ get }: { get: Getter; }) => saveDebounced(get);
 }
 
 // Files
@@ -146,30 +90,6 @@ export const filteredAtom = atom<FileUsAtom[]>(
     }
 );
 
-export const clearFilesAtom = atom(
-    (get) => get(filesAtom),
-    (get, set) => {
-        set(filesAtom, []);
-        set(rightPanelAtom, undefined);
-        set(totalNormalManiAtom, 0);
-        set(totalManualManiAtom, 0);
-        set(totalEmptyManiAtom, 0);
-    }
-);
-
-// Files toggle folding. //TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
-
-export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
-
-export const foldAllCardsAtom = atom(
-    (get) => get(_foldAllCardsAtom),
-    (get, set) => {
-        //set(busyAtom, 'Folding...');
-        set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
-        //set(busyAtom, '');
-    }
-);
-
 // Cache
 
 const updateCacheAtom = atom(
@@ -231,91 +151,5 @@ const updateCacheAtom = atom(
         set(busyAtom, '');
     }
 );
-
-// Filters
-
-export const showNormalManiAtom = atom(true);
-export const showManualManiAtom = atom(true);
-export const showEmptyManiAtom = atom(true);
-
-export const totalManualManiAtom = atom(0);
-export const totalNormalManiAtom = atom(0);
-export const totalEmptyManiAtom = atom(0);
-
-export const searchFilterAtom = atom('');
-export const searchFilterCaseSensitiveAtom = atom(false); // search case sensitive
-
-// Current atom for the right panel
-
-export const rightPanelAtom = atom<FileUsAtom | undefined>(undefined);
-
-export const rightPanelValueAtom = atom<FileUs | undefined>(
-    (get) => {
-        const rpa = get(rightPanelAtom);
-        return rpa ? get(rpa) : undefined;
-    }
-);
-
-// Current card selection
-
-const getCurrentCardAtom = atom( // TODO: it should be function instead of atom, since there is no reactivity
-    (get) => {
-        const files = get(filesAtom);
-        const sel = files.find((currentFileUsAtom) => get(get(currentFileUsAtom).state.isCurrentAtom));
-        //console.log('get selected', `${sel}`, 'all', files.map((fileAtom) => `${fileAtom}`));
-        return sel;
-    }
-);
-
-export const setCurrentCardAtom = atom(
-    null,
-    (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtom, setCurrent: boolean; }) => {
-        const files = get(filesAtom);
-        files.forEach((currentFileUsAtom) => {
-            const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
-            const thisCurrentNow = get(thisCurrentAtom);
-            if (currentFileUsAtom === fileUsAtom) {
-                (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
-            } else {
-                (thisCurrentNow) && set(thisCurrentAtom, false);
-            }
-        });
-    }
-);
-
-// Fields selection
-
-export type SelectRow = {
-    field: number;
-    form: number;
-};
-
-export type SelectRowAtoms = {
-    loginAtom: PrimitiveAtom<SelectRow>;
-    cpassAtom: PrimitiveAtom<SelectRow>;
-};
-
-// Busy indicator
-
-export const busyAtom = atom('');
-
-// Split pane position
-
-export const splitPaneAtom = atomWithCallback<number>(Storage.initialData.vSplitPos, ({ get }) => Storage.save(get));
-
-// Manifests to actions selection
-
-export const selected4ActionAtom = atom<FileUsAtom[]>([]);
-
-// Form editor data
-
-export type EditorData = {
-    fileUsAtom: FileUsAtom;
-    formIdx: number; // 0 - login (even if login does not exist); 1 - pchange; 2 - both
-};
-
-export type FormEditorDataAtom = PrimitiveAtom<EditorData | null>;
-
-export const formEditorDataAtom = atom<EditorData | null>(null);
 
 //

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { FileUs, SelectRowAtoms } from '@/store/store';
+import { FileUs, SelectRowAtoms } from '@/store';
 import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';

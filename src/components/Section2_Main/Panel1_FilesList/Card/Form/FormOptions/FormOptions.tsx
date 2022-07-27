@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '@/store/store';
+import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '@/store';
 import { IconGear } from '@ui/UIIconSymbols';
 import { FieldRowPreview } from '../FormRows/FieldRowPreview';
 import { FormOptionsDetection } from './FormOptionsDetection';

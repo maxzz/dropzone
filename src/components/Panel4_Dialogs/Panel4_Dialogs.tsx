@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { formEditorDataAtom } from '@/store/store';
+import { formEditorDataAtom } from '@/store';
 import { PortalModal } from '@ui/UIDialog';
 import { Manifest_FormEditor } from './Dialog_Manifest/Dialog_Manifest';
 

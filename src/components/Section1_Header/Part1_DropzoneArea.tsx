@@ -1,6 +1,6 @@
 import React, { CSSProperties, useCallback } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { clearFilesAtom, filteredAtom, setFilesAtom } from '@/store/store';
+import { clearFilesAtom, filteredAtom, setFilesAtom, } from '@/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconDocumentsAccepted } from '@ui/UIIcons';
 import toast from 'react-hot-toast';
