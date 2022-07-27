@@ -1,6 +1,7 @@
 import React, { CSSProperties, useCallback } from 'react';
-import { useAtom, useSetAtom } from 'jotai';
-import { clearFilesAtom, filteredAtom, setFilesAtom, } from '@/store';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { filesAtom } from '@/store/store';
+import { filteredAtom, setFilesAtom, } from '@/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconDocumentsAccepted } from '@ui/UIIcons';
 import toast from 'react-hot-toast';
@@ -76,8 +77,8 @@ const dropzoneBg: CSSProperties = {
 };
 
 export function Part1_DropzoneArea() {
-    const [files] = useAtom(clearFilesAtom);
-    const [filtered] = useAtom(filteredAtom);
+    const files = useAtomValue(filesAtom);
+    const filtered = useAtomValue(filteredAtom);
     const total = files.length;
     return (
         <DropzoneBase

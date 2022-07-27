@@ -28,8 +28,8 @@ export const busyAtom = atom('');
 
 //
 
-export const clearFilesAtom = atom(
-    (get) => get(filesAtom),
+export const doClearFilesAtom = atom(
+    null,
     (get, set) => {
         set(filesAtom, []);
         set(rightPanelAtom, undefined);

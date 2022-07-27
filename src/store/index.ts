@@ -32,7 +32,7 @@ export {
 
 export { 
     busyAtom,
-    clearFilesAtom,
+    doClearFilesAtom as clearFilesAtom,
 
     splitPaneAtom,
 

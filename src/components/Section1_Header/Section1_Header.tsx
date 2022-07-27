@@ -1,5 +1,6 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
+import { filesAtom } from '@/store/store';
 import { busyAtom, clearFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
@@ -35,7 +36,8 @@ function BusyIndicator() {
 }
 
 function LeftHeader() {
-    const [files, clearFiles] = useAtom(clearFilesAtom);
+    const clearFiles = useSetAtom(clearFilesAtom);
+    const files = useAtom(filesAtom);
     const total = !!files.length;
     return (
         <div className="flex items-center my-0.5">
