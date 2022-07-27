@@ -63,6 +63,15 @@ export const doClearFilesAtom = atom(
     }
 );
 
+// UI has files
+
+export const hasFilesAtom = atom(
+    (get) => {
+        const total = get(filesAtom);
+        return !!total.length;
+    }
+    );
+
 // Split pane position
 
 export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.vSplitPos, LocalStorageSave.save);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { filesAtom, busyAtom, clearFilesAtom } from '@/store';
+import { busyAtom, clearFilesAtom, hasFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
 import { Part0_TopMenu } from './Part0_TopMenu';
@@ -36,13 +36,12 @@ function BusyIndicator() {
 
 function LeftHeader() {
     const clearFiles = useSetAtom(clearFilesAtom);
-    const files = useAtomValue(filesAtom);
-    const total = !!files.length;
+    const hasFiles = useAtomValue(hasFilesAtom);
     return (
-        <div className="flex items-center my-0.5">
+        <div className="flex-1 flex items-center my-0.5">
             <Part1_DropzoneArea />
 
-            {total && <>
+            {hasFiles && <>
                 <div className="px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center cursor-pointer z-50">
                     <Part0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-primary-700" />} />
                 </div>
@@ -65,14 +64,16 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
                 <LeftHeader />
 
                 {/* Right header */}
-                <div className="flex-1 flex items-center justify-end">
+                <div className="flex items-center justify-end">
                     <Part3_Filters />
+
                     <IconAppLogoMicroscope
                         className="w-7 h-7 mx-4"
                         title="__BUILD_DATE__"
                         onClick={(event) => {
                             event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } });
-                        }} />
+                        }}
+                    />
                 </div>
             </div>
         </header>

@@ -72,37 +72,43 @@ function plural(n: number): string {
 }
 
 const dropzoneBg: CSSProperties = {
-    backgroundImage: "conic-gradient(at right 0%, #5d6a81 214deg, #28446f 264deg, #a4a4a4 274deg)",
+    backgroundImage: "conic-gradient(at right 0%, #103062 214deg, #28446f 264deg, #647897 274deg)",
 };
+
+function ShowingNow() {
+    const files = useAtomValue(filesAtom);
+    const filtered = useAtomValue(filteredAtom);
+    return (<>
+        {files.length !== filtered.length &&
+            <div
+                className="absolute -right-3 -bottom-1 px-1 text-[.65rem] bg-gray-600 rounded"
+                title={`Showing now ${filtered.length} file${plural(filtered.length)}`}
+            >
+                {filtered.length}
+            </div>
+        }
+    </>);
+}
 
 export function Part1_DropzoneArea() {
     const files = useAtomValue(filesAtom);
-    const filtered = useAtomValue(filteredAtom);
-    const total = files.length;
+    const totalFiles = files.length;
     return (
         <DropzoneBase
             className={classNames(
                 "ml-0.5 rounded-l-sm self-stretch flex items-stretch cursor-pointer select-none",
-                total ? "bg-gray-600" : "bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900 border-r border-gray-500"
+                totalFiles ? "bg-primary-600" : "" // "bg-gradient-to-r from-primary-900 via-indigo-900 to-primary-900 border-r border-primary-500"
             )}
-            style={total ? {} : dropzoneBg}
+            style={totalFiles ? {} : dropzoneBg}
             stylesActive={{ background: '#059669' }} // {/* bg-green-600: classNameActive is not good for tailwind parser */}
         >
-            {total
+            {totalFiles
                 ?
-                <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${total} file${plural(total)}`}>
+                <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${totalFiles} file${plural(totalFiles)}`}>
                     <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
-                    
-                    {total} file{plural(total)}
 
-                    {files.length !== filtered.length &&
-                        <div
-                            className="absolute -right-3 -bottom-1 px-1 text-[.65rem] bg-gray-600 rounded"
-                            title={`Showing now ${filtered.length} file${plural(filtered.length)}`}
-                        >
-                            {filtered.length}
-                        </div>
-                    }
+                    {totalFiles} file{plural(totalFiles)}
+                    <ShowingNow />
                 </div>
                 :
                 <div className="px-4 py-2 flex items-center">

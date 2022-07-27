@@ -16,14 +16,14 @@ export {
     formIdxName,
 } from './store-functions';
 
-export { 
+export {
     busyAtom,
     doClearFilesAtom as clearFilesAtom,
 
     splitPaneAtom,
 
-    foldAllCardsAtom, 
-    selected4ActionAtom, 
+    foldAllCardsAtom,
+    selected4ActionAtom,
 
     rightPanelAtom,
     rightPanelValueAtom,
@@ -37,7 +37,9 @@ export {
     totalEmptyManiAtom,
     totalManualManiAtom,
     totalNormalManiAtom,
-    
+
+    hasFilesAtom,
+
 } from './store-ui-state';
 
 export type { SelectRowAtomsType as SelectRowAtoms, } from './store-types';

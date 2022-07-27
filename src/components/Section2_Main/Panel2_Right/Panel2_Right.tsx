@@ -11,23 +11,19 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     return (<>
         {/* <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} /> */}
 
-        <div className={`pt-4 pb-2 flex-auto overflow-hidden w-full h-full bg-gray-900 ${className}`} {...rest}>
+        <div className={`pt-4 pb-2 flex-auto overflow-hidden w-full h-full bg-primary-900 ${className}`} {...rest}>
             {rightPanelValue &&
-                <div className="w-full h-full flex flex-col space-y-2">
+                <div className="w-full h-full flex flex-col">
 
                     {/* Card title */}
-                    <div className="p-2 text-gray-100 bg-gray-900 border-b-[0.5px] border-gray-600">
+                    <div className="p-2 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
                         <CardTitleText fileUsAtom={rightPanelValueAtom as FileUsAtom} />
                     </div>
 
                     {/* Raw data preview (+ codemirror?) */}
-                    <UISimpleBar className={`px-2 overflow-auto w-full h-full text-xs text-gray-100 bg-gray-800 opacity-50 cursor-default`}>
-                        <div className="font-mono" style={{whiteSpace: 'pre'}}>
+                    <UISimpleBar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-primary-800 opacity-50 cursor-default`}>
+                        <div className="font-mono whitespace-pre">
                             {rightPanelValue.raw}
-                        </div>
-                        <br />
-                        <div>
-                            <pre>{rightPanelValue.raw}</pre>
                         </div>
                     </UISimpleBar>
                 </div>
