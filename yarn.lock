@@ -2594,6 +2594,11 @@ util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
+vite-plugin-chunk-split@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/vite-plugin-chunk-split/-/vite-plugin-chunk-split-0.2.5.tgz#58a4ee67bae745b6160bd4bedd4d42122446dbd2"
+  integrity sha512-SqNLWwGO9iqyQEpj59NPGopmIOt245bQoEzLdlCpoiFoj59eHN7Me0fgrb3EMZ9qO/FM6jyLAB/c/5rfVwIrNg==
+
 vite@3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.3.tgz#c7b2ed9505a36a04be1d5d23aea4ea6fc028043f"
