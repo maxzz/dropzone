@@ -1,4 +1,4 @@
-import { FileUs } from '../store';
+import { FileUs } from '../store-types';
 import { XMLParser } from 'fast-xml-parser';
 import { J2xParser } from '@/utils/json2xml';
 import { parseOptions } from './mani-i';

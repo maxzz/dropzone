@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
+import { FileUsAtomType } from "./store-types";
+import { LocalStorageSave, } from "./store-save";
 import { LocalStorage } from "./store-localstorage";
-import { LocalStorageSave, } from "./store";
 import { filesAtom, } from "./store-files";
 import { rightPanelAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from "./store-filters";
-import { FileUsAtomType } from "./store-types";
 
 // Files toggle folding. //TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
 
@@ -42,4 +42,5 @@ export const doClearFilesAtom = atom(
 
 // Split pane position
 
-export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.vSplitPos, ({ get }) => LocalStorageSave.saveDebounced(get));
+//export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.vSplitPos, ({ get }) => LocalStorageSave.saveDebounced(get));
+export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.vSplitPos, LocalStorageSave.save);

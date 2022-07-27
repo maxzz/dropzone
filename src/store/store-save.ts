@@ -13,5 +13,7 @@ export namespace LocalStorageSave {
         localStorage.setItem(LocalStorage.KEY, JSON.stringify(newStore));
     }, 1000);
 
-    export const save = ({ get }: { get: Getter; }) => saveDebounced(get);
+    export function save({ get }: { get: Getter; }) {
+        saveDebounced(get);
+    }
 }
