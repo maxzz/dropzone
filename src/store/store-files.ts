@@ -3,7 +3,7 @@ import { uuid } from '@/utils/uuid';
 import { FileUs, FileUsAtomType, FileUsStats } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
-import { rightPanelAtom, searchFilterAtom, searchFilterCaseSensitiveAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store-filters';
+import { rightPanelAtom, searchFilterAtom, searchFilterCaseSensitiveAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store-ui-state';
 import { busyAtom, _foldAllCardsAtom } from './store-ui-state';
 
 // Files

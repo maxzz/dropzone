@@ -1,22 +1,9 @@
 export type { FileUsState, FileUsStats, FileUs, FileUsAtomType as FileUsAtom } from './store-types';
 
 export {
-    rightPanelAtom,
-    rightPanelValueAtom,
-
-    searchFilterAtom,
-    searchFilterCaseSensitiveAtom,
-
-    showEmptyManiAtom,
-    showManualManiAtom,
-    showNormalManiAtom,
-    totalEmptyManiAtom,
-    totalManualManiAtom,
-    totalNormalManiAtom,
-
     setCurrentCardAtom,
 
-} from './store-filters';
+} from './store-selections';
 
 export type {
     EditorData,
@@ -38,6 +25,20 @@ export {
 
     foldAllCardsAtom, 
     selected4ActionAtom, 
+
+    rightPanelAtom,
+    rightPanelValueAtom,
+
+    searchFilterAtom,
+    searchFilterCaseSensitiveAtom,
+
+    showEmptyManiAtom,
+    showManualManiAtom,
+    showNormalManiAtom,
+    totalEmptyManiAtom,
+    totalManualManiAtom,
+    totalNormalManiAtom,
+    
 } from './store-ui-state';
 
 export type { SelectRowAtomsType as SelectRowAtoms, } from './store-types';

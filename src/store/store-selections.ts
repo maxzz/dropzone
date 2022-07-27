@@ -1,30 +1,6 @@
-// Filters
-
 import { atom } from "jotai";
 import { filesAtom } from "./store-files";
-import { FileUs, FileUsAtomType } from "./store-types";
-
-export const showNormalManiAtom = atom(true);
-export const showManualManiAtom = atom(true);
-export const showEmptyManiAtom = atom(true);
-
-export const totalManualManiAtom = atom(0);
-export const totalNormalManiAtom = atom(0);
-export const totalEmptyManiAtom = atom(0);
-
-export const searchFilterAtom = atom('');
-export const searchFilterCaseSensitiveAtom = atom(false); // search case sensitive
-
-// Current atom for the right panel
-
-export const rightPanelAtom = atom<FileUsAtomType | undefined>(undefined);
-
-export const rightPanelValueAtom = atom<FileUs | undefined>(
-    (get) => {
-        const rpa = get(rightPanelAtom);
-        return rpa ? get(rpa) : undefined;
-    }
-);
+import { FileUsAtomType } from "./store-types";
 
 // Current card selection
 
