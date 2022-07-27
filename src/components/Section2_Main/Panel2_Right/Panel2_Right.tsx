@@ -22,8 +22,12 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
 
                     {/* Raw data preview (+ codemirror?) */}
                     <UISimpleBar className={`px-2 overflow-auto w-full h-full text-xs text-gray-100 bg-gray-800 opacity-50 cursor-default`}>
+                        <div className="font-mono" style={{whiteSpace: 'pre'}}>
+                            {rightPanelValue.raw}
+                        </div>
+                        <br />
                         <div>
-                            <pre className="">{rightPanelValue.raw}</pre>
+                            <pre>{rightPanelValue.raw}</pre>
                         </div>
                     </UISimpleBar>
                 </div>
