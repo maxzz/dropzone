@@ -1,8 +1,9 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { splitPaneAtom } from '@/store';
-import './SimpleSplitPane.css';
+import { classNames } from '@/utils/classnames';
 import { withDigits } from '@/utils/numbers';
+import './SimpleSplitPane.css';
 
 const baseStyle: React.CSSProperties = {
     flex: '1',
@@ -14,10 +15,6 @@ const styleB: React.CSSProperties = {
     minWidth: 0,
     minHeight: 0,
 };
-
-function cx(...configs: any[]) {
-    return configs.map(config => typeof config === 'string' ? config : Object.keys(config).filter(k => config[k]).join(' '),).join(' ');
-}
 
 type SplitPaneProps = {
     vertical?: boolean;
@@ -33,7 +30,7 @@ type SplitPaneDataProps = {
     setPosition: (value: number) => void,
 };
 
-function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.Element {
+function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
     const { vertical = true, minPersent = 1, maxPersent = 99, className, children, position, setPosition, onResize } = props;
 
     const container = React.useRef<HTMLDivElement | null>(null);
@@ -88,7 +85,7 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.El
             <div style={styleA}>
                 {childrenArr[0]}
             </div>
-            <div className={cx({ 'splitpane-divider': true, vertical: vertical, horizontal: !vertical, })} onMouseDown={onMouseDown} />
+            <div className={classNames('splitpane-divider', vertical ? 'vertical' : 'horizontal')} onMouseDown={onMouseDown} />
             <div style={styleB}>
                 {childrenArr[1]}
             </div>
@@ -96,15 +93,15 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps): JSX.El
     );
 }
 
-export function SimpleSplitPane(props: SplitPaneProps): JSX.Element {
-    // Position is really the size (width or height) of the first (left or top)
-    // panel, as percentage of the parent containers size. The remaining elements
-    // are sized and layed out through flexbox.
+export function SimpleSplitPane(props: SplitPaneProps) {
+    // Position is really the size (width or height) of the first (left or top) panel,
+    // as percentage of the parent containers size. The remaining elements are
+    // sized and layed out through flexbox.
     const [position, setPosition] = useAtom(splitPaneAtom);
     return (
         <SimpleSplitPaneBody position={position} setPosition={setPosition} {...props} />
     );
 }
 
-//TODO: styles
-//TODO: highlight moving bar by timer
+//TODO: styles - done
+//TODO: highlight moving bar by timer - done
