@@ -115,7 +115,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         </div>
 
         {/* Login caption */}
-        <div className="font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className="ml-0.5 font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
             {stats.isCustomization
                 ? <span title="This file is for configuring the application">Excluded app</span>
                 : stats.isFCat
@@ -133,6 +133,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
             <div className="flex-none flex items-center space-x-1 mr-1">
                 <CardAttention fileUs={fileUs} />
                 {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
+                <CardTitleFileIndex idx={fileUs.idx + 1} />
             </div>
         </div>
     </>);
