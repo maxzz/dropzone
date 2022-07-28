@@ -1,13 +1,13 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
-import { FileUsAtomType, rightPanelValueAtom } from '@/store';
+import { FileUsAtomType, rightPanel } from '@/store';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
 //import { IconBack } from '@ui/UiIcons';
 
 export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    const rightPanelValue = useAtomValue(rightPanelValueAtom);
+    const rightPanelValue = useAtomValue(rightPanel.valueAtom);
     return (<>
         {/* <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} /> */}
 
@@ -17,7 +17,7 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
 
                     {/* Card title */}
                     <div className="p-2 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
-                        <CardTitleText fileUsAtom={rightPanelValueAtom as FileUsAtomType} />
+                        <CardTitleText fileUsAtom={rightPanel.valueAtom as FileUsAtomType} />
                     </div>
 
                     {/* Raw data preview (+ codemirror?) */}

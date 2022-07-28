@@ -29,11 +29,9 @@ export {
 
     splitPaneAtom,
 
-    rightPanelAtom,
-    rightPanelValueAtom,
-
-    searchFilterAtom,
-    searchFilterCaseSensitiveAtom,
+    searchFilter,
+    
+    rightPanel,
 
 } from './store-ui-state';
 

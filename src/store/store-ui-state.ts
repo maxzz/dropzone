@@ -1,4 +1,4 @@
-import { atom } from "jotai";
+import { Atom, atom, PrimitiveAtom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
 import { FileUs, FileUsAtomType } from "./store-types";
 import { LocalStorageSave, } from "./store-save";
@@ -19,19 +19,27 @@ export const totalMani = {
     emptyAtom: atom(0),
 };
 
-export const searchFilterAtom = atom('');
-export const searchFilterCaseSensitiveAtom = atom(false); // search case sensitive
+export const searchFilter = {
+    textAtom: atom(''),
+    caseSensitiveAtom: atom(false), // search case sensitive
+};
 
-// Current atom for the right panel
+// Right panel
 
-export const rightPanelAtom = atom<FileUsAtomType | undefined>(undefined);
+type RightPanel = {
+    panelAtom: PrimitiveAtom<FileUsAtomType | undefined>;
+    valueAtom: Atom<FileUs | undefined>;
+}
 
-export const rightPanelValueAtom = atom<FileUs | undefined>(
-    (get) => {
-        const rpa = get(rightPanelAtom);
-        return rpa ? get(rpa) : undefined;
-    }
-);
+export const rightPanel: RightPanel = {
+    panelAtom: atom<FileUsAtomType | undefined>(undefined),
+    valueAtom: atom<FileUs | undefined>(
+        (get) => {
+            const rpa = get(rightPanel.panelAtom);
+            return rpa ? get(rpa) : undefined;
+        }
+    ),
+};
 
 // Files toggle folding. //TODO: hack: react does not have events down propagation. for more complicated cases we can use useImperativeHandle.
 

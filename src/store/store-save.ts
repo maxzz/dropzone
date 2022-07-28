@@ -1,7 +1,7 @@
 import { Getter } from 'jotai';
 import { debounce } from '@/utils/debounce';
 import { LocalStorage } from './store-localstorage';
-import { splitPaneAtom, _foldAllCardsAtom } from './store-ui-state';
+import { splitPaneAtom } from './store-ui-state';
 
 // Local storage
 

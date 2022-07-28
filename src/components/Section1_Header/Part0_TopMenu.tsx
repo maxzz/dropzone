@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { foldAllCardsAtom, selected4ActionAtom } from '@/store';
-import { rightPanelAtom } from '@/store';
+import { rightPanel } from '@/store';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -13,21 +13,12 @@ import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
-    const rightPanel = useAtomValue(rightPanelAtom);
-    const disabled = !rightPanel;
+    const rightPanelAtom = useAtomValue(rightPanel.panelAtom);
+    const disabled = !rightPanelAtom;
     function click() {
-        if (rightPanel) {
-            const idx = selectedAtoms.find((atom) => rightPanel === atom);
-            //console.log('items', selectedAtoms.map(_ => _.toString()), rightPanel.toString());
-
-            if (idx) {
-                const newSelection = selectedAtoms.filter((atom) => rightPanel !== atom);
-                //console.log('add items', newSelection.map(_ => _.toString()), rightPanel.toString());
-                setSelectedAtoms(newSelection);
-            } else {
-                //console.log('rem items', [...selectedAtoms, rightPanel as FileUsAtom].map(_ => _.toString()), rightPanel.toString());
-                setSelectedAtoms([...selectedAtoms, rightPanel]);
-            }
+        if (rightPanelAtom) {
+            const idx = selectedAtoms.find((atom) => rightPanelAtom === atom);
+            setSelectedAtoms(idx ? selectedAtoms.filter((atom) => rightPanelAtom !== atom) : [...selectedAtoms, rightPanelAtom]);
         }
     }
     return (
