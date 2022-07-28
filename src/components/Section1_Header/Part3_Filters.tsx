@@ -32,18 +32,16 @@ function ManiFilter({ showAtom, counterAtom, label, title }: { showAtom: Primiti
 
 export function Part3_Filters() {
     const hasFiles = useAtomValue(hasFilesAtom);
-    const styles = useSpring({ opacity: hasFiles ? 1 : 0, x: hasFiles ? 0 : 300 });
+    const styles = useSpring({ opacity: hasFiles ? 1 : 0 });
     return (
-        <div className="overflow-hidden">
-            <a.div style={styles} className={classNames(
-                "flex-1 p-2 md:p-0 flex flex-col md:flex-row items-end justify-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200",
-                //hasFiles ? "opacity-100" : "opacity-0",
-            )}>
-                <Part2_FilterSearch />
-                <ManiFilter showAtom={showMani.normalAtom} counterAtom={totalMani.normalAtom} label="Normal" title="Show normal mode manifests" />
-                <ManiFilter showAtom={showMani.manualAtom} counterAtom={totalMani.manualAtom} label="Manual" title="Show manual mode manifests" />
-                <ManiFilter showAtom={showMani.emptyAtom} counterAtom={totalMani.emptyAtom} label="Empty" title="Show excluded manifests" />
-            </a.div>
-        </div>
+        <a.div style={styles} className={classNames(
+            "flex-1 p-2 md:p-0 flex flex-col md:flex-row items-end justify-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200",
+            //hasFiles ? "opacity-100" : "opacity-0",
+        )}>
+            <Part2_FilterSearch />
+            <ManiFilter showAtom={showMani.normalAtom} counterAtom={totalMani.normalAtom} label="Normal" title="Show normal mode manifests" />
+            <ManiFilter showAtom={showMani.manualAtom} counterAtom={totalMani.manualAtom} label="Manual" title="Show manual mode manifests" />
+            <ManiFilter showAtom={showMani.emptyAtom} counterAtom={totalMani.emptyAtom} label="Empty" title="Show excluded manifests" />
+        </a.div>
     );
 }
