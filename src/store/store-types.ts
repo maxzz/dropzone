@@ -40,6 +40,17 @@ export type FileUs = {
 
 export type FileUsAtomType = WritableAtom<FileUs, FileUs>;
 
+export const enum FormIdx {
+    login = 0,              // 0 - login (even if login does not exist)
+    cpass,                  // 1 - pchange
+    both,                   // 2 - both forms
+}
+
+export type FileUsFormData = {
+    fileUsAtom: FileUsAtomType;
+    formIdx: FormIdx;
+};
+
 // Fields selection
 
 export type SelectRowType = {

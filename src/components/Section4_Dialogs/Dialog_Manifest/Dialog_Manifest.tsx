@@ -1,4 +1,4 @@
-import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
+import React, { Fragment, RefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
 import { EditorData, formIdxName } from '@/store';
@@ -10,50 +10,55 @@ import { UITooltip } from '@ui/UITooltip';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { MatchWebState, MatchWebStateAtom, Tab1_MatchWeb } from './Tab1_Matching';
-import { parsedFname } from '../../Section2_Main/Panel1_FilesList/Card/CardTitle';
+import { parsedFname } from '@/components/Section2_Main/Panel1_FilesList/Card/CardTitleText';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
 //import { toastWarning } from '@ui/UIToaster';
 
-function EditorInfo({ editorData }: { editorData: EditorData; }) {
+function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
-    return (<>
-        <UITooltip trigger={<IconInfo
-            className="w-7 h-7 text-gray-300"
-            style={{ filter: 'drop-shadow(#907bdab0 0px 0px .2rem)' }}
-            fill="#fff"
-            stroke="#0004"
-            strokeWidth={1}
-        />} arrow={true}>
+    return (
+        <UITooltip
+            trigger={
+                <IconInfo
+                    className="w-7 h-7 text-gray-300"
+                    style={{ filter: 'drop-shadow(#907bdab0 0px 0px .2rem)' }}
+                    fill="#fff"
+                    stroke="#0004"
+                    strokeWidth={1}
+                />
+            }
+            arrow={true}
+        >
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
                 <div className="font-bold">Form</div>
-                <div className="">{formName}</div>
+                <div>{formName}</div>
 
                 {stats.domain && <>
                     <div className="font-bold">Domain</div>
-                    <div className="">{stats.domain}</div>
+                    <div>{stats.domain}</div>
                 </>}
 
                 <div className="font-bold">Filename</div>
-                <div className="">{fname}</div>
+                <div>{fname}</div>
 
                 {stats.dateCreated && <>
                     <div className="font-bold">Created</div>
-                    <div className="">{stats.dateCreated}</div>
+                    <div>{stats.dateCreated}</div>
                 </>}
 
                 {stats.dateModified && <>
                     <div className="font-bold">Modified</div>
-                    <div className="">{stats.dateModified}</div>
+                    <div>{stats.dateModified}</div>
                 </>}
             </div>
         </UITooltip>
-    </>);
+    );
 }
 
 function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
@@ -94,13 +99,13 @@ function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: n
 */
 
 function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
-    const $root = React.useRef<HTMLDivElement>(null);
-    const $indicator = React.useRef<HTMLDivElement>(null);
-    const $items = React.useRef(tabs.map<React.RefObject<HTMLButtonElement>>(React.createRef));
+    const $root = useRef<HTMLDivElement>(null);
+    const $indicator = useRef<HTMLDivElement>(null);
+    const $items = useRef(tabs.map<RefObject<HTMLButtonElement>>(React.createRef));
 
     const [indicatorStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0, config: { mass: .3, tension: 280, friction: 14 } }));
 
-    React.useEffect(() => {
+    useEffect(() => {
         function animate() {
             const menuOffset = $root.current?.getBoundingClientRect();
             const activeItem = $items.current[active].current;
@@ -139,6 +144,7 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                 style={{ ...indicatorStyles, filter: 'drop-shadow(#0003 0px 0px .05rem)' }}
                 className="absolute bg-gray-50 rounded border border-gray-900/50 z-[1] shadow"
             />
+
             <div className="flex justify-items-start space-x-1">
                 {tabs.map((pageTitle, idx) => (
                     <button
@@ -164,10 +170,13 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
 
     const scrollableNodeRef = useRef<HTMLDivElement>();
     const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
-    useLayoutEffect(() => { scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]); }, [selectedTab]);
+    useLayoutEffect(() => {
+        scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]);
+    }, [selectedTab]);
 
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
+
             {/* Tabs */} {/*  As alternative to style={{ touchAction: 'none' }} we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between" {...dragBind()} style={{ touchAction: 'none' }}>
                 <div className="flex justify-items-start space-x-1">
@@ -181,6 +190,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                 </div>
                 {stateIndicator}
             </div>
+
             {/* Pages */}
             <div className="text-sm bg-white">
                 <UISemiScrollbar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
@@ -209,7 +219,8 @@ export default function Manifest_FormEditor({ editorData, setShow = (v: boolean)
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
-    const [urlsAtom] = React.useState(atomWithCallback<MatchWebState>(
+
+    const [urlsAtom] = useState(atomWithCallback<MatchWebState>(
         {
             ...initial,
             initial,
@@ -236,9 +247,10 @@ export default function Manifest_FormEditor({ editorData, setShow = (v: boolean)
 
             {/* Editor footer */}
             <div className="px-4 py-4 bg-white flex items-center justify-between">
-                <EditorInfo editorData={editorData} />
+                <EditorInfoTooltip editorData={editorData} />
 
                 <div className="flex space-x-2">
+
                     <button
                         className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
                         onClick={() => {
@@ -246,15 +258,17 @@ export default function Manifest_FormEditor({ editorData, setShow = (v: boolean)
                             // toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
                         }}
                     >OK</button>
+
                     <button
                         className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
                         onClick={() => {
                             setShow(false);
                         }}
                     >Cancel</button>
+
                 </div>
             </div>
-            
+
         </a.div>
     );
 }

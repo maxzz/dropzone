@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { FileUsAtomType } from '@/store';
+import { FileUs, FileUsAtomType } from '@/store';
 import { convertToXml } from '@/store/manifest';
 import { Dialog } from '@ui/UIDialog';
 import {
@@ -13,7 +13,7 @@ import {
 } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
-function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
+function DialogContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     return (
         <div className="text-primary-300">
             <div className="">-=------------------------</div>
@@ -25,16 +25,18 @@ function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     );
 }
 
+function saveXmlFile(fileUs: FileUs) {
+    const res = convertToXml(fileUs);
+    if (res.error) {
+        toast(res.error, { style: { backgroundColor: 'tomato' } });
+    } else {
+        res.xml && console.log('%c---------new xml from converted---------', 'color: green', `\n${res.xml}`);
+        toast('Done', { style: { backgroundColor: 'tomato' } });
+    }
+}
+
 export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType; icon: React.ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
-
-    function saveXmlFile() {
-        const res = convertToXml(fileUs);
-        if (res.err) {
-            toast(res.err, { style: { backgroundColor: 'tomato' } });
-        }
-    }
-
     return (
         <Menu>
             <Trigger>
@@ -45,23 +47,17 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
                 <Content sideOffset={5}>
 
                     <Dialog trigger={
-                        <Item className="!text-sm"
-                        // onClick={(event) => {
-                        //     event.stopPropagation();
-                        //     event.preventDefault();
-                        //     saveXmlFile();
-                        // }}
-                        >
-                            trigger
+                        <Item className="!text-sm" /* onClick={(event) => { event.stopPropagation(); event.preventDefault(); saveXmlFile(); }} */>
+                            Menu item as dialog trigger
                         </Item>
                     }>
-                        <NewContent />
+                        <DialogContent />
                     </Dialog>
 
                     <Item className="!text-sm"
                         onClick={(event) => {
                             event.stopPropagation();
-                            saveXmlFile();
+                            saveXmlFile(fileUs);
                         }}
                     >
                         Convert manual to normal

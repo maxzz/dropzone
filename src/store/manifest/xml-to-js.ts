@@ -5,9 +5,9 @@ import { parseOptions } from './mani-i';
 import { fileDownload } from '@/utils/file-download';
 import { manifestToJsonForXml } from './mani-o';
 
-export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } | { res: string; err?: undefined; } {
+export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; } | { xml: string; error?: undefined; } {
     if (!fileUs.raw) {
-        return { err: 'empty file', };
+        return { error: 'empty file' };
     }
     //console.log('raw', fileUs.raw);
 
@@ -32,13 +32,14 @@ export function convertToXml(fileUs: FileUs): { err: string; res?: undefined; } 
         const j2xParser = new J2xParser({ ...parseOptions, format: true, indentBy: '    ', });
         xml = j2xParser.parse(rv);
         xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
-        console.log('%c---------new xml from converted---------', 'color: green', `\n${xml}`);
+        //console.log('%c---------new xml from converted---------', 'color: green', `\n${xml}`);
 
         // 4.
         //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });
     } catch (error) {
         console.log({ error });
+        return { error: 'cannot convert' };
     }
 
-    return { res: xml, };
+    return { xml };
 }

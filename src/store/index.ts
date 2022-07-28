@@ -3,6 +3,7 @@ export type {
     FileUsStats,
     FileUs,
     FileUsAtomType,
+    FileUsFormData,
 } from './store-types';
 
 export type {
