@@ -95,6 +95,7 @@ const StyledTrigger = styled(Primitive.Trigger, {
 });
 
 export const DropdownMenu = Primitive.Root;
+export const DropdownMenuPortal = Primitive.Portal;
 export const DropdownMenuTrigger = StyledTrigger;
 export const DropdownMenuContent = StyledContent;
 //export const DropdownMenuItem = StyledItem;

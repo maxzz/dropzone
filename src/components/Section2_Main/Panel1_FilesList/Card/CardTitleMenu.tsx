@@ -5,6 +5,7 @@ import { convertToXml } from '@/store/manifest';
 import { Dialog } from '@ui/UIDialog';
 import {
     DropdownMenu as Menu,
+    DropdownMenuPortal,
     DropdownMenuContent as Content,
     DropdownMenuItem as Item,
     DropdownMenuSeparator as Separator,
@@ -40,43 +41,45 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
                 {icon}
             </Trigger>
 
-            <Content sideOffset={5}>
+            <DropdownMenuPortal>
+                <Content sideOffset={5}>
 
-                <Dialog trigger={
+                    <Dialog trigger={
+                        <Item className="!text-sm"
+                        // onClick={(event) => {
+                        //     event.stopPropagation();
+                        //     event.preventDefault();
+                        //     saveXmlFile();
+                        // }}
+                        >
+                            trigger
+                        </Item>
+                    }>
+                        <NewContent ></NewContent>
+                    </Dialog>
+
                     <Item className="!text-sm"
-                    // onClick={(event) => {
-                    //     event.stopPropagation();
-                    //     event.preventDefault();
-                    //     saveXmlFile();
-                    // }}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            saveXmlFile();
+                        }}
                     >
-                        trigger
+                        Convert manual to normal
                     </Item>
-                }>
-                    <NewContent ></NewContent>
-                </Dialog>
 
-                <Item className="!text-sm"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        saveXmlFile();
-                    }}
-                >
-                    Convert manual to normal
-                </Item>
+                    <Item className="!text-sm"
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
+                        }}
+                    >
+                        Merge two manifests
+                    </Item>
 
-                <Item className="!text-sm"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
-                    }}
-                >
-                    Merge two manifests
-                </Item>
-
-                <Separator />
-                <Item disabled={true} >Save</Item>
-            </Content>
+                    <Separator />
+                    <Item disabled={true} >Save</Item>
+                </Content>
+            </DropdownMenuPortal>
         </Menu>
     );
 }
