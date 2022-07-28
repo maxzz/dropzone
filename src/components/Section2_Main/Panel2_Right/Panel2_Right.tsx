@@ -1,17 +1,15 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanel } from '@/store';
-import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
-//import { IconBack } from '@ui/UiIcons';
+import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
+import { classNames } from '@/utils/classnames';
 
 export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const rightPanelValue = useAtomValue(rightPanel.valueAtom);
-    return (<>
-        {/* <IconBack className="w-12 h-12 p-2 bg-green-500" onClick={() => setRightPanel(undefined)} /> */}
-
-        <div className={`pt-4 pb-2 flex-auto overflow-hidden w-full h-full bg-primary-900 ${className}`} {...rest}>
+    return (
+        <div className={classNames("flex-auto pt-4 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>
             {rightPanelValue &&
                 <div className="w-full h-full flex flex-col">
 
@@ -29,5 +27,5 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
                 </div>
             }
         </div>
-    </>);
+    );
 }
