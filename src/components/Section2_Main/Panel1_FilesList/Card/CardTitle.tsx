@@ -13,6 +13,7 @@ export function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         doSetCurrentCard({ fileUsAtom, setCurrent: !currentCard });
         setRightPanel(!currentCard ? fileUsAtom : undefined);
     }
+    
     return (
         <div className={`relative p-2 ${currentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100`}>
 
