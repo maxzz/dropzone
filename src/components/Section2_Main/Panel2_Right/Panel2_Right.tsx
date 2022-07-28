@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanel } from '@/store';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
-import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
+import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 
 export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
@@ -19,11 +19,11 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
                     </div>
 
                     {/* Raw data preview (+ codemirror?) */}
-                    <UISimpleBar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-primary-800 opacity-50 cursor-default`}>
+                    <UISemiScrollbar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-primary-800 opacity-50 cursor-default`}>
                         <div className="font-mono whitespace-pre">
                             {rightPanelValue.raw}
                         </div>
-                    </UISimpleBar>
+                    </UISemiScrollbar>
                 </div>
             }
         </div>

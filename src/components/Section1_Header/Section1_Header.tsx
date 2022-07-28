@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { busyAtom, doClearFilesAtom, hasFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
@@ -19,16 +19,21 @@ const rocketAnimation = keyframes({
 });
 
 function BusyIndicator() {
-    const busy = useAtomValue(busyAtom); //const busy = 'parsing...';
-    const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
+    const busyText = useAtomValue(busyAtom);
+    const styles = useSpring({ opacity: busyText ? 1 : 0, config: { duration: 1250 } });
     return (
         <a.div style={styles} className="grid md:flex md:space-x-1">
-            <IconRocket style={{ animation: busy ? `${rocketAnimation} 1.2s infinite` : '' }} className="ml-2 w-5 h-5 -mt-6 md:mt-0" />
+            {/* Busy icon animation */}
+            <IconRocket
+                className="ml-2 w-5 h-5 -mt-6 md:mt-0"
+                style={{ animation: busyText ? `${rocketAnimation} 1.2s infinite` : '' }}
+            />
+            {/* Busy explanation text */}
             <div
-                className={`text-xs text-green-400 rotate-90 ${busy ? 'translate-x-[-3px]' : ''} translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`}
+                className={`text-xs text-green-400 rotate-90 ${busyText ? 'translate-x-[-3px]' : ''} translate-y-5 md:translate-x-0 md:translate-y-0 md:rotate-0`}
                 style={{ transition: 'opacity 1.2s 1s' }}
             >
-                {busy}
+                {busyText}
             </div>
         </a.div>
     );
@@ -57,6 +62,21 @@ function LeftHeader() {
     );
 }
 
+function AppLogo() {
+    function doClick(event: React.MouseEvent) {
+        event.stopPropagation();
+        if (event.ctrlKey) {
+            window.open('https://github.com/maxzz/dropzone', '_blank');
+        } else {
+            toast('again', { style: { backgroundColor: 'tomato' } });
+        }
+    }
+    const title = "Ctrl+Click - Open source code at GitHub\nApp build version: __BUILD_DATE__";
+    return (
+        <IconAppLogoMicroscope className="w-7 h-7 mx-4 cursor-pointer" title={title} onClick={doClick} />
+    );
+}
+
 export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header {...props}>
@@ -65,19 +85,10 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
 
                 {/* Right header */}
                 <div className="flex items-center justify-end">
-                    <Part3_Filters />
-
-                    <IconAppLogoMicroscope
-                        className="w-7 h-7 mx-4"
-                        title="__BUILD_DATE__"
-                        onClick={(event) => {
-                            event.stopPropagation(); toast('again', { style: { backgroundColor: 'tomato' } });
-                        }}
-                    />
+                    <Part3_Filters className="flex-1" />
+                    <AppLogo />
                 </div>
             </div>
         </header>
     );
 }
-
-//TODO: show build version

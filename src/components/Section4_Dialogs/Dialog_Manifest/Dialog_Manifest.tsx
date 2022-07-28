@@ -2,17 +2,17 @@ import React, { Fragment, useLayoutEffect, useRef, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
 import { EditorData, formIdxName } from '@/store';
+import { a, useSpring } from '@react-spring/web';
+import { useDrag } from '@use-gesture/react';
+import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 import { classNames } from '@/utils/classnames';
 import { UITooltip } from '@ui/UITooltip';
-import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
+import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { MatchWebState, MatchWebStateAtom, Tab1_MatchWeb } from './Tab1_Matching';
 import { parsedFname } from '../../Section2_Main/Panel1_FilesList/Card/CardTitle';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
-import { a, useSpring } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react';
-import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
 //import { toastWarning } from '@ui/UIToaster';
@@ -183,7 +183,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
             </div>
             {/* Pages */}
             <div className="text-sm bg-white">
-                <UISimpleBar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
+                <UISemiScrollbar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
                     {Object.values(pages).map((pageContent, idx) => (
                         <Fragment key={idx}>
                             <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
@@ -191,7 +191,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
                             </div>
                         </Fragment>
                     ))}
-                </UISimpleBar>
+                </UISemiScrollbar>
             </div>
         </div>
     );

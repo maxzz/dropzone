@@ -2,25 +2,24 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { filteredAtom } from '@/store';
 import { Card } from './Card/Card';
-import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
+import { UISemiScrollbar } from '@ui/UISemiScrollbar';
+
 //old: import Card, { CardWRef } from './Card/Card';
 //old: import useVirtual, { Item } from 'react-cool-virtual';
 //import useVirtual from '../../../hooks/useVirtual/useVirtual';
 
-export function Panel1_FilesList(props: HTMLAttributes<HTMLElement>) { //TODO: add compact view
-    const { className, ...rest } = props;
+export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);
     return (
-        <UISimpleBar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
+        <UISemiScrollbar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
             <div className="grid grid-flow-row gap-4 text-sm">
                 {files.map((atom) => <Card fileUsAtom={atom} className="" key={`${atom}`} />)}
             </div>
-        </UISimpleBar>
+        </UISemiScrollbar>
     );
 }
 /*
-function Panel1_FilesListNew(props: HTMLAttributes<HTMLElement>) { //TODO: add compact view
-    const { className, ...rest } = props;
+function Panel1_FilesListNew({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);
 
     //const [len, setLen] = useState(files.length);
