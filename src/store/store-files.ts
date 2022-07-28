@@ -3,7 +3,7 @@ import { uuid } from '@/utils/uuid';
 import { FileUs, FileUsAtomType, FileUsStats } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
-import { rightPanelAtom, searchFilterAtom, searchFilterCaseSensitiveAtom, showEmptyManiAtom, showManualManiAtom, showNormalManiAtom, totalEmptyManiAtom, totalManualManiAtom, totalNormalManiAtom } from './store-ui-state';
+import { rightPanelAtom, searchFilterAtom, searchFilterCaseSensitiveAtom, showMani, totalMani } from './store-ui-state';
 import { busyAtom, _foldAllCardsAtom } from './store-ui-state';
 
 // Files
@@ -40,13 +40,24 @@ export const setFilesAtom = atom(
     }
 );
 
+export const doClearFilesAtom = atom(
+    null,
+    (get, set) => {
+        set(filesAtom, []);
+        set(rightPanelAtom, undefined);
+        set(totalMani.normalAtom, 0);
+        set(totalMani.manualAtom, 0);
+        set(totalMani.emptyAtom, 0);
+    }
+);
+
 export const filteredAtom = atom<FileUsAtomType[]>(
     (get) => {
         const { regex, winOnly, webOnly, whyOnly, capOnly, clsOnly } = createRegexByFilter(get(searchFilterAtom), get(searchFilterCaseSensitiveAtom));
 
-        const showNormal = get(showNormalManiAtom);
-        const showManual = get(showManualManiAtom);
-        const showEmpty = get(showEmptyManiAtom);
+        const showNormal = get(showMani.normalAtom);
+        const showManual = get(showMani.manualAtom);
+        const showEmpty = get(showMani.emptyAtom);
 
         const files = get(filesAtom);
         return files.filter((fileAtom: FileUsAtomType) => {
@@ -79,9 +90,9 @@ export const filteredAtom = atom<FileUsAtomType[]>(
 const updateCacheAtom = atom(
     null,
     async (get, set) => {
-        set(totalNormalManiAtom, 0);
-        set(totalManualManiAtom, 0);
-        set(totalEmptyManiAtom, 0);
+        set(totalMani.normalAtom, 0);
+        set(totalMani.manualAtom, 0);
+        set(totalMani.emptyAtom, 0);
         set(busyAtom, 'Parsing...');
 
         const total = { normal: 0, manual: 0, empty: 0 };
@@ -118,11 +129,11 @@ const updateCacheAtom = atom(
                     set(fileAtom, forNewAtom);
 
                     if (isEmpty(forNewAtom)) {
-                        set(totalEmptyManiAtom, ++total.empty);
+                        set(totalMani.emptyAtom, ++total.empty);
                     } else if (isManual(forNewAtom)) {
-                        set(totalManualManiAtom, ++total.manual);
+                        set(totalMani.manualAtom, ++total.manual);
                     } else {
-                        set(totalNormalManiAtom, ++total.normal);
+                        set(totalMani.normalAtom, ++total.normal);
                     }
 
                     //await delay(1000);
@@ -130,7 +141,7 @@ const updateCacheAtom = atom(
             } catch (error) {
                 console.log('read file error', error);
             }
-        } //for
+        }
 
         set(busyAtom, '');
     }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { FileUsAtom } from '@/store';
+import { useAtomValue } from 'jotai';
+import { FileUsAtomType } from '@/store';
 import { Matching, Transform } from '@/store/manifest';
 import { ToggleWithPortal } from './FormOptionsPool';
 import { UITableFromObject } from '../../UICard/UITableFromObject';
@@ -73,8 +73,8 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
-    const [fileUs] = useAtom(fileUsAtom);
+export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
+    const fileUs = useAtomValue(fileUsAtom);
     const form = fileUs.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});

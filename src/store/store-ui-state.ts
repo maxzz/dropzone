@@ -7,13 +7,17 @@ import { filesAtom, } from "./store-files";
 
 // Filters
 
-export const showNormalManiAtom = atom(true);
-export const showManualManiAtom = atom(true);
-export const showEmptyManiAtom = atom(true);
+export const showMani = {
+    normalAtom: atom(true),
+    manualAtom: atom(true),
+    emptyAtom: atom(true),
+};
 
-export const totalManualManiAtom = atom(0);
-export const totalNormalManiAtom = atom(0);
-export const totalEmptyManiAtom = atom(0);
+export const totalMani = {
+    manualAtom: atom(0),
+    normalAtom: atom(0),
+    emptyAtom: atom(0),
+};
 
 export const searchFilterAtom = atom('');
 export const searchFilterCaseSensitiveAtom = atom(false); // search case sensitive
@@ -50,19 +54,6 @@ export const selected4ActionAtom = atom<FileUsAtomType[]>([]);
 
 export const busyAtom = atom('');
 
-//
-
-export const doClearFilesAtom = atom(
-    null,
-    (get, set) => {
-        set(filesAtom, []);
-        set(rightPanelAtom, undefined);
-        set(totalNormalManiAtom, 0);
-        set(totalManualManiAtom, 0);
-        set(totalEmptyManiAtom, 0);
-    }
-);
-
 // UI has files
 
 export const hasFilesAtom = atom(
@@ -70,7 +61,7 @@ export const hasFilesAtom = atom(
         const total = get(filesAtom);
         return !!total.length;
     }
-    );
+);
 
 // Split pane position
 

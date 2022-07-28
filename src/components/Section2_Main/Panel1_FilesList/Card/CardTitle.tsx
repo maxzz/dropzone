@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { FileUs, FileUsAtom, FileUsStats, rightPanelAtom, doSetCurrentCardAtom } from '@/store';
+import { FileUs, FileUsAtomType, FileUsStats, rightPanelAtom, doSetCurrentCardAtom } from '@/store';
 import { formCaption, isAnyWhy } from '@/store/store-functions';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder, IconMenuHamburger, IconOpenLink } from '@ui/UIIconSymbols';
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
@@ -78,7 +78,7 @@ export function parsedFname({
     styleSm = "opacity-75",
     styleLg = "px-1 text-sm text-gray-300 opacity-100"
 }: ParsedFname) {
-    const match = (fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/);
+    const match = (fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/); //TODO: handle '{id} - extra.dpm' filenames
     const rv = !match
         ? <div className={styleMisc}>
             <span className={styleSm}>{fname}</span>
@@ -95,7 +95,7 @@ export function parsedFname({
     return rv;
 }
 
-export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs.stats;
     const fcatLen = fileUs.fcat?.names.length;
@@ -165,7 +165,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
     </>);
 }
 
-function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const url = fileUs.mani?.forms[0]?.detection.web_ourl;
     const domain = fileUs.meta?.[0]?.disp.domain;
@@ -181,7 +181,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 
 const CardTitleTextMemo = React.memo(CardTitleText);
 
-export function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+export function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
     const doSetCurrentCard = useSetAtom(doSetCurrentCardAtom);
     const setRightPanel = useSetAtom(rightPanelAtom); //#091e4c

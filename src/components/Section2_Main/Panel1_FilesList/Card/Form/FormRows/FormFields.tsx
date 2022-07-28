@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { FileUsAtom, SelectRowAtoms } from '@/store';
+import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { FieldRow } from './FieldRow';
 
 type FormFieldsProps = {
-    fileUsAtom: FileUsAtom;
+    fileUsAtom: FileUsAtomType;
     formType: number;
-    selectRowAtoms: SelectRowAtoms;
+    selectRowAtoms: SelectRowAtomsType;
 };
 
 export function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {

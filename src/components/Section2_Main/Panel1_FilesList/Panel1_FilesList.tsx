@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { filteredAtom } from '@/store';
 import { Card } from './Card/Card';
 import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
@@ -9,7 +9,7 @@ import { UISimpleBar } from '@ui/UIScrollbar/UIScrollbar';
 
 export function Panel1_FilesList(props: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
-    const [files] = useAtom(filteredAtom);
+    const files = useAtomValue(filteredAtom);
     return (
         <UISimpleBar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
             <div className="grid grid-flow-row gap-4 text-sm">
@@ -21,7 +21,7 @@ export function Panel1_FilesList(props: HTMLAttributes<HTMLElement>) { //TODO: a
 /*
 function Panel1_FilesListNew(props: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const { className, ...rest } = props;
-    const [files] = useAtom(filteredAtom);
+    const files = useAtomValue(filteredAtom);
 
     //const [len, setLen] = useState(files.length);
 

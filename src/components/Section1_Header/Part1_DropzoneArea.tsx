@@ -3,8 +3,9 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { filesAtom, filteredAtom, setFilesAtom, } from '@/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { IconDocumentsAccepted } from '@ui/UIIcons';
-import toast from 'react-hot-toast';
 import { classNames } from '@/utils/classnames';
+import { plural } from '@/utils/numbers';
+import toast from 'react-hot-toast';
 
 function fileExt(filename: string = ''): string {
     return /[.]/.exec(filename) ? /([^.]+$)/.exec(filename)?.[0] || '' : '';
@@ -67,15 +68,11 @@ function DropzoneBase({ className, style = {}, classNameActive, stylesActive = {
     );
 }
 
-function plural(n: number): string {
-    return n === 1 ? '' : 's';
-}
-
 const dropzoneBg: CSSProperties = {
-    backgroundImage: "conic-gradient(at right 0%, #103062 214deg, #28446f 264deg, #647897 274deg)",
+    backgroundImage: "conic-gradient(at right 0%, #103062b0 214deg, #28446f 264deg, #647897 274deg)",
 };
 
-function ShowingNow() {
+function CounterShowingNow() {
     const files = useAtomValue(filesAtom);
     const filtered = useAtomValue(filteredAtom);
     return (<>
@@ -91,8 +88,8 @@ function ShowingNow() {
 }
 
 export function Part1_DropzoneArea() {
-    const files = useAtomValue(filesAtom);
-    const totalFiles = files.length;
+    const totalFiles = useAtomValue(filesAtom).length;
+    const filesText = `${totalFiles} file${plural(totalFiles)}`;
     return (
         <DropzoneBase
             className={classNames(
@@ -104,11 +101,10 @@ export function Part1_DropzoneArea() {
         >
             {totalFiles
                 ?
-                <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${totalFiles} file${plural(totalFiles)}`}>
+                <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${filesText}`}>
                     <IconDocumentsAccepted className="w-6 h-6 ml-2 mr-1" />
-
-                    {totalFiles} file{plural(totalFiles)}
-                    <ShowingNow />
+                    {filesText}
+                    <CounterShowingNow />
                 </div>
                 :
                 <div className="px-4 py-2 flex items-center">

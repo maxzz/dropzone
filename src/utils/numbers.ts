@@ -5,3 +5,7 @@ export function withDigits(value: number, digits: number = 2): string {
 export function clamp(value: number, min: number, max: number): number {
     return Math.min(Math.max(value, min), max);
 }
+
+export function plural(n: number): string {
+    return n === 1 ? '' : 's';
+}

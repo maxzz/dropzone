@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { FileUsAtom } from '@/store';
+import { FileUsAtomType } from '@/store';
 import { convertToXml } from '@/store/manifest';
 import { Dialog } from '@ui/UIDialog';
 import {
@@ -24,7 +24,7 @@ function NewContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     );
 }
 
-export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtom; icon: React.ReactNode; }) {
+export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType; icon: React.ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
 
     function saveXmlFile() {

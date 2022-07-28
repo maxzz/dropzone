@@ -1,4 +1,41 @@
-export type { FileUsState, FileUsStats, FileUs, FileUsAtomType as FileUsAtom } from './store-types';
+export type {
+    FileUsState,
+    FileUsStats,
+    FileUs,
+    FileUsAtomType,
+} from './store-types';
+
+export type {
+    SelectRowAtomsType,
+} from './store-types';
+
+export {
+    filesAtom,
+    setFilesAtom,
+    doClearFilesAtom,
+    filteredAtom,
+} from './store-files';
+
+export {
+    showMani,
+    totalMani,
+
+    hasFilesAtom,
+
+    busyAtom,
+
+    foldAllCardsAtom,
+    selected4ActionAtom,
+
+    splitPaneAtom,
+
+    rightPanelAtom,
+    rightPanelValueAtom,
+
+    searchFilterAtom,
+    searchFilterCaseSensitiveAtom,
+
+} from './store-ui-state';
 
 export {
     doSetCurrentCardAtom,
@@ -15,37 +52,3 @@ export {
 export {
     formIdxName,
 } from './store-functions';
-
-export {
-    busyAtom,
-    doClearFilesAtom as clearFilesAtom,
-
-    splitPaneAtom,
-
-    foldAllCardsAtom,
-    selected4ActionAtom,
-
-    rightPanelAtom,
-    rightPanelValueAtom,
-
-    searchFilterAtom,
-    searchFilterCaseSensitiveAtom,
-
-    showEmptyManiAtom,
-    showManualManiAtom,
-    showNormalManiAtom,
-    totalEmptyManiAtom,
-    totalManualManiAtom,
-    totalNormalManiAtom,
-
-    hasFilesAtom,
-
-} from './store-ui-state';
-
-export type { SelectRowAtomsType as SelectRowAtoms, } from './store-types';
-
-export {
-    filesAtom,
-    setFilesAtom,
-    filteredAtom,
-} from './store-files';

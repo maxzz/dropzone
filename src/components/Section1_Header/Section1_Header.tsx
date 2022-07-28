@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { busyAtom, clearFilesAtom, hasFilesAtom } from '@/store';
+import { busyAtom, doClearFilesAtom, hasFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
 import { IconAppLogoMicroscope, IconRocket, IconTrash } from '@ui/UIIcons';
 import { Part0_TopMenu } from './Part0_TopMenu';
@@ -19,7 +19,7 @@ const rocketAnimation = keyframes({
 });
 
 function BusyIndicator() {
-    const [busy] = useAtom(busyAtom); //const busy = 'parsing...';
+    const busy = useAtomValue(busyAtom); //const busy = 'parsing...';
     const styles = useSpring({ opacity: busy ? 1 : 0, config: { duration: 1250 } });
     return (
         <a.div style={styles} className="grid md:flex md:space-x-1">
@@ -35,7 +35,7 @@ function BusyIndicator() {
 }
 
 function LeftHeader() {
-    const clearFiles = useSetAtom(clearFilesAtom);
+    const clearFiles = useSetAtom(doClearFilesAtom);
     const hasFiles = useAtomValue(hasFilesAtom);
     return (
         <div className="flex-1 flex items-center my-0.5">
@@ -59,7 +59,7 @@ function LeftHeader() {
 
 export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
-        <header className="" {...props}>
+        <header {...props}>
             <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-200 ring-1 ring-primary-500 rounded`}>
                 <LeftHeader />
 

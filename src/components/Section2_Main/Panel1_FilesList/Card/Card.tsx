@@ -1,12 +1,12 @@
 import React, { forwardRef, HTMLAttributes, memo, useEffect, useState } from 'react';
 import { atom, useAtom, useAtomValue } from 'jotai';
-import { FileUsAtom, foldAllCardsAtom, SelectRowAtoms, } from '@/store';
+import { FileUsAtomType, foldAllCardsAtom, SelectRowAtomsType, } from '@/store';
 import { CardTitle } from './CardTitle';
 import { FormOptions } from './Form/FormOptions/FormOptions';
 import { FormFields } from './Form/FormRows/FormFields';
 import { UICardFormButton } from './UICard/UICardFormButton';
 
-function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }) {
+function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
         <div className="pt-2 font-bold border-b border-gray-400">{formType === 0 ? "Login form" : "Password change form"}</div>
         <FormOptions fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
@@ -14,10 +14,10 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
     </>);
 }
 
-function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
+function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [open, setOpen] = useState(false);
     const openAll = useAtomValue(foldAllCardsAtom);
-    const [selectRowAtoms] = useState<SelectRowAtoms>({
+    const [selectRowAtoms] = useState<SelectRowAtomsType>({
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
     });
@@ -51,7 +51,7 @@ function CardTopButtons({ fileUsAtom }: { fileUsAtom: FileUsAtom; }) {
 }
 
 type CardProps = {
-    fileUsAtom: FileUsAtom;
+    fileUsAtom: FileUsAtomType;
 } & HTMLAttributes<HTMLDivElement>;
 
 function Card_({ fileUsAtom, ...props }: CardProps) {

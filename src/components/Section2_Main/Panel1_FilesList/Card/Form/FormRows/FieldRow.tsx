@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { FileUs, SelectRowAtoms } from '@/store';
+import { FileUs, SelectRowAtomsType } from '@/store';
 import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
@@ -12,7 +12,7 @@ type FieldRowProps = {
     fileUs: FileUs;
     form: Meta.Form;
     field: Meta.Field;
-    selectRowAtoms: SelectRowAtoms;
+    selectRowAtoms: SelectRowAtomsType;
 };
 
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {

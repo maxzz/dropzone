@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAtom, useSetAtom } from 'jotai';
-import { FileUsAtom, formEditorDataAtom, SelectRowAtoms } from '@/store';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
 import { IconGear } from '@ui/UIIconSymbols';
 import { FieldRowPreview } from '../FormRows/FieldRowPreview';
 import { FormOptionsDetection } from './FormOptionsDetection';
@@ -31,7 +31,7 @@ function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
     );
 }
 
-function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; formType: number; }) {
+function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
     const setFormEditorData = useSetAtom(formEditorDataAtom);
     return (
         <div
@@ -43,7 +43,7 @@ function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtom; form
     );
 }
 
-function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }: { form: Meta.Form; formType: number; selectRowAtoms: SelectRowAtoms; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>; }) {
+function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }: { form: Meta.Form; formType: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>; }) {
     const selectedRowAtom = formType === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
@@ -55,8 +55,8 @@ function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }:
     );
 }
 
-export function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtom; formType: number; selectRowAtoms: SelectRowAtoms; }): JSX.Element | null {
-    const [fileUs] = useAtom(fileUsAtom);
+export function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+    const fileUs = useAtomValue(fileUsAtom);
     const meta = fileUs.meta?.[formType];
     if (!meta) {
         return null;
