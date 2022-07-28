@@ -1,13 +1,13 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { searchFilter } from '@/store';
+import { searchFilterData } from '@/store';
 import { useKey } from 'react-use';
 import { UITooltip } from '@ui/UITooltip';
 import { IconDot } from '@ui/UIIconSymbols';
 import { IconCaseSensitive, IconClose, IconSearch } from '@ui/UIIcons';
 
 function ToggleCaseSensitive() {
-    const [cs, setCs] = useAtom(searchFilter.caseSensitiveAtom);
+    const [cs, setCs] = useAtom(searchFilterData.caseSensitiveAtom);
     return (
         <div
             className={`${cs ? 'bg-gray-500' : 'opacity-30'} cursor-pointer`}
@@ -20,7 +20,7 @@ function ToggleCaseSensitive() {
 }
 
 export function Part2_FilterSearch() {
-    const [filter, setFilter] = useAtom(searchFilter.textAtom);
+    const [filter, setFilter] = useAtom(searchFilterData.textAtom);
     const keyboardRef = React.useRef<HTMLInputElement>(null);
     const [active, setActive] = React.useState(false);
     useKey('Escape', () => setFilter(''), { target: keyboardRef.current });

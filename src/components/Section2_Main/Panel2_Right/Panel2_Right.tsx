@@ -1,13 +1,13 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
-import { FileUsAtomType, rightPanel } from '@/store';
+import { FileUsAtomType, rightPanelData } from '@/store';
 import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 
 export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    const rightPanelValue = useAtomValue(rightPanel.valueAtom);
+    const rightPanelValue = useAtomValue(rightPanelData.valueAtom);
     return (
         <div className={classNames("flex-auto pt-4 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>
             {rightPanelValue &&
@@ -15,7 +15,7 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
 
                     {/* Card title */}
                     <div className="p-2 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
-                        <CardTitleText fileUsAtom={rightPanel.valueAtom as FileUsAtomType} />
+                        <CardTitleText fileUsAtom={rightPanelData.valueAtom as FileUsAtomType} />
                     </div>
 
                     {/* Raw data preview (+ codemirror?) */}

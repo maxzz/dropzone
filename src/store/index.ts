@@ -29,9 +29,8 @@ export {
 
     splitPaneAtom,
 
-    searchFilter,
-    
-    rightPanel,
+    searchFilterData,
+    rightPanelData,
 
 } from './store-ui-state';
 
@@ -48,5 +47,7 @@ export {
 } from './store-dialog-manifest';
 
 export {
+    formCaption,
+    isAnyWhy,
     formIdxName,
-} from './store-functions';
+} from './store-utils';

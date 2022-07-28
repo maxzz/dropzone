@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { foldAllCardsAtom, selected4ActionAtom } from '@/store';
-import { rightPanel } from '@/store';
+import { rightPanelData } from '@/store';
 import {
     DropdownMenu as Menu,
     DropdownMenuContent as Content,
@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
-    const rightPanelAtom = useAtomValue(rightPanel.panelAtom);
+    const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
     const disabled = !rightPanelAtom;
     function click() {
         if (rightPanelAtom) {

@@ -2,9 +2,8 @@ import { atom } from 'jotai';
 import { uuid } from '@/utils/uuid';
 import { FileUs, FileUsAtomType, FileUsStats } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
-import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-functions';
-import { rightPanel, searchFilter, showMani, totalMani } from './store-ui-state';
-import { busyAtom, _foldAllCardsAtom } from './store-ui-state';
+import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';
+import { busyAtom, rightPanelData, searchFilterData, showMani, totalMani, _foldAllCardsAtom } from './store-ui-state';
 
 // Files
 
@@ -36,7 +35,7 @@ export const setFilesAtom = atom(
         set(_foldAllCardsAtom, -1);
         set(filesAtom, dropped);
         set(updateCacheAtom);
-        set(rightPanel.panelAtom, undefined);
+        set(rightPanelData.panelAtom, undefined);
     }
 );
 
@@ -44,7 +43,7 @@ export const doClearFilesAtom = atom(
     null,
     (get, set) => {
         set(filesAtom, []);
-        set(rightPanel.panelAtom, undefined);
+        set(rightPanelData.panelAtom, undefined);
         set(totalMani.normalAtom, 0);
         set(totalMani.manualAtom, 0);
         set(totalMani.emptyAtom, 0);
@@ -53,7 +52,7 @@ export const doClearFilesAtom = atom(
 
 export const filteredAtom = atom<FileUsAtomType[]>(
     (get) => {
-        const { regex, winOnly, webOnly, whyOnly, capOnly, clsOnly } = createRegexByFilter(get(searchFilter.textAtom), get(searchFilter.caseSensitiveAtom));
+        const { regex, winOnly, webOnly, whyOnly, capOnly, clsOnly } = createRegexByFilter(get(searchFilterData.textAtom), get(searchFilterData.caseSensitiveAtom));
 
         const showNormal = get(showMani.normalAtom);
         const showManual = get(showMani.manualAtom);

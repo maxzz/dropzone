@@ -19,23 +19,25 @@ export const totalMani = {
     emptyAtom: atom(0),
 };
 
-export const searchFilter = {
+// Search filter data
+
+export const searchFilterData = {
     textAtom: atom(''),
     caseSensitiveAtom: atom(false), // search case sensitive
 };
 
-// Right panel
+// Right panel data
 
-type RightPanel = {
+type RightPanelData = {
     panelAtom: PrimitiveAtom<FileUsAtomType | undefined>;
     valueAtom: Atom<FileUs | undefined>;
 }
 
-export const rightPanel: RightPanel = {
+export const rightPanelData: RightPanelData = {
     panelAtom: atom<FileUsAtomType | undefined>(undefined),
     valueAtom: atom<FileUs | undefined>(
         (get) => {
-            const rpa = get(rightPanel.panelAtom);
+            const rpa = get(rightPanelData.panelAtom);
             return rpa ? get(rpa) : undefined;
         }
     ),
