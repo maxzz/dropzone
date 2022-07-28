@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanelData } from '@/store';
-import { CardTitleText } from '../Panel1_FilesList/Card/CardTitle';
+import { CardTitleText } from '../Panel1_FilesList/Card/CardTitleText';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 

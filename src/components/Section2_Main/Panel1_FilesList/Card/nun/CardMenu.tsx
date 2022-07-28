@@ -33,7 +33,6 @@ export function Example() {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <div className="">
-
                     <>
                         {ReactDOM.createPortal(
 

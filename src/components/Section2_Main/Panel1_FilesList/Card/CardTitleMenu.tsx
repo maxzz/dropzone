@@ -55,7 +55,7 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
                             trigger
                         </Item>
                     }>
-                        <NewContent ></NewContent>
+                        <NewContent />
                     </Dialog>
 
                     <Item className="!text-sm"
