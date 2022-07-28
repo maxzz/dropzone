@@ -3,36 +3,7 @@ import { FileUs, FileUsAtomType, FileUsStats, formCaption, isAnyWhy } from "@/st
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder } from "@ui/UIIconSymbols";
 import { useAtomValue } from "jotai";
-
-export type ParsedFname = {
-    fname: string;
-    styleMisc?: string;
-    styleSm?: string;
-    styleLg?: string;
-};
-
-export function parsedFname({
-    fname,
-    styleMisc = "text-[0.65rem]",
-    styleSm = "opacity-75",
-    styleLg = "px-1 text-sm text-gray-300 opacity-100"
-}: ParsedFname) {
-    const match = (fname || '').match(/^\{([0-9A-Za-z]{3,3})(.*)([0-9A-Za-z]{3,3})\}\.dpm$/); //TODO: handle '{id} - extra.dpm' filenames
-    const rv = !match
-        ? <div className={styleMisc}>
-            <span className={styleSm}>{fname}</span>
-        </div>
-        : <div className={styleMisc}>
-            <span className={styleSm}>{'{'}</span>
-            <span className={styleLg}>{match[1]}</span>
-
-            <span className={styleSm}>{match[2]}</span>
-
-            <span className={styleLg}>{match[3]}</span>
-            <span className={styleSm}>{'}.dpm'}</span>
-        </div>;
-    return rv;
-}
+import { CardTitleFilename } from "./CardTitleFilename";
 
 function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
     if (isFCat) {
@@ -95,10 +66,10 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs.stats;
     const fcatLen = fileUs.fcat?.names.length;
-    const fname = React.useMemo(() => {
+    const fnameMemo = React.useMemo(() => {
         return (
-            <UITooltip trigger={parsedFname({ fname: fileUs.fname })} {...uitooltipSmall()} >
-                <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-2 gap-y-1">
+            <UITooltip trigger={CardTitleFilename({ fname: fileUs.fname })} {...uitooltipSmall()} >
+                <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
 
                     {fileUs.fpath && <>
                         <div className="font-bold">Sub-folder</div>
@@ -150,7 +121,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         {/* Filename */}
         <div className="flex items-center justify-between">
             <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono">
-                {fname}
+                {fnameMemo}
             </div>
 
             <div className="flex-none flex items-center space-x-1 mr-1">

@@ -10,7 +10,7 @@ import { UITooltip } from '@ui/UITooltip';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { MatchWebState, MatchWebStateAtom, Tab1_MatchWeb } from './Tab1_Matching';
-import { parsedFname } from '@/components/Section2_Main/Panel1_FilesList/Card/CardTitleText';
+import { CardTitleFilename } from '@/components/Section2_Main/Panel1_FilesList/Card/CardTitleFilename';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
 import { IconInfo } from '@ui/UIIcons';
@@ -21,7 +21,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
-    const fname = parsedFname({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
+    const fname = CardTitleFilename({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (
         <UITooltip
             trigger={
