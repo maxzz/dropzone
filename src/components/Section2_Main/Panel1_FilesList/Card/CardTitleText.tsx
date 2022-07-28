@@ -62,11 +62,23 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
+function CardTitleFileIndex({ idx }: { idx: number; }) {
+    return (
+        <div
+            className="pb-px w-4 h-4 text-[.6rem] text-primary-600 border-primary-700 border rounded-md flex items-center justify-center select-none cursor-default"
+            title="File index in all loaded files"
+        >
+            {idx}
+        </div>
+    );
+}
+
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs.stats;
     const fcatLen = fileUs.fcat?.names.length;
-    const fnameMemo = React.useMemo(() => {
+
+    const FilenameMemo = React.useMemo(() => {
         return (
             <UITooltip trigger={CardTitleFilename({ fname: fileUs.fname })} {...uitooltipSmall()} >
                 <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
@@ -94,18 +106,12 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 
     return (<>
         {/* Icon and caption */}
-        <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-            <CardIcon stats={stats} />
-
-            {/* File index in all loaded files */}
-            <div
-                className="self-start ml-0.5 text-[.6rem] text-gray-400 bg-gray-800 border-gray-500 border rounded-md w-4 h-4 p-1 flex items-center justify-center select-none cursor-default"
-                title="File index in all loaded files"
-            >
-                {fileUs.idx + 1}
+        <div className="pr-1 flex items-center justify-between">
+            <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+                <CardIcon stats={stats} />
+                <CardCaption stats={stats} />
             </div>
-
-            <CardCaption stats={stats} />
+            <CardTitleFileIndex idx={fileUs.idx + 1} />
         </div>
 
         {/* Login caption */}
@@ -121,7 +127,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         {/* Filename */}
         <div className="flex items-center justify-between">
             <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono">
-                {fnameMemo}
+                {FilenameMemo}
             </div>
 
             <div className="flex-none flex items-center space-x-1 mr-1">
