@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FileUs, FileUsAtomType, FileUsStats, formCaption, isAnyWhy } from "@/store";
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder } from "@ui/UIIconSymbols";
@@ -38,25 +38,33 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
         <UITooltip
             trigger={<IconAttention className="w-3.5 h-3.5 text-red-500 cursor-default" onClick={(e) => { e.stopPropagation(); }} />}
             arrow={false}
-            popperOptions={{ delayShow: 300 }}
+            popperOptions={{ delayShow: 300 }} // , visible: true
+            className="!p-0 !bg-primary-100 !border-primary-100"
         >
-            <div className="max-w-[17rem] text-sm">
-                <div className="mt-[-.4rem] mx-[-.4rem] p-[.4rem] py-3 px-2 rounded-sm rounded-b-none bg-gray-900 text-gray-300">
+            <div className="pb-2 max-w-[17rem] text-sm bg-primary-100 rounded-[2px]">
+
+                <div className="px-3 py-4 bg-red-700 text-primary-100 rounded-sm rounded-b-none">
                     There are problems to check why
                 </div>
-                {bailOuts.map((bailOut, idx) => <React.Fragment key={`bailout${idx}`}>
-                    {bailOut &&
-                        <div className="pt-1 px-0.5">
-                            <div className="font-bold">{idx === 0 ? 'Login:' : 'Password change:'}</div>
-                            {bailOut.map((item, key) => (
-                                <div className="flex items-top" key={key}>
-                                    <IconDot className="mr-0.5 w-4 h-4 flex-none self-start mt-0.5" />
-                                    {item}
+
+                {bailOuts.map((bailOut, idx) => (
+                    <Fragment key={`bailout${idx}`}>
+                        {bailOut &&
+                            <div className="px-3 py-1">
+                                <div className="font-bold">
+                                    {idx === 0 ? 'Login:' : 'Password change:'}
                                 </div>
-                            ))}
-                        </div>
-                    }
-                </React.Fragment>)}
+
+                                {bailOut.map((item, key) => (
+                                    <div className="flex items-center" key={key}>
+                                        <IconDot className="ml-1 w-4 h-4 flex-none self-start mt-0.5" />
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        }
+                    </Fragment>
+                ))}
             </div>
         </UITooltip>
     );
@@ -111,7 +119,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
                 <CardIcon stats={stats} />
                 <CardCaption stats={stats} />
             </div>
-            <CardTitleFileIndex idx={fileUs.idx + 1} />
+            {/* <CardTitleFileIndex idx={fileUs.idx + 1} /> */}
         </div>
 
         {/* Login caption */}
@@ -126,13 +134,13 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 
         {/* Filename */}
         <div className="flex items-center justify-between">
-            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono">
+            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono flex items-center space-x-2">
                 {FilenameMemo}
+                {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
             </div>
 
             <div className="flex-none flex items-center space-x-1 mr-1">
                 <CardAttention fileUs={fileUs} />
-                {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
                 <CardTitleFileIndex idx={fileUs.idx + 1} />
             </div>
         </div>

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { classNames } from '@/utils/classnames';
+import React, { HTMLAttributes } from 'react';
 import ReactDOM from 'react-dom';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
@@ -11,10 +12,9 @@ type UITooltipOptions = {
 
 type UITooltipProps = {
     trigger: React.ReactNode;
-    children?: React.ReactNode;
 } & UITooltipOptions;
 
-export function UITooltip({ trigger, children, arrow = false, portal = true, popperOptions }: UITooltipProps) {
+export function UITooltip({ trigger, children, className, arrow = false, portal = true, popperOptions, ...rest }: UITooltipProps & HTMLAttributes<HTMLDivElement>) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -27,16 +27,20 @@ export function UITooltip({ trigger, children, arrow = false, portal = true, pop
             ...popperOptions,
         }
     );
+    
     const poperBody = visible && (
         <div
             ref={setTooltipRef}
-            {...getTooltipProps({ className: 'tooltip-container' })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
+            {...getTooltipProps({ className: classNames('tooltip-container', className) })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
+            {...rest}
         >
             {children}
             {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
         </div>
     );
+    
     const popper = visible && (portal ? ReactDOM.createPortal((<>{poperBody}</>), document.getElementById('portal')!) : <>{poperBody}</>);
+    
     return (
         <>
             <div ref={setTriggerRef}> {trigger} </div>
