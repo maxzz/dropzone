@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
 import { IconGear } from '@ui/UIIconSymbols';
-import { FieldRowPreview } from '../FormRows/FieldRowPreview';
+import { FieldRowPreview } from '../Part2_FormFields/FieldRowPreview';
 import { FormOptionsDetection } from './FormOptionsDetection';
 import { FormOptionsPool } from './FormOptionsPool';
 
@@ -55,7 +55,7 @@ function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }:
     );
 }
 
-export function FormOptions({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+export function Part1_FormHeader({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
     const fileUs = useAtomValue(fileUsAtom);
     const meta = fileUs.meta?.[formType];
     if (!meta) {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
-import { BtnShading } from './FormOptions';
+import { BtnShading } from './Part1_FormHeader';
 import { Transform } from '@/store/manifest';
 
 type DropDownButtonProps = {

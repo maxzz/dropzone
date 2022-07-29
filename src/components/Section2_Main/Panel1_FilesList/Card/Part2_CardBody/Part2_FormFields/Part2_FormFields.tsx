@@ -9,7 +9,7 @@ type FormFieldsProps = {
     selectRowAtoms: SelectRowAtomsType;
 };
 
-export function FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
+export function Part2_FormFields({ fileUsAtom, formType, selectRowAtoms }: FormFieldsProps) {
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
     if (!metaForm) {
