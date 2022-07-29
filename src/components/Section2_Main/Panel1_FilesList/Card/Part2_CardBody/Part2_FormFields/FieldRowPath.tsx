@@ -13,7 +13,6 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
         return `Role #: ${item.rnumber} | Role: ${item.roleString} | Classname: "${item.className}" | Name: "${item.name}"`;
     }
     function beautifyVal(item: MPath.p4a): string {
-        //console.log({item});
         return `${item.className} | ${item.name}`;
     }
     return (<>
@@ -65,9 +64,11 @@ function PartLoc({ label, part }: { label: string; part: string; }) {
                     {items.map((item, idx) => {
                         return <Fragment key={idx}>
                             <div>{idx}:</div>
-                            {beautifyRect(item).map((pt, idx) =>
-                                <div className="text-right" key={idx}>{pt}</div>
-                            )}
+                            {beautifyRect(item).map((pt, idx) => (
+                                <div className="text-right" key={idx}>
+                                    {pt}
+                                </div>
+                            ))}
                         </Fragment>;
                     })}
                 </div>

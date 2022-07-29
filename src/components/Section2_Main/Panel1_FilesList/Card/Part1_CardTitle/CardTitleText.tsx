@@ -9,7 +9,7 @@ import { CardAttention } from "./CardTitleAttension";
 
 function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
-        <div className="ml-1 uppercase">
+        <div className="ml-1 text-lg uppercase"> {/* overflow-hidden whitespace-nowrap overflow-ellipsis */}
             {formCaption(stats)}
         </div>
     );
@@ -49,11 +49,9 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 
     return (<>
         {/* Icon and caption */}
-        <div className="pr-1 flex items-center justify-between">
-            <div className="text-lg flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-                <CardTitleIcon stats={stats} />
-                <CardCaption stats={stats} />
-            </div>
+        <div className="flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <CardTitleIcon stats={stats} />
+            <CardCaption stats={stats} />
         </div>
 
         {/* Login caption */}
@@ -81,3 +79,5 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 }
 
 export const CardTitleTextMemo = React.memo(CardTitleText);
+
+//TODO: 'overflow-hidden whitespace-nowrap overflow-ellipsis' is not working

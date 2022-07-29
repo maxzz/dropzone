@@ -6,6 +6,6 @@ export function cx(...classes: Array<string | Record<string, boolean>>): string 
     ).join(' ');
 }
 
-export function classNames(...classes: (string | undefined | false | null)[]): string {
+export function classNames(...classes: (string | undefined | false | null | 0)[]): string {
     return classes.filter(Boolean).join(' ');
 }

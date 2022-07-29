@@ -18,7 +18,7 @@ export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; })
         <div className={`relative p-2 ${isCurrentCard ? 'bg-blue-900' : 'bg-primary-900'} text-primary-100`}>
 
             {/* Title selection */}
-            <div className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none" onClick={toggleCardSelection}>
+            <div className="cursor-pointer select-none" onClick={toggleCardSelection}>
                 <CardTitleTextMemo fileUsAtom={fileUsAtom} />
             </div>
 

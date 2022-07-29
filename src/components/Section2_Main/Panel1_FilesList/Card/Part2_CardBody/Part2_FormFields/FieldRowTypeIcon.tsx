@@ -1,5 +1,4 @@
 import React from 'react';
-//import { IconButton, IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText } from '@ui/UiIcons';
 import { IconButton, IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText } from '@ui/UIIconSymbols';
 
 export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }): JSX.Element {

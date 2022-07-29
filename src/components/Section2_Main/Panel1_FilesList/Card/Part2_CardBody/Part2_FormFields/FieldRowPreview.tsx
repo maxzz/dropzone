@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldPath } from '@/store/manifest';
 import { css } from '@/stitches.config';
+import { classNames } from '@/utils/classnames';
 
 const stylesSvg = css({
     // '--size-div': 4,
@@ -55,13 +56,13 @@ export function FieldRowPreview({ small, form, selected, onSelected, ...attrs }:
         <svg viewBox={`0 0 ${bounds.x2} ${bounds.y2}`} className={`${stylesSvg()} ${className}`} style={styles} {...rest}>
             {rects.map((rect, idx) => (
                 <rect x={rect.x} y={rect.y} width={rect.w} height={rect.h} key={idx}
-                    className={
-                        `${idx === selected
+                    className={classNames(
+                        idx === selected
                             ? 'fill-[#00ff62]'
                             : rect.f
                                 ? 'fill-[#454545]'
-                                : `fill-[#0008] ${small ? '' : 'hover:fill-[#2d6865]'}`}
-                        `}
+                                : `fill-[#0008] ${small ? '' : 'hover:fill-[#2d6865]'}`
+                    )}
                     style={rect.f ? {} : stylesRect}
                     onClick={(event) => onSelected && rect.f && (event.stopPropagation(), onSelected(idx))}
                 >

@@ -5,8 +5,8 @@ import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Part4_CardUI/UIToggleWithPortal';
-//import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UiIcons';
 import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UIIconSymbols';
+import { classNames } from '@/utils/classnames';
 
 type FieldRowProps = {
     fileUs: FileUs;
@@ -32,7 +32,10 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
         ?
         <div className="flex">
             <div
-                className={`px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm ${useit ? 'bg-gray-300 text-gray-800' : 'opacity-25'} cursor-default`}
+                className={classNames(
+                    "px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm cursor-default",
+                    useit ? "bg-gray-300 text-gray-800" : "opacity-25",
+                )}
                 title={`Matching pattern: ${displayname}`}
             >
                 patern
@@ -40,10 +43,10 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
         </div>
         :
         //displayname
-        <div className="" title={`Dispaly name: ${displayname}`}>
+        <div title={`Dispaly name: ${displayname}`}>
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
-        </div>
-        ;
+        </div>;
+
     const columnRefTitle = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
     function selectThisRow() {
@@ -55,11 +58,15 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
     return (
         <div
-            className={`flex items-center text-xs h-6 space-x-1 overflow-hidden ${useit ? 'bg-[#bbffdf42]' : ''} ${isSelected ? '!bg-blue-200' : ''}`}
+            className={classNames(
+                "flex items-center text-xs h-6 space-x-1 overflow-hidden",
+                useit && 'bg-[#bbffdf42]',
+                isSelected && '!bg-blue-200',
+            )}
             onClick={selectThisRow}
         >
             {/* 1. use it */}
-            <div className="" title={`To use or not to use. Field index: ${field.pidx}`}>
+            <div title={`To use or not to use. Field index: ${field.pidx}`}>
                 {useit
                     ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
                     : <IconInputFieldChkEmpty className="w-5 h-5" />
@@ -68,14 +75,17 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
             {/* 2. icon and text for field type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
-            <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>{`${password ? 'psw' : type}`}</div>
+            <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>
+                {`${password ? 'psw' : type}`}
+            </div>
 
             {/* 3. icon preview and preview */}
             <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
                 toggle={
-                    <IconPreview className={`w-4 h-4 ${hasPreview ? '' : 'opacity-25'}`} />
+                    <IconPreview className={classNames("w-4 h-4", !hasPreview && 'opacity-25')} />
                 }
             >
+                {/* Popup content */}
                 {hasPreview &&
                     <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
                         <FieldRowPreview
@@ -83,7 +93,9 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
                             selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
                             className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
                         />
-                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}</div>
+                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">
+                            X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}
+                        </div>
                     </div>
                 }
             </UIToggleWithPortal>
@@ -99,7 +111,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
             {/* 5. policy */}
             <div
-                className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${policy ? '' : 'opacity-25'}`}
+                className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !policy && "opacity-25")}
                 title={`Field policy: ${policy}`}
             >
                 policy
@@ -107,7 +119,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
             {/* 6. value */}
             <div
-                className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${value ? '' : 'opacity-25'}`}
+                className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !value && "opacity-25")}
                 title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
             >
                 value
@@ -115,15 +127,15 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
             {/* 7. ref */}
             <div
-                className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default ${rfield || rfieldform ? '' : 'opacity-25'}`}
+                className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !rfield && !rfieldform && 'opacity-25')}
                 title={columnRefTitle}
             >
-                <div className=""><IconInOut className="w-3 h-4" /></div>
+                <div><IconInOut className="w-3 h-4" /></div>
             </div>
 
             {/* 8. id */}
             <div
-                className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded text-gray-900 cursor-default`}
+                className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900"
                 title={`Value ID: ${dbname}`}
             >
                 id
@@ -133,19 +145,24 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
                 toggle={
                     <div
-                        className={`px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded ${hasPath ? 'text-gray-900' : 'text-red-500 opacity-50'} cursor-default`}
+                        className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default", hasPath ? 'text-gray-900' : 'text-red-500 opacity-50')}
                         title={hasPath ? path_ext : 'no path'}
                     >
                         path
                     </div>
                 }
             >
-                {hasPath ?
-                    <div className={`ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700`}>
-                        {<FieldRowPath className="" fileUs={fileUs} form={form} field={field} />}
+                {/* Popup content */}
+                {hasPath
+                    ?
+                    <div className="ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700">
+                        <FieldRowPath fileUs={fileUs} form={form} field={field} />
                     </div>
                     :
-                    <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">This field has no path and cannot be used.</div>}
+                    <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">
+                        This field has no path and cannot be used.
+                    </div>
+                }
             </UIToggleWithPortal>
 
             {/* 10.done */}
