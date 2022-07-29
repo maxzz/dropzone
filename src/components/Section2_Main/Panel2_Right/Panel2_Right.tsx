@@ -1,9 +1,9 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanelData } from '@/store';
-import { CardTitleText } from '../Panel1_FilesList/Card/CardTitleText';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
+import { CardTitleText } from '../Panel1_FilesList/Card/Part1_CardTitle/CardTitleText';
 
 export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;

@@ -15,7 +15,7 @@ export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; })
     }
     
     return (
-        <div className={`relative p-2 ${isCurrentCard ? 'bg-blue-900' : 'bg-gray-900'} text-gray-100`}>
+        <div className={`relative p-2 ${isCurrentCard ? 'bg-blue-900' : 'bg-primary-900'} text-primary-100`}>
 
             {/* Title selection */}
             <div className="overflow-hidden whitespace-nowrap overflow-ellipsis cursor-pointer select-none" onClick={toggleCardSelection}>
