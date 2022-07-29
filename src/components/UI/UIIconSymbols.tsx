@@ -220,6 +220,8 @@ export function IconAppWindows(props: SVGProps<SVGSVGElement> & { title?: string
 export function IconAppWebIE(props: SVGProps<SVGSVGElement> & { title?: string; }) {
     const { className = '', title, ...rest } = props;
     return (
+        // TODO: use prev solid version for title and outline for buttons
+        // <svg fill="currentColor" stroke="black" strokeWidth={.7} className={`w-full h-full ${className}`} {...rest}>
         <svg fill="none" stroke="currentColor" strokeWidth={.8} className={`w-full h-full ${className}`} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#app-web-ie" />
