@@ -4,6 +4,7 @@ import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
 import { IconAppWebChrome, IconAppWebIE, IconAppWindows, IconAttention, IconCatalog, IconDot, IconFolder } from "@ui/UIIconSymbols";
 import { useAtomValue } from "jotai";
 import { CardTitleFilename } from "./CardTitleFilename";
+import { classNames } from "@/utils/classnames";
 
 function CardIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
     if (isFCat) {
@@ -28,15 +29,36 @@ function CardCaption({ stats }: { stats: FileUsStats; }) {
     );
 }
 
+function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: boolean; }) {
+    return (
+        <div
+            className={classNames(
+                "pb-px w-4 h-4 text-[.6rem] border rounded-md flex items-center justify-center select-none cursor-default",
+                errors ? "text-red-100 bg-red-700 border-red-500" : "text-primary-500 border-primary-600",
+            )}
+            title={errors ? undefined : "File index in the list of all loaded files"}
+            onClick={(e) => e.stopPropagation()}
+        >
+            {idx}
+        </div>
+    );
+}
+
 function CardAttention({ fileUs }: { fileUs: FileUs; }) {
     const hasBailOut = isAnyWhy(fileUs);
     if (!hasBailOut) {
-        return null;
+        return <CardTitleFileIndex idx={fileUs.idx + 1} />;
     }
     const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
     return (
         <UITooltip
-            trigger={<IconAttention className="w-3.5 h-3.5 text-red-500 cursor-default" onClick={(e) => { e.stopPropagation(); }} />}
+            trigger={
+                <CardTitleFileIndex idx={fileUs.idx + 1} errors={true} />
+                // <IconAttention
+                //     className="w-3.5 h-3.5 text-red-500 cursor-default"
+                //     onClick={(e) => e.stopPropagation()}
+                // />
+            }
             arrow={false}
             popperOptions={{ delayShow: 300 }} // , visible: true
             className="!p-0 !bg-primary-100 !border-primary-100"
@@ -67,17 +89,6 @@ function CardAttention({ fileUs }: { fileUs: FileUs; }) {
                 ))}
             </div>
         </UITooltip>
-    );
-}
-
-function CardTitleFileIndex({ idx }: { idx: number; }) {
-    return (
-        <div
-            className="pb-px w-4 h-4 text-[.6rem] text-primary-600 border-primary-700 border rounded-md flex items-center justify-center select-none cursor-default"
-            title="File index in all loaded files"
-        >
-            {idx}
-        </div>
     );
 }
 
@@ -141,7 +152,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 
             <div className="flex-none flex items-center space-x-1 mr-1">
                 <CardAttention fileUs={fileUs} />
-                <CardTitleFileIndex idx={fileUs.idx + 1} />
+                {/* <CardTitleFileIndex idx={fileUs.idx + 1} /> */}
             </div>
         </div>
     </>);
