@@ -4,7 +4,7 @@ import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom } from '@/store';
 import { CardTitleTextMemo } from './CardTitleText';
 import { CardActions } from './CardTitleActions';
 
-export function CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const currentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
     const doSetCurrentCard = useSetAtom(doSetCurrentCardAtom);
     const setRightPanel = useSetAtom(rightPanelData.panelAtom); //#091e4c
