@@ -13,7 +13,9 @@ export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElem
     return (
         <UISemiScrollbar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
             <div className="grid grid-flow-row gap-4 text-sm">
-                {files.map((atom) => <Card fileUsAtom={atom} className="" key={`${atom}`} />)}
+                {files.map((atom) => (
+                    <Card fileUsAtom={atom} key={`${atom}`} />
+                ))}
             </div>
         </UISemiScrollbar>
     );
