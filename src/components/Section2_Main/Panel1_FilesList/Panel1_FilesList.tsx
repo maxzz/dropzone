@@ -3,6 +3,7 @@ import { useAtomValue } from 'jotai';
 import { filteredAtom } from '@/store';
 import { Card } from './Card/Card';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
+import { classNames } from '@/utils/classnames';
 
 //old: import Card, { CardWRef } from './Card/Card';
 //old: import useVirtual, { Item } from 'react-cool-virtual';
@@ -11,7 +12,7 @@ import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);
     return (
-        <UISemiScrollbar className={`p-3 text-gray-500 bg-gray-700 ${className} overflow-auto w-full h-full`} {...rest}>
+        <UISemiScrollbar className={classNames("p-3 text-gray-500 bg-gray-700 overflow-auto w-full h-full", className)} {...rest}>
             <div className="grid grid-flow-row gap-4 text-sm">
                 {files.map((atom) => (
                     <Card fileUsAtom={atom} key={`${atom}`} />

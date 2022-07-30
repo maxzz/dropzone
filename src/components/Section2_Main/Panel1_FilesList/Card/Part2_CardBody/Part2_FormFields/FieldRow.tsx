@@ -47,7 +47,8 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
         </div>;
 
-    const columnRefTitle = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
+    const titleUseIt = `To use or not to use. Field index: ${field.pidx}`;
+    const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
     function selectThisRow() {
         if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.rother) {
@@ -66,12 +67,10 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             onClick={selectThisRow}
         >
             {/* 1. use it */}
-            <div title={`To use or not to use. Field index: ${field.pidx}`}>
-                {useit
-                    ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" />
-                    : <IconInputFieldChkEmpty className="w-5 h-5" />
-                }
-            </div>
+            {useit
+                ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" title={titleUseIt} />
+                : <IconInputFieldChkEmpty className="w-5 h-5" title={titleUseIt} />
+            }
 
             {/* 2. icon and text for field type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
@@ -129,9 +128,9 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {/* 7. ref */}
             <div
                 className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !rfield && !rfieldform && 'opacity-25')}
-                title={columnRefTitle}
+                title={titleColumnRef}
             >
-                <div><IconInOut className="w-3 h-4" /></div>
+                <IconInOut className="w-3 h-4" />
             </div>
 
             {/* 8. id */}
@@ -177,3 +176,5 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
 //TODO: script
 //TODO: 'path_ext' and ignore 'path' but complain about 'path'
+
+//TODO: avoid extra div around SVGs; set size on icon

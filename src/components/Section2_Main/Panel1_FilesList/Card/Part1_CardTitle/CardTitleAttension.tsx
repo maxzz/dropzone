@@ -12,7 +12,7 @@ export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: bool
                 errors ? "text-red-400 bg-red-900/70 border-red-500/50" : "text-primary-500 border-primary-600",
             )}
             title={errors ? undefined : "File index in the list of all loaded files"}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => errors && e.stopPropagation()}
         >
             {idx}
         </div>

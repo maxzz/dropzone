@@ -36,3 +36,5 @@ export function CardTitleActions({ fileUsAtom, className, ...rest }: { fileUsAto
         </div>
     );
 }
+
+//TODO: move it to the rightPanel
