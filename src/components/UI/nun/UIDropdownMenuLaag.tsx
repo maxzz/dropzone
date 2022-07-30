@@ -93,8 +93,8 @@ export function PopoverMenu() {
                 event.stopPropagation();
                 setOpen(!isOpen);
             }}>
-                <div className="w-6 h-6 opacity-60 hover:opacity-100 active:scale-[.97]">
-                    <IconMenuHamburger />
+                <div className="opacity-60 hover:opacity-100 active:scale-[.97]">
+                    <IconMenuHamburger className="w-6 h-6" />
                 </div>
                 {/* {isOpen ? "Hide" : "Show"} */}
             </button>

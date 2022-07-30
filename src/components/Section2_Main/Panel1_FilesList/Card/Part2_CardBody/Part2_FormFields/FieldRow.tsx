@@ -75,6 +75,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
             {/* 2. icon and text for field type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
+
             <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>
                 {`${password ? 'psw' : type}`}
             </div>

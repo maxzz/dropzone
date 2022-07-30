@@ -38,7 +38,7 @@ function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; 
             className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
             onClick={() => setFormEditorData({ fileUsAtom, formIdx: formType })}
         >
-            <IconGear className="w-4" />
+            <IconGear className="w-4 h-4" />
         </div>
     );
 }

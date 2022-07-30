@@ -10,10 +10,17 @@ export function CardTitleIcon({ stats: { isWeb, isChrome, isFCat, isCustomizatio
             </div>
         );
     }
-    const icon = isChrome ? <IconAppWebChrome /> : isWeb ? <IconAppWebIE /> : <IconAppWindows />;
+
+    const icon = isChrome
+        ? <IconAppWebChrome className="w-5 h-5 text-primary-300" />
+        : isWeb
+            ? <IconAppWebIE className="w-5 h-5 text-primary-300" />
+            : <IconAppWindows className="w-5 h-5 text-primary-300" />;
+
     const title = isChrome ? 'Webiste trained with Chrome' : isWeb ? 'Webiste trained with IE' : 'Windows application';
+    
     return (
-        <div className="w-5 h-5 text-primary-300" title={`${title} `}> {/* TODO: avoid this div; set size on icon */}
+        <div title={`${title} `}> {/* TODO: avoid this div; set size on icon */}
             {icon}
         </div>
     );

@@ -48,8 +48,8 @@ export const rightPanelData: RightPanelData = {
 export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
 
 export const allCards = {
-    areFoldedAtom: atom(
-        (get) => get(_foldAllCardsAtom)
+    areFoldedCounterAtom: atom(
+        (get) => get(_foldAllCardsAtom) // This is almost 'areFoldedAtom' except it is counter to skip first render (which is not true anymore for React 18 dev mode).
     ),
     doFoldAllCardsAtom: atom(
         null,

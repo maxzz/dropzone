@@ -1,4 +1,4 @@
-import React, { SVGProps } from 'react';
+import React, { HTMLAttributes, SVGAttributes, SVGProps } from 'react';
 
 export function UISymbolDefs() {
     return (
@@ -183,20 +183,18 @@ export function UISymbolDefs() {
 // apps
 
 // Win95
-// export function IconAppWindows(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-//     const { className = '', title, ...rest } = props;
+// export function IconAppWindows({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
 //     return (
-//         <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+//         <svg fill="currentColor" {...rest}>
 //             {title && <title>{title}</title>}
 //             <use xlinkHref="#app-windows" />
 //         </svg>
 //     );
 // }
 
-export function IconAppWindows(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconAppWindows({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth={1} className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#app-windows" />
         </svg>
@@ -204,32 +202,29 @@ export function IconAppWindows(props: SVGProps<SVGSVGElement> & { title?: string
 }
 
 // IE solid
-export function IconAppWebIESolid(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconAppWebIESolid({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#app-web-ie-solid" />
         </svg>
     );
 }
 
-export function IconAppWebIE(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconAppWebIE({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        // TODO: use prev solid version for title and outline for buttons
-        // <svg fill="currentColor" stroke="black" strokeWidth={.7} className={`w-full h-full ${className}`} {...rest}>
-        <svg fill="none" stroke="currentColor" strokeWidth={.8} className={`w-full h-full ${className}`} {...rest}>
+        // TODO: use prev solid version for title and outline for buttons: // <svg fill="currentColor" stroke="black" strokeWidth={.7} {...rest}>
+
+        <svg fill="none" stroke="currentColor" strokeWidth={.8} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#app-web-ie" />
         </svg>
     );
 }
 
-export function IconAppWebChrome(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconAppWebChrome({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth=".9" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth=".9" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#app-web-chrome" />
         </svg>
@@ -239,20 +234,18 @@ export function IconAppWebChrome(props: SVGProps<SVGSVGElement> & { title?: stri
 // mode
 
 // two hands
-// export function IconManualMode(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-//     const { className = '', title, ...rest } = props;
+// export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
 //     return (
-//         <svg fill="none" stroke="currentColor" strokeWidth=".6" className={`w-full h-full ${className}`} {...rest}>
+//         <svg fill="none" stroke="currentColor" strokeWidth=".6" {...rest}>
 //             {title && <title>{title}</title>}
 //             <use xlinkHref="#icon-manual-mode" />
 //         </svg>
 //     );
 // }
 
-export function IconManualMode(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth=".6" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth=".6" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-manual-mode" />
         </svg>
@@ -261,20 +254,18 @@ export function IconManualMode(props: SVGProps<SVGSVGElement> & { title?: string
 
 // misc
 
-export function IconMenuHamburger(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconMenuHamburger({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} className={`w-full h-full ${className}`} {...rest}>
+        <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#menu-hamburger" />
         </svg>
     );
 }
 
-export function IconCatalog(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconCatalog({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth={1} className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-catalog" />
         </svg>
@@ -283,70 +274,63 @@ export function IconCatalog(props: SVGProps<SVGSVGElement> & { title?: string; }
 
 // field icons
 
-export function IconInputFieldText(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconInputFieldText({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg strokeLinecap="round" strokeLinejoin="round" fill="none" strokeWidth={1.5} stroke="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg strokeLinecap="round" strokeLinejoin="round" fill="none" strokeWidth={1.5} stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#input-field-text" />
         </svg>
     );
 }
 
-export function IconInputFieldPsw(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconInputFieldPsw({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#input-field-psw" />
         </svg>
     );
 }
 
-export function IconInputFieldChk(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconInputFieldChk({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#input-field-chk" />
         </svg>
     );
 }
 
-export function IconInputFieldChkEmpty(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconInputFieldChkEmpty({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#input-field-chk-empty" />
         </svg>
     );
 }
 
-export function IconInputFieldList(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconInputFieldList({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#input-field-list" />
         </svg>
     );
 }
 
-export function IconFieldText(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconFieldText({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#field-text" />
         </svg>
     );
 }
 
-export function IconButton(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconButton({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth={5} className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth={5} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#field-button" />
         </svg>
@@ -355,20 +339,18 @@ export function IconButton(props: SVGProps<SVGSVGElement> & { title?: string; })
 
 // field state
 
-export function IconPreview(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconPreview({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-preview" />
         </svg>
     );
 }
 
-export function IconInOut(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconInOut({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-inout" />
         </svg>
@@ -377,30 +359,27 @@ export function IconInOut(props: SVGProps<SVGSVGElement> & { title?: string; }) 
 
 // chevrons
 
-export function IconChevronDown(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconChevronDown({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-chevron-down" />
         </svg>
     );
 }
 
-export function IconChevronUp(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconChevronUp({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-chevron-up" />
         </svg>
     );
 }
 
-export function IconDoubleDown(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconDoubleDown({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-doubledown" />
         </svg>
@@ -409,50 +388,45 @@ export function IconDoubleDown(props: SVGProps<SVGSVGElement> & { title?: string
 
 // info
 
-export function IconFolder(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconFolder({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-folder" />
         </svg>
     );
 }
 
-export function IconAttention(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconAttention({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-attantion" />
         </svg>
     );
 }
 
-export function IconDot(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconDot({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-dot" />
         </svg>
     );
 }
 
-export function IconOpenLink(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconOpenLink({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#open-link" />
         </svg>
     );
 }
 
-export function IconGear(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function IconGear({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-gear" />
         </svg>
@@ -460,8 +434,7 @@ export function IconGear(props: SVGProps<SVGSVGElement> & { title?: string; }) {
 }
 
 /*
-export function d(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
-    const { title, ...rest } = props;
+export function d({ title, ...rest }: SVGProps<SVGSVGElement> & { title?: string;} ) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
@@ -471,10 +444,9 @@ export function d(props: SVGProps<SVGSVGElement> & { title?: string;} ) {
 */
 
 /*
-export function s(props: SVGProps<SVGSVGElement> & { title?: string; }) {
-    const { className = '', title, ...rest } = props;
+export function s({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" className={`w-full h-full ${className}`} {...rest}>
+        <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#" />
         </svg>

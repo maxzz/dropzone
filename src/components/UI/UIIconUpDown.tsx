@@ -1,6 +1,5 @@
 import React from 'react';
 import { IconChevronDown, IconChevronUp, IconDoubleDown } from './UIIconSymbols';
-// import { IconChevronDown, IconChevronUp } from './UiIcons';
 
 export function UIIconUpDown({ isUp, double = false, className }: { isUp: boolean; double?: boolean; className: string; }) {
     if (double) {
