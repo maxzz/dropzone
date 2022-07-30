@@ -1,6 +1,6 @@
 import React from "react";
 import { useAtomValue } from "jotai";
-import { FileUsAtomType, FileUsStats, formCaption } from "@/store";
+import { FileUs, FileUsAtomType, FileUsStats, formCaption } from "@/store";
 import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
 import { IconFolder } from "@ui/UIIconSymbols";
 import { CardTitleIcon } from "./CardTitleIcon";
@@ -15,10 +15,8 @@ function CardCaption({ stats }: { stats: FileUsStats; }) {
     );
 }
 
-export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
-    const fileUs = useAtomValue(fileUsAtom);
+function CardFilename({fileUs}: {fileUs: FileUs}) {
     const stats = fileUs.stats;
-    const fcatLen = fileUs.fcat?.names.length;
 
     const FilenameMemo = React.useMemo(() => {
         return (
@@ -47,14 +45,18 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         );
     }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]);
 
-    return (<>
-        {/* Icon and caption */}
-        <div className="flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
-            <CardTitleIcon stats={stats} />
-            <CardCaption stats={stats} />
+    return (
+        <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono flex items-center space-x-2">
+            {FilenameMemo}
+            {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
         </div>
+    );
+}
 
-        {/* Login caption */}
+function CardUsername({fileUs}: {fileUs: FileUs}) {
+    const stats = fileUs.stats;
+    const fcatLen = fileUs.fcat?.names.length;
+    return(
         <div className="ml-0.5 font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
             {stats.isCustomization
                 ? <span title="This file is for configuring the application">Excluded app</span>
@@ -63,13 +65,23 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
                     : <span title="Login name">{stats.title || 'No login title'}</span>
             }
         </div>
+    )
+}
 
-        {/* Filename */}
+export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+    const fileUs = useAtomValue(fileUsAtom);
+    const stats = fileUs.stats;
+    return (<>
+        {/* Icon and website/app name */}
+        <div className="flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <CardTitleIcon stats={stats} />
+            <CardCaption stats={stats} />
+        </div>
+
+        <CardUsername fileUs={fileUs} />
+
         <div className="flex items-center justify-between">
-            <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono flex items-center space-x-2">
-                {FilenameMemo}
-                {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
-            </div>
+            <CardFilename fileUs={fileUs} />
 
             <div className="flex-none flex items-center space-x-1 mr-1">
                 <CardTitleAttension fileUs={fileUs} />
