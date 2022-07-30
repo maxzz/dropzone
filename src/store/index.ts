@@ -25,8 +25,7 @@ export {
 
     busyAtom,
 
-    areAllCardsFoldedAtom,
-    doFoldAllCardsAtom,
+    allCards,
 
     selected4ActionAtom,
 

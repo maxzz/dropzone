@@ -47,18 +47,19 @@ export const rightPanelData: RightPanelData = {
 
 export const _foldAllCardsAtom = atom(-1); // -1 to skip initial render
 
-export const areAllCardsFoldedAtom = atom(
-    (get) => get(_foldAllCardsAtom)
-);
-
-export const doFoldAllCardsAtom = atom(
-    null,
-    (get, set) => {
-        //set(busyAtom, 'Folding...');
-        set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
-        //set(busyAtom, '');
-    }
-);
+export const allCards = {
+    areFoldedAtom: atom(
+        (get) => get(_foldAllCardsAtom)
+    ),
+    doFoldAllCardsAtom: atom(
+        null,
+        (get, set) => {
+            //set(busyAtom, 'Folding...');
+            set(_foldAllCardsAtom, get(_foldAllCardsAtom) + 1); // odd - expand; even - collapse
+            //set(busyAtom, '');
+        }
+    )
+}
 
 // Manifests to actions selection
 
