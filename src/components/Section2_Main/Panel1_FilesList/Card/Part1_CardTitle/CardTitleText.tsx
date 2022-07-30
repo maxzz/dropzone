@@ -5,7 +5,7 @@ import { uitooltipSmall, UITooltip } from '@ui/UITooltip';
 import { IconFolder } from "@ui/UIIconSymbols";
 import { CardTitleIcon } from "./CardTitleIcon";
 import { CardTitleFilename } from "./CardTitleFilename";
-import { CardAttention } from "./CardTitleAttension";
+import { CardTitleAttension } from "./CardTitleAttension";
 
 function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
@@ -72,7 +72,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
             </div>
 
             <div className="flex-none flex items-center space-x-1 mr-1">
-                <CardAttention fileUs={fileUs} />
+                <CardTitleAttension fileUs={fileUs} />
             </div>
         </div>
     </>);

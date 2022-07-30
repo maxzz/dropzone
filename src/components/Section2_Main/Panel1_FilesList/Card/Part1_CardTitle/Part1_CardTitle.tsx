@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom } from '@/store';
 import { CardTitleTextMemo } from './CardTitleText';
-import { CardActions } from './CardTitleActions';
+import { CardTitleActions } from './CardTitleActions';
 
 export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const isCurrentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
@@ -22,7 +22,7 @@ export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; })
                 <CardTitleTextMemo fileUsAtom={fileUsAtom} />
             </div>
 
-            {isCurrentCard && <CardActions fileUsAtom={fileUsAtom} />}
+            {/* {isCurrentCard && <CardActions fileUsAtom={fileUsAtom} />} */}
         </div>
     );
 }

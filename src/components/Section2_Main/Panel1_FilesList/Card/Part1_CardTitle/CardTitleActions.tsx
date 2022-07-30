@@ -3,6 +3,7 @@ import { useAtomValue } from "jotai";
 import { FileUsAtomType } from "@/store";
 import { IconMenuHamburger, IconOpenLink } from "@ui/UIIconSymbols";
 import { CardTitleMenu } from "./CardTitleMenu";
+import { classNames } from "@/utils/classnames";
 //import { PopoverMenu } from '@ui/nun/UIDropdownMenuLaag';
 //import { CardMenu } from './nun/CardMenu';
 
@@ -20,9 +21,9 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     );
 }
 
-export function CardActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
+export function CardTitleActions({ fileUsAtom, className, ...rest }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className="absolute top-3 right-2 z-10 flex items-center">
+        <div className={classNames("absolute top-3 right-2 z-10 flex items-center", className)} {...rest}>
             <CardOpenUrl fileUsAtom={fileUsAtom} />
 
             <CardTitleMenu fileUsAtom={fileUsAtom} icon={

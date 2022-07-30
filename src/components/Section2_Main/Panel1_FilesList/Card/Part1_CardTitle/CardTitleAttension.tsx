@@ -19,7 +19,7 @@ export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: bool
     );
 }
 
-export function CardAttention({ fileUs }: { fileUs: FileUs; }) {
+export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
     const hasBailOut = isAnyWhy(fileUs);
     const fileIndex = fileUs.idx + 1;
     if (!hasBailOut) {
