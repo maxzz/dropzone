@@ -110,7 +110,8 @@ export function fileUsStats(fileUs: FileUs): FileUsStats {
     const loginForm = fileUs.mani?.forms[0];
     const domain = fileUs.meta?.[0]?.disp.domain;
     const isWeb = !!domain;
-    const isSubFolder = !!fileUs.fpath?.match(/\//);
+    const hasSubFolders = !!fileUs.fpath?.match(/\//);
+    const isSubFolder = !!fileUs.fpath; // fpath is empty for single items
     return {
         domain,
         isWeb,
@@ -120,7 +121,7 @@ export function fileUsStats(fileUs: FileUs): FileUsStats {
         url: loginForm?.detection.web_ourl,
         title: loginForm?.options.choosename,
         isSubFolder: isSubFolder,
-        subFolder: isSubFolder ? stripFirstFolder(fileUs.fpath) : '',
+        subFolder: hasSubFolders ? stripFirstFolder(fileUs.fpath) : fileUs.fpath || '',
         dateCreated: dpTimeToShow(fileUs.mani?.descriptor?.created),
         dateModified: dpTimeToShow(fileUs.mani?.descriptor?.modified),
     };

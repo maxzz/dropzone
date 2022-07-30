@@ -14,7 +14,7 @@ export const setFilesAtom = atom(
     (get, set, accepterFiles: File[]) => {
         const dropped: FileUsAtomType[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
             const path = ((file as any).path as string || '').replace(/^\//, '').split(/[\\\/]/);
-            path.pop();
+            path.pop(); // remove file name as the last item
             const at: FileUs = {
                 id: uuid(),
                 idx,

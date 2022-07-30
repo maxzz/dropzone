@@ -68,6 +68,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         <div className="flex items-center justify-between">
             <div className="font-light text-sm overflow-hidden whitespace-nowrap overflow-ellipsis font-mono flex items-center space-x-2">
                 {FilenameMemo}
+                {/* {<>{"1" && console.log('-----------------------', stats.isSubFolder)}</>} */}
                 {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Sub-folder: "${stats.subFolder}"`} />}
             </div>
 
