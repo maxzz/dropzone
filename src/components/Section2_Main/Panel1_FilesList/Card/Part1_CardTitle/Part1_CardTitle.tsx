@@ -1,8 +1,10 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom } from '@/store';
-import { CardTitleTextMemo } from './CardTitleText';
+import { CardTitleText } from './CardTitleText';
 import { classNames } from '@/utils/classnames';
+
+export const CardTitleTextMemo = React.memo(CardTitleText);
 
 export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const isCurrentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
