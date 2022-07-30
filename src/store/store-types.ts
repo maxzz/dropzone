@@ -13,8 +13,8 @@ export type FileUsStats = {
     isCustomization: boolean;
     url?: string;
     title?: string;
-    isSubFolder?: boolean;
-    subFolder?: string;
+    isSubFolder?: boolean;  // Now it's a simple check to see if the path is in front of the filename.
+    subFolder?: string;     // This is now the full path available from the browser, i.e. not a subfolder.
     dateCreated?: string;
     dateModified?: string;
 };

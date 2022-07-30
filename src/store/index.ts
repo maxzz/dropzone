@@ -25,7 +25,9 @@ export {
 
     busyAtom,
 
-    foldAllCardsAtom,
+    areAllCardsFoldedAtom,
+    doFoldAllCardsAtom,
+
     selected4ActionAtom,
 
     splitPaneAtom,

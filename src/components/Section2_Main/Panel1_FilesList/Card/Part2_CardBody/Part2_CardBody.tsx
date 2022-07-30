@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
-import { FileUsAtomType, foldAllCardsAtom, SelectRowAtomsType } from '@/store';
+import { FileUsAtomType, areAllCardsFoldedAtom, SelectRowAtomsType } from '@/store';
 import { UICardFormButton } from '../Part4_CardUI/UICardFormButton';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
@@ -19,7 +19,7 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
 export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [formsExpanded, setFormsExpanded] = useState(false);
 
-    const openAll = useAtomValue(foldAllCardsAtom);
+    const openAll = useAtomValue(areAllCardsFoldedAtom);
     useEffect(() => {
         if (openAll >= 0) {
             const collapse = openAll % 2 === 0;

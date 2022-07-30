@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { foldAllCardsAtom, selected4ActionAtom } from '@/store';
+import { doFoldAllCardsAtom, selected4ActionAtom } from '@/store';
 import { rightPanelData } from '@/store';
 import {
     DropdownMenu as Menu,
@@ -47,7 +47,7 @@ function MenuItemConvert() {
 }
 
 function MenuItemFolding() {
-    const doToggleFolding = useSetAtom(foldAllCardsAtom);
+    const doToggleFolding = useSetAtom(doFoldAllCardsAtom);
     //const setBusy = useSetAtom(busyAtom);
     return (
         <Item
