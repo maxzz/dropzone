@@ -36,7 +36,7 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
                 {icon}
             </MenuTrigger>
 
-            <MenuPortal>
+            <MenuPortal container={document.getElementById('portal')}>
                 <MenuContent sideOffset={5}>
 
                     <Dialog trigger={

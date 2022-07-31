@@ -89,6 +89,10 @@ const StyledContent = styled(Primitive.Content, {
     },
 });
 
+const StyledCheckboxItem = styled(Primitive.CheckboxItem, { ...itemStyles });
+const StyledRadioItem = styled(Primitive.RadioItem, { ...itemStyles });
+const StyledItemIndicator = styled(Primitive.ItemIndicator, { ...itemStyles });
+
 const StyledTrigger = styled(Primitive.Trigger, {
     outline: '2px solid transparent',
     outlineOffset: '2px',
@@ -99,4 +103,10 @@ export const MenuPortal = Primitive.Portal;
 export const MenuTrigger = StyledTrigger;
 export const MenuContent = StyledContent;
 export const MenuItem = StyledMenuItem;
+
+export const MenuCheckboxItem = StyledCheckboxItem;
+export const MenuRadioItem = StyledRadioItem;
+export const MenuItemIndicator = StyledItemIndicator;
+
+export const MenuRadioGroup = Primitive.RadioGroup;
 export const MenuSeparator = StyledSeparator;
