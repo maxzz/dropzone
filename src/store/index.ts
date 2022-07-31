@@ -4,6 +4,7 @@ export type {
     FileUs,
     FileUsAtomType,
     FileUsFormData,
+    UISize,
 } from './store-types';
 
 export type {
@@ -33,6 +34,8 @@ export {
 
     searchFilterData,
     rightPanelData,
+
+    uiSizeAtom,
 
 } from './store-ui-state';
 

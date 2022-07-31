@@ -2,7 +2,7 @@ import { Atom, atom, PrimitiveAtom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
 import { FileUs, FileUsAtomType, UISize } from "./store-types";
 import { LocalStorageSave, } from "./store-localstorage-save";
-import { LocalStorage } from "./store-localstorage";
+import { LocalStorage } from "./store-localstorage-load";
 import { filesAtom, } from "./store-files";
 
 // Filters
