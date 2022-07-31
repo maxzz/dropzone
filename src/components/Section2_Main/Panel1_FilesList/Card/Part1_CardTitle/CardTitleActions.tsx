@@ -25,9 +25,9 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     </>);
 }
 
-export function CardTitleActions({ fileUsAtom, className, ...rest }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
+export function CardTitleActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
-        <div className={classNames("absolute top-1 right-2 z-10 flex items-center space-x-1", className)} {...rest}>
+        <div className="flex items-center space-x-1">
             <CardOpenUrl fileUsAtom={fileUsAtom} />
 
             <CardTitleMenu fileUsAtom={fileUsAtom} icon={
