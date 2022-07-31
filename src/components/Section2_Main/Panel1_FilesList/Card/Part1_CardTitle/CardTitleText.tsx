@@ -15,13 +15,13 @@ function CardCaption({ stats }: { stats: FileUsStats; }) {
 
 function CardUsername({ fileUs }: { fileUs: FileUs; }) {
     const stats = fileUs.stats;
-    const fcatLen = fileUs.fcat?.names.length;
+    const fcatSize = fileUs.fcat?.names.length;
     return (
-        <div className="flex-1 min-w-0 ml-0.5 text-sm font-light opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className="ml-0.5 text-sm font-light opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
             {stats.isCustomization
                 ? <span title="This file is for configuring the application">Excluded app</span>
                 : stats.isFCat
-                    ? <span title="Number of items in the Field Catalog">{fcatLen ? `${fcatLen} item${fcatLen === 1 ? '' : 's'}` : `Empty catalog`}</span>
+                    ? <span title="Number of items in the Field Catalog">{fcatSize ? `${fcatSize} item${fcatSize === 1 ? '' : 's'}` : `Empty catalog`}</span>
                     : <span title="Login name">{stats.title || 'No login title'}</span>
             }
         </div>

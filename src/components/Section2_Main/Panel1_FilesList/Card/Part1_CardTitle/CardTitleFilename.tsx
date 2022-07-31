@@ -51,7 +51,7 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
                 }
                 {...optionsUITooltipSmall()}
             >
-                {/* Tooltip content */}
+                {/* Popup content */}
                 <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
 
                     {fileUs.fpath && <>
@@ -83,10 +83,3 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
         </div>
     );
 }
-
-{/* <div className={classNames("text-sm font-light font-mono flex items-center space-x-2", className)} {...rest}>
-{FilenameMemo}
-{stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
-</div> */}
-
-//TODO: overflow-hidden whitespace-nowrap overflow-ellipsis

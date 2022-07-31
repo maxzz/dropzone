@@ -31,7 +31,6 @@ export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
             trigger={
                 <CardTitleFileIndex idx={fileIndex} errors={true} />
             }
-            arrow={false}
             popperOptions={{ delayShow: 300 }} // , visible: true
             className="!p-0 !bg-primary-100 !border-primary-100"
         >

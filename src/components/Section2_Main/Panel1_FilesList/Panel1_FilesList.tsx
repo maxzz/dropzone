@@ -1,9 +1,9 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { filteredAtom } from '@/store';
-import { Card } from './Card/Card';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
+import { Card } from './Card/Card';
 
 //old: import Card, { CardWRef } from './Card/Card';
 //old: import useVirtual, { Item } from 'react-cool-virtual';
@@ -13,7 +13,7 @@ export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElem
     const files = useAtomValue(filteredAtom);
     return (
         <UISemiScrollbar className={classNames("p-3 text-gray-500 bg-gray-700 overflow-auto w-full h-full", className)} {...rest}>
-            <div className="grid grid-flow-row gap-4 text-sm">
+            <div className="grid gap-4">
                 {files.map((atom) => (
                     <Card fileUsAtom={atom} key={`${atom}`} />
                 ))}
@@ -21,6 +21,7 @@ export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElem
         </UISemiScrollbar>
     );
 }
+
 /*
 function Panel1_FilesListNew({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);
@@ -69,5 +70,6 @@ function Panel1_FilesListNew({ className, ...rest }: HTMLAttributes<HTMLElement>
     );
 }
 */
+
 //TODO: we can use alternative solutins: virtual list; pagination; popup; right panel; ...
 //TODO: add filter by website domain
