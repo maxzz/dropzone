@@ -1,7 +1,7 @@
 import { Atom, atom, PrimitiveAtom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
-import { FileUs, FileUsAtomType } from "./store-types";
-import { LocalStorageSave, } from "./store-save";
+import { FileUs, FileUsAtomType, UISize } from "./store-types";
+import { LocalStorageSave, } from "./store-localstorage-save";
 import { LocalStorage } from "./store-localstorage";
 import { filesAtom, } from "./store-files";
 
@@ -31,7 +31,7 @@ export const searchFilterData = {
 type RightPanelData = {
     panelAtom: PrimitiveAtom<FileUsAtomType | undefined>;
     valueAtom: Atom<FileUs | undefined>;
-}
+};
 
 export const rightPanelData: RightPanelData = {
     panelAtom: atom<FileUsAtomType | undefined>(undefined),
@@ -59,7 +59,7 @@ export const allCards = {
             //set(busyAtom, '');
         }
     )
-}
+};
 
 // Manifests to actions selection
 
@@ -81,3 +81,7 @@ export const hasFilesAtom = atom(
 // Split pane position
 
 export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.vSplitPos, LocalStorageSave.save);
+
+// Files list size
+
+export const uiSizeAtom = atomWithCallback<UISize>(LocalStorage.initialData.uiSize, LocalStorageSave.save);

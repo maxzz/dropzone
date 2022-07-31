@@ -62,3 +62,11 @@ export type SelectRowAtomsType = {
     loginAtom: PrimitiveAtom<SelectRowType>;
     cpassAtom: PrimitiveAtom<SelectRowType>;
 };
+
+// Files list size
+
+export const enum UISize {
+    regular = 0,
+    compact,
+    minimal,
+}
