@@ -7,17 +7,17 @@ import { CardTitleAttension } from "./CardTitleAttension";
 
 function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
-        <div className="ml-1 text-lg uppercase"> {/* overflow-hidden whitespace-nowrap overflow-ellipsis */}
+        <div className="ml-1 text-lg uppercase overflow-hidden whitespace-nowrap overflow-ellipsis">
             {formCaption(stats)}
         </div>
     );
 }
 
-function CardUsername({fileUs}: {fileUs: FileUs}) {
+function CardUsername({ fileUs }: { fileUs: FileUs; }) {
     const stats = fileUs.stats;
     const fcatLen = fileUs.fcat?.names.length;
-    return(
-        <div className="ml-0.5 font-light text-sm opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
+    return (
+        <div className="flex-1 min-w-0 ml-0.5 text-sm font-light opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
             {stats.isCustomization
                 ? <span title="This file is for configuring the application">Excluded app</span>
                 : stats.isFCat
@@ -25,7 +25,7 @@ function CardUsername({fileUs}: {fileUs: FileUs}) {
                     : <span title="Login name">{stats.title || 'No login title'}</span>
             }
         </div>
-    )
+    );
 }
 
 export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
@@ -33,7 +33,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const stats = fileUs.stats;
     return (<>
         {/* Icon and website/app name */}
-        <div className="flex items-center overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className="grid grid-cols-[min-content_minmax(0,min-content)] items-center">
             <CardTitleIcon stats={stats} />
             <CardCaption stats={stats} />
         </div>
@@ -42,12 +42,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 
         <div className="flex items-center justify-between">
             <CardTitleFilename fileUs={fileUs} />
-
-            <div className="flex-none flex items-center space-x-1 mr-1">
-                <CardTitleAttension fileUs={fileUs} />
-            </div>
+            <CardTitleAttension fileUs={fileUs} />
         </div>
     </>);
 }
-
-//TODO: 'overflow-hidden whitespace-nowrap overflow-ellipsis' is not working
