@@ -70,3 +70,5 @@ export const enum UISize {
     compact,
     minimal,
 }
+
+export const uiSizeNames = ["Regular", "Compact", "Minimal"];

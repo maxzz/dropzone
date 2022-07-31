@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, rightPanelData, selected4ActionAtom } from '@/store';
+import { allCards, rightPanelData, selected4ActionAtom, uiSizeNames } from '@/store';
 import { Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
@@ -53,6 +53,19 @@ function MenuItemFolding() {
     );
 }
 
+function MenuItemUISizeSelect() {
+    return (<>
+        {uiSizeNames.map((name, idx) => (
+            <MenuItem key={idx}>
+                <label>
+                    <input type="checkbox" />
+                    {name}
+                </label>
+            </MenuItem>
+        ))}
+    </>);
+}
+
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
@@ -61,8 +74,11 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
             </MenuTrigger>
 
             <MenuContent sideOffset={5}>
-                <MenuItemMarkSelected />
-                <MenuItemConvert />
+                {/* <MenuItemMarkSelected />
+                <MenuItemConvert /> */}
+
+                <MenuItemUISizeSelect />
+
                 <MenuSeparator />
                 <MenuItemFolding />
             </MenuContent>

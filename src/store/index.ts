@@ -5,10 +5,11 @@ export type {
     FileUsAtomType,
     FileUsFormData,
     UISize,
+    SelectRowAtomsType,
 } from './store-types';
 
-export type {
-    SelectRowAtomsType,
+export {
+    uiSizeNames,
 } from './store-types';
 
 export {
