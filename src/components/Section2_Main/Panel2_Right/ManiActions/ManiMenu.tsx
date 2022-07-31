@@ -3,14 +3,7 @@ import { useAtomValue } from 'jotai';
 import { FileUs, FileUsAtomType } from '@/store';
 import { convertToXml } from '@/store/manifest';
 import { Dialog } from '@ui/UIDialog';
-import {
-    DropdownMenu as Menu,
-    DropdownMenuPortal,
-    DropdownMenuContent,
-    DropdownMenuItem as MenuItem,
-    DropdownMenuSeparator as MenuSeparator,
-    DropdownMenuTrigger as MenuTrigger
-} from '@ui/UiDropdownMenu';
+import { Menu, MenuPortal, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
 function DialogContent({ setShow }: { setShow?: (v: boolean) => void; }) {
@@ -43,8 +36,8 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
                 {icon}
             </MenuTrigger>
 
-            <DropdownMenuPortal>
-                <DropdownMenuContent sideOffset={5}>
+            <MenuPortal>
+                <MenuContent sideOffset={5}>
 
                     <Dialog trigger={
                         <MenuItem className="!text-sm" /* onClick={(event) => { event.stopPropagation(); event.preventDefault(); saveXmlFile(); }} */>
@@ -74,8 +67,8 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
 
                     <MenuSeparator />
                     <MenuItem disabled={true} >Save</MenuItem>
-                </DropdownMenuContent>
-            </DropdownMenuPortal>
+                </MenuContent>
+            </MenuPortal>
         </Menu>
     );
 }

@@ -36,7 +36,7 @@ const itemStyles = {
 
 const StyledItem = styled(Primitive.Item, { ...itemStyles });
 
-const MenuItem = ({disabled, ...rest}: {disabled?: boolean} & Primitive.MenuItemProps) => {
+const StyledMenuItem = ({disabled, ...rest}: {disabled?: boolean} & Primitive.MenuItemProps) => {
     return <StyledItem {...rest} {...(disabled && {'data-disabled': ''})} />
 }
 
@@ -94,10 +94,9 @@ const StyledTrigger = styled(Primitive.Trigger, {
     outlineOffset: '2px',
 });
 
-export const DropdownMenu = Primitive.Root;
-export const DropdownMenuPortal = Primitive.Portal;
-export const DropdownMenuTrigger = StyledTrigger;
-export const DropdownMenuContent = StyledContent;
-//export const DropdownMenuItem = StyledItem;
-export const DropdownMenuItem = MenuItem;
-export const DropdownMenuSeparator = StyledSeparator;
+export const Menu = Primitive.Root;
+export const MenuPortal = Primitive.Portal;
+export const MenuTrigger = StyledTrigger;
+export const MenuContent = StyledContent;
+export const MenuItem = StyledMenuItem;
+export const MenuSeparator = StyledSeparator;

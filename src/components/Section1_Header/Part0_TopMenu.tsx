@@ -1,14 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, selected4ActionAtom } from '@/store';
-import { rightPanelData } from '@/store';
-import {
-    DropdownMenu as Menu,
-    DropdownMenuContent as Content,
-    DropdownMenuItem as Item,
-    DropdownMenuSeparator as Separator,
-    DropdownMenuTrigger as Trigger,
-} from '@ui/UiDropdownMenu';
+import { allCards, rightPanelData, selected4ActionAtom } from '@/store';
+import { Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
 function MenuItemMarkSelected() {
@@ -22,9 +15,9 @@ function MenuItemMarkSelected() {
         }
     }
     return (
-        <Item disabled={disabled} onClick={click} title="Mark manifest. Select manifest first.">
+        <MenuItem disabled={disabled} onClick={click} title="Mark manifest. Select manifest first.">
             Select / Deselect mainfest
-        </Item>
+        </MenuItem>
     );
 }
 
@@ -33,7 +26,7 @@ function MenuItemConvert() {
     //const disabled = !rightPanel;
     const disabled = true;
     return (
-        <Item
+        <MenuItem
             disabled={disabled}
             onClick={(event) => {
                 event.preventDefault();
@@ -42,7 +35,7 @@ function MenuItemConvert() {
             title="Convert manual mode manifest to regular Chrome manifest. Select manifest first."
         >
             Convert manual to normal
-        </Item>
+        </MenuItem>
     );
 }
 
@@ -50,29 +43,29 @@ function MenuItemFolding() {
     const doToggleFolding = useSetAtom(allCards.doFoldAllCardsAtom);
     //const setBusy = useSetAtom(busyAtom);
     return (
-        <Item
+        <MenuItem
             onSelect={async () => {
                 doToggleFolding(); // setBusy('Folding...'); setTimeout(() => { doToggleFolding(); setBusy(''); }, 0); // still reflow problem
             }}
         >
             Toggle cards folding
-        </Item>
+        </MenuItem>
     );
 }
 
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
-            <Trigger>
+            <MenuTrigger>
                 {icon}
-            </Trigger>
+            </MenuTrigger>
 
-            <Content sideOffset={5}>
+            <MenuContent sideOffset={5}>
                 <MenuItemMarkSelected />
                 <MenuItemConvert />
-                <Separator />
+                <MenuSeparator />
                 <MenuItemFolding />
-            </Content>
+            </MenuContent>
         </Menu>
     );
 };
