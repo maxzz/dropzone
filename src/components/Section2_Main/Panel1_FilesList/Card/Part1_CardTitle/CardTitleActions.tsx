@@ -11,19 +11,23 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const url = fileUs.mani?.forms[0]?.detection.web_ourl;
     const domain = fileUs.meta?.[0]?.disp.domain;
-    if (!url) {
-        return null;
-    }
-    return (
-        <a href={url} target="_blank" rel="noopener" title={`Open ${domain}`} onClick={(event) => event.stopPropagation()}>
-            <IconOpenLink className="w-4 h-4 mr-2" />
+    return (<>
+        {url && <a
+            href={url}
+            target="_blank"
+            rel="noopener"
+            title={`Open ${domain}`}
+            onClick={(event) => event.stopPropagation()}
+        >
+            <IconOpenLink className="w-4 h-4" />
         </a>
-    );
+        }
+    </>);
 }
 
 export function CardTitleActions({ fileUsAtom, className, ...rest }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("absolute top-3 right-2 z-10 flex items-center", className)} {...rest}>
+        <div className={classNames("absolute top-1 right-2 z-10 flex items-center space-x-1", className)} {...rest}>
             <CardOpenUrl fileUsAtom={fileUsAtom} />
 
             <CardTitleMenu fileUsAtom={fileUsAtom} icon={

@@ -11,14 +11,17 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
     const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
     const rightPanelValue = useAtomValue(rightPanelData.valueAtom);
     return (
-        <div className={classNames("flex-auto pt-4 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>
+        <div className={classNames("flex-auto pt-2 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>
             {rightPanelValue &&
                 <div className="w-full h-full flex flex-col">
 
                     {/* Card title */}
                     <div className="relative p-2 pt-0 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
                         <CardTitleText fileUsAtom={rightPanelData.valueAtom as FileUsAtomType} />
-                        {rightPanelAtom && <CardTitleActions fileUsAtom={rightPanelAtom} className="mr-0.5 top-0.5" />}
+
+                        {rightPanelAtom &&
+                            <CardTitleActions fileUsAtom={rightPanelAtom} />
+                        }
                     </div>
 
                     {/* Raw data preview (+ codemirror?) */}

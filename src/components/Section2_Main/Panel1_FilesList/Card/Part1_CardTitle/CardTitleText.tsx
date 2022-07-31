@@ -7,7 +7,7 @@ import { CardTitleAttension } from "./CardTitleAttension";
 
 function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
-        <div className="ml-1 text-lg uppercase overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className="text-lg uppercase overflow-hidden whitespace-nowrap overflow-ellipsis">
             {formCaption(stats)}
         </div>
     );
@@ -33,7 +33,7 @@ export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const stats = fileUs.stats;
     return (<>
         {/* Icon and website/app name */}
-        <div className="grid grid-cols-[min-content_minmax(0,min-content)] items-center">
+        <div className="grid grid-cols-[min-content_minmax(0,min-content)] items-center gap-x-1">
             <CardTitleIcon stats={stats} />
             <CardCaption stats={stats} />
         </div>
