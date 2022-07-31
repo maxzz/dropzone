@@ -21,7 +21,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
-    const fname = ManiFilenameParts({ fname: fileUs.fname, styleLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
+    const fname = ManiFilenameParts({ fname: fileUs.fname, classLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (
         <UITooltip
             trigger={
