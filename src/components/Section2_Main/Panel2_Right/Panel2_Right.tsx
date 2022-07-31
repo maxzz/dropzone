@@ -17,11 +17,18 @@ export function Panel2_Right(props: HTMLAttributes<HTMLDivElement>) {
 
                     {/* Card title */}
                     <div className="relative p-2 pt-0 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
-                        <CardTitleText fileUsAtom={rightPanelData.valueAtom as FileUsAtomType} />
+                        <CardTitleText
+                            fileUsAtom={rightPanelData.valueAtom as FileUsAtomType}
+                            actions={<>
+                                {rightPanelAtom &&
+                                    <CardTitleActions fileUsAtom={rightPanelAtom} />
+                                }
+                            </>}
+                        />
 
-                        {rightPanelAtom &&
+                        {/* {rightPanelAtom &&
                             <CardTitleActions fileUsAtom={rightPanelAtom} />
-                        }
+                        } */}
                     </div>
 
                     {/* Raw data preview (+ codemirror?) */}

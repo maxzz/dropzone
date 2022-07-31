@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { useAtomValue } from "jotai";
 import { FileUs, FileUsAtomType, FileUsStats, formCaption } from "@/store";
 import { CardTitleIcon } from "./CardTitleIcon";
@@ -28,14 +28,15 @@ function CardUsername({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
-export function CardTitleText({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function CardTitleText({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs.stats;
     return (<>
         {/* Icon and website/app name */}
-        <div className="grid grid-cols-[min-content_minmax(0,min-content)] items-center gap-x-1">
+        <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-1">
             <CardTitleIcon stats={stats} />
             <CardCaption stats={stats} />
+            <div className="justify-self-end">{actions}</div>
         </div>
 
         <CardUsername fileUs={fileUs} />
