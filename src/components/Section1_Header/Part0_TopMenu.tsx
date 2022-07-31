@@ -1,8 +1,9 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, rightPanelData, selected4ActionAtom, uiSizeNames } from '@/store';
-import { Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
+import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
+import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
+import { IconDot } from '@ui/UIIconSymbols';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
@@ -54,15 +55,18 @@ function MenuItemFolding() {
 }
 
 function MenuItemUISizeSelect() {
+    const [uiSize, setUiSize] = useAtom(uiSizeAtom);
     return (<>
-        {uiSizeNames.map((name, idx) => (
-            <MenuItem key={idx}>
-                <label>
-                    <input type="checkbox" />
+        <MenuRadioGroup value={'' + uiSize} onValueChange={(value) => setUiSize(+value)}>
+            {uiSizeNames.map((name, idx) => (
+                <MenuRadioItem value={''+idx} key={idx}>
+                    <MenuItemIndicator>
+                        <IconDot className="w-3 h-3" />
+                    </MenuItemIndicator>
                     {name}
-                </label>
-            </MenuItem>
-        ))}
+                </MenuRadioItem>
+            ))}
+        </MenuRadioGroup>
     </>);
 }
 
@@ -73,15 +77,17 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 {icon}
             </MenuTrigger>
 
-            <MenuContent sideOffset={5}>
-                {/* <MenuItemMarkSelected />
-                <MenuItemConvert /> */}
+            <MenuPortal container={document.getElementById('portal')}>
+                <MenuContent sideOffset={5}>
+                    {/* <MenuItemMarkSelected />
+                    <MenuItemConvert /> */}
 
-                <MenuItemUISizeSelect />
+                    <MenuItemUISizeSelect />
 
-                <MenuSeparator />
-                <MenuItemFolding />
-            </MenuContent>
+                    <MenuSeparator />
+                    <MenuItemFolding />
+                </MenuContent>
+            </MenuPortal>
         </Menu>
     );
 };
