@@ -4,7 +4,7 @@ import { FileUsAtomType, rightPanelData } from '@/store';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 import { CardTitleText } from '../Panel1_FilesList/Card/Part1_CardTitle/CardTitleText';
-import { CardTitleActions } from '../Panel1_FilesList/Card/Part1_CardTitle/CardTitleActions';
+import { ManiActions } from './ManiActions/ManiActions';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
@@ -19,7 +19,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         <CardTitleText
                             fileUsAtom={rightPanelData.valueAtom as FileUsAtomType}
                             actions={<>
-                                {rightPanelAtom && <CardTitleActions fileUsAtom={rightPanelAtom} />}
+                                {rightPanelAtom && <ManiActions fileUsAtom={rightPanelAtom} />}
                             </>}
                         />
                     </div>

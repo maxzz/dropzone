@@ -1,9 +1,8 @@
-import React, { HTMLAttributes } from "react";
+import React from "react";
 import { useAtomValue } from "jotai";
 import { FileUsAtomType } from "@/store";
 import { IconMenuHamburger, IconOpenLink } from "@ui/UIIconSymbols";
-import { CardTitleMenu } from "./CardTitleMenu";
-import { classNames } from "@/utils/classnames";
+import { CardTitleMenu } from "./ManiMenu";
 //import { PopoverMenu } from '@ui/nun/UIDropdownMenuLaag';
 //import { CardMenu } from './nun/CardMenu';
 
@@ -25,7 +24,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     </>);
 }
 
-export function CardTitleActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function ManiActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
         <div className="flex items-center space-x-1">
             <CardOpenUrl fileUsAtom={fileUsAtom} />
@@ -40,5 +39,3 @@ export function CardTitleActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }
         </div>
     );
 }
-
-//TODO: move it to the rightPanel

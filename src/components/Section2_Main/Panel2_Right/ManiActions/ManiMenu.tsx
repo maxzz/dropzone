@@ -6,10 +6,10 @@ import { Dialog } from '@ui/UIDialog';
 import {
     DropdownMenu as Menu,
     DropdownMenuPortal,
-    DropdownMenuContent as Content,
-    DropdownMenuItem as Item,
-    DropdownMenuSeparator as Separator,
-    DropdownMenuTrigger as Trigger
+    DropdownMenuContent,
+    DropdownMenuItem as MenuItem,
+    DropdownMenuSeparator as MenuSeparator,
+    DropdownMenuTrigger as MenuTrigger
 } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
@@ -39,42 +39,42 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
     const fileUs = useAtomValue(fileUsAtom);
     return (
         <Menu>
-            <Trigger>
+            <MenuTrigger>
                 {icon}
-            </Trigger>
+            </MenuTrigger>
 
             <DropdownMenuPortal>
-                <Content sideOffset={5}>
+                <DropdownMenuContent sideOffset={5}>
 
                     <Dialog trigger={
-                        <Item className="!text-sm" /* onClick={(event) => { event.stopPropagation(); event.preventDefault(); saveXmlFile(); }} */>
+                        <MenuItem className="!text-sm" /* onClick={(event) => { event.stopPropagation(); event.preventDefault(); saveXmlFile(); }} */>
                             Menu item as dialog trigger
-                        </Item>
+                        </MenuItem>
                     }>
                         <DialogContent />
                     </Dialog>
 
-                    <Item className="!text-sm"
+                    <MenuItem className="!text-sm"
                         onClick={(event) => {
                             event.stopPropagation();
                             saveXmlFile(fileUs);
                         }}
                     >
                         Convert manual to normal
-                    </Item>
+                    </MenuItem>
 
-                    <Item className="!text-sm"
+                    <MenuItem className="!text-sm"
                         onClick={(event) => {
                             event.stopPropagation();
                             toast('Not imlemented yet', { style: { backgroundColor: 'tomato' } });
                         }}
                     >
                         Merge two manifests
-                    </Item>
+                    </MenuItem>
 
-                    <Separator />
-                    <Item disabled={true} >Save</Item>
-                </Content>
+                    <MenuSeparator />
+                    <MenuItem disabled={true} >Save</MenuItem>
+                </DropdownMenuContent>
             </DropdownMenuPortal>
         </Menu>
     );
