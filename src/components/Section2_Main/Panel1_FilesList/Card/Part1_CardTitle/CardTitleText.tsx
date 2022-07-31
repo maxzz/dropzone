@@ -29,22 +29,24 @@ function CardUsername({ fileUs }: { fileUs: FileUs; }) {
     );
 }
 
-export function CardTitleText({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode }) {
+export function CardTitleText({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const stats = fileUs.stats;
+    const stats = fileUs?.stats;
     return (<>
-        {/* Icon and website/app name */}
-        <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-            <CardTitleIcon stats={stats} />
-            <CardCaption stats={stats} />
-            <div className="justify-self-end">{actions}</div>
-        </div>
+        {stats && <>
+            {/* Icon and website/app name */}
+            <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                <CardTitleIcon stats={stats} />
+                <CardCaption stats={stats} />
+                <div className="justify-self-end">{actions}</div>
+            </div>
 
-        <CardUsername fileUs={fileUs} />
+            <CardUsername fileUs={fileUs} />
 
-        <div className="flex items-center justify-between">
-            <CardTitleFilename fileUs={fileUs} />
-            <CardTitleAttension fileUs={fileUs} />
-        </div>
+            <div className="flex items-center justify-between">
+                <CardTitleFilename fileUs={fileUs} />
+                <CardTitleAttension fileUs={fileUs} />
+            </div>
+        </>}
     </>);
 }
