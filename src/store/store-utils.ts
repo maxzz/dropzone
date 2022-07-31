@@ -99,7 +99,7 @@ export function formIdxName(idx: number): string {
 }
 
 export function formCaption({ domain, url, isFCat, isCustomization }: FileUsStats): string {
-    return url ? domain || '' : isFCat ? 'Field Catalog' : isCustomization ? 'Customization' : domain || 'Windows application';
+    return url ? domain || '' : isFCat ? 'FIELD CATALOG' : isCustomization ? 'CUSTOMIZATION' : domain || 'WINDOWS APPLICATION';
 }
 
 function stripFirstFolder(s: string): string {

@@ -4,10 +4,11 @@ import { FileUs, FileUsAtomType, FileUsStats, formCaption } from "@/store";
 import { CardTitleIcon } from "./CardTitleIcon";
 import { CardTitleFilename } from "./CardTitleFilename";
 import { CardTitleAttension } from "./CardTitleAttension";
+import { classNames } from "@/utils/classnames";
 
 function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
-        <div className="text-lg uppercase overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className={classNames("text-lg h-7 overflow-hidden whitespace-nowrap overflow-ellipsis", stats.domain && "leading-[26px]")}>
             {formCaption(stats)}
         </div>
     );
@@ -33,7 +34,7 @@ export function CardTitleText({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomT
     const stats = fileUs.stats;
     return (<>
         {/* Icon and website/app name */}
-        <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-1">
+        <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
             <CardTitleIcon stats={stats} />
             <CardCaption stats={stats} />
             <div className="justify-self-end">{actions}</div>
