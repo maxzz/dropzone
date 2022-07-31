@@ -1,11 +1,12 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
 import { UITooltip, optionsUITooltipSmall } from "@ui/UITooltip";
 import { IconFolder } from "@ui/UIIconSymbols";
+import { classNames } from "@/utils/classnames";
 
 export type ParsedFnameParams = {
     fname: string;
-    classMisc?: string;
+    classAll?: string;
     classSm?: string;
     classXs?: string;
     classLg?: string;
@@ -13,7 +14,7 @@ export type ParsedFnameParams = {
 
 export function ManiFilenameParts({
     fname,
-    classMisc = "text-[0.7rem]", //text-primary-300/80
+    classAll: classMisc = "text-[0.7rem] overflow-hidden whitespace-nowrap overflow-ellipsis", //text-primary-300/80
     classSm = "opacity-50 font-sans text-[0.5rem]",
     classXs = "opacity-30",
     classLg = "px-px text-[0.72rem] text-primary-400 opacity-100 border-b border-dotted border-primary-500"
@@ -39,16 +40,15 @@ export function ManiFilenameParts({
     </>);
 }
 
-export function CardTitleFilename({ fileUs }: { fileUs: FileUs; }) {
+export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: FileUs; } & HTMLAttributes<HTMLDivElement>) {
     const stats = fileUs.stats;
 
     const FilenameMemo = React.useMemo(() => {
         return (
             <UITooltip
                 trigger={
-                    <ManiFilenameParts fname={fileUs.fname} classMisc="flex-1 text-[0.7rem]" />
+                    <ManiFilenameParts fname={fileUs.fname} />
                 }
-                triggerParentClassName="flex-shrink overflow-hidden whitespace-nowrap overflow-ellipsis"
                 {...optionsUITooltipSmall()}
             >
                 {/* Tooltip content */}
@@ -77,9 +77,16 @@ export function CardTitleFilename({ fileUs }: { fileUs: FileUs; }) {
     }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]);
 
     return (
-        <div className="flex-1 text-sm font-light font-mono flex items-center space-x-2">
+        <div className={classNames("text-sm font-light font-mono grid grid-cols-[minmax(0,min-content)_auto] items-center gap-x-1", className)} {...rest}>
             {FilenameMemo}
-            {stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
+            {stats.isSubFolder && <IconFolder className=" w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
         </div>
     );
 }
+
+{/* <div className={classNames("text-sm font-light font-mono flex items-center space-x-2", className)} {...rest}>
+{FilenameMemo}
+{stats.isSubFolder && <IconFolder className="w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
+</div> */}
+
+//TODO: overflow-hidden whitespace-nowrap overflow-ellipsis
