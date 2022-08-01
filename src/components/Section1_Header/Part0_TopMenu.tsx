@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
-import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
+import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 import { IconDot } from '@ui/UIIconSymbols';
 
@@ -57,9 +57,9 @@ function MenuItemFolding() {
 function MenuItemUISizeSelect() {
     const [uiSize, setUiSize] = useAtom(uiSizeAtom);
     return (<>
-        <MenuRadioGroup value={'' + uiSize} onValueChange={(value) => setUiSize(+value)}>
+        <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
             {uiSizeNames.map((name, idx) => (
-                <MenuRadioItem value={''+idx} key={idx}>
+                <MenuRadioItem value={`${idx}`} key={idx}>
                     <MenuItemIndicator>
                         <IconDot className="w-3 h-3" />
                     </MenuItemIndicator>
@@ -82,6 +82,7 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                     {/* <MenuItemMarkSelected />
                     <MenuItemConvert /> */}
 
+                    <MenuLabel>UI size:</MenuLabel>
                     <MenuItemUISizeSelect />
 
                     <MenuSeparator />
