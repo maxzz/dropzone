@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconManualMode as IconManual } from '@ui/UIIconSymbols';
 
 const tips = {
@@ -39,8 +39,12 @@ export function UICardFormButton({ disp, label, opened, onClick }: UICardFormBut
             onClick={onClick}
         >
             <span className="">{label}</span>
-            {icons}
-            {[tags.manual, tags.webCho]}
+            {/* {icons} */}
+            {icons.map((item, idx) => (
+                <Fragment key={idx}>
+                    {item && React.cloneElement(item, {key: idx})}
+                </Fragment>
+            ))}
         </button>
     );
 }
