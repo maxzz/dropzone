@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, SVGProps, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import { allCards, FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { UICardFormButton } from '../Part4_CardUI/UICardFormButton';
@@ -47,8 +47,8 @@ export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) 
 
                 {/* Buttons */}
                 <div className="flex items-center space-x-2 text-sm">
-                    {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login form" />}
-                    {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change form" />}
+                    {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login" />}
+                    {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change" />}
 
                     <div className="flex">
                         <IconFormLogin className="w-4 h-4" />

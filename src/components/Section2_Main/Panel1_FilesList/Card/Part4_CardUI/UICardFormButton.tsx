@@ -8,9 +8,9 @@ const tips = {
     manual: "Manual mode",
 };
 
-const tags = {
+const bigTags = {
     winApp: <IconWinApp key="winApp" title={tips.winApp} className="w-5 h-5 ml-2 opacity-75" />,
-    webIe6: <IconWebIe6 key="webIe6" title={tips.webIe6} className="w-5 h-5 ml-2 fill-transparent stroke-primary-900" />,
+    webIe6: <IconWebIe6 key="webIe6" title={tips.webIe6} className="w-5 h-5 ml-2 fill-transparent stroke-current" />,
     webCho: <IconWebCho key="webCho" title={tips.webCho} className="w-5 h-5 ml-2" strokeWidth={.9} />,
     manual: <IconManual key="manual" title={tips.manual} className="w-5 h-5 ml-2" strokeWidth={.9} />,
 };
@@ -22,29 +22,26 @@ type UICardFormButtonProps = {
     onClick: () => void;
 };
 
-export function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
+function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JSX.Element>): (false | JSX.Element | undefined)[] {
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
     const isWeb = !!disp?.domain;
-
-    const icons = [
+    return [
         isWeb ? isIe ? tags.webIe6 : tags.webCho : tags.winApp,
         !isWeb && isIe && tags.webIe6,
         isScript && tags.manual
     ];
+}
 
+export function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
+    const icons = dispToIcons(disp, bigTags);
     return (
         <button
             className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] select-none ${opened ? 'bg-gray-800 text-gray-100' : ''}`}
             onClick={onClick}
         >
-            <span className="">{label}</span>
-            {/* {icons} */}
-            {icons.map((item, idx) => (
-                <Fragment key={idx}>
-                    {item && React.cloneElement(item, {key: idx})}
-                </Fragment>
-            ))}
+            <span>{label}</span>
+            {icons}
         </button>
     );
 }
