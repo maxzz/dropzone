@@ -2,49 +2,9 @@ import React from 'react';
 import { styled, keyframes } from '@stitches/react';
 import * as Primitive from '@radix-ui/react-dropdown-menu';
 
-const itemStyles = {
-    all: 'unset',
+//#region content and trigger
 
-    fontSize: '0.875rem', // text-sm
-    lineHeight: '1.25rem', // text-sm
-
-    color: 'var(--tm-primary-900)', //violet.violet11
-    borderRadius: 0,
-    display: 'flex',
-    alignItems: 'center',
-    height: 25,
-    padding: '4px 2px',
-    position: 'relative',
-    paddingLeft: 12,
-    userSelect: 'none',
-
-    transition: 'background-color .3s ease',
-
-    '&[data-disabled]': {
-        color: 'var(--tm-primary-300)', //mauve.mauve8
-
-        //pointerEvents: 'none', // I need pointer events to show browser's tooltip
-        backgroundColor: 'white !important',
-    },
-
-    '&:focus': {
-        backgroundColor: 'var(--tm-primary-300)', //violet.violet9
-        //backgroundColor: 'red',
-        //color: 'var(--tm-primary-100)', //violet.violet1
-    },
-};
-
-const StyledItem = styled(Primitive.Item, { ...itemStyles });
-
-const StyledMenuItem = ({disabled, ...rest}: {disabled?: boolean} & Primitive.MenuItemProps) => {
-    return <StyledItem {...rest} {...(disabled && {'data-disabled': ''})} />
-}
-
-const StyledSeparator = styled(Primitive.Separator, {
-    height: 1,
-    backgroundColor: 'var(--tm-primary-300)', //violet.violet6
-    margin: 0, // 5
-});
+//#region animations
 
 const slideUpAndFade = keyframes({
     '0%': { opacity: 0, transform: 'translateY(2px) scale(.2)' },
@@ -66,11 +26,13 @@ const slideLeftAndFade = keyframes({
     '100%': { opacity: 1, transform: 'translateX(0)' },
 });
 
+//#endregion animations
+
 const StyledContent = styled(Primitive.Content, {
     minWidth: 220,
     backgroundColor: 'white',
-    borderRadius: 0,
-    padding: '2px 0', // 2
+    borderRadius: 6,
+    padding: 5,
     boxShadow: '0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)',
 
     '@media (prefers-reduced-motion: no-preference)': {
@@ -89,24 +51,87 @@ const StyledContent = styled(Primitive.Content, {
     },
 });
 
-const StyledCheckboxItem = styled(Primitive.CheckboxItem, { ...itemStyles });
-const StyledRadioItem = styled(Primitive.RadioItem, { ...itemStyles });
-const StyledItemIndicator = styled(Primitive.ItemIndicator, { ...itemStyles });
-
 const StyledTrigger = styled(Primitive.Trigger, {
     outline: '2px solid transparent',
     outlineOffset: '2px',
 });
 
+//#endregion content and trigger
+
+const itemStyles = {
+    all: 'unset',
+    position: 'relative',
+
+    height: 25,
+    fontSize: 13,
+    lineHeight: 1,
+    padding: '0 5px 0 25px',
+
+    color: 'var(--tm-primary-900)', //violet.violet11
+    borderRadius: 3,
+
+    display: 'flex',
+    alignItems: 'center',
+    userSelect: 'none',
+
+    transition: 'background-color .1s ease',
+
+    '&[data-disabled]': {
+        color: 'var(--tm-primary-400)', //mauve.mauve8
+
+        //pointerEvents: 'none', // I need pointer events to show browser's tooltip
+        backgroundColor: 'white !important',
+    },
+
+    '&[data-highlighted]': {
+        backgroundColor: 'var(--tm-primary-700)', //violet.violet9
+        //backgroundColor: 'red',
+        color: 'var(--tm-primary-100)', //violet.violet1
+    },
+};
+
+const StyledItem = styled(Primitive.Item, { ...itemStyles });
+
+const StyledMenuItem = ({ disabled, ...rest }: { disabled?: boolean; } & Primitive.MenuItemProps) => {
+    return <StyledItem {...rest} {...(disabled && { 'data-disabled': '' })} />;
+};
+
+const StyledSeparator = styled(Primitive.Separator, {
+    height: 1,
+    backgroundColor: 'var(--tm-primary-500)', //violet.violet6
+    margin: 5,
+});
+
+const StyledItemIndicator = styled(Primitive.ItemIndicator, {
+    position: 'absolute',
+    left: 0,
+    width: 25,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+});
+
+const StyledLabel = styled(Primitive.Label, {
+    paddingLeft: 25,
+    fontSize: 12,
+    lineHeight: '25px',
+    color: 'var(--tm-primary-600)', //mauve.mauve11,
+});
+
+const StyledCheckboxItem = styled(Primitive.CheckboxItem, { ...itemStyles });
+const StyledRadioItem = styled(Primitive.RadioItem, { ...itemStyles });
+
 export const Menu = Primitive.Root;
 export const MenuPortal = Primitive.Portal;
 export const MenuTrigger = StyledTrigger;
+
 export const MenuContent = StyledContent;
+
 export const MenuItem = StyledMenuItem;
 
-export const MenuCheckboxItem = StyledCheckboxItem;
+export const MenuRadioGroup = Primitive.RadioGroup;
 export const MenuRadioItem = StyledRadioItem;
 export const MenuItemIndicator = StyledItemIndicator;
-
-export const MenuRadioGroup = Primitive.RadioGroup;
+export const MenuCheckboxItem = StyledCheckboxItem;
 export const MenuSeparator = StyledSeparator;
+export const MenuLabel = StyledLabel;
