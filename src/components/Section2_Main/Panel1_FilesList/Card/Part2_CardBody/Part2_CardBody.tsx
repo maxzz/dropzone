@@ -5,9 +5,6 @@ import { UICardFormButton } from '../Part4_CardUI/UICardFormButton';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
 import { IconFormChange, IconFormLogin } from '@ui/UIIconSymbols';
-import { IconBtnFormChangePsw, IconBtnFormLogin } from '@ui/UIIcons';
-
-//TODO: add minimal, compact, and normal views
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
@@ -56,8 +53,6 @@ export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) 
                     <div className="flex">
                         <IconFormLogin className="w-4 h-4" />
                         <IconFormChange className="w-4 h-4" />
-                        {/* <IconBtnFormLogin className="w-4 h-4" />
-                        <IconBtnFormChangePsw className="w-4 h-4" /> */}
                     </div>
                 </div>
 
@@ -68,3 +63,5 @@ export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) 
         }
     </>);
 }
+
+//TODO: add minimal, compact, and normal views

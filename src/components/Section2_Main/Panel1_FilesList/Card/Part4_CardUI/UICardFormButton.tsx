@@ -1,57 +1,18 @@
 import React from 'react';
-import { IconAutoMode, IconBtnFormChangePsw, IconBtnFormLogin } from '@ui/UIIcons';
-import { IconAppWebChrome, IconAppWebIE, IconAppWebIESolid, IconAppWindows, IconManualMode } from '@ui/UIIconSymbols';
-
-/*
-const TagWinApp =     <IconAppWindows    key="TagWinApp"     title="Windows application"                  className="w-5 h-5 ml-2 opacity-75" />      ;
-// const TagWebIe =      <IconAppWebIE      key="TagWebIe"      title="Webiste trained with IE"              className="w-4 h-4 ml-2" strokeWidth={.9} />;
-const TagWebIe =      <IconAppWebIESolid key="TagWebIe"      title="Webiste trained with IE"              className="w-5 h-5 ml-2 fill-transparent stroke-primary-900" />;
-const TagWeb =        <IconAppWebChrome  key="TagWeb"        title="Webiste trained with Chrome/Firefox"  className="w-5 h-5 ml-2" strokeWidth={.9} />;
-const TagModeNormal = <IconAutoMode      key="TagModeNormal" title="Normal mode"                          className="w-5 h-5 ml-2 opacity-75" />      ;
-const TagModeManual = <IconManualMode    key="TagModeManual" title="Manual mode"                          className="w-5 h-5 ml-2" strokeWidth={.9} />;
-*/
-const TagLogin =      <IconBtnFormLogin     key="TagLogin"      title="Login form"                           className="w-5 h-5 ml-2 opacity-75" />      ;
-const TagChgPsw =     <IconBtnFormChangePsw key="TagChgPsw"     title="Password change form"                 className="w-5 h-5 ml-2 opacity-75" />      ;
+import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconManualMode as IconManual } from '@ui/UIIconSymbols';
 
 const tips = {
-    TagWinApp: "Windows application",
-
-    // TagWebIe:
-    //     <IconAppWebIE key="TagWebIe" title="Webiste trained with IE" className="w-4 h-4 ml-2" strokeWidth={.9} />,
-
-    TagWebIe: "Webiste trained with",
-    TagWeb: "Webiste trained with",
-
-    // TagModeNormal:
-    //     <IconAutoMode key="TagModeNormal" title="Normal mode" className="w-5 h-5 ml-2 opacity-75" />,
-
-    TagModeManual: "Manual mode",
-
-
-
-    // TagLogin:
-    //     <IconBtnFormLogin key="TagLogin" title="Login form" className="w-5 h-5 ml-2 opacity-75" />,
-    // TagChgPsw:
-    //     <IconBtnFormChangePsw key="TagChgPsw" title="Password change form" className="w-5 h-5 ml-2 opacity-75" />,
+    winApp: "Windows application",
+    webIe6: "Webiste trained with IE",
+    webCho: "Webiste trained with Chrome/Firefox",
+    manual: "Manual mode",
 };
 
 const tags = {
-    TagWinApp:
-        <IconAppWindows key="TagWinApp" title="Windows application" className="w-5 h-5 ml-2 opacity-75" />,
-    // TagWebIe:
-    //     <IconAppWebIE key="TagWebIe" title="Webiste trained with IE" className="w-4 h-4 ml-2" strokeWidth={.9} />,
-    TagWebIe:
-        <IconAppWebIESolid key="TagWebIe" title="Webiste trained with IE" className="w-5 h-5 ml-2 fill-transparent stroke-primary-900" />,
-    TagWeb:
-        <IconAppWebChrome key="TagWeb" title="Webiste trained with Chrome/Firefox" className="w-5 h-5 ml-2" strokeWidth={.9} />,
-    // TagModeNormal:
-    //     <IconAutoMode key="TagModeNormal" title="Normal mode" className="w-5 h-5 ml-2 opacity-75" />,
-    TagModeManual:
-        <IconManualMode key="TagModeManual" title="Manual mode" className="w-5 h-5 ml-2" strokeWidth={.9} />,
-    // TagLogin:
-    //     <IconBtnFormLogin key="TagLogin" title="Login form" className="w-5 h-5 ml-2 opacity-75" />,
-    // TagChgPsw:
-    //     <IconBtnFormChangePsw key="TagChgPsw" title="Password change form" className="w-5 h-5 ml-2 opacity-75" />,
+    winApp: <IconWinApp key="winApp" title={tips.winApp} className="w-5 h-5 ml-2 opacity-75" />,
+    webIe6: <IconWebIe6 key="webIe6" title={tips.webIe6} className="w-5 h-5 ml-2 fill-transparent stroke-primary-900" />,
+    webCho: <IconWebCho key="webCho" title={tips.webCho} className="w-5 h-5 ml-2" strokeWidth={.9} />,
+    manual: <IconManual key="manual" title={tips.manual} className="w-5 h-5 ml-2" strokeWidth={.9} />,
 };
 
 type UICardFormButtonProps = {
@@ -67,9 +28,9 @@ export function UICardFormButton({ disp, label, opened, onClick }: UICardFormBut
     const isWeb = !!disp?.domain;
 
     const icons = [
-        isWeb ? isIe ? tags.TagWebIe : tags.TagWeb : tags.TagWinApp,
-        !isWeb && isIe && tags.TagWebIe,
-        isScript && tags.TagModeManual
+        isWeb ? isIe ? tags.webIe6 : tags.webCho : tags.winApp,
+        !isWeb && isIe && tags.webIe6,
+        isScript && tags.manual
     ];
 
     return (
@@ -79,7 +40,7 @@ export function UICardFormButton({ disp, label, opened, onClick }: UICardFormBut
         >
             <span className="">{label}</span>
             {icons}
-            {[tags.TagModeManual, tags.TagWeb, TagLogin, TagChgPsw]}
+            {[tags.manual, tags.webCho]}
         </button>
     );
 }

@@ -59,6 +59,7 @@ function IconAutoMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAt
     );
 }
 */
+// small car
 export function IconAutoMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8" {...rest}>
