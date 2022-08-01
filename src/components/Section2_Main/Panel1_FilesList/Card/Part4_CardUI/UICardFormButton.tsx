@@ -13,6 +13,28 @@ const TagModeManual = <IconManualMode    key="TagModeManual" title="Manual mode"
 const TagLogin =      <IconBtnFormLogin     key="TagLogin"      title="Login form"                           className="w-5 h-5 ml-2 opacity-75" />      ;
 const TagChgPsw =     <IconBtnFormChangePsw key="TagChgPsw"     title="Password change form"                 className="w-5 h-5 ml-2 opacity-75" />      ;
 
+const tips = {
+    TagWinApp: "Windows application",
+
+    // TagWebIe:
+    //     <IconAppWebIE key="TagWebIe" title="Webiste trained with IE" className="w-4 h-4 ml-2" strokeWidth={.9} />,
+
+    TagWebIe: "Webiste trained with",
+    TagWeb: "Webiste trained with",
+
+    // TagModeNormal:
+    //     <IconAutoMode key="TagModeNormal" title="Normal mode" className="w-5 h-5 ml-2 opacity-75" />,
+
+    TagModeManual: "Manual mode",
+
+
+
+    // TagLogin:
+    //     <IconBtnFormLogin key="TagLogin" title="Login form" className="w-5 h-5 ml-2 opacity-75" />,
+    // TagChgPsw:
+    //     <IconBtnFormChangePsw key="TagChgPsw" title="Password change form" className="w-5 h-5 ml-2 opacity-75" />,
+};
+
 const tags = {
     TagWinApp:
         <IconAppWindows key="TagWinApp" title="Windows application" className="w-5 h-5 ml-2 opacity-75" />,
@@ -57,7 +79,7 @@ export function UICardFormButton({ disp, label, opened, onClick }: UICardFormBut
         >
             <span className="">{label}</span>
             {icons}
-            {[TagLogin, TagChgPsw]}
+            {[tags.TagModeManual, tags.TagWeb, TagLogin, TagChgPsw]}
         </button>
     );
 }
