@@ -76,17 +76,17 @@ const itemStyles = {
 
     transition: 'background-color .1s ease',
 
-    '&[data-disabled]': {
-        color: 'var(--tm-primary-400)', //mauve.mauve8
-
-        //pointerEvents: 'none', // I need pointer events to show browser's tooltip
-        backgroundColor: 'white !important',
-    },
-
     '&[data-highlighted]': {
         backgroundColor: 'var(--tm-primary-700)', //violet.violet9
         //backgroundColor: 'red',
         color: 'var(--tm-primary-100)', //violet.violet1
+    },
+
+    '&[data-disabled]': {
+        color: 'var(--tm-primary-400)', //mauve.mauve8
+
+        pointerEvents: 'none', // I need pointer events to show browser's tooltip // really? // yes but we need to prevent click
+        backgroundColor: 'transparent !important',
     },
 };
 
