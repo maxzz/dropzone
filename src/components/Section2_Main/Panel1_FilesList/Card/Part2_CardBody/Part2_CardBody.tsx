@@ -40,8 +40,7 @@ function CardMediumButtons({ hasLogin, hasCpass, disp, state }: { hasLogin: bool
 
 export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [formsExpanded, setFormsExpanded] = useState(false);
-    const toogleFormsExpanded = () => setFormsExpanded((v) => !v);
-
+    
     const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);
     useEffect(() => {
         if (allOpenCounter >= 0) {
@@ -68,18 +67,9 @@ export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) 
             <div className="p-2 bg-gray-200 text-gray-800">
 
                 {/* Buttons */}
-                {uiSize === UISize.regular ?
-                    <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} />
-                    // <div className="flex items-center space-x-2 text-sm">
-                    //     {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
-                    //     {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
-                    // </div>
-                    :
-                    <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} />
-                    // <div className="flex items-center space-x-2 text-sm">
-                    //     {hasLogin && <UICardFormMediumButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
-                    //     {hasCpass && <UICardFormMediumButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
-                    // </div>
+                {uiSize === UISize.regular
+                    ? <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} />
+                    : <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} />
                 }
 
                 {/* Forms */}
