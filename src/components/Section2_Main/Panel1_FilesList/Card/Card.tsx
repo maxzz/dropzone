@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, memo, useState } from 'react';
-import { atom } from 'jotai';
-import { FileUsAtomType } from '@/store';
+import React, { HTMLAttributes, memo, useEffect, useState } from 'react';
+import { atom, useAtomValue, useSetAtom } from 'jotai';
+import { allCards, FileUsAtomType } from '@/store';
 import { Part1_CardTitle } from './Part1_CardTitle/Part1_CardTitle';
 import { Part2_CardFormBody } from './Part2_CardFormBody/Part2_CardBody';
 import { classNames } from '@/utils/classnames';
@@ -8,6 +8,16 @@ import { classNames } from '@/utils/classnames';
 function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const openAtom = useState(atom(false))[0];
+
+    const setOpen = useSetAtom(openAtom);
+    const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);
+    useEffect(() => {
+        if (allOpenCounter >= 0) {
+            const collapse = allOpenCounter % 2 === 0;
+            setOpen(collapse);
+        }
+    }, [allOpenCounter]);
+
     return (
         <div className={classNames("grid grid-rows-[min-content,minmax(auto,1fr)] grid-cols-1 overflow-hidden rounded shadow-md select-none", className)} {...rest}>
             <Part1_CardTitle fileUsAtom={fileUsAtom} openAtom={openAtom} />
