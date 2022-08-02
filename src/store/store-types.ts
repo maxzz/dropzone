@@ -66,9 +66,9 @@ export type SelectRowAtomsType = {
 // Files list size
 
 export const enum UISize {
-    regular = 0,
+    normal = 0,
     compact,
     minimal,
 }
 
-export const uiSizeNames = ["Regular", "Compact", "Minimal"];
+export const uiSizeNames = ["Normal", "Compact", "Minimal"];

@@ -17,14 +17,7 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
     </>);
 }
 
-function FormsContent({ fileUsAtom, hasLogin, hasCpass, selectRowAtoms }: { fileUsAtom: FileUsAtomType; hasLogin: boolean; hasCpass: boolean; selectRowAtoms: SelectRowAtomsType; }) {
-    return (<>
-        {hasLogin && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.login} selectRowAtoms={selectRowAtoms} />}
-        {hasCpass && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.cpass} selectRowAtoms={selectRowAtoms} />}
-    </>);
-}
-
-export function Part2Card_Body({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
+export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
 
     const fileUs = useAtomValue(fileUsAtom);
@@ -38,7 +31,7 @@ export function Part2Card_Body({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAto
         cpassAtom: atom({ field: -1, form: -1 }),
     });
 
-    const sizeRegular = useAtomValue(uiSizeAtom) === UISize.regular;
+    const sizeRegular = useAtomValue(uiSizeAtom) === UISize.normal;
 
     return (<>
         {(hasLogin || hasCpass) &&
@@ -48,9 +41,10 @@ export function Part2Card_Body({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAto
                     <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                 }
 
-                {open &&
-                    <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} selectRowAtoms={selectRowAtoms} />
-                }
+                {open && <>
+                    {hasLogin && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.login} selectRowAtoms={selectRowAtoms} />}
+                    {hasCpass && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.cpass} selectRowAtoms={selectRowAtoms} />}
+                </>}
             </div>
         }
     </>);

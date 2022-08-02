@@ -10,7 +10,7 @@ export namespace LocalStorage {
 
     export let initialData: Store = {
         vSplitPos: 44,
-        uiSize: UISize.regular,
+        uiSize: UISize.normal,
     };
 
     function load() {
