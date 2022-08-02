@@ -4,11 +4,11 @@ export type {
     FileUs,
     FileUsAtomType,
     FileUsFormData,
-    UISize,
     SelectRowAtomsType,
 } from './store-types';
 
 export {
+    UISize,
     uiSizeNames,
 } from './store-types';
 

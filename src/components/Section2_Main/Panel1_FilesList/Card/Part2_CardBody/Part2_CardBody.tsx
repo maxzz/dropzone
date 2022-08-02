@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
-import { allCards, FileUsAtomType, SelectRowAtomsType } from '@/store';
-import { UICardFormButton } from '../Part4_CardUI/UICardFormButton';
+import { allCards, FileUsAtomType, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
+import { UICardFormButton, UICardFormMediumButton } from '../Part4_CardUI/UICardFormButton';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
-import { IconFormChange, IconFormLogin } from '@ui/UIIconSymbols';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
@@ -41,20 +40,25 @@ export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) 
         cpassAtom: atom({ field: -1, form: -1 }),
     });
 
+    const uiSize = useAtomValue(uiSizeAtom);
+
     return (<>
         {(hasLogin || hasCpass) &&
             <div className="p-2 bg-gray-200 text-gray-800">
 
                 {/* Buttons */}
-                <div className="flex items-center space-x-2 text-sm">
-                    {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login" />}
-                    {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change" />}
 
-                    <div className="flex">
-                        <IconFormLogin className="w-4 h-4" />
-                        <IconFormChange className="w-4 h-4" />
+                {uiSize === UISize.regular ?
+                    <div className="flex items-center space-x-2 text-sm">
+                        {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login" />}
+                        {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change" />}
                     </div>
-                </div>
+                    :
+                    <div className="flex items-center space-x-2 text-sm">
+                        {hasLogin && <UICardFormMediumButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login" />}
+                        {hasCpass && <UICardFormMediumButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change" />}
+                    </div>
+                }
 
                 {/* Forms */}
                 {hasLogin && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
