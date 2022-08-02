@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils/classnames';
-import { CardNormalButtons } from '../Part1_CardTitle/CardButtons';
-import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
-import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
+import { CardNormalButtons } from '../Part1Card_Title/CardButtons';
+import { Part1Form_Header } from './Part1Form_Header/Part1Form_Header';
+import { Part2Form_Fields } from './Part2Form_Fields/Part2Form_Fields';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: FormIdx; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
@@ -12,19 +12,19 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
             {formIdxName(formType)}
         </div>
 
-        <Part1_FormHeader fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
-        <Part2_FormFields fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
+        <Part1Form_Header fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
+        <Part2Form_Fields fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
     </>);
 }
 
-function FormsContent({ fileUsAtom, hasLogin, hasCpass, open, selectRowAtoms }: { fileUsAtom: FileUsAtomType; hasLogin: boolean; hasCpass: boolean; open: boolean; selectRowAtoms: SelectRowAtomsType; }) {
+function FormsContent({ fileUsAtom, hasLogin, hasCpass, selectRowAtoms }: { fileUsAtom: FileUsAtomType; hasLogin: boolean; hasCpass: boolean; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
-        {hasLogin && open && (<FormContent fileUsAtom={fileUsAtom} formType={FormIdx.login} selectRowAtoms={selectRowAtoms} />)}
-        {hasCpass && open && (<FormContent fileUsAtom={fileUsAtom} formType={FormIdx.cpass} selectRowAtoms={selectRowAtoms} />)}
+        {hasLogin && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.login} selectRowAtoms={selectRowAtoms} />}
+        {hasCpass && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.cpass} selectRowAtoms={selectRowAtoms} />}
     </>);
 }
 
-export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
+export function Part2Card_Body({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
 
     const fileUs = useAtomValue(fileUsAtom);
@@ -48,7 +48,9 @@ export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
                     <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                 }
 
-                <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} open={open} selectRowAtoms={selectRowAtoms} />
+                {open &&
+                    <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} selectRowAtoms={selectRowAtoms} />
+                }
             </div>
         }
     </>);

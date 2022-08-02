@@ -1,6 +1,6 @@
 import React, { MouseEvent } from "react";
 import { FormIdx } from "@/store";
-import { UICardFormButton, UICardFormMediumButton } from "../Part4_CardUI/UICardFormButton";
+import { UICardFormButton, UICardFormMediumButton } from "../Part4Card_UI/UICardFormButton";
 import { PrimitiveAtom, useAtom } from "jotai";
 
 export function CardNormalButtons({ hasLogin, hasCpass, disp, openAtom }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; openAtom: PrimitiveAtom<boolean>; }) {

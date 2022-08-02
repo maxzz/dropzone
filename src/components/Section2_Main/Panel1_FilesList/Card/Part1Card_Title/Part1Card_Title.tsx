@@ -111,7 +111,7 @@ function CardTitleSelect({ fileUsAtom, children }: { fileUsAtom: FileUsAtomType;
     );
 }
 
-export function Part1_CardTitle({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
+export function Part1Card_Title({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const uiSize = useAtomValue(uiSizeAtom);
     return (
         <CardTitleSelect fileUsAtom={fileUsAtom}>

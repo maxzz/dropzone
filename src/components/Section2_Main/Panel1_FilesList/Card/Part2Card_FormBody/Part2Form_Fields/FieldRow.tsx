@@ -4,7 +4,7 @@ import { FileUs, SelectRowAtomsType } from '@/store';
 import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
-import { UIToggleWithPortal } from '../../Part4_CardUI/UIToggleWithPortal';
+import { UIToggleWithPortal } from '../../Part4Card_UI/UIToggleWithPortal';
 import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
 

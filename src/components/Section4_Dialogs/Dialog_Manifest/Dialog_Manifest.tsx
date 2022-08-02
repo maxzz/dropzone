@@ -10,7 +10,7 @@ import { UITooltip } from '@ui/UITooltip';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { MatchWebState, MatchWebStateAtom, Tab1_MatchWeb } from './Tab1_Matching';
-import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1_CardTitle/CardTitleFilename';
+import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
 import { IconInfo } from '@ui/UIIcons';
