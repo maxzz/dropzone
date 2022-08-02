@@ -28,7 +28,6 @@ type UICardFormButtonProps = {
     disp: Meta.Disp | undefined;
     formIdx: FormIdx;
     opened: boolean;
-    onClick: () => void;
 };
 
 function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JSX.Element>): (false | JSX.Element | undefined)[] {
