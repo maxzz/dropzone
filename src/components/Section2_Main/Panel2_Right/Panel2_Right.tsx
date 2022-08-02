@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanelData } from '@/store';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
-import { CardTitleText } from '../Panel1_FilesList/Card/Part1_CardTitle/CardTitleText';
+import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1_CardTitle/Part1_CardTitle';
 import { ManiActions } from './ManiActions/ManiActions';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
@@ -16,7 +16,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
 
                     {/* Card title */}
                     <div className="px-2 pt-1 pb-3 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
-                        <CardTitleText
+                        <CardTitleTextNormal
                             fileUsAtom={rightPanelData.valueAtom as FileUsAtomType}
                             actions={<>
                                 {rightPanelAtom && <ManiActions fileUsAtom={rightPanelAtom} />}
