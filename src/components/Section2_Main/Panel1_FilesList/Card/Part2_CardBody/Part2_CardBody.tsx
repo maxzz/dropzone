@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
-import { allCards, FileUsAtomType, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
+import { allCards, FileUsAtomType, FormIdx, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { UICardFormButton, UICardFormMediumButton } from '../Part4_CardUI/UICardFormButton';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
@@ -50,13 +50,13 @@ export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) 
 
                 {uiSize === UISize.regular ?
                     <div className="flex items-center space-x-2 text-sm">
-                        {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login" />}
-                        {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change" />}
+                        {hasLogin && <UICardFormButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
+                        {hasCpass && <UICardFormButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
                     </div>
                     :
                     <div className="flex items-center space-x-2 text-sm">
-                        {hasLogin && <UICardFormMediumButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Login" />}
-                        {hasCpass && <UICardFormMediumButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} label="Password change" />}
+                        {hasLogin && <UICardFormMediumButton disp={disp(0)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
+                        {hasCpass && <UICardFormMediumButton disp={disp(1)} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
                     </div>
                 }
 

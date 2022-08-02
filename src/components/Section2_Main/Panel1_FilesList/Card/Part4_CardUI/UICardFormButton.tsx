@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, HTMLAttributes } from 'react';
 import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconFormChange, IconFormLogin, IconManualMode as IconManual } from '@ui/UIIconSymbols';
+import { FormIdx } from '@/store';
+import { classNames } from '@/utils/classnames';
 
 const tips = {
     winApp: "Windows application",
@@ -24,7 +26,7 @@ const mediumTags = {
 
 type UICardFormButtonProps = {
     disp: Meta.Disp | undefined;
-    label: string;
+    formIdx: FormIdx;
     opened: boolean;
     onClick: () => void;
 };
@@ -40,33 +42,45 @@ function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JSX.Eleme
     ];
 }
 
-export function UICardFormButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
+function formIdxName(formIdx: FormIdx) {
+    return formIdx === FormIdx.login ? "Login" : formIdx === FormIdx.cpass ? "Password change" : "";
+}
+
+export function UICardFormButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLButtonElement>) {
     const icons = dispToIcons(disp, bigTags);
     return (
         <button
-            className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] select-none ${opened ? 'bg-gray-800 text-gray-100' : ''}`}
-            onClick={onClick}
+            className={classNames("p-2 border border-primary-700 rounded flex items-center shadow-md active:scale-[.97] select-none", opened && 'bg-primary-800 text-primary-100')}
+            {...rest}
         >
-            <span>{label}</span>
+            <span>{formIdxName(formIdx)}</span>
             {icons}
         </button>
     );
 }
 
-export function UICardFormMediumButton({ disp, label, opened, onClick }: UICardFormButtonProps) {
+export function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLButtonElement>) {
     const icons = dispToIcons(disp, mediumTags);
     return (
         <button
-            className={`p-2 border border-gray-700 rounded flex items-center shadow-md active:scale-[.97] select-none ${opened ? 'bg-gray-800 text-gray-100' : ''}`}
-            onClick={onClick}
+            className={classNames("p-0.5 border border-primary-700 rounded shadow-md active:scale-[.97] select-none", opened && 'bg-primary-800 text-primary-100')}
+            title={formIdxName(formIdx)}
+            {...rest}
         >
-            <div className="flex">
-                <IconFormLogin className="w-4 h-4" />
-                <IconFormChange className="w-4 h-4" />
+            <div className="p-px w-4 h-4 bg-primary-300">
+                {formIdx === FormIdx.login
+                    ? <>
+                        <IconFormLogin className="w-full h-full" />
+                    </>
+                    : <>
+                        <IconFormChange className="w-full h-full" />
+                    </>
+                }
             </div>
+            
+            <div className="w-1 self-stretch border-r border-primary-700"></div>
 
-            <span>{label}</span>
-            {icons}
+            <div className="-mt-1 ml-2">{icons}</div>
         </button>
     );
 }
