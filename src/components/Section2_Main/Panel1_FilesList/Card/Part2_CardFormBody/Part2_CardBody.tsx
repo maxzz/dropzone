@@ -4,6 +4,7 @@ import { allCards, FileUsAtomType, FormIdx, SelectRowAtomsType, UISize, uiSizeAt
 import { UICardFormButton, UICardFormMediumButton } from '../Part4_CardUI/UICardFormButton';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
+import { CardMediumButtons, CardNormalButtons } from '../Part1_CardTitle/CardButtons';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
@@ -14,28 +15,6 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
         <Part1_FormHeader fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
         <Part2_FormFields fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
     </>);
-}
-
-function CardNormalButtons({ hasLogin, hasCpass, disp, state }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; state: [boolean, Dispatch<SetStateAction<boolean>>]; }) {
-    const [formsExpanded, setFormsExpanded] = state;
-    const toogleFormsExpanded = () => setFormsExpanded((v) => !v);
-    return (
-        <div className="flex items-center space-x-2 text-sm">
-            {hasLogin && <UICardFormButton disp={disp[0]} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
-            {hasCpass && <UICardFormButton disp={disp[1]} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
-        </div>
-    );
-}
-
-function CardMediumButtons({ hasLogin, hasCpass, disp, state }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; state: [boolean, Dispatch<SetStateAction<boolean>>]; }) {
-    const [formsExpanded, setFormsExpanded] = state;
-    const toogleFormsExpanded = () => setFormsExpanded((v) => !v);
-    return (
-        <div className="flex items-center space-x-2 text-sm">
-            {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
-            {hasCpass && <UICardFormMediumButton disp={disp[1]} opened={formsExpanded} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
-        </div>
-    );
 }
 
 export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
@@ -50,7 +29,7 @@ export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType;
     }, [allOpenCounter]);
 
     const fileUs = useAtomValue(fileUsAtom);
-    const nForms = fileUs.mani?.forms.length || 0;
+    const nForms = fileUs.mani?.forms?.length || 0;
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
     const disp = (type: number) => fileUs?.meta?.[type]?.disp;
@@ -81,7 +60,3 @@ export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType;
 }
 
 //TODO: add minimal, compact, and normal views
-
-/*
-
-*/
