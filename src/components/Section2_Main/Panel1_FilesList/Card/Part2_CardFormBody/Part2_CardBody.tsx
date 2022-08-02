@@ -17,21 +17,21 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
     </>);
 }
 
-function FormsContent({ fileUsAtom, hasLogin, hasCpass, formsExpanded, selectRowAtoms }: { fileUsAtom: FileUsAtomType; hasLogin: boolean; hasCpass: boolean; formsExpanded: boolean; selectRowAtoms: SelectRowAtomsType; }) {
+function FormsContent({ fileUsAtom, hasLogin, hasCpass, open, selectRowAtoms }: { fileUsAtom: FileUsAtomType; hasLogin: boolean; hasCpass: boolean; open: boolean; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
-        {hasLogin && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
-        {hasCpass && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)}
+        {hasLogin && open && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
+        {hasCpass && open && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)}
     </>);
 }
 
 export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
-    const [formsExpanded, setFormsExpanded] = useAtom(openAtom);
+    const [open, setOpen] = useAtom(openAtom);
 
     const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);
     useEffect(() => {
         if (allOpenCounter >= 0) {
             const collapse = allOpenCounter % 2 === 0;
-            setFormsExpanded(collapse);
+            setOpen(collapse);
         }
     }, [allOpenCounter]);
 
@@ -46,23 +46,15 @@ export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
         cpassAtom: atom({ field: -1, form: -1 }),
     });
 
-    const uiSize = useAtomValue(uiSizeAtom);
+    const sizeRegular = useAtomValue(uiSizeAtom) === UISize.regular;
 
     return (<>
         {(hasLogin || hasCpass) &&
-            <div className={classNames("bg-gray-200 text-gray-800", (hasLogin || hasCpass) && (uiSize === UISize.regular) && "p-2")}>
-
-                {/* Buttons */}
-                {/* {uiSize === UISize.regular
-                    ? <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
-                    : <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
-                } */}
-                {uiSize === UISize.regular
-                    && <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
+            <div className={classNames("bg-gray-200 text-gray-800", sizeRegular && "p-2")}>
+                {sizeRegular &&
+                    <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                 }
-
-                {/* Forms */}
-                <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} formsExpanded={formsExpanded} selectRowAtoms={selectRowAtoms} />
+                <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} open={open} selectRowAtoms={selectRowAtoms} />
             </div>
         }
     </>);
