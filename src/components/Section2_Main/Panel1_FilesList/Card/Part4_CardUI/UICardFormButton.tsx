@@ -1,4 +1,4 @@
-import React, { Fragment, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconFormChange, IconFormLogin, IconManualMode as IconManual } from '@ui/UIIconSymbols';
 import { FormIdx } from '@/store';
 import { classNames } from '@/utils/classnames';
@@ -67,7 +67,7 @@ export function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICar
             title={formIdxName(formIdx)}
             {...rest}
         >
-            <div className="p-px w-4 h-4 bg-primary-300">
+            <div className={classNames("p-px w-4 h-4", !opened && "bg-primary-300")}>
                 {formIdx === FormIdx.login
                     ? <>
                         <IconFormLogin className="w-full h-full" />

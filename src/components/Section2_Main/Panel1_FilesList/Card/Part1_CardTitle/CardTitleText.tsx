@@ -1,12 +1,8 @@
-import React, { ReactNode } from "react";
-import { useAtomValue } from "jotai";
-import { FileUs, FileUsAtomType, FileUsStats, formCaption } from "@/store";
-import { CardTitleIcon } from "./CardTitleIcon";
-import { CardTitleFilename } from "./CardTitleFilename";
-import { CardTitleAttension } from "./CardTitleAttension";
+import React from "react";
+import { FileUs, FileUsStats, formCaption } from "@/store";
 import { classNames } from "@/utils/classnames";
 
-function CardCaption({ stats }: { stats: FileUsStats; }) {
+export function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (
         <div className={classNames("text-lg h-7 overflow-hidden whitespace-nowrap overflow-ellipsis", stats.domain && "leading-[26px]")}>
             {formCaption(stats)}
@@ -14,7 +10,7 @@ function CardCaption({ stats }: { stats: FileUsStats; }) {
     );
 }
 
-function CardUsername({ fileUs }: { fileUs: FileUs; }) {
+export function CardUsername({ fileUs }: { fileUs: FileUs; }) {
     const stats = fileUs.stats;
     const fcatSize = fileUs.fcat?.names.length;
     return (
@@ -27,26 +23,4 @@ function CardUsername({ fileUs }: { fileUs: FileUs; }) {
             }
         </div>
     );
-}
-
-export function CardTitleText({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
-    const fileUs = useAtomValue(fileUsAtom);
-    const stats = fileUs?.stats;
-    return (<>
-        {stats && <>
-            {/* Icon and website/app name */}
-            <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-                <CardTitleIcon stats={stats} />
-                <CardCaption stats={stats} />
-                <div className="justify-self-end">{actions}</div>
-            </div>
-
-            <CardUsername fileUs={fileUs} />
-
-            <div className="flex items-center justify-between">
-                <CardTitleFilename fileUs={fileUs} />
-                <CardTitleAttension fileUs={fileUs} />
-            </div>
-        </>}
-    </>);
 }
