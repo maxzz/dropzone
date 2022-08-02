@@ -46,7 +46,7 @@ const colors = require('tailwindcss/colors');
 function buildColorsToBridge(allColors, groupName, groupNameOut) {
     const colorGroup = allColors[groupName];
     const bridge = Object.fromEntries(
-        Object.keys(colorGroup).map((colorKey) => [ `--tm-${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey], ])
+        Object.keys(colorGroup).map((colorKey) => [`--tm-${groupNameOut || groupName}-${colorKey}`, colorGroup[colorKey],])
     );
     return bridge;
 }
@@ -58,6 +58,10 @@ module.exports = {
         extend: {
             colors: {
                 primary: colors.slate,
+                ui: {
+                    bg: colors.slate[100],
+                    text: '#5a3543',
+                },
             },
         },
     },
@@ -99,6 +103,12 @@ module.exports = {
                 },
             });
         },
-        require('@tailwindcss/forms'),       
+        require('./tailwind/tailwnid-plugin-debug-styles'),
+        require('./tailwind/tailwind-plugin-debug-screens'),
+        require('@tailwindcss/forms')({ strategy: 'class' }),
+        require('./tailwind/tailwind-plugin-colors-bridge')([
+            { prefix: '--tm-', groupName: 'primary' },
+            { prefix: '--tm-', groupName: 'ui', groupNameOut: 'ui' },
+        ]),
     ],
-}
+};
