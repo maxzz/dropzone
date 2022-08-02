@@ -18,7 +18,7 @@ export function CardMediumButtons({ hasLogin, hasCpass, disp, openAtom }: { hasL
     const [open, setOpen] = useAtom(openAtom);
     const toogleFormsExpanded = () => setOpen((v) => !v);
     return (
-        <div className="flex items-center space-x-2 text-sm">
+        <div className="flex items-center space-x-1 text-sm">
             {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={open} onClick={toogleFormsExpanded} formIdx={FormIdx.login} />}
             {hasCpass && <UICardFormMediumButton disp={disp[1]} opened={open} onClick={toogleFormsExpanded} formIdx={FormIdx.cpass} />}
         </div>

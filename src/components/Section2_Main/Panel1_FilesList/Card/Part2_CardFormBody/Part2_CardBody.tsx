@@ -4,6 +4,7 @@ import { allCards, FileUsAtomType, SelectRowAtomsType, UISize, uiSizeAtom } from
 import { CardMediumButtons, CardNormalButtons } from '../Part1_CardTitle/CardButtons';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
+import { classNames } from '@/utils/classnames';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
@@ -49,12 +50,15 @@ export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
     return (<>
         {(hasLogin || hasCpass) &&
-            <div className="p-2 bg-gray-200 text-gray-800">
+            <div className={classNames("bg-gray-200 text-gray-800", (hasLogin || hasCpass) && (uiSize === UISize.regular) && "p-2")}>
 
                 {/* Buttons */}
-                {uiSize === UISize.regular
+                {/* {uiSize === UISize.regular
                     ? <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                     : <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
+                } */}
+                {uiSize === UISize.regular
+                    && <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                 }
 
                 {/* Forms */}

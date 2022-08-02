@@ -8,7 +8,7 @@ import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
 import { CardMediumButtons } from './CardButtons';
 
-export function CardTitleTextMinimal({ fileUsAtom, openAtom, actions }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; actions?: ReactNode; }) {
+export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
     return (<>
@@ -17,7 +17,6 @@ export function CardTitleTextMinimal({ fileUsAtom, openAtom, actions }: { fileUs
             <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
                 <CardTitleIcon stats={stats} />
                 <CardCaption stats={stats} />
-                <div className="justify-self-end">{actions}</div>
             </div>
 
             <CardUsername fileUs={fileUs} />
@@ -30,7 +29,7 @@ export function CardTitleTextMinimal({ fileUsAtom, openAtom, actions }: { fileUs
     </>);
 }
 
-export function CardTitleTextCompact({ fileUsAtom, openAtom, actions }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; actions?: ReactNode; }) {
+export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
 
@@ -44,22 +43,28 @@ export function CardTitleTextCompact({ fileUsAtom, openAtom, actions }: { fileUs
 
 
     return (<>
-        {stats && <div className="grid">
-            {/* Icon and website/app name */}
-            <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-                <CardTitleIcon stats={stats} />
-                <CardCaption stats={stats} />
-                <div className="justify-self-end">{actions}</div>
+        {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
+            <div>
+                {/* Icon and website/app name */}
+                <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                    <CardTitleIcon stats={stats} />
+                    <CardCaption stats={stats} />
+                </div>
+
+                <CardUsername fileUs={fileUs} />
+
+                <div className="flex items-center justify-between">
+                    <CardTitleFilename fileUs={fileUs} />
+
+                </div>
             </div>
 
-            <CardUsername fileUs={fileUs} />
-
-            <div className="flex items-center justify-between">
-                <CardTitleFilename fileUs={fileUs} />
-                <CardTitleAttension fileUs={fileUs} />
+            <div className="grid">
+                <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
+                <div className="place-self-end">
+                    <CardTitleAttension fileUs={fileUs} />
+                </div>
             </div>
-
-            <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
         </div>}
     </>);
 }
