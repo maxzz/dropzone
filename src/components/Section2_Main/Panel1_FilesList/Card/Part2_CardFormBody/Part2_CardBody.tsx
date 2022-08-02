@@ -38,7 +38,7 @@ function CardMediumButtons({ hasLogin, hasCpass, disp, state }: { hasLogin: bool
     );
 }
 
-export function Part2_CardBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [formsExpanded, setFormsExpanded] = useState(false);
     
     const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);
