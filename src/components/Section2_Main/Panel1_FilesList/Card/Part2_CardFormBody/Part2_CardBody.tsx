@@ -17,9 +17,16 @@ function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: Fil
     </>);
 }
 
+function FormsContent({ fileUsAtom, hasLogin, hasCpass, formsExpanded, selectRowAtoms }: { fileUsAtom: FileUsAtomType; hasLogin: boolean; hasCpass: boolean; formsExpanded: boolean; selectRowAtoms: SelectRowAtomsType; }) {
+    return (<>
+        {hasLogin && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
+        {hasCpass && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)}
+    </>);
+}
+
 export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [formsExpanded, setFormsExpanded] = useState(false);
-    
+
     const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);
     useEffect(() => {
         if (allOpenCounter >= 0) {
@@ -52,8 +59,9 @@ export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType;
                 }
 
                 {/* Forms */}
-                {hasLogin && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
-                {hasCpass && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)}
+                <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} formsExpanded={formsExpanded} selectRowAtoms={selectRowAtoms}/>
+                {/* {hasLogin && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
+                {hasCpass && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)} */}
             </div>
         }
     </>);
