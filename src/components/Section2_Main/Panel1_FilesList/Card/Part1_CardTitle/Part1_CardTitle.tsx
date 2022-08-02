@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { PrimitiveAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom, uiSizeAtom, UISize } from '@/store';
 import { CardCaption, CardUsername } from './CardTitleText';
 import { classNames } from '@/utils/classnames';
@@ -8,7 +8,7 @@ import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
 import { CardMediumButtons } from './CardButtons';
 
-export function CardTitleTextMinimal({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
+export function CardTitleTextMinimal({ fileUsAtom, openAtom, actions }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
     return (<>
@@ -30,13 +30,13 @@ export function CardTitleTextMinimal({ fileUsAtom, actions }: { fileUsAtom: File
     </>);
 }
 
-export function CardTitleTextCompact({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
+export function CardTitleTextCompact({ fileUsAtom, openAtom, actions }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
 
 
 
-    
+
     const nForms = fileUs.mani?.forms?.length || 0;
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
@@ -59,7 +59,7 @@ export function CardTitleTextCompact({ fileUsAtom, actions }: { fileUsAtom: File
                 <CardTitleAttension fileUs={fileUs} />
             </div>
 
-            {/* <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} /> */}
+            <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
         </div>}
     </>);
 }
@@ -106,14 +106,14 @@ function CardTitleSelect({ fileUsAtom, children }: { fileUsAtom: FileUsAtomType;
     );
 }
 
-export function Part1_CardTitle({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function Part1_CardTitle({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const uiSize = useAtomValue(uiSizeAtom);
     return (
         <CardTitleSelect fileUsAtom={fileUsAtom}>
             {uiSize === UISize.minimal
-                ? <CardTitleTextMinimal fileUsAtom={fileUsAtom} />
+                ? <CardTitleTextMinimal fileUsAtom={fileUsAtom} openAtom={openAtom} />
                 : uiSize === UISize.compact
-                    ? <CardTitleTextCompact fileUsAtom={fileUsAtom} />
+                    ? <CardTitleTextCompact fileUsAtom={fileUsAtom} openAtom={openAtom} />
                     : <CardTitleTextNormal fileUsAtom={fileUsAtom} />
             }
         </CardTitleSelect>

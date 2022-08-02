@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { atom, useAtomValue } from 'jotai';
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { allCards, FileUsAtomType, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { CardMediumButtons, CardNormalButtons } from '../Part1_CardTitle/CardButtons';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
@@ -23,8 +23,8 @@ function FormsContent({ fileUsAtom, hasLogin, hasCpass, formsExpanded, selectRow
     </>);
 }
 
-export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
-    const [formsExpanded, setFormsExpanded] = useState(false);
+export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
+    const [formsExpanded, setFormsExpanded] = useAtom(openAtom);
 
     const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);
     useEffect(() => {
@@ -53,12 +53,12 @@ export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType;
 
                 {/* Buttons */}
                 {uiSize === UISize.regular
-                    ? <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} />
-                    : <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} />
+                    ? <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
+                    : <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                 }
 
                 {/* Forms */}
-                <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} formsExpanded={formsExpanded} selectRowAtoms={selectRowAtoms}/>
+                <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} formsExpanded={formsExpanded} selectRowAtoms={selectRowAtoms} />
             </div>
         }
     </>);
