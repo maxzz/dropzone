@@ -103,7 +103,7 @@ function CardTitleSelect({ fileUsAtom, children }: { fileUsAtom: FileUsAtomType;
 
     return (
         <div
-            className={`relative p-2 text-primary-100 ${isCurrentCard ? "bg-blue-900" : "bg-primary-900"} cursor-pointer select-none`}
+            className={`relative p-2 text-primary-100 ${isCurrentCard ? "bg-blue-900 card-current" : "bg-primary-900"} cursor-pointer select-none`}
             onClick={toggleCardSelection}
         >
             {children}

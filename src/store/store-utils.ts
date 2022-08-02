@@ -1,4 +1,4 @@
-import { FileUs, FileUsStats } from './store-types';
+import { FileUs, FileUsStats, FormIdx } from './store-types';
 import { dpTimeToShow } from './manifest';
 
 export function textFileReader(file: File): Promise<string> {
@@ -94,8 +94,8 @@ export function useFileUsByFilter(fileUs: FileUs, regex: RegExp): boolean {
 
 // Miscellaneous
 
-export function formIdxName(idx: number): string {
-    return idx === 0 ? 'Login' : 'Password change';
+export function formIdxName(formIdx: FormIdx) {
+    return formIdx === FormIdx.login ? 'Login' : formIdx === FormIdx.cpass ? 'Password change' : '';
 }
 
 export function formCaption({ domain, url, isFCat, isCustomization }: FileUsStats): string {

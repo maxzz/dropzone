@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconFormChange, IconFormLogin, IconManualMode as IconManual } from '@ui/UIIconSymbols';
-import { FormIdx } from '@/store';
+import { FormIdx, formIdxName } from '@/store';
 import { classNames } from '@/utils/classnames';
 
 const tips = {
@@ -24,12 +24,6 @@ const mediumTags = {
     manual: <IconManual key="manual" title={tips.manual} className="w-5 h-5 ml-2" strokeWidth={.9} />,
 };
 
-type UICardFormButtonProps = {
-    disp: Meta.Disp | undefined;
-    formIdx: FormIdx;
-    opened: boolean;
-};
-
 function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JSX.Element>): (false | JSX.Element | undefined)[] {
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
@@ -41,9 +35,11 @@ function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JSX.Eleme
     ];
 }
 
-function formIdxName(formIdx: FormIdx) {
-    return formIdx === FormIdx.login ? "Login" : formIdx === FormIdx.cpass ? "Password change" : "";
-}
+type UICardFormButtonProps = {
+    disp: Meta.Disp | undefined;
+    formIdx: FormIdx;
+    opened: boolean;
+};
 
 export function UICardFormButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLButtonElement>) {
     const icons = dispToIcons(disp, bigTags);
@@ -66,17 +62,13 @@ export function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICar
             title={formIdxName(formIdx)}
             {...rest}
         >
-            <div className={classNames("p-px w-4 h-4", !opened && "bg-primary-300")}>
+            <div className={classNames("p-px w-4 h-4", !opened && "bg-primary-700")}>
                 {formIdx === FormIdx.login
-                    ? <>
-                        <IconFormLogin className="w-full h-full" />
-                    </>
-                    : <>
-                        <IconFormChange className="w-full h-full" />
-                    </>
+                    ? <IconFormLogin className="w-full h-full" />
+                    : <IconFormChange className="w-full h-full" />
                 }
             </div>
-            
+
             <div className="w-1 self-stretch border-r border-primary-700"></div>
 
             <div className="-mt-1 ml-2">{icons}</div>

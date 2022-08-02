@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import { FormIdx } from "@/store";
 import { UICardFormButton, UICardFormMediumButton } from "../Part4_CardUI/UICardFormButton";
 import { PrimitiveAtom, useAtom } from "jotai";
@@ -16,7 +16,7 @@ export function CardNormalButtons({ hasLogin, hasCpass, disp, openAtom }: { hasL
 
 export function CardMediumButtons({ hasLogin, hasCpass, disp, openAtom }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; openAtom: PrimitiveAtom<boolean>; }) {
     const [open, setOpen] = useAtom(openAtom);
-    const toogleOpen: React.MouseEventHandler<HTMLButtonElement> = (event) => { event.stopPropagation(); setOpen((v) => !v);}
+    const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
     return (
         <div className="flex items-center space-x-1 text-sm">
             {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={open} onClick={toogleOpen} formIdx={FormIdx.login} />}
