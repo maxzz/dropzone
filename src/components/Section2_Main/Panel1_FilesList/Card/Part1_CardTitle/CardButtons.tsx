@@ -7,7 +7,7 @@ export function CardNormalButtons({ hasLogin, hasCpass, disp, openAtom }: { hasL
     const [open, setOpen] = useAtom(openAtom);
     const toogleOpen = () => setOpen((v) => !v);
     return (
-        <div className="flex items-center space-x-2 text-sm">
+        <div className="py-2 flex items-center space-x-2 text-sm">
             {hasLogin && <UICardFormButton disp={disp[0]} opened={open} onClick={toogleOpen} formIdx={FormIdx.login} />}
             {hasCpass && <UICardFormButton disp={disp[1]} opened={open} onClick={toogleOpen} formIdx={FormIdx.cpass} />}
         </div>

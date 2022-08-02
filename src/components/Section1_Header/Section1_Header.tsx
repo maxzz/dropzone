@@ -47,7 +47,7 @@ function LeftHeader() {
             <Part1_DropzoneArea />
 
             {hasFiles && <>
-                <div className="px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center cursor-pointer z-50">
+                <div className="px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center cursor-pointer">
                     <Part0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-primary-700" />} />
                 </div>
 

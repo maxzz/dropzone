@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
-import { FileUsAtomType, FormIdx, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
+import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { CardNormalButtons } from '../Part1_CardTitle/CardButtons';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
@@ -8,8 +8,8 @@ import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: FormIdx; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
-        <div className="pt-2 font-bold border-b border-gray-400">
-            {formType === 0 ? "Login form" : "Password change form"}
+        <div className="pt-2 font-bold border-b border-primary-400">
+            {formIdxName(formType)}
         </div>
 
         <Part1_FormHeader fileUsAtom={fileUsAtom} formType={formType} selectRowAtoms={selectRowAtoms} />
@@ -42,7 +42,7 @@ export function Part2_CardFormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
     return (<>
         {(hasLogin || hasCpass) &&
-            <div className={classNames("bg-gray-200 text-gray-800", sizeRegular && "p-2")}>
+            <div className={classNames("px-2 bg-gray-200 text-gray-800", open && "pb-2")}>
 
                 {sizeRegular &&
                     <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
