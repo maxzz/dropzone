@@ -1,10 +1,9 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
-import { allCards, FileUsAtomType, FormIdx, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
-import { UICardFormButton, UICardFormMediumButton } from '../Part4_CardUI/UICardFormButton';
+import { allCards, FileUsAtomType, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
+import { CardMediumButtons, CardNormalButtons } from '../Part1_CardTitle/CardButtons';
 import { Part1_FormHeader } from './Part1_FormHeader/Part1_FormHeader';
 import { Part2_FormFields } from './Part2_FormFields/Part2_FormFields';
-import { CardMediumButtons, CardNormalButtons } from '../Part1_CardTitle/CardButtons';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
@@ -60,8 +59,6 @@ export function Part2_CardFormBody({ fileUsAtom }: { fileUsAtom: FileUsAtomType;
 
                 {/* Forms */}
                 <FormsContent fileUsAtom={fileUsAtom} hasLogin={hasLogin} hasCpass={hasCpass} formsExpanded={formsExpanded} selectRowAtoms={selectRowAtoms}/>
-                {/* {hasLogin && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={0} selectRowAtoms={selectRowAtoms} />)}
-                {hasCpass && formsExpanded && (<FormContent fileUsAtom={fileUsAtom} formType={1} selectRowAtoms={selectRowAtoms} />)} */}
             </div>
         }
     </>);

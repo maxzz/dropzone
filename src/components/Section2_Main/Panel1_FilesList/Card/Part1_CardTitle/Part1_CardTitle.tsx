@@ -6,6 +6,7 @@ import { classNames } from '@/utils/classnames';
 import { CardTitleIcon } from './CardTitleIcon';
 import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
+import { CardMediumButtons } from './CardButtons';
 
 export function CardTitleTextMinimal({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
@@ -32,6 +33,16 @@ export function CardTitleTextMinimal({ fileUsAtom, actions }: { fileUsAtom: File
 export function CardTitleTextCompact({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
+
+
+
+    
+    const nForms = fileUs.mani?.forms?.length || 0;
+    const hasLogin = nForms > 0;
+    const hasCpass = nForms > 1;
+    const disp = (type: number) => fileUs?.meta?.[type]?.disp;
+
+
     return (<>
         {stats && <div className="grid">
             {/* Icon and website/app name */}
@@ -47,6 +58,8 @@ export function CardTitleTextCompact({ fileUsAtom, actions }: { fileUsAtom: File
                 <CardTitleFilename fileUs={fileUs} />
                 <CardTitleAttension fileUs={fileUs} />
             </div>
+
+            {/* <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} state={[formsExpanded, setFormsExpanded]} /> */}
         </div>}
     </>);
 }
