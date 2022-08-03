@@ -6,6 +6,8 @@ import { CardNormalButtons } from '../Part1Card_Title/CardButtons';
 import { Part1Form_Header } from './Part1Form_Header/Part1Form_Header';
 import { Part2Form_Fields } from './Part2Form_Fields/Part2Form_Fields';
 
+export type ButtonsDisp = readonly [boolean, Meta.Disp | undefined][];
+
 export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
 
@@ -22,17 +24,18 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
     const sizeRegular = useAtomValue(uiSizeAtom) === UISize.normal;
 
-    const items = [[FormIdx.login, hasLogin], [FormIdx.cpass, hasCpass]] as const;
+    const buttons: ButtonsDisp = [[hasLogin, disp(0)], [hasCpass, disp(1)]];
+    const items = [[hasLogin, FormIdx.login], [hasCpass, FormIdx.cpass]] as const;
 
     return (<>
         {(hasLogin || hasCpass) &&
             <div className={classNames("px-2 bg-gray-200 text-gray-800", open && "pb-2")}>
 
                 {sizeRegular &&
-                    <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
+                    <CardNormalButtons buttonsDisp={buttons} openAtom={openAtom} />
                 }
 
-                {open && items.map(([formIdx, hasForm]) => hasForm && (
+                {open && items.map(([hasForm, formIdx]) => hasForm && (
                     <Fragment key={formIdx}>
                         <div className="pt-2 text-sm font-bold border-b border-primary-400">
                             {formIdxName(formIdx)}
