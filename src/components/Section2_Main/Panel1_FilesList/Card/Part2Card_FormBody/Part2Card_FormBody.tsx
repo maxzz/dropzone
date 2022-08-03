@@ -8,7 +8,7 @@ import { Part2Form_Fields } from './Part2Form_Fields/Part2Form_Fields';
 
 function FormContent({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: FormIdx; selectRowAtoms: SelectRowAtomsType; }) {
     return (<>
-        <div className="pt-2 font-bold border-b border-primary-400">
+        <div className="pt-2 text-sm font-bold border-b border-primary-400">
             {formIdxName(formType)}
         </div>
 
@@ -33,6 +33,8 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
     const sizeRegular = useAtomValue(uiSizeAtom) === UISize.normal;
 
+    const items = [[FormIdx.login, hasLogin], [FormIdx.cpass, hasCpass]] as const;
+
     return (<>
         {(hasLogin || hasCpass) &&
             <div className={classNames("px-2 bg-gray-200 text-gray-800", open && "pb-2")}>
@@ -41,10 +43,9 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
                     <CardNormalButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
                 }
 
-                {open && <>
-                    {hasLogin && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.login} selectRowAtoms={selectRowAtoms} />}
-                    {hasCpass && <FormContent fileUsAtom={fileUsAtom} formType={FormIdx.cpass} selectRowAtoms={selectRowAtoms} />}
-                </>}
+                {open &&
+                    items.map(([formIdx, has]) => has && <FormContent fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} key={formIdx} />)
+                }
             </div>
         }
     </>);
