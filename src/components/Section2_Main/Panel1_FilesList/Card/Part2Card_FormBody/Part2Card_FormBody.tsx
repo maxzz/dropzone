@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils/classnames';
-import { getButtonsDisp } from '../Part4Card_UI/UICardFormButton';
+import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
 import { CardNormalButtons } from '../Part1Card_Title/CardButtons';
 import { Part1Form_Header } from './Part1Form_Header/Part1Form_Header';
 import { Part2Form_Fields } from './Part2Form_Fields/Part2Form_Fields';
@@ -14,7 +14,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
     });
-    const sizeRegular = useAtomValue(uiSizeAtom) === UISize.normal;
+    const sizeNormal = useAtomValue(uiSizeAtom) === UISize.normal;
 
     const buttons = getButtonsDisp(fileUs);
     const hasLogin = buttons[0][0];
@@ -25,7 +25,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
         {(hasLogin || hasCpass) &&
             <div className={classNames("px-2 bg-gray-200 text-gray-800", open && "pb-2")}>
 
-                {sizeRegular &&
+                {sizeNormal &&
                     <CardNormalButtons buttonsDisp={buttons} openAtom={openAtom} />
                 }
 
@@ -43,5 +43,3 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
         }
     </>);
 }
-
-//TODO: add minimal, compact, and normal views

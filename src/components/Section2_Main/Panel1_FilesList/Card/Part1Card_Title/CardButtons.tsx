@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom } from "jotai";
 import { FormIdx, formIdxName } from "@/store";
 import { classNames } from "@/utils/classnames";
 import { IconFormChange, IconFormLogin } from "@ui/UIIconSymbols";
-import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Part4Card_UI/UICardFormButton";
+import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Part4Card_UI/UICardFormButtonTypes";
 
 type UICardFormButtonProps = {
     disp: Meta.Disp | undefined;
@@ -24,6 +24,22 @@ function UICardFormButton({ disp, formIdx, opened, ...rest }: UICardFormButtonPr
             <span>{formIdxName(formIdx)}</span>
             {icons}
         </button>
+    );
+}
+
+export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
+    const [open, setOpen] = useAtom(openAtom);
+    const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
+    return (
+        <div className="py-2 flex items-center space-x-2 text-sm">
+            {buttonsDisp.map(([hasForm, disp], idx) => (
+                <Fragment key={idx}>
+                    {hasForm &&
+                        <UICardFormButton disp={disp} opened={open} onClick={toogleOpen} formIdx={idx} />
+                    }
+                </Fragment>
+            ))}
+        </div>
     );
 }
 
@@ -52,20 +68,6 @@ function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormBu
     );
 }
 
-export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
-    const [open, setOpen] = useAtom(openAtom);
-    const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
-    return (
-        <div className="py-2 flex items-center space-x-2 text-sm">
-            {buttonsDisp.map(([hasForm, disp], idx) => (
-                <Fragment key={idx}>
-                    {hasForm && <UICardFormButton disp={disp} opened={open} onClick={toogleOpen} formIdx={idx} />}
-                </Fragment>
-            ))}
-        </div>
-    );
-}
-
 export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
     const [open, setOpen] = useAtom(openAtom);
     const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
@@ -81,13 +83,6 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
         </div>
     );
 }
-// export function CardMediumButtons({ hasLogin, hasCpass, disp, openAtom }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; openAtom: PrimitiveAtom<boolean>; }) {
-//     const [open, setOpen] = useAtom(openAtom);
-//     const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
-//     return (
-//         <div className="flex items-center space-x-1 text-sm">
-//             {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={open} onClick={toogleOpen} formIdx={FormIdx.login} />}
-//             {hasCpass && <UICardFormMediumButton disp={disp[1]} opened={open} onClick={toogleOpen} formIdx={FormIdx.cpass} />}
-//         </div>
-//     );
-// }
+
+//TODO: add minimal, compact, and normal views
+//TODO: Card title is setting class 'card-current'. use it or use custom CSS vars
