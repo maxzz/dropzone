@@ -67,9 +67,14 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     );
 }
 
-export function CardMediumButtons({ hasLogin, hasCpass, disp, openAtom }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; openAtom: PrimitiveAtom<boolean>; }) {
+export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
     const [open, setOpen] = useAtom(openAtom);
     const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
+
+    const hasLogin = buttonsDisp[0][0];
+    const hasCpass = buttonsDisp[1][0];
+    const disp = [buttonsDisp[0][1], buttonsDisp[1][1]];
+
     return (
         <div className="flex items-center space-x-1 text-sm">
             {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={open} onClick={toogleOpen} formIdx={FormIdx.login} />}
@@ -77,3 +82,13 @@ export function CardMediumButtons({ hasLogin, hasCpass, disp, openAtom }: { hasL
         </div>
     );
 }
+// export function CardMediumButtons({ hasLogin, hasCpass, disp, openAtom }: { hasLogin: boolean; hasCpass: boolean; disp: Array<Meta.Disp | undefined>; openAtom: PrimitiveAtom<boolean>; }) {
+//     const [open, setOpen] = useAtom(openAtom);
+//     const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
+//     return (
+//         <div className="flex items-center space-x-1 text-sm">
+//             {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={open} onClick={toogleOpen} formIdx={FormIdx.login} />}
+//             {hasCpass && <UICardFormMediumButton disp={disp[1]} opened={open} onClick={toogleOpen} formIdx={FormIdx.cpass} />}
+//         </div>
+//     );
+// }

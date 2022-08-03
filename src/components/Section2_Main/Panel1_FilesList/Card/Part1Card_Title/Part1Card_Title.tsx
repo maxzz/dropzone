@@ -7,6 +7,7 @@ import { CardTitleIcon } from './CardTitleIcon';
 import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
 import { CardMediumButtons } from './CardButtons';
+import { ButtonsDisp } from '../Part2Card_FormBody/Part2Card_FormBody';
 
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
@@ -41,26 +42,23 @@ export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: Fil
     const hasCpass = nForms > 1;
     const disp = (type: number) => fileUs?.meta?.[type]?.disp;
 
+    const buttons: ButtonsDisp = [[hasLogin, disp(0)], [hasCpass, disp(1)]];
 
     return (<>
         {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
             <div>
-                {/* Icon and website/app name */}
                 <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
                     <CardTitleIcon stats={stats} />
                     <CardCaption stats={stats} />
                 </div>
 
                 <CardUsername fileUs={fileUs} />
-
-                <div className="flex items-center justify-between">
-                    <CardTitleFilename fileUs={fileUs} />
-
-                </div>
+                <CardTitleFilename fileUs={fileUs} />
             </div>
 
             <div className="grid">
-                <CardMediumButtons hasLogin={hasLogin} hasCpass={hasCpass} disp={[disp(0), disp(1)]} openAtom={openAtom} />
+                <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
+
                 <div className="place-self-end">
                     <CardTitleAttension fileUs={fileUs} />
                 </div>
