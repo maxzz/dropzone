@@ -1,4 +1,5 @@
 import React from 'react';
+import { FileUs } from '@/store';
 import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconManualMode as IconManual } from '@ui/UIIconSymbols';
 
 const tips = {
@@ -31,4 +32,16 @@ export function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JS
         !isWeb && isIe && tags.webIe6,
         isScript && tags.manual
     ];
+}
+
+export type ButtonsDisp = readonly [boolean, Meta.Disp | undefined][];
+
+export function getButtonsDisp(fileUs: FileUs): ButtonsDisp {
+
+    const nForms = fileUs.mani?.forms?.length || 0;
+    const hasLogin = nForms > 0;
+    const hasCpass = nForms > 1;
+    const disp = (type: number) => fileUs?.meta?.[type]?.disp;
+    
+    return [[hasLogin, disp(0)], [hasCpass, disp(1)]];
 }

@@ -2,12 +2,11 @@ import React, { ReactNode } from 'react';
 import { PrimitiveAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom, uiSizeAtom, UISize } from '@/store';
 import { CardCaption, CardUsername } from './CardTitleText';
-import { classNames } from '@/utils/classnames';
 import { CardTitleIcon } from './CardTitleIcon';
 import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
+import { ButtonsDisp, getButtonsDisp } from '../Part4Card_UI/UICardFormButton';
 import { CardMediumButtons } from './CardButtons';
-import { ButtonsDisp } from '../Part2Card_FormBody/Part2Card_FormBody';
 
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
@@ -33,17 +32,7 @@ export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: Fil
 export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
-
-
-
-
-    const nForms = fileUs.mani?.forms?.length || 0;
-    const hasLogin = nForms > 0;
-    const hasCpass = nForms > 1;
-    const disp = (type: number) => fileUs?.meta?.[type]?.disp;
-
-    const buttons: ButtonsDisp = [[hasLogin, disp(0)], [hasCpass, disp(1)]];
-
+    const buttons = getButtonsDisp(fileUs);
     return (<>
         {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
             <div>

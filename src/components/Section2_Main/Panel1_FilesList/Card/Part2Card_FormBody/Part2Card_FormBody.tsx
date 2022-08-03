@@ -2,29 +2,23 @@ import React, { Fragment, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils/classnames';
+import { getButtonsDisp } from '../Part4Card_UI/UICardFormButton';
 import { CardNormalButtons } from '../Part1Card_Title/CardButtons';
 import { Part1Form_Header } from './Part1Form_Header/Part1Form_Header';
 import { Part2Form_Fields } from './Part2Form_Fields/Part2Form_Fields';
 
-export type ButtonsDisp = readonly [boolean, Meta.Disp | undefined][];
-
 export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
-
     const fileUs = useAtomValue(fileUsAtom);
-    const nForms = fileUs.mani?.forms?.length || 0;
-    const hasLogin = nForms > 0;
-    const hasCpass = nForms > 1;
-    const disp = (type: number) => fileUs?.meta?.[type]?.disp;
-
     const [selectRowAtoms] = useState<SelectRowAtomsType>({
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
     });
-
     const sizeRegular = useAtomValue(uiSizeAtom) === UISize.normal;
 
-    const buttons: ButtonsDisp = [[hasLogin, disp(0)], [hasCpass, disp(1)]];
+    const buttons = getButtonsDisp(fileUs);
+    const hasLogin = buttons[0][0];
+    const hasCpass = buttons[1][0];
     const items = [[hasLogin, FormIdx.login], [hasCpass, FormIdx.cpass]] as const;
 
     return (<>

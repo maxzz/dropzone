@@ -3,8 +3,7 @@ import { PrimitiveAtom, useAtom } from "jotai";
 import { FormIdx, formIdxName } from "@/store";
 import { classNames } from "@/utils/classnames";
 import { IconFormChange, IconFormLogin } from "@ui/UIIconSymbols";
-import { appBigIcons, appMediumIcons, dispToIcons } from "../Part4Card_UI/UICardFormButton";
-import { ButtonsDisp } from "../Part2Card_FormBody/Part2Card_FormBody";
+import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Part4Card_UI/UICardFormButton";
 
 type UICardFormButtonProps = {
     disp: Meta.Disp | undefined;
