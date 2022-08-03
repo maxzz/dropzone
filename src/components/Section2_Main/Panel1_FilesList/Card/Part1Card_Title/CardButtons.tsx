@@ -78,8 +78,13 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
 
     return (
         <div className="flex items-center space-x-1 text-sm">
-            {hasLogin && <UICardFormMediumButton disp={disp[0]} opened={open} onClick={toogleOpen} formIdx={FormIdx.login} />}
-            {hasCpass && <UICardFormMediumButton disp={disp[1]} opened={open} onClick={toogleOpen} formIdx={FormIdx.cpass} />}
+            {buttonsDisp.map(([hasForm, disp], idx) => (
+                <Fragment key={idx}>
+                    {hasForm &&
+                        <UICardFormMediumButton disp={disp} opened={open} onClick={toogleOpen} formIdx={idx} />
+                    }
+                </Fragment>
+            ))}
         </div>
     );
 }
