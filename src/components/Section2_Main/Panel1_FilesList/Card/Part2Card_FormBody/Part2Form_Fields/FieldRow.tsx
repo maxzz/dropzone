@@ -5,7 +5,7 @@ import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Part4Card_UI/UIToggleWithPortal';
-import { IconInOut, IconInputFieldChk, IconInputFieldChkEmpty, IconPreview } from '@ui/UIIconSymbols';
+import { IconCheckbox, IconCheckboxEmpty, IconInOut, IconPreview } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
 
 type FieldRowProps = {
@@ -68,8 +68,8 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
         >
             {/* 1. use it */}
             {useit
-                ? <IconInputFieldChk className="w-5 h-5" fill="#38a00040" title={titleUseIt} />
-                : <IconInputFieldChkEmpty className="w-5 h-5" title={titleUseIt} />
+                ? <IconCheckbox className="w-5 h-5" fill="#38a00040" title={titleUseIt} />
+                : <IconCheckboxEmpty className="w-5 h-5" title={titleUseIt} />
             }
 
             {/* 2. icon and text for field type */}
