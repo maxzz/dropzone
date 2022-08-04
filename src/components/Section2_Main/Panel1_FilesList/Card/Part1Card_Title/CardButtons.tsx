@@ -47,29 +47,28 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
-    const prefix = (idx: FormIdx) => idx === FormIdx.login ? <IconFormLogin className="w-4 h-4" /> : <IconFormChange className="w-4 h-4" />;
+    const prefix = (idx: FormIdx) => idx === FormIdx.login ? <IconFormLogin className="self-start w-3 h-3" /> : <IconFormChange className="self-start w-3 h-3" />;
     return (
         <button
             className={classNames(
-                "px-2 border border-primary-700 rounded shadow-md active:scale-[.97] select-none",
+                "px-1.5 py-0.5 border border-dotted border-primary-700 rounded shadow-md active:scale-[.97] select-none",
                 minimal ? "h-8" : "h-10",
                 open && 'bg-primary-800 text-primary-100',
+                "flex items-stretch space-x-1",
             )}
             onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}
         >
-            <div className="flex items-center space-x-1">
-                {buttonsDisp.map(([hasForm, disp], idx) => (
-                    <Fragment key={idx}>
-                        <div className="p-0.5 flex items-center" title={formIdxName(idx)}>
-                            {prefix(idx)}
-                            {hasForm
-                                ? <div className="-mt-1 ml-2">{icons[idx]}</div>
-                                : <div className="-mt-1 ml-4 w-5 h-5"></div>
-                            }
-                        </div>
-                    </Fragment>
-                ))}
-            </div>
+            {buttonsDisp.map(([hasForm, disp], idx) => (
+                <Fragment key={idx}>
+                    <div className="flex items-end pb-0.5" title={formIdxName(idx)}>
+                        {prefix(idx)}
+                        {hasForm
+                            ? <div className="flex">{icons[idx]}</div>
+                            : <div className="w-5 h-5"></div>
+                        }
+                    </div>
+                </Fragment>
+            ))}
         </button>
     );
 }

@@ -17,10 +17,10 @@ export const appBigIcons = {
 };
 
 export const appMediumIcons = {
-    winApp: <IconWinApp key="winApp" title={tips.winApp} className="w-5 h-5 ml-2 opacity-75" />,
-    webIe6: <IconWebIe6 key="webIe6" title={tips.webIe6} className="w-5 h-5 ml-2 fill-transparent stroke-current" />,
-    webCho: <IconWebCho key="webCho" title={tips.webCho} className="w-5 h-5 ml-2" strokeWidth={.9} />,
-    manual: <IconManual key="manual" title={tips.manual} className="w-5 h-5 ml-2" strokeWidth={.9} />,
+    winApp: <IconWinApp key="winApp" title={tips.winApp} className="w-5 h-5 opacity-75" />,
+    webIe6: <IconWebIe6 key="webIe6" title={tips.webIe6} className="w-5 h-5 fill-transparent stroke-current" />,
+    webCho: <IconWebCho key="webCho" title={tips.webCho} className="w-5 h-5" strokeWidth={.9} />,
+    manual: <IconManual key="manual" title={tips.manual} className="w-5 h-5" strokeWidth={.9} />,
 };
 
 export function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JSX.Element>): (false | JSX.Element | undefined)[] {
