@@ -1,0 +1,13 @@
+<svg id="Layer_4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10}.cls-2{stroke-linecap:round}
+    </style>
+  </defs>
+  <path fill="#e6e6e6" d="M0 0h24v24H0z"/>
+  <rect class="cls-1" x="2.5" y="4.66" width="15.3" height="6.38" rx=".89" ry=".89"/>
+  <path class="cls-1" d="M17.79 8.08h3.25c.25 0 .46.21.46.46v10.35c0 .25-.21.46-.46.46H4.93a.47.47 0 0 1-.46-.46v-7.85"/>
+  <path class="cls-2" d="M7.86 13.58h10.52"/>
+  <path class="cls-2" d="M8.03 16.43h7.62"/>
+  <path stroke-linecap="square" fill="none" stroke="#000" stroke-miterlimit="10" d="m13.18 7.84.7.48.71-.49"/>
+</svg>
