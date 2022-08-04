@@ -1,17 +1,17 @@
 import React from 'react';
-import { IconButton, IconFieldText, IconInputFieldChk, IconInputFieldList, IconInputFieldPsw, IconInputFieldText } from '@ui/UIIconSymbols';
+import { IconFieldBtn, IconFieldTxt, IconFieldChk, IconFieldLst, IconFieldPsw, IconFieldEdt } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
 
 export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {
     const hint = `Field type: ${field.type}`;
     return (<>
         {field.type === "edit" && (field.password
-            ? <IconInputFieldPsw className={className} title={hint} />
-            : <IconInputFieldText className={classNames(className)} title={hint} />)
+            ? <IconFieldPsw className={className} title={hint} />
+            : <IconFieldEdt className={classNames(className)} title={hint} />)
         }
-        {field.type === "check" && <IconInputFieldChk className={className} title={hint} />}
-        {(field.type === "list" || field.type === "combo") && <IconInputFieldList className={className} title={`Field choices: ${field.choosevalue}`} />}
-        {field.type === "text" && <IconFieldText className={classNames(className)} title={hint} />}
-        {field.type === "button" && <IconButton className={className} title={hint} />}
+        {field.type === "check" && <IconFieldChk className={className} title={hint} />}
+        {(field.type === "list" || field.type === "combo") && <IconFieldLst className={className} title={`Field choices: ${field.choosevalue}`} />}
+        {field.type === "text" && <IconFieldTxt className={classNames(className)} title={hint} />}
+        {field.type === "button" && <IconFieldBtn className={className} title={hint} />}
     </>);
 }
