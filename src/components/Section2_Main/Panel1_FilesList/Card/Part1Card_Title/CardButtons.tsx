@@ -43,28 +43,25 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     );
 }
 
-function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLButtonElement>) {
+function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLDivElement>) {
     const icons = dispToIcons(disp, appMediumIcons);
     return (
-        <button
+        <div
             className={classNames(
-                "p-0.5 border border-primary-700 rounded shadow-md active:scale-[.97] select-none",
+                "p-0.5 h-8 flex items-center",
                 opened && 'bg-primary-800 text-primary-100'
             )}
             title={formIdxName(formIdx)}
             {...rest}
         >
             <div className={classNames("p-px w-4 h-4", !opened && "bg-primary-700")}>
-                {formIdx === FormIdx.login
-                    ? <IconFormLogin className="w-full h-full" />
-                    : <IconFormChange className="w-full h-full" />
-                }
+                {formIdx === FormIdx.login ? <IconFormLogin className="w-full h-full" /> : <IconFormChange className="w-full h-full" />}
             </div>
 
-            <div className="w-1 self-stretch border-r border-primary-700"></div>
+            {/* <div className="w-1 self-stretch border-r border-primary-700"></div> */}
 
             <div className="-mt-1 ml-2">{icons}</div>
-        </button>
+        </div>
     );
 }
 
@@ -72,20 +69,23 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const [open, setOpen] = useAtom(openAtom);
     const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
 
-    const hasLogin = buttonsDisp[0][0];
-    const hasCpass = buttonsDisp[1][0];
-    const disp = [buttonsDisp[0][1], buttonsDisp[1][1]];
-
     return (
-        <div className="flex items-center space-x-1 text-sm">
-            {buttonsDisp.map(([hasForm, disp], idx) => (
-                <Fragment key={idx}>
-                    {hasForm &&
-                        <UICardFormMediumButton disp={disp} opened={open} onClick={toogleOpen} formIdx={idx} />
-                    }
-                </Fragment>
-            ))}
-        </div>
+        <button className="text-sm border border-primary-700 rounded shadow-md active:scale-[.97] select-none">
+            <div className="flex items-center space-x-1">
+                {buttonsDisp.map(([hasForm, disp], idx) => (
+                    <Fragment key={idx}>
+                        {hasForm ?
+                            <UICardFormMediumButton disp={disp} opened={open} onClick={toogleOpen} formIdx={idx} />
+                            :
+                            <div className="p-0.5 h-4 flex items-center">
+                                <IconFormChange className="p-px w-4 h-4" />
+                                <div className="-mt-1 ml-4 w-5 h-5"></div>
+                            </div>
+                        }
+                    </Fragment>
+                ))}
+            </div>
+        </button>
     );
 }
 
