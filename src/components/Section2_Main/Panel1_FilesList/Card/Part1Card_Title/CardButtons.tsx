@@ -1,6 +1,6 @@
 import React, { Fragment, HTMLAttributes, MouseEvent, ReactNode } from "react";
-import { PrimitiveAtom, useAtom } from "jotai";
-import { FormIdx, formIdxName } from "@/store";
+import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
+import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { classNames } from "@/utils/classnames";
 import { IconFormChange, IconFormLogin } from "@ui/UIIconSymbols";
 import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Part4Card_UI/UICardFormButtonTypes";
@@ -44,32 +44,29 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
 }
 
 export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
+    const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
+    const prefix = (idx: FormIdx) => idx === FormIdx.login ? <IconFormLogin className="w-4 h-4" /> : <IconFormChange className="w-4 h-4" />;
     return (
         <button
             className={classNames(
-                "text-sm border border-primary-700 rounded shadow-md active:scale-[.97] select-none", open && 'bg-primary-800 text-primary-100'
+                "px-2 border border-primary-700 rounded shadow-md active:scale-[.97] select-none",
+                minimal ? "h-8" : "h-10",
+                open && 'bg-primary-800 text-primary-100',
             )}
             onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}
         >
             <div className="flex items-center space-x-1">
                 {buttonsDisp.map(([hasForm, disp], idx) => (
                     <Fragment key={idx}>
-                        {hasForm ?
-                            <div className="p-0.5 h-8 flex items-center" title={formIdxName(idx)}>
-                                <div className="p-px w-4 h-4">
-                                    {idx === FormIdx.login ? <IconFormLogin className="w-full h-full" /> : <IconFormChange className="w-full h-full" />}
-                                </div>
-
-                                <div className="-mt-1 ml-2">{icons[idx]}</div>
-                            </div>
-                            :
-                            <div className="p-0.5 h-4 flex items-center">
-                                <IconFormChange className="p-px w-4 h-4" />
-                                <div className="-mt-1 ml-4 w-5 h-5"></div>
-                            </div>
-                        }
+                        <div className="p-0.5 flex items-center" title={formIdxName(idx)}>
+                            {prefix(idx)}
+                            {hasForm
+                                ? <div className="-mt-1 ml-2">{icons[idx]}</div>
+                                : <div className="-mt-1 ml-4 w-5 h-5"></div>
+                            }
+                        </div>
                     </Fragment>
                 ))}
             </div>
