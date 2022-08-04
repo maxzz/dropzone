@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
-import { filteredAtom } from '@/store';
+import { filteredAtom, UISize, uiSizeAtom } from '@/store';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 import { Card } from './Card/Card';
@@ -11,9 +11,10 @@ import { Card } from './Card/Card';
 
 export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);
+    const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
     return (
         <UISemiScrollbar className={classNames("p-3 text-gray-500 bg-gray-700 overflow-auto w-full h-full", className)} {...rest}>
-            <div className="grid gap-4">
+            <div className={`grid ${minimal ? "gap-0.5" : "gap-4"}`}>
                 {files.map((atom) => (
                     <Card fileUsAtom={atom} key={`${atom}`} />
                 ))}

@@ -16,6 +16,8 @@ export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: Fil
         {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
             <div>
                 <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                    <div className="mr-1"><CardTitleAttension fileUs={fileUs} /></div>
+
                     <CardTitleIcon stats={stats} />
                     <CardCaption stats={stats} />
                 </div>
@@ -26,7 +28,7 @@ export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: Fil
 
             <div className="flex items-center space-x-1">
                 <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
-                <CardTitleAttension fileUs={fileUs} />
+
             </div>
         </div>}
     </>);
