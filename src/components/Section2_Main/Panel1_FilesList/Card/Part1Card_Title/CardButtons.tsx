@@ -1,4 +1,4 @@
-import React, { Fragment, HTMLAttributes, MouseEvent } from "react";
+import React, { Fragment, HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import { FormIdx, formIdxName } from "@/store";
 import { classNames } from "@/utils/classnames";
@@ -44,12 +44,12 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
 }
 
 function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLDivElement>) {
-    const icons = dispToIcons(disp, appMediumIcons);
+    const icons: ReactNode = dispToIcons(disp, appMediumIcons);
     return (
         <div
             className={classNames(
-                "p-0.5 h-8 flex items-center",
-                opened && 'bg-primary-800 text-primary-100'
+                "p-0.5 h-8 flex items-center"
+                
             )}
             title={formIdxName(formIdx)}
             {...rest}
@@ -70,7 +70,7 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
 
     return (
-        <button className="text-sm border border-primary-700 rounded shadow-md active:scale-[.97] select-none">
+        <button className={classNames("text-sm border border-primary-700 rounded shadow-md active:scale-[.97] select-none", open && 'bg-primary-800 text-primary-100')}>
             <div className="flex items-center space-x-1">
                 {buttonsDisp.map(([hasForm, disp], idx) => (
                     <Fragment key={idx}>
