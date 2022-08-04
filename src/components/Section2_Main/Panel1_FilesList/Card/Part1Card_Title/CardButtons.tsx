@@ -15,8 +15,8 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
                     {hasForm &&
                         <button
                             className={classNames(
-                                "p-2 border border-primary-700 rounded flex items-center shadow-md active:scale-[.97] select-none",
-                                open && 'bg-primary-800 text-primary-100'
+                                "p-2 border-primary-700 border rounded shadow-md active:scale-[.97] select-none flex items-center",
+                                open ? 'bg-primary-800 text-primary-100' : "hover:bg-primary-300"
                             )}
                             onClick={() => setOpen((v) => !v)}
                         >

@@ -11,21 +11,24 @@ import { CardMediumButtons } from './CardButtons';
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
+    const buttons = getButtonsDisp(fileUs);
     return (<>
-        {stats && <>
-            {/* Icon and website/app name */}
-            <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-                <CardTitleIcon stats={stats} />
-                <CardCaption stats={stats} />
+        {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
+            <div>
+                <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                    <CardTitleIcon stats={stats} />
+                    <CardCaption stats={stats} />
+                </div>
+
+                {/* <CardUsername fileUs={fileUs} />
+                <CardTitleFilename fileUs={fileUs} /> */}
             </div>
 
-            <CardUsername fileUs={fileUs} />
-
-            <div className="flex items-center justify-between">
-                <CardTitleFilename fileUs={fileUs} />
+            <div className="flex items-center space-x-1">
+                <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
                 <CardTitleAttension fileUs={fileUs} />
             </div>
-        </>}
+        </div>}
     </>);
 }
 
