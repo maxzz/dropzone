@@ -51,10 +51,10 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     return (
         <button
             className={classNames(
-                "px-1.5 py-0.5 border border-dotted border-primary-700 rounded shadow-md active:scale-[.97] select-none",
-                minimal ? "h-8" : "h-10",
-                open && 'bg-primary-800 text-primary-100',
+                "px-1.5 py-0.5 hover:bg-primary-800 border-primary-700 border border-dotted rounded shadow-md active:scale-[.97] select-none",
                 "flex items-stretch space-x-1",
+                minimal ? "h-8" : "h-10",
+                open ? 'bg-primary-800 text-primary-300' : "text-primary-500",
             )}
             onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}
         >
