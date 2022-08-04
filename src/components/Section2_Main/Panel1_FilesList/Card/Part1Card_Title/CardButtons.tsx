@@ -48,10 +48,7 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
     const prefixClass = { className: minimal ? "self-start w-2 h-2" : "self-start w-3 h-3" };
-    const prefix = (idx: FormIdx) => idx === FormIdx.login
-        ? <>{IconFormLogin(prefixClass)}</>
-        : <>{IconFormChange(prefixClass)}</>;
-    // const prefix = (idx: FormIdx) => idx === FormIdx.login ? <IconFormLogin className="self-start w-3 h-3" /> : <IconFormChange className="self-start w-3 h-3" />;
+    const prefix = (idx: FormIdx) => <>{idx === FormIdx.login ? IconFormLogin(prefixClass) : IconFormChange(prefixClass)}</>;
     return (
         <button
             className={classNames(
@@ -63,15 +60,13 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
             onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}
         >
             {buttonsDisp.map(([hasForm, disp], idx) => (
-                <Fragment key={idx}>
-                    <div className="flex items-end pb-0.5" title={formIdxName(idx)}>
-                        {prefix(idx)}
-                        {hasForm
-                            ? <div className="flex">{icons[idx]}</div>
-                            : <div className="w-5 h-5"></div>
-                        }
-                    </div>
-                </Fragment>
+                <div className="flex items-end pb-0.5" title={formIdxName(idx)} key={idx}>
+                    {prefix(idx)}
+                    {hasForm
+                        ? <div className="flex">{icons[idx]}</div>
+                        : <div className="w-5 h-5"></div>
+                    }
+                </div>
             ))}
         </button>
     );
