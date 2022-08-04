@@ -1,80 +1,34 @@
-import React, { Fragment, HTMLAttributes, MouseEvent } from "react";
+import React, { Fragment, MouseEvent } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { IconFormChange, IconFormLogin } from "@ui/UIIconSymbols";
 import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Part4Card_UI/UICardFormButtonTypes";
 import { classNames } from "@/utils/classnames";
 
-type UICardFormButtonProps = {
-    disp: Meta.Disp | undefined;
-    formIdx: FormIdx;
-    open: boolean;
-};
-
-// function UICardFormButton({ disp, formIdx, open, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLButtonElement>) {
-//     const icons = dispToIcons(disp, appBigIcons);
-//     return (
-//         <button
-//             className={classNames(
-//                 "p-2 border border-primary-700 rounded flex items-center shadow-md active:scale-[.97] select-none",
-//                 open && 'bg-primary-800 text-primary-100'
-//             )}
-//             {...rest}
-//         >
-//             <span>{formIdxName(formIdx)}</span>
-//             {icons}
-//         </button>
-//     );
-// }
-
 export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appBigIcons));
-
-    const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
     return (
         <div className="py-2 flex items-center space-x-2 text-sm">
             {buttonsDisp.map(([hasForm, disp], idx) => (
                 <Fragment key={idx}>
                     {hasForm &&
-                        // <UICardFormButton disp={disp} open={open} onClick={toogleOpen} formIdx={idx} />
-
                         <button
                             className={classNames(
                                 "p-2 border border-primary-700 rounded flex items-center shadow-md active:scale-[.97] select-none",
                                 open && 'bg-primary-800 text-primary-100'
                             )}
+                            onClick={() => setOpen((v) => !v)}
                         >
-                            <span>{formIdxName(idx)}</span>
+                            {formIdxName(idx)}
                             {icons[idx]}
                         </button>
-
                     }
                 </Fragment>
             ))}
         </div>
     );
 }
-
-/*
-export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
-    const [open, setOpen] = useAtom(openAtom);
-    const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
-    
-    const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
-    return (
-        <div className="py-2 flex items-center space-x-2 text-sm">
-            {buttonsDisp.map(([hasForm, disp], idx) => (
-                <Fragment key={idx}>
-                    {hasForm &&
-                        <UICardFormButton disp={disp} open={open} onClick={toogleOpen} formIdx={idx} />
-                    }
-                </Fragment>
-            ))}
-        </div>
-    );
-}
-*/
 
 export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
