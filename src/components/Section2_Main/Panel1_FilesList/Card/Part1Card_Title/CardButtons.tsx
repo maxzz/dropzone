@@ -47,7 +47,11 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
-    const prefix = (idx: FormIdx) => idx === FormIdx.login ? <IconFormLogin className="self-start w-3 h-3" /> : <IconFormChange className="self-start w-3 h-3" />;
+    const prefixClass = { className: minimal ? "self-start w-2 h-2" : "self-start w-3 h-3" };
+    const prefix = (idx: FormIdx) => idx === FormIdx.login
+        ? <>{IconFormLogin(prefixClass)}</>
+        : <>{IconFormChange(prefixClass)}</>;
+    // const prefix = (idx: FormIdx) => idx === FormIdx.login ? <IconFormLogin className="self-start w-3 h-3" /> : <IconFormChange className="self-start w-3 h-3" />;
     return (
         <button
             className={classNames(
