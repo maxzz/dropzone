@@ -46,19 +46,10 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
 function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLDivElement>) {
     const icons: ReactNode = dispToIcons(disp, appMediumIcons);
     return (
-        <div
-            className={classNames(
-                "p-0.5 h-8 flex items-center"
-                
-            )}
-            title={formIdxName(formIdx)}
-            {...rest}
-        >
-            <div className={classNames("p-px w-4 h-4", !opened && "bg-primary-700")}>
+        <div className="p-0.5 h-8 flex items-center" title={formIdxName(formIdx)} {...rest}>
+            <div className="p-px w-4 h-4">
                 {formIdx === FormIdx.login ? <IconFormLogin className="w-full h-full" /> : <IconFormChange className="w-full h-full" />}
             </div>
-
-            {/* <div className="w-1 self-stretch border-r border-primary-700"></div> */}
 
             <div className="-mt-1 ml-2">{icons}</div>
         </div>
@@ -67,15 +58,19 @@ function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormBu
 
 export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
     const [open, setOpen] = useAtom(openAtom);
-    const toogleOpen = (event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); };
-
+    const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
     return (
-        <button className={classNames("text-sm border border-primary-700 rounded shadow-md active:scale-[.97] select-none", open && 'bg-primary-800 text-primary-100')}>
+        <button
+            className={classNames(
+                "text-sm border border-primary-700 rounded shadow-md active:scale-[.97] select-none", open && 'bg-primary-800 text-primary-100'
+            )}
+            onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}
+        >
             <div className="flex items-center space-x-1">
                 {buttonsDisp.map(([hasForm, disp], idx) => (
                     <Fragment key={idx}>
                         {hasForm ?
-                            <UICardFormMediumButton disp={disp} opened={open} onClick={toogleOpen} formIdx={idx} />
+                            <UICardFormMediumButton disp={disp} opened={open} formIdx={idx} />
                             :
                             <div className="p-0.5 h-4 flex items-center">
                                 <IconFormChange className="p-px w-4 h-4" />
