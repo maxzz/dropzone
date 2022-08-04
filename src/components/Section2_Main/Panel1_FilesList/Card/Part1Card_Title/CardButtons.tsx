@@ -43,10 +43,9 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     );
 }
 
-function UICardFormMediumButton({ disp, formIdx, opened, ...rest }: UICardFormButtonProps & HTMLAttributes<HTMLDivElement>) {
-    const icons: ReactNode = dispToIcons(disp, appMediumIcons);
+function UICardFormMediumButton({ icons, formIdx }: { icons: ReactNode; formIdx: FormIdx; }) {
     return (
-        <div className="p-0.5 h-8 flex items-center" title={formIdxName(formIdx)} {...rest}>
+        <div className="p-0.5 h-8 flex items-center" title={formIdxName(formIdx)}>
             <div className="p-px w-4 h-4">
                 {formIdx === FormIdx.login ? <IconFormLogin className="w-full h-full" /> : <IconFormChange className="w-full h-full" />}
             </div>
@@ -70,7 +69,7 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
                 {buttonsDisp.map(([hasForm, disp], idx) => (
                     <Fragment key={idx}>
                         {hasForm ?
-                            <UICardFormMediumButton disp={disp} opened={open} formIdx={idx} />
+                            <UICardFormMediumButton icons={icons[idx]} formIdx={idx} />
                             :
                             <div className="p-0.5 h-4 flex items-center">
                                 <IconFormChange className="p-px w-4 h-4" />
