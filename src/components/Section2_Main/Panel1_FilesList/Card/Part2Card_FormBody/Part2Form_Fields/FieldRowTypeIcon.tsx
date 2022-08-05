@@ -13,12 +13,8 @@ const fieldIcons = {
 
 export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {
     const type = field.password ? "psw" : field.type as keyof typeof fieldIcons;
-    const Icon = (
-        fieldIcons[type] &&
-        fieldIcons[type]({
-            className,
-            title: type !== "list" ? `Field type: ${type}` : `Field choices: ${field.choosevalue}`,
-        })
-    ) || <div className="text-red-500">nan</div>;
+    const Icon =
+        fieldIcons[type]?.({ className, title: type !== "list" ? `Field type: ${type}` : `Field choices: ${field.choosevalue}`, })
+        || <div className="text-red-500">nan</div>;
     return Icon;
 }

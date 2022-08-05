@@ -4,10 +4,10 @@ import { IconAppWebChrome, IconAppWebIESolid, IconAppWindows, IconCatalog } from
 import { classNames } from "@/utils/classnames";
 
 const icons = {
-    'web': { i: IconAppWebIESolid, title: "Webiste trained with IE" },
-    'chr': { i: IconAppWebChrome, title: "Webiste trained with Chrome" },
-    'cat': { i: IconCatalog, title: "Field catalog", c: "fill-primary-300 stroke-primary-900" },
-    'app': { i: IconAppWindows, title: "Windows application", c: "fill-primary-300 stroke-transparent" },
+    web: { i: IconAppWebIESolid, title: "Webiste trained with IE" },
+    chr: { i: IconAppWebChrome, title: "Webiste trained with Chrome" },
+    cat: { i: IconCatalog, title: "Field catalog", c: "fill-primary-300 stroke-primary-900" },
+    app: { i: IconAppWindows, title: "Windows application", c: "fill-primary-300 stroke-transparent" },
 };
 
 export function CardTitleIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
