@@ -59,5 +59,5 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     );
 }
 
-//TODO: add minimal, compact, and normal views
-//TODO: Card title is setting class 'card-current'. use it or use custom CSS vars
+//TODO: add minimal, compact, and normal views - done
+//TODO: Card title is setting class 'card-current'. use it or use custom CSS vars - no need, won't do

@@ -5,7 +5,7 @@ import { CardCaption, CardUsername } from './CardTitleText';
 import { CardTitleIcon } from './CardTitleIcon';
 import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
-import { ButtonsDisp, getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
+import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
 import { CardMediumButtons } from './CardButtons';
 
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
@@ -14,22 +14,14 @@ export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: Fil
     const buttons = getButtonsDisp(fileUs);
     return (<>
         {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
-            <div>
-                <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-                    <div className="mr-1"><CardTitleAttension fileUs={fileUs} /></div>
+            <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                <div className="mr-1"><CardTitleAttension fileUs={fileUs} /></div>
 
-                    <CardTitleIcon stats={stats} />
-                    <CardCaption stats={stats} />
-                </div>
-
-                {/* <CardUsername fileUs={fileUs} />
-                <CardTitleFilename fileUs={fileUs} /> */}
+                <CardTitleIcon stats={stats} />
+                <CardCaption stats={stats} />
             </div>
 
-            <div className="flex items-center space-x-1">
-                <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
-
-            </div>
+            <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
         </div>}
     </>);
 }
@@ -66,7 +58,7 @@ export function CardTitleTextNormal({ fileUsAtom, actions }: { fileUsAtom: FileU
     const stats = fileUs?.stats;
     return (<>
         {stats && <>
-            {/* Icon and website/app name */}
+            {/* Icon, website/app name and optional menu */}
             <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
                 <CardTitleIcon stats={stats} />
                 <CardCaption stats={stats} />
