@@ -5,7 +5,7 @@ import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Part4Card_UI/UIToggleWithPortal';
-import { IconCheckbox, IconCheckboxEmpty, IconInOut, IconPreview, IconUseIt0, IconUseIt1 } from '@ui/UIIconSymbols';
+import { IconInOut, IconPreview, IconUseIt0, IconUseIt1 } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
 
 type FieldRowProps = {
@@ -16,15 +16,11 @@ type FieldRowProps = {
 };
 
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
-    const titleUseIt = `To use or not to use. Field index: ${fieldIdx}`;
+    const titleUseIt = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
     return (<>
-        {/* {useit
-                ? <IconCheckbox className="w-5 h-5 flex-none" fill="#38a00040" title={titleUseIt} />
-                : <IconCheckboxEmpty className="w-5 h-5 flex-none" title={titleUseIt} />
-            } */}
         {useIt
-            ? <IconUseIt1 className="ml-0.5 px-0.5 w-3 h-3 flex-none" title={titleUseIt} />
-            : <IconUseIt0 className="ml-0.5 px-0.5 w-3 h-3 flex-none" title={titleUseIt} />
+            ? <IconUseIt1 className="ml-0.5 px-0.5 w-3 h-3 flex-none stroke-[#216100] stroke-[3]" title={titleUseIt} />
+            : <IconUseIt0 className="ml-0.5 px-0.5 w-3 h-3 flex-none stroke-[#999]" title={titleUseIt} />
         }
     </>);
 }
