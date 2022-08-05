@@ -15,6 +15,20 @@ type FieldRowProps = {
     selectRowAtoms: SelectRowAtomsType;
 };
 
+function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
+    const titleUseIt = `To use or not to use. Field index: ${fieldIdx}`;
+    return (<>
+        {/* {useit
+                ? <IconCheckbox className="w-5 h-5 flex-none" fill="#38a00040" title={titleUseIt} />
+                : <IconCheckboxEmpty className="w-5 h-5 flex-none" title={titleUseIt} />
+            } */}
+        {useIt
+            ? <IconUseIt1 className="ml-0.5 px-0.5 w-3 h-3 flex-none" title={titleUseIt} />
+            : <IconUseIt0 className="ml-0.5 px-0.5 w-3 h-3 flex-none" title={titleUseIt} />
+        }
+    </>);
+}
+
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
 
@@ -47,7 +61,6 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
         </div>;
 
-    const titleUseIt = `To use or not to use. Field index: ${field.pidx}`;
     const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
     function selectThisRow() {
@@ -67,14 +80,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             onClick={selectThisRow}
         >
             {/* 1. use it */}
-            {/* {useit
-                ? <IconCheckbox className="w-5 h-5 flex-none" fill="#38a00040" title={titleUseIt} />
-                : <IconCheckboxEmpty className="w-5 h-5 flex-none" title={titleUseIt} />
-            } */}
-            {useit
-                ? <IconUseIt1 className="ml-0.5 px-0.5 w-3 h-3 flex-none" title={titleUseIt} />
-                : <IconUseIt0 className="ml-0.5 px-0.5 w-3 h-3 flex-none" title={titleUseIt} />
-            }
+            {part1_UseIt(useit, field.pidx)}
 
             {/* 2. icon and text for field type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
