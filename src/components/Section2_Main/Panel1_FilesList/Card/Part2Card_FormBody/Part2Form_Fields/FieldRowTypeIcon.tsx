@@ -1,20 +1,24 @@
 import React from 'react';
 import { IconFieldBtn, IconFieldTxt, IconFieldChk, IconFieldLst, IconFieldPsw, IconFieldEdt } from '@ui/UIIconSymbols';
 
+const fieldIcons = {
+    edit: IconFieldEdt,
+    psw: IconFieldPsw,
+    check: IconFieldChk,
+    list: IconFieldLst,
+    combo: IconFieldLst,
+    text: IconFieldTxt,
+    button: IconFieldBtn,
+};
+
 export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {
-    const type = field.type as keyof typeof icons;
-    const hint = `Field type: ${type}`;
-    const props = { className, title: type !== "list" ? hint : `Field choices: ${field.choosevalue}` };
-    const icons = {
-        "edit": field.password ? IconFieldPsw : IconFieldEdt,
-        "check": IconFieldChk,
-        "list": IconFieldLst,
-        "combo": IconFieldLst,
-        "text": IconFieldTxt,
-        "button": IconFieldBtn,
-    }
-    const Icon = icons[type](props);
-    return (<>
-        {Icon}
-    </>);
+    const type = field.password ? "psw" : field.type as keyof typeof fieldIcons;
+    const Icon = (
+        fieldIcons[type] &&
+        fieldIcons[type]({
+            className,
+            title: type !== "list" ? `Field type: ${type}` : `Field choices: ${field.choosevalue}`,
+        })
+    ) || <div className="text-red-500">nan</div>;
+    return Icon;
 }

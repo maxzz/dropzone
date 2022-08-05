@@ -68,14 +68,14 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
         >
             {/* 1. use it */}
             {useit
-                ? <IconCheckbox className="w-5 h-5" fill="#38a00040" title={titleUseIt} />
-                : <IconCheckboxEmpty className="w-5 h-5" title={titleUseIt} />
+                ? <IconCheckbox className="w-5 h-5 flex-none" fill="#38a00040" title={titleUseIt} />
+                : <IconCheckboxEmpty className="w-5 h-5 flex-none" title={titleUseIt} />
             }
 
             {/* 2. icon and text for field type */}
             <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
-            <div className="w-11 text-xs" title={`Field type: ${password ? 'psw' : type}`}>
+            <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password ? 'psw' : type}`}>
                 {`${password ? 'psw' : type}`}
             </div>
 
@@ -101,7 +101,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             </UIToggleWithPortal>
 
             {/* 4. display text */}
-            <div className="flex-1 cursor-default">
+            <div className="flex-1 cursor-default whitespace-nowrap">
                 {columnDispText}
             </div>
 
