@@ -2,8 +2,8 @@ import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
 import toast from 'react-hot-toast';
-import { IconChevronRight, IconDot } from '@ui/UIIconSymbols';
-import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuSubTrigger, MenuTrigger, RightSlot } from '@ui/UiDropdownMenu';
+import { IconDot } from '@ui/UIIconSymbols';
+import { Menu, MenuContentPortal, MenuItem, MenuItemIndicator, MenuLabel, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuTrigger, TriggerSubs } from '@ui/UiDropdownMenu';
 
 function Command_MarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
@@ -86,17 +86,6 @@ function Command_UISizeSelect() {
     </>);
 }
 
-function TriggerSubs({ label }: { label: string; }) {
-    return (
-        <MenuSubTrigger>
-            {label}
-            <RightSlot>
-                <IconChevronRight className="w-4 h-4" />
-            </RightSlot>
-        </MenuSubTrigger>
-    );
-}
-
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
@@ -104,33 +93,25 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 {icon}
             </MenuTrigger>
 
-            <MenuPortal container={document.getElementById('portal')}>
-                <MenuContent sideOffset={5}>
-                    {/* <Command_MarkSelected />
+            <MenuContentPortal sideOffset={5}>
+                {/* <Command_MarkSelected />
                     <Command_Convert /> */}
 
-                    <MenuLabel>File list size:</MenuLabel>
-                    <Command_UISizeSelect />
+                <MenuLabel>File list size:</MenuLabel>
+                <Command_UISizeSelect />
 
-                    <MenuSeparator />
-                    <Command_ToggleFolding />
+                <MenuSeparator />
+                <Command_ToggleFolding />
 
-                    <MenuSub>
-                        <TriggerSubs label="Links"/>
-                        {/* <MenuSubTrigger>
-                            Links
-                            <RightSlot>
-                                <IconChevronRight className="w-4 h-4" />
-                            </RightSlot>
-                        </MenuSubTrigger> */}
+                <MenuSub>
+                    <TriggerSubs label="Links" />
 
-                        <MenuSubContentPortal sideOffset={2} alignOffset={-5}>
-                            <Command_Links />
-                        </MenuSubContentPortal>
-                    </MenuSub>
+                    <MenuSubContentPortal sideOffset={2} alignOffset={-5}>
+                        <Command_Links />
+                    </MenuSubContentPortal>
+                </MenuSub>
 
-                </MenuContent>
-            </MenuPortal>
+            </MenuContentPortal>
         </Menu>
     );
 };
