@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
-import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
+import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuSubTrigger, MenuTrigger, RightSlot } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 import { IconDot } from '@ui/UIIconSymbols';
 
@@ -61,7 +61,7 @@ function MenuItemLink() {
                 window.open('https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit1', '_blank');
             }}
         >
-            Link to PMIT v1
+            PMIT version 1.0
         </MenuItem>
     );
 }
@@ -99,7 +99,20 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
 
                     <MenuSeparator />
                     <MenuItemFolding />
-                    <MenuItemLink />
+
+                    <MenuSub>
+                        <MenuSubTrigger>
+                            Links
+                            <RightSlot>
+                                <>{'>'}</>
+                            </RightSlot>
+                        </MenuSubTrigger>
+
+                        <MenuSubContentPortal sideOffset={2} alignOffset={-5}>
+                            <MenuItemLink />
+                        </MenuSubContentPortal>
+                    </MenuSub>
+
                 </MenuContent>
             </MenuPortal>
         </Menu>
