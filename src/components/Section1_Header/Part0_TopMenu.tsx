@@ -1,12 +1,11 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
-import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuSubTrigger, MenuTrigger, RightSlot } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 import { IconChevronRight, IconDot } from '@ui/UIIconSymbols';
-import { mapToStyles } from '@popperjs/core/lib/modifiers/computeStyles';
+import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuSubTrigger, MenuTrigger, RightSlot } from '@ui/UiDropdownMenu';
 
-function MenuItemMarkSelected() {
+function Command_MarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
     const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
     const disabled = !rightPanelAtom;
@@ -23,7 +22,7 @@ function MenuItemMarkSelected() {
     );
 }
 
-function MenuItemConvert() {
+function Command_Convert() {
     //const rightPanel = useAtomValue(rightPanelAtom);
     //const disabled = !rightPanel;
     const disabled = true;
@@ -41,7 +40,7 @@ function MenuItemConvert() {
     );
 }
 
-function MenuItemFolding() {
+function Command_ToggleFolding() {
     const doToggleFolding = useSetAtom(allCards.doFoldAllCardsAtom);
     //const setBusy = useSetAtom(busyAtom);
     return (
@@ -55,7 +54,7 @@ function MenuItemFolding() {
     );
 }
 
-function MenuItemLink() {
+function Command_Links() {
     const items = [
         {
             txt: "PMIT version 1.0",
@@ -71,7 +70,7 @@ function MenuItemLink() {
     return (<>{items.map(({ txt, url }, idx) => <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}> {txt} </MenuItem>)}</>);
 }
 
-function MenuItemUISizeSelect() {
+function Command_UISizeSelect() {
     const [uiSize, setUiSize] = useAtom(uiSizeAtom);
     return (<>
         <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
@@ -87,6 +86,17 @@ function MenuItemUISizeSelect() {
     </>);
 }
 
+function TriggerSubs({ label }: { label: string; }) {
+    return (
+        <MenuSubTrigger>
+            {label}
+            <RightSlot>
+                <IconChevronRight className="w-4 h-4" />
+            </RightSlot>
+        </MenuSubTrigger>
+    );
+}
+
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
@@ -96,25 +106,26 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
 
             <MenuPortal container={document.getElementById('portal')}>
                 <MenuContent sideOffset={5}>
-                    {/* <MenuItemMarkSelected />
-                    <MenuItemConvert /> */}
+                    {/* <Command_MarkSelected />
+                    <Command_Convert /> */}
 
                     <MenuLabel>File list size:</MenuLabel>
-                    <MenuItemUISizeSelect />
+                    <Command_UISizeSelect />
 
                     <MenuSeparator />
-                    <MenuItemFolding />
+                    <Command_ToggleFolding />
 
                     <MenuSub>
-                        <MenuSubTrigger>
+                        <TriggerSubs label="Links"/>
+                        {/* <MenuSubTrigger>
                             Links
                             <RightSlot>
                                 <IconChevronRight className="w-4 h-4" />
                             </RightSlot>
-                        </MenuSubTrigger>
+                        </MenuSubTrigger> */}
 
                         <MenuSubContentPortal sideOffset={2} alignOffset={-5}>
-                            <MenuItemLink />
+                            <Command_Links />
                         </MenuSubContentPortal>
                     </MenuSub>
 
