@@ -197,6 +197,10 @@ export function UISymbolDefs() {
                     <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />
                 </symbol>
 
+                <symbol id="icon-chevron-right" viewBox="0 0 15 15">
+                    <path d="M6.16 3.14a.5.5 0 0 1 .7.02l3.76 4c.18.19.18.49 0 .68l-3.75 4a.5.5 0 1 1-.73-.68L9.56 7.5 6.14 3.84a.5.5 0 0 1 .02-.7Z" />
+                </symbol>
+
                 {/* good but not used */}
                 {/* <symbol id="icon-quill" viewBox="0 0 32 32">
                     <path d="M0 32c4-12 14.469-32 32-32-8.219 6.594-12 22-18 22s-6 0-6 0l-6 10h-2z"></path>
@@ -524,6 +528,15 @@ export function IconDoubleDown({ title, ...rest }: SVGAttributes<SVGSVGElement> 
         <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-doubledown" />
+        </svg>
+    );
+}
+
+export function IconChevronRight({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-chevron-right" />
         </svg>
     );
 }
