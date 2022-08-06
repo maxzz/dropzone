@@ -6,25 +6,7 @@ export function UISymbolDefs() {
             xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         >
             <defs>
-                {/* good but not used */}
-                {/* <symbol id="icon-quill" viewBox="0 0 32 32">
-                    <path d="M0 32c4-12 14.469-32 32-32-8.219 6.594-12 22-18 22s-6 0-6 0l-6 10h-2z"></path>
-                </symbol>
-                <symbol id="icon-user" viewBox="0 0 32 32">
-                    <path
-                        d="M18 22.082v-1.649c2.203-1.241 4-4.337 4-7.432 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h28c0-4.030-5.216-7.364-12-7.918z">
-                    </path>
-                </symbol>
-                <symbol id="icon-users" viewBox="0 0 32 32">
-                    <path
-                        d="M24 24.082v-1.649c2.203-1.241 4-4.337 4-7.432 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h28c0-4.030-5.216-7.364-12-7.918z">
-                    </path>
-                    <path
-                        d="M10.225 24.854c1.728-1.13 3.877-1.989 6.243-2.513-0.47-0.556-0.897-1.176-1.265-1.844-0.95-1.726-1.453-3.627-1.453-5.497 0-2.689 0-5.228 0.956-7.305 0.928-2.016 2.598-3.265 4.976-3.734-0.529-2.39-1.936-3.961-5.682-3.961-6 0-6 4.029-6 9 0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h8.719c0.454-0.403 0.956-0.787 1.506-1.146z">
-                    </path>
-                </symbol> */}
-
-
+                //#region apps
                 {/* apps */}
 
                 {/* Win95 solid */}
@@ -57,33 +39,20 @@ export function UISymbolDefs() {
                     <path d="M10.88 21.94L15.46 14" />
                 </symbol>
 
-                {/* two hands */}
-                {/* <symbol id="icon-manual-mode-two" viewBox="0 0 24 24">
-                    <path d="M9.86 7.28C9.56 7.07 9 7.46 9 8a1.51 1.51 0 0 0 0 .3c0 1.13.62 2.39.39 3.46C8 9.82 7.39 7.21 6.33 5c-2.33-.84.15 3.74.57 4.81-.07.65.71.93.35 1.69-1-1.66-1.8-3.82-3-5.36-.39-.61-1-.75-1.16.25-.24.47 1 2.23 1.26 2.7v-.05a12 12 0 0 0 1.47 2.56 1.76 1.76 0 0 0 .34.76c0 .26 0 .26-.17.27-.83-.72-3.15-5.3-3.92-4.23-.79 1.31 1 2.24 1.34 3.22A25.22 25.22 0 0 1 5 13.71c0 .37-.3.18-.44 0a.09.09 0 0 1-.06-.06.13.13 0 0 0-.06-.05c-.75-.54-2.68-3.9-3.19-1.77.13 1.52 1.69 2.17 2.39 3.37s.06.05.09.07c1.49 2 2.29 4.45 4.78 3.64 3.69-1.32 2.95-8.18 1.35-11.63ZM14.14 7.28c.3-.21.87.18.86.67a1.51 1.51 0 0 1 0 .3c0 1.13-.62 2.39-.39 3.46 1.35-1.89 2-4.5 3.06-6.68 2.38-.87-.15 3.71-.57 4.78.07.65-.71.93-.35 1.69 1.05-1.66 1.8-3.82 3-5.36.39-.61 1-.75 1.16.25.24.47-1.05 2.23-1.26 2.7v-.05a12 12 0 0 1-1.41 2.56 1.76 1.76 0 0 1-.34.76c0 .26 0 .26.17.27.83-.72 3.15-5.3 3.92-4.23.79 1.31-1 2.24-1.34 3.22A25.22 25.22 0 0 0 19 13.71c0 .37.3.18.44 0a.09.09 0 0 0 .06-.06.13.13 0 0 1 .06-.05c.75-.54 2.68-3.9 3.19-1.77-.17 1.54-1.73 2.19-2.43 3.39s-.06.05-.09.07c-1.49 2-2.29 4.45-4.78 3.64-3.65-1.34-2.91-8.2-1.31-11.65Z" />
-                </symbol> */}
-
-                {/* one hand */}
-                <symbol id="icon-manual-mode" viewBox="0 0 24 24">
-                    <path
-                        strokeMiterlimit="10"
-                        d="M22.52 12.93c-.45-1.22-2.45-.96-3.97.02-.61.4-1.13.65-2.59.95-.64 0-.78-.68-.66-1.35l1.47-8.19c.42-2.08-2.14-2.84-2.65-.7l-1.27 7.12c-.64 1.78-.88 0-.88 0l-.35-7.67c0-2.78-2.73-2.95-2.73 0l.32 7.01c.14 2.77-.52 1.21-.52.99L7.4 4.87c-.62-2.63-3.07-1.95-2.63.44l1.19 5.56c.2 1.29-.81.68-.99.37L3.8 8.55c-.97-2.05-3.05-1.23-2.38.8l1.95 4.98c.19.54.33 1.09.42 1.66 0 1.4.91 4.26 1.65 5.01a6.87 6.87 0 0 0 9.73 0c1.8-2.02 2.66-2.87 3.37-4.42 0 0 1.82-1.53 4.08-2.81.2-.12-.11-.86-.11-.86Z"
-                    />
-                </symbol>
-
-                {/* misc */}
-
-                <symbol id="menu-hamburger" viewBox="0 0 21 21">
-                    <path d="M4.5 6.5h12" />
-                    <path d="M4.498 10.5h11.997" />
-                    <path d="M4.5 14.5h11.995" />
-                </symbol>
-
-                <symbol id="icon-catalog" viewBox="0 0 24 24">
+                <symbol id="app-catalog" viewBox="0 0 24 24">
                     <path d="M12.17 5.2Q18 2.23 23 5.2V20a12.15 12.15 0 0 0-10.83.53" />
-                    {/* <path d="M14.5 8.22c2.74-1.47 4.64-1.47 7 0M14.5 11.22c2.74-1.47 4.64-1.47 7 0M14.5 14.22c2.74-1.47 4.64-1.47 7 0M3 8.91q3.77-2.19 7 0M2.88 11.38q3.78-2.19 7 0M2.88 14q3.78-2.19 7 0M2.88 16.69q3.78-2.19 7 0" /> */}
                     <path d="M12.17 5.2q-5.82-3-10.83 0V20a12.15 12.15 0 0 1 10.83.53ZM3.5 21.22a10.71 10.71 0 0 1 8.23 1.18.81.81 0 0 0 .87 0c2.3-1.5 5.08-2.07 8.9-1.17" />
                 </symbol>
 
+                {/* mode */}
+
+                {/* one hand */}
+                <symbol id="icon-manual-mode" viewBox="0 0 24 24">
+                    <path d="M22.52 12.93c-.45-1.22-2.45-.96-3.97.02-.61.4-1.13.65-2.59.95-.64 0-.78-.68-.66-1.35l1.47-8.19c.42-2.08-2.14-2.84-2.65-.7l-1.27 7.12c-.64 1.78-.88 0-.88 0l-.35-7.67c0-2.78-2.73-2.95-2.73 0l.32 7.01c.14 2.77-.52 1.21-.52.99L7.4 4.87c-.62-2.63-3.07-1.95-2.63.44l1.19 5.56c.2 1.29-.81.68-.99.37L3.8 8.55c-.97-2.05-3.05-1.23-2.38.8l1.95 4.98c.19.54.33 1.09.42 1.66 0 1.4.91 4.26 1.65 5.01a6.87 6.87 0 0 0 9.73 0c1.8-2.02 2.66-2.87 3.37-4.42 0 0 1.82-1.53 4.08-2.81.2-.12-.11-.86-.11-.86Z" />
+                </symbol>
+                //#endregion apps
+
+                //#region fields
                 {/* field icons */}
 
                 <symbol id="ifield-edt" viewBox="0 0 24 24">
@@ -128,18 +97,9 @@ export function UISymbolDefs() {
                         <path d="M15.62 10.61c-.51 0-.88.22-1.12.48l-.02-.4h-.82v.12c.03.27.04.56.04.97v2.76h.89v-2.29c0-.1.01-.2.04-.27a.82.82 0 0 1 .77-.59c.6 0 .72.52.72.95v2.2h.89v-2.28c0-1.22-.75-1.66-1.39-1.66Z" />
                     </g>
                 </symbol>
+                //#endregion fields
 
-                {/* classic check boxes */}
-
-                <symbol id="classic-chk" viewBox="0 0 21 21">
-                    <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
-                    <path d="M7.5 10.5l2 2l4-4" />
-                </symbol>
-
-                <symbol id="classic-chk-empty" viewBox="0 0 21 21">
-                    <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
-                </symbol>
-
+                //#region use-it
                 {/* field use-it */}
 
                 <symbol id="ifield-useit-0" viewBox="0 0 24 24">
@@ -150,8 +110,11 @@ export function UISymbolDefs() {
                 <symbol id="ifield-useit-1" viewBox="0 0 24 24">
                     <path d="m3.1 12 5.94 5.94L20.9 6.06" />
                 </symbol>
+                //#endregion use-it
 
-                {/* field state */}
+                //#region all other
+                
+                {/* field row state */}
 
                 <symbol id="icon-preview" viewBox="0 0 24 24">
                     <rect x="1.49" y="3.46" width="21.02" height="17.08" rx=".73" ry=".73" />
@@ -163,30 +126,6 @@ export function UISymbolDefs() {
                 <symbol id="icon-inout" viewBox="0 0 24 24">
                     <path d="m7.7 19-4.55-5.51h13.3" />
                     <path d="m16.3 5 4.55 5.51H7.55" />
-                </symbol>
-
-                {/* <symbol id="icon-preview" viewBox="0 0 36 36">
-                    <path d="M32 4H4a2 2 0 0 0-2 2v24a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 30V6h28v24z" />
-                    <path d="M8.92 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3zm0-4.6A1.6 1.6 0 1 1 7.33 11a1.6 1.6 0 0 1 1.59-1.59z" />
-                    <path d="M22.78 15.37l-5.4 5.4l-4-4a1 1 0 0 0-1.41 0L5.92 22.9v2.83l6.79-6.79L16 22.18l-3.75 3.75H15l8.45-8.45L30 24v-2.82l-5.81-5.81a1 1 0 0 0-1.41 0z" />
-                </symbol>
-                <symbol id="icon-inout" viewBox="0 0 24 24">
-                    <path d="M21.71 9.29l-4-4a1 1 0 0 0-1.42 1.42L18.59 9H7a1 1 0 0 0 0 2h14a1 1 0 0 0 .92-.62a1 1 0 0 0-.21-1.09zM17 13H3a1 1 0 0 0-.92.62a1 1 0 0 0 .21 1.09l4 4a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L5.41 15H17a1 1 0 0 0 0-2z" />
-                </symbol>
-                */}
-
-                {/* chevrons */}
-
-                <symbol id="icon-chevron-down" viewBox="0 0 24 24">
-                    <path d="M5.843 9.593L11.5 15.25l5.657-5.657l-.707-.707l-4.95 4.95l-4.95-4.95l-.707.707z" />
-                </symbol>
-
-                <symbol id="icon-chevron-up" viewBox="0 0 24 24">
-                    <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
-                </symbol>
-
-                <symbol id="icon-doubledown" viewBox="0 0 24 24">
-                    <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />
                 </symbol>
 
                 {/* Info */}
@@ -213,11 +152,14 @@ export function UISymbolDefs() {
                     <path d="M12.05 7.1a4.9 4.9 0 1 0-.02 9.8 4.9 4.9 0 0 0 .02-9.8Z" />
                     <path d="M14.4 2c-.76 2.17-4.04 2.16-4.8 0-1.05.25-2.06.67-2.98 1.23 1 2.07-1.33 4.38-3.39 3.39A9.99 9.99 0 0 0 2 9.6c2.17.76 2.16 4.04 0 4.8.25 1.05.67 2.06 1.23 2.98 2.07-.99 4.38 1.32 3.39 3.39.92.57 1.92.98 2.98 1.23.76-2.16 4.04-2.15 4.8 0 1.05-.25 2.06-.67 2.98-1.23-1-2.07 1.33-4.38 3.39-3.39.57-.92.98-1.92 1.23-2.98-2.17-.76-2.15-4.04 0-4.8a10.37 10.37 0 0 0-1.23-2.98c-2.07.99-4.38-1.32-3.39-3.39A9.99 9.99 0 0 0 14.4 2Z" />
                 </symbol>
-                {/* <symbol id="icon-gear" viewBox="0 0 512 512">
-                    <path d="M256.9 159.9c-25.7 0-49.8 10-67.9 28.1s-28.1 42.2-28.1 67.9c0 25.7 10 49.7 28.1 67.9a95.55 95.55 0 0 0 67.9 28.1c25.7 0 49.8-10 67.9-28.1a95.38 95.38 0 0 0 28.1-67.9c0-25.7-10-49.7-28.1-67.9a95.38 95.38 0 0 0-67.9-28.1zm0 176c-44.3 0-80-35.9-80-80s35.7-80 80-80 80 35.9 80 80-35.7 80-80 80z" />
-                    <path d="M201.79 82.83a65.38 65.38 0 0 0 16.77 17.07A64.92 64.92 0 0 0 256 111.69a64.92 64.92 0 0 0 37.44-11.8 65.4 65.4 0 0 0 16.77-17.06 179.97 179.97 0 0 1 29.93 12.41 65.4 65.4 0 0 0-.2 23.93 64.93 64.93 0 0 0 18.13 34.8 64.88 64.88 0 0 0 46.18 19.13c4.25 0 8.43-.4 12.52-1.2a179.86 179.86 0 0 1 12.4 29.95 65.39 65.39 0 0 0-17.04 16.78 64.92 64.92 0 0 0-11.78 37.42c0 13.46 4.07 26.4 11.77 37.4a65.38 65.38 0 0 0 17.03 16.77 179.87 179.87 0 0 1-12.42 29.96 65.61 65.61 0 0 0-12.48-1.19 64.88 64.88 0 0 0-46.18 19.13 64.93 64.93 0 0 0-18.12 34.74 65.4 65.4 0 0 0 .17 23.9 179.91 179.91 0 0 1-29.96 12.42 65.37 65.37 0 0 0-16.77-17.02 64.94 64.94 0 0 0-37.4-11.76 64.92 64.92 0 0 0-37.38 11.76 65.4 65.4 0 0 0-16.77 17.02 179.93 179.93 0 0 1-29.96-12.42 65.4 65.4 0 0 0 .17-23.9 64.92 64.92 0 0 0-18.12-34.74A64.88 64.88 0 0 0 107.75 339c-4.23 0-8.4.4-12.48 1.2a180.01 180.01 0 0 1-12.42-29.97 65.38 65.38 0 0 0 17.03-16.77 64.93 64.93 0 0 0 11.77-37.4 64.93 64.93 0 0 0-11.78-37.42 65.4 65.4 0 0 0-17.05-16.78 179.88 179.88 0 0 1 12.4-29.95 65.54 65.54 0 0 0 12.53 1.2c17.44 0 33.84-6.8 46.18-19.13a64.94 64.94 0 0 0 18.13-34.8 65.38 65.38 0 0 0-.2-23.93 180.16 180.16 0 0 1 29.93-12.41M302.07 64a49.35 49.35 0 0 1-92.14 0 196.25 196.25 0 0 0-57.13 23.69 49.35 49.35 0 0 1-45.05 69.41 49.43 49.43 0 0 1-20.09-4.25A196.3 196.3 0 0 0 64 209.98a49.35 49.35 0 0 1 .02 92.12 196.32 196.32 0 0 0 23.7 57.13 49.42 49.42 0 0 1 20.02-4.23 49.35 49.35 0 0 1 45.09 69.33A196.25 196.25 0 0 0 209.96 448a49.35 49.35 0 0 1 92.08 0 196.23 196.23 0 0 0 57.13-23.67 49.34 49.34 0 0 1 65.12-65.1 196.32 196.32 0 0 0 23.69-57.13 49.35 49.35 0 0 1 .02-92.12 196.3 196.3 0 0 0-23.67-57.14 49.42 49.42 0 0 1-20.08 4.26 49.35 49.35 0 0 1-45.05-69.41A196.24 196.24 0 0 0 302.07 64z" />
+
+                {/* misc */}
+
+                <symbol id="menu-hamburger" viewBox="0 0 21 21">
+                    <path d="M4.5 6.5h12" />
+                    <path d="M4.498 10.5h11.997" />
+                    <path d="M4.5 14.5h11.995" />
                 </symbol>
-                */}
 
                 {/* Login and password change */}
 
@@ -230,10 +172,56 @@ export function UISymbolDefs() {
                     <path d="m21.5 10-3 2.8c-.4.5-1.1.5-1.6 0L14 10c-.4-.5.1-1.4.8-1.4H16V7.4c0-1.4-1-2.5-2.4-2.5H10C8.6 5 7.5 6 7.5 7.4c0 .4-.4.7-.8.7H5.6c-.6 0-1.1-.4-1.1-1v-.7c0-2.3 1.9-4.2 4.2-4.2h6.6c2.3 0 4.2 1.9 4.2 4.2v2.2h1.2c.7 0 1.3.9.8 1.4ZM2.5 14l3-2.8c.4-.5 1.1-.5 1.6 0l3 2.8c.4.5-.1 1.4-.8 1.4H8v1.2c0 1.4 1 2.5 2.4 2.5H14c1.3 0 2.4-1.1 2.4-2.5 0-.4.4-.8.8-.8h1.1c.6 0 1.1.5 1.1 1.2v.6c0 2.3-1.9 4.2-4.2 4.2H8.7c-2.3 0-4.2-1.9-4.2-4.2v-2.2H3.3c-.7 0-1.3-.9-.8-1.4Z" />
                 </symbol>
 
+                {/* classic check boxes */}
+
+                <symbol id="classic-chk" viewBox="0 0 21 21">
+                    <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
+                    <path d="M7.5 10.5l2 2l4-4" />
+                </symbol>
+
+                <symbol id="classic-chk-empty" viewBox="0 0 21 21">
+                    <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
+                </symbol>
+
+                {/* chevrons */}
+
+                <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+                    <path d="M5.843 9.593L11.5 15.25l5.657-5.657l-.707-.707l-4.95 4.95l-4.95-4.95l-.707.707z" />
+                </symbol>
+
+                <symbol id="icon-chevron-up" viewBox="0 0 24 24">
+                    <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
+                </symbol>
+
+                <symbol id="icon-doubledown" viewBox="0 0 24 24">
+                    <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />
+                </symbol>
+
+                {/* good but not used */}
+                {/* <symbol id="icon-quill" viewBox="0 0 32 32">
+                    <path d="M0 32c4-12 14.469-32 32-32-8.219 6.594-12 22-18 22s-6 0-6 0l-6 10h-2z"></path>
+                </symbol>
+                <symbol id="icon-user" viewBox="0 0 32 32">
+                    <path
+                        d="M18 22.082v-1.649c2.203-1.241 4-4.337 4-7.432 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h28c0-4.030-5.216-7.364-12-7.918z">
+                    </path>
+                </symbol>
+                <symbol id="icon-users" viewBox="0 0 32 32">
+                    <path
+                        d="M24 24.082v-1.649c2.203-1.241 4-4.337 4-7.432 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h28c0-4.030-5.216-7.364-12-7.918z">
+                    </path>
+                    <path
+                        d="M10.225 24.854c1.728-1.13 3.877-1.989 6.243-2.513-0.47-0.556-0.897-1.176-1.265-1.844-0.95-1.726-1.453-3.627-1.453-5.497 0-2.689 0-5.228 0.956-7.305 0.928-2.016 2.598-3.265 4.976-3.734-0.529-2.39-1.936-3.961-5.682-3.961-6 0-6 4.029-6 9 0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h8.719c0.454-0.403 0.956-0.787 1.506-1.146z">
+                    </path>
+                </symbol> */}
+                //#endregion all other
+
             </defs>
         </svg>
     );
 }
+
+//#region apps
 
 // apps
 
@@ -285,17 +273,16 @@ export function IconAppWebChrome({ title, ...rest }: SVGAttributes<SVGSVGElement
     );
 }
 
-// mode
+export function IconCatalog({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#app-catalog" />
+        </svg>
+    );
+}
 
-// two hands
-// export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-//     return (
-//         <svg fill="none" stroke="currentColor" strokeWidth=".6" {...rest}>
-//             {title && <title>{title}</title>}
-//             <use xlinkHref="#icon-manual-mode-two" />
-//         </svg>
-//     );
-// }
+// mode
 
 export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -306,25 +293,9 @@ export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> 
     );
 }
 
-// misc
+//#endregion apps
 
-export function IconMenuHamburger({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#menu-hamburger" />
-        </svg>
-    );
-}
-
-export function IconCatalog({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#icon-catalog" />
-        </svg>
-    );
-}
+//#region fields
 
 // field icons
 
@@ -382,25 +353,11 @@ export function IconFieldBtn({ title, ...rest }: SVGAttributes<SVGSVGElement> & 
     );
 }
 
-// classic check boxes
+//#endregion fields
 
-export function IconCheckbox({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg fill="none" stroke="currentColor" {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#classic-chk" />
-        </svg>
-    );
-}
+//#region use-it
 
-export function IconCheckboxEmpty({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg fill="none" stroke="currentColor" {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#classic-chk-empty" />
-        </svg>
-    );
-}
+// field use-it
 
 export function IconUseIt0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -420,7 +377,11 @@ export function IconUseIt1({ title, ...rest }: SVGAttributes<SVGSVGElement> & HT
     );
 }
 
-// field state
+//#endregion use-it
+
+//#region all other
+
+// field row state
 
 export function IconPreview({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -440,54 +401,7 @@ export function IconInOut({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTM
     );
 }
 
-// export function IconPreview({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-//     return (
-//         <svg fill="currentColor" {...rest}>
-//             {title && <title>{title}</title>}
-//             <use xlinkHref="#icon-preview" />
-//         </svg>
-//     );
-// }
-
-// export function IconInOut({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-//     return (
-//         <svg fill="currentColor" {...rest}>
-//             {title && <title>{title}</title>}
-//             <use xlinkHref="#icon-inout" />
-//         </svg>
-//     );
-// }
-
-// chevrons
-
-export function IconChevronDown({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg fill="currentColor" {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#icon-chevron-down" />
-        </svg>
-    );
-}
-
-export function IconChevronUp({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg fill="currentColor" {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#icon-chevron-up" />
-        </svg>
-    );
-}
-
-export function IconDoubleDown({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-    return (
-        <svg fill="currentColor" {...rest}>
-            {title && <title>{title}</title>}
-            <use xlinkHref="#icon-doubledown" />
-        </svg>
-    );
-}
-
-// info
+// Info
 
 export function IconFolder({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -534,14 +448,18 @@ export function IconGear({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTML
     );
 }
 
-// export function IconGear({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-//     return (
-//         <svg fill="currentColor" {...rest}>
-//             {title && <title>{title}</title>}
-//             <use xlinkHref="#icon-gear" />
-//         </svg>
-//     );
-// }
+// misc
+
+export function IconMenuHamburger({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#menu-hamburger" />
+        </svg>
+    );
+}
+
+// Login and password change
 
 export function IconFormLogin({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -557,6 +475,55 @@ export function IconFormChange({ title, ...rest }: SVGAttributes<SVGSVGElement> 
         <svg fill="none" stroke="currentColor" strokeMiterlimit={10} strokeWidth={1.39} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-change" />
+        </svg>
+    );
+}
+
+// classic check boxes
+
+export function IconCheckbox({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#classic-chk" />
+        </svg>
+    );
+}
+
+export function IconCheckboxEmpty({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#classic-chk-empty" />
+        </svg>
+    );
+}
+
+// chevrons
+
+export function IconChevronDown({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-chevron-down" />
+        </svg>
+    );
+}
+
+export function IconChevronUp({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-chevron-up" />
+        </svg>
+    );
+}
+
+export function IconDoubleDown({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-doubledown" />
         </svg>
     );
 }
@@ -584,3 +551,5 @@ export function s({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttribu
 <symbol id="" viewBox="0 0 24 24">
 </symbol>
 */
+
+//#endregion all other
