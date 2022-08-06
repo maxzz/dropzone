@@ -139,7 +139,7 @@ function SubContent(props: HTMLAttributes<HTMLDivElement> & { sideOffset?: numbe
 
 const StyledSubTrigger = styled(Primitive.SubTrigger, {
     '&[data-state="open"]': {
-        backgroundColor: 'white', // violet.violet4,
+        backgroundColor: 'var(--tm-primary-300)', // violet.violet4,
         color: 'var(--tm-primary-900)', // violet.violet11,
     },
     ...itemStyles,

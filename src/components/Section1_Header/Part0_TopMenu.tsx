@@ -4,6 +4,7 @@ import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames 
 import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuSubTrigger, MenuTrigger, RightSlot } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 import { IconChevronRight, IconDot } from '@ui/UIIconSymbols';
+import { mapToStyles } from '@popperjs/core/lib/modifiers/computeStyles';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
@@ -55,15 +56,19 @@ function MenuItemFolding() {
 }
 
 function MenuItemLink() {
-    return (
-        <MenuItem
-            onSelect={async () => {
-                window.open('https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit1', '_blank');
-            }}
-        >
-            PMIT version 1.0
-        </MenuItem>
-    );
+    const items = [
+        {
+            txt: "PMIT version 1.0",
+            url: "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit1",
+        }, {
+            txt: "All projects directory",
+            url: "https://maxzz.github.io",
+        }, {
+            txt: "QA website",
+            url: "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa/index.html",
+        }
+    ];
+    return (<>{items.map(({ txt, url }, idx) => <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}> {txt} </MenuItem>)}</>);
 }
 
 function MenuItemUISizeSelect() {
