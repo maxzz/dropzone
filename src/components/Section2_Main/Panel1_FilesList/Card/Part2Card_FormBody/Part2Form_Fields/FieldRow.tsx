@@ -16,13 +16,9 @@ type FieldRowProps = {
 };
 
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
-    const titleUseIt = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
-    return (<>
-        {useIt
-            ? <IconUseIt1 className="ml-0.5 px-0.5 w-3 h-3 flex-none stroke-[#216100] stroke-[3]" title={titleUseIt} />
-            : <IconUseIt0 className="ml-0.5 px-0.5 w-3 h-3 flex-none stroke-[#999]" title={titleUseIt} />
-        }
-    </>);
+    const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
+    const icon = useIt ? IconUseIt1 : IconUseIt0;
+    return icon({title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt? "stroke-[#216100] stroke-[3]" : "stroke-[#888]")});
 }
 
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {

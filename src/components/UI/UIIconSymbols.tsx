@@ -153,15 +153,27 @@ export function UISymbolDefs() {
 
                 {/* field state */}
 
-                <symbol id="icon-preview" viewBox="0 0 36 36">
+                <symbol id="icon-preview" viewBox="0 0 24 24">
+                    <rect x="1.49" y="3.46" width="21.02" height="17.08" rx=".73" ry=".73" />
+                    <circle cx="5.66" cy="7.12" r="1.62" />
+                    <path d="m3.55 16.49 4.73-4.73 3.26 3.11" />
+                    <path d="m8.96 17.71 6.84-7.02 4.66 4.65" />
+                </symbol>
+
+                <symbol id="icon-inout" viewBox="0 0 24 24">
+                    <path d="m7.7 19-4.55-5.51h13.3" />
+                    <path d="m16.3 5 4.55 5.51H7.55" />
+                </symbol>
+
+                {/* <symbol id="icon-preview" viewBox="0 0 36 36">
                     <path d="M32 4H4a2 2 0 0 0-2 2v24a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 30V6h28v24z" />
                     <path d="M8.92 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3zm0-4.6A1.6 1.6 0 1 1 7.33 11a1.6 1.6 0 0 1 1.59-1.59z" />
                     <path d="M22.78 15.37l-5.4 5.4l-4-4a1 1 0 0 0-1.41 0L5.92 22.9v2.83l6.79-6.79L16 22.18l-3.75 3.75H15l8.45-8.45L30 24v-2.82l-5.81-5.81a1 1 0 0 0-1.41 0z" />
                 </symbol>
-
                 <symbol id="icon-inout" viewBox="0 0 24 24">
                     <path d="M21.71 9.29l-4-4a1 1 0 0 0-1.42 1.42L18.59 9H7a1 1 0 0 0 0 2h14a1 1 0 0 0 .92-.62a1 1 0 0 0-.21-1.09zM17 13H3a1 1 0 0 0-.92.62a1 1 0 0 0 .21 1.09l4 4a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L5.41 15H17a1 1 0 0 0 0-2z" />
                 </symbol>
+                */}
 
                 {/* chevrons */}
 
@@ -407,7 +419,7 @@ export function IconUseIt1({ title, ...rest }: SVGAttributes<SVGSVGElement> & HT
 
 export function IconPreview({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" {...rest}>
+        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-preview" />
         </svg>
@@ -416,12 +428,30 @@ export function IconPreview({ title, ...rest }: SVGAttributes<SVGSVGElement> & H
 
 export function IconInOut({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="currentColor" {...rest}>
+        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-inout" />
         </svg>
     );
 }
+
+// export function IconPreview({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+//     return (
+//         <svg fill="currentColor" {...rest}>
+//             {title && <title>{title}</title>}
+//             <use xlinkHref="#icon-preview" />
+//         </svg>
+//     );
+// }
+
+// export function IconInOut({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+//     return (
+//         <svg fill="currentColor" {...rest}>
+//             {title && <title>{title}</title>}
+//             <use xlinkHref="#icon-inout" />
+//         </svg>
+//     );
+// }
 
 // chevrons
 
