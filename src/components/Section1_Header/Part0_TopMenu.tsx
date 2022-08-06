@@ -3,7 +3,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
 import { Menu, MenuContent, MenuItem, MenuItemIndicator, MenuLabel, MenuPortal, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContentPortal, MenuSubTrigger, MenuTrigger, RightSlot } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
-import { IconDot } from '@ui/UIIconSymbols';
+import { IconChevronRight, IconDot } from '@ui/UIIconSymbols';
 
 function MenuItemMarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
@@ -104,7 +104,7 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                         <MenuSubTrigger>
                             Links
                             <RightSlot>
-                                <>{'>'}</>
+                                <IconChevronRight className="w-4 h-4" />
                             </RightSlot>
                         </MenuSubTrigger>
 
