@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { styled, keyframes } from '@stitches/react';
 import * as Primitive from '@radix-ui/react-dropdown-menu';
 
@@ -27,6 +27,8 @@ const slideLeftAndFade = keyframes({
 });
 
 //#endregion animations
+
+// Menu content
 
 const StyledContent = styled(Primitive.Content, {
     minWidth: 220,
@@ -57,6 +59,8 @@ const StyledTrigger = styled(Primitive.Trigger, {
 });
 
 //#endregion content and trigger
+
+// Menu items
 
 const itemStyles = {
     all: 'unset',
@@ -121,6 +125,38 @@ const StyledLabel = styled(Primitive.Label, {
 const StyledCheckboxItem = styled(Primitive.CheckboxItem, { ...itemStyles });
 const StyledRadioItem = styled(Primitive.RadioItem, { ...itemStyles });
 
+// Sub menus
+
+const StyledSubContent = styled(Primitive.SubContent, { ...StyledContent });
+
+function SubContent(props: HTMLAttributes<HTMLDivElement> & { sideOffset?: number; alignOffset?: number; }) {
+    return (
+        <Primitive.Portal>
+            <StyledSubContent {...props} />
+        </Primitive.Portal>
+    );
+}
+
+const StyledSubTrigger = styled(Primitive.SubTrigger, {
+    '&[data-state="open"]': {
+        backgroundColor: 'white', // violet.violet4,
+        color: 'var(--tm-primary-900)', // violet.violet11,
+    },
+    ...itemStyles,
+});
+
+// Sub menu utils
+
+export const RightSlot = styled('div', {
+    marginLeft: 'auto',
+    paddingLeft: 20,
+    color: 'var(--tm-primary-900)', // violet.violet11,
+    '[data-highlighted] > &': { color: 'white' },
+    '[data-disabled] &': { color: 'var(--tm-primary-400)' }, // mauve.mauve8
+});
+
+// exports
+
 export const Menu = Primitive.Root;
 export const MenuPortal = Primitive.Portal;
 export const MenuTrigger = StyledTrigger;
@@ -128,10 +164,14 @@ export const MenuTrigger = StyledTrigger;
 export const MenuContent = StyledContent;
 
 export const MenuItem = StyledMenuItem;
-
 export const MenuRadioGroup = Primitive.RadioGroup;
 export const MenuRadioItem = StyledRadioItem;
 export const MenuItemIndicator = StyledItemIndicator;
 export const MenuCheckboxItem = StyledCheckboxItem;
 export const MenuSeparator = StyledSeparator;
 export const MenuLabel = StyledLabel;
+
+export const MenuSub = Primitive.Sub;
+export const MenuSubTrigger = StyledSubTrigger;
+export const MenuSubContent = StyledSubContent;
+export const MenuSubContentPortal = SubContent;
