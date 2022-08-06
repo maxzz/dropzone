@@ -54,6 +54,18 @@ function MenuItemFolding() {
     );
 }
 
+function MenuItemLink() {
+    return (
+        <MenuItem
+            onSelect={async () => {
+                window.open('https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit1', '_blank');
+            }}
+        >
+            Link to PMIT v1
+        </MenuItem>
+    );
+}
+
 function MenuItemUISizeSelect() {
     const [uiSize, setUiSize] = useAtom(uiSizeAtom);
     return (<>
@@ -82,11 +94,12 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                     {/* <MenuItemMarkSelected />
                     <MenuItemConvert /> */}
 
-                    <MenuLabel>UI size:</MenuLabel>
+                    <MenuLabel>File list size:</MenuLabel>
                     <MenuItemUISizeSelect />
 
                     <MenuSeparator />
                     <MenuItemFolding />
+                    <MenuItemLink />
                 </MenuContent>
             </MenuPortal>
         </Menu>
