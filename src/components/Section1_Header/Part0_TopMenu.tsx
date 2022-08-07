@@ -59,13 +59,15 @@ function Command_Links() {
         {
             txt: "PMIT version 1.0",
             url: "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pmit1",
-        }, {
-            txt: "All projects directory",
-            url: "https://maxzz.github.io",
-        }, {
+        },
+        {
             txt: "QA website",
             url: "https://www.hidglobal.com/sites/default/files/crossmatch/AltusAddons/g01/pageqa/index.html",
-        }
+        },
+        {
+            txt: "All projects catalog",
+            url: "https://maxzz.github.io",
+        },
     ];
     return (<>{items.map(({ txt, url }, idx) => <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}> {txt} </MenuItem>)}</>);
 }

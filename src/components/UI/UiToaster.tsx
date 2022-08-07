@@ -8,11 +8,11 @@ export function UIToaster() {
                 position="bottom-right"
                 reverseOrder={false}
                 gutter={8}
-                containerClassName=""
-                containerStyle={{}}
+                //containerClassName=""
+                //containerStyle={{}}
                 toastOptions={{
                     // Define default options
-                    className: '',
+                    //className: '',
                     duration: 5000,
                     style: {
                         background: '#363636',
