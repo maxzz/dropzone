@@ -86,7 +86,7 @@ function part5_Policy(field: Meta.Field) {
     const low = !policy;
     return (
         <div
-            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
+            className={classNames("px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
             title={`Field policy: ${policy}`}
         >
             policy
@@ -99,7 +99,7 @@ function part6_Value(field: Meta.Field) {
     const low = !value;
     return (
         <div
-            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
+            className={classNames("px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
             title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
         >
             value
@@ -114,7 +114,7 @@ function part7_FormCrossrefs(field: Meta.Field) {
     return (
         <div
             className={classNames(
-                "px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", low && 'opacity-25')}
+                "px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900", low && 'opacity-25')}
             title={title}
         >
             <IconInOut className="w-3 h-4" />
