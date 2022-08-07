@@ -113,6 +113,20 @@ function part6_Value(field: Meta.Field) {
     );
 }
 
+function part7_FormCrossrefs(field: Meta.Field) {
+    const { displayname = '', type = 'NOTYPE', dbname, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
+    const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
+    return (
+        <div
+            className={classNames(
+                "px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !rfield && !rfieldform && 'opacity-25')}
+            title={titleColumnRef}
+        >
+            <IconInOut className="w-3 h-4" />
+        </div>
+    );
+}
+
 function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
     const { path_ext } = field.mani;
     return (
@@ -190,12 +204,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {part6_Value(field)}
 
             {/* 7. ref */}
-            <div
-                className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !rfield && !rfieldform && 'opacity-25')}
-                title={titleColumnRef}
-            >
-                <IconInOut className="w-3 h-4" />
-            </div>
+            {part7_FormCrossrefs(field)}
 
             {/* 8. id */}
             <div
