@@ -18,7 +18,30 @@ type FieldRowProps = {
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
     const icon = useIt ? IconUseIt1 : IconUseIt0;
-    return icon({title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt? "stroke-[#216100] stroke-[3]" : "stroke-[#888]")});
+    return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
+}
+
+function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTYPE', displayname: string) {
+    return (<>
+        {type === 'text'
+            ?
+            <div className="flex">
+                <div
+                    className={classNames(
+                        "px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm cursor-default",
+                        useIt ? "bg-gray-300 text-gray-800" : "opacity-25",
+                    )}
+                    title={`Matching pattern: ${displayname}`}
+                >
+                    patern
+                </div>
+            </div>
+            :
+            //displayname
+            <div title={`Dispaly name: ${displayname}`}>
+                {`${displayname.substring(0, 15)}${displayname.length > 15 ? '...' : ''}`}
+            </div>}
+    </>);
 }
 
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
@@ -33,25 +56,6 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
     const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
     const hasPath = !!Object.keys(field.path).length;
     //console.log(`isSelected: ${isSelected} field.ridx: ${field.ridx} thisSelectedRow.field: ${thisSelectedRow.field}`);
-
-    const columnDispText = type === 'text'
-        ?
-        <div className="flex">
-            <div
-                className={classNames(
-                    "px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm cursor-default",
-                    useit ? "bg-gray-300 text-gray-800" : "opacity-25",
-                )}
-                title={`Matching pattern: ${displayname}`}
-            >
-                patern
-            </div>
-        </div>
-        :
-        //displayname
-        <div title={`Dispaly name: ${displayname}`}>
-            {`${displayname.substr(0, 15)}${displayname.length > 15 ? '...' : ''}`}
-        </div>;
 
     const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
@@ -104,7 +108,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
             {/* 4. display text */}
             <div className="flex-1 cursor-default whitespace-nowrap">
-                {columnDispText}
+                {part4_DispText(useit, type, displayname)}
             </div>
 
             {/* <div className="w-[20%] pr-2 cursor-default overflow-hidden">
