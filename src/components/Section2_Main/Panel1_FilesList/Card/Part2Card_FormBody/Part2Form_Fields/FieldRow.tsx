@@ -58,26 +58,46 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
 }
 
 function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTYPE', displayname: string) {
-    return (<>
-        {type === 'text'
-            ?
-            <div className="flex">
-                <div
-                    className={classNames(
-                        "px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm cursor-default",
-                        useIt ? "bg-gray-300 text-gray-800" : "opacity-25",
-                    )}
-                    title={`Matching pattern: ${displayname}`}
-                >
-                    patern
+    return (
+        <div className="flex-1 cursor-default whitespace-nowrap">
+            {type === 'text'
+                ?
+                <div className="flex">
+                    <div
+                        className={classNames(
+                            "px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm cursor-default",
+                            useIt ? "bg-gray-300 text-gray-800" : "opacity-25",
+                        )}
+                        title={`Matching pattern: ${displayname}`}
+                    >
+                        patern
+                    </div>
                 </div>
-            </div>
-            :
-            //displayname
-            <div title={`Dispaly name: ${displayname}`}>
-                {`${displayname.substring(0, 15)}${displayname.length > 15 ? '...' : ''}`}
-            </div>}
-    </>);
+                :
+                //displayname
+                <div title={`Dispaly name: ${displayname}`}>
+                    {`${displayname.substring(0, 15)}${displayname.length > 15 ? '...' : ''}`}
+                </div>}
+
+            {/* TODO: */}
+            {/* <div className="w-[20%] pr-2 cursor-default overflow-hidden">
+                <div className="whitespace-nowrap overflow-ellipsis">{disp}</div>
+            </div> */}
+
+        </div>
+    );
+}
+
+function part5_Policy(field: Meta.Field) {
+    const { policy } = field.mani;
+    return (
+        <div
+            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !policy && "opacity-25")}
+            title={`Field policy: ${policy}`}
+        >
+            policy
+        </div>
+    );
 }
 
 function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
@@ -112,7 +132,7 @@ function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form:
 }
 
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
-    const { displayname = '', type = 'NOTYPE', dbname, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
+    const { displayname = '', type = 'NOTYPE', dbname, policy, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
 
     const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const selectThemFormAtom = form.type === 0 ? selectRowAtoms.cpassAtom : selectRowAtoms.loginAtom;
@@ -148,21 +168,10 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {part3_Preview(hasPreview, form, field, setSelectedRowThis)}
 
             {/* 4. display text */}
-            <div className="flex-1 cursor-default whitespace-nowrap">
-                {part4_DispText(useit, type, displayname)}
-            </div>
-
-            {/* <div className="w-[20%] pr-2 cursor-default overflow-hidden">
-                <div className="whitespace-nowrap overflow-ellipsis">{disp}</div>
-            </div> */}
+            {part4_DispText(useit, type, displayname)}
 
             {/* 5. policy */}
-            <div
-                className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !policy && "opacity-25")}
-                title={`Field policy: ${policy}`}
-            >
-                policy
-            </div>
+            {part5_Policy(field)}
 
             {/* 6. value */}
             <div
