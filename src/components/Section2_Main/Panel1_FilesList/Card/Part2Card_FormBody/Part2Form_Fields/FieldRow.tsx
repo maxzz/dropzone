@@ -44,6 +44,34 @@ function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTY
     </>);
 }
 
+function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
+    const { path_ext } = field.mani;
+    return (
+        <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
+            toggle={
+                <div
+                    className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default", hasPath ? 'text-gray-900' : 'text-red-500 opacity-50')}
+                    title={hasPath ? path_ext : 'no path'}
+                >
+                    path
+                </div>
+            }
+        >
+            {/* Popup content */}
+            {hasPath
+                ?
+                <div className="ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700">
+                    <FieldRowPath fileUs={fileUs} form={form} field={field} />
+                </div>
+                :
+                <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">
+                    This field has no path and cannot be used.
+                </div>
+            }
+        </UIToggleWithPortal>
+    );
+}
+
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
     const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
 
@@ -148,28 +176,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             </div>
 
             {/* 9. path */}
-            <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
-                toggle={
-                    <div
-                        className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default", hasPath ? 'text-gray-900' : 'text-red-500 opacity-50')}
-                        title={hasPath ? path_ext : 'no path'}
-                    >
-                        path
-                    </div>
-                }
-            >
-                {/* Popup content */}
-                {hasPath
-                    ?
-                    <div className="ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700">
-                        <FieldRowPath fileUs={fileUs} form={form} field={field} />
-                    </div>
-                    :
-                    <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">
-                        This field has no path and cannot be used.
-                    </div>
-                }
-            </UIToggleWithPortal>
+            {part9_Path(hasPreview, hasPath, fileUs, form, field)}
 
             {/* 10.done */}
         </div>
