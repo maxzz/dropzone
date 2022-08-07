@@ -22,6 +22,17 @@ function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
 }
 
+function part2_FieldType(type: Mani.FieldType | 'NOTYPE', field: Meta.Field) {
+    const { password } = field.mani;
+    return (<>
+        <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
+
+        <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password ? 'psw' : type}`}>
+            {`${password ? 'psw' : type}`}
+        </div>
+    </>);
+}
+
 function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, setSelectedRowThis: (update: SetStateAction<SelectRowType>) => void) {
     return (
         <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
@@ -131,11 +142,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {part1_UseIt(useit, field.pidx)}
 
             {/* 2. icon and text for field type */}
-            <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
-
-            <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password ? 'psw' : type}`}>
-                {`${password ? 'psw' : type}`}
-            </div>
+            {part2_FieldType(type, field)}
 
             {/* 3. icon preview and preview */}
             {part3_Preview(hasPreview, form, field, setSelectedRowThis)}
