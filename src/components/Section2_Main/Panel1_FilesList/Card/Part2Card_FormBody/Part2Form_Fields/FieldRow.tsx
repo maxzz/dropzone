@@ -58,10 +58,10 @@ function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTY
                 <div className="flex">
                     <div
                         className={classNames(
-                            "px-1 h-4 text-[10px] leading-[14px] border border-primary-600 rounded-sm cursor-default",
-                            useIt ? "bg-primary-300 text-primary-800" : "opacity-25",
+                            "px-1 h-4 text-[10px] leading-[12px] border-primary-600 border border-dotted rounded-sm cursor-default",
+                            useIt ? "bg-primary-300 text-primary-800" : "opacity-50",
                         )}
-                        title={`Matching pattern: ${displayname}`}
+                        title={`Matching pattern:\n${displayname}`}
                     >
                         patern
                     </div>
@@ -81,8 +81,10 @@ function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTY
     );
 }
 
+//TODO: why row w/ pattern selected w/ prev edit field?
+//TODO: move color primary and top parent, i.e. single place
+
 //TODO: className={classNames("row-field-framed", low && "opacity-25")}
-//TODO: color gray to primary and top parent
 // function borderDiv(low: boolean) {
 //     return (
 //         <div className=""></div>
@@ -93,10 +95,7 @@ function part5_Policy(field: Meta.Field) {
     const { policy } = field.mani;
     const low = !policy;
     return (
-        <div
-            className={classNames("row-field-framed", low && "opacity-25")}
-            title={`Field policy: ${policy}`}
-        >
+        <div className={classNames("row-field-framed", low && "opacity-25")} title={`Field policy: ${policy}`}>
             policy
         </div>
     );
@@ -104,12 +103,10 @@ function part5_Policy(field: Meta.Field) {
 
 function part6_Value(field: Meta.Field) {
     const { value, choosevalue } = field.mani;
+    const title = `Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`;
     const low = !value;
     return (
-        <div
-            className={classNames("row-field-framed", low && "opacity-25")}
-            title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
-        >
+        <div className={classNames("row-field-framed", low && "opacity-25")} title={title}>
             value
         </div>
     );
@@ -120,10 +117,7 @@ function part7_FormCrossrefs(field: Meta.Field) {
     const title = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
     const low = !rfield && !rfieldform;
     return (
-        <div
-            className={classNames("row-field-framed", low && 'opacity-25')}
-            title={title}
-        >
+        <div className={classNames("row-field-framed", low && 'opacity-25')} title={title}>
             <IconInOut className="w-3 h-4" />
         </div>
     );
@@ -132,10 +126,7 @@ function part7_FormCrossrefs(field: Meta.Field) {
 function part8_Id(field: Meta.Field) {
     const { dbname } = field.mani;
     return (
-        <div
-            className="row-field-framed"
-            title={`Value ID: ${dbname}`}
-        >
+        <div className="row-field-framed" title={`Value ID: ${dbname}`}>
             id
         </div>
     );
@@ -146,10 +137,7 @@ function part9_Path(hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Me
     return (
         <UIToggleWithPortal title={hasPath ? path_ext : 'no path'}
             toggle={<>path</>}
-            className={classNames(
-                "row-field-framed",
-                !hasPath && 'text-red-500 opacity-50'
-            )}
+            className={classNames("row-field-framed", !hasPath && 'text-red-500 opacity-50')}
         >
             {/* Popup content */}
             {hasPath
