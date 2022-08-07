@@ -9,13 +9,6 @@ import { IconInOut, IconPreview, IconUseIt0, IconUseIt1 } from '@ui/UIIconSymbol
 import { classNames } from '@/utils/classnames';
 import { SelectRowType } from '@/store/store-types';
 
-type FieldRowProps = {
-    fileUs: FileUs;
-    form: Meta.Form;
-    field: Meta.Field;
-    selectRowAtoms: SelectRowAtomsType;
-};
-
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
     const icon = useIt ? IconUseIt1 : IconUseIt0;
@@ -90,9 +83,10 @@ function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTY
 
 function part5_Policy(field: Meta.Field) {
     const { policy } = field.mani;
+    const low = !policy;
     return (
         <div
-            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !policy && "opacity-25")}
+            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
             title={`Field policy: ${policy}`}
         >
             policy
@@ -102,9 +96,10 @@ function part5_Policy(field: Meta.Field) {
 
 function part6_Value(field: Meta.Field) {
     const { value, choosevalue } = field.mani;
+    const low = !value;
     return (
         <div
-            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !value && "opacity-25")}
+            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
             title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
         >
             value
@@ -114,13 +109,14 @@ function part6_Value(field: Meta.Field) {
 }
 
 function part7_FormCrossrefs(field: Meta.Field) {
-    const { displayname = '', type = 'NOTYPE', dbname, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
-    const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
+    const { rfield, rfieldindex, rfieldform } = field.mani;
+    const title = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
+    const low = !rfield && !rfieldform;
     return (
         <div
             className={classNames(
-                "px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !rfield && !rfieldform && 'opacity-25')}
-            title={titleColumnRef}
+                "px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", low && 'opacity-25')}
+            title={title}
         >
             <IconInOut className="w-3 h-4" />
         </div>
@@ -128,7 +124,7 @@ function part7_FormCrossrefs(field: Meta.Field) {
 }
 
 function part8_Id(field: Meta.Field) {
-    const { displayname = '', type = 'NOTYPE', dbname, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
+    const { dbname } = field.mani;
     return (
         <div
             className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900"
@@ -170,8 +166,15 @@ function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form:
     );
 }
 
+type FieldRowProps = {
+    fileUs: FileUs;
+    form: Meta.Form;
+    field: Meta.Field;
+    selectRowAtoms: SelectRowAtomsType;
+};
+
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
-    const { displayname = '', type = 'NOTYPE', dbname, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
+    const { displayname = '', type = 'NOTYPE', rfieldindex, useit, } = field.mani;
 
     const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const selectThemFormAtom = form.type === 0 ? selectRowAtoms.cpassAtom : selectRowAtoms.loginAtom;
@@ -180,8 +183,6 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
 
     const hasPreview = !!field.path.loc;
     const hasPath = !!Object.keys(field.path).length;
-
-    const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
     const isSelected = form.view?.rects.length && field.ridx === selectedRowThis.field;
 
