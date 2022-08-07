@@ -104,7 +104,6 @@ function part6_Value(field: Meta.Field) {
         >
             value
         </div>
-
     );
 }
 
@@ -127,7 +126,7 @@ function part8_Id(field: Meta.Field) {
     const { dbname } = field.mani;
     return (
         <div
-            className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900"
+            className="px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900"
             title={`Value ID: ${dbname}`}
         >
             id
@@ -135,21 +134,15 @@ function part8_Id(field: Meta.Field) {
     );
 }
 
-function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
+function part9_Path(hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
     const { path_ext } = field.mani;
     return (
-        <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
-            toggle={
-                <div
-                    className={classNames(
-                        "px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default",
-                        hasPath ? 'text-gray-900' : 'text-red-500 opacity-50'
-                    )}
-                    title={hasPath ? path_ext : 'no path'}
-                >
-                    path
-                </div>
-            }
+        <UIToggleWithPortal title={hasPath ? path_ext : 'no path'}
+            toggle={<>path</>}
+            className={classNames(
+                "px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default",
+                hasPath ? 'text-gray-900' : 'text-red-500 opacity-50'
+            )}
         >
             {/* Popup content */}
             {hasPath
@@ -223,7 +216,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {part8_Id(field)}
 
             {/* 9. path */}
-            {part9_Path(hasPreview, hasPath, fileUs, form, field)}
+            {part9_Path(hasPath, fileUs, form, field)}
 
             {/* 10.done */}
         </div>
