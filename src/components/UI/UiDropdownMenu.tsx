@@ -1,6 +1,8 @@
 import React, { HTMLAttributes } from 'react';
 import { styled, keyframes } from '@stitches/react';
+import { IconChevronRight } from './UIIconSymbols';
 import * as Primitive from '@radix-ui/react-dropdown-menu';
+import type { PopperContentProps } from '@radix-ui/react-popper';
 
 //#region content and trigger
 
@@ -30,7 +32,7 @@ const slideLeftAndFade = keyframes({
 
 // Menu content
 
-const StyledContent = styled(Primitive.Content, {
+const MainContent = styled(Primitive.Content, {
     minWidth: 220,
     backgroundColor: 'white',
     borderRadius: 6,
@@ -53,7 +55,7 @@ const StyledContent = styled(Primitive.Content, {
     },
 });
 
-const StyledTrigger = styled(Primitive.Trigger, {
+const MainTrigger = styled(Primitive.Trigger, {
     outline: '2px solid transparent',
     outlineOffset: '2px',
 });
@@ -127,17 +129,9 @@ const StyledRadioItem = styled(Primitive.RadioItem, { ...itemStyles });
 
 // Sub menus
 
-const StyledSubContent = styled(Primitive.SubContent, { ...StyledContent });
+const StyledSubContent = styled(Primitive.SubContent, { ...MainContent });
 
-function SubContent(props: HTMLAttributes<HTMLDivElement> & { sideOffset?: number; alignOffset?: number; }) {
-    return (
-        <Primitive.Portal>
-            <StyledSubContent {...props} />
-        </Primitive.Portal>
-    );
-}
-
-const StyledSubTrigger = styled(Primitive.SubTrigger, {
+const SubTrigger = styled(Primitive.SubTrigger, {
     '&[data-state="open"]': {
         backgroundColor: 'var(--tm-primary-300)', // violet.violet4,
         color: 'var(--tm-primary-900)', // violet.violet11,
@@ -155,13 +149,54 @@ export const RightSlot = styled('div', {
     '[data-disabled] &': { color: 'var(--tm-primary-400)' }, // mauve.mauve8
 });
 
+export function TriggerSubs({ label }: { label: string; }) {
+    return (
+        <MenuSubTrigger>
+            {label}
+            <RightSlot>
+                <IconChevronRight className="w-4 h-4" />
+            </RightSlot>
+        </MenuSubTrigger>
+    );
+}
+
+function SubContentPortal(props: HTMLAttributes<HTMLDivElement> & PopperContentProps) {
+    return (
+        <Primitive.Portal container={document.getElementById('portal')}>
+            <StyledSubContent sideOffset={2} alignOffset={-4} {...props} />
+        </Primitive.Portal>
+    );
+}
+
+function SubContent(props: HTMLAttributes<HTMLDivElement> & PopperContentProps) {
+    return (
+        <StyledSubContent sideOffset={2} alignOffset={-4} {...props} />
+    );
+}
+
+// content with portal
+
+function MainContentPortal(props: HTMLAttributes<HTMLDivElement> & PopperContentProps) {
+    return (
+        <Primitive.Portal container={document.getElementById('portal')}>
+            <MainContent {...props} />
+        </Primitive.Portal>
+    );
+}
+
 // exports
 
-export const Menu = Primitive.Root;
 export const MenuPortal = Primitive.Portal;
-export const MenuTrigger = StyledTrigger;
 
-export const MenuContent = StyledContent;
+export const Menu = Primitive.Root;
+export const MenuTrigger = MainTrigger;
+export const MenuContent = MainContent;
+export const MenuContentPortal = MainContentPortal;
+
+export const MenuSub = Primitive.Sub;
+export const MenuSubTrigger = SubTrigger;
+export const MenuSubContent = SubContent;
+export const MenuSubContentPortal = SubContentPortal;
 
 export const MenuItem = StyledMenuItem;
 export const MenuRadioGroup = Primitive.RadioGroup;
@@ -170,8 +205,3 @@ export const MenuItemIndicator = StyledItemIndicator;
 export const MenuCheckboxItem = StyledCheckboxItem;
 export const MenuSeparator = StyledSeparator;
 export const MenuLabel = StyledLabel;
-
-export const MenuSub = Primitive.Sub;
-export const MenuSubTrigger = StyledSubTrigger;
-export const MenuSubContent = StyledSubContent;
-export const MenuSubContentPortal = SubContent;
