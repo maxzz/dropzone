@@ -23,7 +23,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
     return (<>
         {(hasLogin || hasCpass) &&
-            <div className={classNames("px-2 bg-gray-200 text-gray-800", open && "pb-2")}>
+            <div className={classNames("px-2 bg-primary-200 text-primary-800", open && "pb-2")}>
 
                 {sizeNormal &&
                     <CardNormalButtons buttonsDisp={buttons} openAtom={openAtom} />
@@ -35,7 +35,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
                             {formIdxName(formIdx)}
                         </div>
 
-                        <Part1Form_Header fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} />
+                        <Part1Form_Header fileUsAtom={fileUsAtom} formIdx={formIdx} selectRowAtoms={selectRowAtoms} />
                         <Part2Form_Fields fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} />
                     </Fragment>
                 ))}

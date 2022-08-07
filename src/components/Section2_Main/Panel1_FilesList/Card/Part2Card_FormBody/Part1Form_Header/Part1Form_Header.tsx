@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
 import { IconGear, IconOptionsLock, IconOptionsQL } from '@ui/UIIconSymbols';
 import { FieldRowPreview } from '../Part2Form_Fields/FieldRowPreview';
@@ -11,97 +11,80 @@ export const BtnShading: React.CSSProperties = {
     boxShadow: '0px 1px #64646420',
 };
 
-function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
+function Option_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
     const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
-    return (
-        <>
-            {useit && <IconOptionsLock className="w-3 h-3" title={title} />}
-        </>
-    );
+    return (<>
+        {useit && <IconOptionsLock className="w-3 h-3" title={title} />}
+    </>);
 }
 
-// function FormOptionLockFields({ lockfields }: { lockfields: string | undefined; }) {
-//     const useit = lockfields == '1';
-//     const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
-//     return (
-//         <div className={`px-2 h-6 leading-6 border border-gray-500 rounded ${useit ? '' : 'opacity-25'}`} title={title} style={BtnShading}>
-//             lock
-//         </div>
-//     );
-// }
-
-function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
+function Option_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
-    return (
-        <>
-            {useit && <IconOptionsQL className="w-[10px] h-[10px]" title={title} />}
-        </>
-    );
+    return (<>
+        {useit && <IconOptionsQL className="w-2.5 h-2.5" title={title} />}
+    </>);
 }
 
-// function FormOptionQuickLink({ ql }: { ql: string | undefined; }) {
-//     const useit = ql == '1';
-//     const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
-//     return (
-//         <div className={`px-2 h-6 leading-6 border border-gray-500 rounded text-[.65rem] ${useit ? '' : 'opacity-25'}`} title={title} style={BtnShading}>
-//             QL
-//         </div>
-//     );
-// }
-
-function FormEditButton({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
+function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
     const setFormEditorData = useSetAtom(formEditorDataAtom);
     return (
         <div
-            className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`} title="Edit detection options" style={BtnShading}
-            onClick={() => setFormEditorData({ fileUsAtom, formIdx: formType })}
+            className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`}
+            onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
+            title="Edit detection options"
+            style={BtnShading}
         >
             <IconGear className="w-4 h-4 stroke-[1.2]" />
         </div>
     );
 }
 
-function OptionsFormPreview({ form, formType, selectRowAtoms, small, setSmall }: { form: Meta.Form; formType: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>; }) {
-    const selectedRowAtom = formType === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
+function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall }: { form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>; }) {
+    const selectedRowAtom = formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
     return (
-        <div className="" onClick={() => setSmall((v) => !v)}>
-            <FieldRowPreview small={small} form={form} selected={selectedRow.field} className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
+        <div onClick={() => setSmall((v) => !v)}>
+            <FieldRowPreview
+                className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
+                small={small}
+                form={form}
+                selected={selectedRow.field}
                 onSelected={(selected: number) => setSelectedRow({ field: selected, form: form.type })}
             />
         </div>
     );
 }
 
-export function Part1Form_Header({ fileUsAtom, formType, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formType: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formIdx: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+
+    const [small, setSmall] = useState(true);
     const fileUs = useAtomValue(fileUsAtom);
-    const meta = fileUs.meta?.[formType];
+    const meta = fileUs.meta?.[formIdx];
     if (!meta) {
         return null;
     }
-    const [small, setSmall] = useState(true);
     const form = meta.mani;
     const detection = form?.detection || {};
     const options = form?.options || {};
     const hasFormPreview = !!meta?.view?.rects.length;
     return (
-        <div className="relative py-1 flex justify-between text-xs leading-5 bg-gray-300">
+        <div className="relative py-1 flex justify-between text-xs leading-5 bg-primary-300">
 
             <div className={`place-self-start flex ${small ? 'space-x-1 items-center' : 'flex-col items-stretch space-y-1 mr-1'}`}>
-                <FormOptionsDetection fileUsAtom={fileUsAtom} formType={formType} />
+                <FormOptionsDetection fileUsAtom={fileUsAtom} formType={formIdx} />
                 <FormOptionsPool names_ext={detection.names_ext} />
-                <FormEditButton fileUsAtom={fileUsAtom} formType={formType} />
+                <FormEditButton fileUsAtom={fileUsAtom} formIdx={formIdx} />
 
                 <div className="flex items-center">
-                    <FormOptionLockFields lockfields={options.lockfields} />
-                    <FormOptionQuickLink ql={options.usequicklink} />
+                    <Option_LockFields lockfields={options.lockfields} />
+                    <Option_QuickLink ql={options.usequicklink} />
                 </div>
             </div>
 
             {hasFormPreview &&
-                <OptionsFormPreview form={meta} formType={formType} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />
+                <FormPreview form={meta} formIdx={formIdx} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />
             }
         </div>
     );
