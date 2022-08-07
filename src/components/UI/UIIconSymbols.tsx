@@ -128,7 +128,19 @@ export function UISymbolDefs() {
                     <path d="m16.3 5 4.55 5.51H7.55" />
                 </symbol>
 
-                {/* Info */}
+                {/* // form options */}
+
+                <symbol id="options-lock" viewBox="0 0 24 24">
+                    <path d="M5.99 8.57h12.02c1.09 0 1.98.89 1.98 1.98v4.01a8 8 0 0 1-15.98 0v-4.01c0-1.09.89-1.98 1.98-1.98Z" />
+                    <path d="M17.18 6.64v1.93H6.82V6.64a5.17 5.17 0 1 1 10.36 0Z" />
+                    <ellipse cx="12" cy="15.63" rx="2.01" ry="1.94" />
+                </symbol>
+
+                <symbol id="options-ql" viewBox="0 0 24 24">
+                    <path strokeLinejoin="round" d="m4.46 22.56 14.9-12.07a824.5 824.5 0 0 0-7.02-1.78l7.2-7.27h-8.96L5.15 12.75l7.11-.75S4.59 22.19 4.47 22.56Z" />
+                </symbol>
+
+                {/* info */}
 
                 <symbol id="icon-folder" viewBox="0 0 256 256">
                     <path d="M240.258 111.814A14.034 14.034 0 0 0 228.9 106H214V88a14.016 14.016 0 0 0-14-14h-69.333a2.013 2.013 0 0 1-1.2-.4l-27.734-20.8a14.087 14.087 0 0 0-8.4-2.8H40a14.016 14.016 0 0 0-14 14v144c0 .038.005.075.006.113c.001.085.007.169.013.253a6.07 6.07 0 0 0 .074.651c.026.154.059.306.097.456c.015.062.03.123.047.184c.052.18.112.355.179.527c.012.031.022.064.035.095a6.085 6.085 0 0 0 .293.613c.01.02.024.039.035.059q.145.256.315.496c.013.02.024.041.039.061c.026.036.057.068.084.103c.092.122.188.24.289.355a5.919 5.919 0 0 0 .488.491c.048.044.093.088.142.13a6.171 6.171 0 0 0 .522.396l.013.008a5.947 5.947 0 0 0 .554.325c.048.026.097.047.147.071a5.745 5.745 0 0 0 .637.267q.226.08.46.141c.063.017.126.035.19.05c.16.036.324.064.49.088c.058.008.116.02.176.026A6.047 6.047 0 0 0 32 214h176a6 6 0 0 0 5.692-4.103l28.49-85.47a14.034 14.034 0 0 0-1.924-12.613zM40 62h53.334a2.013 2.013 0 0 1 1.2.4l27.733 20.8a14.087 14.087 0 0 0 8.4 2.8H200a2.003 2.003 0 0 1 2 2v18H69.766a13.983 13.983 0 0 0-13.282 9.573L38 171.026V64a2.003 2.003 0 0 1 2-2zm190.798 58.632L203.676 202H40.325l27.544-82.632A1.998 1.998 0 0 1 69.766 118H228.9a2 2 0 0 1 1.898 2.632z" />
@@ -412,7 +424,27 @@ export function IconInOut({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTM
     );
 }
 
-// Info
+// form options
+
+export function IconOptionsLock({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#options-lock" />
+        </svg>
+    );
+}
+
+export function IconOptionsQL({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#options-ql" />
+        </svg>
+    );
+}
+
+// info
 
 export function IconFolder({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
