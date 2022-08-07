@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom, useSetAtom } from 'jotai';
+import { SetStateAction, useAtom, useSetAtom } from 'jotai';
 import { FileUs, SelectRowAtomsType } from '@/store';
 import { FieldRowPreview } from './FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
@@ -7,6 +7,7 @@ import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Part4Card_UI/UIToggleWithPortal';
 import { IconInOut, IconPreview, IconUseIt0, IconUseIt1 } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
+import { SelectRowType } from '@/store/store-types';
 
 type FieldRowProps = {
     fileUs: FileUs;
@@ -19,6 +20,30 @@ function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
     const icon = useIt ? IconUseIt1 : IconUseIt0;
     return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
+}
+
+function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, setThisSelectedRow: (update: SetStateAction<SelectRowType>) => void) {
+    return (
+        <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
+            toggle={
+                <IconPreview className={classNames("w-4 h-4", !hasPreview && 'opacity-25')} />
+            }
+        >
+            {/* Popup content */}
+            {hasPreview &&
+                <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
+                    <FieldRowPreview
+                        form={form} small={false}
+                        selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
+                        className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
+                    />
+                    <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">
+                        X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}
+                    </div>
+                </div>
+            }
+        </UIToggleWithPortal>
+    );
 }
 
 function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTYPE', displayname: string) {
@@ -50,7 +75,10 @@ function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form:
         <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
             toggle={
                 <div
-                    className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default", hasPath ? 'text-gray-900' : 'text-red-500 opacity-50')}
+                    className={classNames(
+                        "px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default",
+                        hasPath ? 'text-gray-900' : 'text-red-500 opacity-50'
+                    )}
                     title={hasPath ? path_ext : 'no path'}
                 >
                     path
@@ -114,25 +142,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             </div>
 
             {/* 3. icon preview and preview */}
-            <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
-                toggle={
-                    <IconPreview className={classNames("w-4 h-4", !hasPreview && 'opacity-25')} />
-                }
-            >
-                {/* Popup content */}
-                {hasPreview &&
-                    <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
-                        <FieldRowPreview
-                            form={form} small={false}
-                            selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
-                            className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
-                        />
-                        <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">
-                            X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}
-                        </div>
-                    </div>
-                }
-            </UIToggleWithPortal>
+            {part3_Preview(hasPreview, form, field, setThisSelectedRow)}
 
             {/* 4. display text */}
             <div className="flex-1 cursor-default whitespace-nowrap">
