@@ -100,6 +100,19 @@ function part5_Policy(field: Meta.Field) {
     );
 }
 
+function part6_Value(field: Meta.Field) {
+    const { value, choosevalue } = field.mani;
+    return (
+        <div
+            className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !value && "opacity-25")}
+            title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
+        >
+            value
+        </div>
+
+    );
+}
+
 function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
     const { path_ext } = field.mani;
     return (
@@ -132,7 +145,7 @@ function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form:
 }
 
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
-    const { displayname = '', type = 'NOTYPE', dbname, policy, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
+    const { displayname = '', type = 'NOTYPE', dbname, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
 
     const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const selectThemFormAtom = form.type === 0 ? selectRowAtoms.cpassAtom : selectRowAtoms.loginAtom;
@@ -174,12 +187,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {part5_Policy(field)}
 
             {/* 6. value */}
-            <div
-                className={classNames("px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900", !value && "opacity-25")}
-                title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
-            >
-                value
-            </div>
+            {part6_Value(field)}
 
             {/* 7. ref */}
             <div
