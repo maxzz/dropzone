@@ -127,6 +127,18 @@ function part7_FormCrossrefs(field: Meta.Field) {
     );
 }
 
+function part8_Id(field: Meta.Field) {
+    const { displayname = '', type = 'NOTYPE', dbname, value, choosevalue, rfield, rfieldindex, rfieldform, useit, } = field.mani;
+    return (
+        <div
+            className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900"
+            title={`Value ID: ${dbname}`}
+        >
+            id
+        </div>
+    );
+}
+
 function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
     const { path_ext } = field.mani;
     return (
@@ -207,12 +219,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             {part7_FormCrossrefs(field)}
 
             {/* 8. id */}
-            <div
-                className="px-1 h-4 text-[.65rem] leading-[.75rem] border border-gray-400 rounded cursor-default text-gray-900"
-                title={`Value ID: ${dbname}`}
-            >
-                id
-            </div>
+            {part8_Id(field)}
 
             {/* 9. path */}
             {part9_Path(hasPreview, hasPath, fileUs, form, field)}
