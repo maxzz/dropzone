@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { atom, PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
-import { IconGear, IconOptionsLock, IconOptionsQL } from '@ui/UIIconSymbols';
+import { IconCross, IconGear, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
 import { FieldRowPreview } from '../Part2Form_Fields/FieldRowPreview';
 import { FormOptionsDetection } from './FormOptionsDetection';
 import { FormOptionsPool } from './FormOptionsPool';
@@ -41,24 +41,54 @@ function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; f
     );
 }
 
-function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall }: { form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>; }) {
+function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, previewStateAtom }: {
+    form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>;
+    previewStateAtom: PrimitiveAtom<PreviewAs>;
+}) {
+    const [previewState, setPreviewState] = useAtom(previewStateAtom);
+
     const selectedRowAtom = formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
+
+    function onClick() {
+        setPreviewState(() => PreviewAs.small);
+    }
+
     return (
-        <div onClick={() => setSmall((v) => !v)}>
-            <FieldRowPreview
-                className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
-                small={small}
-                form={form}
-                selected={selectedRow.field}
-                onSelected={(selected: number) => setSelectedRow({ field: selected, form: form.type })}
-            />
+        <div className="relative mr-1">
+            <div 
+            className="absolute right-0 top-0 flex items-center bg-orange-500/50" 
+            onClick={() => setSmall((v) => !v)}
+            >
+                {small
+                    ? <IconPreview className="w-5 h-5" />
+                    : <IconCross className="p-1 w-5 h-5" />
+                }
+            </div>
+            <div className="" onClick={() => setSmall((v) => !v)}>
+                <FieldRowPreview
+                    className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
+                    small={small}
+                    form={form}
+                    selected={selectedRow.field}
+                    onSelected={(selected: number) => setSelectedRow({ field: selected, form: form.type })}
+                />
+
+            </div>
+
         </div>
     );
 }
 
-export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formIdx: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+const enum PreviewAs {
+    none,
+    small,
+    full,
+}
 
+export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formIdx: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+    const previewStateAtom = useState(atom(PreviewAs.none))[0];
+    const previewState = useAtomValue(previewStateAtom);
     const [small, setSmall] = useState(true);
     const fileUs = useAtomValue(fileUsAtom);
     const meta = fileUs.meta?.[formIdx];
@@ -70,7 +100,7 @@ export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { file
     const options = form?.options || {};
     const hasFormPreview = !!meta?.view?.rects.length;
     return (
-        <div className="relative py-1 flex justify-between text-xs leading-5 bg-primary-300">
+        <div className="relative py-1 text-xs leading-5 flex justify-between bg-primary-300 border-t border-b border-primary-400">
 
             <div className={`place-self-start flex ${small ? 'space-x-1 items-center' : 'flex-col items-stretch space-y-1 mr-1'}`}>
                 <FormOptionsDetection fileUsAtom={fileUsAtom} formType={formIdx} />
@@ -84,7 +114,14 @@ export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { file
             </div>
 
             {hasFormPreview &&
-                <FormPreview form={meta} formIdx={formIdx} selectRowAtoms={selectRowAtoms} small={small} setSmall={setSmall} />
+                <FormPreview
+                    form={meta}
+                    formIdx={formIdx}
+                    selectRowAtoms={selectRowAtoms}
+                    small={small}
+                    setSmall={setSmall}
+                    previewStateAtom={previewStateAtom}
+                />
             }
         </div>
     );

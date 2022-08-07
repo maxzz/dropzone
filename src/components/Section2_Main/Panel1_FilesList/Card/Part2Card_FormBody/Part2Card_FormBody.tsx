@@ -31,7 +31,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
                 {open && items.map(([hasForm, formIdx]) => hasForm && (
                     <Fragment key={formIdx}>
-                        <div className="pt-2 text-sm font-bold border-b border-primary-400">
+                        <div className="pt-2 text-sm font-bold">
                             {formIdxName(formIdx)}
                         </div>
 
