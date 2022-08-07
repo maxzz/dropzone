@@ -174,10 +174,15 @@ export function UISymbolDefs() {
 
                 {/* misc */}
 
-                <symbol id="menu-hamburger" viewBox="0 0 21 21">
+                <symbol id="icon-burger" viewBox="0 0 21 21">
                     <path d="M4.5 6.5h12" />
                     <path d="M4.498 10.5h11.997" />
                     <path d="M4.5 14.5h11.995" />
+                </symbol>
+
+                <symbol id="icon-cross" viewBox="0 0 24 24">
+                    <path d="m2 2 20 20" />
+                    <path d="M2 22 22 2" />
                 </symbol>
 
                 {/* Login and password change */}
@@ -484,7 +489,7 @@ export function IconOpenLink({ title, ...rest }: SVGAttributes<SVGSVGElement> & 
 
 export function IconGear({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg fill="none" stroke="currentColor" {...rest}>
+        <svg fill="none" stroke="currentColor" strokeLinecap="round" {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-gear" />
         </svg>
@@ -497,7 +502,16 @@ export function IconMenuHamburger({ title, ...rest }: SVGAttributes<SVGSVGElemen
     return (
         <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...rest}>
             {title && <title>{title}</title>}
-            <use xlinkHref="#menu-hamburger" />
+            <use xlinkHref="#icon-burger" />
+        </svg>
+    );
+}
+
+export function IconCross({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-cross" />
         </svg>
     );
 }

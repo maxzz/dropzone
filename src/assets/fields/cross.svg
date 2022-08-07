@@ -1,0 +1,10 @@
+<svg id="renders" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10}
+    </style>
+  </defs>
+  <path fill="#e6e6e6" d="M0 0h24v24H0z"/>
+  <path class="cls-1" d="m2 2 20 20"/>
+  <path class="cls-1" d="M2 22 22 2"/>
+</svg>
