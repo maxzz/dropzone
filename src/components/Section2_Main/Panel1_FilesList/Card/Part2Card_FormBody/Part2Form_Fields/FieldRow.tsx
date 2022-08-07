@@ -22,7 +22,7 @@ function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
 }
 
-function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, setThisSelectedRow: (update: SetStateAction<SelectRowType>) => void) {
+function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, setSelectedRowThis: (update: SetStateAction<SelectRowType>) => void) {
     return (
         <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
             toggle={
@@ -34,7 +34,7 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
                 <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
                     <FieldRowPreview
                         form={form} small={false}
-                        selected={field.ridx} onSelected={(selected: number) => { setThisSelectedRow({ field: selected, form: form.type }); }}
+                        selected={field.ridx} onSelected={(selected: number) => { setSelectedRowThis({ field: selected, form: form.type }); }}
                         className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
                     />
                     <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">
@@ -101,35 +101,31 @@ function part9_Path(hasPreview: boolean, hasPath: boolean, fileUs: FileUs, form:
 }
 
 export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps): JSX.Element {
-    const { displayname = '', type = 'NOTYPE', dbname, path_ext, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
+    const { displayname = '', type = 'NOTYPE', dbname, policy, value, choosevalue, rfield, rfieldindex, rfieldform, password, useit, } = field.mani;
 
     const selectThisFormAtom = form.type === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
     const selectThemFormAtom = form.type === 0 ? selectRowAtoms.cpassAtom : selectRowAtoms.loginAtom;
-    const [thisSelectedRow, setThisSelectedRow] = useAtom(selectThisFormAtom);
-    const setThemSelectedRow = useSetAtom(selectThemFormAtom);
+    const [selectedRowThis, setSelectedRowThis] = useAtom(selectThisFormAtom);
+    const setSelectedRowThem = useSetAtom(selectThemFormAtom);
 
     const hasPreview = !!field.path.loc;
-    const isSelected = form.view?.rects.length && field.ridx === thisSelectedRow.field;
     const hasPath = !!Object.keys(field.path).length;
-    //console.log(`isSelected: ${isSelected} field.ridx: ${field.ridx} thisSelectedRow.field: ${thisSelectedRow.field}`);
 
     const titleColumnRef = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
 
-    function selectThisRow() {
+    const isSelected = form.view?.rects.length && field.ridx === selectedRowThis.field;
+
+    function selectRow() {
         if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.rother) {
-            setThemSelectedRow({ field: rfieldindex && form.rother[rfieldindex] || -1, form: 0 });
+            setSelectedRowThem({ field: rfieldindex && form.rother[rfieldindex] || -1, form: 0 });
         }
-        setThisSelectedRow({ field: isSelected ? -1 : field.ridx, form: form.type });
+        setSelectedRowThis({ field: isSelected ? -1 : field.ridx, form: form.type });
     }
 
     return (
         <div
-            className={classNames(
-                "flex items-center text-xs h-6 space-x-1 overflow-hidden",
-                useit && 'bg-[#bbffdf42]',
-                isSelected && '!bg-blue-200',
-            )}
-            onClick={selectThisRow}
+            className={classNames("flex items-center text-xs h-6 space-x-1 overflow-hidden", useit && 'bg-[#bbffdf42]', isSelected && '!bg-blue-200')}
+            onClick={selectRow}
         >
             {/* 1. use it */}
             {part1_UseIt(useit, field.pidx)}
@@ -142,7 +138,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
             </div>
 
             {/* 3. icon preview and preview */}
-            {part3_Preview(hasPreview, form, field, setThisSelectedRow)}
+            {part3_Preview(hasPreview, form, field, setSelectedRowThis)}
 
             {/* 4. display text */}
             <div className="flex-1 cursor-default whitespace-nowrap">
