@@ -35,7 +35,7 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
         >
             {/* Popup content */}
             {hasPreview &&
-                <div className="w-[calc(1920px/4)] bg-gray-200 p-0.5 border border-gray-700">
+                <div className="w-[calc(1920px/4)] bg-primary-200 p-0.5 border border-primary-700">
                     <FieldRowPreview
                         form={form} small={false}
                         selected={field.ridx} onSelected={(selected: number) => { setSelectedRowThis({ field: selected, form: form.type }); }}
@@ -58,8 +58,8 @@ function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTY
                 <div className="flex">
                     <div
                         className={classNames(
-                            "px-1 h-4 text-[.65rem] leading-[.7rem] border border-gray-600 rounded-sm cursor-default",
-                            useIt ? "bg-gray-300 text-gray-800" : "opacity-25",
+                            "px-1 h-4 text-[10px] leading-[14px] border border-primary-600 rounded-sm cursor-default",
+                            useIt ? "bg-primary-300 text-primary-800" : "opacity-25",
                         )}
                         title={`Matching pattern: ${displayname}`}
                     >
@@ -81,12 +81,20 @@ function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTY
     );
 }
 
+//TODO: className={classNames("row-field-framed", low && "opacity-25")}
+//TODO: color gray to primary and top parent
+// function borderDiv(low: boolean) {
+//     return (
+//         <div className=""></div>
+//     );
+// }
+
 function part5_Policy(field: Meta.Field) {
     const { policy } = field.mani;
     const low = !policy;
     return (
         <div
-            className={classNames("px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
+            className={classNames("row-field-framed", low && "opacity-25")}
             title={`Field policy: ${policy}`}
         >
             policy
@@ -99,7 +107,7 @@ function part6_Value(field: Meta.Field) {
     const low = !value;
     return (
         <div
-            className={classNames("px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900", low && "opacity-25")}
+            className={classNames("row-field-framed", low && "opacity-25")}
             title={`Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`}
         >
             value
@@ -113,8 +121,7 @@ function part7_FormCrossrefs(field: Meta.Field) {
     const low = !rfield && !rfieldform;
     return (
         <div
-            className={classNames(
-                "px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900", low && 'opacity-25')}
+            className={classNames("row-field-framed", low && 'opacity-25')}
             title={title}
         >
             <IconInOut className="w-3 h-4" />
@@ -126,7 +133,7 @@ function part8_Id(field: Meta.Field) {
     const { dbname } = field.mani;
     return (
         <div
-            className="px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default text-gray-900"
+            className="row-field-framed"
             title={`Value ID: ${dbname}`}
         >
             id
@@ -140,18 +147,18 @@ function part9_Path(hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Me
         <UIToggleWithPortal title={hasPath ? path_ext : 'no path'}
             toggle={<>path</>}
             className={classNames(
-                "px-1 h-4 text-[10px] leading-[14px] border border-gray-400 rounded cursor-default",
-                hasPath ? 'text-gray-900' : 'text-red-500 opacity-50'
+                "row-field-framed",
+                !hasPath && 'text-red-500 opacity-50'
             )}
         >
             {/* Popup content */}
             {hasPath
                 ?
-                <div className="ml-4 w-[28rem] bg-gray-100 p-0.5 border border-gray-700">
+                <div className="ml-4 w-[28rem] bg-primary-100 p-0.5 border border-primary-700">
                     <FieldRowPath fileUs={fileUs} form={form} field={field} />
                 </div>
                 :
-                <div className="px-2 py-1 text-xs text-red-500 bg-gray-100 border border-gray-400">
+                <div className="px-2 py-1 text-xs text-red-500 bg-primary-100 border border-primary-400">
                     This field has no path and cannot be used.
                 </div>
             }

@@ -50,3 +50,13 @@
         aspect-ratio: 3 / 4;
     }
 }
+
+/* Filelist */
+
+@layer components {
+    
+    /* FieldRow */
+    .row-field-framed {
+        @apply px-1 h-4 text-[10px] leading-[14px] border border-primary-400 rounded cursor-default text-primary-900;
+    }
+}
