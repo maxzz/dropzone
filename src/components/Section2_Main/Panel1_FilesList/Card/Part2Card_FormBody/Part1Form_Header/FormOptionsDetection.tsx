@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType } from '@/store';
 import { Matching, Transform } from '@/store/manifest';
-import { ToggleWithPortal } from './FormOptionsPool';
+import { ToggleWithPortal } from './FormOptionsButton';
 import { UITableFromObject } from '../../Part4Card_UI/UITableFromObject';
 
 function woProtocol(url: string): string {
@@ -99,7 +99,7 @@ export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: Fil
                 </button>
                 */}
             </div>
-            
+
         </ToggleWithPortal>
     );
 }

@@ -1,64 +1,6 @@
-import React, { forwardRef, Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import { usePopper } from 'react-popper';
-import { useElementClickAway } from '@/hooks/useElementClickAway';
-import { UIIconUpDown } from '@ui/UIIconUpDown';
-import { BtnShading } from './Part1Form_Header';
+import React, { Fragment } from 'react';
 import { Transform } from '@/store/manifest';
-import { classNames } from '@/utils/classnames';
-
-type DropDownButtonProps = {
-    open?: boolean;
-    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-    text: string;
-};
-
-export const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
-    const disabled = !setOpen;
-    return (
-        <button
-            ref={ref}
-            className={classNames(
-                "pl-2 pr-1 h-6 leading-6 text-xs border border-primary-500 rounded flex items-center justify-between",
-                open && "bg-primary-300",
-                disabled && "opacity-25",
-            )}
-            onClick={() => !disabled && setOpen((v) => !v)}
-            style={BtnShading}
-        >
-            <div className="">
-                {text}
-            </div>
-
-            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIIconUpDown isUp={open} className="list-owner w-4 h-4 pt-0.5" />}
-        </button>
-    );
-});
-
-export function ToggleWithPortal({ children, text }: { children?: React.ReactNode; text: string; }) {
-    const [referenceElm, setReferenceElm] = React.useState<HTMLButtonElement | null>(null);
-    const [popperElm, setPopperElm] = React.useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end', strategy: 'fixed' });
-    const [open, setOpen] = React.useState(false);
-
-    useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
-
-    return (<>
-        <DropDownButton text={text} ref={setReferenceElm} open={open} setOpen={setOpen} />
-
-        {open &&
-            ReactDOM.createPortal(<div
-                ref={setPopperElm}
-                style={{ ...styles.popper, zIndex: 'inherit' }}
-                {...attributes.popper}
-                onClick={() => setOpen((v) => !v)}
-            >
-                {children}
-            </div>, document.getElementById('portal')!
-            )
-        }
-    </>);
-}
+import { DropDownButton, ToggleWithPortal } from './FormOptionsButton';
 
 export function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
