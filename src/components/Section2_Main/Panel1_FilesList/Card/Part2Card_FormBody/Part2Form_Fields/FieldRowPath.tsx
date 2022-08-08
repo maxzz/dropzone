@@ -3,7 +3,7 @@ import { Transform } from '@/store/manifest';
 
 function Section({ label }: { label: ReactNode; }) {
     return (
-        <div className="mt-2 mb-0.5 py-2 px-2 bg-primary-300 rounded flex space-x-1">
+        <div className="mt-2 mb-1 py-2 px-2 bg-primary-300 rounded flex space-x-1">
             <div className="text-primary-500">part:</div>
             <div className="font-bold">{label}</div>
         </div>
@@ -18,13 +18,13 @@ function PartSid({ part, label }: { part: MPath.sid; label: string; }) {
         {!!part &&
             <div>
                 <Section label={label} />
-                <div className="">
-                    {items.map(([key, val]) => {
-                        return <div className="flex items-center space-x-2" key={key}>
-                            <div className="font-bold text-primary-700">{key}:</div>
+                <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-1">
+                    {items.map(([key, val]) => (
+                        <Fragment key={key}>
+                            <div className="font-bold text-primary-700">{key}</div>
                             <div>{Transform.xmlRestore(val) || `""`}</div>
-                        </div>;
-                    })}
+                        </Fragment>
+                    ))}
                 </div>
             </div>
         }
@@ -37,7 +37,7 @@ function PartStr({ part, label }: { part: string | object; label: string; }) {
         {!!part &&
             <div>
                 <Section label={label} />
-                <div className="">{text}</div>
+                <div>{text}</div>
             </div>
         }
     </>);
@@ -57,28 +57,17 @@ function Part_P4({ part, label }: { part: MPath.p4[]; label: string; }) {
         {!!part &&
             <div>
                 <Section label={label} />
-                <div className="mx-2 grid grid-cols-[auto,1fr] border-b border-b-primary-400">
-                    {/* overflow-x-hidden */}
-                    {part.map((item, idx) => {
-                        return <Fragment key={idx}>
-                            {/* <div className="px-2 leading-5 border-l border-r border-t border-primary-400">{idx}</div>
-                            <div className="pl-2 leading-5 border-r border-t border-primary-400">{JSON.stringify(item)}</div> */}
-
-                            {/* <div className="px-2 leading-5 border-l border-r border-t border-primary-400">{idx}</div>
-                            <div className="pl-2 min-w-0 w-full leading-5 border-r border-t border-primary-400">{JSON.stringify(item)}</div> */}
-
-                            {/* <div className="box-content border-l border-r border-t border-primary-400"><div className="box-content px-2 leading-5">{idx}</div></div>
-                            <div className="box-content border-r border-t border-primary-400"><div className="box-content pl-2 leading-5">{JSON.stringify(item)}</div></div> */}
-
+                <div className="mx-px grid grid-cols-[auto,1fr] border-b border-b-primary-400">
+                    {part.map((item, idx) => (
+                        <Fragment key={idx}>
                             <div className="px-2 leading-5 border-l border-r border-t border-primary-400">{idx}</div>
                             <div className="px-2 overflow-x-hidden leading-5 border-r border-t border-primary-400" title={beautifyHint(item)}>
                                 <div className="overflow-x-hidden whitespace-nowrap overflow-ellipsis">
                                     {beautifyVal(item)}
                                 </div>
                             </div>
-
-                        </Fragment>;
-                    })}
+                        </Fragment>
+                    ))}
                 </div>
             </div>
         }
@@ -122,7 +111,7 @@ export function FieldRowPath({ field }: { field: Meta.Field; }) {
     return (
         <div className="w-[28rem] bg-primary-100 rounded p-0.5 border border-primary-700">
             <div className="pl-4 pb-1 text-xs bg-primary-100">
-                <div className={"pr-2 max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto smallscroll"}>
+                <div className={"pr-2 max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] space-y-4 overflow-auto smallscroll"}>
                     {sid && <PartSid part={sid} label={'sid'} />}
                     {dd2 && <PartStr part={dd2} label={'did2'} />}
                     {p4_ && <Part_P4 part={p4_} label={'p4'} />}
