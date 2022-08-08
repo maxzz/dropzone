@@ -1,20 +1,26 @@
-import React, { Fragment } from 'react';
-import { FileUs } from '@/store';
+import React, { Fragment, ReactNode } from 'react';
 import { Transform } from '@/store/manifest';
 
-function Section({ label }: { label: React.ReactNode; }) {
+function Section({ label }: { label: ReactNode; }) {
     return (
-        <div className="pt-2 pb-1 font-bold flex"><div className="px-2 py-1 bg-primary-300 rounded">{label}</div></div>
+        <div className="pt-2 pb-1 font-bold flex">
+            <div className="px-2 py-1 bg-primary-300 rounded">
+                {label}
+            </div>
+        </div>
     );
 }
 
-function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
+function Part_P4({ part, label }: { part: MPath.p4[]; label: string; }) {
+
     function beautifyHint(item: MPath.p4a): string {
         return `Role #: ${item.rnumber} | Role: ${item.roleString} | Classname: "${item.className}" | Name: "${item.name}"`;
     }
+
     function beautifyVal(item: MPath.p4a): string {
         return `${item.className} | ${item.name}`;
     }
+
     return (<>
         {!!part &&
             <div>
@@ -47,11 +53,13 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
     </>);
 }
 
-function PartLoc({ label, part }: { label: string; part: string; }) {
+function PartLoc({ part, label }: { part: string; label: string; }) {
     const items = part.split('|');
+
     function beautifyRect(item: string) {
         return item.split(' ');
     }
+    
     return (<>
         {!!part &&
             <div>
@@ -77,7 +85,7 @@ function PartLoc({ label, part }: { label: string; part: string; }) {
     </>);
 }
 
-function PartSid({ label, part }: { label: string; part: MPath.sid; }) {
+function PartSid({ part, label }: { part: MPath.sid; label: string; }) {
     const { version, ...rest } = part;
     part = { ...rest, version };
     const items = Object.entries(part);
@@ -97,7 +105,7 @@ function PartSid({ label, part }: { label: string; part: MPath.sid; }) {
     </>);
 }
 
-function PartString({ label, part }: { label: string; part: any; }) {
+function PartStr({ part, label }: { part: string | object; label: string; }) {
     const text = typeof part === 'string' ? part : JSON.stringify(part, null, 4);
     return (<>
         {!!part &&
@@ -110,27 +118,17 @@ function PartString({ label, part }: { label: string; part: any; }) {
 }
 
 export function FieldRowPath({ field }: { field: Meta.Field; }) {
-
-    // p4a?: MPath.p4a[];
-    // p4?: MPath.p4[];
-    // loc?: string;       // "x y w h | x y w h ... | x y w h"
-    // sid?: MPath.sid;
-    // did2?: string;
-    // sn?: MPath.sn;      // script number
-
-    //console.log('sid', field.path, JSON.stringify(field.path.sid || ''));
-
-
+    const { sid, did2: dd2, p4: p4_, p4a, loc, sn: sn_, } = field.path;
     return (
         <div className="w-[28rem] bg-primary-100 rounded p-0.5 border border-primary-700">
             <div className="pl-4 pb-1 text-xs bg-primary-100">
                 <div className={"pr-2 max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto smallscroll"}>
-                    {field.path.sid && <PartSid label={'sid'} part={field.path.sid} />}
-                    {field.path.did2 && <PartString label={'did2'} part={field.path.did2} />}
-                    {field.path.p4 && <PartP4 label={'p4'} part={field.path.p4} />}
-                    {field.path.p4a && <PartP4 label={'p4a'} part={field.path.p4a} />}
-                    {field.path.loc && <PartLoc label={'loc'} part={field.path.loc} />}
-                    {field.path.sn && <PartString label={'sn'} part={field.path.sn} />}
+                    {sid && <PartSid part={sid} label={'sid'} />}
+                    {dd2 && <PartStr part={dd2} label={'did2'} />}
+                    {p4_ && <Part_P4 part={p4_} label={'p4'} />}
+                    {p4a && <Part_P4 part={p4a} label={'p4a'} />}
+                    {loc && <PartLoc part={loc} label={'loc'} />}
+                    {sn_ && <PartStr part={sn_} label={'sn'} />}
                 </div>
             </div>
         </div>
