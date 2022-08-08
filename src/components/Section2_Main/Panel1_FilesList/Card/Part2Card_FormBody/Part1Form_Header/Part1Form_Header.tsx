@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { atom, PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
 import { IconCross, IconGear, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
 import { FieldRowPreview } from '../Part2Form_Fields/FieldRowPreview';
@@ -15,7 +15,7 @@ function Option_LockFields({ lockfields }: { lockfields: string | undefined; }) 
     const useit = lockfields == '1';
     const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
     return (<>
-        {useit && <IconOptionsLock className="w-3 h-3" title={title} />}
+        {useit && IconOptionsLock({className:"w-3 h-3", title})}
     </>);
 }
 
@@ -23,7 +23,7 @@ function Option_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
     return (<>
-        {useit && <IconOptionsQL className="w-2.5 h-2.5" title={title} />}
+        {useit && IconOptionsQL({className:"w-2.5 h-2.5", title})}
     </>);
 }
 
@@ -46,13 +46,8 @@ function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
 }) {
     const [selectedRow, setSelectedRow] = useAtom(formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom);
     const icon = small
-        // ? <IconPreview className="w-5 h-5" />
-        // ? <IconPreview className="m-px p-0.5 w-6 h-6 border border-gray-500 rounded-sm shadow-sm shadow-red-500" />
-        // ? <IconPreview className="w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97]" title="Open preview" />
         ? IconPreview({ className: "w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97] opacity-75", title: "Open preview" })
-        // ? IconPreview({ className: "w-5 h-5" })
         : IconCross({ className: "p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" });
-        // : <IconCross className="p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" />
     return (
         <div className="grid grid-cols-[minmax(0,1fr)_24px] mr-1 overflow-hidden">
             <div className="w-6 h-6 col-start-2 row-start-1 cursor-pointer flex items-center justify-center z-10" onClick={() => setSmall((v) => !v)}>
@@ -114,9 +109,9 @@ export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { file
 //TODO: form preview: move left-top to min point, i.e. ignore window position: find min x,y and substract from all location. can be done in meta
 //TODO: form preview: show one preview per form?
 //TODO: form preview: checkbox (on form preview) to show individual preview per field or not
-//TODO: form preview: use hover over preview icon instead of click
+//TODO: form preview: use hover over preview icon instead of click - won't do
 
-//TODO: preview for all fields and highlight on click
+//TODO: preview for all fields and highlight on click - done
 //TODO: save split pane position - done
 
 //TODO: check if we have forms in FormDetectionEdit(). (i.e. we have web, win, fields, script, or exclude manifest)
