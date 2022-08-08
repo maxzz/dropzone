@@ -79,10 +79,11 @@ export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: Fil
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterOptions(form?.options || {});
     //console.log('aa', MatchStyle.regex);
-
     return (
         <ToggleWithPortal text="detection">
-            <div className="mt-1 text-xs bg-gray-100 ring-1 ring-gray-400 shadow-2xl">
+            
+            {/* Popup content */}
+            <div className="mt-1 p-4 text-xs bg-gray-100 ring-1 ring-gray-400 rounded shadow-2xl">
                 <div className="px-2 py-1 font-bold">summary</div>
                 <div className="px-2 w-96 max-w-sm max-h-[40vh] overflow-auto border-t border-b border-gray-400">
                     <UITableFromObject obj={toShowDetection} />
@@ -98,6 +99,7 @@ export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: Fil
                 </button>
                 */}
             </div>
+            
         </ToggleWithPortal>
     );
 }
