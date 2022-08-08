@@ -3,12 +3,44 @@ import { Transform } from '@/store/manifest';
 
 function Section({ label }: { label: ReactNode; }) {
     return (
-        <div className="pt-2 pb-1 font-bold flex">
-            <div className="px-2 py-1 bg-primary-300 rounded">
-                {label}
-            </div>
+        <div className="mt-2 mb-0.5 py-2 px-2 bg-primary-300 rounded flex space-x-1">
+            <div className="text-primary-500">part:</div>
+            <div className="font-bold">{label}</div>
         </div>
     );
+}
+
+function PartSid({ part, label }: { part: MPath.sid; label: string; }) {
+    const { version, ...rest } = part;
+    part = { ...rest, version };
+    const items = Object.entries(part);
+    return (<>
+        {!!part &&
+            <div>
+                <Section label={label} />
+                <div className="">
+                    {items.map(([key, val]) => {
+                        return <div className="flex items-center space-x-2" key={key}>
+                            <div className="font-bold text-primary-700">{key}:</div>
+                            <div>{Transform.xmlRestore(val) || `""`}</div>
+                        </div>;
+                    })}
+                </div>
+            </div>
+        }
+    </>);
+}
+
+function PartStr({ part, label }: { part: string | object; label: string; }) {
+    const text = typeof part === 'string' ? part : JSON.stringify(part, null, 4);
+    return (<>
+        {!!part &&
+            <div>
+                <Section label={label} />
+                <div className="">{text}</div>
+            </div>
+        }
+    </>);
 }
 
 function Part_P4({ part, label }: { part: MPath.p4[]; label: string; }) {
@@ -59,7 +91,7 @@ function PartLoc({ part, label }: { part: string; label: string; }) {
     function beautifyRect(item: string) {
         return item.split(' ');
     }
-    
+
     return (<>
         {!!part &&
             <div>
@@ -80,38 +112,6 @@ function PartLoc({ part, label }: { part: string; label: string; }) {
                         </Fragment>;
                     })}
                 </div>
-            </div>
-        }
-    </>);
-}
-
-function PartSid({ part, label }: { part: MPath.sid; label: string; }) {
-    const { version, ...rest } = part;
-    part = { ...rest, version };
-    const items = Object.entries(part);
-    return (<>
-        {!!part &&
-            <div>
-                <Section label={label} />
-                <div className="mx-2">
-                    {items.map(([key, val]) => {
-                        return <Fragment key={key}>
-                            <div>{key}: {Transform.xmlRestore(val) || `""`}</div>
-                        </Fragment>;
-                    })}
-                </div>
-            </div>
-        }
-    </>);
-}
-
-function PartStr({ part, label }: { part: string | object; label: string; }) {
-    const text = typeof part === 'string' ? part : JSON.stringify(part, null, 4);
-    return (<>
-        {!!part &&
-            <div>
-                <Section label={label} />
-                <div className="">{text}</div>
             </div>
         }
     </>);
