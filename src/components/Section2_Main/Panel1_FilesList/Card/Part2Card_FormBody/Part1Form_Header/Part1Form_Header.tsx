@@ -41,19 +41,10 @@ function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; f
     );
 }
 
-function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, previewStateAtom }: {
+function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
     form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>;
-    previewStateAtom: PrimitiveAtom<PreviewAs>;
 }) {
-    const [previewState, setPreviewState] = useAtom(previewStateAtom);
-
-    const selectedRowAtom = formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom;
-    const [selectedRow, setSelectedRow] = useAtom(selectedRowAtom);
-
-    function onClick() {
-        setPreviewState(() => PreviewAs.small);
-    }
-
+    const [selectedRow, setSelectedRow] = useAtom(formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom);
     return (
         <div className="grid grid-cols-[minmax(0,1fr)_24px] mr-1 overflow-hidden">
             <div className="w-6 h-6 col-start-2 row-start-1 z-10 flex items-center justify-center" onClick={() => setSmall((v) => !v)}>
@@ -63,7 +54,7 @@ function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, previewSt
                 }
             </div>
             {!small &&
-                <div className="col-start-1 row-start-1 col-span-2 row-span-2" onClick={() => setSmall((v) => !v)}>
+                <div className="col-start-1 row-start-1 col-span-2 row-span-2">
                     <FieldRowPreview
                         className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
                         small={small}
@@ -77,15 +68,7 @@ function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, previewSt
     );
 }
 
-const enum PreviewAs {
-    none,
-    small,
-    full,
-}
-
 export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formIdx: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
-    const previewStateAtom = useState(atom(PreviewAs.none))[0];
-    const previewState = useAtomValue(previewStateAtom);
     const [small, setSmall] = useState(true);
     const fileUs = useAtomValue(fileUsAtom);
     const meta = fileUs.meta?.[formIdx];
@@ -117,7 +100,6 @@ export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { file
                     selectRowAtoms={selectRowAtoms}
                     small={small}
                     setSmall={setSmall}
-                    previewStateAtom={previewStateAtom}
                 />
             }
         </div>
