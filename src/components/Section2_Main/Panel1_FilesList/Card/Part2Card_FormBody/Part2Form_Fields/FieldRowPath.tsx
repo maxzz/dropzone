@@ -4,7 +4,7 @@ import { Transform } from '@/store/manifest';
 
 function Section({ label }: { label: React.ReactNode; }) {
     return (
-        <div className="pt-2 pb-1 font-bold flex"><div className="px-2 py-1 bg-gray-300 rounded">{label}</div></div>
+        <div className="pt-2 pb-1 font-bold flex"><div className="px-2 py-1 bg-primary-300 rounded">{label}</div></div>
     );
 }
 
@@ -19,21 +19,21 @@ function PartP4({ label, part }: { label: string; part: MPath.p4[]; }) {
         {!!part &&
             <div>
                 <Section label={label} />
-                <div className="mx-2 grid grid-cols-[auto,1fr] border-b border-b-gray-400">
+                <div className="mx-2 grid grid-cols-[auto,1fr] border-b border-b-primary-400">
                     {/* overflow-x-hidden */}
                     {part.map((item, idx) => {
                         return <Fragment key={idx}>
-                            {/* <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
-                            <div className="pl-2 leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div> */}
+                            {/* <div className="px-2 leading-5 border-l border-r border-t border-primary-400">{idx}</div>
+                            <div className="pl-2 leading-5 border-r border-t border-primary-400">{JSON.stringify(item)}</div> */}
 
-                            {/* <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
-                            <div className="pl-2 min-w-0 w-full leading-5 border-r border-t border-gray-400">{JSON.stringify(item)}</div> */}
+                            {/* <div className="px-2 leading-5 border-l border-r border-t border-primary-400">{idx}</div>
+                            <div className="pl-2 min-w-0 w-full leading-5 border-r border-t border-primary-400">{JSON.stringify(item)}</div> */}
 
-                            {/* <div className="box-content border-l border-r border-t border-gray-400"><div className="box-content px-2 leading-5">{idx}</div></div>
-                            <div className="box-content border-r border-t border-gray-400"><div className="box-content pl-2 leading-5">{JSON.stringify(item)}</div></div> */}
+                            {/* <div className="box-content border-l border-r border-t border-primary-400"><div className="box-content px-2 leading-5">{idx}</div></div>
+                            <div className="box-content border-r border-t border-primary-400"><div className="box-content pl-2 leading-5">{JSON.stringify(item)}</div></div> */}
 
-                            <div className="px-2 leading-5 border-l border-r border-t border-gray-400">{idx}</div>
-                            <div className="px-2 overflow-x-hidden leading-5 border-r border-t border-gray-400" title={beautifyHint(item)}>
+                            <div className="px-2 leading-5 border-l border-r border-t border-primary-400">{idx}</div>
+                            <div className="px-2 overflow-x-hidden leading-5 border-r border-t border-primary-400" title={beautifyHint(item)}>
                                 <div className="overflow-x-hidden whitespace-nowrap overflow-ellipsis">
                                     {beautifyVal(item)}
                                 </div>
@@ -109,7 +109,7 @@ function PartString({ label, part }: { label: string; part: any; }) {
     </>);
 }
 
-export function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: FileUs; form: Meta.Form; field: Meta.Field; } & React.HTMLAttributes<HTMLDivElement>) {
+export function FieldRowPath({ field }: { field: Meta.Field; }) {
 
     // p4a?: MPath.p4a[];
     // p4?: MPath.p4[];
@@ -122,14 +122,16 @@ export function FieldRowPath({ fileUs, form, field, className = '' }: { fileUs: 
 
 
     return (
-        <div className="text-xs bg-gray-100 px-2 pb-1">
-            <div className={`max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto ${className}`}>
-                {field.path.sid && <PartSid label={'sid'} part={field.path.sid} />}
-                {field.path.did2 && <PartString label={'did2'} part={field.path.did2} />}
-                {field.path.p4 && <PartP4 label={'p4'} part={field.path.p4} />}
-                {field.path.p4a && <PartP4 label={'p4a'} part={field.path.p4a} />}
-                {field.path.loc && <PartLoc label={'loc'} part={field.path.loc} />}
-                {field.path.sn && <PartString label={'sn'} part={field.path.sn} />}
+        <div className="w-[28rem] bg-primary-100 rounded p-0.5 border border-primary-700">
+            <div className="pl-4 pb-1 text-xs bg-primary-100">
+                <div className={"pr-2 max-w-[min(28rem,50vw)] max-h-[max(32rem,40vh)] overflow-auto smallscroll"}>
+                    {field.path.sid && <PartSid label={'sid'} part={field.path.sid} />}
+                    {field.path.did2 && <PartString label={'did2'} part={field.path.did2} />}
+                    {field.path.p4 && <PartP4 label={'p4'} part={field.path.p4} />}
+                    {field.path.p4a && <PartP4 label={'p4a'} part={field.path.p4a} />}
+                    {field.path.loc && <PartLoc label={'loc'} part={field.path.loc} />}
+                    {field.path.sn && <PartString label={'sn'} part={field.path.sn} />}
+                </div>
             </div>
         </div>
     );

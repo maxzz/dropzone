@@ -12,13 +12,13 @@ export function FormOptionsPool({ names_ext }: { names_ext: string | undefined; 
         <ToggleWithPortal text={"pool"}>
 
             {/* Popup content */}
-            <div className="mt-1 px-4 bg-primary-100 ring-1 ring-primary-400 rounded">
-                <div className="px-2 text-xs max-w-sm max-h-[40vh] overflow-auto shadow-2xl">
+            <div className="mt-1 pl-4 pr-1 pb-1 pt-2 bg-primary-100 ring-1 ring-primary-400 rounded shadow-2xl">
+                <div className="max-w-sm max-h-[40vh] text-xs overflow-auto smallscroll">
                     <div className="grid grid-cols-[auto,1fr] gap-x-2 ">
                         {items.map((item, idx) =>
                             <Fragment key={idx}>
-                                <div className="px-1 text-right border-r border-r-primary-400">{idx}</div>
-                                <div className="">{item}</div>
+                                <div className="px-1 text-right text-primary-400 border-r-primary-400 border-r">{idx}</div>
+                                <div>{item}</div>
                             </Fragment>)
                         }
                     </div>

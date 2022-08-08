@@ -143,11 +143,9 @@ function part9_Path(hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Me
             {/* Popup content */}
             {hasPath
                 ?
-                <div className="ml-4 w-[28rem] bg-primary-100 p-0.5 border border-primary-700">
-                    <FieldRowPath fileUs={fileUs} form={form} field={field} />
-                </div>
+                <FieldRowPath field={field} />
                 :
-                <div className="px-2 py-1 text-xs text-red-500 bg-primary-100 border border-primary-400">
+                <div className="px-2 py-1 text-xs text-red-500 bg-primary-100 border-primary-400 border">
                     This field has no path and cannot be used.
                 </div>
             }

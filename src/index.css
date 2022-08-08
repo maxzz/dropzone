@@ -54,9 +54,31 @@
 /* Filelist */
 
 @layer components {
-    
     /* FieldRow */
     .row-field-framed {
         @apply px-1 h-4 text-[10px] leading-[14px] border border-primary-400 rounded cursor-default text-primary-900;
+    }
+}
+
+/* Scrollbars */
+
+@layer components {
+    /* Firefox scrollbars */
+
+    .smallscroll {
+        --sb-width: 8px;
+        scrollbar-color: #666b7a transparent;
+        scrollbar-width: thin;
+    }
+
+    /* Chrome scrollbars */
+    .smallscroll::-webkit-scrollbar {
+        width: var(--sb-width);
+        height: var(--sb-width);
+        background-color: transparent;
+    }
+
+    .smallscroll::-webkit-scrollbar-thumb {
+        background-color: #666b7a;
     }
 }
