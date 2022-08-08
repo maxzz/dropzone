@@ -13,18 +13,14 @@ export const BtnShading: React.CSSProperties = {
 
 function Option_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
-    const title = `Lock fields: ${useit ? '1 (lock)' : `${lockfields} don\'t lock`}`;
-    return (<>
-        {useit && IconOptionsLock({className:"w-3 h-3", title})}
-    </>);
+    const title = `Lock fields ${useit ? '= 1 (lock)' : `${lockfields} don\'t lock`}`;
+    return useit ? IconOptionsLock({className:"w-3 h-3", title}) : null;
 }
 
 function Option_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
-    const title = `Quick link: ${useit ? '1 (use)' : ql == '2' ? '2 (don\'t use)' : `'${ql}''`}`;
-    return (<>
-        {useit && IconOptionsQL({className:"w-2.5 h-2.5", title})}
-    </>);
+    const title = `Quick link ${useit ? '= 1 (use)' : ql == '2' ? '= 2 (don\'t use)' : `'${ql}''`}`;
+    return useit ? IconOptionsQL({className:"w-2.5 h-2.5", title}) : null;
 }
 
 function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
