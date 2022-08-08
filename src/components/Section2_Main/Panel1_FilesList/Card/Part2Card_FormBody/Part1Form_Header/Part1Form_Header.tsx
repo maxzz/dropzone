@@ -1,15 +1,11 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
-import { IconCross, IconGear, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
-import { FieldRowPreview } from '../Part2Form_Fields/FieldRowPreview';
+import { useAtom, useAtomValue } from 'jotai';
+import { FileUsAtomType, SelectRowAtomsType } from '@/store';
+import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
+import { FieldRowPreview } from '../../Part3Card_Shared/FieldRowPreview';
 import { FormOptionsDetection } from './FormOptionsDetection';
 import { FormOptionsPool } from './FormOptionsPool';
-
-export const BtnShading: React.CSSProperties = {
-    backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
-    boxShadow: '0px 1px #64646420',
-};
+import { FormEditButton } from './FormOptionsEdit';
 
 function Option_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
@@ -21,20 +17,6 @@ function Option_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link ${useit ? '= 1 (use)' : ql == '2' ? '= 2 (don\'t use)' : `'${ql}''`}`;
     return useit ? IconOptionsQL({className:"w-2.5 h-2.5", title}) : null;
-}
-
-function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
-    const setFormEditorData = useSetAtom(formEditorDataAtom);
-    return (
-        <div
-            className={`px-1 h-6 flex items-center justify-center border border-gray-500 rounded active:scale-[.97]`}
-            onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
-            title="Edit detection options"
-            style={BtnShading}
-        >
-            <IconGear className="w-4 h-4 stroke-[1.2]" />
-        </div>
-    );
 }
 
 function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {

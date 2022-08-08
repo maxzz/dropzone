@@ -3,7 +3,7 @@ import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
-import { CardNormalButtons } from '../Part1Card_Title/CardButtons';
+import { CardNormalButtons } from '../Part3Card_Shared/CardButtons';
 import { Part1Form_Header } from './Part1Form_Header/Part1Form_Header';
 import { Part2Form_Fields } from './Part2Form_Fields/Part2Form_Fields';
 

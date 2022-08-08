@@ -4,7 +4,11 @@ import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { classNames } from '@/utils/classnames';
-import { BtnShading } from './Part1Form_Header';
+
+export const BtnShading: React.CSSProperties = {
+    backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
+    boxShadow: '0px 1px #64646420',
+};
 
 type DropDownButtonProps = {
     open?: boolean;

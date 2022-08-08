@@ -1,7 +1,7 @@
 import React from 'react';
 import { SetStateAction, useAtom, useSetAtom } from 'jotai';
 import { FileUs, SelectRowAtomsType } from '@/store';
-import { FieldRowPreview } from './FieldRowPreview';
+import { FieldRowPreview } from '../../Part3Card_Shared/FieldRowPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Part4Card_UI/UIToggleWithPortal';
@@ -37,7 +37,8 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
             {hasPreview &&
                 <div className="w-[calc(1920px/4)] bg-primary-200 p-0.5 border border-primary-700">
                     <FieldRowPreview
-                        form={form} small={false}
+                        form={form}
+                        small={false}
                         selected={field.ridx} onSelected={(selected: number) => { setSelectedRowThis({ field: selected, form: form.type }); }}
                         className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
                     />
