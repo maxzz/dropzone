@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, formEditorDataAtom, SelectRowAtomsType } from '@/store';
 import { IconCross, IconGear, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
@@ -42,16 +42,21 @@ function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; f
 }
 
 function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
-    form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: React.Dispatch<React.SetStateAction<boolean>>;
+    form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: Dispatch<SetStateAction<boolean>>;
 }) {
     const [selectedRow, setSelectedRow] = useAtom(formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom);
+    const icon = small
+        // ? <IconPreview className="w-5 h-5" />
+        // ? <IconPreview className="m-px p-0.5 w-6 h-6 border border-gray-500 rounded-sm shadow-sm shadow-red-500" />
+        // ? <IconPreview className="w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97]" title="Open preview" />
+        ? IconPreview({ className: "w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97] opacity-75", title: "Open preview" })
+        // ? IconPreview({ className: "w-5 h-5" })
+        : IconCross({ className: "p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" });
+        // : <IconCross className="p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" />
     return (
         <div className="grid grid-cols-[minmax(0,1fr)_24px] mr-1 overflow-hidden">
-            <div className="w-6 h-6 col-start-2 row-start-1 z-10 flex items-center justify-center" onClick={() => setSmall((v) => !v)}>
-                {small
-                    ? <IconPreview className="w-5 h-5" />
-                    : <IconCross className="p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" />
-                }
+            <div className="w-6 h-6 col-start-2 row-start-1 cursor-pointer flex items-center justify-center z-10" onClick={() => setSmall((v) => !v)}>
+                {icon}
             </div>
             {!small &&
                 <div className="col-start-1 row-start-1 col-span-2 row-span-2">
@@ -80,7 +85,7 @@ export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { file
     const options = form?.options || {};
     const hasFormPreview = !!meta?.view?.rects.length;
     return (
-        <div className="relative py-1 text-xs leading-5 flex items-center justify-between bg-primary-300 border-t border-b border-primary-400">
+        <div className="py-1 text-xs leading-5 flex items-center justify-between bg-primary-300 border-t border-b border-primary-400">
 
             <div className={`place-self-start flex ${small ? 'space-x-1 items-center' : 'flex-col items-stretch space-y-1 mr-1'}`}>
                 <FormOptionsDetection fileUsAtom={fileUsAtom} formType={formIdx} />
