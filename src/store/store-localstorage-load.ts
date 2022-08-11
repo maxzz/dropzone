@@ -12,7 +12,7 @@ export namespace LocalStorage {
     export let initialData: Store = {
         vSplitPos: 44,
         uiSize: UISize.minimal,
-        sortBy: SortBy.index,
+        sortBy: SortBy.url,
     };
 
     function load() {

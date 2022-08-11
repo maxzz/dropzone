@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
 import { uuid } from '@/utils/uuid';
-import { FileUs, FileUsAtomType, FileUsStats } from './store-types';
+import { FileUs, FileUsAtomType, FileUsStats, SortBy } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';
-import { busyAtom, rightPanelData, searchFilterData, showMani, totalMani, _foldAllCardsAtom } from './store-ui-state';
+import { busyAtom, rightPanelData, searchFilterData, showMani, sortByAtom, totalMani, _foldAllCardsAtom } from './store-ui-state';
 
 // Files
 
@@ -59,7 +59,7 @@ export const filteredAtom = atom<FileUsAtomType[]>(
         const showEmpty = get(showMani.emptyAtom);
 
         const files = get(filesAtom);
-        const result = files.filter((fileAtom: FileUsAtomType) => {
+        let result = files.filter((fileAtom: FileUsAtomType) => {
             const fileUs = get(fileAtom);
 
             if (capOnly) {
@@ -81,7 +81,19 @@ export const filteredAtom = atom<FileUsAtomType[]>(
             }
             return useItNow;
         });
-        
+
+        const sortBy = get(sortByAtom);
+        if (sortBy !== SortBy.index) {
+            result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType)=> {
+                const fileUsA = get(atomA);
+                const fileUsB = get(atomB);
+                const a = fileUsA?.stats?.domain || '';
+                const b = fileUsB?.stats?.domain || '';
+                const res = a < b ? -1 : a > b ? 1 : 0;
+                return res;
+            })
+        }
+
         return result;
     }
 );
