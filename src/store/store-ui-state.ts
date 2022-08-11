@@ -1,6 +1,6 @@
 import { Atom, atom, PrimitiveAtom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
-import { FileUs, FileUsAtomType, SortBy, UISize } from "./store-types";
+import { FileUs, FileUsAtomType, Order, SortBy, UISize } from "./store-types";
 import { LocalStorageSave, } from "./store-localstorage-save";
 import { LocalStorage } from "./store-localstorage-load";
 import { filesAtom, } from "./store-files";
@@ -25,6 +25,11 @@ export const searchFilterData = {
     textAtom: atom(''),
     caseSensitiveAtom: atom(false), // search case sensitive
 };
+
+// Files sort by and order
+
+export const sortByAtom = atomWithCallback<SortBy>(LocalStorage.initialData.sortBy, LocalStorageSave.save);
+export const orderAtom = atomWithCallback<Order>(LocalStorage.initialData.order, LocalStorageSave.save);
 
 // Right panel data
 
@@ -85,7 +90,3 @@ export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.v
 // Files list size
 
 export const uiSizeAtom = atomWithCallback<UISize>(LocalStorage.initialData.uiSize, LocalStorageSave.save);
-
-// Files sort by
-
-export const sortByAtom = atomWithCallback<SortBy>(LocalStorage.initialData.sortBy, LocalStorageSave.save);

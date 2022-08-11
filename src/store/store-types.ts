@@ -76,7 +76,12 @@ export const uiSizeNames = ["Normal", "Compact", "Minimal"];
 // Sort by
 
 export const enum SortBy {
-    index,  // load order, i.e. unsorted
-    url,    // domain, and then the rest: winapps, non manifest
-    group,  // group by categories and inside by domain
+    index,          // load order, i.e. unsorted
+    url,            // domain, and then the rest: winapps, non manifest
+    group,          // group by categories and inside by domain
+}
+
+export const enum Order {
+    lowToHigh,      // ascending
+    highToLow,      // descending
 }

@@ -10,6 +10,7 @@ export type {
 export {
     UISize,
     SortBy,
+    Order,
     FormIdx,
     uiSizeNames,
 } from './store-types';
@@ -36,6 +37,9 @@ export {
     splitPaneAtom,
 
     searchFilterData,
+    sortByAtom,
+    orderAtom,
+
     rightPanelData,
 
     uiSizeAtom,

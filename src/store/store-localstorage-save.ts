@@ -1,7 +1,7 @@
 import { Getter } from 'jotai';
 import { debounce } from '@/utils/debounce';
 import { LocalStorage } from './store-localstorage-load';
-import { splitPaneAtom, uiSizeAtom } from './store-ui-state';
+import { orderAtom, sortByAtom, splitPaneAtom, uiSizeAtom } from './store-ui-state';
 
 // Local storage
 
@@ -10,6 +10,8 @@ export namespace LocalStorageSave {
         let newStore: LocalStorage.Store = {
             vSplitPos: get(splitPaneAtom),
             uiSize: get(uiSizeAtom),
+            sortBy: get(sortByAtom),
+            order: get(orderAtom),
         };
         localStorage.setItem(LocalStorage.KEY, JSON.stringify(newStore));
     }, 1000);
