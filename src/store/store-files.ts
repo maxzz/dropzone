@@ -89,8 +89,8 @@ export const filteredAtom = atom<FileUsAtomType[]>(
             result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
                 const fileUsA = get(atomA);
                 const fileUsB = get(atomB);
-                const a = fileUsA?.stats?.domain || '';
-                const b = fileUsB?.stats?.domain || '';
+                const a = fileUsA?.stats?.domain || 'zz';
+                const b = fileUsB?.stats?.domain || 'zz';
                 if (order === Order.lowToHigh) {
                     return a < b ? -1 : a > b ? 1 : 0;
                 } else {
