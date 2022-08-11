@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, rightPanelData, selected4ActionAtom, uiSizeAtom, uiSizeNames } from '@/store';
+import { allCards, rightPanelData, selected4ActionAtom, sortByAtom, sortByNames, uiSizeAtom, uiSizeNames } from '@/store';
 import toast from 'react-hot-toast';
 import { IconDot } from '@ui/UIIconSymbols';
 import { Menu, MenuContentPortal, MenuItem, MenuItemIndicator, MenuLabel, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContent, MenuTrigger, TriggerSubs } from '@ui/UiDropdownMenu';
@@ -49,7 +49,7 @@ function Command_ToggleFolding() {
                 doToggleFolding(); // setBusy('Folding...'); setTimeout(() => { doToggleFolding(); setBusy(''); }, 0); // still reflow problem
             }}
         >
-            Toggle cards folding
+            Toggle all cards folding
         </MenuItem>
     );
 }
@@ -88,6 +88,22 @@ function Command_UISizeSelect() {
     </>);
 }
 
+function Command_SortBySelect() {
+    const [uiSize, setUiSize] = useAtom(sortByAtom);
+    return (<>
+        <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
+            {sortByNames.map((name, idx) => (
+                <MenuRadioItem value={`${idx}`} key={idx}>
+                    <MenuItemIndicator>
+                        <IconDot className="w-3 h-3" />
+                    </MenuItemIndicator>
+                    {name}
+                </MenuRadioItem>
+            ))}
+        </MenuRadioGroup>
+    </>);
+}
+
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
@@ -102,6 +118,8 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 <MenuLabel>File list size:</MenuLabel>
                 <Command_UISizeSelect />
 
+                <MenuSeparator />
+                <Command_SortBySelect />
                 <MenuSeparator />
                 <Command_ToggleFolding />
 

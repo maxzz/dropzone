@@ -104,7 +104,7 @@ const StyledMenuItem = ({ disabled, ...rest }: { disabled?: boolean; } & Primiti
 
 const StyledSeparator = styled(Primitive.Separator, {
     height: 1,
-    backgroundColor: 'var(--tm-primary-500)', //violet.violet6
+    backgroundColor: 'var(--tm-primary-300)', //violet.violet6
     margin: 5,
 });
 
