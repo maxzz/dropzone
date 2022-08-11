@@ -1,6 +1,6 @@
 import { Atom, atom, PrimitiveAtom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
-import { FileUs, FileUsAtomType, UISize } from "./store-types";
+import { FileUs, FileUsAtomType, SortBy, UISize } from "./store-types";
 import { LocalStorageSave, } from "./store-localstorage-save";
 import { LocalStorage } from "./store-localstorage-load";
 import { filesAtom, } from "./store-files";
@@ -85,3 +85,7 @@ export const splitPaneAtom = atomWithCallback<number>(LocalStorage.initialData.v
 // Files list size
 
 export const uiSizeAtom = atomWithCallback<UISize>(LocalStorage.initialData.uiSize, LocalStorageSave.save);
+
+// Files sort by
+
+export const sortByAtom = atomWithCallback<SortBy>(LocalStorage.initialData.sortBy, LocalStorageSave.save);

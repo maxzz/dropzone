@@ -9,6 +9,7 @@ export type {
 
 export {
     UISize,
+    SortBy,
     FormIdx,
     uiSizeNames,
 } from './store-types';

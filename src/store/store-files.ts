@@ -59,7 +59,7 @@ export const filteredAtom = atom<FileUsAtomType[]>(
         const showEmpty = get(showMani.emptyAtom);
 
         const files = get(filesAtom);
-        return files.filter((fileAtom: FileUsAtomType) => {
+        const result = files.filter((fileAtom: FileUsAtomType) => {
             const fileUs = get(fileAtom);
 
             if (capOnly) {
@@ -81,6 +81,8 @@ export const filteredAtom = atom<FileUsAtomType[]>(
             }
             return useItNow;
         });
+        
+        return result;
     }
 );
 
