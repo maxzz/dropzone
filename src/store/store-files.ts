@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
 import { uuid } from '@/utils/uuid';
-import { FileUs, FileUsAtomType, FileUsStats, SortBy } from './store-types';
+import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from './store-types';
 import { buildManiMetaForms, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';
-import { busyAtom, rightPanelData, searchFilterData, showMani, sortByAtom, totalMani, _foldAllCardsAtom } from './store-ui-state';
+import { busyAtom, orderAtom, rightPanelData, searchFilterData, showMani, sortByAtom, totalMani, _foldAllCardsAtom } from './store-ui-state';
 
 // Files
 
@@ -84,14 +84,19 @@ export const filteredAtom = atom<FileUsAtomType[]>(
 
         const sortBy = get(sortByAtom);
         if (sortBy !== SortBy.index) {
-            result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType)=> {
+            const order = get(orderAtom);
+
+            result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
                 const fileUsA = get(atomA);
                 const fileUsB = get(atomB);
                 const a = fileUsA?.stats?.domain || '';
                 const b = fileUsB?.stats?.domain || '';
-                const res = a < b ? -1 : a > b ? 1 : 0;
-                return res;
-            })
+                if (order === Order.lowToHigh) {
+                    return a < b ? -1 : a > b ? 1 : 0;
+                } else {
+                    return a < b ? 1 : a > b ? -1 : 0;
+                }
+            });
         }
 
         return result;
