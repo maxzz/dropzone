@@ -12,7 +12,10 @@ export {
     SortBy,
     Order,
     FormIdx,
+    
     uiSizeNames,
+    sortByNames,
+    orderNames,
 } from './store-types';
 
 export {
