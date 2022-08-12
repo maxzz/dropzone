@@ -9,32 +9,35 @@ import { busyAtom, orderAtom, rightPanelData, searchFilterData, showMani, sortBy
 
 export const filesAtom = atom<FileUsAtomType[]>([]);
 
-export const setFilesAtom = atom(
+export const doSetFilesAtom = atom(
     null,
     (get, set, accepterFiles: File[]) => {
-        const dropped: FileUsAtomType[] = accepterFiles.filter((file) => file.size).map((file, idx) => {
-            const path = ((file as any).path as string || '').replace(/^\//, '').split(/[\\\/]/);
-            path.pop(); // remove file name as the last item
-            const at: FileUs = {
-                id: uuid(),
-                idx,
-                fname: file.name,
-                fpath: path.join('/'),
-                fmodi: (file as any).lastModified || 0,
-                modified: file.lastModified,
-                size: file.size,
-                file: file,
-                state: {
-                    isGroupAtom: atom<boolean>(false),
-                    isCurrentAtom: atom<boolean>(false),
-                },
-                stats: {} as FileUsStats, // the real one will be assigned after caching content
-            };
-            return atom<FileUs>(at);
-        });
+        const droppedIn: FileUsAtomType[] = accepterFiles
+            .filter((file) => file.size)
+            .map((file, idx) => {
+                const path = ((file as any).path as string || '').replace(/^\//, '').split(/[\\\/]/);
+                path.pop(); // remove file name as the last item
+                const newItem: FileUs = {
+                    id: uuid(),
+                    idx,
+                    fname: file.name,
+                    fpath: path.join('/'),
+                    fmodi: (file as any).lastModified || 0,
+                    modified: file.lastModified,
+                    size: file.size,
+                    file: file,
+                    state: {
+                        isGroupAtom: atom<boolean>(false),
+                        isCurrentAtom: atom<boolean>(false),
+                    },
+                    stats: {} as FileUsStats, // the real one will be assigned after caching content
+                };
+                return atom<FileUs>(newItem);
+            });
+
         set(_foldAllCardsAtom, -1);
-        set(filesAtom, dropped);
-        set(updateCacheAtom);
+        set(filesAtom, droppedIn);
+        set(doUpdateCacheAtom);
         set(rightPanelData.panelAtom, undefined);
     }
 );
@@ -60,8 +63,8 @@ export const filteredAtom = atom<FileUsAtomType[]>(
 
         const files = get(filesAtom);
 
-        const isInitialLoading = !!get(busyAtom);
-        if (isInitialLoading) {
+        const isFilesLoading = !!get(busyAtom);
+        if (isFilesLoading) {
             return files;
         }
 
@@ -88,21 +91,20 @@ export const filteredAtom = atom<FileUsAtomType[]>(
             return useItNow;
         });
 
-        // const isInitialLoading = !!get(busyAtom);
-        // if (!isInitialLoading) {
         const sortBy = get(sortByAtom);
         const order = get(orderAtom);
 
-        if (sortBy === SortBy.index && order !== Order.lowToHigh) {
-            result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
-                const fileUsA = get(atomA);
-                const fileUsB = get(atomB);
-                const a = fileUsA.idx;
-                const b = fileUsB.idx;
-                return a < b ? 1 : a > b ? -1 : 0;
-            });
-        }
-        else if (sortBy !== SortBy.index) {
+        if (sortBy === SortBy.index) {
+            if (order === Order.highToLow) {
+                result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
+                    const fileUsA = get(atomA);
+                    const fileUsB = get(atomB);
+                    const a = fileUsA.idx;
+                    const b = fileUsB.idx;
+                    return a < b ? 1 : a > b ? -1 : 0;
+                });
+            }
+        } else if (sortBy === SortBy.url) {
             result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
                 const fileUsA = get(atomA);
                 const fileUsB = get(atomB);
@@ -115,7 +117,6 @@ export const filteredAtom = atom<FileUsAtomType[]>(
                 }
             });
         }
-        // }
 
         return result;
     }
@@ -123,7 +124,7 @@ export const filteredAtom = atom<FileUsAtomType[]>(
 
 // Cache
 
-const updateCacheAtom = atom(
+const doUpdateCacheAtom = atom(
     null,
     async (get, set) => {
         set(totalMani.normalAtom, 0);

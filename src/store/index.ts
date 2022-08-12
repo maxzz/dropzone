@@ -20,7 +20,7 @@ export {
 
 export {
     filesAtom,
-    setFilesAtom,
+    doSetFilesAtom,
     doClearFilesAtom,
     filteredAtom,
 } from './store-files';
