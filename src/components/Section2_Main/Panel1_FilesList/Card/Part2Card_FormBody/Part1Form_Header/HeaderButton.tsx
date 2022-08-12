@@ -5,7 +5,7 @@ import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { classNames } from '@/utils/classnames';
 
-export const BtnShading: React.CSSProperties = {
+export const BtnGradientShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
     boxShadow: '0px 1px #64646420',
 };
@@ -22,12 +22,12 @@ export const HeaderButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(f
         <button
             ref={ref}
             className={classNames(
-                "pl-2 pr-1 h-6 leading-6 text-xs border border-primary-500 rounded flex items-center justify-between",
+                "pl-2 pr-1 h-6 card-header-btn__popup",
                 open && "bg-primary-300",
                 disabled && "opacity-25",
             )}
             onClick={() => !disabled && setOpen((v) => !v)}
-            style={BtnShading}
+            //style={BtnShading}
         >
             <div className="">
                 {text}

@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
-import { FieldRowPreview } from '../../Part3Card_Shared/FieldRowPreview';
+import { CardSvgPreview } from '../../Part3Card_Shared/CardSvgPreview';
 import { BtnPopupDetection } from './BtnPopupDetection';
 import { BtnPopupPool } from './BtnPopupPool';
 import { BtnEdit } from './BtnEdit';
@@ -33,7 +33,7 @@ function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
             </div>
             {!small &&
                 <div className="col-start-1 row-start-1 col-span-2 row-span-2">
-                    <FieldRowPreview
+                    <CardSvgPreview
                         className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
                         small={small}
                         form={form}

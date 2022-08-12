@@ -60,6 +60,17 @@
     }
 }
 
+/* Card */
+
+@layer components {
+    .card-header-btn__popup {
+        @apply text-xs border-primary-500 hover:bg-primary-200 border rounded shadow-sm active:scale-[.97] flex items-center justify-between;
+    }
+    .card-header-btn__edit {
+        @apply border-gray-500 hover:bg-primary-200 border rounded shadow-sm active:scale-[.97] flex items-center justify-center;
+    }
+}
+
 /* Scrollbars */
 
 @layer components {

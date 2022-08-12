@@ -32,7 +32,7 @@ type PreviewProps = {
     onSelected?: (selected: number) => void;
 } & React.HTMLAttributes<SVGSVGElement>;
 
-export function FieldRowPreview({ small, form, selected, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
+export function CardSvgPreview({ small, form, selected, onSelected, ...attrs }: PreviewProps): JSX.Element | null {
     const view = form.view;
     if (!view || !view.rects.length) {
         return null;
