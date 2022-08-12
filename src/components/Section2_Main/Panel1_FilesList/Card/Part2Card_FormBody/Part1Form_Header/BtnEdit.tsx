@@ -2,9 +2,9 @@ import React from "react";
 import { useSetAtom } from "jotai";
 import { FileUsAtomType, formEditorDataAtom } from "@/store";
 import { IconGear } from "@ui/UIIconSymbols";
-import { BtnShading } from "./FormOptionsButton";
+import { BtnShading } from "./HeaderButton";
 
-export function FormEditButton({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
+export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
     const setFormEditorData = useSetAtom(formEditorDataAtom);
     return (
         <div

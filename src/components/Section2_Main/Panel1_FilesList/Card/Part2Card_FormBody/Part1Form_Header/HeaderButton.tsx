@@ -16,7 +16,7 @@ type DropDownButtonProps = {
     text: string;
 };
 
-export const DropDownButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
+export const HeaderButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
     const disabled = !setOpen;
     return (
         <button
@@ -47,7 +47,7 @@ export function ToggleWithPortal({ children, text }: { children?: React.ReactNod
     useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
 
     return (<>
-        <DropDownButton text={text} ref={setReferenceElm} open={open} setOpen={setOpen} />
+        <HeaderButton text={text} ref={setReferenceElm} open={open} setOpen={setOpen} />
 
         {open &&
             ReactDOM.createPortal(<div

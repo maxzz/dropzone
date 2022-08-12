@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType } from '@/store';
 import { Matching, Transform } from '@/store/manifest';
-import { ToggleWithPortal } from './FormOptionsButton';
+import { ToggleWithPortal } from './HeaderButton';
 import { UITableFromObject } from '../../Part4Card_UI/UITableFromObject';
 
 function woProtocol(url: string): string {
@@ -73,7 +73,7 @@ function filterOptions(options: Mani.Options) {
     };
 }
 
-export function FormOptionsDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
+export function BtnPopupDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const form = fileUs.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});

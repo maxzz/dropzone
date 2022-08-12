@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Transform } from '@/store/manifest';
-import { DropDownButton, ToggleWithPortal } from './FormOptionsButton';
+import { HeaderButton, ToggleWithPortal } from './HeaderButton';
 
-export function FormOptionsPool({ names_ext }: { names_ext: string | undefined; }) {
+export function BtnPopupPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {
-        return <DropDownButton text={"pool"} />;
+        return <HeaderButton text={"pool"} />;
     }
     names_ext && (names_ext = Transform.persentRemove(Transform.xmlRestore(Transform.cppRestore(names_ext.replace(/:/g, '●'))))); // fix packed names
     let items = (names_ext || '').split('●');

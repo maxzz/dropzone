@@ -73,15 +73,15 @@ const dropzoneBg: CSSProperties = {
 };
 
 function CounterShowingNow() {
-    const files = useAtomValue(filesAtom);
-    const filtered = useAtomValue(filteredAtom);
+    const totalFiles = useAtomValue(filesAtom).length;
+    const totalFiltered = useAtomValue(filteredAtom).length;
     return (<>
-        {files.length !== filtered.length &&
+        {totalFiles !== totalFiltered &&
             <div
                 className="absolute -right-3 -bottom-1 px-1 text-[.65rem] bg-gray-600 rounded"
-                title={`Showing now ${filtered.length} file${plural(filtered.length)}`}
+                title={`Showing now ${totalFiltered} file${plural(totalFiltered)}`}
             >
-                {filtered.length}
+                {totalFiltered}
             </div>
         }
     </>);

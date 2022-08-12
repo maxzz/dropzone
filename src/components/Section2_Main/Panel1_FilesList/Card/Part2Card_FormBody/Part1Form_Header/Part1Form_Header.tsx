@@ -3,23 +3,23 @@ import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
 import { FieldRowPreview } from '../../Part3Card_Shared/FieldRowPreview';
-import { FormOptionsDetection } from './FormOptionsDetection';
-import { FormOptionsPool } from './FormOptionsPool';
-import { FormEditButton } from './FormOptionsEdit';
+import { BtnPopupDetection } from './BtnPopupDetection';
+import { BtnPopupPool } from './BtnPopupPool';
+import { BtnEdit } from './BtnEdit';
 
-function Option_LockFields({ lockfields }: { lockfields: string | undefined; }) {
+function Icon_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
     const title = `Lock fields ${useit ? '= 1 (lock)' : `${lockfields} don\'t lock`}`;
     return useit ? IconOptionsLock({className:"w-3 h-3", title}) : null;
 }
 
-function Option_QuickLink({ ql }: { ql: string | undefined; }) {
+function Icon_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link ${useit ? '= 1 (use)' : ql == '2' ? '= 2 (don\'t use)' : `'${ql}''`}`;
     return useit ? IconOptionsQL({className:"w-2.5 h-2.5", title}) : null;
 }
 
-function FormPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
+function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
     form: Meta.Form; formIdx: number; selectRowAtoms: SelectRowAtomsType; small: boolean; setSmall: Dispatch<SetStateAction<boolean>>;
 }) {
     const [selectedRow, setSelectedRow] = useAtom(formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom);
@@ -61,18 +61,18 @@ export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { file
         <div className="py-1 text-xs leading-5 flex items-center justify-between bg-primary-300 border-t border-b border-primary-400">
 
             <div className={`place-self-start flex ${small ? 'space-x-1 items-center' : 'flex-col items-stretch space-y-1 mr-1'}`}>
-                <FormOptionsDetection fileUsAtom={fileUsAtom} formType={formIdx} />
-                <FormOptionsPool names_ext={detection.names_ext} />
-                <FormEditButton fileUsAtom={fileUsAtom} formIdx={formIdx} />
+                <BtnPopupDetection fileUsAtom={fileUsAtom} formType={formIdx} />
+                <BtnPopupPool names_ext={detection.names_ext} />
+                <BtnEdit fileUsAtom={fileUsAtom} formIdx={formIdx} />
 
                 <div className="flex items-center">
-                    <Option_LockFields lockfields={options.lockfields} />
-                    <Option_QuickLink ql={options.usequicklink} />
+                    <Icon_LockFields lockfields={options.lockfields} />
+                    <Icon_QuickLink ql={options.usequicklink} />
                 </div>
             </div>
 
             {hasFormPreview &&
-                <FormPreview
+                <BtnPreview
                     form={meta}
                     formIdx={formIdx}
                     selectRowAtoms={selectRowAtoms}
