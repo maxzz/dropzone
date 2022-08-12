@@ -90,22 +90,31 @@ export const filteredAtom = atom<FileUsAtomType[]>(
 
         // const isInitialLoading = !!get(busyAtom);
         // if (!isInitialLoading) {
-            const sortBy = get(sortByAtom);
-            if (sortBy !== SortBy.index) {
-                const order = get(orderAtom);
+        const sortBy = get(sortByAtom);
+        const order = get(orderAtom);
 
-                result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
-                    const fileUsA = get(atomA);
-                    const fileUsB = get(atomB);
-                    const a = fileUsA?.stats?.domain || 'zz';
-                    const b = fileUsB?.stats?.domain || 'zz';
-                    if (order === Order.lowToHigh) {
-                        return a < b ? -1 : a > b ? 1 : 0;
-                    } else {
-                        return a < b ? 1 : a > b ? -1 : 0;
-                    }
-                });
-            }
+        if (sortBy === SortBy.index && order !== Order.lowToHigh) {
+            result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
+                const fileUsA = get(atomA);
+                const fileUsB = get(atomB);
+                const a = fileUsA.idx;
+                const b = fileUsB.idx;
+                return a < b ? 1 : a > b ? -1 : 0;
+            });
+        }
+        else if (sortBy !== SortBy.index) {
+            result.sort((atomA: FileUsAtomType, atomB: FileUsAtomType) => {
+                const fileUsA = get(atomA);
+                const fileUsB = get(atomB);
+                const a = fileUsA?.stats?.domain || 'zz';
+                const b = fileUsB?.stats?.domain || 'zz';
+                if (order === Order.lowToHigh) {
+                    return a < b ? -1 : a > b ? 1 : 0;
+                } else {
+                    return a < b ? 1 : a > b ? -1 : 0;
+                }
+            });
+        }
         // }
 
         return result;
