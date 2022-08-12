@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, rightPanelData, selected4ActionAtom, sortByAtom, sortByNames, uiSizeAtom, uiSizeNames } from '@/store';
+import { allCards, orderAtom, orderNames, rightPanelData, selected4ActionAtom, sortByAtom, sortByNames, uiSizeAtom, uiSizeNames } from '@/store';
 import { Menu, MenuContentPortal, MenuItem, MenuLabel, MenuRadioGroupValue, MenuSeparator, MenuSub, MenuSubContent, MenuTrigger, TriggerSubs } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
@@ -86,29 +86,20 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
 
                 <MenuSeparator />
+                <MenuLabel>Sort order</MenuLabel>
+                <MenuRadioGroupValue radioAtom={orderAtom} names={orderNames} />
 
+                <MenuSeparator />
                 <MenuSub>
                     <TriggerSubs label="File list" />
                     <MenuSubContent alignOffset={-29}>
                         <MenuLabel>Size</MenuLabel>
                         <MenuRadioGroupValue radioAtom={uiSizeAtom} names={uiSizeNames} />
+                        
                         <MenuSeparator />
                         <Command_ToggleFolding />
                     </MenuSubContent>
                 </MenuSub>
-
-
-
-                {/* <MenuSub>
-                    <TriggerSubs label="Sort" />
-                    <MenuSubContent alignOffset={-29}>
-                        <MenuLabel>Sort by</MenuLabel>
-                        <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
-                    </MenuSubContent>
-                </MenuSub> */}
-
-                {/* <MenuSeparator /> */}
-                {/* <Command_ToggleFolding /> */}
 
                 <MenuSub>
                     <TriggerSubs label="Links" />
