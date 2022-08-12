@@ -59,6 +59,12 @@ export const filteredAtom = atom<FileUsAtomType[]>(
         const showEmpty = get(showMani.emptyAtom);
 
         const files = get(filesAtom);
+
+        const isInitialLoading = !!get(busyAtom);
+        if (isInitialLoading) {
+            return files;
+        }
+
         let result = files.filter((fileAtom: FileUsAtomType) => {
             const fileUs = get(fileAtom);
 
@@ -82,8 +88,8 @@ export const filteredAtom = atom<FileUsAtomType[]>(
             return useItNow;
         });
 
-        const isInitialLoading = !!get(busyAtom);
-        if (!isInitialLoading) {
+        // const isInitialLoading = !!get(busyAtom);
+        // if (!isInitialLoading) {
             const sortBy = get(sortByAtom);
             if (sortBy !== SortBy.index) {
                 const order = get(orderAtom);
@@ -100,7 +106,7 @@ export const filteredAtom = atom<FileUsAtomType[]>(
                     }
                 });
             }
-        }
+        // }
 
         return result;
     }
