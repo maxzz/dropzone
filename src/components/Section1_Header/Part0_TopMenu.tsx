@@ -72,7 +72,7 @@ function Command_Links() {
     return (<>{items.map(({ txt, url }, idx) => <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}> {txt} </MenuItem>)}</>);
 }
 
-function MenuRadioGroupValue({radioAtom, names}: {radioAtom: PrimitiveAtom<number>; names: string[]}) {
+function MenuRadioGroupValue({ radioAtom, names }: { radioAtom: PrimitiveAtom<number>; names: string[]; }) {
     const [uiSize, setUiSize] = useAtom(radioAtom);
     return (<>
         <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
@@ -100,20 +100,25 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                     <Command_Convert /> */}
 
                 <MenuLabel>File list size:</MenuLabel>
-                {/* <Command_UISizeSelect /> */}
                 <MenuRadioGroupValue radioAtom={uiSizeAtom} names={uiSizeNames} />
 
                 <MenuSeparator />
-                <MenuLabel>Sort by:</MenuLabel>
-                {/* <Command_SortBySelect /> */}
-                <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
+                {/* <MenuLabel>Sort by:</MenuLabel>
+                <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} /> */}
+
+                <MenuSub>
+                    <TriggerSubs label="Sort" />
+                    <MenuSubContent>
+                        <MenuLabel>Sort by</MenuLabel>
+                        <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
+                    </MenuSubContent>
+                </MenuSub>
 
                 <MenuSeparator />
                 <Command_ToggleFolding />
 
                 <MenuSub>
                     <TriggerSubs label="Links" />
-
                     <MenuSubContent>
                         <Command_Links />
                     </MenuSubContent>
