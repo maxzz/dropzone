@@ -1,8 +1,9 @@
 import React, { HTMLAttributes } from 'react';
+import { PrimitiveAtom, useAtom } from 'jotai';
 import { styled, keyframes } from '@stitches/react';
-import { IconChevronRight } from './UIIconSymbols';
-import * as Primitive from '@radix-ui/react-dropdown-menu';
+import { IconChevronRight, IconDot } from './UIIconSymbols';
 import type { PopperContentProps } from '@radix-ui/react-popper';
+import * as Primitive from '@radix-ui/react-dropdown-menu';
 
 //#region content and trigger
 
@@ -185,6 +186,24 @@ function MainContentPortal(props: HTMLAttributes<HTMLDivElement> & PopperContent
             <MainContent {...props} />
         </Primitive.Portal>
     );
+}
+
+// radio group value
+
+export function MenuRadioGroupValue({ radioAtom, names }: { radioAtom: PrimitiveAtom<number>; names: string[]; }) {
+    const [value, setValue] = useAtom(radioAtom);
+    return (<>
+        <MenuRadioGroup value={`${value}`} onValueChange={(value) => setValue(+value)}>
+            {names.map((name, idx) => (
+                <MenuRadioItem value={`${idx}`} key={idx}>
+                    <MenuItemIndicator>
+                        <IconDot className="w-3 h-3" />
+                    </MenuItemIndicator>
+                    {name}
+                </MenuRadioItem>
+            ))}
+        </MenuRadioGroup>
+    </>);
 }
 
 // exports
