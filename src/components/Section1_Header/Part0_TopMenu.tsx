@@ -119,6 +119,7 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 <Command_UISizeSelect />
 
                 <MenuSeparator />
+                <MenuLabel>Sort by:</MenuLabel>
                 <Command_SortBySelect />
                 <MenuSeparator />
                 <Command_ToggleFolding />
@@ -139,3 +140,5 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
 //TODO: show title in compact form by point of interset
 //sort titles
 //filter titles and sort by: filename, url, app/website title
+
+//TODO: disconnect sort during loading (and filter?)
