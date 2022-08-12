@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, sortByAtom, sortByNames, uiSizeAtom, uiSizeNames } from '@/store';
 import toast from 'react-hot-toast';
 import { IconDot } from '@ui/UIIconSymbols';
@@ -72,27 +72,11 @@ function Command_Links() {
     return (<>{items.map(({ txt, url }, idx) => <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}> {txt} </MenuItem>)}</>);
 }
 
-function Command_UISizeSelect() {
-    const [uiSize, setUiSize] = useAtom(uiSizeAtom);
+function MenuRadioGroupValue({radioAtom, names}: {radioAtom: PrimitiveAtom<number>; names: string[]}) {
+    const [uiSize, setUiSize] = useAtom(radioAtom);
     return (<>
         <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
-            {uiSizeNames.map((name, idx) => (
-                <MenuRadioItem value={`${idx}`} key={idx}>
-                    <MenuItemIndicator>
-                        <IconDot className="w-3 h-3" />
-                    </MenuItemIndicator>
-                    {name}
-                </MenuRadioItem>
-            ))}
-        </MenuRadioGroup>
-    </>);
-}
-
-function Command_SortBySelect() {
-    const [uiSize, setUiSize] = useAtom(sortByAtom);
-    return (<>
-        <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
-            {sortByNames.map((name, idx) => (
+            {names.map((name, idx) => (
                 <MenuRadioItem value={`${idx}`} key={idx}>
                     <MenuItemIndicator>
                         <IconDot className="w-3 h-3" />
@@ -116,11 +100,14 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                     <Command_Convert /> */}
 
                 <MenuLabel>File list size:</MenuLabel>
-                <Command_UISizeSelect />
+                {/* <Command_UISizeSelect /> */}
+                <MenuRadioGroupValue radioAtom={uiSizeAtom} names={uiSizeNames} />
 
                 <MenuSeparator />
                 <MenuLabel>Sort by:</MenuLabel>
-                <Command_SortBySelect />
+                {/* <Command_SortBySelect /> */}
+                <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
+
                 <MenuSeparator />
                 <Command_ToggleFolding />
 
