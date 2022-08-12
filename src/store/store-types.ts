@@ -81,11 +81,11 @@ export const enum SortBy {
     group,          // group by categories and inside by domain
 }
 
-export const sortByNames = ["Index", "URL", "Group"];
+export const sortByNames = ["Index", "URL", /*"Group"*/];
 
 export const enum Order {
     lowToHigh,      // ascending
     highToLow,      // descending
 }
 
-export const orderNames = ["ascending", "descending"];
+export const orderNames = ["Ascending", "Descending"];

@@ -1,9 +1,8 @@
 import React from 'react';
-import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom, sortByAtom, sortByNames, uiSizeAtom, uiSizeNames } from '@/store';
+import { Menu, MenuContentPortal, MenuItem, MenuLabel, MenuRadioGroupValue, MenuSeparator, MenuSub, MenuSubContent, MenuTrigger, TriggerSubs } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
-import { IconDot } from '@ui/UIIconSymbols';
-import { Menu, MenuContentPortal, MenuItem, MenuItemIndicator, MenuLabel, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuSub, MenuSubContent, MenuTrigger, TriggerSubs } from '@ui/UiDropdownMenu';
 
 function Command_MarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
@@ -72,22 +71,6 @@ function Command_Links() {
     return (<>{items.map(({ txt, url }, idx) => <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}> {txt} </MenuItem>)}</>);
 }
 
-function MenuRadioGroupValue({ radioAtom, names }: { radioAtom: PrimitiveAtom<number>; names: string[]; }) {
-    const [uiSize, setUiSize] = useAtom(radioAtom);
-    return (<>
-        <MenuRadioGroup value={`${uiSize}`} onValueChange={(value) => setUiSize(+value)}>
-            {names.map((name, idx) => (
-                <MenuRadioItem value={`${idx}`} key={idx}>
-                    <MenuItemIndicator>
-                        <IconDot className="w-3 h-3" />
-                    </MenuItemIndicator>
-                    {name}
-                </MenuRadioItem>
-            ))}
-        </MenuRadioGroup>
-    </>);
-}
-
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
     return (
         <Menu>
@@ -99,23 +82,33 @@ export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
                 {/* <Command_MarkSelected />
                     <Command_Convert /> */}
 
-                <MenuLabel>File list size:</MenuLabel>
-                <MenuRadioGroupValue radioAtom={uiSizeAtom} names={uiSizeNames} />
+                <MenuLabel>Sort by</MenuLabel>
+                <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
 
                 <MenuSeparator />
-                {/* <MenuLabel>Sort by:</MenuLabel>
-                <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} /> */}
 
                 <MenuSub>
-                    <TriggerSubs label="Sort" />
-                    <MenuSubContent>
-                        <MenuLabel>Sort by</MenuLabel>
-                        <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
+                    <TriggerSubs label="File list" />
+                    <MenuSubContent alignOffset={-29}>
+                        <MenuLabel>Size</MenuLabel>
+                        <MenuRadioGroupValue radioAtom={uiSizeAtom} names={uiSizeNames} />
+                        <MenuSeparator />
+                        <Command_ToggleFolding />
                     </MenuSubContent>
                 </MenuSub>
 
-                <MenuSeparator />
-                <Command_ToggleFolding />
+
+
+                {/* <MenuSub>
+                    <TriggerSubs label="Sort" />
+                    <MenuSubContent alignOffset={-29}>
+                        <MenuLabel>Sort by</MenuLabel>
+                        <MenuRadioGroupValue radioAtom={sortByAtom} names={sortByNames} />
+                    </MenuSubContent>
+                </MenuSub> */}
+
+                {/* <MenuSeparator /> */}
+                {/* <Command_ToggleFolding /> */}
 
                 <MenuSub>
                     <TriggerSubs label="Links" />
