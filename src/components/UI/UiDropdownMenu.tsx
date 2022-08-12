@@ -79,6 +79,7 @@ const itemStyles = {
     display: 'flex',
     alignItems: 'center',
     userSelect: 'none',
+    cursor: 'pointer',
 
     transition: 'background-color .1s ease',
 
@@ -118,10 +119,12 @@ const StyledItemIndicator = styled(Primitive.ItemIndicator, {
 });
 
 const StyledLabel = styled(Primitive.Label, {
-    paddingLeft: 25,
+    paddingLeft: 10, // paddingLeft: 25,
     fontSize: 12,
+    fontWeight: 700,
     lineHeight: '25px',
-    color: 'var(--tm-primary-600)', //mauve.mauve11,
+    color: 'var(--tm-primary-900)', //mauve.mauve11,
+    cursor: 'default',
 });
 
 const StyledCheckboxItem = styled(Primitive.CheckboxItem, { ...itemStyles });
