@@ -4,8 +4,9 @@ import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { classNames } from '@/utils/classnames';
+import { UIPortal } from '@ui/UIPortal';
 
-export const BtnGradientShading: React.CSSProperties = {
+const BtnGradientShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
     boxShadow: '0px 1px #64646420',
 };
@@ -27,13 +28,16 @@ export const HeaderButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(f
                 disabled && "opacity-25",
             )}
             onClick={() => !disabled && setOpen((v) => !v)}
-            //style={BtnShading}
+        //style={BtnShading}
         >
             <div className="">
                 {text}
             </div>
 
-            {disabled ? <div className="list-owner w-4 h-4 pt-0.5" /> : <UIIconUpDown isUp={open} className="list-owner w-4 h-4 pt-0.5" />}
+            {disabled ?
+                <div className="list-owner w-4 h-4 pt-0.5" />
+                : <UIIconUpDown isUp={open} className="list-owner w-4 h-4 pt-0.5" />
+            }
         </button>
     );
 });
@@ -50,15 +54,16 @@ export function ToggleWithPortal({ children, text }: { children?: React.ReactNod
         <HeaderButton text={text} ref={setReferenceElm} open={open} setOpen={setOpen} />
 
         {open &&
-            ReactDOM.createPortal(<div
-                ref={setPopperElm}
-                style={{ ...styles.popper, zIndex: 'inherit' }}
-                {...attributes.popper}
-                onClick={() => setOpen((v) => !v)}
-            >
-                {children}
-            </div>, document.getElementById('portal')!
-            )
+            <UIPortal>
+                <div
+                    ref={setPopperElm}
+                    style={{ ...styles.popper, zIndex: 'inherit' }}
+                    {...attributes.popper}
+                    onClick={() => setOpen((v) => !v)}
+                >
+                    {children}
+                </div>
+            </UIPortal>
         }
     </>);
 }

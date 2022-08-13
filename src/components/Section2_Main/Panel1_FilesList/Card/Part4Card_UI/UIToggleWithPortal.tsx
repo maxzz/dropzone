@@ -1,5 +1,5 @@
-import React, { HTMLAttributes, ReactNode, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { HTMLAttributes, useState } from 'react';
+import { UIPortal } from '@ui/UIPortal';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '../../../../../hooks/useElementClickAway';
 
@@ -12,17 +12,20 @@ export function UIToggleWithPortal({ toggle, children, ...rest }: { toggle?: Rea
     useElementClickAway(popperElm, (event) => event.target !== popperElm && !referenceElm?.contains(event.target as HTMLElement) && setOpen(false));
 
     return (<>
-        <button ref={setReferenceElm} onClick={() => setOpen((v) => !v)} {...rest}>
+        <button
+            ref={setReferenceElm}
+            onClick={() => setOpen((v) => !v)}
+            {...rest}
+        >
             {toggle}
         </button>
 
         {open && children &&
-            ReactDOM.createPortal(
+            <UIPortal>
                 <div ref={setPopperElm} style={{ ...styles.popper, zIndex: 'inherit' }} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
                     {children}
                 </div>
-                , document.getElementById('portal')!
-            )
+            </UIPortal>
         }
     </>);
 }

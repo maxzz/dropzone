@@ -1,6 +1,6 @@
-import { classNames } from '@/utils/classnames';
 import React, { HTMLAttributes } from 'react';
-import ReactDOM from 'react-dom';
+import { UIPortal } from './UIPortal';
+import { classNames } from '@/utils/classnames';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 
@@ -40,7 +40,7 @@ export function UITooltip({ trigger, children, className, arrow = false, portal 
         </div>
     );
 
-    const popper = visible && (portal ? ReactDOM.createPortal((<>{poperBody}</>), document.getElementById('portal')!) : <>{poperBody}</>);
+    const popper = visible && portal ? <UIPortal>{poperBody}</UIPortal> : <>{poperBody}</>;
 
     return (<>
         <div ref={setTriggerRef} className={triggerParentClassName}>

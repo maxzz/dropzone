@@ -1,17 +1,11 @@
-import React, { ReactNode } from 'react';
-
+import React, { Fragment } from 'react';
 
 
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import { Menu, Transition } from '@headlessui/react';
+import { UIPortal } from '@ui/UIPortal';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { classNames } from '@/utils/classnames';
-
-function Portal({ children }: { children: ReactNode; }) {
-    return ReactDOM.createPortal(children, document.getElementById('portal')!);
-}
 
 export function Example() {
     return (
@@ -37,7 +31,7 @@ export function Example() {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <div className="">
-                    <Portal>
+                    <UIPortal>
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <div className="py-1">
                                 <Menu.Item>
@@ -72,7 +66,7 @@ export function Example() {
                                 </form>
                             </div>
                         </Menu.Items>
-                    </Portal>
+                    </UIPortal>
                 </div>
             </Transition>
 
@@ -81,9 +75,5 @@ export function Example() {
 }
 
 export function CardMenu() {
-    return (
-        <div className="">
-            <Example />
-        </div>
-    );
+    return <Example />;
 }
