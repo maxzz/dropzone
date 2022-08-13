@@ -18,7 +18,7 @@ type PortalModalProps = {
     allowClickOutside?: boolean;
     show: boolean;
     setShow: (v: boolean) => void;
-}
+};
 
 type ControlledDialogProps = PortalModalProps & {
     trigger?: JSX.Element;
@@ -27,46 +27,40 @@ type ControlledDialogProps = PortalModalProps & {
 type DialogProps = Omit<ControlledDialogProps, 'show' | 'setShow'>;
 
 export function PortalModal({ children, allowClickOutside, show, setShow }: PortalModalProps) {
-    return (
-        <>
-            {show &&
-                <Modal
-                    className={className}
-                    show={show}
-                    onHide={() => { allowClickOutside && setShow(false); }}
-                    onEscapeKeyDown={() => setShow(false)}
-                    renderBackdrop={RenderBackdrop}
-                    aria-labelledby="modal-label"
-                    container={document.getElementById('portal')}
-                >
-                    {cloneElement(children, { setShow })}
-                </Modal>
-            }
-        </>
-    );
+    return (<>
+        {show &&
+            <Modal
+                className={className}
+                show={show}
+                onHide={() => { allowClickOutside && setShow(false); }}
+                onEscapeKeyDown={() => setShow(false)}
+                renderBackdrop={RenderBackdrop}
+                aria-labelledby="modal-label"
+                container={document.getElementById('portal')}
+            >
+                {cloneElement(children, { setShow })}
+            </Modal>
+        }
+    </>);
 }
 
 export function ControlledDialog({ trigger, show, setShow, ...rest }: ControlledDialogProps) {
     const portalRef = useRef<HTMLElement | null>(null);
     useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
-    return (
-        <>
-            {trigger
-                ? cloneElement(trigger, {
-                    onClick: (event: Event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        //console.log('triiger');
+    return (<>
+        {trigger
+            ? cloneElement(trigger, {
+                onClick: (event: Event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setShow(true);
+                }
+            })
+            : <ButtonTrigger onClick={() => setShow(true)} />
+        }
 
-                        setShow(true);
-                    }
-                })
-                : <ButtonTrigger onClick={() => setShow(true)} />
-            }
-
-            <PortalModal {...rest} show={show} setShow={setShow} />
-        </>
-    );
+        <PortalModal {...rest} show={show} setShow={setShow} />
+    </>);
 }
 
 export function Dialog(props: DialogProps) {

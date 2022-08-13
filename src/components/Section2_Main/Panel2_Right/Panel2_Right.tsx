@@ -5,6 +5,7 @@ import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Part1Card_Title';
 import { ManiActions } from './ManiActions/ManiActions';
+import BodyText from './BodyText';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
@@ -23,13 +24,8 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                             </>}
                         />
                     </div>
-
-                    {/* Raw data preview (+ codemirror?) */}
-                    <UISemiScrollbar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-primary-800 opacity-50 cursor-default`}>
-                        <div className="font-mono whitespace-pre">
-                            {rightPanelValue.raw}
-                        </div>
-                    </UISemiScrollbar>
+                    
+                    <BodyText text={rightPanelValue.raw || ''}/>
                 </div>
             }
         </div>

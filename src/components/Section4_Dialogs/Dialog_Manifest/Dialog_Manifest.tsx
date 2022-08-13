@@ -207,7 +207,7 @@ function EditorTabs({ pages, stateIndicator, dragBind }: { pages: Record<string,
     );
 }
 
-export default function Manifest_FormEditor({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) {
+export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
 
     // Caption dragging
 
