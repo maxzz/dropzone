@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 
 
@@ -8,6 +8,10 @@ import ReactDOM from 'react-dom';
 import { Menu, Transition } from '@headlessui/react';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import { classNames } from '@/utils/classnames';
+
+function Portal({ children }: { children: ReactNode; }) {
+    return ReactDOM.createPortal(children, document.getElementById('portal')!);
+}
 
 export function Example() {
     return (
@@ -33,47 +37,42 @@ export function Example() {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <div className="">
-                    <>
-                        {ReactDOM.createPortal(
-
-                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1">
+                    <Portal>
+                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-1">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
+                                            Account settings
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
+                                            Support
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
+                                            License
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <form method="POST" action="#">
                                     <Menu.Item>
                                         {({ active }) => (
-                                            <a href="#" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
-                                                Account settings
-                                            </a>
+                                            <button type="submit" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full text-left px-4 py-2 text-sm')}>
+                                                Sign out
+                                            </button>
                                         )}
                                     </Menu.Item>
-                                    <Menu.Item>
-                                        {({ active }) => (
-                                            <a href="#" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
-                                                Support
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                        {({ active }) => (
-                                            <a href="#" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>
-                                                License
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                    <form method="POST" action="#">
-                                        <Menu.Item>
-                                            {({ active }) => (
-                                                <button type="submit" className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full text-left px-4 py-2 text-sm')}>
-                                                    Sign out
-                                                </button>
-                                            )}
-                                        </Menu.Item>
-                                    </form>
-                                </div>
-                            </Menu.Items>
-
-                            , document.getElementById('portal')!)}
-                    </>
-
+                                </form>
+                            </div>
+                        </Menu.Items>
+                    </Portal>
                 </div>
             </Transition>
 
