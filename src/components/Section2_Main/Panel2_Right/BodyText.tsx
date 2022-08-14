@@ -10,7 +10,7 @@ import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
 //import theme from 'react-syntax-highlighter/dist/esm/styles/hljs/night-owl';
 import theme from './highlight';
 
-SyntaxHighlighter.registerLanguage('xml-doc', xml); /* cannot use lazy load */
+SyntaxHighlighter.registerLanguage('xml', xml); /* cannot use lazy load */
 
 export default function BodyText({ text }: { text: string; }) { /*lazy load*/
     return (<>
@@ -22,7 +22,7 @@ export default function BodyText({ text }: { text: string; }) { /*lazy load*/
             </div>
         </UISemiScrollbar>
          */}
-        <UISemiScrollbar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-primary-[#011627] opacity-50 cursor-default`}>
+        <UISemiScrollbar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-[#011627] opacity-50 cursor-default`}>
             {/* <div className="font-mono whitespace-pre"> */}
             <div className="font-mono">
                 <SyntaxHighlighter language='xml' style={theme}>
