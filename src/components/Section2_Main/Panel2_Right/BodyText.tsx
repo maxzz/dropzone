@@ -4,7 +4,7 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import xml from 'react-syntax-highlighter/dist/esm/languages/prism/xml-doc';
 import st from 'react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus';
 
-SyntaxHighlighter.registerLanguage('xml-doc', xml);
+SyntaxHighlighter.registerLanguage('xml-doc', xml); /* cannot use lazy load */
 
 export default function BodyText({ text }: { text: string; }) { /*lazy load*/
     return (<>
