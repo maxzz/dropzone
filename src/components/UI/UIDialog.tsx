@@ -26,7 +26,7 @@ type ControlledDialogProps = PortalModalProps & {
 
 type DialogProps = Omit<ControlledDialogProps, 'show' | 'setShow'>;
 
-export function PortalModal({ children, allowClickOutside, show, setShow }: PortalModalProps) {
+export function OldOverlay_PortalModal({ children, allowClickOutside, show, setShow }: PortalModalProps) {
     return (<>
         {show &&
             <Modal
@@ -44,7 +44,7 @@ export function PortalModal({ children, allowClickOutside, show, setShow }: Port
     </>);
 }
 
-export function ControlledDialog({ trigger, show, setShow, ...rest }: ControlledDialogProps) {
+export function OldOverlay_ControlledDialog({ trigger, show, setShow, ...rest }: ControlledDialogProps) {
     const portalRef = useRef<HTMLElement | null>(null);
     useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
     return (<>
@@ -59,13 +59,13 @@ export function ControlledDialog({ trigger, show, setShow, ...rest }: Controlled
             : <ButtonTrigger onClick={() => setShow(true)} />
         }
 
-        <PortalModal {...rest} show={show} setShow={setShow} />
+        <OldOverlay_PortalModal {...rest} show={show} setShow={setShow} />
     </>);
 }
 
-export function Dialog(props: DialogProps) {
+export function OldOverlay_Dialog(props: DialogProps) {
     const [show, setShow] = useState(false);
     return (
-        <ControlledDialog {...props} show={show} setShow={setShow} />
+        <OldOverlay_ControlledDialog {...props} show={show} setShow={setShow} />
     );
 }

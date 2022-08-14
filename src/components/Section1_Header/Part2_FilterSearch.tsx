@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterData } from '@/store';
 import { useKey } from 'react-use';
-import { UITooltip } from '@ui/UITooltip';
+import { OldPopper_UITooltip } from '@ui/UITooltip';
 import { IconDot } from '@ui/UIIconSymbols';
 import { IconCaseSensitive, IconClose, IconSearch } from '@ui/UIIcons';
 
@@ -28,7 +28,7 @@ export function Part2_FilterSearch() {
     const isEmpty = !filter;
     return (
         <div className="flex-1 min-h-[32px] max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
-            <UITooltip
+            <OldPopper_UITooltip
                 trigger={
                     <div className={``}>
                         <div
@@ -80,7 +80,7 @@ export function Part2_FilterSearch() {
                     <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cap:</span> logins with window caption</div>
                     <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cls:</span> logins with window classname</div>
                 </div>
-            </UITooltip>
+            </OldPopper_UITooltip>
         </div>
     );
 }

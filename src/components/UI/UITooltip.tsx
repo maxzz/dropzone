@@ -15,7 +15,7 @@ type UITooltipProps = {
     triggerParentClassName?: string;
 } & UITooltipOptions & HTMLAttributes<HTMLDivElement>;
 
-export function UITooltip({ trigger, children, className, arrow = false, portal = true, popperOptions, triggerParentClassName, ...rest }: UITooltipProps) {
+export function OldPopper_UITooltip({ trigger, children, className, arrow = false, portal = true, popperOptions, triggerParentClassName, ...rest }: UITooltipProps) {
     const {
         getArrowProps,
         getTooltipProps,
@@ -50,7 +50,7 @@ export function UITooltip({ trigger, children, className, arrow = false, portal 
     </>);
 }
 
-export function optionsUITooltipSmall(): UITooltipOptions {
+export function OldPopper_optionsUITooltipSmall(): UITooltipOptions {
     return {
         arrow: true,
         popperOptions: { delayShow: 750, placement: 'auto' }

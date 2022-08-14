@@ -6,7 +6,7 @@ import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 import { classNames } from '@/utils/classnames';
-import { UITooltip } from '@ui/UITooltip';
+import { OldPopper_UITooltip } from '@ui/UITooltip';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
 import { IconInfo } from '@ui/UIIcons';
@@ -24,7 +24,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = ManiFilenameParts({ fname: fileUs.fname, classLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (
-        <UITooltip
+        <OldPopper_UITooltip
             trigger={
                 <IconInfo
                     className="w-7 h-7 text-gray-300"
@@ -58,7 +58,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
                     <div>{stats.dateModified}</div>
                 </>}
             </div>
-        </UITooltip>
+        </OldPopper_UITooltip>
     );
 }
 

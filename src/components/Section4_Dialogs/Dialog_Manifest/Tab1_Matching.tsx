@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from '
 import { Matching } from '@/store/manifest';
 import { a, useSpring } from '@react-spring/web';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
-import { UITooltip, optionsUITooltipSmall } from '@ui/UITooltip';
+import { OldPopper_UITooltip, OldPopper_optionsUITooltipSmall } from '@ui/UITooltip';
 import { classNames } from '@/utils/classnames';
 //import { arrow } from '@popperjs/core';
 
@@ -35,25 +35,25 @@ function RadioGroup({ value, setValue }: { value: number, setValue: (v: number) 
             className="px-3 py-2 max-w-max flex flex-col space-y-1 border border-gray-300 rounded"
             onChange={(v: ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
-            <UITooltip trigger={<RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />} {...optionsUITooltipSmall()}>
+            <OldPopper_UITooltip trigger={<RadioButton groupName={"how"} value={0} checked={value === 0} label="Same as original url" />} {...OldPopper_optionsUITooltipSmall()}>
                 <div className="text-xs">Same as original url</div>
-            </UITooltip>
+            </OldPopper_UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" />} {...optionsUITooltipSmall()}>
+            <OldPopper_UITooltip trigger={<RadioButton groupName={"how"} value={1} checked={value === 1} label="Match only domain of original url" />} {...OldPopper_optionsUITooltipSmall()}>
                 <div className="text-xs">Match only domain of original url</div>
-            </UITooltip>
+            </OldPopper_UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />} {...optionsUITooltipSmall()}>
+            <OldPopper_UITooltip trigger={<RadioButton groupName={"how"} value={2} checked={value === 2} label="Wildcard match" />} {...OldPopper_optionsUITooltipSmall()}>
                 <div className="text-xs">Wildcard match</div>
-            </UITooltip>
+            </OldPopper_UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />} {...optionsUITooltipSmall()}>
+            <OldPopper_UITooltip trigger={<RadioButton groupName={"how"} value={3} checked={value === 3} label="Regular expresssion" />} {...OldPopper_optionsUITooltipSmall()}>
                 <div className="text-xs">Regular expresssion</div>
-            </UITooltip>
+            </OldPopper_UITooltip>
 
-            <UITooltip trigger={<RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" />} {...optionsUITooltipSmall()}>
+            <OldPopper_UITooltip trigger={<RadioButton groupName={"how"} value={4} checked={value === 4} label="No domain match" />} {...OldPopper_optionsUITooltipSmall()}>
                 <div className="text-xs">Exclude this login from domain match</div>
-            </UITooltip>
+            </OldPopper_UITooltip>
         </div>
     );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUs, FileUsAtomType } from '@/store';
 import { convertToXml } from '@/store/manifest';
-import { Dialog } from '@ui/UIDialog';
+import { OldOverlay_Dialog } from '@ui/UIDialog';
 import { Menu, MenuPortal, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from '@ui/UiDropdownMenu';
 import toast from 'react-hot-toast';
 
@@ -39,13 +39,13 @@ export function CardTitleMenu({ fileUsAtom, icon }: { fileUsAtom: FileUsAtomType
             <MenuPortal container={document.getElementById('portal')}>
                 <MenuContent sideOffset={5}>
 
-                    <Dialog trigger={
+                    <OldOverlay_Dialog trigger={
                         <MenuItem className="!text-sm" /* onClick={(event) => { event.stopPropagation(); event.preventDefault(); saveXmlFile(); }} */>
                             Menu item as dialog trigger
                         </MenuItem>
                     }>
                         <DialogContent />
-                    </Dialog>
+                    </OldOverlay_Dialog>
 
                     <MenuItem className="!text-sm"
                         onClick={(event) => {

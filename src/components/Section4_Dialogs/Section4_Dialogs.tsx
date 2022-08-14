@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useAtom } from 'jotai';
 import { formEditorDataAtom } from '@/store';
-import { PortalModal } from '@ui/UIDialog';
+import { OldOverlay_PortalModal } from '@ui/UIDialog';
 const Manifest_FormEditor = React.lazy(() => import('./Dialog_Manifest/Dialog_Manifest'));
 
 function ManifestFormEditorTrigger() {
@@ -9,9 +9,9 @@ function ManifestFormEditorTrigger() {
     return (<>
         {editorData &&
             <Suspense fallback={"Loading"} >
-                <PortalModal show={true} setShow={(v: boolean) => !v && setEditorData(null)}>
+                <OldOverlay_PortalModal show={true} setShow={(v: boolean) => !v && setEditorData(null)}>
                     <Manifest_FormEditor editorData={editorData} />
-                </PortalModal>
+                </OldOverlay_PortalModal>
             </Suspense>
         }
     </>);
