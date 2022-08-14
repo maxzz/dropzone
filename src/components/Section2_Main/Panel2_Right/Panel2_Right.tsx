@@ -1,13 +1,10 @@
-import React, { HTMLAttributes, Suspense } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanelData } from '@/store';
-import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Part1Card_Title';
 import { ManiActions } from './ManiActions/ManiActions';
-
-import BodyText from './BodyText';
-//const BodyText = React.lazy(() => import('./BodyText'));
+import { BodyText } from './BodyText';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
@@ -27,9 +24,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         />
                     </div>
 
-                    {/* <Suspense fallback={""} > */}
                     <BodyText text={rightPanelValue.raw || ''} />
-                    {/* </Suspense> */}
                 </div>
             }
         </div>

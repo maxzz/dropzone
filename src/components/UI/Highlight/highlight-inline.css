@@ -1,15 +1,16 @@
 /* order is important here */
 
+.hljs-meta {
+    color: #82aaff;
+}
+
 .hljs-tag {
     color: #7fdbca;
 }
 
 .hljs-name {
     color: #32ffda;
-}
-
-.hljs-meta {
-    color: #82aaff;
+    /* font-size: 0.65rem; */
 }
 
 .hljs-attr {

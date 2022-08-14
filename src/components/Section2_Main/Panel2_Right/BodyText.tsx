@@ -2,7 +2,7 @@ import React from 'react';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { SyntaxHighlighterXml } from '@ui/Highlight/SyntaxHighlighter';
 
-export default function BodyText({ text }: { text: string; }) { /*lazy load*/
+export function BodyText({ text }: { text: string; }) {
     return (<>
         {/* Raw data preview (+ codemirror?) */}
         {/* 
