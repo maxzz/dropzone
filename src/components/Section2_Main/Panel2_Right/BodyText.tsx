@@ -7,7 +7,8 @@ import React from 'react';
 
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
-import theme from 'react-syntax-highlighter/dist/esm/styles/hljs/night-owl';
+//import theme from 'react-syntax-highlighter/dist/esm/styles/hljs/night-owl';
+import theme from './highlight';
 
 SyntaxHighlighter.registerLanguage('xml-doc', xml); /* cannot use lazy load */
 
