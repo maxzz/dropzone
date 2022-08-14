@@ -1,0 +1,25 @@
+/* order is important here */
+
+.hljs-tag {
+    color: #7fdbca;
+}
+
+.hljs-name {
+    color: #32ffda;
+}
+
+.hljs-meta {
+    color: #82aaff;
+}
+
+.hljs-attr {
+    color: #00c4ff;
+}
+
+.hljs-string {
+    color: #ecc48d;
+}
+
+.hljs-symbol {
+    color: #82aaff;
+}
