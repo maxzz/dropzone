@@ -13,13 +13,13 @@
     font-family: "Source Sans Pro";
     font-style: normal;
     font-weight: 300;
-    src: local(""), url("./assets/fonts/source-sans-pro-v21-latin-300.woff2") format("woff2");
+    src: local(""), url("@/assets/fonts/source-sans-pro-v21-latin-300.woff2") format("woff2");
 }
 @font-face {
     font-family: "Source Sans Pro";
     font-style: normal;
     font-weight: 400;
-    src: local(""), url("./assets/fonts/source-sans-pro-v21-latin-regular.woff2") format("woff2");
+    src: local(""), url("@/assets/fonts/source-sans-pro-v21-latin-regular.woff2") format("woff2");
 }
 /**/
 /** /
