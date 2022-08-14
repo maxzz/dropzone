@@ -28,7 +28,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                     </div>
 
                     {/* <Suspense fallback={""} > */}
-                        <BodyText text={rightPanelValue.raw || ''} />
+                    <BodyText text={rightPanelValue.raw || ''} />
                     {/* </Suspense> */}
                 </div>
             }
