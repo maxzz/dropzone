@@ -3,8 +3,8 @@ import { CSSProperties } from "react";
 const styles: { [key: string]: React.CSSProperties } = {
     "hljs": {
       "display": "block",
-      "overflowX": "auto",
-      "padding": "0.5em",
+      //"overflowX": "auto",
+      //"padding": "0.5em",
       "background": "#011627",
       "color": "#d6deeb"
     },
