@@ -5,7 +5,9 @@ import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Part1Card_Title';
 import { ManiActions } from './ManiActions/ManiActions';
-const BodyText = React.lazy(() => import('./BodyText'));
+
+import BodyText from './BodyText';
+//const BodyText = React.lazy(() => import('./BodyText'));
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
