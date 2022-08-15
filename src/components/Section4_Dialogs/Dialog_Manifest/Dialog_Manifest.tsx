@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
-import { EditorData, formIdxName } from '@/store';
+import { EditorData, FileUs, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils/classnames';
@@ -124,14 +124,12 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
     );
 }
 
-export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
-    const fileUs = useAtomValue(editorData.fileUsAtom);
-
+function createUrlsAtom(fileUs: FileUs, editorData: EditorData): PrimitiveAtom<MatchWebState> {
     // Page Web Matching
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
 
-    const [urlsAtom] = useState(atomWithCallback<MatchWebState>(
+    return atomWithCallback<MatchWebState>(
         {
             ...initial,
             initial,
@@ -139,7 +137,18 @@ export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => 
         },
         ({ nextValue }) => {
             console.log('urls updated', nextValue);
-        }));
+        }
+    );
+}
+
+export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
+    const fileUs = useAtomValue(editorData.fileUsAtom);
+
+    // Page Web Matching
+    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
+    const initial = { o, m, q, };
+
+    const urlsAtom = useState(createUrlsAtom(fileUs, editorData))[0];
 
     return (
         <TopTabsAndBody urlsAtom={urlsAtom} editorData={editorData}>
