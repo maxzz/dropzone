@@ -16,6 +16,21 @@ import { Tab4_Fields } from './Tab4_Fields';
 import { EditorTabs } from './TabSelector';
 //import { toastWarning } from '@ui/UIToaster';
 
+function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+    const urls = useAtomValue(urlsAtom);
+    const dirty = useAtomValue(urls.dirtyAtom);
+    return (<>
+        {dirty &&
+            <IconAttention
+                className="self-end w-4 h-4 text-[#f6673b]"
+                fill="#ffad42" // #ff5400 stroke="#f6673b" strokeWidth={0.8}
+                style={{ filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' }}
+                title="Modified"
+            />
+        }
+    </>);
+}
+
 function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;
@@ -61,22 +76,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
-    const urls = useAtomValue(urlsAtom);
-    const dirty = useAtomValue(urls.dirtyAtom);
-    return (<>
-        {dirty &&
-            <IconAttention
-                className="self-end w-4 h-4 text-[#f6673b]"
-                fill="#ffad42" // #ff5400 stroke="#f6673b" strokeWidth={0.8}
-                style={{ filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' }}
-                title="Modified"
-            />
-        }
-    </>);
-}
-
-function BottomButtons({setShow}: {setShow: (v: boolean) => void}) {
+function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
     return (
         <div className="flex space-x-2">
             <button
@@ -133,12 +133,17 @@ export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => 
         <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
 
             {/* Editor body */}
-            <EditorTabs pages={pages} stateIndicator={<ManifestState urlsAtom={urlsAtom} />} dragBind={dragBind} />
+            <EditorTabs
+                pages={pages}
+                stateIndicator={
+                    <ManifestState urlsAtom={urlsAtom} />
+                }
+                dragBind={dragBind}
+            />
 
             {/* Editor footer */}
             <div className="px-4 py-4 bg-white flex items-center justify-between">
                 <EditorInfoTooltip editorData={editorData} />
-
                 <BottomButtons setShow={setShow} />
             </div>
 
