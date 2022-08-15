@@ -1,7 +1,7 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
+import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import { UIPortal } from '../UIPortal';
 import { classNames } from '@/utils/classnames';
-import { Config, usePopperTooltip } from 'react-popper-tooltip';
 import './styles.css';
 
 type UITooltipOptions = {
@@ -19,7 +19,7 @@ export function OldPopper_optionsUITooltipSmall(): UITooltipOptions {
 
 type UITooltipProps =
     {
-        trigger: React.ReactNode;
+        trigger: ReactNode;
         triggerParentClassName?: string;
     }
     & UITooltipOptions
@@ -28,34 +28,27 @@ type UITooltipProps =
 export function OldPopper_UITooltip({ trigger, children, className, arrow = false, portal = true, popperOptions, triggerParentClassName, ...rest }: UITooltipProps) {
     const {
         getArrowProps,
-        getTooltipProps,
+        getTooltipProps, // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip(
-        //{ defaultVisible: true }
-        {
-            ...popperOptions,
-        }
-    );
+    } = usePopperTooltip(popperOptions); // } = usePopperTooltip({...popperOptions, defaultVisible: true});
 
-    const poperBody = visible && (
+    const poperBody =
         <div
             ref={setTooltipRef}
-            {...getTooltipProps({ className: classNames('tooltip-container', className) })} // add -mx-4 to add right/left margin from viewport edge, but it will shift arrow
+            {...getTooltipProps({ className: classNames('tooltip-container', className) })}
             {...rest}
         >
             {children}
             {arrow && <div {...getArrowProps({ className: 'tooltip-arrow' })} />}
-        </div>
-    );
-
-    const popper = visible && portal ? <UIPortal>{poperBody}</UIPortal> : <>{poperBody}</>;
+        </div>;
 
     return (<>
         <div ref={setTriggerRef} className={triggerParentClassName}>
             {trigger}
         </div>
-        {popper}
+
+        {visible && (portal ? <UIPortal>{poperBody}</UIPortal> : <>{poperBody}</>)}
     </>);
 }
