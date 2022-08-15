@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { atom, useAtomValue } from 'jotai';
+import React, { HTMLAttributes, useState } from 'react';
+import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
 import { EditorData, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
@@ -97,16 +97,37 @@ function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
     );
 }
 
-export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
-
+function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: PrimitiveAtom<MatchWebState>; editorData: EditorData; } & HTMLAttributes<HTMLDivElement>) {
     // Caption dragging
-
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
     const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
 
-    // Page Web Matching
+    // Pages
+    const pages = {
+        'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
+        'Win32': <Tab2_MatchWindows editorData={editorData} />,
+        'Options': <Tab3_Options editorData={editorData} />,
+        'Fields': <Tab4_Fields editorData={editorData} />,
+    };
 
+    return (
+        <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
+            <EditorTabs
+                pages={pages}
+                stateIndicator={
+                    <ManifestState urlsAtom={urlsAtom} />
+                }
+                dragBind={dragBind}
+            />
+            {children}
+        </a.div>
+    );
+}
+
+export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
     const fileUs = useAtomValue(editorData.fileUsAtom);
+
+    // Page Web Matching
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
 
@@ -120,34 +141,14 @@ export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => 
             console.log('urls updated', nextValue);
         }));
 
-    // Pages
-
-    const pages = {
-        'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
-        'Win32': <Tab2_MatchWindows editorData={editorData} />,
-        'Options': <Tab3_Options editorData={editorData} />,
-        'Fields': <Tab4_Fields editorData={editorData} />,
-    };
-
     return (
-        <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
-
-            {/* Editor body */}
-            <EditorTabs
-                pages={pages}
-                stateIndicator={
-                    <ManifestState urlsAtom={urlsAtom} />
-                }
-                dragBind={dragBind}
-            />
-
+        <TopTabsAndBody urlsAtom={urlsAtom} editorData={editorData}>
             {/* Editor footer */}
             <div className="px-4 py-4 bg-white flex items-center justify-between">
                 <EditorInfoTooltip editorData={editorData} />
                 <BottomButtons setShow={setShow} />
             </div>
-
-        </a.div>
+        </TopTabsAndBody>
     );
 }
 
