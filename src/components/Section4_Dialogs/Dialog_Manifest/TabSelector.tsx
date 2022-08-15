@@ -1,9 +1,31 @@
-import React, { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { a, useSpring } from "@react-spring/web";
 import { ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
 import { classNames } from "@/utils/classnames";
 import { UISemiScrollbar } from "@ui/UISemiScrollbar";
 import { RefObject, useRef } from "react";
+
+/*
+function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
+    return (
+        <div className="flex justify-items-start space-x-1">
+            {tabs.map((pageTitle, idx) => (
+                <button
+                    className={classNames(
+                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
+                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                    )}
+                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                    key={pageTitle}
+                    onClick={() => setActive(idx)}
+                >
+                    {pageTitle}
+                </button>
+            ))}
+        </div>
+    );
+}
+*/
 
 function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
     const $root = useRef<HTMLDivElement>(null);
@@ -24,21 +46,8 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
                     width: width,
                     height: height,
                 });
-
-                // api.start([{
-                //     x: left - menuOffset.x,
-                //     y: top - menuOffset.y,
-                //     width: width,
-                //     height: height,
-                // }
-                // ]);
-
-                // api.start(async (next, cancel) => ({
-                //     x: left - menuOffset.x,
-                //     y: top - menuOffset.y,
-                //     width: width,
-                //     height: height,
-                // }));
+                // api.start([ { x: left - menuOffset.x, y: top - menuOffset.y, width: width, height: height, } ]);
+                // api.start(async (next, cancel) => ({ x: left - menuOffset.x, y: top - menuOffset.y, width: width, height: height, }));
             }
         }
         animate();
@@ -72,27 +81,15 @@ function TabSelector({ tabs, active, setActive }: { tabs: string[], active: numb
     );
 }
 
-/*
-function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
-    return (
-        <div className="flex justify-items-start space-x-1">
-            {tabs.map((pageTitle, idx) => (
-                <button
-                    className={classNames(
-                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
-                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                    )}
-                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                    key={pageTitle}
-                    onClick={() => setActive(idx)}
-                >
-                    {pageTitle}
-                </button>
-            ))}
-        </div>
-    );
+function RealPages({ pages, selectedTab }: { pages: Record<string, JSX.Element>; selectedTab: number; }) {
+    return (<>
+        {Object.values(pages).map((pageContent, idx) => (
+            <div className={classNames(selectedTab !== idx && 'hidden')} key={idx}>
+                {pageContent}
+            </div>
+        ))}
+    </>);
 }
-*/
 
 export function EditorTabs({ pages, stateIndicator, dragBind }: {
     pages: Record<string, JSX.Element>;
@@ -131,13 +128,9 @@ export function EditorTabs({ pages, stateIndicator, dragBind }: {
             {/* Pages */}
             <div className="text-sm bg-white">
                 <UISemiScrollbar className={`text-gray-500 overflow-auto w-full h-full`} scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
-                    {Object.values(pages).map((pageContent, idx) => (
-                        <Fragment key={idx}>
-                            <div key={idx} className={`${selectedTab === idx ? '' : 'hidden'}`}>
-                                {pageContent}
-                            </div>
-                        </Fragment>
-                    ))}
+
+                    <RealPages pages={pages} selectedTab={selectedTab} />
+
                 </UISemiScrollbar>
             </div>
         </div>

@@ -109,7 +109,6 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
         'Options': <Tab3_Options editorData={editorData} />,
         'Fields': <Tab4_Fields editorData={editorData} />,
     };
-
     return (
         <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
             <EditorTabs
@@ -142,9 +141,11 @@ function createUrlsAtom(editorData: EditorData, onChange: OnValueChange<MatchWeb
 }
 
 export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
+
     const onUrlsUpdate = useCallback<OnValueChange<MatchWebState>>(({ nextValue }) => {
         console.log('urls updated', nextValue);
     }, []);
+
     const urlsAtom = useState(createUrlsAtom(editorData, onUrlsUpdate))[0];
     return (
         <TopTabsAndBody urlsAtom={urlsAtom} editorData={editorData}>
