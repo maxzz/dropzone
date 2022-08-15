@@ -1,4 +1,5 @@
 import React from 'react';
+import { FocusGuards } from '@radix-ui/react-focus-guards';
 import { UIToaster } from '@ui/UIToaster';
 import { Section1_Header } from './components/Section1_Header/Section1_Header';
 import { Section2_Main } from './components/Section2_Main/Section2_Main';
@@ -7,18 +8,19 @@ import { UISymbolDefs } from '@ui/UIIconSymbols';
 import './styles/App.scss';
 //import { SpySvgSymbols } from './utils/SpySvgSymbols';
 
-function App() {
-    return (<>
-        <UIToaster />
-        <UISymbolDefs />
+export function App() {
+    return (
+        <FocusGuards>
+            <UIToaster />
+            <UISymbolDefs />
 
-        <div className="h-screen p-1 pt-2 space-y-2 flex flex-col overflow-hidden">
-            <Section1_Header className="flex-none" />
-            <Section2_Main />
-            <Section4_Dialogs />
-            {/* <SpySvgSymbols /> */}
-        </div>
-    </>);
+            <div className="h-screen p-1 pt-2 space-y-2 flex flex-col overflow-hidden">
+                <Section1_Header className="flex-none" />
+                <Section2_Main />
+                <Section4_Dialogs />
+                {/* <SpySvgSymbols /> */}
+            </div>
+        </FocusGuards>
+    );
 }
 
-export default App;
