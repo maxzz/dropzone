@@ -124,7 +124,8 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
     );
 }
 
-function createUrlsAtom(fileUs: FileUs, editorData: EditorData): PrimitiveAtom<MatchWebState> {
+function createUrlsAtom(editorData: EditorData): PrimitiveAtom<MatchWebState> {
+    const fileUs = useAtomValue(editorData.fileUsAtom);
     // Page Web Matching
     const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
     const initial = { o, m, q, };
@@ -142,14 +143,7 @@ function createUrlsAtom(fileUs: FileUs, editorData: EditorData): PrimitiveAtom<M
 }
 
 export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
-    const fileUs = useAtomValue(editorData.fileUsAtom);
-
-    // Page Web Matching
-    const { web_ourl: o = '', web_murl: m = '', web_qurl: q = '' } = fileUs.meta?.[editorData.formIdx]?.mani?.detection || {};
-    const initial = { o, m, q, };
-
-    const urlsAtom = useState(createUrlsAtom(fileUs, editorData))[0];
-
+    const urlsAtom = useState(createUrlsAtom(editorData))[0];
     return (
         <TopTabsAndBody urlsAtom={urlsAtom} editorData={editorData}>
             {/* Editor footer */}
