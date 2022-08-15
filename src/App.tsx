@@ -4,7 +4,7 @@ import { Section1_Header } from './components/Section1_Header/Section1_Header';
 import { Section2_Main } from './components/Section2_Main/Section2_Main';
 import { Section4_Dialogs } from './components/Section4_Dialogs/Section4_Dialogs';
 import { UISymbolDefs } from '@ui/UIIconSymbols';
-import './App.scss';
+import './styles/App.scss';
 //import { SpySvgSymbols } from './utils/SpySvgSymbols';
 
 function App() {
