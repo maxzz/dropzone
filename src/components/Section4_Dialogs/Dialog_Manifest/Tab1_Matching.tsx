@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from '
 import { Matching } from '@/store/manifest';
 import { a, useSpring } from '@react-spring/web';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
-import { OldPopper_UITooltip, OldPopper_optionsUITooltipSmall } from '@ui/UITooltip';
+import { OldPopper_UITooltip, OldPopper_optionsUITooltipSmall } from '@ui/UITooltip/UITooltip';
 import { classNames } from '@/utils/classnames';
 //import { arrow } from '@popperjs/core';
 

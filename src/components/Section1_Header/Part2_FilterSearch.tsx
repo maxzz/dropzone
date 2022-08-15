@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { searchFilterData } from '@/store';
 import { useKey } from 'react-use';
-import { OldPopper_UITooltip } from '@ui/UITooltip';
+import { OldPopper_UITooltip } from '@ui/UITooltip/UITooltip';
 import { IconDot } from '@ui/UIIconSymbols';
 import { IconCaseSensitive, IconClose, IconSearch } from '@ui/UIIcons';
 

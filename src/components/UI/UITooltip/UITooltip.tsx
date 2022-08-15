@@ -1,8 +1,8 @@
 import React, { HTMLAttributes } from 'react';
-import { UIPortal } from './UIPortal';
+import { UIPortal } from '../UIPortal';
 import { classNames } from '@/utils/classnames';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
-import 'react-popper-tooltip/dist/styles.css';
+import './styles.css';
 
 type UITooltipOptions = {
     arrow?: boolean;
@@ -10,10 +10,20 @@ type UITooltipOptions = {
     popperOptions?: Config;
 };
 
-type UITooltipProps = {
-    trigger: React.ReactNode;
-    triggerParentClassName?: string;
-} & UITooltipOptions & HTMLAttributes<HTMLDivElement>;
+export function OldPopper_optionsUITooltipSmall(): UITooltipOptions {
+    return {
+        arrow: true,
+        popperOptions: { delayShow: 750, placement: 'auto' }
+    };
+}
+
+type UITooltipProps =
+    {
+        trigger: React.ReactNode;
+        triggerParentClassName?: string;
+    }
+    & UITooltipOptions
+    & HTMLAttributes<HTMLDivElement>;
 
 export function OldPopper_UITooltip({ trigger, children, className, arrow = false, portal = true, popperOptions, triggerParentClassName, ...rest }: UITooltipProps) {
     const {
@@ -48,11 +58,4 @@ export function OldPopper_UITooltip({ trigger, children, className, arrow = fals
         </div>
         {popper}
     </>);
-}
-
-export function OldPopper_optionsUITooltipSmall(): UITooltipOptions {
-    return {
-        arrow: true,
-        popperOptions: { delayShow: 750, placement: 'auto' }
-    };
 }

@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
-import { OldPopper_UITooltip, OldPopper_optionsUITooltipSmall } from "@ui/UITooltip";
+import { OldPopper_UITooltip, OldPopper_optionsUITooltipSmall } from "@ui/UITooltip/UITooltip";
 import { IconFolder } from "@ui/UIIconSymbols";
 import { classNames } from "@/utils/classnames";
 

@@ -5,7 +5,7 @@ import { EditorData, FileUs, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils/classnames';
-import { OldPopper_UITooltip } from '@ui/UITooltip';
+import { OldPopper_UITooltip } from '@ui/UITooltip/UITooltip';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
