@@ -1,13 +1,11 @@
-import React, { Fragment, RefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { atom, useAtomValue } from 'jotai';
 import { atomWithCallback } from '@/hooks/atomsX';
 import { EditorData, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 import { classNames } from '@/utils/classnames';
 import { OldPopper_UITooltip } from '@ui/UITooltip';
-import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
@@ -36,6 +34,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
             }
             arrow={true}
         >
+            {/* Popup content */}
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
                 <div className="font-bold">Form</div>
                 <div>{formName}</div>
@@ -77,28 +76,26 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     </>);
 }
 
-/*
-function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
+function BottomButtons({setShow}: {setShow: (v: boolean) => void}) {
     return (
-        <div className="flex justify-items-start space-x-1">
-            {tabs.map((pageTitle, idx) => (
-                <button
-                    className={classNames(
-                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
-                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                    )}
-                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                    key={pageTitle}
-                    onClick={() => setActive(idx)}
-                >
-                    {pageTitle}
-                </button>
-            ))}
+        <div className="flex space-x-2">
+            <button
+                className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
+                onClick={() => {
+                    setShow(false);
+                    // toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
+                }}
+            >OK</button>
+
+            <button
+                className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
+                onClick={() => {
+                    setShow(false);
+                }}
+            >Cancel</button>
         </div>
     );
 }
-*/
-
 
 export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
 
@@ -142,22 +139,7 @@ export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => 
             <div className="px-4 py-4 bg-white flex items-center justify-between">
                 <EditorInfoTooltip editorData={editorData} />
 
-                <div className="flex space-x-2">
-                    <button
-                        className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
-                        onClick={() => {
-                            setShow(false);
-                            // toastWarning(<div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } });
-                        }}
-                    >OK</button>
-
-                    <button
-                        className="px-4 py-2 min-w-[6rem] h-9 leading-4 text-gray-900 bg-gray-200 border border-gray-500 rounded shadow active:scale-[.97]"
-                        onClick={() => {
-                            setShow(false);
-                        }}
-                    >Cancel</button>
-                </div>
+                <BottomButtons setShow={setShow} />
             </div>
 
         </a.div>
