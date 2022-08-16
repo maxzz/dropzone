@@ -158,8 +158,6 @@ function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: ReactNode; u
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
     const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
 
-    const selectedTabAtom = useState(atom(0))[0];
-
     // Pages
     const pages = {
         'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
@@ -169,6 +167,8 @@ function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: ReactNode; u
     };
     const pageNames = Object.keys(pages);
     const pageComponents = Object.values(pages);
+
+    const selectedTabAtom = useState(atom(0))[0];
 
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]  bg-gray-200 rounded overflow-hidden">
