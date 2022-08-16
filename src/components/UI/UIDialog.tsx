@@ -1,7 +1,7 @@
 import React, { cloneElement, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import Modal from 'react-overlays/Modal';
 
-export const RenderBackdrop = (props: any) => <div className="fixed inset-0 z-[1040] bg-black opacity-40" {...props} />;
+export const RenderBackdrop = (props: HTMLAttributes<HTMLDivElement>) => <div className="fixed inset-0 z-[1040] bg-black opacity-50" {...props} />;
 
 const className = "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[1040] focus:outline-none";
 
@@ -45,8 +45,10 @@ export function OldOverlay_PortalModal({ children, allowClickOutside, show, setS
 }
 
 export function OldOverlay_ControlledDialog({ trigger, show, setShow, ...rest }: ControlledDialogProps) {
-    const portalRef = useRef<HTMLElement | null>(null);
-    useEffect(() => { portalRef.current = document.getElementById('portal'); }, []);
+    // const portalRef = useRef<HTMLElement | null>(null);
+    // useEffect(() => {
+    //     portalRef.current = document.getElementById('portal');
+    // }, []);
     return (<>
         {trigger
             ? cloneElement(trigger, {
@@ -59,13 +61,13 @@ export function OldOverlay_ControlledDialog({ trigger, show, setShow, ...rest }:
             : <ButtonTrigger onClick={() => setShow(true)} />
         }
 
-        <OldOverlay_PortalModal {...rest} show={show} setShow={setShow} />
+        <OldOverlay_PortalModal show={show} setShow={setShow} {...rest} />
     </>);
 }
 
 export function OldOverlay_Dialog(props: DialogProps) {
     const [show, setShow] = useState(false);
     return (
-        <OldOverlay_ControlledDialog {...props} show={show} setShow={setShow} />
+        <OldOverlay_ControlledDialog show={show} setShow={setShow} {...props} />
     );
 }
