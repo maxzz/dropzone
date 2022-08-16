@@ -99,10 +99,10 @@ function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
     );
 }
 
-function RealPages({ pages, selectedTabAtom }: { pages: Record<string, JSX.Element>; selectedTabAtom: PrimitiveAtom<number>; }) {
+function RealPages({ pageComponents, selectedTabAtom }: { pageComponents: JSX.Element[]; selectedTabAtom: PrimitiveAtom<number>; }) {
     const selectedTab = useAtomValue(selectedTabAtom);
     return (<>
-        {Object.values(pages).map((pageContent, idx) => (
+        {pageComponents.map((pageContent, idx) => (
             <div className={classNames(selectedTab !== idx && 'hidden')} key={idx}>
                 {pageContent}
             </div>
@@ -168,6 +168,7 @@ function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: ReactNode; u
         'Fields': <Tab4_Fields editorData={editorData} />,
     };
     const pageNames = Object.keys(pages);
+    const pageComponents = Object.values(pages);
 
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]  bg-gray-200 rounded overflow-hidden">
@@ -177,7 +178,7 @@ function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: ReactNode; u
                     <ManifestState urlsAtom={urlsAtom} />
                 }
                 dialogContentBody={
-                    <RealPages pages={pages} selectedTabAtom={selectedTabAtom} />
+                    <RealPages pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />
                 }
                 selectedTabAtom={selectedTabAtom}
                 dragBind={dragBind}
