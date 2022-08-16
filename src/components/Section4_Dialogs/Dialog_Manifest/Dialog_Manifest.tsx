@@ -99,7 +99,8 @@ function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
     );
 }
 
-function RealPages({ pages, selectedTab }: { pages: Record<string, JSX.Element>; selectedTab: number; }) {
+function RealPages({ pages, selectedTabAtom }: { pages: Record<string, JSX.Element>; selectedTabAtom: PrimitiveAtom<number>; }) {
+    const selectedTab = useAtomValue(selectedTabAtom);
     return (<>
         {Object.values(pages).map((pageContent, idx) => (
             <div className={classNames(selectedTab !== idx && 'hidden')} key={idx}>
@@ -115,10 +116,9 @@ function RealPages({ pages, selectedTab }: { pages: Record<string, JSX.Element>;
 export function EditorTabs({ pages, stateIndicator, selectedTabAtom, dragBind }: {
     pages: Record<string, JSX.Element>;
     stateIndicator: JSX.Element;
-    selectedTabAtom: PrimitiveAtom<number>,
+    selectedTabAtom: PrimitiveAtom<number>;
     dragBind: (...args: any[]) => ReactDOMAttributes;
 }) {
-    //const [selectedTab, setSelectedTab] = useState(0);
     const [selectedTab, setSelectedTab] = useAtom(selectedTabAtom);
 
     const scrollableNodeRef = useRef<HTMLDivElement>();
@@ -145,7 +145,7 @@ export function EditorTabs({ pages, stateIndicator, selectedTabAtom, dragBind }:
             <div className="text-sm bg-white">
                 <UISemiScrollbar className="text-gray-500 overflow-auto w-full h-full" scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
 
-                    <RealPages pages={pages} selectedTab={selectedTab} />
+                    <RealPages pages={pages} selectedTabAtom={selectedTabAtom} />
 
                 </UISemiScrollbar>
             </div>
