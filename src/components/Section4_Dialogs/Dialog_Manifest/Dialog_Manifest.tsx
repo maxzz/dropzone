@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { atomWithCallback, OnValueChange } from '@/hooks/atomsX';
 import { EditorData, FileUs, formIdxName } from '@/store';
@@ -13,7 +13,9 @@ import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from './Tab1_Matching
 import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
-import { EditorTabs } from './TabSelector';
+import { TabSelector } from './TabSelector';
+import { UISemiScrollbar } from '@ui/UISemiScrollbar';
+import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 //import { toastWarning } from '@ui/UIToaster';
 
 function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
@@ -93,6 +95,62 @@ function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
                     setShow(false);
                 }}
             >Cancel</button>
+        </div>
+    );
+}
+
+function RealPages({ pages, selectedTab }: { pages: Record<string, JSX.Element>; selectedTab: number; }) {
+    return (<>
+        {Object.values(pages).map((pageContent, idx) => (
+            <div className={classNames(selectedTab !== idx && 'hidden')} key={idx}>
+                {pageContent}
+            </div>
+        ))}
+    </>);
+}
+
+export function EditorTabs({ pages, stateIndicator, dragBind }: {
+    pages: Record<string, JSX.Element>;
+    stateIndicator: JSX.Element;
+    dragBind: (...args: any[]) => ReactDOMAttributes;
+}) {
+    const [selectedTab, setSelectedTab] = useState(0);
+
+    //TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
+    //TODO: dialog x, y to atom
+
+    const scrollableNodeRef = useRef<HTMLDivElement>();
+    const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
+    useLayoutEffect(() => {
+        scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]);
+    }, [selectedTab]);
+
+    return (
+        <div className="grid grid-rows-[auto,minmax(0,1fr)]">
+
+            {/* Tabs */}
+            <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between touch-none" {...dragBind()} >
+                <div className="flex justify-items-start space-x-1">
+                    <TabSelector
+                        tabs={Object.keys(pages)}
+                        active={selectedTab}
+                        setActive={(v: number) => {
+                            pageScrollOfs.current[selectedTab] = scrollableNodeRef.current?.scrollTop || 0;
+                            setSelectedTab(v);
+                        }}
+                    />
+                </div>
+                {stateIndicator} {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
+            </div>
+
+            {/* Pages */}
+            <div className="text-sm bg-white">
+                <UISemiScrollbar className="text-gray-500 overflow-auto w-full h-full" scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
+
+                    <RealPages pages={pages} selectedTab={selectedTab} />
+
+                </UISemiScrollbar>
+            </div>
         </div>
     );
 }
