@@ -12,10 +12,8 @@ export function BodyText({ text }: { text: string; }) {
         </UISemiScrollbar>
          */}
 
-        <div className="font-mono">
-            <SyntaxHighlighterXml>
-                {text}
-            </SyntaxHighlighterXml>
-        </div>
+        <SyntaxHighlighterXml>
+            {text}
+        </SyntaxHighlighterXml>
     </>);
 }

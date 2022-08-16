@@ -12,7 +12,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
     const fileUsAtom = useAtomValue(rightPanelData.panelAtom);
     const rightPanelValue = useAtomValue(rightPanelData.valueAtom);
     const rightPanelViewMode = useAtomValue(rightPanelData.viewModeAtom);
-    
+
     const canEditManifest = !!fileUsAtom;
     const showRaw = rightPanelViewMode === ViewMode.raw || (rightPanelViewMode === ViewMode.edit && !canEditManifest);
 
@@ -31,7 +31,12 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         />
                     </div>
 
-                    <UISemiScrollbar className={`px-2 pt-1 pb-4 overflow-auto w-full h-full text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default`}>
+                    <UISemiScrollbar className={classNames(
+                        "px-2 pt-1 pb-4 overflow-auto w-full h-full",
+                        showRaw
+                            ? "font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default"
+                            : "text-xs text-primary-100 bg-[#011627]",
+                    )}>
                         {showRaw
                             ? <BodyText text={rightPanelValue.raw || ''} />
                             : <List_Manifest />
