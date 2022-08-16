@@ -136,8 +136,9 @@ export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selec
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
 
-            {/* Tabs */} {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
+            {/* Tabs */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between touch-none" {...dragBind()} >
+                {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
                 <TabSelector tabs={pageNames} active={selectedTab} setActive={onSetActive} />
                 {stateIndicator}
             </div>
@@ -152,7 +153,7 @@ export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selec
     );
 }
 
-function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: PrimitiveAtom<MatchWebState>; editorData: EditorData; } & HTMLAttributes<HTMLDivElement>) {
+function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: ReactNode; urlsAtom: PrimitiveAtom<MatchWebState>; editorData: EditorData; }) {
     // Caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
     const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
@@ -169,7 +170,7 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
     const pageNames = Object.keys(pages);
 
     return (
-        <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
+        <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]  bg-gray-200 rounded overflow-hidden">
             <EditorTabs
                 pageNames={pageNames}
                 stateIndicator={
@@ -181,7 +182,7 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
                 selectedTabAtom={selectedTabAtom}
                 dragBind={dragBind}
             />
-            {children}
+            {footer}
         </a.div>
     );
 }
@@ -211,12 +212,16 @@ export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => 
 
     const urlsAtom = useState(createUrlsAtom(editorData, onUrlsUpdate))[0];
     return (
-        <TopTabsAndBody urlsAtom={urlsAtom} editorData={editorData}>
-            <div className="px-4 py-4 bg-white flex items-center justify-between">
-                <EditorInfoTooltip editorData={editorData} />
-                <BottomButtons setShow={setShow} />
-            </div>
-        </TopTabsAndBody>
+        <TopTabsAndBody
+            urlsAtom={urlsAtom}
+            editorData={editorData}
+            footer={
+                <div className="px-4 py-4 bg-white flex items-center justify-between">
+                    <EditorInfoTooltip editorData={editorData} />
+                    <BottomButtons setShow={setShow} />
+                </div>
+            }
+        />
     );
 }
 
