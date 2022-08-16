@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/UIIconUpDown';

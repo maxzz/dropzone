@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useState } from 'react';
 import { UIPortal } from '@ui/UIPortal';
 import { usePopper } from 'react-popper';
-import { useElementClickAway } from '../../../../../hooks/useElementClickAway';
+import { useElementClickAway } from '@/hooks/useElementClickAway';
 
 export function UIToggleWithPortal({ toggle, children, ...rest }: { toggle?: React.ReactNode; } & HTMLAttributes<HTMLButtonElement>) {
     const [referenceElm, setReferenceElm] = useState<HTMLButtonElement | null>(null);

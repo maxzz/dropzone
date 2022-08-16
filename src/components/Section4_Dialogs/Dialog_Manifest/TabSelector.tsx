@@ -98,6 +98,9 @@ export function EditorTabs({ pages, stateIndicator, dragBind }: {
 }) {
     const [selectedTab, setSelectedTab] = useState(0);
 
+    //TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
+    //TODO: dialog x, y to atom
+
     const scrollableNodeRef = useRef<HTMLDivElement>();
     const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
     useLayoutEffect(() => {
@@ -107,14 +110,11 @@ export function EditorTabs({ pages, stateIndicator, dragBind }: {
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
 
-            {/* Tabs */} {/*  As alternative to style={{ touchAction: 'none' }} we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
-            <div
-                className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between"
-                {...dragBind()}
-                style={{ touchAction: 'none' }}
-            >
+            {/* Tabs */}
+            <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between touch-none" {...dragBind()} >
                 <div className="flex justify-items-start space-x-1">
-                    <TabSelector tabs={Object.keys(pages)}
+                    <TabSelector
+                        tabs={Object.keys(pages)}
                         active={selectedTab}
                         setActive={(v: number) => {
                             pageScrollOfs.current[selectedTab] = scrollableNodeRef.current?.scrollTop || 0;
@@ -122,7 +122,7 @@ export function EditorTabs({ pages, stateIndicator, dragBind }: {
                         }}
                     />
                 </div>
-                {stateIndicator}
+                {stateIndicator} {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
             </div>
 
             {/* Pages */}
