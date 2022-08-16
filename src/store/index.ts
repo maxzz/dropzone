@@ -43,11 +43,13 @@ export {
     sortByAtom,
     orderAtom,
 
-    rightPanelData,
-
     uiSizeAtom,
 
 } from './store-ui-state';
+
+export {
+    rightPanelData,
+} from './store-ui-right-panel';
 
 export {
     doSetCurrentCardAtom,
