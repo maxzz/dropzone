@@ -109,6 +109,9 @@ function RealPages({ pages, selectedTab }: { pages: Record<string, JSX.Element>;
     </>);
 }
 
+//TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
+//TODO: dialog x, y to atom
+
 export function EditorTabs({ pages, stateIndicator, dragBind }: {
     pages: Record<string, JSX.Element>;
     stateIndicator: JSX.Element;
@@ -116,31 +119,24 @@ export function EditorTabs({ pages, stateIndicator, dragBind }: {
 }) {
     const [selectedTab, setSelectedTab] = useState(0);
 
-    //TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
-    //TODO: dialog x, y to atom
-
     const scrollableNodeRef = useRef<HTMLDivElement>();
     const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
     useLayoutEffect(() => {
         scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]);
     }, [selectedTab]);
 
+    function onSetActive(v: number) {
+        pageScrollOfs.current[selectedTab] = scrollableNodeRef.current?.scrollTop || 0;
+        setSelectedTab(v);
+    }
+
     return (
         <div className="grid grid-rows-[auto,minmax(0,1fr)]">
 
-            {/* Tabs */}
+            {/* Tabs */} {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between touch-none" {...dragBind()} >
-                <div className="flex justify-items-start space-x-1">
-                    <TabSelector
-                        tabs={Object.keys(pages)}
-                        active={selectedTab}
-                        setActive={(v: number) => {
-                            pageScrollOfs.current[selectedTab] = scrollableNodeRef.current?.scrollTop || 0;
-                            setSelectedTab(v);
-                        }}
-                    />
-                </div>
-                {stateIndicator} {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
+                <TabSelector tabs={Object.keys(pages)} active={selectedTab} setActive={onSetActive} />
+                {stateIndicator}
             </div>
 
             {/* Pages */}
