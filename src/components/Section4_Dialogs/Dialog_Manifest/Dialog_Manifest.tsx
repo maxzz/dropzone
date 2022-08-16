@@ -113,16 +113,14 @@ function RealPages({ pages, selectedTabAtom }: { pages: Record<string, JSX.Eleme
 //TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
 //TODO: dialog x, y to atom
 
-export function EditorTabs({ pages, stateIndicator, dialogContentBody, selectedTabAtom, dragBind }: {
-    pages: Record<string, JSX.Element>;
+export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selectedTabAtom, dragBind }: {
+    pageNames: string[];
     stateIndicator: JSX.Element;
     dialogContentBody: ReactNode;
     selectedTabAtom: PrimitiveAtom<number>;
     dragBind: (...args: any[]) => ReactDOMAttributes;
 }) {
     const [selectedTab, setSelectedTab] = useAtom(selectedTabAtom);
-
-    const pageNames = Object.keys(pages);
 
     const scrollableNodeRef = useRef<HTMLDivElement>();
     const pageScrollOfs = useRef<number[]>(Array(pageNames.length).fill(0));
@@ -168,10 +166,12 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
         'Options': <Tab3_Options editorData={editorData} />,
         'Fields': <Tab4_Fields editorData={editorData} />,
     };
+    const pageNames = Object.keys(pages);
+
     return (
         <a.div style={{ x, y }} className={classNames("w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]", "bg-gray-200 rounded overflow-hidden")}>
             <EditorTabs
-                pages={pages}
+                pageNames={pageNames}
                 stateIndicator={
                     <ManifestState urlsAtom={urlsAtom} />
                 }
