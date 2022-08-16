@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { HTMLAttributes, ReactNode, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { atomWithCallback, OnValueChange } from '@/hooks/atomsX';
 import { EditorData, FileUs, formIdxName } from '@/store';
@@ -113,9 +113,10 @@ function RealPages({ pages, selectedTabAtom }: { pages: Record<string, JSX.Eleme
 //TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
 //TODO: dialog x, y to atom
 
-export function EditorTabs({ pages, stateIndicator, selectedTabAtom, dragBind }: {
+export function EditorTabs({ pages, stateIndicator, dialogContentBody, selectedTabAtom, dragBind }: {
     pages: Record<string, JSX.Element>;
     stateIndicator: JSX.Element;
+    dialogContentBody: ReactNode;
     selectedTabAtom: PrimitiveAtom<number>;
     dragBind: (...args: any[]) => ReactDOMAttributes;
 }) {
@@ -144,9 +145,7 @@ export function EditorTabs({ pages, stateIndicator, selectedTabAtom, dragBind }:
             {/* Pages */}
             <div className="text-sm bg-white">
                 <UISemiScrollbar className="text-gray-500 overflow-auto w-full h-full" scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
-
-                    <RealPages pages={pages} selectedTabAtom={selectedTabAtom} />
-
+                    {dialogContentBody}
                 </UISemiScrollbar>
             </div>
         </div>
@@ -173,6 +172,9 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
                 pages={pages}
                 stateIndicator={
                     <ManifestState urlsAtom={urlsAtom} />
+                }
+                dialogContentBody={
+                    <RealPages pages={pages} selectedTabAtom={selectedTabAtom} />
                 }
                 selectedTabAtom={selectedTabAtom}
                 dragBind={dragBind}
