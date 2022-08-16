@@ -48,6 +48,7 @@ export {
 } from './store-ui-state';
 
 export {
+    ViewMode,
     rightPanelData,
 } from './store-ui-right-panel';
 
