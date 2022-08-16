@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
-import { OldPopper_UITooltip, OldPopper_optionsUITooltipSmall } from "@ui/UITooltip/UITooltip";
+import { UITip, tipSmall } from "@ui/UITooltip";
 import { IconFolder } from "@ui/UIIconSymbols";
 import { classNames } from "@/utils/classnames";
 
@@ -45,11 +45,11 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
 
     const FilenameMemo = React.useMemo(() => {
         return (
-            <OldPopper_UITooltip
+            <UITip
                 trigger={
                     <ManiFilenameParts fname={fileUs.fname} />
                 }
-                {...OldPopper_optionsUITooltipSmall()}
+                {...tipSmall()}
             >
                 {/* Popup content */}
                 <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
@@ -72,7 +72,7 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
                         <div>{stats.dateModified}</div>
                     </>}
                 </div>
-            </OldPopper_UITooltip>
+            </UITip>
         );
     }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]);
 

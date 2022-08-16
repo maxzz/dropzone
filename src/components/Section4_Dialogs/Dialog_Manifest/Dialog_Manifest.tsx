@@ -5,7 +5,7 @@ import { EditorData, FileUs, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils/classnames';
-import { OldPopper_UITooltip } from '@ui/UITooltip/UITooltip';
+import { UITip } from '@ui/UITooltip';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
@@ -37,7 +37,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = ManiFilenameParts({ fname: fileUs.fname, classLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (
-        <OldPopper_UITooltip
+        <UITip
             trigger={
                 <IconInfo
                     className="w-7 h-7 text-gray-300"
@@ -72,7 +72,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
                     <div>{stats.dateModified}</div>
                 </>}
             </div>
-        </OldPopper_UITooltip>
+        </UITip>
     );
 }
 

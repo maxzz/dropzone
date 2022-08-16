@@ -1,8 +1,8 @@
+import React, { Fragment } from "react";
 import { FileUs, isAnyWhy } from "@/store";
 import { classNames } from "@/utils/classnames";
 import { IconDot } from "@ui/UIIconSymbols";
-import { OldPopper_UITooltip } from "@ui/UITooltip/UITooltip";
-import React, { Fragment } from "react";
+import { UITip } from "@ui/UITooltip";
 
 export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: boolean; }) {
     return (
@@ -27,7 +27,7 @@ export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
     }
     const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
     return (
-        <OldPopper_UITooltip
+        <UITip
             trigger={
                 <CardTitleFileIndex idx={fileIndex} errors={true} />
             }
@@ -60,6 +60,6 @@ export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
                     </Fragment>
                 ))}
             </div>
-        </OldPopper_UITooltip>
+        </UITip>
     );
 }
