@@ -122,8 +122,10 @@ export function EditorTabs({ pages, stateIndicator, dialogContentBody, selectedT
 }) {
     const [selectedTab, setSelectedTab] = useAtom(selectedTabAtom);
 
+    const pageNames = Object.keys(pages);
+
     const scrollableNodeRef = useRef<HTMLDivElement>();
-    const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
+    const pageScrollOfs = useRef<number[]>(Array(pageNames.length).fill(0));
     useLayoutEffect(() => {
         scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs.current[selectedTab]);
     }, [selectedTab]);
@@ -138,7 +140,7 @@ export function EditorTabs({ pages, stateIndicator, dialogContentBody, selectedT
 
             {/* Tabs */} {/* As alternative to touch-none we can if ref.scrollHeight != ref.scrollTop + ref.clientHeight -> show indicator */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between touch-none" {...dragBind()} >
-                <TabSelector tabs={Object.keys(pages)} active={selectedTab} setActive={onSetActive} />
+                <TabSelector tabs={pageNames} active={selectedTab} setActive={onSetActive} />
                 {stateIndicator}
             </div>
 
