@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { atomWithCallback, OnValueChange } from '@/hooks/atomsX';
 import { EditorData, FileUs, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
@@ -112,12 +112,14 @@ function RealPages({ pages, selectedTab }: { pages: Record<string, JSX.Element>;
 //TODO: add atom selectedTab and scroll offset: scrollableNodeRef.current?.scrollTop (may be for each page?)
 //TODO: dialog x, y to atom
 
-export function EditorTabs({ pages, stateIndicator, dragBind }: {
+export function EditorTabs({ pages, stateIndicator, selectedTabAtom, dragBind }: {
     pages: Record<string, JSX.Element>;
     stateIndicator: JSX.Element;
+    selectedTabAtom: PrimitiveAtom<number>,
     dragBind: (...args: any[]) => ReactDOMAttributes;
 }) {
-    const [selectedTab, setSelectedTab] = useState(0);
+    //const [selectedTab, setSelectedTab] = useState(0);
+    const [selectedTab, setSelectedTab] = useAtom(selectedTabAtom);
 
     const scrollableNodeRef = useRef<HTMLDivElement>();
     const pageScrollOfs = useRef<number[]>(Array(Object.keys(pages).length).fill(0));
@@ -156,6 +158,8 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
     const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
 
+    const selectedTabAtom = useState(atom(0))[0];
+
     // Pages
     const pages = {
         'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
@@ -170,6 +174,7 @@ function TopTabsAndBody({ children, urlsAtom, editorData }: { urlsAtom: Primitiv
                 stateIndicator={
                     <ManifestState urlsAtom={urlsAtom} />
                 }
+                selectedTabAtom={selectedTabAtom}
                 dragBind={dragBind}
             />
             {children}
