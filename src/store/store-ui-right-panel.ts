@@ -11,7 +11,7 @@ export const enum ViewMode {
 type RightPanelData = {
     panelAtom: PrimitiveAtom<FileUsAtomType | undefined>;
     valueAtom: Atom<FileUs | undefined>;
-    viewModeAtom: Atom<ViewMode>;
+    viewModeAtom: PrimitiveAtom<ViewMode>;
 };
 
 export const rightPanelData: RightPanelData = {

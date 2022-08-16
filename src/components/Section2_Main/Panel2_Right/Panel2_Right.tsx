@@ -13,7 +13,9 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
     const rightPanelValue = useAtomValue(rightPanelData.valueAtom);
     const rightPanelViewMode = useAtomValue(rightPanelData.viewModeAtom);
     
-    const showRaw = rightPanelViewMode === ViewMode.raw || false; //TODO: check if we can edit manifest
+    const canEditManifest = !!fileUsAtom;
+    const showRaw = rightPanelViewMode === ViewMode.raw || (rightPanelViewMode === ViewMode.edit && !canEditManifest);
+
     return (
         <div className={classNames("flex-auto pt-2 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>
             {rightPanelValue &&

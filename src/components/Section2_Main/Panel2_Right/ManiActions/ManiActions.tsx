@@ -1,6 +1,6 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { FileUsAtomType, formEditorDataAtom } from "@/store";
+import { FileUsAtomType, formEditorDataAtom, rightPanelData, ViewMode } from "@/store";
 import { IconGear, IconMenuHamburger, IconOpenLink } from "@ui/UIIconSymbols";
 import { CardTitleMenu } from "./ManiMenu";
 //import { PopoverMenu } from '@ui/nun/UIDropdownMenuLaag';
@@ -27,12 +27,14 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 }
 
 export function CardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
-    const setFormEditorData = useSetAtom(formEditorDataAtom);
+    //const setFormEditorData = useSetAtom(formEditorDataAtom);
+    const setViewMode = useSetAtom(rightPanelData.viewModeAtom);
     return (
         <button
             className={`p-1 w-8 h-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400`}
-            onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
             title="Edit detection options"
+            //onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
+            onClick={() => setViewMode((v) => v === ViewMode.edit ? ViewMode.raw : ViewMode.edit)}
         >
             <IconGear className="w-4 h-4 stroke-[0.7] hover:stroke-[1]" />
         </button>
@@ -57,3 +59,5 @@ export function ManiActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
         </div>
     );
 }
+
+//TODO: show edit button only when we can edit manifest
