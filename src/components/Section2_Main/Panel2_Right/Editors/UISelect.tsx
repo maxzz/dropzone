@@ -41,7 +41,7 @@ const StyledViewport = styled(SelectPrimitive.Viewport, {
 
 function Content({ children, ...props }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <SelectPrimitive.Portal>
+        <SelectPrimitive.Portal container={document.getElementById('portal')}>
             <StyledContent {...props}>{children}</StyledContent>
         </SelectPrimitive.Portal>
     );

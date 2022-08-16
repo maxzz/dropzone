@@ -6,7 +6,7 @@ import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Pa
 import { ManiActions } from './ManiActions/ManiActions';
 import { BodyText } from './BodyText';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
-import { List_Manifest } from '@/components/Section4_Dialogs/List_Manifest/List_Manifest';
+import { Editors } from './Editors';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom = useAtomValue(rightPanelData.panelAtom);
@@ -35,11 +35,11 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         "px-2 pt-1 pb-4 overflow-auto w-full h-full",
                         showRaw
                             ? "font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default"
-                            : "text-xs text-primary-100 bg-[#011627]",
+                            : "text-xs text-primary-100",
                     )}>
                         {showRaw
                             ? <BodyText text={rightPanelValue.raw || ''} />
-                            : <List_Manifest />
+                            : <Editors fileUsAtom={fileUsAtom} />
                         }
                     </UISemiScrollbar>
                 </div>
