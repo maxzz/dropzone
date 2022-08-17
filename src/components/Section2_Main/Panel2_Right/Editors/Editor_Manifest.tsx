@@ -1,10 +1,11 @@
 import React, { HTMLAttributes, ReactNode, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import { FileUsAtomType } from '@/store';
-import SelectDemo from './UISelect';
+import * as se from './UISelect';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
 import { classNames } from '@/utils/classnames';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
 
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);
@@ -24,37 +25,81 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
 
 function LoginFields({ }: {}) {
     return (<>
-        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr] gap-2 bg-primary-200 text-primary-800">
+        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_auto] gap-2 bg-primary-200 text-primary-800">
             <div className="whitespace-nowrap">User name</div>
             <div className="px-2 border-primary-800 border-l border-r">text</div>
             <div className="">maxzz</div>
+            <Values isPsw={false} value={2} />
             {/* TODO: values */}
 
             <div className="whitespace-nowrap">Password</div>
             <div className="px-2 border-primary-800 border-l border-r">password</div>
             <div className="">123</div>
+            <Values isPsw={false} value={1} />
         </div>
     </>);
 }
 
-function Values({ isPsw }: { isPsw: boolean; }) {
-    return (<>
-        <div className="">Ask - Resuse</div>
-        <div className="">Ask - Confirm</div>
-        <div className="">Ask always</div>
-        {isPsw
-            ? <>
-                <div className="">Windows Password</div>
-            </>
-            : <>
-                <div className="">Windows User Name</div>
-                <div className="">Windows User Principal Name</div>
-                <div className="">Windows Domain\User Name</div>
-                <div className="">Windows Domain</div>
-                <div className="">Windows E-mail Address</div>
-            </>
-        }
-    </>);
+function SeGroupItem({ label, value }: { label: string; value: string; }) {
+    return (
+        <se.SelectItem value={value}>
+            <se.SelectItemText>{label}</se.SelectItemText>
+            <se.SelectItemIndicator>
+                <DotIcon />
+            </se.SelectItemIndicator>
+        </se.SelectItem>
+    );
+}
+
+function Values({ isPsw, value }: { isPsw: boolean; value: number; }) {
+    return (
+        <>
+            <se.Select>
+                <se.SelectTrigger aria-label="Food">
+                    <se.SelectValue className="whitespace-nowrap" placeholder="Select a fruit…" />   <se.SelectIcon> <ChevronDownIcon /> </se.SelectIcon>
+                </se.SelectTrigger>
+
+                <se.SelectContent>
+                    <se.SelectScrollUpButton>
+                        <ChevronUpIcon />
+                    </se.SelectScrollUpButton>
+
+                    <se.SelectViewport>
+                        <se.SelectGroup>
+                            <se.SelectLabel>Fruits</se.SelectLabel>
+                            <SeGroupItem label="Ask - Resuse" value="1" />
+                            <SeGroupItem label="Ask - Confirm" value="2" />
+                            <SeGroupItem label="Ask always</" value="3" />
+                        </se.SelectGroup>
+
+                        {/* <se.SelectSeparator />
+
+                        <se.SelectGroup>
+                        </se.SelectGroup> */}
+
+                    </se.SelectViewport>
+
+                    <se.SelectScrollDownButton>
+                        <ChevronDownIcon />
+                    </se.SelectScrollDownButton>
+
+                </se.SelectContent>
+            </se.Select>
+
+            {/* {isPsw
+                ? <>
+                    <div className="">Windows Password</div>
+                </>
+                : <>
+                    <div className="">Windows User Name</div>
+                    <div className="">Windows User Principal Name</div>
+                    <div className="">Windows Domain\User Name</div>
+                    <div className="">Windows Domain</div>
+                    <div className="">Windows E-mail Address</div>
+                </>
+            } */}
+        </>
+    );
 }
 
 function SubmitOptions({ }: {}) {
@@ -154,7 +199,7 @@ export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; })
             <Form_Login />
             <Form_PChange />
 
-            <SelectDemo />
+            <se.SelectDemo />
         </div>
     );
 }

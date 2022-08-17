@@ -187,5 +187,3 @@ export const SelectDemo = () => (
         </Select>
     </Box>
 );
-
-export default SelectDemo;
