@@ -113,14 +113,24 @@ function PasswordManagerIcon({ }: {}) {
 
 function Form_Login() {
     const [atoms] = useState({
+        fieldsAtom: atom<boolean>(false),
+        submitAtom: atom<boolean>(false),
         optionsAtom: atom<boolean>(false),
     });
     return (<>
         <div className="text-lg border-red-500 border-b">Login</div>
         <div className="pl-4">
-            <div className="">Fields</div>
+            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                <div className="pl-4">
+                    <LoginFields />
+                </div>
+            </SubSection>
 
-            <div className="">Submit options</div>
+            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                <div className="pl-4">
+                    <SubmitOptions />
+                </div>
+            </SubSection>
 
             <SubSection label="Form options" openAtom={atoms.optionsAtom}>
                 <div className="pl-4">
