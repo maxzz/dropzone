@@ -9,14 +9,13 @@ import { classNames } from '@/utils/classnames';
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);
     return (<>
-        <div className="flex items-center cursor-pointer px-2 pb-1" onClick={() => setOpen(v => !v)}>
-            <UIArrow className="w-4 h-4 pt-1 text-red-500" open={open} />
-            <div className="text-base text-red-500">
-                {label}
-            </div>
+        <div className="pb-1 text-base flex items-center select-none cursor-pointer text-[#32ffdaa0]" onClick={() => setOpen(v => !v)}>
+            <UIArrow className="w-4 h-4 pt-1" open={open} />
+            {label}
         </div>
+
         <UIAccordion open={open}>
-            <div className="ml-12">
+            <div className="ml-4">
                 {children}
             </div>
         </UIAccordion>
@@ -25,8 +24,16 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
 
 function LoginFields({ }: {}) {
     return (<>
-        <div className="">User name</div>
-        <div className="">Password</div>
+        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr] gap-2 bg-primary-200 text-primary-800">
+            <div className="whitespace-nowrap">User name</div>
+            <div className="px-2 border-primary-800 border-l border-r">text</div>
+            <div className="">maxzz</div>
+            {/* TODO: values */}
+
+            <div className="whitespace-nowrap">Password</div>
+            <div className="px-2 border-primary-800 border-l border-r">password</div>
+            <div className="">123</div>
+        </div>
     </>);
 }
 
@@ -96,27 +103,27 @@ function Form_Login() {
         optionsAtom: atom<boolean>(false),
     });
     return (<>
-        <SubSection label={<div className="text-lg border-red-500 border-b">Login</div>} openAtom={atoms.loginAtom}>
-            <div className="pl-4">
-                <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                    <LoginFields />
-                </SubSection>
+        <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.loginAtom}>
 
-                <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                    <SubmitOptions />
-                </SubSection>
+            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                <LoginFields />
+            </SubSection>
 
-                <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                    <div className="">Policy</div>
-                </SubSection>
+            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                <SubmitOptions />
+            </SubSection>
 
-                <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                    <div className="">General</div>
-                    <div className="">Quick link</div>
-                    <div className="">Screen detection</div>
-                    <div className="">Authentication</div>
-                </SubSection>
-            </div>
+            <SubSection label="Policy" openAtom={atoms.policyAtom}>
+                <div className="">Policy</div>
+            </SubSection>
+
+            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+                <div className="">General</div>
+                <div className="">Quick link</div>
+                <div className="">Screen detection</div>
+                <div className="">Authentication</div>
+            </SubSection>
+
 
         </SubSection>
     </>);
