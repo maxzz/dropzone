@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode, useState } from 'react';
+import React, { HTMLAttributes, InputHTMLAttributes, ReactNode, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import { FileUsAtomType } from '@/store';
 import * as se from './UISelect';
@@ -23,18 +23,30 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
     </>);
 }
 
+function InputField({value, placeholder}: InputHTMLAttributes<HTMLInputElement>) {
+    const [value1, setValue] = useState(value);
+    return (
+        <input
+            className="px-2 py-3 w-48 h-8 rounded"
+            placeholder={placeholder}
+            value={value1}
+            onChange={(event) => setValue(event.target.value)}
+        />
+    );
+}
+
 function LoginFields({ }: {}) {
     return (<>
-        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_max-content] items-stretch bg-primary-200 text-primary-800">
-            <div className="self-center whitespace-nowrap">User name</div>
-            <div className="self-center px-2 border-primary-800 border-l border-r">text</div>
-            <div className="self-center">maxzz</div>
+        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_max-content] items-center gap-x-2 gap-y-1 bg-primary-200 text-primary-800">
+            <div className="whitespace-nowrap">User name</div>
+            <div className="px-2 border-primary-800 border-l border-r">text</div>
+            <InputField value="" placeholder="Username" />
             <FieldValue isPsw={false} value={2} />
             {/* TODO: values */}
 
-            <div className="self-center whitespace-nowrap">Password</div>
-            <div className="self-center px-2 border-primary-800 border-l border-r">password</div>
-            <div className="self-center">123</div>
+            <div className="whitespace-nowrap">Password</div>
+            <div className="px-2 border-primary-800 border-l border-r">password</div>
+            <InputField value={"123"} />
             <FieldValue isPsw={false} value={1} />
         </div>
     </>);
