@@ -16,7 +16,7 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
         </div>
 
         <UIAccordion open={open}>
-            <div className="ml-4">
+            <div className="ml-4 py-2">
                 {children}
             </div>
         </UIAccordion>
@@ -27,7 +27,7 @@ function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement
     const [value1, setValue] = useState(value);
     return (
         <input
-            className="px-2 py-3 w-48 h-8 rounded"
+            className="px-2 py-3 w-48 h-8 bg-primary-800 text-primary-200 rounded"
             placeholder={placeholder}
             value={value1}
             onChange={(event) => setValue(event.target.value)}
@@ -37,7 +37,7 @@ function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement
 
 function LoginFields({ }: {}) {
     return (<>
-        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_max-content] items-center gap-x-2 gap-y-1 bg-primary-200 text-primary-800">
+        <div className="p-2 w-min grid grid-cols-[auto_auto_1fr_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
             <InputField value="User name" placeholder="Label" />
             <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
             <InputField value="" placeholder="Username" />
