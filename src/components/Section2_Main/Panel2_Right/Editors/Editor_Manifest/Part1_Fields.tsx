@@ -8,10 +8,17 @@ function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<strin
     return (
         <input
             className="px-2 py-3 min-w-[5rem] h-8 bg-primary-700 text-primary-200
-            focus:ring-1 focus:ring-offset-1 data-state-open:bg-red-500
+            focus:ring-1 focus:ring-offset-1 
+            
+            data-state-open:bg-red-500
+            data-placeholder:bg-green-500
+            
             focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
             outline-none rounded"
+            
             data-state="open"
+            data-placeholder
+            
             placeholder={placeholder}
             value={value1}
             onChange={(event) => setValue(event.target.value)}

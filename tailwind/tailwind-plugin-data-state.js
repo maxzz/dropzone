@@ -13,7 +13,7 @@ function dataStateVariant(state, { addVariant, e, }) {
         ({ modifySelectors, separator }) => {
             modifySelectors(({ className }) => {
                 console.log(`------------- className = '${className}' state = '${state}'`);
-                
+
                 return `.${e(`data-state-${state}${separator}${className}`)}[data-state='${state}']`;
             });
         }
@@ -34,6 +34,27 @@ function dataStateVariant(state, { addVariant, e, }) {
             });
         }
     );
+    
+}
+
+/**
+ * @param {string} state 
+ * @param {import('tailwindcss/types/config').PluginAPI} helpers 
+ * 
+ * * addVariant - for registering custom variants
+ * * e - for manually escaping strings meant to be used in class names
+ */
+function dataPadixUIVariants(state, { addVariant, e, }) {
+
+    addVariant(`data-placeholder`,
+        ({ modifySelectors, separator }) => {
+            modifySelectors(({ className }) => {
+                console.log(`------place------- className = '${className}' state = '${state}'`);
+
+                return `.${e(`data-placeholder${separator}${className}`)}[data-placeholder]`;
+            });
+        }
+    );
 
 }
 
@@ -44,4 +65,6 @@ module.exports = plugin(function (helpers) {
     dataStateVariant('on', helpers);
     dataStateVariant('checked', helpers);
     dataStateVariant('unchecked', helpers);
+
+    dataPadixUIVariants('_', helpers);
 });
