@@ -123,7 +123,12 @@ function InputRow() {
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
     return (<>
-        <input type="checkbox" className="place-self-center w-4 h-4" checked={useIt} onChange={() => setUseIt(v => !v)} />
+        <input
+            className="place-self-center w-5 h-5 form-checkbox text-primary-700 bg-primary-800 ring-2 ring-primary-600 focus:ring-offset-primary-800 rounded"
+            type="checkbox" 
+            checked={useIt} 
+            onChange={() => setUseIt(v => !v)}
+        />
         <InputField valueAtom={state.labelAtom} placeholder="Label" />
         <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
         <InputField valueAtom={state.valueAtom} placeholder="Username" />
