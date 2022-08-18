@@ -38,6 +38,12 @@ function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement
 function LoginFields({ }: {}) {
     return (<>
         <div className="p-2 w-min grid grid-cols-[auto_auto_1fr_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
+
+            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
+            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
+            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
+            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
+
             <InputField value="User name" placeholder="Label" />
             <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
             <InputField value="" placeholder="Username" />
