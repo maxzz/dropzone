@@ -1,11 +1,24 @@
+///<reference path='../node_modules/tailwindcss/types/config.d.ts'/>
+
 const plugin = require('tailwindcss/plugin');
 
+/**
+ * @param {string} state 
+ * @param {import('tailwindcss/types/config').PluginAPI} helpers 
+ */
 function dataStateVariant(state, {
-    addVariant, // for registering custom variants
-    e           // for manually escaping strings meant to be used in class names
+    // config.d.ts:
+    // addVariant(name: string, definition: string | string[] | (() => string) | (() => string)[]): void
+    // for registering custom variants
+    addVariant,
+    // e: (className: string) => string
+    // for manually escaping strings meant to be used in class names
+    e
 }) {
     addVariant(`data-state-${state}`, ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
+            console.log('------------- class', className, '-----------state', state);
+            
             return `.${e(`data-state-${state}${separator}${className}`)}[data-state='${state}']`;
         });
     });
