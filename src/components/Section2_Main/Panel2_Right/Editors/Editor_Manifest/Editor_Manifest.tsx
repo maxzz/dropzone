@@ -7,6 +7,7 @@ import { Part1_Fields } from './Part1_Fields';
 import { Part2_Submit } from './Part2_Submit';
 import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
+import { Atomize } from '@/hooks/atomsX';
 
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);
@@ -24,16 +25,28 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
     </>);
 }
 
-function Form_Login() {
-    const [atoms] = useState({
-        loginAtom: atom<boolean>(true),
+type ManiOpenSections = {
+    form: boolean;
+    fields: boolean;
+    submit: boolean;
+    policy: boolean;
+    options: boolean;
+};
+
+function createFormOpenSections(): Atomize<ManiOpenSections> {
+    return {
+        formAtom: atom<boolean>(true),
         fieldsAtom: atom<boolean>(true),
         submitAtom: atom<boolean>(false),
         policyAtom: atom<boolean>(false),
         optionsAtom: atom<boolean>(false),
-    });
+    };
+}
+
+function Form_Login() {
+    const [atoms] = useState(createFormOpenSections());
     return (<>
-        <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.loginAtom}>
+        <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
 
             <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
                 <Part1_Fields />
@@ -56,20 +69,27 @@ function Form_Login() {
 }
 
 function Form_PChange() {
+    const [atoms] = useState(createFormOpenSections());
     return (<>
-        <div className="text-lg border-red-500 border-b">Password change</div>
+        <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
 
-        <div className="">Fields</div>
+            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                <Part1_Fields />
+            </SubSection>
 
-        <div className="">Submit options</div>
+            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                <Part2_Submit />
+            </SubSection>
 
-        <div className="">Form options</div>
-        <div className="">
-            <div className="">General</div>
-            <div className="">Quick link</div>
-            <div className="">Screen detection</div>
-            <div className="">Authentication</div>
-        </div>
+            <SubSection label="Policy" openAtom={atoms.policyAtom}>
+                <Part3_Policy />
+            </SubSection>
+
+            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+                <Part4_FormOptions />
+            </SubSection>
+
+        </SubSection>
     </>);
 }
 
