@@ -1,7 +1,57 @@
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { HTMLAttributes, InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import * as se from '../UISelect';
 import { ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
+
+import * as primitive from '@radix-ui/react-select';
+
+function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <primitive.SelectTrigger className="w-6 h-6 bg-orange-800 text-primary-800">
+            {props.children}
+        </primitive.SelectTrigger>
+    );
+}
+
+function ValueDropdown() {
+    return (
+        <se.Select>
+            <Trigger>
+                <se.SelectValue />
+                <se.SelectIcon>
+                    <ChevronDownIcon />
+                </se.SelectIcon>
+            </Trigger>
+
+            <se.SelectContent>
+                    <se.SelectScrollUpButton>
+                        <ChevronUpIcon />
+                    </se.SelectScrollUpButton>
+
+                    <se.SelectViewport>
+                        <se.SelectGroup>
+                            <se.SelectLabel>Fruits</se.SelectLabel>
+                            <SeGroupItem label="Ask - Resuse" value="1" />
+                            <SeGroupItem label="Ask - Confirm" value="2" />
+                            <SeGroupItem label="Ask Always" value="3" />
+                        </se.SelectGroup>
+
+                        {/* <se.SelectSeparator />
+
+                        <se.SelectGroup>
+                        </se.SelectGroup> */}
+
+                    </se.SelectViewport>
+
+                    <se.SelectScrollDownButton>
+                        <ChevronDownIcon />
+                    </se.SelectScrollDownButton>
+
+                </se.SelectContent>
+
+        </se.Select>
+    );
+}
 
 function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value1, setValue] = useAtom(valueAtom);
@@ -16,11 +66,11 @@ function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<strin
             
             focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
             outline-none rounded"
-            
+
             data-state="open"
             // data-placeholder
             // data-highlighted
-            
+
             placeholder={placeholder}
             value={value1}
             onChange={(event) => setValue(event.target.value)}
@@ -172,5 +222,7 @@ export function Part1_Fields({ }: {}) {
             <InputRow />
 
         </div>
+
+        <ValueDropdown />
     </>);
 }
