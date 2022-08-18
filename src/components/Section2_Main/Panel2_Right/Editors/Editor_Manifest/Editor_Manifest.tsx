@@ -3,7 +3,9 @@ import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import { FileUsAtomType } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
-import { LoginFields } from './Part1_Fields';
+import { Part1_Fields } from './Part1_Fields';
+import { Part2_Submit } from './Part2_Submit';
+import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
 
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
@@ -15,7 +17,7 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
         </div>
 
         <UIAccordion open={open}>
-            <div className="ml-4 py-2">
+            <div className="ml-4 pt-2 pb-4">
                 {children}
             </div>
         </UIAccordion>
@@ -34,24 +36,20 @@ function Form_Login() {
         <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.loginAtom}>
 
             <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                <LoginFields />
+                <Part1_Fields />
             </SubSection>
 
             <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                <Part4_FormOptions />
+                <Part2_Submit />
             </SubSection>
 
             <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                <div className="">Policy</div>
+                <Part3_Policy />
             </SubSection>
 
             <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                <div className="">General</div>
-                <div className="">Quick link</div>
-                <div className="">Screen detection</div>
-                <div className="">Authentication</div>
+                <Part4_FormOptions />
             </SubSection>
-
 
         </SubSection>
     </>);

@@ -32,7 +32,9 @@ function PasswordManagerIcon({ }: {}) {
 
 export function Part4_FormOptions({ }: {}) {
     return (<>
-        <div className="">Do Not Submit</div>
-        <div className="">Automatically submit login data</div>
+        <div className="">General</div>
+        <div className="">Quick link</div>
+        <div className="">Screen detection</div>
+        <div className="">Authentication</div>
     </>);
 }

@@ -131,7 +131,7 @@ function InputRow() {
     </>);
 }
 
-export function LoginFields({ }: {}) {
+export function Part1_Fields({ }: {}) {
     return (<>
         <div className="p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
 
