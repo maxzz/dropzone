@@ -11,13 +11,15 @@ function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<strin
             focus:ring-1 focus:ring-offset-1 
             
             data-state-open:bg-red-500
-            data-placeholder:bg-green-500
+            group-data-placeholder:bg-green-500
+            group-data-highlighted:bg-orange-500
             
             focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
             outline-none rounded"
             
             data-state="open"
-            data-placeholder
+            // data-placeholder
+            // data-highlighted
             
             placeholder={placeholder}
             value={value1}
@@ -153,7 +155,11 @@ function InputRow() {
 
 export function Part1_Fields({ }: {}) {
     return (<>
-        <div className="p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
+        <div className="
+        group
+        p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
+        // data-highlighted
+        >
 
             <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
             <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
