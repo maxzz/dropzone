@@ -25,17 +25,17 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
 
 function LoginFields({ }: {}) {
     return (<>
-        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_auto] gap-2 bg-primary-200 text-primary-800">
-            <div className="whitespace-nowrap">User name</div>
-            <div className="px-2 border-primary-800 border-l border-r">text</div>
-            <div className="">maxzz</div>
-            <Values isPsw={false} value={2} />
+        <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_max-content] items-stretch bg-primary-200 text-primary-800">
+            <div className="self-center whitespace-nowrap">User name</div>
+            <div className="self-center px-2 border-primary-800 border-l border-r">text</div>
+            <div className="self-center">maxzz</div>
+            <FieldValue isPsw={false} value={2} />
             {/* TODO: values */}
 
-            <div className="whitespace-nowrap">Password</div>
-            <div className="px-2 border-primary-800 border-l border-r">password</div>
-            <div className="">123</div>
-            <Values isPsw={false} value={1} />
+            <div className="self-center whitespace-nowrap">Password</div>
+            <div className="self-center px-2 border-primary-800 border-l border-r">password</div>
+            <div className="self-center">123</div>
+            <FieldValue isPsw={false} value={1} />
         </div>
     </>);
 }
@@ -51,12 +51,12 @@ function SeGroupItem({ label, value }: { label: string; value: string; }) {
     );
 }
 
-function Values({ isPsw, value }: { isPsw: boolean; value: number; }) {
+function FieldValue({ isPsw, value }: { isPsw: boolean; value: number; }) {
     return (
         <>
             <se.Select>
                 <se.SelectTrigger aria-label="Food">
-                    <se.SelectValue className="whitespace-nowrap" placeholder="Select a fruit…" />   <se.SelectIcon> <ChevronDownIcon /> </se.SelectIcon>
+                    <se.SelectValue /> <se.SelectIcon> <ChevronDownIcon /> </se.SelectIcon>
                 </se.SelectTrigger>
 
                 <se.SelectContent>
@@ -69,7 +69,7 @@ function Values({ isPsw, value }: { isPsw: boolean; value: number; }) {
                             <se.SelectLabel>Fruits</se.SelectLabel>
                             <SeGroupItem label="Ask - Resuse" value="1" />
                             <SeGroupItem label="Ask - Confirm" value="2" />
-                            <SeGroupItem label="Ask always</" value="3" />
+                            <SeGroupItem label="Ask Always" value="3" />
                         </se.SelectGroup>
 
                         {/* <se.SelectSeparator />
