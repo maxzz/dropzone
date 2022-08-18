@@ -7,7 +7,7 @@ function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<strin
     const [value1, setValue] = useAtom(valueAtom);
     return (
         <input
-            className="px-2 py-3 min-w-[5rem] h-8 bg-primary-800 text-primary-200 rounded"
+            className="px-2 py-3 min-w-[5rem] h-8 bg-primary-700 text-primary-200 rounded"
             placeholder={placeholder}
             value={value1}
             onChange={(event) => setValue(event.target.value)}
@@ -135,26 +135,16 @@ export function Part1_Fields({ }: {}) {
     return (<>
         <div className="p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
 
-            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
-            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
-            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
-            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
-            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
+            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
+            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
+            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
+            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
+            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
 
-            {/* <input type="checkbox" />
-            <InputField value="Username" placeholder="Label" />
-            <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> * /}
-            <InputField value="" placeholder="Username" />
-            <FieldValue isPsw={false} value={2} /> */}
             <InputRow />
             <InputRow />
             <InputRow />
 
-            {/* <input type="checkbox" />
-            <InputField value="Password" placeholder="Label" />
-            <FieldType value={2} />  {/* <div className="px-2 border-primary-800 border-l border-r">password</div> * /}
-            <InputField value={"123"} />
-            <FieldValue isPsw={false} value={1} /> */}
         </div>
     </>);
 }
