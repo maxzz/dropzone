@@ -23,7 +23,7 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
     </>);
 }
 
-function InputField({value, placeholder}: InputHTMLAttributes<HTMLInputElement>) {
+function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement>) {
     const [value1, setValue] = useState(value);
     return (
         <input
@@ -38,14 +38,14 @@ function InputField({value, placeholder}: InputHTMLAttributes<HTMLInputElement>)
 function LoginFields({ }: {}) {
     return (<>
         <div className="w-min p-2 grid grid-cols-[auto_auto_1fr_max-content] items-center gap-x-2 gap-y-1 bg-primary-200 text-primary-800">
-            <div className="whitespace-nowrap">User name</div>
-            <div className="px-2 border-primary-800 border-l border-r">text</div>
+            <InputField value="User name" placeholder="Label" />
+            <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
             <InputField value="" placeholder="Username" />
             <FieldValue isPsw={false} value={2} />
             {/* TODO: values */}
 
-            <div className="whitespace-nowrap">Password</div>
-            <div className="px-2 border-primary-800 border-l border-r">password</div>
+            <InputField value="Password" placeholder="Label" />
+            <FieldType value={2} />  {/* <div className="px-2 border-primary-800 border-l border-r">password</div> */}
             <InputField value={"123"} />
             <FieldValue isPsw={false} value={1} />
         </div>
@@ -60,6 +60,38 @@ function SeGroupItem({ label, value }: { label: string; value: string; }) {
                 <DotIcon />
             </se.SelectItemIndicator>
         </se.SelectItem>
+    );
+}
+
+function FieldType({ value }: { value: number; }) {
+    return (
+        <se.Select>
+            <se.SelectTrigger aria-label="Food">
+                <se.SelectValue /> <se.SelectIcon> <ChevronDownIcon /> </se.SelectIcon>
+            </se.SelectTrigger>
+
+            <se.SelectContent>
+                <se.SelectScrollUpButton>
+                    <ChevronUpIcon />
+                </se.SelectScrollUpButton>
+
+                <se.SelectViewport>
+                    <se.SelectGroup>
+                        <se.SelectLabel>Fruits</se.SelectLabel>
+                        <SeGroupItem label="Text" value="1" />
+                        <SeGroupItem label="Password" value="2" />
+                        <SeGroupItem label="Checkbox" value="3" />
+                        {/* ... and so on but should not be changed by user */}
+                    </se.SelectGroup>
+
+                </se.SelectViewport>
+
+                <se.SelectScrollDownButton>
+                    <ChevronDownIcon />
+                </se.SelectScrollDownButton>
+
+            </se.SelectContent>
+        </se.Select>
     );
 }
 
@@ -153,8 +185,8 @@ function PasswordManagerIcon({ }: {}) {
 
 function Form_Login() {
     const [atoms] = useState({
-        loginAtom: atom<boolean>(false),
-        fieldsAtom: atom<boolean>(false),
+        loginAtom: atom<boolean>(true),
+        fieldsAtom: atom<boolean>(true),
         submitAtom: atom<boolean>(false),
         policyAtom: atom<boolean>(false),
         optionsAtom: atom<boolean>(false),
