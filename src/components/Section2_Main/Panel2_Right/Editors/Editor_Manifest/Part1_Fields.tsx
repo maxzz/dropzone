@@ -7,7 +7,10 @@ function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<strin
     const [value1, setValue] = useAtom(valueAtom);
     return (
         <input
-            className="px-2 py-3 min-w-[5rem] h-8 bg-primary-700 text-primary-200 rounded"
+            className="px-2 py-3 min-w-[5rem] h-8 bg-primary-700 text-primary-200
+            focus:ring-1 focus:ring-offset-1
+            focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
+            outline-none rounded"
             placeholder={placeholder}
             value={value1}
             onChange={(event) => setValue(event.target.value)}
@@ -124,9 +127,13 @@ function InputRow() {
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
     return (<>
         <input
-            className="place-self-center w-5 h-5 form-checkbox text-primary-700 bg-primary-800 ring-2 ring-primary-600 focus:ring-offset-primary-800 rounded"
-            type="checkbox" 
-            checked={useIt} 
+            className="place-self-center w-5 h-5 form-checkbox text-primary-700 bg-primary-800
+            ring-1
+            focus:ring-1
+            focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
+            rounded"
+            type="checkbox"
+            checked={useIt}
             onChange={() => setUseIt(v => !v)}
         />
         <InputField valueAtom={state.labelAtom} placeholder="Label" />
