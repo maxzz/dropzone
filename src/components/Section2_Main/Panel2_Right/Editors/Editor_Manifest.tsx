@@ -27,7 +27,7 @@ function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement
     const [value1, setValue] = useState(value);
     return (
         <input
-            className="px-2 py-3 w-48 h-8 bg-primary-800 text-primary-200 rounded"
+            className="px-2 py-3 min-w-[5rem] h-8 bg-primary-800 text-primary-200 rounded"
             placeholder={placeholder}
             value={value1}
             onChange={(event) => setValue(event.target.value)}
@@ -35,21 +35,46 @@ function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement
     );
 }
 
+function InputRow() {
+    const state = useState({
+        useItAtom: atom<boolean>(true),
+        labelAtom: atom(''),
+        typeAtom: atom(1),
+        valueAtom: atom(''),
+        valueAsAtom: atom(''),
+    })[0];
+    const [useIt, setUseIt] = useAtom(state.useItAtom);
+    const [label, setLabel] = useAtom(state.labelAtom);
+    const [type, setType] = useAtom(state.typeAtom);
+    const [value, setValue] = useAtom(state.valueAtom);
+    const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
+return (<>
+        <input type="checkbox" checked={useIt} onChange={()=>setUseIt(v=>!v)} />
+        <InputField value="Username" placeholder="Label" />
+        <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
+        <InputField value="" placeholder="Username" />
+        <FieldValue isPsw={false} value={2} />
+    </>);
+}
+
 function LoginFields({ }: {}) {
     return (<>
-        <div className="p-2 w-min grid grid-cols-[auto_auto_1fr_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
+        <div className="p-2 w-min grid grid-cols-[auto_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
 
+            <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
             <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
             <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
             <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
             <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
 
-            <InputField value="User name" placeholder="Label" />
-            <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
+            {/* <input type="checkbox" />
+            <InputField value="Username" placeholder="Label" />
+            <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> * /}
             <InputField value="" placeholder="Username" />
-            <FieldValue isPsw={false} value={2} />
-            {/* TODO: values */}
+            <FieldValue isPsw={false} value={2} /> */}
+            <InputRow />
 
+            <input type="checkbox" />
             <InputField value="Password" placeholder="Label" />
             <FieldType value={2} />  {/* <div className="px-2 border-primary-800 border-l border-r">password</div> */}
             <InputField value={"123"} />
