@@ -23,8 +23,8 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
     </>);
 }
 
-function InputField({ value, placeholder }: InputHTMLAttributes<HTMLInputElement>) {
-    const [value1, setValue] = useState(value);
+function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
+    const [value1, setValue] = useAtom(valueAtom);
     return (
         <input
             className="px-2 py-3 min-w-[5rem] h-8 bg-primary-800 text-primary-200 rounded"
@@ -48,18 +48,18 @@ function InputRow() {
     const [type, setType] = useAtom(state.typeAtom);
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
-return (<>
-        <input type="checkbox" checked={useIt} onChange={()=>setUseIt(v=>!v)} />
-        <InputField value="Username" placeholder="Label" />
+    return (<>
+        <input type="checkbox" className="place-self-center w-4 h-4" checked={useIt} onChange={() => setUseIt(v => !v)} />
+        <InputField valueAtom={state.labelAtom} placeholder="Label" />
         <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
-        <InputField value="" placeholder="Username" />
+        <InputField valueAtom={state.valueAtom} placeholder="Username" />
         <FieldValue isPsw={false} value={2} />
     </>);
 }
 
 function LoginFields({ }: {}) {
     return (<>
-        <div className="p-2 w-min grid grid-cols-[auto_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
+        <div className="p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm">
 
             <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
             <div className="text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
@@ -73,12 +73,14 @@ function LoginFields({ }: {}) {
             <InputField value="" placeholder="Username" />
             <FieldValue isPsw={false} value={2} /> */}
             <InputRow />
+            <InputRow />
+            <InputRow />
 
-            <input type="checkbox" />
+            {/* <input type="checkbox" />
             <InputField value="Password" placeholder="Label" />
-            <FieldType value={2} />  {/* <div className="px-2 border-primary-800 border-l border-r">password</div> */}
+            <FieldType value={2} />  {/* <div className="px-2 border-primary-800 border-l border-r">password</div> * /}
             <InputField value={"123"} />
-            <FieldValue isPsw={false} value={1} />
+            <FieldValue isPsw={false} value={1} /> */}
         </div>
     </>);
 }
