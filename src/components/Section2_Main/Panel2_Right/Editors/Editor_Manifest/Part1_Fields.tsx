@@ -6,6 +6,7 @@ import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Car
 
 import * as primitiveSe from '@radix-ui/react-select';
 import * as primitiveMe from '@radix-ui/react-dropdown-menu';
+import { DropdownMenu } from './dmtest';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     return (
@@ -241,7 +242,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                 >
                     <TableHeader />
 
-                    {fields.map((field, idx) => <InputRow field={field} />)}
+                    {fields.map((field, idx) => <InputRow field={field} key={idx} />)}
 
                 </div>
                 {/* <ValueDropdown /> */}
@@ -249,5 +250,6 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
             :
             <div className="">no fields</div>
         }
+        <DropdownMenu />
     </>);
 }
