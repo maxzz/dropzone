@@ -2,6 +2,7 @@ import React, { HTMLAttributes, InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import * as se from '../UISelect';
 import { ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
+import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
 
 import * as primitiveSe from '@radix-ui/react-select';
 import * as primitiveMe from '@radix-ui/react-dropdown-menu';
@@ -89,8 +90,8 @@ function SeGroupItem({ label, value }: { label: string; value: string; }) {
         </se.SelectItem>
     );
 }
-
-function FieldType({ value }: { value: number; }) {
+/*
+function FieldTypeOld({ value }: { value: number; }) {
     return (
         <se.Select>
             <se.SelectTrigger aria-label="Food">
@@ -108,7 +109,7 @@ function FieldType({ value }: { value: number; }) {
                         <SeGroupItem label="Text" value="1" />
                         <SeGroupItem label="Password" value="2" />
                         <SeGroupItem label="Checkbox" value="3" />
-                        {/* ... and so on but should not be changed by user */}
+                        {/* ... and so on but should not be changed by user * /}
                     </se.SelectGroup>
 
                 </se.SelectViewport>
@@ -119,6 +120,16 @@ function FieldType({ value }: { value: number; }) {
 
             </se.SelectContent>
         </se.Select>
+    );
+}
+*/
+function FieldType({ field }: { field: Meta.Field; }) {
+    const { password, type = 'NOTYPE' } = field.mani;
+    return (
+        <div className="flex items-center space-x-0.5">
+            <FormRowTypeIcon field={field.mani} className="w-5 h-5 text-primary-500" />
+            <div className="">{`${password ? 'psw' : type}`}</div>
+        </div>
     );
 }
 
@@ -174,20 +185,23 @@ function FieldValue({ isPsw, value }: { isPsw: boolean; value: number; }) {
 }
 
 function InputRow({ field }: { field: Meta.Field; }) {
-    const {useit, displayname, type: typ, value: val} = field.mani;
+    const { useit, displayname, type: typ, value: val } = field.mani;
+
     const state = useState({
         useItAtom: atom<boolean>(!!useit),
         labelAtom: atom(displayname || ''),
         typeAtom: atom(''),
-        valueAtom: atom<string>(typ || ''),
+        valueAtom: atom<string>(val || ''),
         valueAsAtom: atom(val),
     })[0];
+
     const [useIt, setUseIt] = useAtom(state.useItAtom);
     const [label, setLabel] = useAtom(state.labelAtom);
     const [type, setType] = useAtom(state.typeAtom);
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
     return (<>
+        <FieldType field={field} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
         <input
             className="place-self-center w-5 h-5 form-checkbox text-primary-700 bg-primary-800
             ring-1
@@ -199,7 +213,6 @@ function InputRow({ field }: { field: Meta.Field; }) {
             onChange={() => setUseIt(v => !v)}
         />
         <InputField valueAtom={state.labelAtom} placeholder="Label" />
-        <FieldType value={1} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
         <InputField valueAtom={state.valueAtom} placeholder="Username" />
         <FieldValue isPsw={false} value={2} />
     </>);
@@ -207,9 +220,9 @@ function InputRow({ field }: { field: Meta.Field; }) {
 
 function TableHeader() {
     return (<>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
     </>);
@@ -221,12 +234,12 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
             ? <>
                 <div className="
                 group
-                p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
+                p-2 w-min grid grid-cols-[auto_max-content_minmax(5rem,1fr)_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
                 // data-highlighted
                 >
                     <TableHeader />
 
-                    {fields.map((field, idx) => <InputRow  field={field}/>)}
+                    {fields.map((field, idx) => <InputRow field={field} />)}
 
                 </div>
                 <ValueDropdown />
