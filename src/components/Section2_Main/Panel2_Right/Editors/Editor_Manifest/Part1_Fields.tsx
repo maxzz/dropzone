@@ -204,6 +204,16 @@ function InputRow() {
     </>);
 }
 
+function TableHeader() {
+    return (<>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
+    </>);
+}
+
 export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
     return (<>
         {fields
@@ -213,11 +223,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                 p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
                 // data-highlighted
                 >
-                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
-                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
-                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
-                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
-                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
+                    <TableHeader />
 
                     <InputRow />
                     <InputRow />
