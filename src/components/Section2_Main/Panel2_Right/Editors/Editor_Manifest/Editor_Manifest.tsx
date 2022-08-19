@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, ReactNode, useState } from 'react';
-import { atom, PrimitiveAtom, useAtom } from 'jotai';
-import { FileUsAtomType } from '@/store';
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
+import { FileUsAtomType, FormIdx } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
 import { Part1_Fields } from './Part1_Fields';
@@ -43,8 +43,12 @@ function createFormOpenSections(): Atomize<ManiOpenSections> {
     };
 }
 
-function Form_Login() {
+function Form_Login({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
     const [atoms] = useState(createFormOpenSections());
+    const fileUs = useAtomValue(fileUsAtom);
+    const formType = FormIdx.login;
+    const metaForm = fileUs.meta?.[formType];
+    const fields = metaForm?.fields;
     return (<>
         <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
 
@@ -68,8 +72,11 @@ function Form_Login() {
     </>);
 }
 
-function Form_PChange() {
+function Form_PChange({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
     const [atoms] = useState(createFormOpenSections());
+    const fileUs = useAtomValue(fileUsAtom);
+    const formType = FormIdx.cpass;
+    const metaForm = fileUs.meta?.[formType];
     return (<>
         <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
 
@@ -94,11 +101,10 @@ function Form_PChange() {
 }
 
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
-    const [fileUs] = useAtom(fileUsAtom);
     return (
         <div>
-            <Form_Login />
-            <Form_PChange />
+            <Form_Login fileUsAtom={fileUsAtom}/>
+            <Form_PChange fileUsAtom={fileUsAtom}/>
 
             {/* <se.SelectDemo /> */}
         </div>

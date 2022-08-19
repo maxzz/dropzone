@@ -3,13 +3,14 @@ import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import * as se from '../UISelect';
 import { ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
 
-import * as primitive from '@radix-ui/react-select';
+import * as primitiveSe from '@radix-ui/react-select';
+import * as primitiveMe from '@radix-ui/react-dropdown-menu';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     return (
-        <primitive.SelectTrigger className="w-6 h-6 bg-orange-800 text-primary-800">
+        <primitiveSe.SelectTrigger className="w-6 h-6 bg-orange-800 text-primary-800">
             {props.children}
-        </primitive.SelectTrigger>
+        </primitiveSe.SelectTrigger>
     );
 }
 
