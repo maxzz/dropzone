@@ -43,17 +43,16 @@ function createFormOpenSections(): Atomize<ManiOpenSections> {
     };
 }
 
-function Form_Login({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
+function Form_Login({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [atoms] = useState(createFormOpenSections());
     const fileUs = useAtomValue(fileUsAtom);
     const formType = FormIdx.login;
     const metaForm = fileUs.meta?.[formType];
-    const fields = metaForm?.fields;
     return (<>
         <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
 
             <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                <Part1_Fields />
+                <Part1_Fields fields={metaForm?.fields} />
             </SubSection>
 
             <SubSection label="Submit options" openAtom={atoms.submitAtom}>
@@ -72,7 +71,7 @@ function Form_Login({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
     </>);
 }
 
-function Form_PChange({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
+function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [atoms] = useState(createFormOpenSections());
     const fileUs = useAtomValue(fileUsAtom);
     const formType = FormIdx.cpass;
@@ -81,7 +80,7 @@ function Form_PChange({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
         <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
 
             <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                <Part1_Fields />
+                <Part1_Fields fields={metaForm?.fields} />
             </SubSection>
 
             <SubSection label="Submit options" openAtom={atoms.submitAtom}>
@@ -103,8 +102,8 @@ function Form_PChange({fileUsAtom}: {fileUsAtom: FileUsAtomType}) {
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
         <div>
-            <Form_Login fileUsAtom={fileUsAtom}/>
-            <Form_PChange fileUsAtom={fileUsAtom}/>
+            <Form_Login fileUsAtom={fileUsAtom} />
+            <Form_PChange fileUsAtom={fileUsAtom} />
 
             {/* <se.SelectDemo /> */}
         </div>

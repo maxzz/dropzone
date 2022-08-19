@@ -25,30 +25,30 @@ function ValueDropdown() {
             </Trigger>
 
             <se.SelectContent>
-                    <se.SelectScrollUpButton>
-                        <ChevronUpIcon />
-                    </se.SelectScrollUpButton>
+                <se.SelectScrollUpButton>
+                    <ChevronUpIcon />
+                </se.SelectScrollUpButton>
 
-                    <se.SelectViewport>
-                        <se.SelectGroup>
-                            <se.SelectLabel>Fruits</se.SelectLabel>
-                            <SeGroupItem label="Ask - Resuse" value="1" />
-                            <SeGroupItem label="Ask - Confirm" value="2" />
-                            <SeGroupItem label="Ask Always" value="3" />
-                        </se.SelectGroup>
+                <se.SelectViewport>
+                    <se.SelectGroup>
+                        <se.SelectLabel>Fruits</se.SelectLabel>
+                        <SeGroupItem label="Ask - Resuse" value="1" />
+                        <SeGroupItem label="Ask - Confirm" value="2" />
+                        <SeGroupItem label="Ask Always" value="3" />
+                    </se.SelectGroup>
 
-                        {/* <se.SelectSeparator />
+                    {/* <se.SelectSeparator />
 
                         <se.SelectGroup>
                         </se.SelectGroup> */}
 
-                    </se.SelectViewport>
+                </se.SelectViewport>
 
-                    <se.SelectScrollDownButton>
-                        <ChevronDownIcon />
-                    </se.SelectScrollDownButton>
+                <se.SelectScrollDownButton>
+                    <ChevronDownIcon />
+                </se.SelectScrollDownButton>
 
-                </se.SelectContent>
+            </se.SelectContent>
 
         </se.Select>
     );
@@ -204,26 +204,29 @@ function InputRow() {
     </>);
 }
 
-export function Part1_Fields({ }: {}) {
+export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
     return (<>
-        <div className="
-        group
-        p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
-        // data-highlighted
-        >
+        {fields
+            ? <>
+                <div className="
+                group
+                p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_auto_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
+                // data-highlighted
+                >
+                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
+                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
+                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
+                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
+                    <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
 
-            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
-            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
-            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
-            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
-            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
-
-            <InputRow />
-            <InputRow />
-            <InputRow />
-
-        </div>
-
-        <ValueDropdown />
+                    <InputRow />
+                    <InputRow />
+                    <InputRow />
+                </div>
+                <ValueDropdown />
+            </>
+            :
+            <div className="">no fields</div>
+        }
     </>);
 }
