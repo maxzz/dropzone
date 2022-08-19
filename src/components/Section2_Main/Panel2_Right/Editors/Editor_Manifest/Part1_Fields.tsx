@@ -128,7 +128,7 @@ function FieldType({ field }: { field: Meta.Field; }) {
     return (
         <div className="flex items-center space-x-0.5">
             <FormRowTypeIcon field={field.mani} className="w-5 h-5 text-primary-500" />
-            <div className="">{`${password ? 'psw' : type}`}</div>
+            <div className="text-primary-500">{`${password ? 'psw' : type}`}</div>
         </div>
     );
 }
@@ -201,7 +201,6 @@ function InputRow({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
     return (<>
-        <FieldType field={field} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
         <input
             className="place-self-center w-5 h-5 form-checkbox text-primary-700 bg-primary-800
             ring-1
@@ -213,18 +212,21 @@ function InputRow({ field }: { field: Meta.Field; }) {
             onChange={() => setUseIt(v => !v)}
         />
         <InputField valueAtom={state.labelAtom} placeholder="Label" />
+        <InputField valueAtom={state.labelAtom} placeholder="Catalog" />
         <InputField valueAtom={state.valueAtom} placeholder="Username" />
         <FieldValue isPsw={false} value={2} />
+        <FieldType field={field} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
     </>);
 }
 
 function TableHeader() {
     return (<>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Catalog</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
         <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
+        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
     </>);
 }
 
@@ -234,7 +236,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
             ? <>
                 <div className="
                 group
-                p-2 w-min grid grid-cols-[auto_max-content_minmax(5rem,1fr)_minmax(5rem,1fr)_max-content] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
+                p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_minmax(5rem,1fr)_minmax(5rem,1fr)_max-content_auto] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
                 // data-highlighted
                 >
                     <TableHeader />
@@ -242,7 +244,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                     {fields.map((field, idx) => <InputRow field={field} />)}
 
                 </div>
-                <ValueDropdown />
+                {/* <ValueDropdown /> */}
             </>
             :
             <div className="">no fields</div>
