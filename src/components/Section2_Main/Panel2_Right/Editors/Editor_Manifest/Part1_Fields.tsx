@@ -173,13 +173,14 @@ function FieldValue({ isPsw, value }: { isPsw: boolean; value: number; }) {
     );
 }
 
-function InputRow() {
+function InputRow({ field }: { field: Meta.Field; }) {
+    const {useit, displayname, type: typ, value: val} = field.mani;
     const state = useState({
-        useItAtom: atom<boolean>(true),
-        labelAtom: atom(''),
-        typeAtom: atom(1),
-        valueAtom: atom(''),
-        valueAsAtom: atom(''),
+        useItAtom: atom<boolean>(!!useit),
+        labelAtom: atom(displayname || ''),
+        typeAtom: atom(''),
+        valueAtom: atom<string>(typ || ''),
+        valueAsAtom: atom(val),
     })[0];
     const [useIt, setUseIt] = useAtom(state.useItAtom);
     const [label, setLabel] = useAtom(state.labelAtom);
@@ -225,9 +226,8 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                 >
                     <TableHeader />
 
-                    <InputRow />
-                    <InputRow />
-                    <InputRow />
+                    {fields.map((field, idx) => <InputRow  field={field}/>)}
+
                 </div>
                 <ValueDropdown />
             </>
