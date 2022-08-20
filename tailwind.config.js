@@ -63,6 +63,7 @@ module.exports = {
                     text: '#5a3543',
                 },
             },
+            ...require('./tailwind/tailwind-extra-animations').extraAnimations,
         },
     },
     variants: {
