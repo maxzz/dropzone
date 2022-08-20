@@ -89,9 +89,9 @@ export const referencesTxt = {
     upnname: "Windows User Principal Name",
     fullname: "Windows Domain\\User Name",
     domain: "Windows Domain",
-    "e-mail":"Windows E-mail Address",
-}
+    "e-mail": "Windows E-mail Address",
+};
 
 export const referencesPsw = {
     password: "Windows User Password",
-}
+};

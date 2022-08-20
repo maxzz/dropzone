@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FocusGuards } from '@radix-ui/react-focus-guards';
 import { UIToaster } from '@ui/UIToaster';
 import { Section1_Header } from './components/Section1_Header/Section1_Header';
@@ -9,6 +9,10 @@ import './styles/App.scss';
 //import { SpySvgSymbols } from './utils/SpySvgSymbols';
 
 export function App() {
+    useEffect(() => {
+        const guards = [...document.querySelectorAll('[data-radix-focus-guard]')] as HTMLSpanElement[];
+        guards.forEach((guard) => { guard.dataset['ariaHidden'] = 'true'; guard.setAttribute('aria-hidden', 'true'); });
+    }, []);
     return (
         <FocusGuards>
             <UIToaster />
@@ -23,4 +27,3 @@ export function App() {
         </FocusGuards>
     );
 }
-
