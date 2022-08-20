@@ -107,6 +107,7 @@ module.exports = {
         require('./tailwind/tailwnid-plugin-debug-styles'),
         require('./tailwind/tailwind-plugin-debug-screens'),
         require('./tailwind/tailwind-plugin-data-state'),
+        require('tailwindcss-radix')(),
         require('@tailwindcss/forms')({ strategy: 'class' }),
         require('./tailwind/tailwind-plugin-colors-bridge')([
             { prefix: '--tm-', groupName: 'primary' },

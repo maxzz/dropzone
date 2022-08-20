@@ -29,12 +29,10 @@ function ValueDropdown() {
             <menu.Portal container={document.getElementById('portal')}>
                 <menu.Content
                     className={classNames(
-                        // "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
                         "bg-white dark:bg-gray-800"
                     )}
-                    radix-side-top={true}
                     onClick={() => {
                         console.log('click')}
                     }
