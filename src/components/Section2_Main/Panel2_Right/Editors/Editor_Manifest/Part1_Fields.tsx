@@ -17,9 +17,28 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     );
 }
 
+const valueItems = [
+    "Ask - Resuse",
+    "Ask - Confirm",
+    "Ask Always ",
+];
+
+const txtRefItems = [
+    "Windows User Name",
+    "Windows User Principal Name",
+    "Windows Domain\\User Name",
+    "Windows Domain",
+    "Windows E-mail Address",
+];
+
+const pswRefItems = [
+    "Windows Password",
+];
+
 function ValueDropdown() {
     const cnames = "px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none";
-    const cnames2 = "data-highlighted:bg-red-200";
+    const cnames2 = "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100";
+    const [value, setValue] = useState(0);
     return (<>
         <menu.Root>
             <menu.Trigger asChild>
@@ -33,14 +52,13 @@ function ValueDropdown() {
                         "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
                         "bg-white dark:bg-gray-800"
                     )}
-                    onClick={() => {
-                        console.log('click')}
-                    }
                 >
-                    <menu.Item className={classNames(cnames, cnames2)}>
-                        <DotIcon />
-                        <span className="flex-grow text-gray-700">Label</span>
-                    </menu.Item>
+                    {valueItems.map((item, idx) =>
+                        <menu.Item className={classNames(cnames, cnames2)} onClick={() => setValue(idx)} key={idx}>
+                            {value === idx && <DotIcon />}
+                            <span className="flex-grow">{item}</span>
+                        </menu.Item>
+                    )}
 
                 </menu.Content>
             </menu.Portal>
