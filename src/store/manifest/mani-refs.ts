@@ -21,7 +21,7 @@ C:\Y\w\2-web\0-dp\pmat-org-c++\c++\oti_manifest_valuelife.h
             if (isvalueempty_)
                 switch (v_)
                 {
-                //case illigal   : manifest_askalways_ = false, manifest_onetvalue_ = true;  break;	// if it is one_time_value then we'll askalways
+                  //case illigal   : manifest_askalways_ = false, manifest_onetvalue_ = true;  break;	// if it is one_time_value then we'll askalways
                     case undefined : manifest_askalways_ = false, manifest_onetvalue_ = false; break;	// value is a reference from field catalog
                     case askreuse  : manifest_askalways_ = false, manifest_onetvalue_ = false; break;	// value will be asked and saved, if value is empty
                     case askconfirm: manifest_askalways_ = true,  manifest_onetvalue_ = false; break;	// value is saved but need to be confirmed allways
@@ -83,6 +83,18 @@ C:\Y\c\dp\pm\Components\PMAT\DpoTrainMgr\include\adminmanagmentwkg_referencename
     ext_vip_p@pv@noui=User Password|password=1\n
     ext_vip_potp@id@noui=User Password + VIP One-time Password|password=1\n
 */
+
+export const enum ValueAs {
+    askReuse,
+    askConfirm,
+    askAlways,
+}
+
+export type ValueLife = {
+    valueAs: ValueAs;       // how to treat value from user
+    value?: string;         // key in 'references' if started with '@' otherwise it's a constant value
+    isRef?: boolean;        // true if value started with '@' but not '@@'
+};
 
 export type References = {
     txt: Record<string, string>;
