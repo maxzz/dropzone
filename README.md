@@ -138,3 +138,19 @@ Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:
   <br/>
   <!-- <pre>npm i <a href="https://www.npmjs.com/package/react-use">react-use</a></pre> -->
 </div>
+
+<!-- 
+setting.json:
+
+    "tailwindCSS.experimental.classRegex": [
+    
+        "\"([^\"]*)\"",
+        "classNames\\('([^)]*)\\')",
+        "'([^']*)'"
+    ],
+
+probelms with that:
+    * abnormal amount of intellisense hints and first is tailwind/CSS text instead of the real help
+    * color squares are doubled
+
+ -->
