@@ -15,6 +15,9 @@ declare module Mani {
         value?: string;
         choosevalue?: string;
 
+        askalways?: boolean,     // "1"
+        onetvalue?: boolean,     // "1"
+
         password?: boolean,     // "1"
         useit?: boolean,        // "1"
 
