@@ -5,8 +5,9 @@ import { ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
 import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
 
 import * as primitiveSe from '@radix-ui/react-select';
-import * as primitiveMe from '@radix-ui/react-dropdown-menu';
+import * as menu from '@radix-ui/react-dropdown-menu';
 import { DropdownMenu } from './dmtest';
+import { classNames } from '@/utils/classnames';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     return (
@@ -17,8 +18,32 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
 }
 
 function ValueDropdown() {
-    return (
-        <se.Select>
+    const cnames = "px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none";
+    const cnames2 = "data-highlighted:bg-red-200";
+    return (<>
+        <menu.Root>
+            <menu.Trigger asChild>
+                <button>OK</button>
+            </menu.Trigger>
+
+            <menu.Portal container={document.getElementById('portal')}>
+                <menu.Content
+                    className={classNames(
+                        "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+                        "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
+                        "bg-white dark:bg-gray-800"
+                    )}
+                    onClick={() => {console.log('click')}}
+                >
+                    <menu.Item className={classNames(cnames, cnames2)}>
+                        <DotIcon />
+                        <span className="flex-grow text-gray-700">Label</span>
+                    </menu.Item>
+
+                </menu.Content>
+            </menu.Portal>
+        </menu.Root>
+        {/* <se.Select>
             <Trigger>
                 <se.SelectValue />
                 <se.SelectIcon>
@@ -39,11 +64,6 @@ function ValueDropdown() {
                         <SeGroupItem label="Ask Always" value="3" />
                     </se.SelectGroup>
 
-                    {/* <se.SelectSeparator />
-
-                        <se.SelectGroup>
-                        </se.SelectGroup> */}
-
                 </se.SelectViewport>
 
                 <se.SelectScrollDownButton>
@@ -52,8 +72,8 @@ function ValueDropdown() {
 
             </se.SelectContent>
 
-        </se.Select>
-    );
+        </se.Select> */}
+    </>);
 }
 
 function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
@@ -245,11 +265,11 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                     {fields.map((field, idx) => <InputRow field={field} key={idx} />)}
 
                 </div>
-                {/* <ValueDropdown /> */}
             </>
             :
             <div className="">no fields</div>
         }
-        <DropdownMenu />
+        <ValueDropdown />
+        {/* <DropdownMenu /> */}
     </>);
 }
