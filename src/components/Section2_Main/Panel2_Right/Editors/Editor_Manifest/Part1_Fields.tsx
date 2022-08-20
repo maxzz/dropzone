@@ -54,7 +54,10 @@ function ValueDropdown() {
                     )}
                 >
                     {valueItems.map((item, idx) =>
-                        <menu.Item className={classNames(cnames, cnames2)} onClick={() => setValue(idx)} key={idx}>
+                        <menu.Item className={classNames(cnames, cnames2)}
+                            //onClick={() => setValue(idx)} 
+                            onSelect={(event) => { console.log('sel', event); }}
+                            key={idx}>
                             {value === idx && <DotIcon />}
                             <span className="flex-grow">{item}</span>
                         </menu.Item>

@@ -84,14 +84,20 @@ C:\Y\c\dp\pm\Components\PMAT\DpoTrainMgr\include\adminmanagmentwkg_referencename
     ext_vip_potp@id@noui=User Password + VIP One-time Password|password=1\n
 */
 
-export const referencesTxt = {
-    name: "Windows User Name",
-    upnname: "Windows User Principal Name",
-    fullname: "Windows Domain\\User Name",
-    domain: "Windows Domain",
-    "e-mail": "Windows E-mail Address",
-};
+export type References = {
+    txt: Record<string, string>;
+    psw: Record<string, string>;
+}
 
-export const referencesPsw = {
-    password: "Windows User Password",
+export const references = {
+    txt: {
+        name: "Windows User Name",
+        upnname: "Windows User Principal Name",
+        fullname: "Windows Domain\\User Name",
+        domain: "Windows Domain",
+        "e-mail": "Windows E-mail Address",
+    },
+    psw: {
+        password: "Windows User Password",
+    },
 };

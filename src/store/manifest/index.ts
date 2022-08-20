@@ -2,4 +2,4 @@ export { buildManiMetaForms, dpTimeToShow, FieldPath, Transform } from './mani-f
 export { parseManifest, Matching } from './mani-i';
 export { convertToXml } from './xml-to-js';
 
-export { referencesTxt, referencesPsw } from './mani-refs';
+export { references } from './mani-refs';
