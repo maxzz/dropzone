@@ -1,8 +1,8 @@
 import { FileUs } from '../store-types';
 import { XMLParser } from 'fast-xml-parser';
 import { J2xParser } from '@/utils/json2xml';
-import { parseOptions } from './mani-i';
 import { fileDownload } from '@/utils/file-download';
+import { parseOptions } from './mani-i';
 import { manifestToJsonForXml } from './mani-o';
 
 export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; } | { xml: string; error?: undefined; } {
@@ -16,6 +16,8 @@ export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; 
         // 1.
         const parser = new XMLParser(parseOptions);
         const jsFromXml = parser.parse(fileUs.raw);
+
+        //TODO: convert value life and skip '=== undefined'
 
         // 2.
         let rv = fileUs.mani && manifestToJsonForXml(fileUs.mani) || '';

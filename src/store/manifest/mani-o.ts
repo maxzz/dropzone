@@ -1,3 +1,5 @@
+import { Mani } from "./mani";
+
 const attributes: string = "_attributes";
 
 function hasKeys(obj?: object): boolean {

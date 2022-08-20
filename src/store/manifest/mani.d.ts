@@ -1,3 +1,5 @@
+import { ValueLife } from "./mani-refs";
+
 type Entries<T> = {
     [K in keyof T]: [K, T[K]];
 }[keyof T][];
@@ -183,6 +185,7 @@ declare module Meta {           // Manifest unpacked forms, as meta data
 
     interface Field {
         mani: Mani.Field,
+        life: ValueLife;
         path: Path;
         pidx: number;           // index in the form
         ridx: number;           // for preview index in form.view.rects (or -1 if no found, but it should never happens if view exist)

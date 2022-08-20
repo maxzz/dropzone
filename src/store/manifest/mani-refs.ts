@@ -90,10 +90,14 @@ export const enum ValueAs {
     askAlways,
 }
 
+export const valueAsNames = [ "Ask - Resuse", "Ask - Confirm", "Ask Always ", ];
+
+
 export type ValueLife = {
     valueAs: ValueAs;       // how to treat value from user
     value?: string;         // key in 'references' if started with '@' otherwise it's a constant value
     isRef?: boolean;        // true if value started with '@' but not '@@'
+    //isPsw?: boolean;        // true if @password
 };
 
 export type References = {

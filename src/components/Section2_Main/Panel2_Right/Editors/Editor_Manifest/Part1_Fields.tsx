@@ -8,6 +8,7 @@ import * as primitiveSe from '@radix-ui/react-select';
 import * as menu from '@radix-ui/react-dropdown-menu';
 import { DropdownMenu } from './dmtest';
 import { classNames } from '@/utils/classnames';
+import { Meta, valueAsNames } from '@/store/manifest';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     return (
@@ -16,12 +17,6 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
         </primitiveSe.SelectTrigger>
     );
 }
-
-const valueItems = [
-    "Ask - Resuse",
-    "Ask - Confirm",
-    "Ask Always ",
-];
 
 const txtRefItems = [
     "Windows User Name",
@@ -53,7 +48,7 @@ function ValueDropdown() {
                         "bg-white dark:bg-gray-800"
                     )}
                 >
-                    {valueItems.map((item, idx) =>
+                    {valueAsNames.map((item, idx) =>
                         <menu.Item className={classNames(cnames, cnames2)}
                             //onClick={() => setValue(idx)} 
                             onSelect={(event) => { console.log('sel', event); }}

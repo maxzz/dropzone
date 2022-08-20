@@ -1,3 +1,4 @@
+import { Mani, Meta, MPath } from './mani';
 import { ValueAs, ValueLife } from './mani-refs';
 import { removeQuery, urlDomain } from './url';
 
@@ -339,6 +340,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const pool: string[] = getPool(form) || [];
         const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field, idx: number) => ({
             mani: field,
+            life: TransformValue.valueLife4Mani(field),
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
             pidx: idx,
             ridx: 0,
