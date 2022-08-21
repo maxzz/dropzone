@@ -103,7 +103,7 @@ function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
-        <div>
+        <div className="min-w-[34rem]">
             <Form_Login fileUsAtom={fileUsAtom} />
             <Form_PChange fileUsAtom={fileUsAtom} />
 
