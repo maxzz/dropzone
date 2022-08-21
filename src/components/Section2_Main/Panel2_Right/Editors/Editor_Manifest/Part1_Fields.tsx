@@ -27,7 +27,7 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
     //const [text, setText] = useAtom(textAtom);
     return (
         <div className="flex items-center">
-            <InputField valueAtom={textAtom} />
+            <InputField className="w-full flex-1" valueAtom={textAtom} />
 
             <menu.Root>
                 <menu.Trigger asChild>
@@ -60,27 +60,21 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
     );
 }
 
-function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
-    const [value1, setValue] = useAtom(valueAtom);
+function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
+    const [value, setValue] = useAtom(valueAtom);
     return (
         <input
-            className="px-2 py-3 h-8 bg-primary-700 text-primary-200
-            focus:ring-1 focus:ring-offset-1
-            
-            data-state-open:bg-red-500
-            group-data-placeholder:bg-green-500
-            group-data-highlighted:bg-orange-500
-            
-            focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
-            outline-none rounded"
-
-            data-state="open"
-            // data-placeholder
-            // data-highlighted
-
-            placeholder={placeholder}
-            value={value1}
+            className={classNames(
+                "px-2 py-3 h-8",
+                "focus:ring-1 focus:ring-offset-1",
+                "bg-primary-700 text-primary-200",
+                "focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400",
+                "outline-none rounded",
+                className,
+            )}
+            value={value}
             onChange={(event) => setValue(event.target.value)}
+            {...rest}
         />
     );
 }
@@ -241,7 +235,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
         {fields
             ? <>
                 <div className="
-                p-2 grid grid-cols-[max-content_minmax(5rem,1fr)_minmax(5rem,1fr)_minmax(5rem,1fr)_max-content_auto] 
+                p-2 grid grid-cols-[max-content_minmax(5ch,1fr)_minmax(5ch,1fr)_minmax(5ch,1fr)_max-content_auto] 
                 items-center gap-x-2 gap-y-1 
                 bg-primary-800 text-primary-200 rounded-sm"
                 >
