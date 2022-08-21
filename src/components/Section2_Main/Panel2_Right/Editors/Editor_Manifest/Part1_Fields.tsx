@@ -18,8 +18,10 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     );
 }
 
-const cnames = tw("px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none");
-const cnames2 = tw("text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100");
+const cnames2 = classNames(
+    "relative pl-8 px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
+    "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100"
+    );
 
 function ValueDropdown({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useState(0);
@@ -65,13 +67,13 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                         )}
                     >
                         {valueAsNames.map((item, idx) =>
-                            <menu.Item className={classNames(cnames, cnames2)}
+                            <menu.Item className={classNames(cnames2, value === idx && "bg-primary-200")}
                                 //onClick={() => setValue(idx)} 
                                 //onClick={(event) => { console.log('sel', event); }}
                                 onSelect={() => onSelectAsk(idx)}
                                 key={idx}
                             >
-                                {value === idx && <DotIcon />}
+                                {value === idx && <DotIcon className="absolute left-2" />}
                                 <span className="flex-grow">{item}</span>
                             </menu.Item>
                         )}
@@ -79,11 +81,11 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                         <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
 
                         {fieldRefs.map(([key, val], idx) =>
-                            <menu.Item className={classNames(cnames, cnames2)}
+                            <menu.Item className={classNames(cnames2, value === idx && "bg-primary-200")}
                                 onSelect={() => onSelectRef(idx)}
                                 key={idx}
                             >
-                                {value === idx && <DotIcon />}
+                                {value === idx && <DotIcon className="absolute left-2" />}
                                 <span className="flex-grow">{val}</span>
                             </menu.Item>
                         )}
@@ -271,22 +273,16 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
     return (<>
         {fields
             ? <>
-                <div className="
-                p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_max-content_auto] 
-                items-center gap-x-2 gap-y-1 
-                bg-primary-800 text-primary-200 rounded-sm
-                _min-w-[34rem]"
-                >
+                <div className={classNames(
+                    "p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_max-content_auto] items-center gap-x-2 gap-y-1",
+                    "bg-primary-800 text-primary-200 rounded-sm"
+                )}>
                     <TableHeader />
-
                     {fields.map((field, idx) => <InputRow field={field} key={idx} />)}
-
                 </div>
             </>
-            :
-            <div className="">no fields</div>
+            : <div className="">no fields</div>
         }
-        {/* <ValueDropdown /> */}
-        {/* <DropdownMenu /> */}
+        <DropdownMenu />
     </>);
 }
