@@ -6,7 +6,7 @@ Experimenting with Data-Driven User Interfaces (DDUI).
 
 [**GitHub Dependencies Graph**](https://github.com/maxzz/dropzone/network/dependencies)
 
-<!-- 
+<!--
 [**Visualization** of npm package usage](https://octo-repo-visualization.vercel.app/?repo=maxzz%2Fdropzone)
 * [Explore for yourself](https://githubnext.com/projects/repo-visualization#explore-for-yourself) (search 'maxzz/dropzone')
 * [tw](https://twitter.com/GitHubNext/status/1423315150413705223)
@@ -119,7 +119,7 @@ Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:
         "react-overlays": "5.2.0",
         "react-popper": "2.3.0",
         "react-popper-tooltip": "4.4.2",
- 
+
 -->
 
 <!--
@@ -139,11 +139,11 @@ Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:
   <!-- <pre>npm i <a href="https://www.npmjs.com/package/react-use">react-use</a></pre> -->
 </div>
 
-<!-- 
+<!--
 setting.json:
 
     "tailwindCSS.experimental.classRegex": [
-    
+
         "\"([^\"]*)\"",
         "classNames\\('([^)]*)\\')",
         "'([^']*)'"
@@ -153,10 +153,23 @@ probelms with that:
     * abnormal amount of intellisense hints and first is tailwind/CSS text instead of the real help
     * color squares are doubled
 
-another version tw("classes") and classNames("classes", "classes") (classNames can be multiline) :
+another version tw("classes") and classNames("classes", "classes"):
+    * classNames can be multiline
+    * need spaces around string content
+    * will not work for grid-cols-[minmax(0,1fr)]
+
     "tailwindCSS.experimental.classRegex": [
         "tw\\(['\"`]([^)]*)['\"`]\\)",
         "classNames\\(([^)]*)\\)",
+    ],
+
+another version with ending by ';':
+    * will combine until the next operator if ';' is missing;
+    * spaces after and before quatas also required, i.e. " p-2 "
+
+    "tailwindCSS.experimental.classRegex": [
+        "tw\\(['\"`]([^)]*)['\"`]\\)",
+        "classNames\\(([^;]*)\\);",
     ],
 
  -->
