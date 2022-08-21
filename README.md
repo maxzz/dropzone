@@ -153,4 +153,9 @@ probelms with that:
     * abnormal amount of intellisense hints and first is tailwind/CSS text instead of the real help
     * color squares are doubled
 
+another version (css("classes")):
+    "tailwindCSS.experimental.classRegex": [
+        "tw\\(['\"`]([^)]*)['\"`]\\)",
+    ],
+
  -->

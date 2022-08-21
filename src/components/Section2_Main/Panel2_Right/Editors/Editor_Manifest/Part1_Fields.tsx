@@ -6,7 +6,7 @@ import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Car
 
 import * as primitiveSe from '@radix-ui/react-select';
 import * as menu from '@radix-ui/react-dropdown-menu';
-import { DropdownMenu } from './dmtest';
+import { DropdownMenu } from '../../../../UI/nun/dmtest';
 import { classNames } from '@/utils/classnames';
 import { Meta, valueAsNames } from '@/store/manifest';
 
@@ -17,18 +17,6 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
         </primitiveSe.SelectTrigger>
     );
 }
-
-const txtRefItems = [
-    "Windows User Name",
-    "Windows User Principal Name",
-    "Windows Domain\\User Name",
-    "Windows Domain",
-    "Windows E-mail Address",
-];
-
-const pswRefItems = [
-    "Windows Password",
-];
 
 function ValueDropdown() {
     const cnames = "px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none";

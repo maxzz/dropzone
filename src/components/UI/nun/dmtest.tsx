@@ -13,7 +13,7 @@ import {
     PersonIcon,
     TransparencyGridIcon,
 } from "@radix-ui/react-icons";
-import { classNames as cx } from "@/utils/classnames";
+import { classNames as cx, tw } from "@/utils/classnames";
 import React, { ReactNode, useState } from "react";
 //import Button from "./shared/Button";
 
@@ -75,8 +75,8 @@ export const DropdownMenu = (props: Props) => {
     const [showGrid, setShowGrid] = useState(false);
     const [showUi, setShowUi] = useState(false);
 
-    const cnames = "flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none";
-    const cnames2 = "data-highlighted:bg-red-200";
+    const cnames = tw("flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none");
+    const cnames2 = tw("data-highlighted:bg-red-200");
     //"text-gray-400 focus:bg-gray-200 dark:text-gray-500 dark:focus:bg-gray-900",
     return (
         <div className="relative inline-block text-left">
@@ -92,7 +92,7 @@ export const DropdownMenu = (props: Props) => {
                         sideOffset={5}
                         className={cx(
                             "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
-                            "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
+                            "px-1.5 py-1 w-48 md:w-56 rounded-lg shadow-md",
                             "bg-white dark:bg-gray-800"
                         )}
                     >
@@ -152,7 +152,7 @@ export const DropdownMenu = (props: Props) => {
 
                         <prim.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
 
-                        <prim.Label className="select-none px-2 py-2 text-xs text-gray-700 dark:text-gray-200">
+                        <prim.Label className="px-2 py-2 text-xs text-gray-700 dark:text-gray-200 select-none">
                             Region Tools
                         </prim.Label>
 
@@ -194,7 +194,7 @@ export const DropdownMenu = (props: Props) => {
                                 <prim.SubContent
                                     className={cx(
                                         "origin-radix-dropdown-menu radix-side-right:animate-scale-in",
-                                        "w-full rounded-md px-1 py-1 text-xs shadow-md",
+                                        "px-1 py-1 w-full text-xs rounded-md shadow-md",
                                         "bg-white dark:bg-gray-800"
                                     )}
                                 >
