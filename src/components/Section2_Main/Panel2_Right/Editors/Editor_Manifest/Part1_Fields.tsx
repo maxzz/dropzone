@@ -9,6 +9,7 @@ import * as menu from '@radix-ui/react-dropdown-menu';
 import { DropdownMenu } from '../../../../UI/nun/dmtest';
 import { classNames, tw } from '@/utils/classnames';
 import { Meta, references, valueAsNames } from '@/store/manifest';
+import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     return (
@@ -19,8 +20,8 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
 }
 
 const cnames2 = classNames(
-    "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
-    "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100"
+    tw("relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none"),
+    tw("text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100"),
 );
 
 function ValueDropdown({ field }: { field: Meta.Field; }) {
@@ -55,7 +56,9 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
 
             <menu.Root>
                 <menu.Trigger asChild>
-                    <button className="px-2 border-l border-primary-800 outline-none"><ChevronDownIcon /></button>
+                    <button className="px-2 border-l border-primary-800 outline-none group">
+                        <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
+                    </button>
                 </menu.Trigger>
 
                 <menu.Portal container={document.getElementById('portal')}>
@@ -75,7 +78,7 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                                 onSelect={() => onSelectAsk(idx)}
                                 key={idx}
                             >
-                                {value === idx && <DotIcon className="absolute left-2" />}
+                                {value === idx && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
                                 <span className="flex-grow">{item}</span>
                             </menu.Item>
                         )}
@@ -87,7 +90,7 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                                 onSelect={() => onSelectRef(idx)}
                                 key={idx}
                             >
-                                {value === idx && <DotIcon className="absolute left-2" />}
+                                {value === idx && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
                                 <span className="flex-grow">{val}</span>
                             </menu.Item>
                         )}
@@ -166,7 +169,7 @@ function FieldTypeOld({ value }: { value: number; }) {
 function FieldType({ field }: { field: Meta.Field; }) {
     const { password, type = 'NOTYPE' } = field.mani;
     return (
-        <div className="ml-0.5 flex items-center space-x-0.5">
+        <div className="flex items-center space-x-0.5">
             <FormRowTypeIcon field={field.mani} className="w-5 h-5 text-primary-500" />
             <div className="text-primary-500">{`${password ? 'psw' : type}`}</div>
         </div>
@@ -276,7 +279,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
         {fields
             ? <>
                 <div className={classNames(
-                    "p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-x-0.5 gap-y-0.5",
+                    "p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-x-1 gap-y-1",
                     "bg-primary-800 text-primary-200 rounded-sm"
                 )}>
                     <TableHeader />
