@@ -25,18 +25,36 @@ const cnames2 = classNames(
 );
 
 function ValueDropdown({ field }: { field: Meta.Field; }) {
-    const [value, setValue] = useState(0);
-    const textAtom = useState(atom(''))[0];
+    const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
     const [text, setText] = useAtom(textAtom);
-    function onSelectAsk(idx: number) {
-        setValue(idx);
-        setText(valueAsNames[idx]);
+
+    const list = field.mani.password ? references.psw : references.txt;
+    const items = [...valueAsNames, '-', ...Object.values(list)];
+
+    const [index, setIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
+    function onSetIndex(idx: number) {
+        setIndex(idx);
+        setText(items[idx]);
     }
-    const fieldRefs = Object.entries(field.mani.password ? references.psw : references.txt);
-    function onSelectRef(idx: number) {
-        setValue(idx);
-        setText(fieldRefs[idx][1]);
+
+    function onSetText(value: string) {
+        !!value ? setText(value) : setText(items[0]);
+        !!value ? setIndex(-1) : setIndex(0);
     }
+
+    function onSetKey(event: React.KeyboardEvent) {
+        if (index !== -1 && (event.key === 'Backspace' || /^[a-z0-9]$/i.test(event.key))) {
+            setText('');
+            setIndex(-1);
+        }
+    }
+
+    function onBlur() {
+        if (index === -1 && !text.trim()) {
+            onSetIndex(0);
+        }
+    }
+
     return (
         <div
             className={classNames(
@@ -46,11 +64,12 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
             )}
         >
             <input
-                className={classNames(
-                    "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
-                )}
+                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none")}
+                multiple
                 value={text}
-                onChange={(event) => setText(event.target.value)}
+                onChange={(event) => onSetText(event.target.value)}
+                onKeyDown={onSetKey}
+                onBlur={onBlur}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
@@ -66,34 +85,25 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                         className={classNames(
                             "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                             "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
-                            "bg-white dark:bg-gray-800"
+                            "bg-primary-100 dark:bg-gray-800"
                         )}
-                    // "px-1.5 py-1 w-48 md:w-56 rounded-lg shadow-md",
-                    // "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
                     >
-                        {valueAsNames.map((item, idx) =>
-                            <menu.Item className={classNames(cnames2, value === idx && "bg-primary-200")}
-                                //onClick={() => setValue(idx)} 
-                                //onClick={(event) => { console.log('sel', event); }}
-                                onSelect={() => onSelectAsk(idx)}
-                                key={idx}
-                            >
-                                {value === idx && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
-                                <span className="flex-grow">{item}</span>
-                            </menu.Item>
-                        )}
+                        {items.map((item, idx) => {
+                            const isSelected = index === idx;
+                            const isSeparator = item === '-';
 
-                        <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
-
-                        {fieldRefs.map(([key, val], idx) =>
-                            <menu.Item className={classNames(cnames2, value === idx && "bg-primary-200")}
-                                onSelect={() => onSelectRef(idx)}
-                                key={idx}
-                            >
-                                {value === idx && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
-                                <span className="flex-grow">{val}</span>
-                            </menu.Item>
-                        )}
+                            return isSeparator
+                                ? <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                                :
+                                <menu.Item
+                                    className={classNames(cnames2, isSelected && "bg-primary-300")}
+                                    onSelect={() => onSetIndex(idx)}
+                                    key={idx}
+                                >
+                                    {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
+                                    <span className="flex-grow">{item}</span>
+                                </menu.Item>;
+                        })}
 
                     </menu.Content>
                 </menu.Portal>
