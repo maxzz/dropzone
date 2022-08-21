@@ -19,9 +19,9 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
 }
 
 const cnames2 = classNames(
-    "relative pl-8 px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
+    "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
     "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100"
-    );
+);
 
 function ValueDropdown({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useState(0);
@@ -62,9 +62,11 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                     <menu.Content
                         className={classNames(
                             "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
-                            "px-1.5 py-1 w-48 md:w-56 rounded-lg shadow-md",
+                            "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
                             "bg-white dark:bg-gray-800"
                         )}
+                    // "px-1.5 py-1 w-48 md:w-56 rounded-lg shadow-md",
+                    // "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
                     >
                         {valueAsNames.map((item, idx) =>
                             <menu.Item className={classNames(cnames2, value === idx && "bg-primary-200")}
