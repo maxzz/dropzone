@@ -8,7 +8,7 @@ import * as primitiveSe from '@radix-ui/react-select';
 import * as menu from '@radix-ui/react-dropdown-menu';
 import { DropdownMenu } from '../../../../UI/nun/dmtest';
 import { classNames, tw } from '@/utils/classnames';
-import { Meta, valueAsNames } from '@/store/manifest';
+import { Meta, references, valueAsNames } from '@/store/manifest';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     return (
@@ -28,6 +28,11 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
     function onSelectAsk(idx: number) {
         setValue(idx);
         setText(valueAsNames[idx]);
+    }
+    const fieldRefs = Object.entries(field.mani.password ? references.psw : references.txt);
+    function onSelectRef(idx: number) {
+        setValue(idx);
+        setText(fieldRefs[idx][1]);
     }
     return (
         <div
@@ -55,7 +60,7 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                     <menu.Content
                         className={classNames(
                             "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
-                            "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
+                            "px-1.5 py-1 w-48 md:w-56 rounded-lg shadow-md",
                             "bg-white dark:bg-gray-800"
                         )}
                     >
@@ -68,6 +73,18 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                             >
                                 {value === idx && <DotIcon />}
                                 <span className="flex-grow">{item}</span>
+                            </menu.Item>
+                        )}
+
+                        <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
+
+                        {fieldRefs.map(([key, val], idx) =>
+                            <menu.Item className={classNames(cnames, cnames2)}
+                                onSelect={() => onSelectRef(idx)}
+                                key={idx}
+                            >
+                                {value === idx && <DotIcon />}
+                                <span className="flex-grow">{val}</span>
                             </menu.Item>
                         )}
 
@@ -255,9 +272,10 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
         {fields
             ? <>
                 <div className="
-                p-2 grid grid-cols-[max-content_minmax(5ch,1fr)_minmax(5ch,1fr)_minmax(12ch,1fr)_max-content_auto] 
+                p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_max-content_auto] 
                 items-center gap-x-2 gap-y-1 
-                bg-primary-800 text-primary-200 rounded-sm"
+                bg-primary-800 text-primary-200 rounded-sm
+                _min-w-[34rem]"
                 >
                     <TableHeader />
 
