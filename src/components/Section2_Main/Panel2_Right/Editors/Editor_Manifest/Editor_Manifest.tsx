@@ -12,9 +12,11 @@ import { Atomize } from '@/hooks/atomsX';
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);
     return (<>
-        <div className="pb-1 text-base flex items-center select-none cursor-pointer text-[#32ffdaa0]" onClick={() => setOpen(v => !v)}>
-            <UIArrow className="w-4 h-4 pt-1" open={open} />
-            {label}
+        <div className="inline-block">
+            <div className="pb-1 text-base flex items-center select-none cursor-pointer text-[#32ffdaa0]" onClick={() => setOpen(v => !v)}>
+                <UIArrow className="w-4 h-4 pt-1" open={open} />
+                {label}
+            </div>
         </div>
 
         <UIAccordion open={open}>
