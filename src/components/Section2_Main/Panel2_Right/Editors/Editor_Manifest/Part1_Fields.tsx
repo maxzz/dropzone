@@ -26,12 +26,12 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
     const textAtom = useState(atom(''))[0];
     //const [text, setText] = useAtom(textAtom);
     return (
-        <div className="flex items-center">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] bg-gray-700">
             <InputField className="w-full flex-1" valueAtom={textAtom} />
 
             <menu.Root>
                 <menu.Trigger asChild>
-                    <button><ChevronDownIcon /></button>
+                    <button className="px-2 border-l border-primary-800"><ChevronDownIcon /></button>
                 </menu.Trigger>
 
                 <menu.Portal container={document.getElementById('portal')}>
@@ -235,7 +235,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
         {fields
             ? <>
                 <div className="
-                p-2 grid grid-cols-[max-content_minmax(5ch,1fr)_minmax(5ch,1fr)_minmax(5ch,1fr)_max-content_auto] 
+                p-2 grid grid-cols-[max-content_minmax(5ch,1fr)_minmax(5ch,1fr)_minmax(12ch,1fr)_max-content_auto] 
                 items-center gap-x-2 gap-y-1 
                 bg-primary-800 text-primary-200 rounded-sm"
                 >
