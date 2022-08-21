@@ -7,7 +7,7 @@ import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Car
 import * as primitiveSe from '@radix-ui/react-select';
 import * as menu from '@radix-ui/react-dropdown-menu';
 import { DropdownMenu } from '../../../../UI/nun/dmtest';
-import { classNames } from '@/utils/classnames';
+import { classNames, tw } from '@/utils/classnames';
 import { Meta, valueAsNames } from '@/store/manifest';
 
 function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
@@ -18,76 +18,54 @@ function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
     );
 }
 
-function ValueDropdown() {
-    const cnames = "px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none";
-    const cnames2 = "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100";
+const cnames = tw("px-2 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none");
+const cnames2 = tw("text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100");
+
+function ValueDropdown({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useState(0);
-    return (<>
-        <menu.Root>
-            <menu.Trigger asChild>
-                <button>OK</button>
-            </menu.Trigger>
+    const textAtom = useState(atom(''))[0];
+    //const [text, setText] = useAtom(textAtom);
+    return (
+        <div className="flex items-center">
+            <InputField valueAtom={textAtom} />
 
-            <menu.Portal container={document.getElementById('portal')}>
-                <menu.Content
-                    className={classNames(
-                        "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
-                        "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
-                        "bg-white dark:bg-gray-800"
-                    )}
-                >
-                    {valueAsNames.map((item, idx) =>
-                        <menu.Item className={classNames(cnames, cnames2)}
-                            //onClick={() => setValue(idx)} 
-                            onSelect={(event) => { console.log('sel', event); }}
-                            key={idx}>
-                            {value === idx && <DotIcon />}
-                            <span className="flex-grow">{item}</span>
-                        </menu.Item>
-                    )}
+            <menu.Root>
+                <menu.Trigger asChild>
+                    <button><ChevronDownIcon /></button>
+                </menu.Trigger>
 
-                </menu.Content>
-            </menu.Portal>
-        </menu.Root>
-        {/* <se.Select>
-            <Trigger>
-                <se.SelectValue />
-                <se.SelectIcon>
-                    <ChevronDownIcon />
-                </se.SelectIcon>
-            </Trigger>
+                <menu.Portal container={document.getElementById('portal')}>
+                    <menu.Content
+                        className={classNames(
+                            "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+                            "w-48 rounded-lg px-1.5 py-1 shadow-md md:w-56",
+                            "bg-white dark:bg-gray-800"
+                        )}
+                    >
+                        {valueAsNames.map((item, idx) =>
+                            <menu.Item className={classNames(cnames, cnames2)}
+                                //onClick={() => setValue(idx)} 
+                                onSelect={(event) => { console.log('sel', event); }}
+                                key={idx}>
+                                {value === idx && <DotIcon />}
+                                <span className="flex-grow">{item}</span>
+                            </menu.Item>
+                        )}
 
-            <se.SelectContent>
-                <se.SelectScrollUpButton>
-                    <ChevronUpIcon />
-                </se.SelectScrollUpButton>
+                    </menu.Content>
+                </menu.Portal>
+            </menu.Root>
 
-                <se.SelectViewport>
-                    <se.SelectGroup>
-                        <se.SelectLabel>Fruits</se.SelectLabel>
-                        <SeGroupItem label="Ask - Resuse" value="1" />
-                        <SeGroupItem label="Ask - Confirm" value="2" />
-                        <SeGroupItem label="Ask Always" value="3" />
-                    </se.SelectGroup>
-
-                </se.SelectViewport>
-
-                <se.SelectScrollDownButton>
-                    <ChevronDownIcon />
-                </se.SelectScrollDownButton>
-
-            </se.SelectContent>
-
-        </se.Select> */}
-    </>);
+        </div>
+    );
 }
 
 function InputField({ valueAtom, placeholder }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value1, setValue] = useAtom(valueAtom);
     return (
         <input
-            className="px-2 py-3 min-w-[5rem] h-8 bg-primary-700 text-primary-200
-            focus:ring-1 focus:ring-offset-1 
+            className="px-2 py-3 h-8 bg-primary-700 text-primary-200
+            focus:ring-1 focus:ring-offset-1
             
             data-state-open:bg-red-500
             group-data-placeholder:bg-green-500
@@ -240,20 +218,21 @@ function InputRow({ field }: { field: Meta.Field; }) {
         />
         <InputField valueAtom={state.labelAtom} placeholder="Label" />
         <InputField valueAtom={state.labelAtom} placeholder="Catalog" />
-        <InputField valueAtom={state.valueAtom} placeholder="Username" />
+
+        {/* <InputField valueAtom={state.valueAtom} placeholder="Username" /> */}
+        <ValueDropdown field={field} />
+
         <FieldValue isPsw={false} value={2} />
         <FieldType field={field} /> {/* <div className="px-2 border-primary-800 border-l border-r">text</div> */}
     </>);
 }
 
+const titles = ["Use it", "Label", "Catalog", "Value", "Value type", "Type"];
 function TableHeader() {
     return (<>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Use it</div>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Label</div>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Catalog</div>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value</div>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Value type</div>
-        <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2">Type</div>
+        {titles.map((title, idx) => (
+            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2" key={idx}>{title}</div>
+        ))}
     </>);
 }
 
@@ -262,9 +241,9 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
         {fields
             ? <>
                 <div className="
-                group
-                p-2 w-min grid grid-cols-[max-content_minmax(5rem,1fr)_minmax(5rem,1fr)_minmax(5rem,1fr)_max-content_auto] items-center gap-x-2 gap-y-1 bg-primary-800 text-primary-200 rounded-sm"
-                // data-highlighted
+                p-2 grid grid-cols-[max-content_minmax(5rem,1fr)_minmax(5rem,1fr)_minmax(5rem,1fr)_max-content_auto] 
+                items-center gap-x-2 gap-y-1 
+                bg-primary-800 text-primary-200 rounded-sm"
                 >
                     <TableHeader />
 
@@ -275,7 +254,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
             :
             <div className="">no fields</div>
         }
-        <ValueDropdown />
+        {/* <ValueDropdown /> */}
         {/* <DropdownMenu /> */}
     </>);
 }
