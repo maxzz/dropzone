@@ -25,6 +25,10 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useState(0);
     const textAtom = useState(atom(''))[0];
     const [text, setText] = useAtom(textAtom);
+    function onSelectAsk(idx: number) {
+        setValue(idx);
+        setText(valueAsNames[idx]);
+    }
     return (
         <div
             className={classNames(
@@ -33,7 +37,6 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                 "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
             )}
         >
-
             <input
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
@@ -59,8 +62,10 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                         {valueAsNames.map((item, idx) =>
                             <menu.Item className={classNames(cnames, cnames2)}
                                 //onClick={() => setValue(idx)} 
-                                onSelect={(event) => { console.log('sel', event); }}
-                                key={idx}>
+                                //onClick={(event) => { console.log('sel', event); }}
+                                onSelect={() => onSelectAsk(idx)}
+                                key={idx}
+                            >
                                 {value === idx && <DotIcon />}
                                 <span className="flex-grow">{item}</span>
                             </menu.Item>
