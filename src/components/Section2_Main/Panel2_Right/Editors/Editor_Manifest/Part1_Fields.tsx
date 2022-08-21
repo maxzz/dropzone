@@ -24,14 +24,29 @@ const cnames2 = tw("text-primary-700 data-highlighted:bg-primary-700 data-highli
 function ValueDropdown({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useState(0);
     const textAtom = useState(atom(''))[0];
-    //const [text, setText] = useAtom(textAtom);
+    const [text, setText] = useAtom(textAtom);
     return (
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] bg-gray-700">
-            <InputField className="w-full flex-1" valueAtom={textAtom} />
+        <div
+            className={classNames(
+                "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
+                "focus-within:ring-1 focus-within:ring-offset-1",
+                "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
+            )}
+        >
+
+            <input
+                className={classNames(
+                    "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
+                )}
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                autoComplete="off"
+                list="autocompleteOff"
+            />
 
             <menu.Root>
                 <menu.Trigger asChild>
-                    <button className="px-2 border-l border-primary-800"><ChevronDownIcon /></button>
+                    <button className="px-2 border-l border-primary-800 outline-none"><ChevronDownIcon /></button>
                 </menu.Trigger>
 
                 <menu.Portal container={document.getElementById('portal')}>
