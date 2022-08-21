@@ -40,8 +40,7 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                 )}
                 value={text}
                 onChange={(event) => setText(event.target.value)}
-                autoComplete="off"
-                list="autocompleteOff"
+                autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
             <menu.Root>
@@ -89,6 +88,7 @@ function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAto
             )}
             value={value}
             onChange={(event) => setValue(event.target.value)}
+            autoComplete="off" list="autocompleteOff" spellCheck={false}
             {...rest}
         />
     );
