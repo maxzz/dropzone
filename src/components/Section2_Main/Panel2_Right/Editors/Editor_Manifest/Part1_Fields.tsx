@@ -55,21 +55,30 @@ function isKeyClearDefault(key: string) {
     return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
 }
 
+function getCatalogName(catalogNames: string[], isPsw: boolean | undefined, dbid: string | undefined) {
+    return ''; //TODO: get catalog names atom and check
+}
+
+const catalogNo = "Not from catalog";
+const catalogMore = "More fields ...";
+
 function FieldCatalog({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
-    const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
+    const catalogNames: string[] = []; //TODO: get catalog names atom for field type
+    const catalogName = getCatalogName(catalogNames, field.mani.password, field.mani.dbname);
+
+    const textAtom = useState(atom(catalogName ? catalogName : catalogNo))[0];
     const [text, setText] = useAtom(textAtom);
 
-    const list = field.mani.password ? references.psw : references.txt;
-    const items = [...valueAsNames, '-', ...Object.values(list)];
+    const items = [catalogNo, ...catalogNames, '-', catalogMore];
 
-    const [selectedIndex, setSelectedIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
+    const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
 
     const onSetIndex = (idx: number) => (setText(items[idx]), setSelectedIndex(idx));
     const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(items[0]), setSelectedIndex(0)));
     const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
     const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
 
-    //TODO: map it to/from ValueLife
+    //TODO: map it to/from catalog name
 
     return (
         <div
@@ -97,13 +106,13 @@ function FieldCatalog({ field, className, ...rest }: { field: Meta.Field; } & In
 }
 
 function FieldValue({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
-    const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
+    const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
     const [text, setText] = useAtom(textAtom);
 
     const list = field.mani.password ? references.psw : references.txt;
     const items = [...valueAsNames, '-', ...Object.values(list)];
 
-    const [selectedIndex, setSelectedIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
+    const [selectedIndex, setSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
 
     const onSetIndex = (idx: number) => (setText(items[idx]), setSelectedIndex(idx));
     const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(items[0]), setSelectedIndex(0)));
@@ -157,7 +166,7 @@ function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAto
     );
 }
 
-function FieldType({ field, className, ...rest }: { field: Meta.Field; }& InputHTMLAttributes<HTMLInputElement>) {
+function FieldType({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const { password, type = 'NOTYPE' } = field.mani;
     return (
         <div className={classNames("flex items-center space-x-0.5", className)} {...rest}>
@@ -184,7 +193,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
 
-    const rowClassName = useIt ? "" : "opacity-30";
+    const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
     return (<>
         <input
             className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded"
