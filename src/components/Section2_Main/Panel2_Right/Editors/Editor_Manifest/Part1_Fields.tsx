@@ -51,6 +51,10 @@ function Dropdown(items: string[], selectedIndex: number, onSetIndex: (idx: numb
     );
 }
 
+function isKeyClearDefault(key: string) {
+    return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
+}
+
 function FieldValue({ field }: { field: Meta.Field; }) {
     const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
     const [text, setText] = useAtom(textAtom);
@@ -60,29 +64,13 @@ function FieldValue({ field }: { field: Meta.Field; }) {
 
     const [selectedIndex, setSelectedIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
 
-    function onSetIndex(idx: number) {
-        setSelectedIndex(idx);
-        setText(items[idx]);
-    }
+    const onSetIndex = (idx: number) => (setText(items[idx]), setSelectedIndex(idx));
+    const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(items[0]), setSelectedIndex(0)));
+    const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
+    const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
 
-    function onSetText(value: string) {
-        value ? setText(value) : setText(items[0]);
-        value ? setSelectedIndex(-1) : setSelectedIndex(0);
-    }
-
-    function onSetKey(event: React.KeyboardEvent) {
-        if (~selectedIndex && (event.key === 'Backspace' || /^[a-z0-9]$/i.test(event.key))) {
-            setText('');
-            setSelectedIndex(-1);
-        }
-    }
-
-    function onBlur() {
-        if (~~selectedIndex && !text) {
-            onSetIndex(0);
-        }
-    }
     //TODO: map it to/from ValueLife
+
     return (
         <div
             className={classNames(
@@ -102,7 +90,6 @@ function FieldValue({ field }: { field: Meta.Field; }) {
             />
 
             {Dropdown(items, selectedIndex, onSetIndex)}
-
         </div>
     );
 }
