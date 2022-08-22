@@ -9,6 +9,10 @@ import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
 import { Atomize } from '@/hooks/atomsX';
 
+function NoForm(label: string) {
+    return <div className="px-4 text-lg text-[#32ffdaa0]">{label}</div>;
+}
+
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);
     return (<>
@@ -72,7 +76,7 @@ function Form_Login({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
                 </SubSection>
 
             </SubSection>
-            : <div className="px-4 text-lg text-[#32ffdaa0]">No login form</div>
+            : NoForm("No login form")
         }
     </>);
 }
@@ -104,7 +108,7 @@ function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
                 </SubSection>
 
             </SubSection>
-            : <div className="px-4 text-lg text-[#32ffdaa0]">No password change form</div>
+            : NoForm("No password change form")
         }
     </>);
 }
