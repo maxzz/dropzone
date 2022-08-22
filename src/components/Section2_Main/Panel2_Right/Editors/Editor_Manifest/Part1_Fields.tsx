@@ -55,7 +55,7 @@ function isKeyClearDefault(key: string) {
     return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
 }
 
-function FieldValue({ field }: { field: Meta.Field; }) {
+function FieldCatalog({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
     const [text, setText] = useAtom(textAtom);
 
@@ -77,7 +77,50 @@ function FieldValue({ field }: { field: Meta.Field; }) {
                 "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
                 "focus-within:ring-1 focus-within:ring-offset-1",
                 "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
+                className,
             )}
+            {...rest}
+        >
+            <input
+                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
+                multiple
+                value={text}
+                onChange={(event) => onSetText(event.target.value)}
+                onKeyDown={onSetKey}
+                onBlur={onBlur}
+                autoComplete="off" list="autocompleteOff" spellCheck={false}
+            />
+
+            {Dropdown(items, selectedIndex, onSetIndex)}
+        </div>
+    );
+}
+
+function FieldValue({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+    const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
+    const [text, setText] = useAtom(textAtom);
+
+    const list = field.mani.password ? references.psw : references.txt;
+    const items = [...valueAsNames, '-', ...Object.values(list)];
+
+    const [selectedIndex, setSelectedIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
+
+    const onSetIndex = (idx: number) => (setText(items[idx]), setSelectedIndex(idx));
+    const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(items[0]), setSelectedIndex(0)));
+    const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
+    const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
+
+    //TODO: map it to/from ValueLife
+
+    return (
+        <div
+            className={classNames(
+                "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
+                "focus-within:ring-1 focus-within:ring-offset-1",
+                "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
+                className,
+            )}
+            {...rest}
         >
             <input
                 className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
@@ -114,10 +157,10 @@ function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAto
     );
 }
 
-function FieldType({ field }: { field: Meta.Field; }) {
+function FieldType({ field, className, ...rest }: { field: Meta.Field; }& InputHTMLAttributes<HTMLInputElement>) {
     const { password, type = 'NOTYPE' } = field.mani;
     return (
-        <div className="flex items-center space-x-0.5">
+        <div className={classNames("flex items-center space-x-0.5", className)} {...rest}>
             <FormRowTypeIcon field={field.mani} className="w-5 h-5 text-primary-500" />
             <div className="text-primary-500">{`${password ? 'psw' : type}`}</div>
         </div>
@@ -140,24 +183,20 @@ function TableRow({ field }: { field: Meta.Field; }) {
     const [type, setType] = useAtom(state.typeAtom);
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
+
+    const rowClassName = useIt ? "" : "opacity-50";
     return (<>
         <input
-            className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800
-            ring-1
-            focus:ring-1
-            focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400
-            rounded"
+            className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded"
             type="checkbox"
             checked={useIt}
             onChange={() => setUseIt(v => !v)}
         />
 
-        <InputField valueAtom={state.labelAtom} placeholder="Label" />
-        <InputField valueAtom={state.labelAtom} placeholder="Catalog" />
-
-        <FieldValue field={field} />
-
-        <FieldType field={field} />
+        <InputField className={rowClassName} valueAtom={state.labelAtom} placeholder="Label" />
+        <FieldCatalog className={rowClassName} field={field} />
+        <FieldValue className={rowClassName} field={field} />
+        <FieldType className={rowClassName} field={field} />
     </>);
 }
 
