@@ -1,15 +1,55 @@
 import React, { HTMLAttributes, InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
-import * as se from '../UISelect';
+import { Meta, references, valueAsNames } from '@/store/manifest';
 import { ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
 import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
 
-import * as primitiveSe from '@radix-ui/react-select';
 import * as menu from '@radix-ui/react-dropdown-menu';
 import { DropdownMenu } from '../../../../UI/nun/dmtest';
-import { classNames, tw } from '@/utils/classnames';
-import { Meta, references, valueAsNames } from '@/store/manifest';
+import { classNames } from '@/utils/classnames';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
+
+function Dropdown(items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
+    return (
+        <menu.Root>
+            <menu.Trigger asChild>
+                <button className="px-2 border-l border-primary-800 outline-none group">
+                    <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
+                </button>
+            </menu.Trigger>
+
+            <menu.Portal container={document.getElementById('portal')}>
+                <menu.Content
+                    className={classNames(
+                        "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+                        "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
+                        "bg-primary-100 dark:bg-gray-800"
+                    )}
+                >
+                    {items.map((item, idx) => {
+                        const isSelected = selectedIndex === idx;
+                        const isSeparator = item === '-';
+                        return isSeparator
+                            ? <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                            :
+                            <menu.Item
+                                className={classNames(
+                                    "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
+                                    "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
+                                    isSelected && "bg-primary-300"
+                                )}
+                                onSelect={() => onSetIndex(idx)}
+                                key={idx}
+                            >
+                                {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
+                                <span className="flex-grow">{item}</span>
+                            </menu.Item>;
+                    })}
+                </menu.Content>
+            </menu.Portal>
+        </menu.Root>
+    );
+}
 
 function FieldValue({ field }: { field: Meta.Field; }) {
     const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
@@ -18,27 +58,27 @@ function FieldValue({ field }: { field: Meta.Field; }) {
     const list = field.mani.password ? references.psw : references.txt;
     const items = [...valueAsNames, '-', ...Object.values(list)];
 
-    const [index, setIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
-    
+    const [selectedIndex, setSelectedIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
+
     function onSetIndex(idx: number) {
-        setIndex(idx);
+        setSelectedIndex(idx);
         setText(items[idx]);
     }
 
     function onSetText(value: string) {
         value ? setText(value) : setText(items[0]);
-        value ? setIndex(-1) : setIndex(0);
+        value ? setSelectedIndex(-1) : setSelectedIndex(0);
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        if (~index && (event.key === 'Backspace' || /^[a-z0-9]$/i.test(event.key))) {
+        if (~selectedIndex && (event.key === 'Backspace' || /^[a-z0-9]$/i.test(event.key))) {
             setText('');
-            setIndex(-1);
+            setSelectedIndex(-1);
         }
     }
 
     function onBlur() {
-        if (~~index && !text) {
+        if (~~selectedIndex && !text) {
             onSetIndex(0);
         }
     }
@@ -52,7 +92,7 @@ function FieldValue({ field }: { field: Meta.Field; }) {
             )}
         >
             <input
-                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~index && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
+                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 multiple
                 value={text}
                 onChange={(event) => onSetText(event.target.value)}
@@ -61,45 +101,7 @@ function FieldValue({ field }: { field: Meta.Field; }) {
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            <menu.Root>
-                <menu.Trigger asChild>
-                    <button className="px-2 border-l border-primary-800 outline-none group">
-                        <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
-                    </button>
-                </menu.Trigger>
-
-                <menu.Portal container={document.getElementById('portal')}>
-                    <menu.Content
-                        className={classNames(
-                            "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
-                            "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
-                            "bg-primary-100 dark:bg-gray-800"
-                        )}
-                    >
-                        {items.map((item, idx) => {
-                            const isSelected = index === idx;
-                            const isSeparator = item === '-';
-
-                            return isSeparator
-                                ? <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
-                                :
-                                <menu.Item
-                                    className={classNames(
-                                        "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
-                                        "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
-                                        isSelected && "bg-primary-300"
-                                    )}
-                                    onSelect={() => onSetIndex(idx)}
-                                    key={idx}
-                                >
-                                    {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
-                                    <span className="flex-grow">{item}</span>
-                                </menu.Item>;
-                        })}
-
-                    </menu.Content>
-                </menu.Portal>
-            </menu.Root>
+            {Dropdown(items, selectedIndex, onSetIndex)}
 
         </div>
     );
