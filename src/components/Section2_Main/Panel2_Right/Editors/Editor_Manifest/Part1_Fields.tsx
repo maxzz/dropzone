@@ -184,7 +184,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
 
-    const rowClassName = useIt ? "" : "opacity-50";
+    const rowClassName = useIt ? "" : "opacity-30";
     return (<>
         <input
             className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded"

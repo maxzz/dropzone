@@ -51,25 +51,29 @@ function Form_Login({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const formType = FormIdx.login;
     const metaForm = fileUs.meta?.[formType];
     return (<>
-        <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
+        {metaForm
+            ?
+            <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
 
-            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                <Part1_Fields fields={metaForm?.fields} />
+                <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                    <Part1_Fields fields={metaForm?.fields} />
+                </SubSection>
+
+                <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                    <Part2_Submit />
+                </SubSection>
+
+                <SubSection label="Policy" openAtom={atoms.policyAtom}>
+                    <Part3_Policy />
+                </SubSection>
+
+                <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+                    <Part4_FormOptions />
+                </SubSection>
+
             </SubSection>
-
-            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                <Part2_Submit />
-            </SubSection>
-
-            <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                <Part3_Policy />
-            </SubSection>
-
-            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                <Part4_FormOptions />
-            </SubSection>
-
-        </SubSection>
+            : <div className="px-4 text-lg text-[#32ffdaa0]">No login form</div>
+        }
     </>);
 }
 
@@ -79,25 +83,29 @@ function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const formType = FormIdx.cpass;
     const metaForm = fileUs.meta?.[formType];
     return (<>
-        <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
+        {metaForm
+            ?
+            <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
 
-            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                <Part1_Fields fields={metaForm?.fields} />
+                <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                    <Part1_Fields fields={metaForm?.fields} />
+                </SubSection>
+
+                <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                    <Part2_Submit />
+                </SubSection>
+
+                <SubSection label="Policy" openAtom={atoms.policyAtom}>
+                    <Part3_Policy />
+                </SubSection>
+
+                <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+                    <Part4_FormOptions />
+                </SubSection>
+
             </SubSection>
-
-            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                <Part2_Submit />
-            </SubSection>
-
-            <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                <Part3_Policy />
-            </SubSection>
-
-            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                <Part4_FormOptions />
-            </SubSection>
-
-        </SubSection>
+            : <div className="px-4 text-lg text-[#32ffdaa0]">No password change form</div>
+        }
     </>);
 }
 
