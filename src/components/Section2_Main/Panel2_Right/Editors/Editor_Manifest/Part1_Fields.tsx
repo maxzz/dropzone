@@ -11,20 +11,7 @@ import { classNames, tw } from '@/utils/classnames';
 import { Meta, references, valueAsNames } from '@/store/manifest';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 
-function Trigger<T>(props: HTMLAttributes<HTMLDivElement>) {
-    return (
-        <primitiveSe.SelectTrigger className="w-6 h-6 bg-orange-800 text-primary-800">
-            {props.children}
-        </primitiveSe.SelectTrigger>
-    );
-}
-
-const cnames2 = classNames(
-    tw("relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none"),
-    tw("text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100"),
-);
-
-function ValueDropdown({ field }: { field: Meta.Field; }) {
+function FieldValue({ field }: { field: Meta.Field; }) {
     const textAtom = useState(atom(!field.mani.value ? valueAsNames[0] : field.mani.value))[0];
     const [text, setText] = useAtom(textAtom);
 
@@ -32,29 +19,30 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
     const items = [...valueAsNames, '-', ...Object.values(list)];
 
     const [index, setIndex] = useState(!field.mani.value ? 0 : -1); // TODO: instead of 0 find real ref
+    
     function onSetIndex(idx: number) {
         setIndex(idx);
         setText(items[idx]);
     }
 
     function onSetText(value: string) {
-        !!value ? setText(value) : setText(items[0]);
-        !!value ? setIndex(-1) : setIndex(0);
+        value ? setText(value) : setText(items[0]);
+        value ? setIndex(-1) : setIndex(0);
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        if (index !== -1 && (event.key === 'Backspace' || /^[a-z0-9]$/i.test(event.key))) {
+        if (~index && (event.key === 'Backspace' || /^[a-z0-9]$/i.test(event.key))) {
             setText('');
             setIndex(-1);
         }
     }
 
     function onBlur() {
-        if (index === -1 && !text.trim()) {
+        if (~~index && !text) {
             onSetIndex(0);
         }
     }
-
+    //TODO: map it to/from ValueLife
     return (
         <div
             className={classNames(
@@ -64,7 +52,7 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
             )}
         >
             <input
-                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none")}
+                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~index && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 multiple
                 value={text}
                 onChange={(event) => onSetText(event.target.value)}
@@ -96,7 +84,11 @@ function ValueDropdown({ field }: { field: Meta.Field; }) {
                                 ? <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
                                 :
                                 <menu.Item
-                                    className={classNames(cnames2, isSelected && "bg-primary-300")}
+                                    className={classNames(
+                                        "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
+                                        "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
+                                        isSelected && "bg-primary-300"
+                                    )}
                                     onSelect={() => onSetIndex(idx)}
                                     key={idx}
                                 >
@@ -133,49 +125,6 @@ function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAto
     );
 }
 
-function SeGroupItem({ label, value }: { label: string; value: string; }) {
-    return (
-        <se.SelectItem value={value}>
-            <se.SelectItemText>{label}</se.SelectItemText>
-            <se.SelectItemIndicator>
-                <DotIcon />
-            </se.SelectItemIndicator>
-        </se.SelectItem>
-    );
-}
-/*
-function FieldTypeOld({ value }: { value: number; }) {
-    return (
-        <se.Select>
-            <se.SelectTrigger aria-label="Food">
-                <se.SelectValue /> <se.SelectIcon> <ChevronDownIcon /> </se.SelectIcon>
-            </se.SelectTrigger>
-
-            <se.SelectContent>
-                <se.SelectScrollUpButton>
-                    <ChevronUpIcon />
-                </se.SelectScrollUpButton>
-
-                <se.SelectViewport>
-                    <se.SelectGroup>
-                        <se.SelectLabel>Fruits</se.SelectLabel>
-                        <SeGroupItem label="Text" value="1" />
-                        <SeGroupItem label="Password" value="2" />
-                        <SeGroupItem label="Checkbox" value="3" />
-                        {/* ... and so on but should not be changed by user * /}
-                    </se.SelectGroup>
-
-                </se.SelectViewport>
-
-                <se.SelectScrollDownButton>
-                    <ChevronDownIcon />
-                </se.SelectScrollDownButton>
-
-            </se.SelectContent>
-        </se.Select>
-    );
-}
-*/
 function FieldType({ field }: { field: Meta.Field; }) {
     const { password, type = 'NOTYPE' } = field.mani;
     return (
@@ -186,58 +135,7 @@ function FieldType({ field }: { field: Meta.Field; }) {
     );
 }
 
-// function FieldValue({ isPsw, value }: { isPsw: boolean; value: number; }) {
-//     return (
-//         <>
-//             <se.Select>
-//                 <se.SelectTrigger aria-label="Food">
-//                     <se.SelectValue /> <se.SelectIcon> <ChevronDownIcon /> </se.SelectIcon>
-//                 </se.SelectTrigger>
-
-//                 <se.SelectContent>
-//                     <se.SelectScrollUpButton>
-//                         <ChevronUpIcon />
-//                     </se.SelectScrollUpButton>
-
-//                     <se.SelectViewport>
-//                         <se.SelectGroup>
-//                             <se.SelectLabel>Fruits</se.SelectLabel>
-//                             <SeGroupItem label="Ask - Resuse" value="1" />
-//                             <SeGroupItem label="Ask - Confirm" value="2" />
-//                             <SeGroupItem label="Ask Always" value="3" />
-//                         </se.SelectGroup>
-
-//                         {/* <se.SelectSeparator />
-
-//                         <se.SelectGroup>
-//                         </se.SelectGroup> */}
-
-//                     </se.SelectViewport>
-
-//                     <se.SelectScrollDownButton>
-//                         <ChevronDownIcon />
-//                     </se.SelectScrollDownButton>
-
-//                 </se.SelectContent>
-//             </se.Select>
-
-//             {/* {isPsw
-//                 ? <>
-//                     <div className="">Windows Password</div>
-//                 </>
-//                 : <>
-//                     <div className="">Windows User Name</div>
-//                     <div className="">Windows User Principal Name</div>
-//                     <div className="">Windows Domain\User Name</div>
-//                     <div className="">Windows Domain</div>
-//                     <div className="">Windows E-mail Address</div>
-//                 </>
-//             } */}
-//         </>
-//     );
-// }
-
-function InputRow({ field }: { field: Meta.Field; }) {
+function TableRow({ field }: { field: Meta.Field; }) {
     const { useit, displayname, type: typ, value: val } = field.mani;
 
     const state = useState({
@@ -268,9 +166,8 @@ function InputRow({ field }: { field: Meta.Field; }) {
         <InputField valueAtom={state.labelAtom} placeholder="Label" />
         <InputField valueAtom={state.labelAtom} placeholder="Catalog" />
 
-        <ValueDropdown field={field} />
+        <FieldValue field={field} />
 
-        {/* <FieldValue isPsw={false} value={2} /> */}
         <FieldType field={field} />
     </>);
 }
@@ -279,7 +176,7 @@ const titles = ["Use it", "Label", "Catalog", "Value", "Type"];
 function TableHeader() {
     return (<>
         {titles.map((title, idx) => (
-            <div className="px-2 text-[.65rem] text-primary-400 border-primary-100 border-b mb-2" key={idx}>{title}</div>
+            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b" key={idx}>{title}</div>
         ))}
     </>);
 }
@@ -293,7 +190,7 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                     "bg-primary-800 text-primary-200 rounded-sm"
                 )}>
                     <TableHeader />
-                    {fields.map((field, idx) => <InputRow field={field} key={idx} />)}
+                    {fields.map((field, idx) => <TableRow field={field} key={idx} />)}
                 </div>
             </>
             : <div className="">no fields</div>
