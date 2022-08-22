@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, ReactNode, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
+import { Atomize } from '@/hooks/atomsX';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
@@ -7,7 +8,6 @@ import { Part1_Fields } from './Part1_Fields';
 import { Part2_Submit } from './Part2_Submit';
 import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
-import { Atomize } from '@/hooks/atomsX';
 
 function NoForm(label: string) {
     return <div className="px-4 text-lg text-[#32ffdaa0]">{label}</div>;
@@ -54,31 +54,27 @@ function Form_Login({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const formType = FormIdx.login;
     const metaForm = fileUs.meta?.[formType];
-    return (<>
-        {metaForm
-            ?
-            <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
+    return (!metaForm ? NoForm("No login form") :
+        <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
 
-                <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                    <Part1_Fields fields={metaForm?.fields} />
-                </SubSection>
-
-                <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                    <Part2_Submit />
-                </SubSection>
-
-                <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                    <Part3_Policy />
-                </SubSection>
-
-                <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                    <Part4_FormOptions />
-                </SubSection>
-
+            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                <Part1_Fields fields={metaForm?.fields} />
             </SubSection>
-            : NoForm("No login form")
-        }
-    </>);
+
+            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                <Part2_Submit />
+            </SubSection>
+
+            <SubSection label="Policy" openAtom={atoms.policyAtom}>
+                <Part3_Policy />
+            </SubSection>
+
+            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+                <Part4_FormOptions />
+            </SubSection>
+
+        </SubSection>
+    );
 }
 
 function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
@@ -86,31 +82,27 @@ function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const formType = FormIdx.cpass;
     const metaForm = fileUs.meta?.[formType];
-    return (<>
-        {metaForm
-            ?
-            <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
+    return (!metaForm ? NoForm("No password change form") :
+        <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
 
-                <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                    <Part1_Fields fields={metaForm?.fields} />
-                </SubSection>
-
-                <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                    <Part2_Submit />
-                </SubSection>
-
-                <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                    <Part3_Policy />
-                </SubSection>
-
-                <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                    <Part4_FormOptions />
-                </SubSection>
-
+            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+                <Part1_Fields fields={metaForm?.fields} />
             </SubSection>
-            : NoForm("No password change form")
-        }
-    </>);
+
+            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+                <Part2_Submit />
+            </SubSection>
+
+            <SubSection label="Policy" openAtom={atoms.policyAtom}>
+                <Part3_Policy />
+            </SubSection>
+
+            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+                <Part4_FormOptions />
+            </SubSection>
+
+        </SubSection>
+    );
 }
 
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
