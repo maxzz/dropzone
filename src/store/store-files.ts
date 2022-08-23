@@ -154,8 +154,10 @@ const doUpdateCacheAtom = atom(
                         fcat = res.fcat;
                         meta = buildManiMetaForms(mani);
 
-                        const { items } = buildCatalogMeta(fcat);
-                        set(FieldCatalogItemsAtom, items);
+                        if (fcat) {
+                            const { items } = buildCatalogMeta(fcat); //TODO: we need to load multiple catalog files
+                            set(FieldCatalogItemsAtom, items);
+                        }
                     } catch (error) {
                         console.log('%ctm parse error', 'color: red', error, '\n', file.fname, raw);
                     }
