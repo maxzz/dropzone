@@ -21,7 +21,7 @@ function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIn
                     className={classNames(
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
-                        "bg-primary-100 dark:bg-gray-800"
+                        "bg-primary-100 dark:bg-gray-800 overflow-auto max-h-96 smallscroll"
                     )}
                 >
                     {items.map((item, idx) => {
