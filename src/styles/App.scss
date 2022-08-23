@@ -1,29 +1,4 @@
-/* Firefox scrollbars */
-.smallscroll {
-    --sb-width: 6px;
-    --sb-clr: #c1c1c178; /* #666b7a */
-    --sb-bkg: #30303080; /* transparent */
-    scrollbar-color: var(--sb-clr) var(--sb-bkg);
-    scrollbar-width: thin;
-}
-
-.smallscroll-light {
-    --sb-width: 6px;
-    --sb-clr: #30303080; /* #666b7a */
-    --sb-bkg: #c1c1c178; /* transparent */
-}
-
-/* Chrome scrollbars */
-.smallscroll::-webkit-scrollbar {
-    width: var(--sb-width);
-    height: var(--sb-width);
-    background-color: var(--sb-bkg);
-}
-
-.smallscroll::-webkit-scrollbar-thumb {
-    background-color: var(--sb-clr);
-}
-
+//
 body {
     // background-image: linear-gradient(to right, var(--tm-primary-300-, #607b9894), var(--tm-primary-800-, #c191917d)),
     // background-image: linear-gradient(to right, var(--tm-primary-300-, #0361c694), var(--tm-primary-800-, #c191917d)),
@@ -32,7 +7,5 @@ body {
         url("@/assets/background-bw.jpg") /*http://higeom.math.msu.su/history/delone_r.html*/;
     background-blend-mode: multiply;
 }
-
-//
 
 //font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320)); //https://codepen.io/maxzz/pen/KKvzLvB
