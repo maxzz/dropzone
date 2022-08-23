@@ -130,7 +130,7 @@ export namespace TransformValue {
         }
         return vl;
     }
-    
+
     export function valueLife2Mani(vl: ValueLife, field: Mani.Field) {
         const { valueAs: va } = vl;
         va === ValueAs.askReuse
@@ -378,9 +378,12 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
     return forms;
 }
 
+// Field catalog transformation
+
 export function buildCatalogMeta(fcat?: Catalog.Root | undefined): FieldCatalog {
+    const items = fcat?.names.map((item, idx) => ({ ...item, index: idx })) || [];
     return {
-        items: [],
+        items,
     };
 }
 

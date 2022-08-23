@@ -27,11 +27,13 @@ export {
 } from './store-files';
 
 export type {
+    CatalogItem,
     FieldCatalog,
 } from './store-file-catalog';
 
 export {
     FieldCatalogItemsAtom,
+    getCatalogName,
 } from './store-file-catalog';
 
 export {

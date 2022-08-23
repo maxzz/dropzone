@@ -1,13 +1,11 @@
-import React, { HTMLAttributes, InputHTMLAttributes, useState } from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import { Meta, references, valueAsNames } from '@/store/manifest';
-import { ChevronDownIcon, ChevronUpIcon, DotIcon } from '@radix-ui/react-icons';
 import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
-
-import * as menu from '@radix-ui/react-dropdown-menu';
-import { DropdownMenu } from '../../../../UI/nun/dmtest';
-import { classNames } from '@/utils/classnames';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
+import { classNames } from '@/utils/classnames';
+import * as menu from '@radix-ui/react-dropdown-menu';
+import { getCatalogName } from '@/store';
 
 function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
     return (
@@ -53,10 +51,6 @@ function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIn
 
 function isKeyClearDefault(key: string) {
     return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
-}
-
-function getCatalogName(catalogNames: string[], isPsw: boolean | undefined, dbid: string | undefined) {
-    return ''; //TODO: get catalog names atom and check
 }
 
 const catalogNo = "Not from catalog";
@@ -240,6 +234,5 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
             </>
             : <div className="">no fields</div>
         }
-        {/* <DropdownMenu /> */}
     </>);
 }
