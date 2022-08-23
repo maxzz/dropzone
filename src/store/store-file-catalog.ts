@@ -10,11 +10,14 @@ export type CatalogItem =
     };
 
 export type FieldCatalog = {
-    items: Catalog.Name[];
+    items: CatalogItem[];
 };
 
 export const FieldCatalogItemsAtom = atom<Catalog.Name[]>([]);
 
-export function getCatalogName(catalogNames: string[], isPsw: boolean | undefined, dbid: string | undefined): string {
-    return ''; //TODO: get catalog names atom and check
+export function getCatalogName(catalog: Catalog.Name[], isPsw: boolean | undefined, dbid: string | undefined): { name: string; names: string[]; } {
+    return {
+        name: '',
+        names: catalog.filter((item) => item.password === isPsw).map((item) => item.dispname),
+    };
 }

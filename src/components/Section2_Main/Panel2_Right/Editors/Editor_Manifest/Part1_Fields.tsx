@@ -1,11 +1,11 @@
 import React, { InputHTMLAttributes, useState } from 'react';
-import { atom, PrimitiveAtom, useAtom } from 'jotai';
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { Meta, references, valueAsNames } from '@/store/manifest';
 import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
 import * as menu from '@radix-ui/react-dropdown-menu';
-import { getCatalogName } from '@/store';
+import { FieldCatalogItemsAtom, getCatalogName } from '@/store';
 
 function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
     return (
@@ -57,13 +57,13 @@ const catalogNo = "Not from catalog";
 const catalogMore = "More fields ...";
 
 function FieldCatalog({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
-    const catalogNames: string[] = []; //TODO: get catalog names atom for field type
-    const catalogName = getCatalogName(catalogNames, field.mani.password, field.mani.dbname);
+    const catalogNames = useAtomValue(FieldCatalogItemsAtom);
+    const { name: catalogName, names } = getCatalogName(catalogNames, field.mani.password, field.mani.dbname); //TODO: might need memo
 
     const textAtom = useState(atom(catalogName ? catalogName : catalogNo))[0];
     const [text, setText] = useAtom(textAtom);
 
-    const items = [catalogNo, ...catalogNames, '-', catalogMore];
+    const items = [catalogNo, ...names, '-', catalogMore];
 
     const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
 
