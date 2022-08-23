@@ -30,7 +30,7 @@ export const rightPanelData: RightPanelData = {
 
 // Open sections
 
-type OpenSection = {
+export type ManiOpenSections = {
     form: boolean;
     fields: boolean;
     submit: boolean;
@@ -38,19 +38,17 @@ type OpenSection = {
     options: boolean;
 };
 
-export const openSections: [login: Atomize<OpenSection>, cpass: Atomize<OpenSection>] = [
-    {
+function createFormOpenSections(): Atomize<ManiOpenSections> {
+    return {
         formAtom: atom<boolean>(true),
         fieldsAtom: atom<boolean>(true),
         submitAtom: atom<boolean>(false),
         policyAtom: atom<boolean>(false),
         optionsAtom: atom<boolean>(false),
-    },
-    {
-        formAtom: atom<boolean>(true),
-        fieldsAtom: atom<boolean>(true),
-        submitAtom: atom<boolean>(false),
-        policyAtom: atom<boolean>(false),
-        optionsAtom: atom<boolean>(false),
-    }
+    };
+}
+
+export const maniOpenSections: [login: Atomize<ManiOpenSections>, cpass: Atomize<ManiOpenSections>] = [
+    createFormOpenSections(),
+    createFormOpenSections()
 ];

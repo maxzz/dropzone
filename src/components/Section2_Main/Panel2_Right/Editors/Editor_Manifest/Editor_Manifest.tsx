@@ -1,7 +1,6 @@
-import React, { HTMLAttributes, ReactNode, useState } from 'react';
-import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
-import { Atomize } from '@/hooks/atomsX';
-import { FileUsAtomType, FormIdx } from '@/store';
+import React, { HTMLAttributes, ReactNode } from 'react';
+import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
+import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
 import { Part1_Fields } from './Part1_Fields';
@@ -10,7 +9,7 @@ import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
 
 function NoForm(formType: FormIdx) {
-    const label = formType === FormIdx.login ? "No login form": "No password change form";
+    const label = formType === FormIdx.login ? "No login form" : "No password change form";
     return <div className="px-4 text-lg text-[#32ffdaa0]">
         {label}
     </div>;
@@ -34,29 +33,11 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
     </>);
 }
 
-type ManiOpenSections = {
-    form: boolean;
-    fields: boolean;
-    submit: boolean;
-    policy: boolean;
-    options: boolean;
-};
-
-function createFormOpenSections(): Atomize<ManiOpenSections> {
-    return {
-        formAtom: atom<boolean>(true),
-        fieldsAtom: atom<boolean>(true),
-        submitAtom: atom<boolean>(false),
-        policyAtom: atom<boolean>(false),
-        optionsAtom: atom<boolean>(false),
-    };
-}
-
 function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
-    const title = formType === FormIdx.login ? "Login": "Password change";
-    const openSections = useState(createFormOpenSections())[0];
+    const title = formType === FormIdx.login ? "Login" : "Password change";
+    const openSections = maniOpenSections[formType];
     return (!metaForm ? NoForm(formType) :
         <SubSection label={<div className="text-lg">{title}</div>} openAtom={openSections.formAtom}>
 
@@ -83,8 +64,8 @@ function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formT
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
         <div className="min-w-[34rem]">
-            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.login}/>
-            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.cpass}/>
+            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.login} />
+            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.cpass} />
         </div>
     );
 }

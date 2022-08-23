@@ -1,4 +1,5 @@
 import { PrimitiveAtom, WritableAtom } from "jotai";
+import { Catalog, Mani, Meta } from "./manifest";
 
 export type FileUsState = {
     isGroupAtom: PrimitiveAtom<boolean>, // this fileUs selected for bulk group operation
@@ -43,7 +44,7 @@ export type FileUsAtomType = WritableAtom<FileUs, FileUs>;
 export const enum FormIdx {
     login = 0,              // 0 - login (even if login does not exist)
     cpass,                  // 1 - pchange
-    both,                   // 2 - both forms
+    //both,                   // 2 - both forms
 }
 
 export type FileUsFormData = {
