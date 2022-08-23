@@ -1,3 +1,4 @@
+import { Atomize } from "@/hooks/atomsX";
 import { atom, Atom, PrimitiveAtom } from "jotai";
 import { FileUs, FileUsAtomType } from "./store-types";
 
@@ -26,3 +27,30 @@ export const rightPanelData: RightPanelData = {
 
     viewModeAtom: atom<ViewMode>(ViewMode.raw),
 };
+
+// Open sections
+
+type OpenSection = {
+    form: boolean;
+    fields: boolean;
+    submit: boolean;
+    policy: boolean;
+    options: boolean;
+};
+
+export const openSections: [login: Atomize<OpenSection>, cpass: Atomize<OpenSection>] = [
+    {
+        formAtom: atom<boolean>(true),
+        fieldsAtom: atom<boolean>(true),
+        submitAtom: atom<boolean>(false),
+        policyAtom: atom<boolean>(false),
+        optionsAtom: atom<boolean>(false),
+    },
+    {
+        formAtom: atom<boolean>(true),
+        fieldsAtom: atom<boolean>(true),
+        submitAtom: atom<boolean>(false),
+        policyAtom: atom<boolean>(false),
+        optionsAtom: atom<boolean>(false),
+    }
+];
