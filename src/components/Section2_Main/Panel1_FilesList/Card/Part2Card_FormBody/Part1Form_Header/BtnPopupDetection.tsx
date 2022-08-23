@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType } from '@/store';
-import { Matching, Transform } from '@/store/manifest';
+import { Mani, Matching, Transform } from '@/store/manifest';
 import { ToggleWithPortal } from './HeaderButton';
 import { UITableFromObject } from '../../Part4Card_UI/UITableFromObject';
 

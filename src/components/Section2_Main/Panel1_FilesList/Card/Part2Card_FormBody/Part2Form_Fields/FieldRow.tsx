@@ -1,13 +1,13 @@
 import React from 'react';
 import { SetStateAction, useAtom, useSetAtom } from 'jotai';
-import { FileUs, SelectRowAtomsType } from '@/store';
+import { FileUs, SelectRowAtomsType, SelectRowType } from '@/store';
+import { Mani, Meta } from '@/store/manifest';
 import { CardSvgPreview } from '../../Part3Card_Shared/CardSvgPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Part4Card_UI/UIToggleWithPortal';
 import { IconInOut, IconPreview, IconUseIt0, IconUseIt1 } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
-import { SelectRowType } from '@/store/store-types';
 
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;

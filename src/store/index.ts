@@ -5,6 +5,7 @@ export type {
     FileUsAtomType,
     FileUsFormData,
     SelectRowAtomsType,
+    SelectRowType,
 } from './store-types';
 
 export {
@@ -47,9 +48,14 @@ export {
 
 } from './store-ui-state';
 
+export type {
+    ManiOpenSections,
+} from './store-ui-right-panel';
+
 export {
     ViewMode,
     rightPanelData,
+    maniOpenSections,
 } from './store-ui-right-panel';
 
 export {

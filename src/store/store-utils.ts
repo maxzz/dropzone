@@ -1,5 +1,5 @@
 import { FileUs, FileUsStats, FormIdx } from './store-types';
-import { dpTimeToShow } from './manifest';
+import { dpTimeToShow, Meta } from './manifest';
 
 export function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {

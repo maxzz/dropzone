@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldPath } from '@/store/manifest';
+import { FieldPath, Meta } from '@/store/manifest';
 import { css } from '@/stitches.config';
 import { classNames } from '@/utils/classnames';
 

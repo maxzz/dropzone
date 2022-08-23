@@ -9,7 +9,7 @@ import { DropdownMenu } from '../../../../UI/nun/dmtest';
 import { classNames } from '@/utils/classnames';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 
-function Dropdown(items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
+function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
     return (
         <menu.Root>
             <menu.Trigger asChild>
@@ -62,7 +62,7 @@ function getCatalogName(catalogNames: string[], isPsw: boolean | undefined, dbid
 const catalogNo = "Not from catalog";
 const catalogMore = "More fields ...";
 
-function FieldCatalog({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+function FieldCatalog({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const catalogNames: string[] = []; //TODO: get catalog names atom for field type
     const catalogName = getCatalogName(catalogNames, field.mani.password, field.mani.dbname);
 
@@ -78,14 +78,16 @@ function FieldCatalog({ field, className, ...rest }: { field: Meta.Field; } & In
     const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
     const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
 
+    const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name
 
     return (
         <div
             className={classNames(
                 "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
-                "focus-within:ring-1 focus-within:ring-offset-1",
                 "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
+                "focus-within:ring-1 focus-within:ring-offset-1",
+                !useIt && "opacity-30 cursor-pointer",
                 className,
             )}
             {...rest}
@@ -100,12 +102,12 @@ function FieldCatalog({ field, className, ...rest }: { field: Meta.Field; } & In
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {Dropdown(items, selectedIndex, onSetIndex)}
+            {Dropdown(useItAtom, items, selectedIndex, onSetIndex)}
         </div>
     );
 }
 
-function FieldValue({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+function FieldValue({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
     const [text, setText] = useAtom(textAtom);
 
@@ -119,14 +121,16 @@ function FieldValue({ field, className, ...rest }: { field: Meta.Field; } & Inpu
     const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
     const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
 
+    const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from ValueLife
 
     return (
         <div
             className={classNames(
                 "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
-                "focus-within:ring-1 focus-within:ring-offset-1",
                 "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
+                "focus-within:ring-1 focus-within:ring-offset-1",
+                !useIt && "opacity-30 cursor-pointer",
                 className,
             )}
             {...rest}
@@ -141,21 +145,22 @@ function FieldValue({ field, className, ...rest }: { field: Meta.Field; } & Inpu
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {Dropdown(items, selectedIndex, onSetIndex)}
+            {Dropdown(useItAtom, items, selectedIndex, onSetIndex)}
         </div>
     );
 }
 
-function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
+function InputField({ useItAtom, valueAtom, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value, setValue] = useAtom(valueAtom);
+    const [useIt, setUseIt] = useAtom(useItAtom);
     return (
         <input
             className={classNames(
                 "px-2 py-3 h-8",
+                "bg-primary-700 text-primary-200 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400",
                 "focus:ring-1 focus:ring-offset-1",
-                "bg-primary-700 text-primary-200",
-                "focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400",
                 "outline-none rounded",
+                !useIt && "opacity-30 cursor-pointer",
                 className,
             )}
             value={value}
@@ -166,10 +171,11 @@ function InputField({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAto
     );
 }
 
-function FieldType({ field, className, ...rest }: { field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+function FieldType({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const { password, type = 'NOTYPE' } = field.mani;
+    const [useIt, setUseIt] = useAtom(useItAtom);
     return (
-        <div className={classNames("flex items-center space-x-0.5", className)} {...rest}>
+        <div className={classNames("flex items-center space-x-0.5", !useIt && "opacity-30 cursor-pointer", className)} {...rest}>
             <FormRowTypeIcon field={field.mani} className="w-5 h-5 text-primary-500" />
             <div className="text-primary-500">{`${password ? 'psw' : type}`}</div>
         </div>
@@ -193,7 +199,9 @@ function TableRow({ field }: { field: Meta.Field; }) {
     const [value, setValue] = useAtom(state.valueAtom);
     const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
 
-    const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
+    //const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
+    const enableRow = () => !useIt && setUseIt(true);
+
     return (<>
         <input
             className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded"
@@ -202,10 +210,10 @@ function TableRow({ field }: { field: Meta.Field; }) {
             onChange={() => setUseIt(v => !v)}
         />
 
-        <InputField className={rowClassName} valueAtom={state.labelAtom} placeholder="Label" />
-        <FieldCatalog className={rowClassName} field={field} />
-        <FieldValue className={rowClassName} field={field} />
-        <FieldType className={rowClassName} field={field} />
+        <InputField useItAtom={state.useItAtom} valueAtom={state.labelAtom} placeholder="Label" onClick={enableRow} />
+        <FieldCatalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <FieldValue useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <FieldType useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
 

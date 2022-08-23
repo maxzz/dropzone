@@ -1,5 +1,5 @@
 import React, { Fragment, ReactNode } from 'react';
-import { Transform } from '@/store/manifest';
+import { Meta, MPath, Transform } from '@/store/manifest';
 
 function Section({ label }: { label: ReactNode; }) {
     return (

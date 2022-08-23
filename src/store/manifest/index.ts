@@ -1,4 +1,9 @@
-export type { Mani, Meta, Catalog, MPath } from './mani';
+export type { 
+    Mani, 
+    Meta, 
+    Catalog, 
+    MPath 
+} from './mani';
 
 export type { parseOptions } from './mani-i';
 
