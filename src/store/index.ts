@@ -26,6 +26,14 @@ export {
     filteredAtom,
 } from './store-files';
 
+export type {
+    FieldCatalog,
+} from './store-file-catalog';
+
+export {
+    FieldCatalogItemsAtom,
+} from './store-file-catalog';
+
 export {
     showMani,
     totalMani,

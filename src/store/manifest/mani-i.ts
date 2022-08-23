@@ -71,7 +71,7 @@ export type ParseManifestResult = {
     fcat?: Catalog.Root;
 };
 
-export function parseManifest(cnt: string): ParseManifestResult {
+export function parseXMLFile(cnt: string): ParseManifestResult {
     const parser = new XMLParser(parseOptions);
     const obj = parser.parse(cnt); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
     return {

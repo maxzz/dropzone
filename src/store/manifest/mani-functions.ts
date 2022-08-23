@@ -1,4 +1,5 @@
-import { Mani, Meta, MPath } from './mani';
+import { FieldCatalog } from '../store-file-catalog';
+import { Catalog, Mani, Meta, MPath } from './mani';
 import { ValueAs, ValueLife } from './mani-refs';
 import { removeQuery, urlDomain } from './url';
 
@@ -375,6 +376,12 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         }
     });
     return forms;
+}
+
+export function buildCatalogMeta(fcat?: Catalog.Root | undefined): FieldCatalog {
+    return {
+        items: [],
+    };
 }
 
 // TODO: bailOut: add more checks and explanation why there are issues on each check.

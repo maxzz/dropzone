@@ -8,7 +8,7 @@ export type {
 export type { parseOptions } from './mani-i';
 
 export {
-    parseManifest,
+    parseXMLFile,
     Matching
 } from './mani-i';
 
@@ -18,6 +18,7 @@ export {
 
 export {
     buildManiMetaForms,
+    buildCatalogMeta,
     dpTimeToShow,
     FieldPath,
     Transform,

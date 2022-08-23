@@ -1,10 +1,11 @@
 import { atom } from 'jotai';
 import { uuid } from '@/utils/uuid';
+import { buildCatalogMeta, buildManiMetaForms, Catalog, Mani, Meta, parseXMLFile } from './manifest';
 import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from './store-types';
-import { buildManiMetaForms, Catalog, Mani, Meta, parseManifest } from './manifest';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';
 import { busyAtom, orderAtom, searchFilterData, showMani, sortByAtom, totalMani, _foldAllCardsAtom } from './store-ui-state';
 import { rightPanelData } from './store-ui-right-panel';
+import { FieldCatalogItemsAtom } from './store-file-catalog';
 
 // Files
 
@@ -148,10 +149,13 @@ const doUpdateCacheAtom = atom(
                     let fcat: Catalog.Root | undefined;
                     let meta: Meta.Form[] | undefined;
                     try {
-                        const res = parseManifest(raw);
+                        const res = parseXMLFile(raw);
                         mani = res.mani;
                         fcat = res.fcat;
                         meta = buildManiMetaForms(mani);
+
+                        const { items } = buildCatalogMeta(fcat);
+                        set(FieldCatalogItemsAtom, items);
                     } catch (error) {
                         console.log('%ctm parse error', 'color: red', error, '\n', file.fname, raw);
                     }
