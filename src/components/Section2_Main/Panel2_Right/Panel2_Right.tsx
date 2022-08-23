@@ -3,9 +3,9 @@ import { useAtomValue } from 'jotai';
 import { FileUsAtomType, rightPanelData, ViewMode } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Part1Card_Title';
+import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { ManiActions } from './ManiActions/ManiActions';
 import { BodyText } from './BodyText';
-import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { Editors } from './Editors';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {

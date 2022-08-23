@@ -9,8 +9,11 @@ import { Part2_Submit } from './Part2_Submit';
 import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
 
-function NoForm(label: string) {
-    return <div className="px-4 text-lg text-[#32ffdaa0]">{label}</div>;
+function NoForm(formType: FormIdx) {
+    const label = formType === FormIdx.login ? "No login form": "No password change form";
+    return <div className="px-4 text-lg text-[#32ffdaa0]">
+        {label}
+    </div>;
 }
 
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
@@ -49,55 +52,27 @@ function createFormOpenSections(): Atomize<ManiOpenSections> {
     };
 }
 
-function Form_Login({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
-    const [atoms] = useState(createFormOpenSections());
+function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const formType = FormIdx.login;
     const metaForm = fileUs.meta?.[formType];
-    return (!metaForm ? NoForm("No login form") :
-        <SubSection label={<div className="text-lg">Login</div>} openAtom={atoms.formAtom}>
+    const title = formType === FormIdx.login ? "Login": "Password change";
+    const openSections = useState(createFormOpenSections())[0];
+    return (!metaForm ? NoForm(formType) :
+        <SubSection label={<div className="text-lg">{title}</div>} openAtom={openSections.formAtom}>
 
-            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
+            <SubSection label="Fields" openAtom={openSections.fieldsAtom}>
                 <Part1_Fields fields={metaForm?.fields} />
             </SubSection>
 
-            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
+            <SubSection label="Submit options" openAtom={openSections.submitAtom}>
                 <Part2_Submit />
             </SubSection>
 
-            <SubSection label="Policy" openAtom={atoms.policyAtom}>
+            <SubSection label="Policy" openAtom={openSections.policyAtom}>
                 <Part3_Policy />
             </SubSection>
 
-            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
-                <Part4_FormOptions />
-            </SubSection>
-
-        </SubSection>
-    );
-}
-
-function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
-    const [atoms] = useState(createFormOpenSections());
-    const fileUs = useAtomValue(fileUsAtom);
-    const formType = FormIdx.cpass;
-    const metaForm = fileUs.meta?.[formType];
-    return (!metaForm ? NoForm("No password change form") :
-        <SubSection label={<div className="text-lg">Password change</div>} openAtom={atoms.formAtom}>
-
-            <SubSection label="Fields" openAtom={atoms.fieldsAtom}>
-                <Part1_Fields fields={metaForm?.fields} />
-            </SubSection>
-
-            <SubSection label="Submit options" openAtom={atoms.submitAtom}>
-                <Part2_Submit />
-            </SubSection>
-
-            <SubSection label="Policy" openAtom={atoms.policyAtom}>
-                <Part3_Policy />
-            </SubSection>
-
-            <SubSection label="Form options" openAtom={atoms.optionsAtom}>
+            <SubSection label="Form options" openAtom={openSections.optionsAtom}>
                 <Part4_FormOptions />
             </SubSection>
 
@@ -108,10 +83,8 @@ function Form_PChange({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
         <div className="min-w-[34rem]">
-            <Form_Login fileUsAtom={fileUsAtom} />
-            <Form_PChange fileUsAtom={fileUsAtom} />
-
-            {/* <se.SelectDemo /> */}
+            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.login}/>
+            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.cpass}/>
         </div>
     );
 }
