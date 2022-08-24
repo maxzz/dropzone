@@ -132,15 +132,14 @@ export namespace TransformValue {
         return vl;
     }
 
-    export function valueLife2Mani(vl: ValueLife, field: Mani.Field) {
+    export function valueLife2Mani(vl: ValueLife, field: Mani.Field): void {
         const { valueAs: va } = vl;
         va === ValueAs.askReuse
             ? (field.onetvalue = undefined, field.askalways = undefined)
             : va === ValueAs.askConfirm
                 ? (field.onetvalue = undefined, field.askalways = true)
                 : (field.onetvalue = true, field.askalways = true);
-        field.value = vl.value;
-        vl.isRef && (field.value = `@${field.value}`);
+        vl.value && (field.value = `${vl.isRef ? (vl.value[0] === '@' ? '@@' : '@') : ''}${vl.value}`);
     }
 
     //TODO: skip recording of '=== undefined' values
