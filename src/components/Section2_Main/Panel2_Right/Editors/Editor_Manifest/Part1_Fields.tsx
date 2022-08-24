@@ -109,7 +109,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
     const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
 
     const list = field.mani.password ? references.psw : references.txt;
-    const items = [...valueAsNames, '-', ...Object.values(list)];
+    const items = [...valueAsNames, '-', ...Object.values(list).map((item) => item.n)];
 
     const [inputText, setInputText] = useAtom(textAtom);
 

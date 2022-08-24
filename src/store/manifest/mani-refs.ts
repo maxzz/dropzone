@@ -90,7 +90,7 @@ export const enum ValueAs {
     askAlways,
 }
 
-export const valueAsNames = [ "Ask - Resuse", "Ask - Confirm", "Ask Always ", ];
+export const valueAsNames = ["Ask - Resuse", "Ask - Confirm", "Ask Always ",];
 
 
 export type ValueLife = {
@@ -100,20 +100,22 @@ export type ValueLife = {
     isPsw?: boolean;        // it comes from field.password, and not from ref @password (ref should reflect field type not opposite).
 };
 
-export type References = {
-    txt: Record<string, string>;
-    psw: Record<string, string>;
-}
+export type ReferenceItem = { i: number; n: string; };
 
-export const references = {
+export type References = {
+    txt: Record<string, ReferenceItem>;
+    psw: Record<string, ReferenceItem>;
+};
+
+export const references: References = {
     txt: {
-        name: "Windows User Name",
-        upnname: "Windows User Principal Name",
-        fullname: "Windows Domain\\User Name",
-        domain: "Windows Domain",
-        "e-mail": "Windows E-mail Address",
+        name: { i: 0, n: "Windows User Name" },
+        upnname: { i: 1, n: "Windows User Principal Name" },
+        fullname: { i: 2, n: "Windows Domain\\User Name" },
+        domain: { i: 3, n: "Windows Domain" },
+        "e-mail": { i: 4, n: "Windows E-mail Address" },
     },
     psw: {
-        password: "Windows User Password",
+        password: { i: 0, n: "Windows User Password" },
     },
 };
