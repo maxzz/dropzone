@@ -102,11 +102,12 @@ function FieldCatalog({ useItAtom, field, className, ...rest }: { useItAtom: Pri
     );
 }
 
-function FieldValue({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+
+    const [valueLife, setValueLife] = useAtom(valueLifeAtom);
+
     const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
     const [text, setText] = useAtom(textAtom);
-
-    const valueLife: ValueLife = TransformValue.valueLife4Mani(field.mani);
 
     const list = field.mani.password ? references.psw : references.txt;
     const items = [...valueAsNames, '-', ...Object.values(list)];
@@ -204,6 +205,8 @@ function TableRow({ field }: { field: Meta.Field; }) {
         typeAtom: atom(''),
         valueAtom: atom<string>(val || ''),
         valueAsAtom: atom(val),
+
+        valueLifeAtom: atom(TransformValue.valueLife4Mani(field.mani)),
     })[0];
 
     const [useIt, setUseIt] = useAtom(state.useItAtom);
@@ -226,7 +229,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
         <InputField useItAtom={state.useItAtom} valueAtom={state.labelAtom} placeholder="Label" onClick={enableRow} />
         <FieldCatalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
         
-        <FieldValue useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <FieldValue useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
         
         <FieldType useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
