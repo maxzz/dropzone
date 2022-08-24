@@ -107,36 +107,35 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
     const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
-    const [text, setText] = useAtom(textAtom);
 
     const list = field.mani.password ? references.psw : references.txt;
     const items = [...valueAsNames, '-', ...Object.values(list)];
 
-    const [selectedIndex, setSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
+    const [inputText, setInputText] = useAtom(textAtom);
 
-    function onSetIndex(idx: number) {
-        setText(items[idx]);
-        setSelectedIndex(idx);
-    }
+    const [dropdownSelectedIndex, setDropdownSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
 
     function onSetText(value: string) {
-        value
-            ? (setText(value), setSelectedIndex(-1))
-            : (setText(items[0]), setSelectedIndex(0));
+        setInputText(value ? value : items[0]);
+        setDropdownSelectedIndex(value ? -1 : 0);
+    }
+
+    function onSetDropdownIndex(idx: number) {
+        setInputText(items[idx]);
+        setDropdownSelectedIndex(idx);
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        ~selectedIndex && isKeyClearDefault(event.key) &&
-            (setText(''), setSelectedIndex(-1));
+        ~dropdownSelectedIndex && isKeyClearDefault(event.key) &&
+            (setInputText(''), setDropdownSelectedIndex(-1));
     }
 
     function onBlur() {
-        ~~selectedIndex && !text &&
-            onSetIndex(0);
+        ~~dropdownSelectedIndex && !inputText &&
+            onSetDropdownIndex(0);
     }
 
     const [useIt, setUseIt] = useAtom(useItAtom);
-    //TODO: map it to/from ValueLife
 
     return (
         <div
@@ -150,16 +149,18 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
             {...rest}
         >
             <input
-                className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
-                multiple
-                value={text}
+                className={classNames(
+                    "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
+                    ~dropdownSelectedIndex && "text-[0.6rem] !text-blue-400"
+                )} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
+                value={inputText}
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {Dropdown(useItAtom, items, selectedIndex, onSetIndex)}
+            {Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
         </div>
     );
 }
@@ -228,9 +229,9 @@ function TableRow({ field }: { field: Meta.Field; }) {
 
         <InputField useItAtom={state.useItAtom} valueAtom={state.labelAtom} placeholder="Label" onClick={enableRow} />
         <FieldCatalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
-        
+
         <FieldValue useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
-        
+
         <FieldType useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
