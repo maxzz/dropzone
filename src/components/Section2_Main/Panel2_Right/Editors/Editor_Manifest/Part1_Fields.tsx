@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
-import { Meta, references, valueAsNames } from '@/store/manifest';
+import { Meta, references, TransformValue, ValueAs, valueAsNames, ValueLife } from '@/store/manifest';
 import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
@@ -106,15 +106,33 @@ function FieldValue({ useItAtom, field, className, ...rest }: { useItAtom: Primi
     const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
     const [text, setText] = useAtom(textAtom);
 
+    const valueLife: ValueLife = TransformValue.valueLife4Mani(field.mani);
+
     const list = field.mani.password ? references.psw : references.txt;
     const items = [...valueAsNames, '-', ...Object.values(list)];
 
     const [selectedIndex, setSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
 
-    const onSetIndex = (idx: number) => (setText(items[idx]), setSelectedIndex(idx));
-    const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(items[0]), setSelectedIndex(0)));
-    const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
-    const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
+    function onSetIndex(idx: number) {
+        setText(items[idx]);
+        setSelectedIndex(idx);
+    }
+
+    function onSetText(value: string) {
+        value
+            ? (setText(value), setSelectedIndex(-1))
+            : (setText(items[0]), setSelectedIndex(0));
+    }
+
+    function onSetKey(event: React.KeyboardEvent) {
+        ~selectedIndex && isKeyClearDefault(event.key) &&
+            (setText(''), setSelectedIndex(-1));
+    }
+
+    function onBlur() {
+        ~~selectedIndex && !text &&
+            onSetIndex(0);
+    }
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from ValueLife
@@ -207,7 +225,9 @@ function TableRow({ field }: { field: Meta.Field; }) {
 
         <InputField useItAtom={state.useItAtom} valueAtom={state.labelAtom} placeholder="Label" onClick={enableRow} />
         <FieldCatalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        
         <FieldValue useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        
         <FieldType useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
