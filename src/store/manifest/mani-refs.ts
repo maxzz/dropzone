@@ -97,7 +97,7 @@ export type ValueLife = {
     valueAs: ValueAs;       // how to treat value from user
     value?: string;         // key in 'references' if started with '@' otherwise it's a constant value
     isRef?: boolean;        // true if value started with '@' but not '@@'
-    //isPsw?: boolean;        // true if @password
+    isPsw?: boolean;        // it comes from field.password, and not from ref @password (ref should reflect field type not opposite).
 };
 
 export type References = {
