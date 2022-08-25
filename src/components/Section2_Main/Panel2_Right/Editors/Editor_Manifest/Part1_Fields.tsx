@@ -149,55 +149,25 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 
     function onSetText(value: string) {
-        setValueLife((v) => ({
-            ...v,
-            value,
-            isRef: false,
-            valueAs: ValueAs.askReuse,
-            isNon: false,
-        }));
+        setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
     }
 
     function onSetDropdownIndex(idx: number) {
         if (idx >= 4) {
-            idx -= 4;
-            setValueLife((v) => ({
-                ...v,
-                value: idx2RefName(idx, isPsw),
-                isRef: true,
-                valueAs: ValueAs.askReuse,
-                isNon: false,
-            }));
+            setValueLife((v) => ({ ...v, value: idx2RefName(idx - 4, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
         } else {
-            setValueLife((v) => ({
-                ...v,
-                value: '',
-                isRef: false,
-                valueAs: idx,
-                isNon: false,
-            }));
+            setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
         }
     }
 
     function onSetKey(event: React.KeyboardEvent) {
         showAsRef && isKeyClearDefault(event.key) &&
-            setValueLife((v) => ({...v,
-                value: '',
-                isRef: false,
-                valueAs: ValueAs.askReuse,
-                isNon: true,
-            }));
+            setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: ValueAs.askReuse, isNon: true, }));
     }
 
     function onBlur() {
         showAsRef && !inputText &&
-            setValueLife((v) => ({
-                ...v,
-                value: '',
-                isRef: false,
-                valueAs: ValueAs.askReuse,
-                isNon: false,
-            }));
+            setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
     }
 
     return (
