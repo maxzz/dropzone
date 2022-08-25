@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
-import { Meta, references, TransformValue, ValueAs, valueAsNames, ValueLife } from '@/store/manifest';
+import { FieldTyp, Meta, references, TransformValue, ValueAs, valueAsNames, ValueLife } from '@/store/manifest';
 import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 import { classNames } from '@/utils/classnames';
@@ -184,14 +184,16 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
 
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
+    const isBtn = valueLife.fType !== FieldTyp.edit && valueLife.fType !== FieldTyp.psw
+    const isPsw = valueLife.fType === FieldTyp.psw;
 
     //const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
 
-    const list = valueLife.isBtn ? [] : valueLife.isPsw ? references.psw : references.txt;
-    const items = [...valueAsNames, ...(valueLife.isBtn ? [] : ['-']), ...Object.values(list).map((item) => item.n)];
+    const list = isBtn ? [] : isPsw ? references.psw : references.txt;
+    const items = [...valueAsNames, ...(isBtn ? [] : ['-']), ...Object.values(list).map((item) => item.n)];
 
     const inputText = valueLife.isRef
-        ? refName2Txt(valueLife.value, valueLife.isPsw)
+        ? refName2Txt(valueLife.value, isPsw)
         : valueLife.value
             ? valueLife.value
             : valueLife.isNon
@@ -199,7 +201,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
                 : valueAsNames[valueLife.valueAs];
 
     const dropdownSelectedIndex = valueLife.isRef
-        ? 4 + refName2Idx(valueLife.value, valueLife.isPsw)
+        ? 4 + refName2Idx(valueLife.value, isPsw)
         : valueLife.value
             ? -1
             : valueAs2Idx(valueLife.valueAs);
@@ -229,7 +231,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
             idx -= 4;
             setValueLife((v) => ({
                 ...v,
-                value: idx2RefName(idx, valueLife.isPsw),
+                value: idx2RefName(idx, isPsw),
                 isRef: true,
                 valueAs: ValueAs.askReuse,
                 isNon: false,

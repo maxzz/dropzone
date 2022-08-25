@@ -127,7 +127,8 @@ export namespace TransformValue {
                         ? ValueAs.askConfirm
                         : ValueAs.askAlways, // legal:(onetvalue && askalways) and illegal:(onetvalue && !askalways)
             ...(field.password && { isPsw: true }),
-            ...(field.type !== 'edit' && field.type !== 'combo' && { isBtn: true }),
+            //...(field.type !== 'edit' && field.type !== 'combo' && { isBtn: true }),
+            fType: fieldTyp4Str(field),
         };
         if (value) {
             vl.isRef = value?.[0] === '@';

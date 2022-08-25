@@ -98,9 +98,10 @@ export type ValueLife = {
     value?: string;         // key in 'references' if started with '@' otherwise it's a constant value
     isRef?: boolean;        // true if value started with '@' but not '@@'
 
-    isPsw?: boolean;        // it comes from field.password, and not from ref @password (ref should reflect field type not opposite).
+    fType?: FieldTyp;       // now it has type psw and edit/psw/rest information
+  //isPsw?: boolean;        // it comes from field.password, and not from ref @password (ref should reflect field type not opposite).
+  //isBtn?: boolean;        // any type but not edit or password
     isNon?: boolean;        // true when value is empty and valueAs is default AskReuse, but input cleared by user
-    isBtn?: boolean;        // any type but not edit or password
 };
 
 export type ReferenceItem = { i: number; n: string; };
