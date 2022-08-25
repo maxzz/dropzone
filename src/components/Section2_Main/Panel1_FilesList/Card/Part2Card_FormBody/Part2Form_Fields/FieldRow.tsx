@@ -15,7 +15,7 @@ function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
 }
 
-function part2_FieldType(type: Mani.FieldType | 'NOTYPE', field: Meta.Field) {
+function part2_FieldType(type: Mani.FieldTypeStr | 'NOTYPE', field: Meta.Field) {
     const { password } = field.mani;
     return (<>
         <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
@@ -51,7 +51,7 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
     );
 }
 
-function part4_DispText(useIt: boolean | undefined, type: Mani.FieldType | 'NOTYPE', displayname: string) {
+function part4_DispText(useIt: boolean | undefined, type: Mani.FieldTypeStr | 'NOTYPE', displayname: string) {
     return (
         <div className="flex-1 cursor-default whitespace-nowrap">
             {type === 'text'

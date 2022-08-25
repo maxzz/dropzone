@@ -19,7 +19,7 @@ export {
 export {
     buildManiMetaForms,
     buildCatalogMeta,
-    dpTimeToShow,
+    TimeUtils,
     FieldPath,
     Transform,
     TransformValue

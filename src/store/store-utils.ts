@@ -1,5 +1,5 @@
 import { FileUs, FileUsStats, FormIdx } from './store-types';
-import { dpTimeToShow, Meta } from './manifest';
+import { TimeUtils, Meta } from './manifest';
 
 export function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -121,8 +121,8 @@ export function fileUsStats(fileUs: FileUs): FileUsStats {
         title: loginForm?.options.choosename,
         isSubFolder: isSubFolder,
         subFolder: fileUs.fpath || '', // subFolder: hasSubFolders ? stripFirstFolder(fileUs.fpath) : fileUs.fpath || '',
-        dateCreated: dpTimeToShow(fileUs.mani?.descriptor?.created),
-        dateModified: dpTimeToShow(fileUs.mani?.descriptor?.modified),
+        dateCreated: TimeUtils.dpTimeToShow(fileUs.mani?.descriptor?.created),
+        dateModified: TimeUtils.dpTimeToShow(fileUs.mani?.descriptor?.modified),
     };
 }
 
