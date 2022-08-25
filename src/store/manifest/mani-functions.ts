@@ -123,6 +123,7 @@ export namespace TransformValue {
                         ? ValueAs.askConfirm
                         : ValueAs.askAlways, // legal:(onetvalue && askalways) and illegal:(onetvalue && !askalways)
             ...(field.password && { isPsw: true }),
+            ...(field.type !== 'edit' && { isBtn: true }),
         };
         if (value) {
             vl.isRef = value?.[0] === '@';

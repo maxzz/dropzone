@@ -188,7 +188,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
     //const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
 
     const list = valueLife.isPsw ? references.psw : references.txt;
-    const items = [...valueAsNames, '-', ...Object.values(list).map((item) => item.n)];
+    const items = [...valueAsNames, '-', ...Object.values(valueLife.isBtn ? [] : list).map((item) => item.n)];
 
     const inputText = valueLife.isRef
         ? refName2Txt(valueLife.value, valueLife.isPsw)
