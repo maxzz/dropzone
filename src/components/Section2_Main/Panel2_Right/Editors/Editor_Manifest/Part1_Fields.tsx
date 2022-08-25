@@ -184,13 +184,14 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
 
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
-    const isBtn = valueLife.fType !== FieldTyp.edit && valueLife.fType !== FieldTyp.psw
+    //const isBtn = valueLife.fType !== FieldTyp.edit && valueLife.fType !== FieldTyp.psw;
     const isPsw = valueLife.fType === FieldTyp.psw;
 
     //const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
 
-    const list = isBtn ? [] : isPsw ? references.psw : references.txt;
-    const items = [...valueAsNames, ...(isBtn ? [] : ['-']), ...Object.values(list).map((item) => item.n)];
+    const listArr = isPsw || valueLife.fType === FieldTyp.edit ? ['-', ...Object.values(references[isPsw ? 'psw' : 'txt']).map((item) => item.n)] : [];
+
+    const items = [...valueAsNames, ...listArr];
 
     const inputText = valueLife.isRef
         ? refName2Txt(valueLife.value, isPsw)

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SetStateAction, useAtom, useSetAtom } from 'jotai';
 import { FileUs, SelectRowAtomsType, SelectRowType } from '@/store';
-import { Mani, Meta } from '@/store/manifest';
+import { FieldTyp, Mani, Meta } from '@/store/manifest';
 import { CardSvgPreview } from '../../Part3Card_Shared/CardSvgPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
@@ -16,12 +16,12 @@ function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
 }
 
 function part2_FieldType(type: Mani.FieldTypeStr | 'NOTYPE', field: Meta.Field) {
-    const { password } = field.mani;
+    const password = field.ftyp === FieldTyp.psw ? 'psw' : type;
     return (<>
         <FormRowTypeIcon className="w-5 h-5 flex-none" field={field.mani} />
 
-        <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password ? 'psw' : type}`}>
-            {`${password ? 'psw' : type}`}
+        <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password}`}>
+            {`${password}`}
         </div>
     </>);
 }
