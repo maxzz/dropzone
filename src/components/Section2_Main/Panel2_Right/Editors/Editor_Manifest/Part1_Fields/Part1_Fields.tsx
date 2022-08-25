@@ -2,41 +2,10 @@ import React, { InputHTMLAttributes, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
 import { Meta, TransformValue } from '@/store/manifest';
 import { classNames } from '@/utils/classnames';
-import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/Part2Form_Fields/FieldRowTypeIcon';
-import { FieldValue } from './FieldValue';
-import { FieldCatalog } from './FieldCatalog';
-
-function InputField({ useItAtom, valueAtom, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
-    const [value, setValue] = useAtom(valueAtom);
-    const [useIt, setUseIt] = useAtom(useItAtom);
-    return (
-        <input
-            className={classNames(
-                "px-2 py-3 h-8",
-                "bg-primary-700 text-primary-200 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400",
-                "focus:ring-1 focus:ring-offset-1",
-                "outline-none rounded",
-                !useIt && "opacity-30 cursor-pointer",
-                className,
-            )}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            autoComplete="off" list="autocompleteOff" spellCheck={false}
-            {...rest}
-        />
-    );
-}
-
-function FieldType({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
-    const { password, type = 'NOTYPE' } = field.mani;
-    const [useIt, setUseIt] = useAtom(useItAtom);
-    return (
-        <div className={classNames("flex items-center space-x-0.5", !useIt && "opacity-30 cursor-pointer", className)} {...rest}>
-            <FormRowTypeIcon field={field.mani} className="w-5 h-5 text-primary-500" />
-            <div className="text-primary-500">{`${password ? 'psw' : type}`}</div>
-        </div>
-    );
-}
+import { Column4_Value } from './Column4_Value';
+import { Column3_Catalog } from './Column3_Catalog';
+import { Column5_Type } from './Column5_Type';
+import { Column2_Label } from './Column2_Label';
 
 function TableRow({ field }: { field: Meta.Field; }) {
     const { useit, displayname, type: typ, value: val } = field.mani;
@@ -68,12 +37,10 @@ function TableRow({ field }: { field: Meta.Field; }) {
             onChange={() => setUseIt(v => !v)}
         />
 
-        <InputField useItAtom={state.useItAtom} valueAtom={state.labelAtom} placeholder="Label" onClick={enableRow} />
-        <FieldCatalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
-
-        <FieldValue useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
-
-        <FieldType useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <Column2_Label useItAtom={state.useItAtom} valueAtom={state.labelAtom} onClick={enableRow} />
+        <Column3_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <Column4_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
+        <Column5_Type useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
 

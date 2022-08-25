@@ -20,7 +20,7 @@ function idx2RefName(v: number, isPsw: boolean | undefined) {
     return Object.keys(references[isPsw ? 'psw' : 'txt'])[v];
 }
 
-export function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);

@@ -1,13 +1,12 @@
 import React from 'react';
 import { PrimitiveAtom } from 'jotai';
 import { classNames } from '@/utils/classnames';
-import * as menu from '@radix-ui/react-dropdown-menu';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
+import * as menu from '@radix-ui/react-dropdown-menu';
 
 export function isKeyClearDefault(key: string) {
     return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
 }
-
 
 export function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
     return (

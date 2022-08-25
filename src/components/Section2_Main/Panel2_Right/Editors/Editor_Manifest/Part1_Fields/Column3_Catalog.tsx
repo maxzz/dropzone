@@ -8,7 +8,7 @@ import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 const catalogNo = "Not from catalog";
 const catalogMore = "More fields ...";
 
-export function FieldCatalog({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+export function Column3_Catalog({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const catalogNames = useAtomValue(FieldCatalogItemsAtom);
     const { name: catalogName, names } = getCatalogName(catalogNames, field.mani.password, field.mani.dbname); //TODO: might need memo
 
