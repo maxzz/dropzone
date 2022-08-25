@@ -187,8 +187,8 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
 
     //const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
 
-    const list = valueLife.isPsw ? references.psw : references.txt;
-    const items = [...valueAsNames, '-', ...Object.values(valueLife.isBtn ? [] : list).map((item) => item.n)];
+    const list = valueLife.isBtn ? [] : valueLife.isPsw ? references.psw : references.txt;
+    const items = [...valueAsNames, ...(valueLife.isBtn ? [] : ['-']), ...Object.values(list).map((item) => item.n)];
 
     const inputText = valueLife.isRef
         ? refName2Txt(valueLife.value, valueLife.isPsw)
@@ -225,7 +225,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
     }
 
     function onSetDropdownIndex(idx: number) {
-        if (idx > 3) {
+        if (idx >= 4) {
             idx -= 4;
             setValueLife((v) => ({
                 ...v,
