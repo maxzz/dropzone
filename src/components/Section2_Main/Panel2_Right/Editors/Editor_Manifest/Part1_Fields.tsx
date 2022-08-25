@@ -102,37 +102,175 @@ function FieldCatalog({ useItAtom, field, className, ...rest }: { useItAtom: Pri
     );
 }
 
+// function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+
+//     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
+
+//     const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
+
+//     const list = field.mani.password ? references.psw : references.txt;
+//     const items = [...valueAsNames, '-', ...Object.values(list).map((item) => item.n)];
+
+//     const [inputText, setInputText] = useAtom(textAtom);
+//     const [dropdownSelectedIndex, setDropdownSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
+
+//     function onSetText(value: string) {
+//         setInputText(value ? value : items[0]);
+//         setDropdownSelectedIndex(value ? -1 : 0);
+//     }
+
+//     function onSetDropdownIndex(idx: number) {
+//         setInputText(items[idx]);
+//         setDropdownSelectedIndex(idx);
+//     }
+
+//     function onSetKey(event: React.KeyboardEvent) {
+//         ~dropdownSelectedIndex && isKeyClearDefault(event.key) &&
+//             (setInputText(''), setDropdownSelectedIndex(-1));
+//     }
+
+//     function onBlur() {
+//         ~~dropdownSelectedIndex && !inputText &&
+//             onSetDropdownIndex(0);
+//     }
+
+//     const [useIt, setUseIt] = useAtom(useItAtom);
+
+//     return (
+//         <div
+//             className={classNames(
+//                 "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
+//                 "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
+//                 "focus-within:ring-1 focus-within:ring-offset-1",
+//                 !useIt && "opacity-30 cursor-pointer",
+//                 className,
+//             )}
+//             {...rest}
+//         >
+//             <input
+//                 className={classNames(
+//                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
+//                     ~dropdownSelectedIndex && "text-[0.6rem] !text-blue-400"
+//                 )} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
+//                 value={inputText}
+//                 onChange={(event) => onSetText(event.target.value)}
+//                 onKeyDown={onSetKey}
+//                 onBlur={onBlur}
+//                 autoComplete="off" list="autocompleteOff" spellCheck={false}
+//             />
+
+//             {Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
+//         </div>
+//     );
+// }
+
+function valueAs2Idx(v: ValueAs) {
+    return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
+}
+
+function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
+    return v ? references[isPsw ? 'psw' : 'txt'][v].i : -1;
+}
+
+function refName2Txt(v: string | undefined, isPsw: boolean | undefined) {
+    return v ? references[isPsw ? 'psw' : 'txt'][v].n : '';
+}
+
+function idx2RefName(v: number, isPsw: boolean | undefined) {
+    return Object.keys(references[isPsw ? 'psw' : 'txt'])[v];
+}
+
 function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
 
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
-    const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
 
-    const list = field.mani.password ? references.psw : references.txt;
+    //const textAtom = useState(atom(field.mani.value ? field.mani.value : valueAsNames[0]))[0];
+
+    const list = valueLife.isPsw ? references.psw : references.txt;
     const items = [...valueAsNames, '-', ...Object.values(list).map((item) => item.n)];
 
-    const [inputText, setInputText] = useAtom(textAtom);
+    const inputText = valueLife.isRef
+        ? refName2Txt(valueLife.value, valueLife.isPsw)
+        : valueLife.value
+            ? valueLife.value
+            : valueLife.isNon
+                ? ''
+                : valueAsNames[valueLife.valueAs];
 
-    const [dropdownSelectedIndex, setDropdownSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
+    const dropdownSelectedIndex = valueLife.isRef
+        ? 4 + refName2Idx(valueLife.value, valueLife.isPsw)
+        : valueLife.value
+            ? -1
+            : valueAs2Idx(valueLife.valueAs);
+
+    console.log(field.pidx, 'valueLife', valueLife, dropdownSelectedIndex, `text='${inputText}'`);
+
+    //const [inputText, setInputText] = useAtom(textAtom);
+    //const [dropdownSelectedIndex, setDropdownSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
+
+    const showAsRef = valueLife.isRef || !valueLife.value;
 
     function onSetText(value: string) {
-        setInputText(value ? value : items[0]);
-        setDropdownSelectedIndex(value ? -1 : 0);
+
+        setValueLife((v) => ({
+            ...v,
+            value,
+            isRef: false,
+            valueAs: ValueAs.askReuse,
+            isNon: false,
+        }));
+        //setInputText(value ? value : items[0]);
+        //setDropdownSelectedIndex(value ? -1 : 0);
     }
 
     function onSetDropdownIndex(idx: number) {
-        setInputText(items[idx]);
-        setDropdownSelectedIndex(idx);
+        if (idx > 3) {
+            idx -= 4;
+            setValueLife((v) => ({
+                ...v,
+                value: idx2RefName(idx, valueLife.isPsw),
+                isRef: true,
+                valueAs: ValueAs.askReuse,
+                isNon: false,
+            }));
+        } else {
+            setValueLife((v) => ({
+                ...v,
+                value: '',
+                isRef: false,
+                valueAs: idx,
+                isNon: false,
+            }));
+        }
+        // setInputText(items[idx]);
+        // setDropdownSelectedIndex(idx);
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        ~dropdownSelectedIndex && isKeyClearDefault(event.key) &&
-            (setInputText(''), setDropdownSelectedIndex(-1));
+        // ~dropdownSelectedIndex && isKeyClearDefault(event.key) &&
+        //     (setInputText(''), setDropdownSelectedIndex(-1));
+        showAsRef && isKeyClearDefault(event.key) &&
+            setValueLife((v) => ({
+                ...v,
+                value: '',
+                isRef: false,
+                valueAs: ValueAs.askReuse,
+                isNon: true,
+            }));
     }
 
     function onBlur() {
-        ~~dropdownSelectedIndex && !inputText &&
-            onSetDropdownIndex(0);
+        // ~~dropdownSelectedIndex && !inputText &&
+        //     onSetDropdownIndex(0);
+        showAsRef && !inputText &&
+            setValueLife((v) => ({
+                ...v,
+                value: '',
+                isRef: false,
+                valueAs: ValueAs.askReuse,
+                isNon: false,
+            }));
     }
 
     const [useIt, setUseIt] = useAtom(useItAtom);
@@ -151,7 +289,8 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
             <input
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
-                    ~dropdownSelectedIndex && "text-[0.6rem] !text-blue-400"
+                    //~dropdownSelectedIndex && "text-[0.6rem] !text-blue-400"
+                    showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400"
                 )} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 value={inputText}
                 onChange={(event) => onSetText(event.target.value)}
