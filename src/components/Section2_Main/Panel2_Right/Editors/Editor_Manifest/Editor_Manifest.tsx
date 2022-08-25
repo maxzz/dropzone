@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
-import { Part1_Fields } from './Part1_Fields';
+import { Part1_Fields } from './Part1_Fields/Part1_Fields';
 import { Part2_Submit } from './Part2_Submit';
 import { Part3_Policy } from './Part3_Policy';
 import { Part4_FormOptions } from './Part4_FormOptions';
