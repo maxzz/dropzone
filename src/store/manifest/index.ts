@@ -30,4 +30,4 @@ export {
 } from './xml-to-js';
 
 export type { ValueLife, References } from './mani-types';
-export { ValueAs, valueAsNames, references } from './mani-types';
+export { FieldTyp, ValueAs, valueAsNames, references } from './mani-types';

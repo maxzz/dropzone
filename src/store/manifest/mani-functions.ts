@@ -150,6 +150,13 @@ export namespace TransformValue {
     //TODO: skip recording of '=== undefined' values
 } //namespace TransformValue
 
+// FieldTyp convert
+
+function fieldTyp4Str(field: Mani.Field): FieldTyp {
+    let rv = FieldTyp[field.type] || FieldTyp.und;
+    return rv === FieldTyp.edit && field.password ? FieldTyp.psw : rv;
+}
+
 // Manifest specific functions
 
 function getPool(form: Mani.Form): string[] {
@@ -346,7 +353,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const pool: string[] = getPool(form) || [];
         const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field, idx: number) => ({
             mani: field,
-            ftyp: FieldTyp[field.type] || FieldTyp.und,
+            ftyp: fieldTyp4Str(field),
             life: TransformValue.valueLife4Mani(field),
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
             pidx: idx,

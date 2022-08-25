@@ -139,6 +139,9 @@ export const references: References = {
     }
 */
 
+/**
+ * Our UI internal type
+ */
 export enum FieldTyp { //type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo' | 'check' | 'radio' | 'text';
     und, // undefined
     edit,
@@ -148,4 +151,7 @@ export enum FieldTyp { //type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo
     check,
     radio,
     text,
+
+    psw, // combined value 'edit' and 'password'
 }
+
