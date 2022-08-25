@@ -182,6 +182,7 @@ function idx2RefName(v: number, isPsw: boolean | undefined) {
 
 function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
 
+    const [useIt, setUseIt] = useAtom(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
     //const isBtn = valueLife.fType !== FieldTyp.edit && valueLife.fType !== FieldTyp.psw;
@@ -213,6 +214,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
     //const [dropdownSelectedIndex, setDropdownSelectedIndex] = useState(field.mani.value ? -1 : 0); // TODO: instead of 0 find real ref
 
     const showAsRef = valueLife.isRef || !valueLife.value;
+    const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 
     function onSetText(value: string) {
 
@@ -276,8 +278,6 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
             }));
     }
 
-    const [useIt, setUseIt] = useAtom(useItAtom);
-
     return (
         <div
             className={classNames(
@@ -295,7 +295,7 @@ function FieldValue({ useItAtom, valueLifeAtom, field, className, ...rest }: { u
                     //~dropdownSelectedIndex && "text-[0.6rem] !text-blue-400"
                     showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400"
                 )} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
-                value={inputText}
+                value={showInputText ? '' : inputText}
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
