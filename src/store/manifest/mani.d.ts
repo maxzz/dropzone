@@ -1,9 +1,11 @@
-import { FieldTyp } from "./mani-functions";
-import { ValueLife } from "./mani-refs";
+import { FieldTyp, ValueLife } from "./mani-types";
 
+/**
+ * Object.entries() type support
+ */
 type Entries<T> = {
     [K in keyof T]: [K, T[K]];
-}[keyof T][]; // Object.entries() type support
+}[keyof T][];
 
 declare module Mani {
     type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo' | 'check' | 'radio' | 'text';
@@ -18,8 +20,8 @@ declare module Mani {
         value?: string;
         choosevalue?: string;
 
-        askalways?: boolean,     // "1"
-        onetvalue?: boolean,     // "1"
+        askalways?: boolean,    // "1"
+        onetvalue?: boolean,    // "1"
 
         password?: boolean,     // "1"
         useit?: boolean,        // "1"

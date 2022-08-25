@@ -29,5 +29,5 @@ export {
     convertToXml
 } from './xml-to-js';
 
-export type { ValueLife, References } from './mani-refs';
-export { ValueAs, valueAsNames, references } from './mani-refs';
+export type { ValueLife, References } from './mani-types';
+export { ValueAs, valueAsNames, references } from './mani-types';

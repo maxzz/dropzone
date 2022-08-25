@@ -1,18 +1,7 @@
 import { Catalog, Mani, Meta, MPath } from './mani';
-import { ValueAs, ValueLife } from './mani-refs';
+import { FieldTyp, ValueAs, ValueLife } from './mani-types';
 import { FieldCatalog } from '../store-file-catalog';
 import { removeQuery, urlDomain } from './url';
-
-export enum FieldTyp { //type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo' | 'check' | 'radio' | 'text';
-    und, // undefined
-    edit,
-    button,
-    list,
-    combo,
-    check,
-    radio,
-    text,
-}
 
 export namespace TimeUtils {
 
