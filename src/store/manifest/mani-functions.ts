@@ -3,6 +3,17 @@ import { ValueAs, ValueLife } from './mani-refs';
 import { FieldCatalog } from '../store-file-catalog';
 import { removeQuery, urlDomain } from './url';
 
+export enum FieldTyp { //type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo' | 'check' | 'radio' | 'text';
+    und, // undefined
+    edit,
+    button,
+    list,
+    combo,
+    check,
+    radio,
+    text,
+}
+
 export namespace TimeUtils {
 
     function fileTimeToDate(fileTime?: number | string): Date {
@@ -148,7 +159,7 @@ export namespace TransformValue {
     }
 
     //TODO: skip recording of '=== undefined' values
-}
+} //namespace TransformValue
 
 // Manifest specific functions
 
@@ -346,6 +357,7 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
         const pool: string[] = getPool(form) || [];
         const fields: Meta.Field[] = (form.fields || []).map((field: Mani.Field, idx: number) => ({
             mani: field,
+            ftyp: FieldTyp[field.type] || FieldTyp.und,
             life: TransformValue.valueLife4Mani(field),
             path: FieldPath.fieldPathItems(pool, field.path_ext || ''),
             pidx: idx,
