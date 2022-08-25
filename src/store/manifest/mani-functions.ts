@@ -128,7 +128,7 @@ export namespace TransformValue {
         if (value) {
             vl.isRef = value?.[0] === '@';
             vl.value = value?.replace(/^@/, '');
-            vl.isRef = !!vl.value && vl.value[0] !== '@'; // case for '@@'
+            vl.isRef = vl.isRef && !!vl.value && vl.value[0] !== '@'; // case for '@@'
         }
         return vl;
     }
