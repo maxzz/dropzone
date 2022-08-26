@@ -17,7 +17,7 @@ function refName2Txt(v: string | undefined, isPsw: boolean | undefined) {
 }
 
 function refName2Full(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? typeRefs(isPsw)[v].f : '';
+    return v ? typeRefs(isPsw)[v].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
 }
 
 function idx2RefName(v: number, isPsw: boolean | undefined) {
@@ -44,7 +44,7 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
 
     const items = [...valueAsNames, '-', ...values, ...listRefs];
     const itemIdxs = [...valueAsNames.map(() => 0), 0, ...values.map(() => idxValues), ...listRefs.map(() => idxRefs)];
-
+    
     items.at(-1) === '-' && items.pop();
 
     const inputText = valueLife.isRef
@@ -55,17 +55,19 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 ? ''
                 : valueAsNames[valueLife.valueAs];
 
-    const dropdownSelectedIndex = valueLife.isRef
-        ? 4 + refName2Idx(valueLife.value, isPsw)
-        : valueLife.value
-            ? -1
-            : valueAs2Idx(valueLife.valueAs);
+    const dropdownSelectedIndex =
+        valueLife.isRef
+            ? idxRefs + refName2Idx(valueLife.value, isPsw)
+            : valueLife.value
+                ? values.length
+                    ? idxValues + values.indexOf(valueLife.value)
+                    : -1
+                : valueAs2Idx(valueLife.valueAs);
 
-    console.log(field.pidx, 'valueLife', valueLife, dropdownSelectedIndex, `text='${inputText}'`);
+    //console.log(field.pidx, 'valueLife', valueLife, dropdownSelectedIndex, `text='${inputText}'`);
 
     const showAsRef = valueLife.isRef || !valueLife.value;
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
-
     const title = valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
 
     function onSetText(value: string) {
@@ -108,7 +110,7 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
                     showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400 cursor-default"
-                )} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
+                )}
                 value={showInputText ? '' : inputText}
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
