@@ -30,11 +30,16 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
     const isPsw = valueLife.fType === FieldTyp.psw;
+    const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.n) : [];
+    
+    const values = field.mani.choosevalue?.split(':') || [];
+    values.length && values.push('-');
 
-    const listArr = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.n) : [];
+    const idxValues = valueAsNames.length + 1;
+    const idxRefs = idxValues + values.length;
 
-    const items = [...valueAsNames, '-', ...listArr];
-    const itemIdxs = [...valueAsNames.map(() => 0), 0, ...listArr.map(() => 4)];
+    const items = [...valueAsNames, '-', ...values, ...listRefs];
+    const itemIdxs = [...valueAsNames.map(() => 0), 0, ...values.map(() => idxValues), ...listRefs.map(() => idxRefs)];
 
     items.at(-1) === '-' && items.pop();
 
@@ -62,8 +67,11 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     }
 
     function onSetDropdownIndex(idx: number) {
-        if (itemIdxs[idx] === 4) {
-            setValueLife((v) => ({ ...v, value: idx2RefName(idx - 4, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
+        if (itemIdxs[idx] === idxRefs) {
+            setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
+        } else
+        if (itemIdxs[idx] === idxValues) {
+            setValueLife((v) => ({ ...v, value: values[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
         } else {
             setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
         }
