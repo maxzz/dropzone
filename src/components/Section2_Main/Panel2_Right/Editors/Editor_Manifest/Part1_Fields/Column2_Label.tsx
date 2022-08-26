@@ -17,8 +17,11 @@ export function Column2_Label({ useItAtom, valueAtom, className, ...rest }: { us
             )}
             value={value}
             onChange={(event) => setValue(event.target.value)}
+            title={useIt ? "The label is shown to the user next to\nthe field for entering a value." : undefined}
             autoComplete="off" list="autocompleteOff" spellCheck={false}
             {...rest}
         />
     );
 }
+
+//TODO: add default text 'Give me a name' or 'No name, give me one';

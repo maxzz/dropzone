@@ -50,9 +50,6 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const items = [...listAskNames, ...listValues, ...listRefs];
     const itemIdxs = [...listAskNames.map(() => 0), 0, ...listValues.map(() => idxValues), ...listRefs.map(() => idxRefs)];
 
-    console.log('items', items);
-
-
     items.at(-1) === '-' && items.pop();
 
     const inputText = valueLife.isRef
@@ -73,8 +70,6 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                     ? idxValues + listValues.indexOf(valueLife.value)
                     : -1
                 : valueAs2Idx(valueLife.valueAs);
-
-    //console.log(field.pidx, 'valueLife', valueLife, dropdownSelectedIndex, `text='${inputText}'`);
 
     const showAsRef = valueLife.isRef || !valueLife.value;
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
