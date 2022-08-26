@@ -1,11 +1,12 @@
-import React, { InputHTMLAttributes, useState } from 'react';
-import { atom, PrimitiveAtom, useAtom } from 'jotai';
+import React, { useState } from 'react';
+import { atom, useAtom } from 'jotai';
 import { Meta, TransformValue } from '@/store/manifest';
 import { classNames } from '@/utils/classnames';
-import { Column4_Value } from './Column4_Value';
-import { Column3_Catalog } from './Column3_Catalog';
-import { Column5_Type } from './Column5_Type';
+import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
+import { Column3_Catalog } from './Column3_Catalog';
+import { Column4_Value } from './Column4_Value';
+import { Column5_Type } from './Column5_Type';
 
 function TableRow({ field }: { field: Meta.Field; }) {
     const { useit, displayname, type: typ, value: val } = field.mani;
@@ -30,13 +31,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
     const enableRow = () => !useIt && setUseIt(true);
 
     return (<>
-        <input
-            className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded"
-            type="checkbox"
-            checked={useIt}
-            onChange={() => setUseIt(v => !v)}
-        />
-
+        <Column1_UseIt useItAtom={state.useItAtom} />
         <Column2_Label useItAtom={state.useItAtom} valueAtom={state.labelAtom} onClick={enableRow} />
         <Column3_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
         <Column4_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
@@ -44,11 +39,13 @@ function TableRow({ field }: { field: Meta.Field; }) {
     </>);
 }
 
-const titles = ["Use it", "Label", "Catalog", "Value", "Type"];
+const columns = ["Use it", "Label", "Catalog", "Value", "Type"];
 function TableHeader() {
     return (<>
-        {titles.map((title, idx) => (
-            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b" key={idx}>{title}</div>
+        {columns.map((title, idx) => (
+            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b" key={idx}>
+                {title}
+            </div>
         ))}
     </>);
 }
@@ -62,7 +59,9 @@ export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) 
                     "bg-primary-800 text-primary-200 rounded-sm"
                 )}>
                     <TableHeader />
-                    {fields.map((field, idx) => <TableRow field={field} key={idx} />)}
+                    {fields.map((field, idx) => (
+                        <TableRow field={field} key={idx} />
+                    ))}
                 </div>
             </>
             : <div className="">no fields</div>
