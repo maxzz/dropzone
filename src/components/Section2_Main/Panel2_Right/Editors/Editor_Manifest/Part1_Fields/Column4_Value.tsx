@@ -31,9 +31,12 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
 
     const isPsw = valueLife.fType === FieldTyp.psw;
 
-    const listArr = isPsw || valueLife.fType === FieldTyp.edit ? ['-', ...Object.values(typeRefs(isPsw)).map((item) => item.n)] : [];
+    const listArr = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.n) : [];
 
-    const items = [...valueAsNames, ...listArr];
+    const items = [...valueAsNames, '-', ...listArr];
+    const itemIdxs = [...valueAsNames.map(() => 0), 0, ...listArr.map(() => 4)];
+
+    items.at(-1) === '-' && items.pop();
 
     const inputText = valueLife.isRef
         ? refName2Txt(valueLife.value, isPsw)
@@ -59,7 +62,7 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     }
 
     function onSetDropdownIndex(idx: number) {
-        if (idx >= 4) {
+        if (itemIdxs[idx] === 4) {
             setValueLife((v) => ({ ...v, value: idx2RefName(idx - 4, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
         } else {
             setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
