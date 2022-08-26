@@ -33,18 +33,26 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const [useIt, setUseIt] = useAtom(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
+    const isBtn = valueLife.fType === FieldTyp.button;
     const isPsw = valueLife.fType === FieldTyp.psw;
+
+    const listAskNames = isBtn ? [] : [...valueAsNames];
+    listAskNames.length && listAskNames.push('-');
+
+    const listValues = field.mani.choosevalue?.split(':') || [];
+    listValues.length && listValues.push('-');
+
     const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.f) : [];
 
-    const values = field.mani.choosevalue?.split(':') || [];
-    values.length && values.push('-');
+    const idxValues = listAskNames.length;
+    const idxRefs = idxValues + listValues.length;
 
-    const idxValues = valueAsNames.length + 1;
-    const idxRefs = idxValues + values.length;
+    const items = [...listAskNames, ...listValues, ...listRefs];
+    const itemIdxs = [...listAskNames.map(() => 0), 0, ...listValues.map(() => idxValues), ...listRefs.map(() => idxRefs)];
 
-    const items = [...valueAsNames, '-', ...values, ...listRefs];
-    const itemIdxs = [...valueAsNames.map(() => 0), 0, ...values.map(() => idxValues), ...listRefs.map(() => idxRefs)];
-    
+    console.log('items', items);
+
+
     items.at(-1) === '-' && items.pop();
 
     const inputText = valueLife.isRef
@@ -53,14 +61,16 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
             ? valueLife.value
             : valueLife.isNon
                 ? ''
-                : valueAsNames[valueLife.valueAs];
+                : isBtn
+                    ? ''
+                    : valueAsNames[valueLife.valueAs];
 
     const dropdownSelectedIndex =
         valueLife.isRef
             ? idxRefs + refName2Idx(valueLife.value, isPsw)
             : valueLife.value
-                ? values.length
-                    ? idxValues + values.indexOf(valueLife.value)
+                ? listValues.length
+                    ? idxValues + listValues.indexOf(valueLife.value)
                     : -1
                 : valueAs2Idx(valueLife.valueAs);
 
@@ -68,7 +78,8 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
 
     const showAsRef = valueLife.isRef || !valueLife.value;
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
-    const title = valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
+    const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
+    const title = disabled ? 'Buttons cannot have value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
 
     function onSetText(value: string) {
         setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
@@ -77,12 +88,11 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     function onSetDropdownIndex(idx: number) {
         if (itemIdxs[idx] === idxRefs) {
             setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
-        } else
-            if (itemIdxs[idx] === idxValues) {
-                setValueLife((v) => ({ ...v, value: values[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
-            } else {
-                setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
-            }
+        } else if (itemIdxs[idx] === idxValues) {
+            setValueLife((v) => ({ ...v, value: listValues[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
+        } else {
+            setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
+        }
     }
 
     function onSetKey(event: React.KeyboardEvent) {
@@ -115,11 +125,11 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
-                //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
+                disabled={disabled}
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
-            {Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
+            {!!items.length && Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
         </div>
     );
 }
