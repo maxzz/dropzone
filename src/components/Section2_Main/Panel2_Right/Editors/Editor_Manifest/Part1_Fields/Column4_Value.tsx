@@ -107,9 +107,9 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
+                readOnly={valueLife.fType === FieldTyp.list ? true : undefined}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
-
             {Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
         </div>
     );
