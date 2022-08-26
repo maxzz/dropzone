@@ -1,23 +1,27 @@
 import React, { InputHTMLAttributes } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
-import { FieldTyp, Meta, references, ValueAs, valueAsNames, ValueLife } from "@/store/manifest";
+import { FieldTyp, Meta, ReferenceItem, references, ValueAs, valueAsNames, ValueLife } from "@/store/manifest";
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils/classnames";
+
+function typeRefs(isPsw: boolean | undefined): Record<string, ReferenceItem> {
+    return references[isPsw ? 'psw' : 'txt'];
+}
 
 function valueAs2Idx(v: ValueAs) {
     return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
 }
 
 function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? references[isPsw ? 'psw' : 'txt'][v].i : -1;
+    return v ? typeRefs(isPsw)[v].i : -1;
 }
 
 function refName2Txt(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? references[isPsw ? 'psw' : 'txt'][v].n : '';
+    return v ? typeRefs(isPsw)[v].n : '';
 }
 
 function idx2RefName(v: number, isPsw: boolean | undefined) {
-    return Object.keys(references[isPsw ? 'psw' : 'txt'])[v];
+    return Object.keys(typeRefs(isPsw))[v];
 }
 
 export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
@@ -27,7 +31,7 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
 
     const isPsw = valueLife.fType === FieldTyp.psw;
 
-    const listArr = isPsw || valueLife.fType === FieldTyp.edit ? ['-', ...Object.values(references[isPsw ? 'psw' : 'txt']).map((item) => item.n)] : [];
+    const listArr = isPsw || valueLife.fType === FieldTyp.edit ? ['-', ...Object.values(typeRefs(isPsw)).map((item) => item.n)] : [];
 
     const items = [...valueAsNames, ...listArr];
 
@@ -99,3 +103,6 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
         </div>
     );
 }
+
+//TODO: add values to dropdown selection
+//TODO: move out value <-> index mappers
