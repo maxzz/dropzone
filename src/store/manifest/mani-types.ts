@@ -92,7 +92,6 @@ export const enum ValueAs {
 
 export const valueAsNames = ["Ask - Resuse", "Ask - Confirm", "Ask Always ",];
 
-
 export type ValueLife = {
     valueAs: ValueAs;       // how to treat value from user
     value?: string;         // key in 'references' if started with '@' otherwise it's a constant value
@@ -104,7 +103,7 @@ export type ValueLife = {
     isNon?: boolean;        // true when value is empty and valueAs is default AskReuse, but input cleared by user
 };
 
-export type ReferenceItem = { i: number; n: string; };
+export type ReferenceItem = { i: number; f: string; s: string; };
 
 export type References = {
     txt: Record<string, ReferenceItem>;
@@ -113,14 +112,14 @@ export type References = {
 
 export const references: References = {
     txt: {
-        name: { i: 0, n: "Windows User Name" },
-        upnname: { i: 1, n: "Windows User Principal Name" },
-        fullname: { i: 2, n: "Windows Domain\\User Name" },
-        domain: { i: 3, n: "Windows Domain" },
-        "e-mail": { i: 4, n: "Windows E-mail Address" },
+        name: { i: 0, f: "Windows User Name", s: "User Name" },
+        upnname: { i: 1, f: "Windows User Principal Name", s: "User Principal Name" },
+        fullname: { i: 2, f: "Windows Domain\\User Name", s: "Domain\\User Name" },
+        domain: { i: 3, f: "Windows Domain", s: "Windows Domain" },
+        "e-mail": { i: 4, f: "Windows E-mail Address", s: "Windows Email" },
     },
     psw: {
-        password: { i: 0, n: "Windows User Password" },
+        password: { i: 0, f: "Windows User Password", s: "Windows Password" },
     },
 };
 

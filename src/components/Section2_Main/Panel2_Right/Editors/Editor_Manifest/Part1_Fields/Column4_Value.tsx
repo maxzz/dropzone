@@ -4,12 +4,8 @@ import { FieldTyp, Meta, ReferenceItem, references, ValueAs, valueAsNames, Value
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils/classnames";
 
-function typeRefs(isPsw: boolean | undefined): Record<string, ReferenceItem> {
+function typeRefs(isPsw: boolean | undefined): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
     return references[isPsw ? 'psw' : 'txt'];
-}
-
-function valueAs2Idx(v: ValueAs) {
-    return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
 }
 
 function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
@@ -17,11 +13,19 @@ function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
 }
 
 function refName2Txt(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? typeRefs(isPsw)[v].n : '';
+    return v ? typeRefs(isPsw)[v].s : '';
+}
+
+function refName2Full(v: string | undefined, isPsw: boolean | undefined) {
+    return v ? typeRefs(isPsw)[v].f : '';
 }
 
 function idx2RefName(v: number, isPsw: boolean | undefined) {
     return Object.keys(typeRefs(isPsw))[v];
+}
+
+function valueAs2Idx(v: ValueAs) {
+    return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
 }
 
 export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueLifeAtom: PrimitiveAtom<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
@@ -30,8 +34,8 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
     const isPsw = valueLife.fType === FieldTyp.psw;
-    const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.n) : [];
-    
+    const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.f) : [];
+
     const values = field.mani.choosevalue?.split(':') || [];
     values.length && values.push('-');
 
@@ -62,6 +66,8 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const showAsRef = valueLife.isRef || !valueLife.value;
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 
+    const title = valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
+
     function onSetText(value: string) {
         setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
     }
@@ -70,11 +76,11 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
         if (itemIdxs[idx] === idxRefs) {
             setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
         } else
-        if (itemIdxs[idx] === idxValues) {
-            setValueLife((v) => ({ ...v, value: values[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
-        } else {
-            setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
-        }
+            if (itemIdxs[idx] === idxValues) {
+                setValueLife((v) => ({ ...v, value: values[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
+            } else {
+                setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
+            }
     }
 
     function onSetKey(event: React.KeyboardEvent) {
@@ -101,19 +107,17 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
             <input
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
-                    showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400"
+                    showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400 cursor-default"
                 )} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 value={showInputText ? '' : inputText}
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
-                readOnly={valueLife.fType === FieldTyp.list ? true : undefined}
+                //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
+                title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
             {Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
         </div>
     );
 }
-
-//TODO: add values to dropdown selection
-//TODO: move out value <-> index mappers
