@@ -76,9 +76,6 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
     const title = disabled ? 'Buttons have no state value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
 
-    console.log('disabled', disabled);
-
-
     function onSetText(value: string) {
         setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
     }
@@ -115,22 +112,16 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
             )}
             {...rest}
         >
-            <input type="text" disabled={true} />
             <input
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
-                    showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400 cursor-default"
+                    showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400 cursor-default",
+                    disabled && "pointer-events-none",
                 )}
                 value={showInputText ? '' : inputText}
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
-
-                //disabled={"disabled"}
-                //disabled="disabled"
-                disabled={true}
-                //disabled={disabled}
-                
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
