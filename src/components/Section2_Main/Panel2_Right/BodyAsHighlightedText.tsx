@@ -1,7 +1,7 @@
 import React from 'react';
 import { SyntaxHighlighterXml } from '@ui/Highlight/SyntaxHighlighter';
 
-export function BodyText({ text }: { text: string; }) {
+export function BodyAsHighlightedText({ text }: { text: string; }) {
     return (<>
         {/* Raw data preview (+ codemirror?) */}
         {/* 

@@ -4,7 +4,7 @@ import React from 'react';
 import { Editor_FieldCatalog } from './Editor_FieldCatalog/Editor_FieldCatalog';
 import { Editor_Manifest } from './Editor_Manifest/Editor_Manifest';
 
-export function Editors({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function BodyAsEditors({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
     return (
         !fileUs.meta

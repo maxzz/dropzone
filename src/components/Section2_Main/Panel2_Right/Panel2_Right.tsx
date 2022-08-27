@@ -5,8 +5,8 @@ import { classNames } from '@/utils/classnames';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Part1Card_Title';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { ManiActions } from './ManiActions/ManiActions';
-import { BodyText } from './BodyText';
-import { Editors } from './Editors';
+import { BodyAsHighlightedText } from './BodyAsHighlightedText';
+import { BodyAsEditors } from './BodyAsEditors';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom = useAtomValue(rightPanelData.panelAtom);
@@ -25,9 +25,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                     <div className="px-2 pt-1 pb-3 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
                         <CardTitleTextNormal
                             fileUsAtom={rightPanelData.valueAtom as FileUsAtomType}
-                            actions={<>
-                                {fileUsAtom && <ManiActions fileUsAtom={fileUsAtom} />}
-                            </>}
+                            actions={fileUsAtom && <ManiActions fileUsAtom={fileUsAtom} />}
                         />
                     </div>
 
@@ -38,8 +36,8 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                             : "text-xs text-primary-100",
                     )}>
                         {showRaw
-                            ? <BodyText text={rightPanelValue.raw || ''} />
-                            : <Editors fileUsAtom={fileUsAtom} />
+                            ? <BodyAsHighlightedText text={rightPanelValue.raw || ''} />
+                            : fileUsAtom && <BodyAsEditors fileUsAtom={fileUsAtom} />
                         }
                     </UISemiScrollbar>
                 </div>
