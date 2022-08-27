@@ -6,50 +6,40 @@ import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title/Pa
 import { Scroller } from './Scroller';
 import { ManiActions } from './ManiActions/ManiActions';
 import { BodyAsHighlightedText } from './BodyAsHighlightedText';
-import { BodyAsEditors } from './BodyAsEditors';
+import { Editor_FieldCatalog, Editor_Manifest } from './BodyAsEditors';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelData.panelAtom);
     const fileUs: FileUs | undefined = useAtomValue(rightPanelData.fileUsAtom);
-    const viewMode = useAtomValue(rightPanelData.viewModeAtom);
-
-    const canEditManifest = !!fileUsAtom;
-    const showRaw = viewMode === ViewMode.raw || (viewMode === ViewMode.edit && !canEditManifest);
-
+    const viewRawText = useAtomValue(rightPanelData.viewModeAtom) === ViewMode.raw;
     return (
         <div className={classNames("flex-auto pt-2 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>
-            {fileUs &&
+            {fileUsAtom && fileUs &&
                 <div className="w-full h-full flex flex-col">
 
                     {/* Card title */}
                     <div className="px-2 pt-1 pb-3 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
                         <CardTitleTextNormal
-                            fileUsAtom={rightPanelData.fileUsAtom as FileUsAtomType}
-                            actions={fileUsAtom && <ManiActions fileUsAtom={fileUsAtom} />}
+                            fileUsAtom={fileUsAtom}
+                            actions={<ManiActions fileUsAtom={fileUsAtom} />}
                         />
                     </div>
 
-                    {showRaw
+                    {viewRawText
                         ?
                         <Scroller className="font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default">
                             <BodyAsHighlightedText text={fileUs.raw || ''} />
                         </Scroller>
-                        :
-                        <Scroller className="text-xs text-primary-100">
-                            {fileUsAtom && <BodyAsEditors fileUsAtom={fileUsAtom} />}
-                        </Scroller>
+                        : fileUs.fcat
+                            ?
+                            <Scroller className="text-xs text-primary-100">
+                                <Editor_FieldCatalog fileUsAtom={fileUsAtom} />
+                            </Scroller>
+                            :
+                            <Scroller className="text-xs text-primary-100">
+                                <Editor_Manifest fileUsAtom={fileUsAtom} />
+                            </Scroller>
                     }
-
-                    {/* <Scroller className={
-                        showRaw
-                            ? "font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default"
-                            : "text-xs text-primary-100"
-                    }>
-                        {showRaw
-                            ? <BodyAsHighlightedText text={fileUs.raw || ''} />
-                            : fileUsAtom && <BodyAsEditors fileUsAtom={fileUsAtom} />
-                        }
-                    </Scroller> */}
 
                 </div>
             }
