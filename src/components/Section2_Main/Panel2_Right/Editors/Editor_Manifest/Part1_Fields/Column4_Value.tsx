@@ -48,7 +48,9 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const idxRefs = idxValues + listValues.length;
 
     const items = [...listAskNames, ...listValues, ...listRefs];
-    const itemIdxs = [...listAskNames.map(() => 0), 0, ...listValues.map(() => idxValues), ...listRefs.map(() => idxRefs)];
+    const itemIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxValues), ...listRefs.map(() => idxRefs)];
+
+    //console.log('items', items);
 
     items.at(-1) === '-' && items.pop();
 
@@ -71,6 +73,8 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                     : -1
                 : valueAs2Idx(valueLife.valueAs);
 
+    console.log(field.pidx, 'valueLife', valueLife, 'idx', dropdownSelectedIndex, `text='${inputText}'`);
+
     const showAsRef = valueLife.isRef || !valueLife.value;
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
     const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
@@ -81,9 +85,14 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     }
 
     function onSetDropdownIndex(idx: number) {
-        if (itemIdxs[idx] === idxRefs) {
+        const groupIdx = itemIdxs[idx];
+        console.log('onSetDropdownIndex idx', idx, 'groupIdx = ', groupIdx);
+        
+        if (groupIdx === idxRefs) {
             setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
-        } else if (itemIdxs[idx] === idxValues) {
+        } else if (groupIdx === idxValues) {
+            console.log('idxValues', idxValues, `listValues = '${listValues[idx - idxValues]}' indexOf()=${listValues.indexOf(listValues[idx - idxValues])}`);
+
             setValueLife((v) => ({ ...v, value: listValues[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
         } else {
             setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
