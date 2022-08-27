@@ -24,3 +24,4 @@ export function Editor_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType
 
 //TODO: # of items
 //TODO: sort controls
+//TODO: separate edit/psw and buttons

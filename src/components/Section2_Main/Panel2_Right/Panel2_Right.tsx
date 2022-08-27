@@ -8,6 +8,14 @@ import { ManiActions } from './ManiActions/ManiActions';
 import { BodyAsHighlightedText } from './BodyAsHighlightedText';
 import { BodyAsEditors } from './BodyAsEditors';
 
+function Scroller({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <UISemiScrollbar className={classNames("px-2 pt-1 pb-4 overflow-auto w-full h-full", className)} {...rest}>
+            {children}
+        </UISemiScrollbar>
+    );
+}
+
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom = useAtomValue(rightPanelData.panelAtom);
     const rightPanelValue = useAtomValue(rightPanelData.valueAtom);
@@ -29,17 +37,17 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         />
                     </div>
 
-                    <UISemiScrollbar className={classNames(
-                        "px-2 pt-1 pb-4 overflow-auto w-full h-full",
+                    <Scroller className={
                         showRaw
                             ? "font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default"
-                            : "text-xs text-primary-100",
-                    )}>
+                            : "text-xs text-primary-100"
+                    }>
                         {showRaw
                             ? <BodyAsHighlightedText text={rightPanelValue.raw || ''} />
                             : fileUsAtom && <BodyAsEditors fileUsAtom={fileUsAtom} />
                         }
-                    </UISemiScrollbar>
+                    </Scroller>
+
                 </div>
             }
         </div>
