@@ -22,17 +22,19 @@ export function Editor_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType
             </div>
 
             <Scroller className="pt-2 text-xs text-primary-100">
-                <div className="grid grid-cols-[1fr_auto_auto_auto_auto_1fr] gap-x-4 text-primary-400">
+                <div className="grid grid-cols-[1fr_auto_auto_auto_1fr] gap-x-4 text-primary-400">
                     <div className="col-start-2 mb-2 text-[.65rem] text-right text-primary-400 border-primary-100 border-b select-none">#</div>
-                    <div className="col-start-3 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">Type</div>
-                    <div className="col-start-4 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">Name</div>
-                    <div className="col-start-5 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">ID</div>
+                    {/* <div className="col-start-3 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">Type</div> */}
+                    <div className="col-start-3 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">Name</div>
+                    <div className="col-start-4 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">ID</div>
                     {names.map((item, idx) => (
                         <Fragment key={idx}>
                             <div className="col-start-2 text-right">{idx + 1}</div>
-                            <div className="col-start-32">{FieldIcon(item.password, "w-4 h-4 opacity-50")}</div>
-                            <div className="col-start-4">{item.dispname}</div>
-                            <div className="col-start-5 font-mono text-[.6rem]">{item.dbname}</div>
+                            <div className="col-start-3 flex items-center gap-x-2 leading-[18px]">
+                                {FieldIcon(item.password, "w-4 h-4 opacity-25")}
+                                <div className="">{item.dispname}</div>
+                            </div>
+                            <div className="col-start-4 font-mono text-[.6rem]">{item.dbname}</div>
                         </Fragment>
                     ))}
                 </div>
