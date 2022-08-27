@@ -43,7 +43,7 @@ const columns = ["Use it", "Label", "Catalog", "Value", "Type"];
 function TableHeader() {
     return (<>
         {columns.map((title, idx) => (
-            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b" key={idx}>
+            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none" key={idx}>
                 {title}
             </div>
         ))}

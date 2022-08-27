@@ -122,6 +122,8 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
+                readOnly={disabled}
+                disabled={disabled}
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
