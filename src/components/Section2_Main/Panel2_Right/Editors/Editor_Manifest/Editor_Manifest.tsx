@@ -3,10 +3,10 @@ import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
-import { Part1_Fields } from './Part1_Fields/Part1_Fields';
-import { Part2_Submit } from './Part2_Submit';
-import { Part3_Policy } from './Part3_Policy';
-import { Part4_FormOptions } from './Part4_FormOptions';
+import { Section1_Fields } from './Section1_Fields/Section1_Fields';
+import { Section2_Submit } from './Section2_Submit';
+import { Section3_Policy } from './Section3_Policy';
+import { Section4_FormOptions } from './Section4_FormOptions';
 
 function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";
@@ -42,19 +42,19 @@ function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formT
         <SubSection label={<div className="text-lg">{title}</div>} openAtom={openSections.formAtom}>
 
             <SubSection label="Fields" openAtom={openSections.fieldsAtom}>
-                <Part1_Fields fields={metaForm?.fields} />
+                <Section1_Fields fields={metaForm?.fields} />
             </SubSection>
 
             <SubSection label="Submit options" openAtom={openSections.submitAtom}>
-                <Part2_Submit />
+                <Section2_Submit />
             </SubSection>
 
             <SubSection label="Policy" openAtom={openSections.policyAtom}>
-                <Part3_Policy />
+                <Section3_Policy />
             </SubSection>
 
             <SubSection label="Form options" openAtom={openSections.optionsAtom}>
-                <Part4_FormOptions />
+                <Section4_FormOptions />
             </SubSection>
 
         </SubSection>

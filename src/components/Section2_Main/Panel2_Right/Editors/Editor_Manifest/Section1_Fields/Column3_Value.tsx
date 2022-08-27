@@ -28,7 +28,7 @@ function valueAs2Idx(v: ValueAs) {
     return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
 }
 
-export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);

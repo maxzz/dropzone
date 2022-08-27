@@ -4,8 +4,8 @@ import { Meta, TransformValue } from '@/store/manifest';
 import { classNames } from '@/utils/classnames';
 import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
-import { Column3_Catalog } from './Column3_Catalog';
-import { Column4_Value } from './Column4_Value';
+import { Column3_Value } from './Column3_Value';
+import { Column4_Catalog } from './Column4_Catalog';
 import { Column5_Type } from './Column5_Type';
 
 function TableRow({ field }: { field: Meta.Field; }) {
@@ -33,8 +33,8 @@ function TableRow({ field }: { field: Meta.Field; }) {
     return (<>
         <Column1_UseIt useItAtom={state.useItAtom} />
         <Column2_Label useItAtom={state.useItAtom} valueAtom={state.labelAtom} onClick={enableRow} />
-        <Column4_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
-        <Column3_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <Column3_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
+        <Column4_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
         <Column5_Type useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
@@ -57,7 +57,7 @@ function TableHeader() {
     </>);
 }
 
-export function Part1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
+export function Section1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
     return (<>
         {fields
             ? <>

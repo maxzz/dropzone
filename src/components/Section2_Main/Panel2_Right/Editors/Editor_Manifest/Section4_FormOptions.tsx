@@ -30,7 +30,7 @@ function PasswordManagerIcon({ }: {}) {
     </>);
 }
 
-export function Part4_FormOptions({ }: {}) {
+export function Section4_FormOptions({ }: {}) {
     return (<>
         <div className="">General</div>
         <div className="">Quick link</div>
