@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { atom, useAtom } from 'jotai';
-import { Meta, TransformValue } from '@/store/manifest';
+import { FieldTyp, Meta, TransformValue } from '@/store/manifest';
 import { classNames } from '@/utils/classnames';
 import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
@@ -58,15 +58,16 @@ function TableHeader() {
 }
 
 export function Section1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
+    const ourFields = fields?.filter((field) => field.ftyp !== FieldTyp.button);
     return (<>
-        {fields
+        {ourFields?.length
             ? <>
                 <div className={classNames(
                     "p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-x-1 gap-y-1",
                     "bg-primary-800 text-primary-200 rounded-sm"
                 )}>
                     <TableHeader />
-                    {fields.map((field, idx) => (
+                    {ourFields.map((field, idx) => (
                         <TableRow field={field} key={idx} />
                     ))}
                 </div>
