@@ -10,7 +10,7 @@ import { BodyAsEditors } from './BodyAsEditors';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelData.panelAtom);
-    const fileUs: FileUs | undefined = useAtomValue(rightPanelData.valueAtom);
+    const fileUs: FileUs | undefined = useAtomValue(rightPanelData.fileUsAtom);
     const viewMode = useAtomValue(rightPanelData.viewModeAtom);
 
     const canEditManifest = !!fileUsAtom;
@@ -24,12 +24,23 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                     {/* Card title */}
                     <div className="px-2 pt-1 pb-3 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
                         <CardTitleTextNormal
-                            fileUsAtom={rightPanelData.valueAtom as FileUsAtomType}
+                            fileUsAtom={rightPanelData.fileUsAtom as FileUsAtomType}
                             actions={fileUsAtom && <ManiActions fileUsAtom={fileUsAtom} />}
                         />
                     </div>
 
-                    <Scroller className={
+                    {showRaw
+                        ?
+                        <Scroller className="font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default">
+                            <BodyAsHighlightedText text={fileUs.raw || ''} />
+                        </Scroller>
+                        :
+                        <Scroller className="text-xs text-primary-100">
+                            {fileUsAtom && <BodyAsEditors fileUsAtom={fileUsAtom} />}
+                        </Scroller>
+                    }
+
+                    {/* <Scroller className={
                         showRaw
                             ? "font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default"
                             : "text-xs text-primary-100"
@@ -38,7 +49,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                             ? <BodyAsHighlightedText text={fileUs.raw || ''} />
                             : fileUsAtom && <BodyAsEditors fileUsAtom={fileUsAtom} />
                         }
-                    </Scroller>
+                    </Scroller> */}
 
                 </div>
             }

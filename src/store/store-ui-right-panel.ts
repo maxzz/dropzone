@@ -11,14 +11,14 @@ export const enum ViewMode {
 
 type RightPanelData = {
     panelAtom: PrimitiveAtom<FileUsAtomType | undefined>;
-    valueAtom: Atom<FileUs | undefined>;
+    fileUsAtom: Atom<FileUs | undefined>;
     viewModeAtom: PrimitiveAtom<ViewMode>;
 };
 
 export const rightPanelData: RightPanelData = {
     panelAtom: atom<FileUsAtomType | undefined>(undefined),
 
-    valueAtom: atom<FileUs | undefined>(
+    fileUsAtom: atom<FileUs | undefined>(
         (get) => {
             const rpa = get(rightPanelData.panelAtom);
             return rpa ? get(rpa) : undefined;
