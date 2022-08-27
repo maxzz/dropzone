@@ -33,17 +33,24 @@ function TableRow({ field }: { field: Meta.Field; }) {
     return (<>
         <Column1_UseIt useItAtom={state.useItAtom} />
         <Column2_Label useItAtom={state.useItAtom} valueAtom={state.labelAtom} onClick={enableRow} />
-        <Column3_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
         <Column4_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
+        <Column3_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
         <Column5_Type useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
 
-const columns = ["Use it", "Label", "Catalog", "Value", "Type"];
+const columns = ["Use it", "Label", "Value", "Shared ID (Catalog)", "Type"];
+const columnHints = [
+    "Use this field or not",
+    "The label is shown to the user next to\nthe field for entering a value",
+    "Specifies the value to fill out the field\nand how it is stored",
+    "The Shared ID determines whether the value\nwill be shared through the field catalog",
+    "Type of field"
+];
 function TableHeader() {
     return (<>
         {columns.map((title, idx) => (
-            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none" key={idx}>
+            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none" title={columnHints[idx]} key={idx}>
                 {title}
             </div>
         ))}
