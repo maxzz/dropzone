@@ -50,8 +50,6 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const items = [...listAskNames, ...listValues, ...listRefs];
     const itemIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxValues), ...listRefs.map(() => idxRefs)];
 
-    //console.log('items', items);
-
     items.at(-1) === '-' && items.pop();
 
     const inputText = valueLife.isRef
@@ -73,12 +71,13 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                     : -1
                 : valueAs2Idx(valueLife.valueAs);
 
-    console.log(field.pidx, 'valueLife', valueLife, 'idx', dropdownSelectedIndex, `text='${inputText}'`);
-
     const showAsRef = valueLife.isRef || !valueLife.value;
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
     const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
-    const title = disabled ? 'Buttons cannot have value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
+    const title = disabled ? 'Buttons have no state value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
+
+    console.log('disabled', disabled);
+
 
     function onSetText(value: string) {
         setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
@@ -86,13 +85,9 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
 
     function onSetDropdownIndex(idx: number) {
         const groupIdx = itemIdxs[idx];
-        console.log('onSetDropdownIndex idx', idx, 'groupIdx = ', groupIdx);
-        
         if (groupIdx === idxRefs) {
             setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
         } else if (groupIdx === idxValues) {
-            console.log('idxValues', idxValues, `listValues = '${listValues[idx - idxValues]}' indexOf()=${listValues.indexOf(listValues[idx - idxValues])}`);
-
             setValueLife((v) => ({ ...v, value: listValues[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
         } else {
             setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
@@ -120,6 +115,7 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
             )}
             {...rest}
         >
+            <input type="text" disabled={true} />
             <input
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
@@ -129,7 +125,12 @@ export function Column4_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 onChange={(event) => onSetText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
-                disabled={disabled}
+
+                //disabled={"disabled"}
+                //disabled="disabled"
+                disabled={true}
+                //disabled={disabled}
+                
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
