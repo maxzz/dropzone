@@ -32,9 +32,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         </Scroller>
                         : fileUs.fcat
                             ?
-                            <Scroller className="text-xs text-primary-100">
                                 <Editor_FieldCatalog fileUsAtom={fileUsAtom} />
-                            </Scroller>
                             :
                             <Scroller className="text-xs text-primary-100">
                                 <Editor_Manifest fileUsAtom={fileUsAtom} />
