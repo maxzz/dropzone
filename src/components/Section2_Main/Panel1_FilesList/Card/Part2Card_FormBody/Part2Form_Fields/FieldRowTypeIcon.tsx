@@ -2,7 +2,7 @@ import React from 'react';
 import { Mani } from '@/store/manifest';
 import { IconFieldBtn, IconFieldTxt, IconFieldChk, IconFieldLst, IconFieldPsw, IconFieldEdt } from '@ui/UIIconSymbols';
 
-const fieldIcons = {
+export const fieldIcons = {
     edit: IconFieldEdt,
     psw: IconFieldPsw,
     check: IconFieldChk,
