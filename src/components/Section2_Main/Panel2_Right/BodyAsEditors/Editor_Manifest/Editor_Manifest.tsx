@@ -25,11 +25,12 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
             </div>
         </div>
 
-        <UIAccordion open={open}>
+        {children}
+        {/* <UIAccordion open={open}>
             <div className="ml-4 pt-2 pb-4">
                 {children}
             </div>
-        </UIAccordion>
+        </UIAccordion> */}
     </>);
 }
 

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, HTMLAttributes, useMemo, useState } from 'react';
 import { FieldTyp, Meta } from '@/store/manifest';
-import { atom, useAtom } from 'jotai';
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 
 type RadioButtonProps = {
     label: string;
@@ -30,8 +30,13 @@ function RadioButton({ label, groupName, value, checked, onChange, ...rest }: Ra
     );
 }
 
-function RadioGroup({ items, groupName, selected, setSelected }: { items: string[]; groupName: string; selected: number, setSelected: (v: number) => void; }) {
+function RadioGroup({ items, groupName, selected, setSelected, selectAtom }: {
+    items: string[]; groupName: string; selected: number, setSelected: (v: number) => void;
+    selectAtom: PrimitiveAtom<number>;
+}) {
     console.log(`group render: selected=${selected}`);
+
+    const [select, setSelect] = useAtom(selectAtom);
 
     return (
         <div
@@ -39,10 +44,12 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
         //onChange={(v: ChangeEvent<HTMLInputElement>) => setSelected(+v.target.value)}
         >
             {items.map((item, idx) => (
-                <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => {
+                // <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => {
+                <RadioButton groupName={groupName} value={idx} checked={select === idx} label={item} key={idx} onChange={() => {
                     console.log(`DOM selected change: selected=${idx}`);
 
-                    setSelected(idx);
+                    //setSelected(idx);
+                    setSelect(idx);
                 }} />
                 // <RadioButton groupName={groupName} value={idx} checked={value === idx} label={item} key={idx} />
             ))}
@@ -51,7 +58,7 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
 }
 
 
-export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; idd: string }) {
+export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; idd: string; }) {
     const isWeb = !!form?.mani.detection.web_ourl;
 
     const [valueAtom] = useState(atom(0));
@@ -60,7 +67,7 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
     const [value, setValue] = useAtom(valueAtom);
 
     console.log(`%crender main idd=${idd} atom=%c'${valueAtom}'%c selected=${value} form ${(form?.mani?.detection?.web_ourl || '').substring(0, 30)}`, 'color: green', 'color: royalblue', 'color: gray');
-    
+
     function setValue2(v: number) {
         console.log(`setValue2: selected=${v} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: royalblue', 'color: gray');
         setValue(v);
@@ -76,14 +83,14 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
         initialSelected++;
 
         console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
-        //setValue2(initialSelected);
+        setValue2(initialSelected);
         return { initialSelected, ourFieldNames };
     }, [form]);
 
     const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
 
     return (<>
-        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} selected={value} setSelected={setValue2} />
+        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} selected={value} setSelected={setValue2} selectAtom={valueAtom} />
 
         {/* <div className="">Do Not Submit</div>
 
