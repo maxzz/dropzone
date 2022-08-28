@@ -1,4 +1,4 @@
-import React, { ChangeEvent, HTMLAttributes, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useMemo, useState } from 'react';
 import { FieldTyp, Meta } from '@/store/manifest';
 import { atom, useAtom } from 'jotai';
 
@@ -44,13 +44,17 @@ function RadioGroup({ items, groupName, value, setValue }: { items: string[]; gr
 export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
     const isWeb = !!form?.mani.detection.web_ourl;
 
-    let initialSelected = -1;
-    const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
-    const ourFieldNames = ourFields?.map((field, idx) => {
-        field.mani.useit && (initialSelected = idx);
-        return field.mani.displayname || 'no name';
-    });
-    initialSelected++;
+    const { initialSelected, ourFieldNames } = useMemo(() => {
+        let initialSelected = -1;
+        const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
+        const ourFieldNames = ourFields?.map((field, idx) => {
+            field.mani.useit && (initialSelected = idx);
+            return field.mani.displayname || 'no name';
+        });
+        initialSelected++;
+        console.log('re-cals', initialSelected);
+        return { initialSelected, ourFieldNames };
+    }, [form]);
 
     console.log('form', form, initialSelected);
 
