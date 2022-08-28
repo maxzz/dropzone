@@ -40,8 +40,11 @@ function RadioGroup({ items, groupName, value, setValue }: { items: string[]; gr
 
 export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
     const isWeb = !!form?.mani.detection.web_ourl;
-    const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button);
-    const items = ['Do Not Submit', ...(ourFields?.map((field) => field.mani.displayname || 'no name') || [])];
+    const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
+    const ourFieldNames = ourFields?.map((field) => field.mani.displayname || 'no name');
+
+    const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
+
     const [value, setValue] = useAtom(useState(atom(0))[0]);
     return (<>
         <RadioGroup items={items} groupName={`submit${form?.type}`} value={value} setValue={setValue} />
