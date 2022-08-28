@@ -34,7 +34,7 @@ function RadioGroup({ items, groupName, value, setValue }: { items: string[]; gr
             onChange={(v: ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
         >
             {items.map((item, idx) => (
-                <RadioButton groupName={groupName} value={0} checked={value === 0} label={item} key={idx} />
+                <RadioButton groupName={groupName} value={idx} checked={value === idx} label={item} key={idx} />
             ))}
         </div>
     );
@@ -43,12 +43,20 @@ function RadioGroup({ items, groupName, value, setValue }: { items: string[]; gr
 
 export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
     const isWeb = !!form?.mani.detection.web_ourl;
+
+    let initialSelected = -1;
     const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
-    const ourFieldNames = ourFields?.map((field) => field.mani.displayname || 'no name');
+    const ourFieldNames = ourFields?.map((field, idx) => {
+        field.mani.useit && (initialSelected = idx);
+        return field.mani.displayname || 'no name';
+    });
+    initialSelected++;
+
+    console.log('form', form, initialSelected);
 
     const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
 
-    const [value, setValue] = useAtom(useState(atom(0))[0]);
+    const [value, setValue] = useAtom(useState(atom(initialSelected))[0]);
     return (<>
         <RadioGroup items={items} groupName={`submit-form-${form?.type}`} value={value} setValue={setValue} />
 
