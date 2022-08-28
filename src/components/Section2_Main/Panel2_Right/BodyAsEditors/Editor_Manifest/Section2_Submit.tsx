@@ -11,15 +11,12 @@ type RadioButtonProps = {
 
 function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonProps) {
     return (
-        <label className="h-6 flex items-center space-x-1.5" {...rest}>
+        <label className="h-6 flex items-center space-x-3 select-none" {...rest}>
             <input
-                className="w-4 h-4 form-radio 
-                text-purple-800 bg-yellow-800 
-                ring-1 focus:ring-1 ring-orange-600
-                focus:ring-offset-red-800
-                "
-                //
-                //focus:ring-primary-400 
+                className="w-4 h-4 form-radio
+                text-primary-800 bg-primary-800 border-none
+                ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-500 checked:ring-primary-600 focus:ring-offset-primary-800
+                transition-shadow"
                 type="radio"
                 value={value}
                 defaultChecked={checked}
