@@ -1,4 +1,4 @@
-import React, { ChangeEvent, HTMLAttributes, useMemo, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useEffect, useMemo, useState } from 'react';
 import { FieldTyp, Meta } from '@/store/manifest';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 
@@ -81,13 +81,28 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
     //         return field.mani.displayname || 'no name';
     //     });
     //     initialSelected++;
-
     //     console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
     //     setValue2(initialSelected);
     //     return { initialSelected, ourFieldNames };
     // }, [form]);
 
-    const { initialSelected, ourFieldNames } = (() => {
+    // const { initialSelected, ourFieldNames } = (() => {
+    //     let initialSelected = -1;
+    //     const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
+    //     const ourFieldNames = ourFields?.map((field, idx) => {
+    //         field.mani.useit && (initialSelected = idx);
+    //         return field.mani.displayname || 'no name';
+    //     });
+    //     initialSelected++;
+    //     console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
+    //     setValue2(initialSelected);
+    //     return { initialSelected, ourFieldNames };
+    // })();
+
+    //https://github.com/facebook/react/issues/18178 'Bug: too hard to fix "Cannot update a component from inside the function body of a different component." #18178'
+    const [ourFieldNames, setOurFieldNames] = useState<string[]>([]);
+
+    useEffect(() => {
         let initialSelected = -1;
         const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
         const ourFieldNames = ourFields?.map((field, idx) => {
@@ -95,11 +110,11 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
             return field.mani.displayname || 'no name';
         });
         initialSelected++;
-
         console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
         setValue2(initialSelected);
-        return { initialSelected, ourFieldNames };
-    })();
+        setOurFieldNames(ourFieldNames);
+        //return { initialSelected, ourFieldNames };
+    }, [form]);
 
     const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
 
