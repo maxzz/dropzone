@@ -37,7 +37,7 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
     );
 }
 
-export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; idd: string; }) {
+export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
     const [selected, setSelected] = useState(0);
     const [items, setitems] = useState<string[]>([]);
 
@@ -46,12 +46,12 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
 
         let initialSelected = -1;
         const buttons = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
-        const buttonNames = buttons?.map((field, idx) => {
+        const buttonNames = isWeb ? [] : buttons?.map((field, idx) => {
             field.mani.useit && (initialSelected = idx);
             return field.mani.displayname || 'no name';
         });
         initialSelected++;
-        
+
         setitems(['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : buttonNames)]);
         setSelected(initialSelected);
     }, [form]);
