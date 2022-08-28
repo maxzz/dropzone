@@ -73,7 +73,21 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
         setValue(v);
     }
 
-    const { initialSelected, ourFieldNames } = useMemo(() => {
+    // const { initialSelected, ourFieldNames } = useMemo(() => {
+    //     let initialSelected = -1;
+    //     const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
+    //     const ourFieldNames = ourFields?.map((field, idx) => {
+    //         field.mani.useit && (initialSelected = idx);
+    //         return field.mani.displayname || 'no name';
+    //     });
+    //     initialSelected++;
+
+    //     console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
+    //     setValue2(initialSelected);
+    //     return { initialSelected, ourFieldNames };
+    // }, [form]);
+
+    const { initialSelected, ourFieldNames } = (() => {
         let initialSelected = -1;
         const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
         const ourFieldNames = ourFields?.map((field, idx) => {
@@ -85,7 +99,7 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
         console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
         setValue2(initialSelected);
         return { initialSelected, ourFieldNames };
-    }, [form]);
+    })();
 
     const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
 
