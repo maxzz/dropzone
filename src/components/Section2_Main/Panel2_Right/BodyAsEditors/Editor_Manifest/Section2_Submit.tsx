@@ -51,18 +51,20 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
 }
 
 
-export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
+export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; idd: string }) {
     const isWeb = !!form?.mani.detection.web_ourl;
 
     const [valueAtom] = useState(atom(0));
-    const [value, setValue] = useAtom(valueAtom);
-    function setValue2(v: number) {
-        console.log(`setValue2: selected=${v} atom=%c'${valueAtom}'%c`, 'color: royalblue', 'color: gray');
+    console.log(`%cSection2_Submit entry idd=${idd} atom=%c'${valueAtom}'%c`, 'color: pink', 'color: royalblue', 'color: gray');
 
+    const [value, setValue] = useAtom(valueAtom);
+
+    console.log(`%crender main idd=${idd} atom=%c'${valueAtom}'%c selected=${value} form ${(form?.mani?.detection?.web_ourl || '').substring(0, 30)}`, 'color: green', 'color: royalblue', 'color: gray');
+    
+    function setValue2(v: number) {
+        console.log(`setValue2: selected=${v} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: royalblue', 'color: gray');
         setValue(v);
     }
-
-    console.log(`render main atom=%c'${valueAtom}'%c selected=${value} form ${(form?.mani?.detection?.web_ourl || '').substring(0, 30)}`, 'color: royalblue', 'color: gray');
 
     const { initialSelected, ourFieldNames } = useMemo(() => {
         let initialSelected = -1;
@@ -72,8 +74,9 @@ export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
             return field.mani.displayname || 'no name';
         });
         initialSelected++;
-        console.log(`%cinitial reCal: select=${initialSelected} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
-        setValue2(initialSelected);
+
+        console.log(`%cinitial reCal: select=${initialSelected} idd=${idd} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
+        //setValue2(initialSelected);
         return { initialSelected, ourFieldNames };
     }, [form]);
 

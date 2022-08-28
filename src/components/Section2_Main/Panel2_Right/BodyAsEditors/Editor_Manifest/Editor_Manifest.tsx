@@ -46,7 +46,7 @@ function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formT
             </SubSection>
 
             <SubSection label="Submit options" openAtom={openSections.submitAtom}>
-                <Section2_Submit form={metaForm} />
+                <Section2_Submit form={metaForm} idd={fileUs.id} />
             </SubSection>
 
             <SubSection label="Policy" openAtom={openSections.policyAtom}>
