@@ -29,7 +29,7 @@ function RadioButton({ label, groupName, value, checked, onChange, ...rest }: Ra
 
 function RadioGroup({ items, groupName, selected, setSelected }: { items: string[]; groupName: string; selected: number, setSelected: (v: number) => void; }) {
     return (
-        <div className="px-3 py-2 max-w-max flex flex-col space-y-1 bg-primary-800 rounded">
+        <div className="px-3 py-2 max-w-max min-w-[14rem] flex flex-col space-y-1 bg-primary-800 rounded">
             {items.map((item, idx) => (
                 <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => setSelected(idx)} />
             ))}
@@ -42,6 +42,8 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
     const [items, setitems] = useState<string[]>([]);
 
     useEffect(() => {
+        const isWeb = !!form?.mani.detection.web_ourl;
+
         let initialSelected = -1;
         const buttons = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
         const buttonNames = buttons?.map((field, idx) => {
@@ -49,12 +51,9 @@ export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; id
             return field.mani.displayname || 'no name';
         });
         initialSelected++;
-
-        const isWeb = !!form?.mani.detection.web_ourl;
-        const final = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : buttonNames)];
-
+        
+        setitems(['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : buttonNames)]);
         setSelected(initialSelected);
-        setitems(final);
     }, [form]);
 
     return (
