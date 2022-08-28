@@ -1,6 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 import { FieldTyp, Meta } from '@/store/manifest';
-import { atom, useAtom } from 'jotai';
 
 type RadioButtonProps = {
     label: string;
@@ -39,27 +38,26 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
 }
 
 export function Section2_Submit({ form, idd }: { form: Meta.Form | undefined; idd: string; }) {
-    const isWeb = !!form?.mani.detection.web_ourl;
-
-    const [valueAtom] = useState(atom(0));
-    const [value, setValue] = useAtom(valueAtom);
-    const [ourFieldNames, setOurFieldNames] = useState<string[]>([]);
+    const [selected, setSelected] = useState(0);
+    const [items, setitems] = useState<string[]>([]);
 
     useEffect(() => {
         let initialSelected = -1;
-        const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
-        const ourFieldNames = ourFields?.map((field, idx) => {
+        const buttons = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
+        const buttonNames = buttons?.map((field, idx) => {
             field.mani.useit && (initialSelected = idx);
             return field.mani.displayname || 'no name';
         });
         initialSelected++;
-        setValue(initialSelected);
-        setOurFieldNames(ourFieldNames);
+
+        const isWeb = !!form?.mani.detection.web_ourl;
+        const final = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : buttonNames)];
+
+        setSelected(initialSelected);
+        setitems(final);
     }, [form]);
 
-    const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
-
     return (
-        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} selected={value} setSelected={setValue} />
+        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} selected={selected} setSelected={setSelected} />
     );
 }
