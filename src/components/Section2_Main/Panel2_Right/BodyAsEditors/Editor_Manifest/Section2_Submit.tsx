@@ -7,19 +7,22 @@ type RadioButtonProps = {
     groupName?: string;
     value?: number;
     checked: boolean;
-} & HTMLAttributes<HTMLLabelElement>;
+} & HTMLAttributes<HTMLElement>;
 
-function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonProps) {
+function RadioButton({ label, groupName, value, checked, onChange, ...rest }: RadioButtonProps) {
+    console.log('radio render', value, checked);
     return (
         <label className="h-6 flex items-center space-x-3 select-none" {...rest}>
             <input
                 className="w-4 h-4 form-radio
-                text-primary-800 bg-primary-800 border-none
+                text-primary-700 bg-primary-800 border-none
                 ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-500 checked:ring-primary-600 focus:ring-offset-primary-800
                 transition-shadow"
                 type="radio"
                 value={value}
-                defaultChecked={checked}
+                checked={checked}
+                onChange={onChange}
+                //defaultChecked={checked}
                 {...(groupName && { name: groupName })}
             />
             <div >{label}</div>
@@ -27,14 +30,21 @@ function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonP
     );
 }
 
-function RadioGroup({ items, groupName, value, setValue }: { items: string[]; groupName: string; value: number, setValue: (v: number) => void; }) {
+function RadioGroup({ items, groupName, selected, setSelected }: { items: string[]; groupName: string; selected: number, setSelected: (v: number) => void; }) {
+    console.log('group render', selected);
+
     return (
         <div
             className="px-3 py-2 max-w-max flex flex-col space-y-1 bg-primary-800 rounded"
-            onChange={(v: ChangeEvent<HTMLInputElement>) => setValue(+v.target.value)}
+        //onChange={(v: ChangeEvent<HTMLInputElement>) => setSelected(+v.target.value)}
         >
             {items.map((item, idx) => (
-                <RadioButton groupName={groupName} value={idx} checked={value === idx} label={item} key={idx} />
+                <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => {
+                    console.log('selected change',idx);
+                    
+                    setSelected(idx);
+                }} />
+                // <RadioButton groupName={groupName} value={idx} checked={value === idx} label={item} key={idx} />
             ))}
         </div>
     );
@@ -44,6 +54,16 @@ function RadioGroup({ items, groupName, value, setValue }: { items: string[]; gr
 export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
     const isWeb = !!form?.mani.detection.web_ourl;
 
+    const [valueAtom] = useState(atom(0));
+    const [value, setValue] = useAtom(valueAtom);
+    function setValue2(v: number) {
+        console.log('setValue2', v, 'atom', `${valueAtom}`);
+        
+        setValue(v);
+    }
+
+    console.log(`render main atom=%c'${valueAtom}'%c value=${value} form ${(form?.mani?.detection?.web_ourl || '').substring(0, 30)}`, 'color: royalblue', 'color: gray');
+
     const { initialSelected, ourFieldNames } = useMemo(() => {
         let initialSelected = -1;
         const ourFields = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
@@ -52,17 +72,15 @@ export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
             return field.mani.displayname || 'no name';
         });
         initialSelected++;
-        console.log('re-cals', initialSelected);
+        console.log(`%cinitial reCal: select=${initialSelected} atom=%c'${valueAtom}'%c`, 'color: orange', 'color: royalblue', 'color: gray');
+        setValue2(initialSelected);
         return { initialSelected, ourFieldNames };
     }, [form]);
 
-    console.log('form', form, initialSelected);
-
     const items = ['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : ourFieldNames)];
 
-    const [value, setValue] = useAtom(useState(atom(initialSelected))[0]);
     return (<>
-        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} value={value} setValue={setValue} />
+        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} selected={value} setSelected={setValue2} />
 
         {/* <div className="">Do Not Submit</div>
 
