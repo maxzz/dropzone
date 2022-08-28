@@ -44,12 +44,12 @@ function RadioGroup({ items, groupName, selected, setSelected, selectAtom }: {
         //onChange={(v: ChangeEvent<HTMLInputElement>) => setSelected(+v.target.value)}
         >
             {items.map((item, idx) => (
-                // <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => {
-                <RadioButton groupName={groupName} value={idx} checked={select === idx} label={item} key={idx} onChange={() => {
+                <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => {
+                //<RadioButton groupName={groupName} value={idx} checked={select === idx} label={item} key={idx} onChange={() => {
                     console.log(`DOM selected change: selected=${idx}`);
 
-                    //setSelected(idx);
-                    setSelect(idx);
+                    setSelected(idx);
+                    //setSelect(idx);
                 }} />
                 // <RadioButton groupName={groupName} value={idx} checked={value === idx} label={item} key={idx} />
             ))}
