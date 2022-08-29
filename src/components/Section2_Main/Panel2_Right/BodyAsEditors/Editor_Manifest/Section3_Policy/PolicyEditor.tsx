@@ -6,6 +6,13 @@ function EditorBody() {
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
 
+            <div className="flex items-center justify-between">
+                <div className="text-lg">Policy Editor</div>
+                <Dialog.Close>
+                    <div className="px-4 p-1 bg-primary-700 rounded" tabIndex={-1}>x</div>
+                </Dialog.Close>
+            </div>
+
             <h1>Specify password complexity, history and generation requirements.</h1>
             <label>
                 <input type="checkbox" />
@@ -65,7 +72,11 @@ function EditorBody() {
                 <label className="block"> <input type="radio" /> By system </label>
             </div>
 
-            <Dialog.Close>close</Dialog.Close>
+            <Dialog.Close>
+                <div className="px-4 py-3 inline-block border-primary-500 active:scale-[.97] border rounded select-none">
+                    Close
+                </div>
+            </Dialog.Close>
         </div>
     );
 }
@@ -73,10 +84,10 @@ function EditorBody() {
 export function PolicyEditor() {
     const [open, setOpen] = React.useState(false);
     const transitions = useTransition(open, {
-        from: { opacity: 0, y: -200 },
-        enter: { opacity: 1, y: 0 },
-        leave: { opacity: 0, y: 200 },
-        config: config.wobbly,
+        from: { opacity: 0, y: -10, scale: 0.97 },
+        enter: { opacity: 1, y: 0, scale: 1 },
+        leave: { opacity: 0, y: 10, scale: 0.97 },
+        config: config.stiff,
     });
     return (<>
         <Dialog.Root open={open} onOpenChange={setOpen}>
