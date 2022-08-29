@@ -15,7 +15,8 @@ declare module Mani {
         type: FieldTypeStr;
         dbname?: string;
         path_ext?: string;
-        policy?: string;
+        policy?: string;        // this is standard rule: "[p4]g:8:8:withspecial:different_ap"
+        policy2?: string;       // this is custom rule like: "[e1]g:(a{4,4}d{2,2}A{1,1}[@#$%!]{1,1})&lt;8,8&gt;"; both can present at the same time
 
         value?: string;
         choosevalue?: string;
