@@ -4,7 +4,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 function EditorBody() {
     return (
-        <div className="flex flex-col space-y-4 bg-primary-800">
+        <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
+
             <h1>Specify password complexity, history and generation requirements.</h1>
             <label>
                 <input type="checkbox" />
@@ -15,7 +16,7 @@ function EditorBody() {
             <div className="space-y-4">
                 <div className="">
                     <label className="block"> <input type="radio" />Predefined rule</label>
-                    <select className="text-primary-800" value={4} onChange={() => { }}>
+                    <select className="px-2 py-1 text-primary-800" value={4} onChange={() => { }}>
                         <option value="1">Letters and numbers</option>
                         <option value="2">Numbers only</option>
                         <option value="3">letters only</option>
@@ -51,7 +52,7 @@ function EditorBody() {
             </div>
 
             <h2>History</h2>
-            <select className="text-primary-800" value={2} onChange={() => { }}>
+            <select className="px-2 py-1 text-primary-800" value={2} onChange={() => { }}>
                 <option value="0">None</option>
                 <option value="1">Different than the Windows password</option>
                 <option value="2">Unique within Password Manager logons</option>
@@ -72,29 +73,31 @@ function EditorBody() {
 export function PolicyEditor() {
     const [open, setOpen] = React.useState(false);
     const transitions = useTransition(open, {
-        from: { opacity: 0, y: -10 },
+        from: { opacity: 0, y: -200 },
         enter: { opacity: 1, y: 0 },
-        leave: { opacity: 0, y: 10 },
+        leave: { opacity: 0, y: 200 },
         config: config.stiff,
     });
     return (<>
         <Dialog.Root open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger>Open Dialog</Dialog.Trigger>
+            <Dialog.Trigger className="px-4 py-3 border-primary-500 active:scale-[.97] border rounded select-none">
+                Open Dialog
+            </Dialog.Trigger>
+
             {transitions((styles, item) =>
                 item ? (<>
-                    <Dialog.Overlay forceMount asChild>
-                        <a.div
-                            style={{
-                                opacity: styles.opacity,
-                            }}
-                        />
-                    </Dialog.Overlay>
+                    <Dialog.Portal container={document.getElementById('portal')}>
+                        <Dialog.Overlay forceMount asChild className="fixed inset-0 bg-primary-900/80">
+                            <a.div style={{ opacity: styles.opacity, }} />
+                        </Dialog.Overlay>
 
-                    <Dialog.Content forceMount asChild>
-                        <a.div style={styles}>
-                        <EditorBody />
-                        </a.div>
-                    </Dialog.Content>
+                        <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
+                            <a.div style={styles}>
+                                <EditorBody />
+                            </a.div>
+                        </Dialog.Content>
+
+                    </Dialog.Portal>
                 </>) : null
             )}
         </Dialog.Root>
