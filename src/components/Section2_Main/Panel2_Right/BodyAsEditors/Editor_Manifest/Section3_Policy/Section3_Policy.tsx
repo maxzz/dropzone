@@ -26,8 +26,14 @@ function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<str
 
 function FieldWithPolicy({ field }: { field: Meta.Field; }) {
     return (<>
-        <div className="">{field.mani.policy}</div>
-        {field.mani.policy2 && <div className="">{field.mani.policy2}</div>}
+        <div className="">{field.mani.displayname || 'no name'}</div>
+        <div className="">
+            <div className="">{field.mani.policy}</div>
+            {field.mani.policy2 && <div className="">{field.mani.policy2}</div>}
+        </div>
+        <div className="">
+            <PolicyEditor />
+        </div>
     </>);
 }
 
@@ -46,26 +52,13 @@ export function Section3_Policy({ fileUsAtom, formType }: { fileUsAtom: FileUsAt
     }
     */
 
-    return (
-        <>
-            {!policies?.length
-                ? <div className="">Policy not specified</div>
-                :
-                <div className="">
-                    {policies.map((field, idx) => (
-                        <FieldWithPolicy field={field} key={idx} />
-                    ))}
-                </div>
-
-                // policies.length === 1
-                //     ?
-                //     <FieldWithPolicy field={policies[0]} />
-                //     : <>
-                //         Multiple policies
-                //     </>
-            }
-            <hr className="mt-4" />
-            <PolicyEditor />
-        </>
-    );
+    return (<>
+        {!policies?.length ? <div className="">Policy not specified</div> :
+            <div className="px-3 py-2 grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-4 items-center rounded bg-primary-800">
+                {policies.map((field, idx) => (
+                    <FieldWithPolicy field={field} key={idx} />
+                ))}
+            </div>
+        }
+    </>);
 }

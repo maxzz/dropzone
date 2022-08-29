@@ -81,7 +81,7 @@ export function PolicyEditor() {
     return (<>
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger className="px-4 py-3 border-primary-500 active:scale-[.97] border rounded select-none">
-                Open Dialog
+                Edit
             </Dialog.Trigger>
 
             {transitions((styles, item) =>
