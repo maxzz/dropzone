@@ -36,6 +36,7 @@ export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
 
             form.fields.forEach((field: Mani.Field) => {
                 field.password && (field.password = !!field.password);
+                field.submit && (field.submit = !!field.submit);
                 field.useit && (field.useit = !!field.useit);
                 field.rfieldindex && (field.rfieldindex = +field.rfieldindex);
             });

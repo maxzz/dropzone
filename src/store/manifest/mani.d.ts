@@ -24,6 +24,7 @@ declare module Mani {
         onetvalue?: boolean,    // "1"
 
         password?: boolean,     // "1"
+        submit?: boolean,       // "1"
         useit?: boolean,        // "1"
 
         rfield?: 'in' | 'out';

@@ -1,8 +1,8 @@
-export type { 
-    Mani, 
-    Meta, 
-    Catalog, 
-    MPath 
+export type {
+    Mani,
+    Meta,
+    Catalog,
+    MPath
 } from './mani';
 
 export type { parseOptions } from './mani-i';
@@ -30,4 +30,4 @@ export {
 } from './xml-to-js';
 
 export type { References, ReferenceItem, ValueLife } from './mani-types';
-export { FieldTyp, ValueAs, valueAsNames, references } from './mani-types';
+export { FieldTyp, ValueAs, valueAsNames, references, SUBMIT } from './mani-types';
