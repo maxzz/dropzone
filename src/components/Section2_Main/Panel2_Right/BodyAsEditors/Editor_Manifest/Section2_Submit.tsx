@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import { FieldTyp, Meta } from '@/store/manifest';
+import { FieldTyp, Meta, SUBMIT } from '@/store/manifest';
 
 type RadioButtonProps = {
     label: string;
@@ -44,15 +44,25 @@ export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
     useEffect(() => {
         const isWeb = !!form?.mani.detection.web_ourl;
 
+        const submits = form?.fields?.filter((field) => field.ftyp === FieldTyp.button || field.mani.submit) || [];
+        const submitNames = isWeb ? [] : submits.map((field) => field.mani.displayname || 'no name');
+
+        let buttonSelected = -1;
+        submits.forEach((field, idx) => field.mani.useit && (buttonSelected = idx));
+
+        const forceSubmit = form?.mani?.options?.submittype === SUBMIT.dosumbit;
+        
         let initialSelected = -1;
-        const buttons = form?.fields?.filter((field) => field.ftyp === FieldTyp.button) || [];
-        const buttonNames = isWeb ? [] : buttons?.map((field, idx) => {
-            field.mani.useit && (initialSelected = idx);
-            return field.mani.displayname || 'no name';
-        });
+        if (forceSubmit || buttonSelected !== -1) {
+            if (isWeb) {
+                initialSelected++;
+            } else {
+                initialSelected = buttonSelected;
+            }
+        }
         initialSelected++;
 
-        setitems(['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : buttonNames)]);
+        setitems(['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : submitNames)]);
         setSelected(initialSelected);
     }, [form]);
 
