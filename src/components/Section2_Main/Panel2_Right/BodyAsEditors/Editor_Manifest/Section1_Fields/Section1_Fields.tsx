@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 import { FieldTyp, Meta, TransformValue } from '@/store/manifest';
 import { classNames } from '@/utils/classnames';
@@ -29,6 +29,14 @@ function TableRow({ field }: { field: Meta.Field; }) {
 
     //const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
     const enableRow = () => !useIt && setUseIt(true);
+
+    useEffect(() => {
+        setUseIt(!!useit);
+        setLabel(displayname || '');
+        setType('');
+        setValue(val || '');
+        setValueAs(val);
+    }, [field]);
 
     return (<>
         <Column1_UseIt useItAtom={state.useItAtom} />
