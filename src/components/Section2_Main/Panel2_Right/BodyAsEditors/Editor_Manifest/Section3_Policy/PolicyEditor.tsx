@@ -76,7 +76,7 @@ export function PolicyEditor() {
         from: { opacity: 0, y: -200 },
         enter: { opacity: 1, y: 0 },
         leave: { opacity: 0, y: 200 },
-        config: config.stiff,
+        config: config.wobbly,
     });
     return (<>
         <Dialog.Root open={open} onOpenChange={setOpen}>
