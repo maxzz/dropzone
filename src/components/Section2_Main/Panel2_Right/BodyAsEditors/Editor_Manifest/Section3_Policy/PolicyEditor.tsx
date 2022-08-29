@@ -1,5 +1,6 @@
-import { config, useTransition } from "@react-spring/web";
 import React from "react";
+import { a, config, useTransition } from "@react-spring/web";
+import * as Dialog from '@radix-ui/react-dialog';
 
 function EditorBody() {
     return (
@@ -67,7 +68,37 @@ function EditorBody() {
 }
 
 export function PolicyEditor() {
-    return (
-        <EditorBody />
+    const [open, setOpen] = React.useState(false);
+    const transitions = useTransition(open, {
+        from: { opacity: 0, y: -10 },
+        enter: { opacity: 1, y: 0 },
+        leave: { opacity: 0, y: 10 },
+        config: config.stiff,
+    });
+    return (<>
+        <Dialog.Root open={open} onOpenChange={setOpen}>
+            <Dialog.Trigger>Open Dialog</Dialog.Trigger>
+            {transitions((styles, item) =>
+                item ? (<>
+                    <Dialog.Overlay forceMount asChild>
+                        <a.div
+                            style={{
+                                opacity: styles.opacity,
+                            }}
+                        />
+                    </Dialog.Overlay>
+
+                    <Dialog.Content forceMount asChild>
+                        <a.div style={styles}>
+                            <h1>Hello from inside the Dialog!</h1>
+                            <Dialog.Close>close</Dialog.Close>
+                        </a.div>
+                    </Dialog.Content>
+                </>) : null
+            )}
+        </Dialog.Root>
+
+        {/* <EditorBody /> */}
+    </>
     );
 }
