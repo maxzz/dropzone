@@ -63,6 +63,8 @@ function EditorBody() {
                 <label className="block"> <input type="radio" /> By user </label>
                 <label className="block"> <input type="radio" /> By system </label>
             </div>
+
+            <Dialog.Close>close</Dialog.Close>
         </div>
     );
 }
@@ -90,15 +92,13 @@ export function PolicyEditor() {
 
                     <Dialog.Content forceMount asChild>
                         <a.div style={styles}>
-                            <h1>Hello from inside the Dialog!</h1>
-                            <Dialog.Close>close</Dialog.Close>
+                        <EditorBody />
                         </a.div>
                     </Dialog.Content>
                 </>) : null
             )}
         </Dialog.Root>
 
-        {/* <EditorBody /> */}
     </>
     );
 }
