@@ -43,6 +43,29 @@ function FieldWithPolicy({ field }: { field: Meta.Field; }) {
     </>);
 }
 
+const columns = ["Field", "Policy"];
+const columnHints = [
+    "Field",
+    "Field policy",
+];
+const columnClassNames = [
+    "",
+    "col-span-2",
+];
+function TableHeader() {
+    return (<>
+        {columns.map((title, idx) => (
+            <div
+                className={classNames("mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none", columnClassNames[idx],)}
+                title={columnHints[idx]} key={idx}
+            >
+                {title}
+            </div>
+        ))}
+    </>);
+}
+
+
 export function Section3_Policy({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
@@ -61,6 +84,7 @@ export function Section3_Policy({ fileUsAtom, formType }: { fileUsAtom: FileUsAt
     return (<>
         {!policies?.length ? <div className="">Policy not specified</div> :
             <div className="px-3 py-2 grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-1 items-stretch rounded bg-primary-800">
+                <TableHeader />
                 {policies.map((field, idx) => (
                     <FieldWithPolicy field={field} key={idx} />
                 ))}
