@@ -1,5 +1,5 @@
-import React, { InputHTMLAttributes } from 'react';
-import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
+import React, { InputHTMLAttributes, useEffect, useState } from 'react';
+import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { classNames } from '@/utils/classnames';
 import { PolicyEditor } from './PolicyEditor';
@@ -30,7 +30,7 @@ function FieldWithPolicy({ field }: { field: Meta.Field; }) {
             {field.mani.displayname || 'no name'}
         </div>
 
-        <div className="px-2 py-1 bg-primary-700 rounded grid grid-cols-[auto_minmax(0,1fr)] gap-x-2">
+        <div className="px-2 py-1 bg-primary-700 rounded grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2">
             <div className="text-primary-500">Main</div>
             <div className="text-blue-400 text-[.7rem] font-mono">{field.mani.policy}</div>
             {field.mani.policy2 && <div className="text-primary-500">Custom</div>}
@@ -70,7 +70,13 @@ export function Section3_Policy({ fileUsAtom, formType }: { fileUsAtom: FileUsAt
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
 
-    const policies = metaForm?.fields?.filter((field) => field.mani.policy || field.mani.policy2);
+    const policiesAtom = useState(atom<Meta.Field[]>([]))[0];
+    const [policies, setPolicies] = useAtom(policiesAtom);
+
+    useEffect(() => {
+        const policies2 = metaForm?.fields?.filter((field) => field.mani.policy || field.mani.policy2) || [];    
+        setPolicies(policies2);
+    }, [fileUs]);
 
     /* // No, keep it simple, just check one at time
 
