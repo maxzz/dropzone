@@ -10,12 +10,12 @@ type RadioButtonProps = {
 
 function RadioButton({ label, groupName, value, checked, onChange, ...rest }: RadioButtonProps) {
     return (
-        <label className="h-6 flex items-center space-x-3 select-none" {...rest}>
+        <label className="h-6 flex items-center space-x-3 cursor-pointer select-none" {...rest}>
             <input
                 className="w-4 h-4 form-radio
                 text-primary-700 bg-primary-800 border-none
-                ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-500 checked:ring-primary-600 focus:ring-offset-primary-800
-                transition-shadow"
+                ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-400 checked:ring-primary-600 focus:ring-offset-primary-800
+                transition-shadow cursor-pointer"
                 type="radio"
                 name={groupName}
                 value={value}
@@ -38,8 +38,8 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
 }
 
 export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
+    const [items, setItems] = useState<string[]>([]);
     const [selected, setSelected] = useState(0);
-    const [items, setitems] = useState<string[]>([]);
 
     useEffect(() => {
         const isWeb = !!form?.mani.detection.web_ourl;
@@ -51,18 +51,9 @@ export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
         submits.forEach((field, idx) => field.mani.useit && (buttonSelected = idx));
 
         const forceSubmit = form?.mani?.options?.submittype === SUBMIT.dosumbit;
-        
-        let initialSelected = -1;
-        if (forceSubmit || buttonSelected !== -1) {
-            if (isWeb) {
-                initialSelected++;
-            } else {
-                initialSelected = buttonSelected;
-            }
-        }
-        initialSelected++;
+        const initialSelected = (forceSubmit || buttonSelected !== -1 ? isWeb ? 0 : buttonSelected : -1) + 1;
 
-        setitems(['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : submitNames)]);
+        setItems(['Do Not Submit', ...(isWeb ? ['Automatically submit login data'] : submitNames)]);
         setSelected(initialSelected);
     }, [form]);
 
