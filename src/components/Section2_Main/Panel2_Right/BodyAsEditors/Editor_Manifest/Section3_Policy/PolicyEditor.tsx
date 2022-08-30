@@ -1,32 +1,45 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
+import { classNames } from "@/utils/classnames";
+
+function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
+    return (
+        <label className={classNames("flex items-center gap-x-1", className)} {...rest}>
+            <input type="checkbox" />
+            {children}
+        </label>
+    );
+}
+
+function Radio({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
+    return (
+        <label className={classNames("flex items-center gap-x-1", className)} {...rest}>
+            <input type="radio" />
+            {children}
+        </label>
+    );
+}
 
 function EditorBody() {
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
 
             <div className="flex items-center justify-between">
-                <div className="text-lg">Policy Editor</div>
+                <div className="text-lg font-bold text-primary-300">Policy Editor</div>
                 <Dialog.Close>
                     <div className="px-4 p-1 bg-primary-700 rounded" tabIndex={-1}>x</div>
                 </Dialog.Close>
             </div>
 
             <h1>Specify password complexity, history and generation requirements.</h1>
-            <label className="flex items-center gap-x-1">
-                <input type="checkbox" />
-                Enable password policy
-            </label>
+            <Check>Enable password policy</Check>
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
 
             <div className="space-y-4">
                 <div className="">
-                    <label className="flex items-center gap-x-1">
-                        <input type="radio" />
-                        Predefined rule
-                    </label>
+                    <Radio>Predefined rule</Radio>
                     <select className="p-2 text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
                         <option value="1">Letters and numbers</option>
                         <option value="2">Numbers only</option>
@@ -37,10 +50,7 @@ function EditorBody() {
                 </div>
 
                 <div className="">
-                    <label className="flex items-center gap-x-1">
-                        <input type="radio" />
-                        Custom rule
-                    </label>
+                    <Radio>Custom rule</Radio>
                     <div className="flex items-center space-x-2">
                         <input className="p-2 text-primary-300 bg-primary-700 rounded" />
                         <button>?</button>
@@ -78,8 +88,8 @@ function EditorBody() {
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
 
             <div className="">
-                <label className="block"> <input type="radio" /> By user </label>
-                <label className="block"> <input type="radio" /> By system </label>
+                <Radio>By user</Radio>
+                <Radio>By system</Radio>
             </div>
 
             <Dialog.Close>
