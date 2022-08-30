@@ -14,16 +14,20 @@ function EditorBody() {
             </div>
 
             <h1>Specify password complexity, history and generation requirements.</h1>
-            <label>
+            <label className="flex items-center gap-x-1">
                 <input type="checkbox" />
                 Enable password policy
             </label>
 
-            <h2>Complexity</h2>
+            <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
+
             <div className="space-y-4">
                 <div className="">
-                    <label className="block"> <input type="radio" />Predefined rule</label>
-                    <select className="px-2 py-1 text-primary-800" value={4} onChange={() => { }}>
+                    <label className="flex items-center gap-x-1">
+                        <input type="radio" />
+                        Predefined rule
+                    </label>
+                    <select className="p-2 text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
                         <option value="1">Letters and numbers</option>
                         <option value="2">Numbers only</option>
                         <option value="3">letters only</option>
@@ -33,9 +37,12 @@ function EditorBody() {
                 </div>
 
                 <div className="">
-                    <label> <input type="radio" />Custom rule</label>
+                    <label className="flex items-center gap-x-1">
+                        <input type="radio" />
+                        Custom rule
+                    </label>
                     <div className="flex items-center space-x-2">
-                        <input type="text" />
+                        <input className="p-2 text-primary-300 bg-primary-700 rounded" />
                         <button>?</button>
                     </div>
                 </div>
@@ -43,30 +50,33 @@ function EditorBody() {
 
             <div className="flex items-center">
                 <div className="">Length:</div>
-                <input />
+                <input className="p-2 text-primary-300 bg-primary-700 rounded" />
                 <div className="">to</div>
-                <input />
+                <input className="p-2 text-primary-300 bg-primary-700 rounded" />
             </div>
 
-            <h2>Test complexity</h2>
+            <h2 className="text-sm font-bold border-primary-700 border-b">Test complexity</h2>
+
             <div className="flex items-center space-x-2">
-                <input />
+                <input className="p-2 text-primary-300 bg-primary-700 rounded" />
                 <button>Verify</button>
             </div>
             <div className="flex items-center space-x-2">
-                <input />
+                <input className="p-2 text-primary-300 bg-primary-700 rounded" />
                 <button>Generate</button>
             </div>
 
-            <h2>History</h2>
-            <select className="px-2 py-1 text-primary-800" value={2} onChange={() => { }}>
+            <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
+
+            <select className="p-2 text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
                 <option value="0">None</option>
                 <option value="1">Different than the Windows password</option>
                 <option value="2">Unique within Password Manager logons</option>
                 <option value="3">Different than the current password</option>
             </select>
 
-            <h2>Generation</h2>
+            <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
+
             <div className="">
                 <label className="block"> <input type="radio" /> By user </label>
                 <label className="block"> <input type="radio" /> By system </label>
