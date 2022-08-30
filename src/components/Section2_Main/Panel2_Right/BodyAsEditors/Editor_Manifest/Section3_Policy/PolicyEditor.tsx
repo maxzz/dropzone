@@ -5,7 +5,7 @@ import { classNames } from "@/utils/classnames";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <label className={classNames("flex items-center gap-x-2", className)} {...rest}>
+        <label className={classNames("w-max inline-flex items-center gap-x-2 select-none cursor-pointer", className)} {...rest}>
             <input className="place-self-center w-4 h-4 dark-checkbox" type="checkbox" />
             {children}
         </label>
@@ -14,7 +14,7 @@ function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
 
 function Radio({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <label className={classNames("flex items-center gap-x-2", className)} {...rest}>
+        <label className={classNames("w-max inline-flex items-center gap-x-2 select-none cursor-pointer", className)} {...rest}>
             <input className="w-4 h-4 dark-radio" type="radio" />
             {children}
         </label>
@@ -40,7 +40,7 @@ function EditorBody() {
             <div className="space-y-4">
                 <div className="">
                     <Radio>Predefined rule</Radio>
-                    <select className="mt-2 p-2 text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
+                    <select className="mt-2 p-2 block text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
                         <option value="1">Letters and numbers</option>
                         <option value="2">Numbers only</option>
                         <option value="3">letters only</option>
@@ -52,17 +52,17 @@ function EditorBody() {
                 <div className="">
                     <Radio>Custom rule</Radio>
                     <div className="mt-2 flex items-center space-x-2">
-                        <input className="p-2 text-primary-300 bg-primary-700 rounded" />
-                        <button>?</button>
+                        <input className="flex-1 p-2 text-primary-300 bg-primary-700 rounded" />
+                        <button className="self-stretch px-4 p-1 bg-primary-700 rounded">?</button>
                     </div>
                 </div>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center space-x-2">
                 <div className="">Length:</div>
-                <input className="p-2 text-primary-300 bg-primary-700 rounded" />
+                <input className="p-2 max-w-[6ch] text-primary-300 bg-primary-700 rounded" />
                 <div className="">to</div>
-                <input className="p-2 text-primary-300 bg-primary-700 rounded" />
+                <input className="p-2 max-w-[6ch] text-primary-300 bg-primary-700 rounded" />
             </div>
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Test complexity</h2>
@@ -78,7 +78,7 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
 
-            <select className="p-2 text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
+            <select className="p-2 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
                 <option value="0">None</option>
                 <option value="1">Different than the Windows password</option>
                 <option value="2">Unique within Password Manager logons</option>
@@ -87,7 +87,7 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
 
-            <div className="space-y-2">
+            <div className="grid space-y-2">
                 <Radio>By user</Radio>
                 <Radio>By system</Radio>
             </div>
