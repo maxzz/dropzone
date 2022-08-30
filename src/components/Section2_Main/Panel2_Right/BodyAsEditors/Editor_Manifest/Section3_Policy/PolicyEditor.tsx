@@ -5,8 +5,8 @@ import { classNames } from "@/utils/classnames";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <label className={classNames("flex items-center gap-x-1", className)} {...rest}>
-            <input type="checkbox" />
+        <label className={classNames("flex items-center gap-x-2", className)} {...rest}>
+            <input className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded border-none cursor-pointer transition-all" type="checkbox" />
             {children}
         </label>
     );
@@ -14,8 +14,11 @@ function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
 
 function Radio({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <label className={classNames("flex items-center gap-x-1", className)} {...rest}>
-            <input type="radio" />
+        <label className={classNames("flex items-center gap-x-2", className)} {...rest}>
+            <input className="w-4 h-4 form-radio
+                text-primary-700 bg-primary-800 border-none
+                ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-400 checked:ring-primary-600 focus:ring-offset-primary-800
+                transition-shadow cursor-pointer" type="radio" />
             {children}
         </label>
     );
@@ -40,7 +43,7 @@ function EditorBody() {
             <div className="space-y-4">
                 <div className="">
                     <Radio>Predefined rule</Radio>
-                    <select className="p-2 text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
+                    <select className="mt-2 p-2 text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
                         <option value="1">Letters and numbers</option>
                         <option value="2">Numbers only</option>
                         <option value="3">letters only</option>
@@ -51,7 +54,7 @@ function EditorBody() {
 
                 <div className="">
                     <Radio>Custom rule</Radio>
-                    <div className="flex items-center space-x-2">
+                    <div className="mt-2 flex items-center space-x-2">
                         <input className="p-2 text-primary-300 bg-primary-700 rounded" />
                         <button>?</button>
                     </div>
