@@ -12,10 +12,7 @@ function RadioButton({ label, groupName, value, checked, onChange, ...rest }: Ra
     return (
         <label className="h-6 flex items-center space-x-3 cursor-pointer select-none" {...rest}>
             <input
-                className="w-4 h-4 form-radio
-                text-primary-700 bg-primary-800 border-none
-                ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-400 checked:ring-primary-600 focus:ring-offset-primary-800
-                transition-shadow cursor-pointer"
+                className="w-4 h-4 dark-radio"
                 type="radio"
                 name={groupName}
                 value={value}

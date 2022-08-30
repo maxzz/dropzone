@@ -6,7 +6,7 @@ import { classNames } from "@/utils/classnames";
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
         <label className={classNames("flex items-center gap-x-2", className)} {...rest}>
-            <input className="place-self-center w-4 h-4 form-checkbox text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 rounded border-none cursor-pointer transition-all" type="checkbox" />
+            <input className="place-self-center w-4 h-4 dark-checkbox" type="checkbox" />
             {children}
         </label>
     );
@@ -15,10 +15,7 @@ function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
 function Radio({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
         <label className={classNames("flex items-center gap-x-2", className)} {...rest}>
-            <input className="w-4 h-4 form-radio
-                text-primary-700 bg-primary-800 border-none
-                ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-400 checked:ring-primary-600 focus:ring-offset-primary-800
-                transition-shadow cursor-pointer" type="radio" />
+            <input className="w-4 h-4 dark-radio" type="radio" />
             {children}
         </label>
     );
@@ -90,7 +87,7 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
 
-            <div className="">
+            <div className="space-y-2">
                 <Radio>By user</Radio>
                 <Radio>By system</Radio>
             </div>
