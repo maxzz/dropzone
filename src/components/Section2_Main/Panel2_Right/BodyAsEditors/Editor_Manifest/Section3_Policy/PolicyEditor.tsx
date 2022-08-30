@@ -98,11 +98,18 @@ function EditorBody() {
                 <Radio>By system</Radio>
             </div>
 
-            <Dialog.Close>
-                <div className="px-4 py-3 inline-block border-primary-500 active:scale-[.97] border rounded select-none">
-                    Close
-                </div>
-            </Dialog.Close>
+            <div className="flex items-center justify-center gap-x-2">
+                <Dialog.Close>
+                    <div className="px-4 py-2 inline-block border-primary-500 active:scale-[.97] border rounded select-none">
+                        OK
+                    </div>
+                </Dialog.Close>
+                <Dialog.Close>
+                    <div className="px-4 py-2 inline-block border-primary-500 active:scale-[.97] border rounded select-none">
+                        Cancel
+                    </div>
+                </Dialog.Close>
+            </div>
         </div>
     );
 }
