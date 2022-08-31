@@ -42,20 +42,29 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
     return (<>
         <div className="relative">
             <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
-                <div className="flex space-x-4">
-                    <Select.Value />
-                    
-                    <Select.Trigger>
+                <Select.Trigger>
+                    <div className="flex space-x-4">
+                        <div className="px-2 py-3 bg-green-600 rounded">
+                            <Select.Value>
+                            </Select.Value>
+                        </div>
+
                         <Select.Icon>Trigger</Select.Icon>
-                    </Select.Trigger>
-                </div>
+                    </div>
+                </Select.Trigger>
 
                 {/* <Select.Portal container={document.getElementById('portal')}> */}
                 {/* <Select.Portal> */}
                 <Select.Content>
-                    <Select.Viewport>
+                    <Select.Viewport className="bg-primary-700 rounded">
                         {itemsPolicy.map((item, idx) => (
-                            <Select.Item className="bg-red-500" value={item.value}>
+                            <Select.Item className={
+                                classNames(
+                                    "relative flex items-center px-8 py-2 rounded-md text-sm",
+                                    "text-primary-300 font-medium focus:bg-primary-100",
+                                    "radix-disabled:opacity-50",
+                                    "focus:outline-none select-none"
+                                )} value={item.value}>
                                 <Select.ItemText>{item.name}</Select.ItemText>
                                 <Select.ItemIndicator>Q</Select.ItemIndicator>
                             </Select.Item>
