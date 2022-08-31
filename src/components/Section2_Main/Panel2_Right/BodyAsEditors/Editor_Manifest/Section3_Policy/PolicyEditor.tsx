@@ -4,7 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
 import { atom, PrimitiveAtom, useAtom } from "jotai";
-import { IconChevronDown } from "@ui/UIIconSymbols";
+import { IconChevronDown, IconCross } from "@ui/UIIconSymbols";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
@@ -51,7 +51,9 @@ function Dropdown({ items, valueAtom, className }: { items: { value: string; nam
     return (<>
         <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
             <Select.Trigger className={className}>
+                {/* <div className="p-2 grid grid-cols-[minmax(0,1fr)_auto] space-x-1 text-primary-300 bg-primary-700 rounded"> */}
                 <div className="p-2 flex items-center justify-between space-x-1 text-primary-300 bg-primary-700 rounded">
+                    {/* <Select.Value className="flex-1 w-max" /> */}
                     <Select.Value />
                     <Select.Icon><IconChevronDown className="w-4 h-4" /></Select.Icon>
                 </div>
@@ -100,8 +102,8 @@ function EditorBody() {
 
             <div className="flex items-center justify-between">
                 <div className="text-lg font-bold text-primary-300">Policy Editor</div>
-                <Dialog.Close>
-                    <div className="px-4 p-1 bg-primary-700 rounded" tabIndex={-1}>x</div>
+                <Dialog.Close tabIndex={-1}>
+                    <div className="px-2 py-1 bg-primary-700 rounded"><IconCross className="w-5 h-5 py-1" /> </div>
                 </Dialog.Close>
             </div>
 
@@ -110,10 +112,12 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
 
+            {/* <div className="flex flex-col min-w-0 space-y-8"> */}
             <div className="space-y-8">
                 <div>
                     <Radio>Predefined rule</Radio>
                     <Dropdown className="mt-2 w-full" items={itemsRule} valueAtom={ruleAtom} />
+                    {/* <Dropdown className="mt-2 w-max" items={itemsRule} valueAtom={ruleAtom} /> */}
                 </div>
 
                 <div>
