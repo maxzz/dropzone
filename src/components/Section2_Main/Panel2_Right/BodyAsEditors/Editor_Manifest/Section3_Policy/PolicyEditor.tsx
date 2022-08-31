@@ -38,11 +38,11 @@ const itemsPolicy = [
     { value: "4", name: "Different than the current password" },
 ];
 
-function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
+function Dropdown({ items }: {items: {value: string; name: string}[]} & HTMLAttributes<HTMLInputElement>) {
     const ourAtom = useState(atom('1'))[0];
     const [val, setVal] = useAtom(ourAtom);
     return (<>
-        <div className="relative">
+        {/* <div className="relative"> */}
             <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
                 <Select.Trigger>
                     <div className="p-2 flex items-center space-x-1 text-primary-300 bg-primary-700 rounded">
@@ -60,7 +60,7 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
                                 "bg-primary-100 dark:bg-gray-800 rounded",
                             )}
                         >
-                            {itemsPolicy.map((item, idx) => (
+                            {items.map((item, idx) => (
                                 <Select.Item className={
                                     classNames(
                                         "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded outline-none",
@@ -83,7 +83,7 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
                 </Select.Portal>
 
             </Select.Root>
-        </div>
+        {/* </div> */}
     </>
     );
 }
@@ -145,7 +145,7 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
 
-            <Dropdown />
+            <Dropdown items={itemsPolicy} />
 
             <select className="p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
                 <option value="0">None</option>
