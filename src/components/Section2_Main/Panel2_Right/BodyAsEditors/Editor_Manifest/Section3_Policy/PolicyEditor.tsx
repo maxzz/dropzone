@@ -1,8 +1,9 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useState } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
+import { atom, useAtom } from "jotai";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -36,13 +37,18 @@ const itemsPolicy = [
 ];
 
 function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
+    const ourAtom = useState(atom('1'))[0];
+    const [val, setVal] = useAtom(ourAtom);
     return (<>
         <div className="relative">
-            <Select.Root value="2">
-                <Select.Trigger>
-                    <Select.Value placeholder="123"></Select.Value>
-                    <Select.Icon>Trigger</Select.Icon>
-                </Select.Trigger>
+            <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
+                <div className="flex space-x-4">
+                    <Select.Value />
+                    
+                    <Select.Trigger>
+                        <Select.Icon>Trigger</Select.Icon>
+                    </Select.Trigger>
+                </div>
 
                 {/* <Select.Portal container={document.getElementById('portal')}> */}
                 {/* <Select.Portal> */}
@@ -50,7 +56,8 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
                     <Select.Viewport>
                         {itemsPolicy.map((item, idx) => (
                             <Select.Item className="bg-red-500" value={item.value}>
-                                {item.name}
+                                <Select.ItemText>{item.name}</Select.ItemText>
+                                <Select.ItemIndicator>Q</Select.ItemIndicator>
                             </Select.Item>
                         ))}
                     </Select.Viewport>
