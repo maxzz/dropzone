@@ -176,12 +176,12 @@ function EditorBody() {
 
 export function PolicyEditor() {
     const [open, setOpen] = React.useState(false);
-    const transitions = useTransition(open, {
+    const transitions = useTransition(Number(open), {
         from: { opacity: 0, y: -10, scale: 0.97 },
         enter: { opacity: 1, y: 0, scale: 1 },
         leave: { opacity: 0, y: 10, scale: 0.97 },
-        // config: config.stiff,
-        config: {duration: 3000},
+        //config: config.stiff,
+        config: {duration: 4000},
     });
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -189,27 +189,18 @@ export function PolicyEditor() {
                 Edit
             </Dialog.Trigger>
 
-            {transitions((styles, item) =>
-                item ? (<>
-                    <Dialog.Portal container={document.getElementById('portal')}>
-                        <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
+            {transitions((styles, item) => !item ? null : <>
+                <Dialog.Portal container={document.getElementById('portal')}>
+                    <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
 
-                        {/* <div className="fixed inset-0 bg-primary-900/80">
-                            <a.div style={{ opacity: styles.opacity, }} />
-                        </div> */}
+                    <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
+                        <a.div style={styles}>
+                            <EditorBody />
+                        </a.div>
+                    </Dialog.Content>
 
-                        {/* <Dialog.Overlay forceMount asChild className="fixed inset-0 bg-primary-900/80">
-                            <a.div style={{ opacity: styles.opacity, }} />
-                        </Dialog.Overlay> */}
-
-                        <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
-                            <a.div style={styles}>
-                                <EditorBody />
-                            </a.div>
-                        </Dialog.Content>
-
-                    </Dialog.Portal>
-                </>) : null
+                </Dialog.Portal>
+            </>
             )}
         </Dialog.Root>
     );
