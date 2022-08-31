@@ -4,6 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
 import { atom, useAtom } from "jotai";
+import { IconChevronDown } from "@ui/UIIconSymbols";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -43,35 +44,36 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
         <div className="relative">
             <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
                 <Select.Trigger>
-                    <div className="flex space-x-4">
-                        <div className="px-2 py-3 bg-green-600 rounded">
+                    <div className="px-2 py-3 flex items-center space-x-1 bg-green-300 rounded">
+                        <div className="">
                             <Select.Value>
                             </Select.Value>
                         </div>
-
-                        <Select.Icon>Trigger</Select.Icon>
+                        <Select.Icon><IconChevronDown className="w-4 h-4" /> </Select.Icon>
                     </div>
                 </Select.Trigger>
 
-                {/* <Select.Portal container={document.getElementById('portal')}> */}
-                {/* <Select.Portal> */}
-                <Select.Content>
-                    <Select.Viewport className="bg-primary-700 rounded">
-                        {itemsPolicy.map((item, idx) => (
-                            <Select.Item className={
-                                classNames(
-                                    "relative flex items-center px-8 py-2 rounded-md text-sm",
-                                    "text-primary-300 font-medium focus:bg-primary-100",
-                                    "radix-disabled:opacity-50",
-                                    "focus:outline-none select-none"
-                                )} value={item.value}>
-                                <Select.ItemText>{item.name}</Select.ItemText>
-                                <Select.ItemIndicator>Q</Select.ItemIndicator>
-                            </Select.Item>
-                        ))}
-                    </Select.Viewport>
-                </Select.Content>
-                {/* </Select.Portal> */}
+                <Select.Portal container={document.getElementById('portal')}>
+                    <Select.Content>
+                        <Select.Viewport className="bg-primary-700 rounded">
+                            {itemsPolicy.map((item, idx) => (
+                                <Select.Item className={
+                                    classNames(
+                                        "relative flex items-center px-8 py-2 rounded-md text-sm",
+                                        "text-primary-300 font-medium focus:bg-primary-100",
+                                        "radix-disabled:opacity-50",
+                                        "focus:outline-none select-none"
+                                    )}
+                                    value={item.value}
+                                    key={idx}
+                                >
+                                    <Select.ItemText>{item.name}</Select.ItemText>
+                                    <Select.ItemIndicator className="absolute left-2 inline-flex items-center">Q</Select.ItemIndicator>
+                                </Select.Item>
+                            ))}
+                        </Select.Viewport>
+                    </Select.Content>
+                </Select.Portal>
 
             </Select.Root>
         </div>
