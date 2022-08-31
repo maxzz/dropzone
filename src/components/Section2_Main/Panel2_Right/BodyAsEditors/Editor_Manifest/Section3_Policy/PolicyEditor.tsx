@@ -51,9 +51,7 @@ function Dropdown({ items, valueAtom, className }: { items: { value: string; nam
     return (<>
         <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
             <Select.Trigger className={className}>
-                {/* <div className="p-2 grid grid-cols-[minmax(0,1fr)_auto] space-x-1 text-primary-300 bg-primary-700 rounded"> */}
                 <div className="p-2 flex items-center justify-between space-x-1 text-primary-300 bg-primary-700 rounded">
-                    {/* <Select.Value className="flex-1 w-max" /> */}
                     <Select.Value />
                     <Select.Icon><IconChevronDown className="w-4 h-4" /></Select.Icon>
                 </div>
@@ -107,24 +105,26 @@ function EditorBody() {
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
 
-            <div className="flex items-center justify-between">
-                <div className="text-lg font-bold text-primary-300">Policy Editor</div>
-                <Dialog.Close tabIndex={-1}>
-                    <div className="px-2 py-1 hover:bg-primary-700 active:scale-[.97] rounded"><IconCross className="w-5 h-5 py-1" /> </div>
-                </Dialog.Close>
+            <div className="">
+                <div className="flex items-center justify-between">
+                    <div className="text-lg font-bold text-primary-300">Policy Editor</div>
+                    <Dialog.Close tabIndex={-1}>
+                        <div className="px-2 py-1 hover:bg-primary-700 active:scale-[.97] rounded"><IconCross className="w-5 h-5 py-1" /> </div>
+                    </Dialog.Close>
+                </div>
+                <h1 className="mt-2 mb-4">Specify password complexity, history and generation requirements.</h1>
             </div>
 
-            <h1>Specify password complexity, history and generation requirements.</h1>
             <Check>Enable password policy</Check>
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
 
-            {/* <div className="flex flex-col min-w-0 space-y-8"> */}
             <div className="space-y-8">
                 <div>
                     <Radio name="rule-type" checked={ruleType === '1'} onChange={() => setRuleType('1')}>Predefined rule</Radio>
-                    <Dropdown className="mt-2 w-full" items={itemsRule} valueAtom={ruleAtom} />
-                    {/* <Dropdown className="mt-2 w-max" items={itemsRule} valueAtom={ruleAtom} /> */}
+                    <div className="mt-2">
+                        <Dropdown items={itemsRule} valueAtom={ruleAtom} />
+                    </div>
                 </div>
 
                 <div>
@@ -163,8 +163,8 @@ function EditorBody() {
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
 
             <div className="grid space-y-2">
-                <Radio name="gen-type" checked={genType === '1'} onChange={()=>setGenType('1')}>By user</Radio>
-                <Radio name="gen-type" checked={genType === '2'} onChange={()=>setGenType('2')}>By system</Radio>
+                <Radio name="gen-type" checked={genType === '1'} onChange={() => setGenType('1')}>By user</Radio>
+                <Radio name="gen-type" checked={genType === '2'} onChange={() => setGenType('2')}>By system</Radio>
             </div>
 
             <div className="flex items-center justify-center gap-x-2">
