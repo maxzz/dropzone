@@ -64,18 +64,20 @@ function RuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     );
 }
 
-function MinMaxLength() {
+function MinMaxLength({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+    const [min, setMin] = useAtom(atoms.minLengthAtom);
+    const [max, setMax] = useAtom(atoms.maxLengthAtom);
     return (
         <div className="flex items-center space-x-2">
             <div className="">Length:</div>
-            <Input className="max-w-[6ch]" />
+            <Input className="max-w-[6ch]" value={`${min}`} onChange={(e) => setMin(+e.target.value)} />
             <div className="">to</div>
-            <Input className="max-w-[6ch]" />
+            <Input className="max-w-[6ch]" value={`${max}`} onChange={(e) => setMax(+e.target.value)} />
         </div>
     );
 }
 
-function TestSection() {
+function TestSection({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     return (<>
         <div className="flex items-center space-x-2">
             <Input className="" />
@@ -126,6 +128,7 @@ export function PolicyEditorBody() {
         console.log('changed');
     }))[0];
 
+    const [enabled, setEnabled] = useAtom(atoms.enabledAtom);
     const [useAs, setUseUs] = useAtom(atoms.useAsAtom);
 
     return (
@@ -134,18 +137,18 @@ export function PolicyEditorBody() {
             {/* Header */}
             <Header />
 
-            <Check>Enable password policy</Check>
+            <Check checked={enabled} onChange={() => setEnabled(v => !v)}>Enable password policy</Check>
 
             {/* Predefined or Custom rule */}
             <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
             <RuleTypes atoms={atoms} />
 
             {/* Min / Max length */}
-            <MinMaxLength />
+            <MinMaxLength atoms={atoms} />
 
             {/* Test section */}
             <h2 className="text-sm font-bold border-primary-700 border-b">Test complexity</h2>
-            <TestSection />
+            <TestSection atoms={atoms} />
 
             {/* History */}
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>

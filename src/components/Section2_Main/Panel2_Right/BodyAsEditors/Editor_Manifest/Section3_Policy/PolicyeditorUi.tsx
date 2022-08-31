@@ -1,14 +1,14 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, InputHTMLAttributes } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
 import { IconChevronDown } from "@ui/UIIconSymbols";
 import { CheckIcon } from "@radix-ui/react-icons";
 
-export function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
+export function Check({ children, checked, onChange, className, ...rest }: { checked: boolean; } & HTMLAttributes<HTMLElement>) {
     return (
         <label className={classNames("w-max inline-flex items-center gap-x-2 select-none cursor-pointer", className)} {...rest}>
-            <input className="place-self-center w-4 h-4 dark-checkbox" type="checkbox" />
+            <input className="place-self-center w-4 h-4 dark-checkbox" checked={checked} onChange={onChange} type="checkbox" />
             {children}
         </label>
     );
@@ -23,7 +23,7 @@ export function Radio({ children, name, checked, onChange, className, ...rest }:
     );
 }
 
-export function Input({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
+export function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
     return (
         <input className={classNames("p-2 h-9 text-primary-300 bg-primary-700 rounded", className)} {...rest} />
     );
