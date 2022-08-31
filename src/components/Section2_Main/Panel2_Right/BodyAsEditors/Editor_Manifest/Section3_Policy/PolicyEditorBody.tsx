@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { atom, PrimitiveAtom, useAtom } from "jotai";
+import { Atomize } from "@/hooks/atomsX";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Check, Dropdown, Input, Radio } from "./PolicyeditorUi";
 import { IconCross } from "@ui/UIIconSymbols";
@@ -23,6 +24,21 @@ type PolicyUi = {
     useAs: UseAs;       // by user / by system
 };
 
+function createUiAtoms(policy: string): Atomize<PolicyUi> {
+    return {
+        enabledAtom: atom<boolean>(false),
+        isCustomRuleAtom: atom<boolean>(false),
+        constrainSetAtom: atom<ConstrainSet>(ConstrainSet.withspecial),
+        customAtom: atom<string>(''),
+        minLengthAtom: atom<number>(8),
+        maxLengthAtom: atom<number>(12),
+        textVerifyAtom: atom<string>(''),
+        textGenerateAtom: atom<string>(''),
+        constrainsPswAtom: atom<ConstrainPsw>(ConstrainPsw.diffAp),
+        useAsAtom: atom<UseAs>(UseAs.generate),
+    };
+}
+
 export function PolicyEditorBody() {
     const ruleAtom = useState(atom('1'))[0];
     const historyAtom = useState(atom('1'))[0];
@@ -32,6 +48,8 @@ export function PolicyEditorBody() {
 
     const genTypeAtom = useState(atom('1'))[0];
     const [genType, setGenType] = useAtom(genTypeAtom);
+
+    const atoms = useState(createUiAtoms(''))[0];
 
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
