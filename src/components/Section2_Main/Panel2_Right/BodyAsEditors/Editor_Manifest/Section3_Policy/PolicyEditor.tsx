@@ -5,6 +5,7 @@ import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
 import { atom, useAtom } from "jotai";
 import { IconChevronDown } from "@ui/UIIconSymbols";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -44,23 +45,27 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
         <div className="relative">
             <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
                 <Select.Trigger>
-                    <div className="px-2 py-3 flex items-center space-x-1 bg-green-300 rounded">
-                        <div className="">
-                            <Select.Value>
-                            </Select.Value>
-                        </div>
-                        <Select.Icon><IconChevronDown className="w-4 h-4" /> </Select.Icon>
+                    <div className="p-2 flex items-center space-x-1 text-primary-300 bg-primary-700 rounded">
+                        <Select.Value />
+                        <Select.Icon><IconChevronDown className="w-4 h-4" /></Select.Icon>
                     </div>
                 </Select.Trigger>
 
                 <Select.Portal container={document.getElementById('portal')}>
                     <Select.Content>
-                        <Select.Viewport className="bg-primary-700 rounded">
+                        <Select.Viewport className={
+                            classNames(
+                                "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
+                                "px-1.5 py-1 grid grid-cols-1 rounded shadow-md",
+                                "bg-primary-100 dark:bg-gray-800 rounded",
+                            )}
+                        >
                             {itemsPolicy.map((item, idx) => (
                                 <Select.Item className={
                                     classNames(
-                                        "relative flex items-center px-8 py-2 rounded-md text-sm",
-                                        "text-primary-300 font-medium focus:bg-primary-100",
+                                        "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded outline-none",
+                                        "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
+                                        "focus:bg-primary-100",
                                         "radix-disabled:opacity-50",
                                         "focus:outline-none select-none"
                                     )}
@@ -68,7 +73,9 @@ function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
                                     key={idx}
                                 >
                                     <Select.ItemText>{item.name}</Select.ItemText>
-                                    <Select.ItemIndicator className="absolute left-2 inline-flex items-center">Q</Select.ItemIndicator>
+                                    <Select.ItemIndicator className="absolute left-2 inline-flex items-center">
+                                        <CheckIcon />
+                                    </Select.ItemIndicator>
                                 </Select.Item>
                             ))}
                         </Select.Viewport>
@@ -178,8 +185,7 @@ export function PolicyEditor() {
         leave: { opacity: 0, y: 10, scale: 0.97 },
         config: config.stiff,
     });
-    return (<>
-        <Dropdown />
+    return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger className="px-4 py-3 border-primary-500 active:scale-[.97] border rounded select-none">
                 Edit
@@ -208,7 +214,5 @@ export function PolicyEditor() {
                 </>) : null
             )}
         </Dialog.Root>
-
-    </>
     );
 }
