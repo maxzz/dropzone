@@ -8,9 +8,9 @@ import { ConstrainPsw, ConstrainSet, namesConstrainPsw, namesConstrainSet, UseAs
 
 type PolicyUi = {
     enabled: boolean;       // Enable password policy
-    isCustomRule: boolean;  // rule type: predefined or custom rule
+    isCustomRule: '0' | '1';  // boolean; rule type: predefined or custom rule
 
-    constrainSet: ConstrainSet; // predefined rule
+    constrainSet: string;   // ConstrainSet; predefined rule
     custom: string;         // customRule
 
     minLength: number;      // min password length
@@ -19,25 +19,10 @@ type PolicyUi = {
     textVerify: string;     // text to verify policy
     textGenerate: string;   // text to verify policy generation
 
-    constrainsPsw: ConstrainPsw;
+    constrainsPsw: string;  // ConstrainPsw
 
-    useAs: UseAs;       // by user / by system
+    useAs: string;          // UseAs; by user / by system
 };
-
-function createUiAtoms(policy: string): Atomize<PolicyUi> {
-    return {
-        enabledAtom: atom<boolean>(false),
-        isCustomRuleAtom: atom<boolean>(false),
-        constrainSetAtom: atom<ConstrainSet>(ConstrainSet.withspecial),
-        customAtom: atom<string>(''),
-        minLengthAtom: atom<number>(8),
-        maxLengthAtom: atom<number>(12),
-        textVerifyAtom: atom<string>(''),
-        textGenerateAtom: atom<string>(''),
-        constrainsPswAtom: atom<ConstrainPsw>(ConstrainPsw.diffAp),
-        useAsAtom: atom<UseAs>(UseAs.generate),
-    };
-}
 
 function Header() {
     return (
@@ -57,21 +42,19 @@ function Header() {
     );
 }
 
-function RuleTypes() {
-    const ruleAtom = useState(atom('1'))[0];
-    const ruleTypeAtom = useState(atom('1'))[0];
-    const [ruleType, setRuleType] = useAtom(ruleTypeAtom);
+function RuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+    const [isCustomRule, setIsCustomRule] = useAtom(atoms.isCustomRuleAtom);
     return (
         <div className="space-y-8">
             <div>
-                <Radio name="rule-type" checked={ruleType === '1'} onChange={() => setRuleType('1')}>Predefined rule</Radio>
+                <Radio name="rule-type" checked={isCustomRule === '0'} onChange={() => setIsCustomRule('0')}>Predefined rule</Radio>
                 <div className="mt-2">
-                    <Dropdown items={namesConstrainSet} valueAtom={ruleAtom} />
+                    <Dropdown items={namesConstrainSet} valueAtom={atoms.constrainSetAtom} />
                 </div>
             </div>
 
             <div>
-                <Radio name="rule-type" checked={ruleType === '2'} onChange={() => setRuleType('2')}>Custom rule</Radio>
+                <Radio name="rule-type" checked={isCustomRule === '1'} onChange={() => setIsCustomRule('1')}>Custom rule</Radio>
                 <div className="mt-2 flex items-center space-x-2">
                     <Input className="flex-1" />
                     <button className="self-stretch px-4 p-1 bg-primary-700 rounded">?</button>
@@ -122,13 +105,28 @@ function Buttons() {
     );
 }
 
+function createUiAtoms(policy: string, onChange: () => void): Atomize<PolicyUi> {
+    //TODO: parse policy and assign onChange callback
+    return {
+        enabledAtom: atom<boolean>(true),
+        isCustomRuleAtom: atom<'0' | '1'>('0'),
+        constrainSetAtom: atom<string>(`${ConstrainSet.withspecial}`),
+        customAtom: atom<string>(''),
+        minLengthAtom: atom<number>(8),
+        maxLengthAtom: atom<number>(12),
+        textVerifyAtom: atom<string>(''),
+        textGenerateAtom: atom<string>(''),
+        constrainsPswAtom: atom<string>(`${ConstrainPsw.diffAp}`),
+        useAsAtom: atom<string>(`${UseAs.verify}`),
+    };
+}
+
 export function PolicyEditorBody() {
-    const historyAtom = useState(atom('1'))[0];
+    const atoms = useState(createUiAtoms('', () => {
+        console.log('changed');
+    }))[0];
 
-    const genTypeAtom = useState(atom('1'))[0];
-    const [genType, setGenType] = useAtom(genTypeAtom);
-
-    const atoms = useState(createUiAtoms(''))[0];
+    const [useAs, setUseUs] = useAtom(atoms.useAsAtom);
 
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
@@ -140,7 +138,7 @@ export function PolicyEditorBody() {
 
             {/* Predefined or Custom rule */}
             <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
-            <RuleTypes />
+            <RuleTypes atoms={atoms} />
 
             {/* Min / Max length */}
             <MinMaxLength />
@@ -152,14 +150,14 @@ export function PolicyEditorBody() {
             {/* History */}
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
             <div>
-                <Dropdown items={namesConstrainPsw} valueAtom={historyAtom} />
+                <Dropdown items={namesConstrainPsw} valueAtom={atoms.constrainsPswAtom} />
             </div>
 
             {/* Generation */}
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
             <div className="grid space-y-2">
-                <Radio name="gen-type" checked={genType === '1'} onChange={() => setGenType('1')}>By user</Radio>
-                <Radio name="gen-type" checked={genType === '2'} onChange={() => setGenType('2')}>By system</Radio>
+                <Radio name="gen-type" checked={useAs === `${UseAs.verify}`} onChange={() => setUseUs(`${UseAs.verify}`)}>By user</Radio>
+                <Radio name="gen-type" checked={useAs === `${UseAs.generate}`} onChange={() => setUseUs(`${UseAs.generate}`)}>By system</Radio>
             </div>
 
             {/* Buttons */}
