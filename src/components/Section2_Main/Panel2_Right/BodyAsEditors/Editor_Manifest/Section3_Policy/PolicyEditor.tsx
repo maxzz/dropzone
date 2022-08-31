@@ -30,32 +30,32 @@ function Input({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
 
 function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
     return (<>
-        <Select.Root>
-            <Select.Trigger>
-                <Select.Value></Select.Value>
-                <Select.Icon>Trigger</Select.Icon>
-            </Select.Trigger>
-
-            <Select.Portal container={document.getElementById('portal')}>
-                <Select.Content>
-                    <Select.Viewport>
-                        <Select.Item value="1">None</Select.Item>
-                        <Select.Item value="2">Different than the Windows password</Select.Item>
-                        <Select.Item value="3">Unique within Password Manager logons</Select.Item>
-                        <Select.Item value="4">Different than the current password</Select.Item>
-                    </Select.Viewport>
-                </Select.Content>
-            </Select.Portal>
-        </Select.Root>
-
-        {/* <select className="p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
-            <option value="0">None</option>
-            <option value="1">Different than the Windows password</option>
-            <option value="2">Unique within Password Manager logons</option>
-            <option value="3">Different than the current password</option>
-        </select>
-
-        <input className={classNames("p-2 h-9 text-primary-300 bg-primary-700 rounded", className)} {...rest} /> */}
+        <div className="relative">
+            <Select.Root value="2">
+                <Select.Trigger>
+                    <Select.Value placeholder="123"></Select.Value>
+                    <Select.Icon>Trigger</Select.Icon>
+                </Select.Trigger>
+                {/* <Select.Portal container={document.getElementById('portal')}> */}
+                {/* <Select.Portal> */}
+                    <Select.Content>
+                        <Select.Viewport>
+                            <Select.Item className="bg-red-500" value="1">None</Select.Item>
+                            <Select.Item className="bg-red-500" value="2">Different than the Windows password</Select.Item>
+                            <Select.Item className="bg-red-500" value="3">Unique within Password Manager logons</Select.Item>
+                            <Select.Item className="bg-red-500" value="4">Different than the current password</Select.Item>
+                        </Select.Viewport>
+                    </Select.Content>
+                {/* </Select.Portal> */}
+            </Select.Root>
+            {/* <select className="p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
+                <option value="0">None</option>
+                <option value="1">Different than the Windows password</option>
+                <option value="2">Unique within Password Manager logons</option>
+                <option value="3">Different than the current password</option>
+            </select>
+            <input className={classNames("p-2 h-9 text-primary-300 bg-primary-700 rounded", className)} {...rest} /> */}
+        </div>
     </>
     );
 }
@@ -158,6 +158,7 @@ export function PolicyEditor() {
         config: config.stiff,
     });
     return (<>
+    <Dropdown />
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger className="px-4 py-3 border-primary-500 active:scale-[.97] border rounded select-none">
                 Edit
