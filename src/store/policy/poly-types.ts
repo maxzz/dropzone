@@ -28,3 +28,23 @@ export type Policy = {
     useExt: boolean;    // ? use customRule
     custom: string;     // customRule former policyExt
 };
+
+export const namesConstrainSet = [
+    "Letters and numbers",
+    "Numbers only",
+    "Letters only",
+    "Letters or numbers with special characters",
+    "Letters or numbers with at least one number",
+];
+
+export const namesConstrainPsw = [
+    "None",
+    "Different than the Windows password",
+    "Unique within Password Manager logons",
+    "Different than the current password",
+];
+
+export const namesUseAs = [
+    "Verify",
+    "Generate",
+];

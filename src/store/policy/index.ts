@@ -6,4 +6,7 @@ export {
     ConstrainSet,
     ConstrainPsw,
     UseAs,
+    namesConstrainSet,
+    namesConstrainPsw,
+    namesUseAs,
 } from './poly-types';
