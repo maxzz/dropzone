@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
+import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
@@ -24,6 +25,38 @@ function Radio({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
 function Input({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
     return (
         <input className={classNames("p-2 h-9 text-primary-300 bg-primary-700 rounded", className)} {...rest} />
+    );
+}
+
+function Dropdown({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
+    return (<>
+        <Select.Root>
+            <Select.Trigger>
+                <Select.Value></Select.Value>
+                <Select.Icon>Trigger</Select.Icon>
+            </Select.Trigger>
+
+            <Select.Portal container={document.getElementById('portal')}>
+                <Select.Content>
+                    <Select.Viewport>
+                        <Select.Item value="1">None</Select.Item>
+                        <Select.Item value="2">Different than the Windows password</Select.Item>
+                        <Select.Item value="3">Unique within Password Manager logons</Select.Item>
+                        <Select.Item value="4">Different than the current password</Select.Item>
+                    </Select.Viewport>
+                </Select.Content>
+            </Select.Portal>
+        </Select.Root>
+
+        {/* <select className="p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
+            <option value="0">None</option>
+            <option value="1">Different than the Windows password</option>
+            <option value="2">Unique within Password Manager logons</option>
+            <option value="3">Different than the current password</option>
+        </select>
+
+        <input className={classNames("p-2 h-9 text-primary-300 bg-primary-700 rounded", className)} {...rest} /> */}
+    </>
     );
 }
 
@@ -84,6 +117,8 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
 
+            <Dropdown />
+
             <select className="p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
                 <option value="0">None</option>
                 <option value="1">Different than the Windows password</option>
@@ -131,9 +166,15 @@ export function PolicyEditor() {
             {transitions((styles, item) =>
                 item ? (<>
                     <Dialog.Portal container={document.getElementById('portal')}>
-                        <Dialog.Overlay forceMount asChild className="fixed inset-0 bg-primary-900/80">
+                        <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
+                        
+                        {/* <div className="fixed inset-0 bg-primary-900/80">
                             <a.div style={{ opacity: styles.opacity, }} />
-                        </Dialog.Overlay>
+                        </div> */}
+
+                        {/* <Dialog.Overlay forceMount asChild className="fixed inset-0 bg-primary-900/80">
+                            <a.div style={{ opacity: styles.opacity, }} />
+                        </Dialog.Overlay> */}
 
                         <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
                             <a.div style={styles}>
