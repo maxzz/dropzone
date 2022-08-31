@@ -16,10 +16,10 @@ function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     );
 }
 
-function Radio({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
+function Radio({ children, name, checked, onChange, className, ...rest }: { name: string; checked: boolean; } & HTMLAttributes<HTMLElement>) {
     return (
         <label className={classNames("w-max inline-flex items-center gap-x-2 select-none cursor-pointer", className)} {...rest}>
-            <input className="w-4 h-4 dark-radio" type="radio" />
+            <input className="w-4 h-4 dark-radio" name={name} checked={checked} onChange={onChange} type="radio" />
             {children}
         </label>
     );
@@ -97,6 +97,13 @@ function Dropdown({ items, valueAtom, className }: { items: { value: string; nam
 function EditorBody() {
     const ruleAtom = useState(atom('1'))[0];
     const historyAtom = useState(atom('1'))[0];
+
+    const ruleTypeAtom = useState(atom('1'))[0];
+    const [ruleType, setRuleType] = useAtom(ruleTypeAtom);
+
+    const genTypeAtom = useState(atom('1'))[0];
+    const [genType, setGenType] = useAtom(genTypeAtom);
+
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
 
@@ -115,13 +122,13 @@ function EditorBody() {
             {/* <div className="flex flex-col min-w-0 space-y-8"> */}
             <div className="space-y-8">
                 <div>
-                    <Radio>Predefined rule</Radio>
+                    <Radio name="rule-type" checked={ruleType === '1'} onChange={() => setRuleType('1')}>Predefined rule</Radio>
                     <Dropdown className="mt-2 w-full" items={itemsRule} valueAtom={ruleAtom} />
                     {/* <Dropdown className="mt-2 w-max" items={itemsRule} valueAtom={ruleAtom} /> */}
                 </div>
 
                 <div>
-                    <Radio>Custom rule</Radio>
+                    <Radio name="rule-type" checked={ruleType === '2'} onChange={() => setRuleType('2')}>Custom rule</Radio>
                     <div className="mt-2 flex items-center space-x-2">
                         <Input className="flex-1" />
                         <button className="self-stretch px-4 p-1 bg-primary-700 rounded">?</button>
@@ -156,8 +163,8 @@ function EditorBody() {
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
 
             <div className="grid space-y-2">
-                <Radio>By user</Radio>
-                <Radio>By system</Radio>
+                <Radio name="gen-type" checked={genType === '1'} onChange={()=>setGenType('1')}>By user</Radio>
+                <Radio name="gen-type" checked={genType === '2'} onChange={()=>setGenType('2')}>By system</Radio>
             </div>
 
             <div className="flex items-center justify-center gap-x-2">
