@@ -1,11 +1,30 @@
 import React, { HTMLAttributes, useState } from "react";
+import { atom, PrimitiveAtom, useAtom } from "jotai";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
-import { atom, PrimitiveAtom, useAtom } from "jotai";
 import { IconChevronDown, IconCross } from "@ui/UIIconSymbols";
 import { CheckIcon } from "@radix-ui/react-icons";
+import { ConstrainPsw, ConstrainSet, namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
+
+type PolicyUi = {
+    enabled: boolean;       // Enable password policy
+    isCustomRule: boolean;  // rule type: predefined or custom rule
+
+    constrainSet: ConstrainSet; // predefined rule
+    custom: string;         // customRule
+
+    minLength: number;      // min password length
+    maxLength: number;      // max password length
+
+    textVerify: string;     // text to verify policy
+    textGenerate: string;   // text to verify policy generation
+
+    constrainsPsw: ConstrainPsw;
+
+    useAs: UseAs;       // by user / by system
+};
 
 function Check({ children, className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -46,7 +65,7 @@ const itemsHistory = [
     { value: "4", name: "Different than the current password" },
 ];
 
-function Dropdown({ items, valueAtom, className }: { items: { value: string; name: string; }[]; valueAtom: PrimitiveAtom<string>; } & HTMLAttributes<HTMLButtonElement>) {
+function Dropdown({ items, valueAtom, className }: { items: string[]; valueAtom: PrimitiveAtom<string>; } & HTMLAttributes<HTMLButtonElement>) {
     const [val, setVal] = useAtom(valueAtom);
     return (<>
         <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
@@ -75,10 +94,10 @@ function Dropdown({ items, valueAtom, className }: { items: { value: string; nam
                                     "radix-disabled:opacity-50",
                                     "focus:outline-none select-none"
                                 )}
-                                value={item.value}
+                                value={`${idx}`}
                                 key={idx}
                             >
-                                <Select.ItemText>{item.name}</Select.ItemText>
+                                <Select.ItemText>{item}</Select.ItemText>
                                 <Select.ItemIndicator className="absolute left-2 inline-flex items-center">
                                     <CheckIcon />
                                 </Select.ItemIndicator>
@@ -107,12 +126,16 @@ function EditorBody() {
 
             <div className="">
                 <div className="flex items-center justify-between">
-                    <div className="text-lg font-bold text-primary-300">Policy Editor</div>
+                    <div className="text-lg font-bold text-primary-300">
+                        Policy Editor
+                    </div>
                     <Dialog.Close tabIndex={-1}>
                         <div className="px-2 py-1 hover:bg-primary-700 active:scale-[.97] rounded"><IconCross className="w-5 h-5 py-1" /> </div>
                     </Dialog.Close>
                 </div>
-                <h1 className="mt-2 mb-4">Specify password complexity, history and generation requirements.</h1>
+                <h1 className="mt-4 mb-6">
+                    Specify password complexity, history and generation requirements.
+                </h1>
             </div>
 
             <Check>Enable password policy</Check>
@@ -123,7 +146,7 @@ function EditorBody() {
                 <div>
                     <Radio name="rule-type" checked={ruleType === '1'} onChange={() => setRuleType('1')}>Predefined rule</Radio>
                     <div className="mt-2">
-                        <Dropdown items={itemsRule} valueAtom={ruleAtom} />
+                        <Dropdown items={namesConstrainSet} valueAtom={ruleAtom} />
                     </div>
                 </div>
 
@@ -157,7 +180,7 @@ function EditorBody() {
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
 
             <div>
-                <Dropdown items={itemsHistory} valueAtom={historyAtom} />
+                <Dropdown items={namesConstrainPsw} valueAtom={historyAtom} />
             </div>
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
