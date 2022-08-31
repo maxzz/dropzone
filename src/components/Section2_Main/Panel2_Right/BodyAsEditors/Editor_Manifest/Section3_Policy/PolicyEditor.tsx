@@ -103,7 +103,7 @@ function EditorBody() {
             <div className="flex items-center justify-between">
                 <div className="text-lg font-bold text-primary-300">Policy Editor</div>
                 <Dialog.Close tabIndex={-1}>
-                    <div className="px-2 py-1 bg-primary-700 rounded"><IconCross className="w-5 h-5 py-1" /> </div>
+                    <div className="px-2 py-1 hover:bg-primary-700 active:scale-[.97] rounded"><IconCross className="w-5 h-5 py-1" /> </div>
                 </Dialog.Close>
             </div>
 
@@ -140,11 +140,11 @@ function EditorBody() {
 
             <div className="flex items-center space-x-2">
                 <Input className="" />
-                <button>Verify</button>
+                <button className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">Verify</button>
             </div>
             <div className="flex items-center space-x-2">
                 <Input className="" />
-                <button>Generate</button>
+                <button className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">Generate</button>
             </div>
 
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
@@ -162,12 +162,12 @@ function EditorBody() {
 
             <div className="flex items-center justify-center gap-x-2">
                 <Dialog.Close>
-                    <div className="px-4 py-2 inline-block border-primary-500 active:scale-[.97] border rounded select-none">
+                    <div className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">
                         OK
                     </div>
                 </Dialog.Close>
                 <Dialog.Close>
-                    <div className="px-4 py-2 inline-block border-primary-500 active:scale-[.97] border rounded select-none">
+                    <div className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">
                         Cancel
                     </div>
                 </Dialog.Close>
