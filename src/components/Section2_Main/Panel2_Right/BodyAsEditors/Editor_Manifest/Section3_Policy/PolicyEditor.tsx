@@ -3,7 +3,7 @@ import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import { classNames } from "@/utils/classnames";
-import { atom, useAtom } from "jotai";
+import { atom, PrimitiveAtom, useAtom } from "jotai";
 import { IconChevronDown } from "@ui/UIIconSymbols";
 import { CheckIcon } from "@radix-ui/react-icons";
 
@@ -31,19 +31,26 @@ function Input({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
     );
 }
 
-const itemsPolicy = [
+const itemsRule = [
+    { value: "1", name: "Letters and numbers" },
+    { value: "2", name: "Numbers only" },
+    { value: "3", name: "Letters only" },
+    { value: "4", name: "Letters or numbers with special characters" },
+    { value: "5", name: "Letters or numbers with at least one number" },
+];
+
+const itemsHistory = [
     { value: "1", name: "None" },
     { value: "2", name: "Different than the Windows password" },
     { value: "3", name: "Unique within Password Manager logons" },
     { value: "4", name: "Different than the current password" },
 ];
 
-function Dropdown({ items }: { items: { value: string; name: string; }[]; } & HTMLAttributes<HTMLInputElement>) {
-    const ourAtom = useState(atom('1'))[0];
-    const [val, setVal] = useAtom(ourAtom);
+function Dropdown({ items, valueAtom, className }: { items: { value: string; name: string; }[]; valueAtom: PrimitiveAtom<string>; } & HTMLAttributes<HTMLButtonElement>) {
+    const [val, setVal] = useAtom(valueAtom);
     return (<>
         <Select.Root value={val} onValueChange={(v: string) => setVal(v)}>
-            <Select.Trigger>
+            <Select.Trigger className={className}>
                 <div className="p-2 flex items-center justify-between space-x-1 text-primary-300 bg-primary-700 rounded">
                     <Select.Value />
                     <Select.Icon><IconChevronDown className="w-4 h-4" /></Select.Icon>
@@ -86,6 +93,8 @@ function Dropdown({ items }: { items: { value: string; name: string; }[]; } & HT
 }
 
 function EditorBody() {
+    const ruleAtom = useState(atom('1'))[0];
+    const historyAtom = useState(atom('1'))[0];
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
 
@@ -101,19 +110,13 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
 
-            <div className="space-y-4">
-                <div className="">
+            <div className="space-y-8">
+                <div>
                     <Radio>Predefined rule</Radio>
-                    <select className="mt-2 p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={4} onChange={() => { }}>
-                        <option value="1">Letters and numbers</option>
-                        <option value="2">Numbers only</option>
-                        <option value="3">letters only</option>
-                        <option value="4">Letters or numbers with special characters</option>
-                        <option value="5">Letters or numbers with at least one number</option>
-                    </select>
+                    <Dropdown className="mt-2 w-full" items={itemsRule} valueAtom={ruleAtom} />
                 </div>
 
-                <div className="">
+                <div>
                     <Radio>Custom rule</Radio>
                     <div className="mt-2 flex items-center space-x-2">
                         <Input className="flex-1" />
@@ -142,14 +145,9 @@ function EditorBody() {
 
             <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
 
-            <Dropdown items={itemsPolicy} />
-
-            <select className="p-2 h-9 block text-primary-300 bg-primary-700 rounded" value={2} onChange={() => { }}>
-                <option value="0">None</option>
-                <option value="1">Different than the Windows password</option>
-                <option value="2">Unique within Password Manager logons</option>
-                <option value="3">Different than the current password</option>
-            </select>
+            <div>
+                <Dropdown items={itemsHistory} valueAtom={historyAtom} />
+            </div>
 
             <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
 
@@ -180,12 +178,11 @@ export function PolicyEditor() {
         from: { opacity: 0, y: -10, scale: 0.97 },
         enter: { opacity: 1, y: 0, scale: 1 },
         leave: { opacity: 0, y: 10, scale: 0.97 },
-        //config: config.stiff,
-        config: {duration: 4000},
+        config: config.stiff,
     });
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger className="px-4 py-3 border-primary-500 active:scale-[.97] border rounded select-none">
+            <Dialog.Trigger className="px-4 py-3 text-primary-300 border-primary-500 active:scale-[.97] border rounded select-none">
                 Edit
             </Dialog.Trigger>
 
@@ -200,8 +197,7 @@ export function PolicyEditor() {
                     </Dialog.Content>
 
                 </Dialog.Portal>
-            </>
-            )}
+            </>)}
         </Dialog.Root>
     );
 }
