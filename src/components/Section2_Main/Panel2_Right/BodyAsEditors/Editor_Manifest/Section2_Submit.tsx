@@ -1,25 +1,13 @@
-import React, { HTMLAttributes, useEffect, useState } from 'react';
+import React, { InputHTMLAttributes, useEffect, useState } from 'react';
 import { FieldTyp, Meta, SUBMIT } from '@/store/manifest';
 
-type RadioButtonProps = {
-    label: string;
-    groupName: string;
-    value?: number;
-    checked: boolean;
-} & HTMLAttributes<HTMLElement>;
-
-function RadioButton({ label, groupName, value, checked, onChange, ...rest }: RadioButtonProps) {
+function RadioButton({ label, ...rest }: { label: string; } & InputHTMLAttributes<HTMLElement>) {
     return (
-        <label className="h-6 flex items-center space-x-3 cursor-pointer select-none" {...rest}>
-            <input
-                className="w-4 h-4 dark-radio"
-                type="radio"
-                name={groupName}
-                value={value}
-                checked={checked}
-                onChange={onChange}
-            />
-            <div >{label}</div>
+        <label className="h-6 flex items-center space-x-3 cursor-pointer select-none">
+            <input className="w-4 h-4 dark-radio" type="radio" {...rest} />
+            <div>
+                {label}
+            </div>
         </label>
     );
 }
@@ -28,7 +16,7 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
     return (
         <div className="px-3 py-2 max-w-max min-w-[14rem] flex flex-col space-y-1 bg-primary-800 rounded">
             {items.map((item, idx) => (
-                <RadioButton groupName={groupName} value={idx} checked={selected === idx} label={item} key={idx} onChange={() => setSelected(idx)} />
+                <RadioButton name={groupName} label={item} value={idx} checked={selected === idx} onChange={() => setSelected(idx)} key={idx} />
             ))}
         </div>
     );

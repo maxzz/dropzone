@@ -9,6 +9,7 @@ Experimenting with data-driven and self-learning UI (DDUI and SLUI).
 ![](src/assets/previews/2022-08-31_16-51-04.png)
 ![](src/assets/previews/2022-08-31_16-51-05.png)
 ![](src/assets/previews/2022-08-31_16-51-06.png)
+![](src/assets/previews/2022-08-31_16-51-07.png)
 
 
 [**GitHub Dependencies Graph**](https://github.com/maxzz/dropzone/network/dependencies)
@@ -31,8 +32,8 @@ Experimenting with data-driven and self-learning UI (DDUI and SLUI).
 <!-- <a href="http://streamich.github.io/react-use"><img src="https://img.shields.io/badge/demos-🚀-yellow.svg" alt="demos" /></a> -->
 <!-- [img-demo]: https://img.shields.io/badge/demo-%20%20%20%F0%9F%9A%80-green.svg -->
 
-#### Live Demo [![][img-demo]](https://maxzz.github.io/dropzone)
-
+<!-- #### Live Demo [![][img-demo]](https://maxzz.github.io/dropzone) -->
+#### Live Demo [🏹](https://maxzz.github.io/dropzone)
 
 <!--
 Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:

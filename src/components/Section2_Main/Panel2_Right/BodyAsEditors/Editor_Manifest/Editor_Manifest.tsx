@@ -54,7 +54,7 @@ function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formT
             </SubSection>
 
             <SubSection label="Form options" openAtom={openSections.optionsAtom}>
-                <Section4_FormOptions />
+                <Section4_FormOptions fileUsAtom={fileUsAtom} formType={formType} />
             </SubSection>
 
         </SubSection>
