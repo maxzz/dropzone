@@ -1,8 +1,15 @@
 #### About
 
-Experimenting with Data-Driven User Interfaces (DDUI).
+Experimenting with data-driven and self-learning UI (DDUI and SLUI).
 
-![](src/assets/previews/2022-08-14_16-24-05,highlight2.png)
+<!-- ![](src/assets/previews/2022-08-14_16-24-05,highlight2.png) -->
+
+![](src/assets/previews/2022-08-31_16-51-02.png)
+![](src/assets/previews/2022-08-31_16-51-03.png)
+![](src/assets/previews/2022-08-31_16-51-04.png)
+![](src/assets/previews/2022-08-31_16-51-05.png)
+![](src/assets/previews/2022-08-31_16-51-06.png)
+
 
 [**GitHub Dependencies Graph**](https://github.com/maxzz/dropzone/network/dependencies)
 
