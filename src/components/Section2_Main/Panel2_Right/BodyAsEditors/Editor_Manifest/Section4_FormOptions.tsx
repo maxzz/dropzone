@@ -84,13 +84,16 @@ function Section({ label }: { label: string; }) {
 
 function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
     return (
-        <input className={classNames(
-            "px-2 py-1 h-6",
-            "bg-primary-800 text-primary-300 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400",
-            "focus:ring-1 focus:ring-offset-1",
-            "outline-none rounded-sm",
-            className
-        )} {...rest} />
+        <input
+            className={classNames(
+                "px-2 py-1 h-6",
+                "bg-primary-800 text-primary-300 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400",
+                "focus:ring-1 focus:ring-offset-1",
+                "outline-none rounded-sm",
+                className,
+            )}
+            {...rest}
+        />
     );
 }
 
@@ -116,23 +119,7 @@ function Part1General({ atoms }: { atoms: FormAtoms; }) {
     </>);
 }
 
-function Part2QL({ atoms }: { atoms: FormAtoms; }) {
-    const [dashboard, setDashboard] = useAtom(atoms.uiPart2QL.dashboardAtom);
-    const [name, setName] = useAtom(atoms.uiPart2QL.nameAtom);
-    const [url, setUrl] = useAtom(atoms.uiPart2QL.urlAtom);
-    return (<>
-        <div className="">Display on mini-dashboard</div>
-        <Input value={dashboard ? '1' : '0'} onChange={(e) => setDashboard(e.target.value === '1')} />
-
-        <div className="">Quick Link Name</div>
-        <Input value={name} onChange={(e) => setName(e.target.value)} />
-
-        <div className="">Quick Link URL</div>
-        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
-    </>);
-}
-
-function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
+function Part2ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
     const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
     const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom); //TODO: show only if web app
     const [monitor, setMonitor] = useAtom(atoms.uiPart3ScreenDetection.monitorAtom);
@@ -155,15 +142,31 @@ function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
             </>);
 }
 
-function Part4Authentication({ atoms }: { atoms: FormAtoms; }) {
+function Part3Authentication({ atoms }: { atoms: FormAtoms; }) {
     const [aim, setAim] = useAtom(atoms.uiPart4Authentication.aimAtom);
     const [lock, setLock] = useAtom(atoms.uiPart4Authentication.lockAtom);
     return (<>
-        <div className="">Start authentication immediately</div>
+        <div className="" title="Start authentication immediately">Authenticate immediately</div>
         <Input value={aim ? '1' : '0'} onChange={(e) => setAim(e.target.value === '1')} />
 
         <div className="">Lock out login fields</div>
         <Input value={lock ? '1' : '0'} onChange={(e) => setLock(e.target.value === '1')} />
+    </>);
+}
+
+function Part4QL({ atoms }: { atoms: FormAtoms; }) {
+    const [dashboard, setDashboard] = useAtom(atoms.uiPart2QL.dashboardAtom);
+    const [name, setName] = useAtom(atoms.uiPart2QL.nameAtom);
+    const [url, setUrl] = useAtom(atoms.uiPart2QL.urlAtom);
+    return (<>
+        <div className="">Display on mini-dashboard</div>
+        <Input value={dashboard ? '1' : '0'} onChange={(e) => setDashboard(e.target.value === '1')} />
+
+        <div className="">Quick Link Name</div>
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
+
+        <div className="">Quick Link URL</div>
+        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
     </>);
 }
 
@@ -191,18 +194,18 @@ export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: File
     const isWeb = fileUs.stats.isWeb; // TODO: why this is not per form?
 
     return (
-        <div className="mr-1 grid grid-cols-[auto_minmax(0,1fr)] gap-x-1 gap-y-0.5 items-center font-light text-primary-400">
+        <div className="mr-1 grid grid-cols-[auto_minmax(0,1fr)] gap-x-2 gap-y-0.5 items-center font-light text-primary-400">
             <Section label="General" />
             <Part1General atoms={atoms} />
 
-            <Section label="Quick link" />
-            <Part2QL atoms={atoms} />
-
             <Section label="Screen detection" />
-            <Part3ScreenDetection atoms={atoms} />
+            <Part2ScreenDetection atoms={atoms} />
 
             <Section label="Authentication" />
-            <Part4Authentication atoms={atoms} />
+            <Part3Authentication atoms={atoms} />
+
+            <Section label="Quick link" />
+            <Part4QL atoms={atoms} />
 
             {!isWeb && <>
                 <Section label="Password Manager Icon" />
@@ -211,3 +214,5 @@ export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: File
         </div>
     );
 }
+
+//TODO: Do we need to show fields: window caption and classname if they don't have sense for web, but created w/ IE?
