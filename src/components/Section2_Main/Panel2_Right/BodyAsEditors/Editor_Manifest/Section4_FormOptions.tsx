@@ -133,19 +133,20 @@ function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
 
     const fileUs = useAtomValue(atoms.fileUsAtom);
     const isWeb = fileUs.stats.isWeb;
-    return (<>
-        <div className="">URL</div>
-        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+    return (
+        isWeb ?
+            <>
+                <div className="">URL</div>
+                <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+            </>
+            : <>
+                <div className="">Windows Caption</div>
+                <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
 
-        {!isWeb && <>
-            <div className="">Windows Caption</div>
-            <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
+                <div className="">Monitor screen changes</div>
+                <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
 
-            <div className="">Monitor screen changes</div>
-            <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
-
-        </>}
-    </>);
+            </>);
 }
 
 function Part4Authentication({ atoms }: { atoms: FormAtoms; }) {
@@ -180,6 +181,9 @@ export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: File
         console.log('changed');
     }, fileUsAtom, formIdx);
 
+    const fileUs = useAtomValue(atoms.fileUsAtom);
+    const isWeb = fileUs.stats.isWeb; // TODO: why this is not per form?
+
     return (
         <div className="mr-1 grid grid-cols-[auto_minmax(0,1fr)] gap-x-1 gap-y-0.5 items-center font-light text-primary-400">
             <Section label="General" />
@@ -194,8 +198,10 @@ export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: File
             <Section label="Authentication" />
             <Part4Authentication atoms={atoms} />
 
-            <Section label="Password Manager Icon" />
-            <Part5PasswordManagerIcon atoms={atoms} />
+            {!isWeb && <>
+                <Section label="Password Manager Icon" />
+                <Part5PasswordManagerIcon atoms={atoms} />
+            </>}
         </div>
     );
 }
