@@ -17,7 +17,7 @@ function Icon_LockFields({ lockfields }: { lockfields: string | undefined; }) {
 function Icon_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link ${useit ? '= 1 (use)' : ql == '2' ? '= 2 (don\'t use)' : `'${ql}''`}`;
-    return useit ? IconOptionsQL({className:"w-2.5 h-2.5", title}) : null;
+    return useit ? IconOptionsQL({className:"w-3.5 h-3.5", title}) : null;
 }
 
 function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {

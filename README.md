@@ -123,6 +123,15 @@ Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:
 * "styled-components": "5.3.5", - https://github.com/styled-components/styled-components - should use instead of @stitches/react, but who cares
   "@types/styled-components": "5.1.26",
 
+* from ManiActions.tsx:
+        //import { PopoverMenu } from '@ui/nun/UIDropdownMenuLaag';
+        //import { CardMenu } from './nun/CardMenu';
+
+        export function ManiActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+            return (... {/* <PopoverMenu /> */} {/* <CardMenu /> */} );
+        }
+
+
 * TODO:
         "react-overlays": "5.2.0",
         "react-popper": "2.3.0",

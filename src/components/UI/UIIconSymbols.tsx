@@ -136,8 +136,13 @@ export function UISymbolDefs() {
                     <ellipse cx="12" cy="15.63" rx="2.01" ry="1.94" />
                 </symbol>
 
-                <symbol id="options-ql" viewBox="0 0 24 24">
+                {/* first version */}
+                {/* <symbol id="options-ql" viewBox="0 0 24 24">
                     <path strokeLinejoin="round" d="m4.46 22.56 14.9-12.07a824.5 824.5 0 0 0-7.02-1.78l7.2-7.27h-8.96L5.15 12.75l7.11-.75S4.59 22.19 4.47 22.56Z" />
+                </symbol> */}
+
+                <symbol id="options-ql" viewBox="0 0 24 24">
+                    <path d="M5.85 8.47c-.16 4.39.56 9.05 1.51 13.88.03.14.23.14.26 0l1.66-8.56 5.16 2 3.75-11.93-6.48-2.32-1.25 8.45-4.61-1.52Z" />
                 </symbol>
 
                 {/* info */}
@@ -183,6 +188,11 @@ export function UISymbolDefs() {
                 <symbol id="icon-cross" viewBox="0 0 24 24">
                     <path d="m2 2 20 20" />
                     <path d="M2 22 22 2" />
+                </symbol>
+
+                <symbol id="icon-pen" viewBox="0 0 24 24">
+                    <path d="M1.48 20.12 6.37 8.39l7.65-2.91 5.01 3.21-.64 8.27-14.65 5.53c-.21.08-.38-.19-.21-.34l7.4-6.6s.23-.28.57-.39c.65-.21 1.7-.17 2.42-1.18 1.37-1.91-1.11-4.28-3.09-3.1-1.04.62-1.12 2.04-1.24 2.89-.05.39-.32.66-.32.66L1.85 20.4c-.19.16-.47-.05-.37-.28Z" />
+                    <path d="m15.79 3.77 1.77-2.22c.06-.07.15-.08.23-.03l4.68 3.16c.08.06.1.17.04.25L20.64 7.2a.17.17 0 0 1-.23.03L15.8 3.92s-.05-.08 0-.14Z" />
                 </symbol>
 
                 {/* Login and password change */}
@@ -512,6 +522,15 @@ export function IconCross({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTM
         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} {...rest}>
             {title && <title>{title}</title>}
             <use xlinkHref="#icon-cross" />
+        </svg>
+    );
+}
+
+export function IconPen({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#icon-pen" />
         </svg>
     );
 }
