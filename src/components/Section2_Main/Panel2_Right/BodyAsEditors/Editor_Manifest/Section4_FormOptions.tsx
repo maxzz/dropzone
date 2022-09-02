@@ -73,7 +73,7 @@ function createAtoms(v: string, callback: () => void): FormAtoms {
 
 function Section({ label }: { label: string; }) {
     return (
-        <div className="text-[#32ffdaa0]">{label}</div>
+        <div className="text-[#32ffdaa0] col-span-2">{label}</div>
     );
 }
 
@@ -90,101 +90,97 @@ function Part1General({ atoms }: { atoms: FormAtoms; }) {
     const [desc, setDesc] = useAtom(atoms.uiPart1General.descAtom);
     const [hint, setHint] = useAtom(atoms.uiPart1General.hintAtom);
     const [balloon, setBalloon] = useAtom(atoms.uiPart1General.balloonAtom);
-    return (
-        <div className="ml-4">
-            <div className="">Managed login name</div>
-            <Input value={name} onChange={(e) => setName(e.target.value)} />
+    return (<>
+        <div className="">Managed login name</div>
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
 
-            <div className="">Description</div>
-            <Input value={desc} onChange={(e) => setDesc(e.target.value)} />
+        <div className="">Description</div>
+        <Input value={desc} onChange={(e) => setDesc(e.target.value)} />
 
-            <div className="">User hint</div>
-            <Input value={hint} onChange={(e) => setHint(e.target.value)} />
+        <div className="">User hint</div>
+        <Input value={hint} onChange={(e) => setHint(e.target.value)} />
 
-            <div className="">Show balloon</div>
-            <Input value={balloon} onChange={(e) => setBalloon(+e.target.value)} /> {/* TODO: add validation */}
-        </div>
-    );
+        <div className="">Show balloon</div>
+        <Input value={balloon} onChange={(e) => setBalloon(+e.target.value)} /> {/* TODO: add validation */}
+    </>);
 }
 
 function Part2QL({ atoms }: { atoms: FormAtoms; }) {
     const [dashboard, setDashboard] = useAtom(atoms.uiPart2QL.dashboardAtom);
     const [name, setName] = useAtom(atoms.uiPart2QL.nameAtom);
     const [url, setUrl] = useAtom(atoms.uiPart2QL.urlAtom);
-    return (
-        <div className="ml-4">
-            <div className="">Display on mini-dashboard</div>
-            <Input value={dashboard ? '1' : '0'} onChange={(e) => setDashboard(e.target.value === '1')} />
+    return (<>
+        <div className="">Display on mini-dashboard</div>
+        <Input value={dashboard ? '1' : '0'} onChange={(e) => setDashboard(e.target.value === '1')} />
 
-            <div className="">Quick Link Name</div>
-            <Input value={name} onChange={(e) => setName(e.target.value)} />
+        <div className="">Quick Link Name</div>
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
 
-            <div className="">Quick Link URL</div>
-            <Input value={url} onChange={(e) => setUrl(e.target.value)} />
-        </div>
-    );
+        <div className="">Quick Link URL</div>
+        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+    </>);
 }
 
 function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
     const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom);
     const [monitor, setMonitor] = useAtom(atoms.uiPart3ScreenDetection.monitorAtom);
     const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
-    return (
-        <div className="ml-4">
-            <div className="">Windows Caption</div>
-            <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
+    return (<>
+        <div className="">Windows Caption</div>
+        <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
 
-            <div className="">Monitor screen changes</div>
-            <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
+        <div className="">Monitor screen changes</div>
+        <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
 
-            <div className="">URL</div>
-            <Input value={url} onChange={(e) => setUrl(e.target.value)} />
-        </div>
-    );
+        <div className="">URL</div>
+        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+    </>);
 }
 
 function Part4Authentication({ atoms }: { atoms: FormAtoms; }) {
     const [aim, setAim] = useAtom(atoms.uiPart4Authentication.aimAtom);
     const [lock, setLock] = useAtom(atoms.uiPart4Authentication.lockAtom);
-    return (
-        <div className="ml-4">
-            <div className="">Start authentication immediately</div>
-            <Input value={aim ? '1' : '0'} onChange={(e) => setAim(e.target.value === '1')} />
-            
-            <div className="">Lock out login fields</div>
-            <Input value={lock ? '1' : '0'} onChange={(e) => setLock(e.target.value === '1')} />
-        </div>
-    );
+    return (<>
+        <div className="">Start authentication immediately</div>
+        <Input value={aim ? '1' : '0'} onChange={(e) => setAim(e.target.value === '1')} />
+
+        <div className="">Lock out login fields</div>
+        <Input value={lock ? '1' : '0'} onChange={(e) => setLock(e.target.value === '1')} />
+    </>);
 }
 
 function Part5PasswordManagerIcon({ atoms }: { atoms: FormAtoms; }) {
     const [id, setId] = useAtom(atoms.uiPart5PasswordManagerIcon.idAtom);
     const [loc, setLoc] = useAtom(atoms.uiPart5PasswordManagerIcon.locAtom);
-    return (
-        <div className="ml-4">
-            <div className="">Location ID</div>
-            <Input value={id} onChange={(e) => setId(e.target.value)} />
+    return (<>
+        <div className="">Location ID</div>
+        <Input value={id} onChange={(e) => setId(e.target.value)} />
 
-            <div className="">Location</div>
-            <Input value={loc} onChange={(e) => setLoc(e.target.value)} />
-        </div>
-    );
+        <div className="">Location</div>
+        <Input value={loc} onChange={(e) => setLoc(e.target.value)} />
+    </>);
 }
 
 export function Section4_FormOptions({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
     const atoms = createAtoms('', () => {
         console.log('changed');
     });
-    return (<>
-        <Section label="General" />
-        <Part1General atoms={atoms} />
-        <Section label="Quick link" />
-        <Part2QL atoms={atoms} />
-        <Section label="Screen detection" />
-        <Part3ScreenDetection atoms={atoms} />
-        <Section label="Authentication" />
-        <Part4Authentication atoms={atoms} />
-        <Section label="Password Manager Icon" />
-        <Part5PasswordManagerIcon atoms={atoms} />
-    </>);
+    return (
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-1">
+            <Section label="General" />
+            <Part1General atoms={atoms} />
+
+            <Section label="Quick link" />
+            <Part2QL atoms={atoms} />
+
+            <Section label="Screen detection" />
+            <Part3ScreenDetection atoms={atoms} />
+
+            <Section label="Authentication" />
+            <Part4Authentication atoms={atoms} />
+
+            <Section label="Password Manager Icon" />
+            <Part5PasswordManagerIcon atoms={atoms} />
+        </div>
+    );
 }
