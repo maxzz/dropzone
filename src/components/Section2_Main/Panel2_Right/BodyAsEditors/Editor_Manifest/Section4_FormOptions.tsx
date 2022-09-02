@@ -73,13 +73,13 @@ function createAtoms(v: string, callback: () => void): FormAtoms {
 
 function Section({ label }: { label: string; }) {
     return (
-        <div className="text-[#32ffdaa0] col-span-2">{label}</div>
+        <div className="col-span-2 text-[#32ffdaa0] font-normal">{label}</div>
     );
 }
 
 function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
     return (
-        <input className={classNames("p-2 h-9 text-primary-300 bg-primary-700 rounded", className)} {...rest} />
+        <input className={classNames("px-2 py-1 h-8 text-primary-300 bg-primary-700 rounded", className)} {...rest} />
     );
 }
 
@@ -166,7 +166,7 @@ export function Section4_FormOptions({ fileUsAtom, formType }: { fileUsAtom: Fil
         console.log('changed');
     });
     return (
-        <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-1">
+        <div className="mr-1 grid grid-cols-[auto_minmax(0,1fr)] gap-x-1 gap-y-0.5 items-center font-light text-primary-400">
             <Section label="General" />
             <Part1General atoms={atoms} />
 
