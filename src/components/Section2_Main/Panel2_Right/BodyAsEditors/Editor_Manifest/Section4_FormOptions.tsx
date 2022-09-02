@@ -12,21 +12,21 @@ type UiPart1General = {
     balloon: number;    // show balloon # times
 };
 
-type UiPart2QL = {
-    dashboard: boolean; // Display on mini-dashboard
-    name: string;       // Quick Link Name
-    url: string;        // Quick Link URL
-};
-
-type UiPart3ScreenDetection = {
+type UiPart2ScreenDetection = {
     url: string;        // URL
     caption: string;    // Windows Caption
     monitor: boolean;   // Monitor screen changes
 };
 
-type UiPart4Authentication = {
+type UiPart3Authentication = {
     aim: boolean;       // Start authentication immediately
     lock: boolean;      // Lock out login fields
+};
+
+type UiPart4QL = {
+    dashboard: boolean; // Display on mini-dashboard
+    name: string;       // Quick Link Name
+    url: string;        // Quick Link URL
 };
 
 type UiPart5PasswordManagerIcon = {
@@ -36,9 +36,9 @@ type UiPart5PasswordManagerIcon = {
 
 type FormAtoms = {
     uiPart1General: Atomize<UiPart1General>;
-    uiPart2QL: Atomize<UiPart2QL>;
-    uiPart3ScreenDetection: Atomize<UiPart3ScreenDetection>;
-    uiPart4Authentication: Atomize<UiPart4Authentication>;
+    uiPart4QL: Atomize<UiPart4QL>;
+    uiPart2ScreenDetection: Atomize<UiPart2ScreenDetection>;
+    uiPart3Authentication: Atomize<UiPart3Authentication>;
     uiPart5PasswordManagerIcon: Atomize<UiPart5PasswordManagerIcon>;
 
     fileUsAtom: FileUsAtomType;
@@ -53,19 +53,19 @@ function createAtoms(v: string, callback: () => void, fileUsAtom: FileUsAtomType
             hintAtom: atom(''),
             balloonAtom: atom(3),
         },
-        uiPart2QL: {
-            dashboardAtom: atom<boolean>(false),
-            nameAtom: atom(''),
-            urlAtom: atom(''),
-        },
-        uiPart3ScreenDetection: {
+        uiPart2ScreenDetection: {
             captionAtom: atom(''),
             monitorAtom: atom<boolean>(false),
             urlAtom: atom(''),
         },
-        uiPart4Authentication: {
+        uiPart3Authentication: {
             aimAtom: atom<boolean>(false),
             lockAtom: atom<boolean>(false),
+        },
+        uiPart4QL: {
+            dashboardAtom: atom<boolean>(false),
+            nameAtom: atom(''),
+            urlAtom: atom(''),
         },
         uiPart5PasswordManagerIcon: {
             idAtom: atom(''),
@@ -133,9 +133,9 @@ function Part1General({ atoms }: { atoms: FormAtoms; }) {
 }
 
 function Part2ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
-    const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
-    const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom); //TODO: show only if web app
-    const [monitor, setMonitor] = useAtom(atoms.uiPart3ScreenDetection.monitorAtom);
+    const [url, setUrl] = useAtom(atoms.uiPart2ScreenDetection.urlAtom);
+    const [caption, setCaption] = useAtom(atoms.uiPart2ScreenDetection.captionAtom); //TODO: show only if web app
+    const [monitor, setMonitor] = useAtom(atoms.uiPart2ScreenDetection.monitorAtom);
 
     const fileUs = useAtomValue(atoms.fileUsAtom);
     const isWeb = fileUs.stats.isWeb;
@@ -157,20 +157,20 @@ function Part2ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
 
 function Part3Authentication({ atoms }: { atoms: FormAtoms; }) {
     return (<>
-        <div className="" title="Start authentication immediately">Authenticate immediately</div>
-        <RowBoolean className="justify-self-start" useItAtom={atoms.uiPart4Authentication.aimAtom} />
+        <div className="mb-1" title="Start authentication immediately">Authenticate immediately</div>
+        <RowBoolean className="mb-1 justify-self-start" useItAtom={atoms.uiPart3Authentication.aimAtom} />
 
-        <div className="mt-1.5">Lock out login fields</div>
-        <RowBoolean className="justify-self-start" useItAtom={atoms.uiPart4Authentication.lockAtom} />
+        <div className="">Lock out login fields</div>
+        <RowBoolean className="justify-self-start" useItAtom={atoms.uiPart3Authentication.lockAtom} />
     </>);
 }
 
 function Part4QL({ atoms }: { atoms: FormAtoms; }) {
-    const [name, setName] = useAtom(atoms.uiPart2QL.nameAtom);
-    const [url, setUrl] = useAtom(atoms.uiPart2QL.urlAtom);
+    const [name, setName] = useAtom(atoms.uiPart4QL.nameAtom);
+    const [url, setUrl] = useAtom(atoms.uiPart4QL.urlAtom);
     return (<>
-        <div className="">Display on mini-dashboard</div>
-        <RowBoolean className="mb-1.5 justify-self-start" useItAtom={atoms.uiPart2QL.dashboardAtom} />
+        <div className="mb-1">Display on mini-dashboard</div>
+        <RowBoolean className="mb-1 justify-self-start" useItAtom={atoms.uiPart4QL.dashboardAtom} />
 
         <div className="">Quick Link Name</div>
         <RowInput value={name} onChange={(e) => setName(e.target.value)} />
