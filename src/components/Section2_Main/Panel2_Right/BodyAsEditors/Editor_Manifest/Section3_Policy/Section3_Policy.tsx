@@ -66,9 +66,9 @@ function TableHeader() {
 }
 
 
-export function Section3_Policy({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
+export function Section3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const metaForm = fileUs.meta?.[formType];
+    const metaForm = fileUs.meta?.[formIdx];
 
     const policiesAtom = useState(atom<Meta.Field[]>([]))[0];
     const [policies, setPolicies] = useAtom(policiesAtom);
@@ -80,7 +80,7 @@ export function Section3_Policy({ fileUsAtom, formType }: { fileUsAtom: FileUsAt
 
     /* // No, keep it simple, just check one at time
 
-    if (formType === FormIdx.login) {
+    if (formIdx === FormIdx.login) {
         // check in this form (new addition) and cpass
     } else {
         // check only in this form

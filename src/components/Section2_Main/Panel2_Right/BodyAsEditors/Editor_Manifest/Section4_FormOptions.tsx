@@ -3,7 +3,7 @@ import { Atomize } from '@/hooks/atomsX';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { Meta } from '@/store/manifest';
 import { classNames } from '@/utils/classnames';
-import { atom, useAtom } from 'jotai';
+import { atom, useAtom, useAtomValue } from 'jotai';
 
 type UiPart1General = {
     name: string;       // login name
@@ -19,9 +19,9 @@ type UiPart2QL = {
 };
 
 type UiPart3ScreenDetection = {
+    url: string;        // URL
     caption: string;    // Windows Caption
     monitor: boolean;   // Monitor screen changes
-    url: string;        // URL
 };
 
 type UiPart4Authentication = {
@@ -40,9 +40,12 @@ type FormAtoms = {
     uiPart3ScreenDetection: Atomize<UiPart3ScreenDetection>;
     uiPart4Authentication: Atomize<UiPart4Authentication>;
     uiPart5PasswordManagerIcon: Atomize<UiPart5PasswordManagerIcon>;
+
+    fileUsAtom: FileUsAtomType;
+    formIdx: FormIdx;
 };
 
-function createAtoms(v: string, callback: () => void): FormAtoms {
+function createAtoms(v: string, callback: () => void, fileUsAtom: FileUsAtomType, formIdx: FormIdx): FormAtoms {
     return {
         uiPart1General: {
             nameAtom: atom(''),
@@ -68,6 +71,8 @@ function createAtoms(v: string, callback: () => void): FormAtoms {
             idAtom: atom(''),
             locAtom: atom(''),
         },
+        fileUsAtom,
+        formIdx,
     };
 }
 
@@ -122,18 +127,18 @@ function Part2QL({ atoms }: { atoms: FormAtoms; }) {
 }
 
 function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
+    const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
     const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom);
     const [monitor, setMonitor] = useAtom(atoms.uiPart3ScreenDetection.monitorAtom);
-    const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
     return (<>
+        <div className="">URL</div>
+        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+
         <div className="">Windows Caption</div>
         <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
 
         <div className="">Monitor screen changes</div>
         <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
-
-        <div className="">URL</div>
-        <Input value={url} onChange={(e) => setUrl(e.target.value)} />
     </>);
 }
 
@@ -161,10 +166,14 @@ function Part5PasswordManagerIcon({ atoms }: { atoms: FormAtoms; }) {
     </>);
 }
 
-export function Section4_FormOptions({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
+export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
+    // const fileUs = useAtomValue(fileUsAtom);
+    // const metaForm = fileUs.meta?.[formIdx];
+    
     const atoms = createAtoms('', () => {
         console.log('changed');
-    });
+    }, fileUsAtom, formIdx);
+
     return (
         <div className="mr-1 grid grid-cols-[auto_minmax(0,1fr)] gap-x-1 gap-y-0.5 items-center font-light text-primary-400">
             <Section label="General" />

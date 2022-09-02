@@ -33,12 +33,12 @@ function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom:
     </>);
 }
 
-function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: FormIdx; }) {
+function FormItems({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const metaForm = fileUs.meta?.[formType];
-    const title = formType === FormIdx.login ? "Login" : "Password change";
-    const openSections = maniOpenSections[formType];
-    return (!metaForm ? NoForm(formType) :
+    const metaForm = fileUs.meta?.[formIdx];
+    const title = formIdx === FormIdx.login ? "Login" : "Password change";
+    const openSections = maniOpenSections[formIdx];
+    return (!metaForm ? NoForm(formIdx) :
         <SubSection label={<div className="text-lg">{title}</div>} openAtom={openSections.formAtom}>
 
             <SubSection label="Fields" openAtom={openSections.fieldsAtom}>
@@ -50,11 +50,11 @@ function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formT
             </SubSection>
 
             <SubSection label="Policy" openAtom={openSections.policyAtom}>
-                <Section3_Policy fileUsAtom={fileUsAtom} formType={formType} />
+                <Section3_Policy fileUsAtom={fileUsAtom} formIdx={formIdx} />
             </SubSection>
 
             <SubSection label="Form options" openAtom={openSections.optionsAtom}>
-                <Section4_FormOptions fileUsAtom={fileUsAtom} formType={formType} />
+                <Section4_FormOptions fileUsAtom={fileUsAtom} formIdx={formIdx} />
             </SubSection>
 
         </SubSection>
@@ -64,8 +64,8 @@ function FormItems({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formT
 export function Editor_Manifest({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
         <div className="min-w-[34rem]">
-            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.login} />
-            <FormItems fileUsAtom={fileUsAtom} formType={FormIdx.cpass} />
+            <FormItems fileUsAtom={fileUsAtom} formIdx={FormIdx.login} />
+            <FormItems fileUsAtom={fileUsAtom} formIdx={FormIdx.cpass} />
         </div>
     );
 }
