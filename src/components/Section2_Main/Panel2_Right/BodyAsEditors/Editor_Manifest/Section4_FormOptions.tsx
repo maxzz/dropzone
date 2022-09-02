@@ -78,7 +78,7 @@ function createAtoms(v: string, callback: () => void, fileUsAtom: FileUsAtomType
 
 function Section({ label }: { label: string; }) {
     return (
-        <div className="col-span-2 text-[#32ffdaa0] font-normal">{label}</div>
+        <div className="mt-2 mb-1 col-span-2 text-[#32ffdaa0] font-normal border-[#32ffda40] border-b">{label}</div>
     );
 }
 
@@ -128,7 +128,7 @@ function Part2QL({ atoms }: { atoms: FormAtoms; }) {
 
 function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
     const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
-    const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom);
+    const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom); //TODO: show only if web app
     const [monitor, setMonitor] = useAtom(atoms.uiPart3ScreenDetection.monitorAtom);
     return (<>
         <div className="">URL</div>
