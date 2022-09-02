@@ -130,15 +130,21 @@ function Part3ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
     const [url, setUrl] = useAtom(atoms.uiPart3ScreenDetection.urlAtom);
     const [caption, setCaption] = useAtom(atoms.uiPart3ScreenDetection.captionAtom); //TODO: show only if web app
     const [monitor, setMonitor] = useAtom(atoms.uiPart3ScreenDetection.monitorAtom);
+
+    const fileUs = useAtomValue(atoms.fileUsAtom);
+    const isWeb = fileUs.stats.isWeb;
     return (<>
         <div className="">URL</div>
         <Input value={url} onChange={(e) => setUrl(e.target.value)} />
 
-        <div className="">Windows Caption</div>
-        <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
+        {!isWeb && <>
+            <div className="">Windows Caption</div>
+            <Input value={caption} onChange={(e) => setCaption(e.target.value)} />
 
-        <div className="">Monitor screen changes</div>
-        <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
+            <div className="">Monitor screen changes</div>
+            <Input value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
+
+        </>}
     </>);
 }
 
@@ -169,7 +175,7 @@ function Part5PasswordManagerIcon({ atoms }: { atoms: FormAtoms; }) {
 export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     // const fileUs = useAtomValue(fileUsAtom);
     // const metaForm = fileUs.meta?.[formIdx];
-    
+
     const atoms = createAtoms('', () => {
         console.log('changed');
     }, fileUsAtom, formIdx);
