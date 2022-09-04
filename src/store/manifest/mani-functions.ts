@@ -1,6 +1,6 @@
 import { Catalog, Mani, Meta, MPath } from './mani';
 import { FieldTyp, ValueAs, ValueLife } from './mani-types';
-import { FieldCatalog } from '../store-file-catalog';
+import { FieldCatalog } from './field-catalog';
 import { removeQuery, urlDomain } from './url';
 
 export namespace TimeUtils {

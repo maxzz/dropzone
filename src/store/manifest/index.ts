@@ -2,18 +2,20 @@ export type {
     Mani,
     Meta,
     Catalog,
-    MPath
+    MPath,
 } from './mani';
 
-export type { parseOptions } from './mani-i';
-
-export {
-    parseXMLFile,
-    Matching
+export type {
+    parseOptions,
 } from './mani-i';
 
 export {
-    manifestToJsonForXml
+    parseXMLFile,
+    Matching,
+} from './mani-i';
+
+export {
+    manifestToJsonForXml,
 } from './mani-o';
 
 export {
@@ -22,12 +24,28 @@ export {
     TimeUtils,
     FieldPath,
     Transform,
-    TransformValue
+    TransformValue,
 } from './mani-functions';
 
 export {
-    convertToXml
+    convertToXml,
 } from './xml-to-js';
 
-export type { References, ReferenceItem, ValueLife } from './mani-types';
-export { FieldTyp, ValueAs, valueAsNames, references, SUBMIT } from './mani-types';
+export type {
+    References,
+    ReferenceItem,
+    ValueLife,
+} from './mani-types';
+
+export {
+    FieldTyp,
+    ValueAs,
+    valueAsNames,
+    references,
+    SUBMIT,
+} from './mani-types';
+
+export type {
+    CatalogItem,
+    FieldCatalog,
+} from './field-catalog';
