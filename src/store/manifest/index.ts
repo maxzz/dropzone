@@ -6,6 +6,10 @@ export type {
 } from './mani';
 
 export {
+    showError,
+} from './mani-show-error';
+
+export {
     parseOptionsRead,
     parseXMLFile,
     Matching,
