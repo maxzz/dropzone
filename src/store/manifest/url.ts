@@ -145,14 +145,14 @@ export namespace tmurl {
     }
     */
 
-    export function url(url: string, arg?: IUrlKeys): IUrlParts | string | undefined { //: IUrlResult | string | string[] | RegExp | undefined
+    export function url(url: string/*, arg?: IUrlKeys*/): IUrlParts { //: IUrlResult | string | string[] | RegExp | undefined
         var _l: IUrlParts = {},
             tmp;
 
         //if (arg === 'tld?') { return _t; }
 
         if (!url) { //!url - includes undefined and 0 length //url = url || ''; // tm: url = url || window.location.toString();
-            return '';
+            return _l;
         }
 
         //if (!arg) { return url; }
@@ -255,7 +255,7 @@ export namespace tmurl {
             //_l.protocol = _l.protocol || (_l.port === '443' ? 'https' : 'http');
         }
 
-        return arg ? _l[arg] : _l;
+        return _l; //return arg ? _l[arg] : _l;
 
         // Return everything.
         //if (!arg) { return _l; }

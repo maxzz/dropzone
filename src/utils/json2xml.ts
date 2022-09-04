@@ -1,6 +1,6 @@
 type J2xOptions = {
     attributeNamePrefix: string;
-    attrNodeName: false | string;
+    attributesGroupName: false | string;
     textNodeName: string;
     ignoreAttributes: boolean;
     cdataTagName: string;
@@ -36,7 +36,7 @@ function buildOptions(options: J2xOptionsOptional, defaultOptions: J2xOptions, p
 
 const defaultOptions: J2xOptions = {
     attributeNamePrefix: '@_',
-    attrNodeName: false,
+    attributesGroupName: false,
     textNodeName: '#text',
     ignoreAttributes: true,
     cdataTagName: '',
@@ -54,7 +54,7 @@ const defaultOptions: J2xOptions = {
 
 const props: (keyof J2xOptions)[] = [
     'attributeNamePrefix',
-    'attrNodeName',
+    'attributesGroupName',
     'textNodeName',
     'ignoreAttributes',
     'cdataTagName',
@@ -93,7 +93,7 @@ export class J2xParser {
 
     constructor(options?: J2xOptionsOptional) {
         this.options = buildOptions(options || {}, defaultOptions, props);
-        if (this.options.ignoreAttributes || this.options.attrNodeName) {
+        if (this.options.ignoreAttributes || this.options.attributesGroupName) {
             this.attrPrefixLen = 0;
             this.isAttribute = () => false;
         } else {
@@ -196,7 +196,7 @@ export class J2xParser {
                 }
             } else {
                 //nested node
-                if (this.options.attrNodeName && key === this.options.attrNodeName) {
+                if (this.options.attributesGroupName && key === this.options.attributesGroupName) {
                     const Ks = Object.keys(keyVal);
                     const L = Ks.length;
                     for (let j = 0; j < L; j++) {
