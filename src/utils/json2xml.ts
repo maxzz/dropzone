@@ -9,14 +9,13 @@ type J2xOptions = {
     indentBy: string;
     supressEmptyNode: boolean;
     tagValueProcessor: (tagValue: string | any) => string;
-    attrValueProcessor: (attrValue: string | any) => string;
+    attrValueProcessor: (attrValue: string | any, attrName: string) => string;
 
     rootNodeName?: string;
 
     doReduceEmptyValues: boolean;   // Reduce attrs closing on empty values.            true: <field /> false: <field></field>
     doAttrsIndent: boolean;         // Attribute indentation.                           true: <field \nattr ... \nattr /> false: <field attr attr />
     doAttrsEndingIndent: boolean;   // Attrs ending indented. valid if doAttrsIndent is true. true: <field ... \n/> false: <field ... />
-
 };
 type J2xOptionsOptional = Partial<J2xOptions>;
 
@@ -148,7 +147,7 @@ export class J2xParser {
                 //premitive type
                 const attr = this.isAttribute(key);
                 if (attr) {
-                    attrStr.push(`${attr}="${this.options.attrValueProcessor(keyVal)}"`);
+                    attrStr.push(`${attr}="${this.options.attrValueProcessor(keyVal, attr as string)}"`);
                 }
                 else if (this.isCDATA(key)) {
                     if (jObj[this.options.textNodeName]) {
@@ -201,7 +200,7 @@ export class J2xParser {
                     const L = Ks.length;
                     for (let j = 0; j < L; j++) {
                         const attrName = Ks[j];
-                        attrStr.push(`${attrName}="${this.options.attrValueProcessor(keyVal[attrName])}"`);
+                        attrStr.push(`${attrName}="${this.options.attrValueProcessor(keyVal[attrName], attrName)}"`);
                     }
                 } else {
                     val += this.processTextOrObjNode(keyVal, key, level);
