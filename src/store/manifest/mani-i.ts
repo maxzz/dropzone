@@ -60,7 +60,7 @@ export function beautifyXMLCatalog(catalog: Catalog.Root): Catalog.Root {
     return catalog;
 }
 
-export const parseOptions = {
+export const parseOptionsRead = {
     attributeNamePrefix: "",
     attributesGroupName: "_attributes",
     ignoreAttributes: false,
@@ -73,7 +73,7 @@ export type ParseManifestResult = {
 };
 
 export function parseXMLFile(cnt: string): ParseManifestResult {
-    const parser = new XMLParser(parseOptions);
+    const parser = new XMLParser(parseOptionsRead);
     const obj = parser.parse(cnt); //console.log('%craw', 'color: green', JSON.stringify(obj, null, 4));
     return {
         mani: obj?.manifest && beautifyXMLManifest(obj.manifest),

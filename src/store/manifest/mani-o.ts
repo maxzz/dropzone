@@ -1,4 +1,21 @@
 import { Mani } from "./mani";
+import { Transform } from "./mani-functions";
+import { parseOptionsRead } from "./mani-i";
+
+export const parseOptionsWrite = {
+    ...parseOptionsRead,
+    format: true,
+    indentBy: '\t',
+    attrValueProcessor: (attrValue: string | any, attrName: string): string => {
+        const val =
+            typeof attrValue === 'string'
+                ? Transform.xmlEscape(attrValue)
+                : typeof attrValue === 'boolean'
+                    ? attrValue ? '1' : '0'
+                    : attrValue; //console.log(`    ${attrName} = ${val}`);
+        return val;
+    }
+};
 
 const attributes: string = "_attributes";
 
@@ -6,7 +23,7 @@ function hasKeys(obj?: object): boolean {
     return !!obj && !!Reflect.ownKeys(obj).length;
 }
 
-export function manifestToJsonForXml(mani: Mani.Manifest) {
+export function makeNewManifest4Xml(mani: Mani.Manifest) {
     const { options, descriptor, forms, ...rest } = mani;
 
     let rv: any = { manifest: {}, };
