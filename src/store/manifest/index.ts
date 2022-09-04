@@ -13,7 +13,7 @@ export {
 
 export {
     parseOptionsWrite,
-    makeNewManifest4Xml,
+    makeXML,
 } from './mani-o';
 
 export {

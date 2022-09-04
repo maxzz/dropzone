@@ -1,6 +1,7 @@
 import { Mani } from "./mani";
 import { Transform } from "./mani-functions";
 import { parseOptionsRead } from "./mani-i";
+import { J2xParser } from "@/utils/json2xml";
 
 export const parseOptionsWrite = {
     ...parseOptionsRead,
@@ -23,7 +24,7 @@ function hasKeys(obj?: object): boolean {
     return !!obj && !!Reflect.ownKeys(obj).length;
 }
 
-export function makeNewManifest4Xml(mani: Mani.Manifest) {
+function makeNewManifest4Xml(mani: Mani.Manifest) {
     const { options, descriptor, forms, ...rest } = mani;
 
     let rv: any = { manifest: {}, };
@@ -58,3 +59,18 @@ export function makeNewManifest4Xml(mani: Mani.Manifest) {
 
     return { ...rv, ...rest, };
 }
+
+export function makeXML(mani: Mani.Manifest | undefined): string | undefined {
+    let rv = mani && makeNewManifest4Xml(mani);
+    if (rv) {
+        try {
+            const j2xParser = new J2xParser(parseOptionsWrite);
+            const xml = j2xParser.parse(rv);
+            return `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
+        } catch (error) {
+            console.log('%ctm-error:\n', 'color: red', error);
+        }
+    }
+}
+
+//TODO: attrValueProcessor(): convert value life and skip '=== undefined'
