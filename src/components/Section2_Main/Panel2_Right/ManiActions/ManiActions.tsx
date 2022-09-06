@@ -14,7 +14,7 @@ function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
                 href={url}
                 target="_blank"
                 rel="noopener"
-                title={`Open ${domain}`}
+                title={`Open this website: ${domain}`}
                 onClick={(event) => event.stopPropagation()}
                 className="p-1 w-8 h-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400"
             >
@@ -30,7 +30,7 @@ export function CardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; 
     return (
         <button
             className={`p-1 w-8 h-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400`}
-            title="Edit detection options"
+            title="Switch to manifest editing mode"
             //onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
             onClick={() => setViewMode((v) => v === ViewMode.edit ? ViewMode.raw : ViewMode.edit)}
         >
