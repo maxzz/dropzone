@@ -93,8 +93,9 @@ export namespace Matching {
     export enum Options {       // cannot use const w/ esbuild
         undef = 0,
         caseinsensitive = 0x0001, // This option does not make sense for URLs (even for wildcards).
-        matchtext = 0x0002,     // match text or don't; This option does not make sense for URLs.
-        usequery = 0x0004,      // match text or don't; This option does not make sense for URLs.
+        matchtext = 0x0002,       // match text or don't; This option does not make sense for URLs.
+        usequery = 0x0004,        // match text or don't; This option does not make sense for URLs.
+        pmacSet = 0x0008,         // set manually by pmac utility.
     }
 
     export type RawMatchData = {
@@ -102,6 +103,10 @@ export namespace Matching {
         opt: Options;
         url: string;
     };
+
+    export const reUrlMatchCheck = /^\[m0\]\:.\:.\:/;   // this regex to quickly check the start of url if any matching is set
+    export const reUrlMatchRegex = /^\[m0\]\:3\:.\:/;   // this regex to quickly check the start of url if regex matching is set
+    export const addPrefixRegex = '[m0]:3:8:';          // this prefix is to add the start of url as regex match to exclude from DomainMatch
 
     const reOtsMatching = /^\[m0\]:([0-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 

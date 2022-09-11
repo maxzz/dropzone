@@ -17,3 +17,5 @@ export function BodyAsHighlightedText({ text }: { text: string; }) {
         </SyntaxHighlighterXml>
     </>);
 }
+
+//TODO: extension 'text highlight' may cause a problem when user switch manifests (this is a thirdparty problem).
