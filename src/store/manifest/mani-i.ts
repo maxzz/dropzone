@@ -111,7 +111,7 @@ export namespace Matching {
     const reOtsMatching = /^\[m0\]:([0-4]):([0-3]?):\s*(.+)/; // 0: [m0]; 1:style; 2:options; 3:pattern. Example: web_murl="[m0]:2:2:https^2dot;//maxzz.github.io/test-pm/"
 
     export function getMatchRawData(murl: string): RawMatchData {
-        let rv = { style: 0, opt: 0, url: murl || '', }; // don't need call restoreCpp(murl) here.
+        let rv = { style: Style.undef, opt: Options.undef, url: murl || '', }; // don't need call restoreCpp(murl) here.
         let m = murl?.match(reOtsMatching); // TODO: do we need to resrt reOtsMatching.lastIndex before match?
         if (m) {
             rv.style = +m[1] as Style; // style
