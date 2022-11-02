@@ -27,3 +27,6 @@ export function App() {
         </FocusGuards>
     );
 }
+
+//C:\Users\maxzz\Desktop\HID bugs\89863\temp-for-max
+//TODO: add orange attention mark to ach card qith duplicated urls and as result domain credentials
