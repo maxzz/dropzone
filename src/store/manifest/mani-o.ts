@@ -25,7 +25,7 @@ function hasKeys(obj?: object): boolean {
     return !!obj && !!Reflect.ownKeys(obj).length;
 }
 
-function makeNewManifest4Xml(mani: Mani.Manifest) {
+function makeNewManifest4Xml(mani: Mani.Manifest): Mani.Manifest {
     const { options, descriptor, forms, ...rest } = mani;
 
     let rv: any = { manifest: {}, };
@@ -33,7 +33,7 @@ function makeNewManifest4Xml(mani: Mani.Manifest) {
     // 1. Customization
     if (options) {
         const { processes, ...rest } = options;
-        const xmlProcesses = processes?.length && {processes: { process: processes.map((process) => ({ [ATTRS]: process })) }};
+        const xmlProcesses = processes?.length && { processes: { process: processes.map((process) => ({ [ATTRS]: process })) } };
         rv.manifest.options = { ...xmlProcesses, ...rest, };
     }
 
