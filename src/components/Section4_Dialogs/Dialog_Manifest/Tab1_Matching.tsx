@@ -257,7 +257,7 @@ export type MatchWebState = UrlsState & {
     dirtyAtom: PrimitiveAtom<boolean>; // it should be not dirty but: is initial value?
 };
 
-export type MatchWebStateAtom = WritableAtom<MatchWebState, MatchWebState>;
+export type MatchWebStateAtom = WritableAtom<MatchWebState, [MatchWebState], void>;
 
 function urlsDirty(urls: MatchWebState): boolean {
     return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
