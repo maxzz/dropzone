@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 /* This example requires Tailwind CSS v2.0+ */
 import { Menu, Transition } from '@headlessui/react';
 import { UIPortal } from '@ui/UIPortal';
-import { DotsVerticalIcon } from '@heroicons/react/solid';
+import { EllipsisVerticalIcon as DotsVerticalIcon } from '@heroicons/react/24/solid';
 import { classNames } from '@/utils/classnames';
 
 export function Example() {
