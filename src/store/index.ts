@@ -29,7 +29,7 @@ export {
 export type {
     CatalogItem,
     FieldCatalog,
-} from './store-file-catalog';
+} from './manifest/field-catalog';
 
 export {
     FieldCatalogItemsAtom,
