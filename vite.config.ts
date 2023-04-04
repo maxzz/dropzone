@@ -41,7 +41,7 @@ export default defineConfig({
         }),
 
         chunkSplitPlugin({
-            strategy: 'single-vendor',
+            //strategy: 'single-vendor',
             customSplitting: {
                 // `react` and `react-dom` will be bundled together in the `react-vendor` chunk (with their dependencies, such as object-assign)
                 'react-vendor': ['react', 'react-dom'],
