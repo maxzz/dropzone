@@ -40,13 +40,12 @@ export default defineConfig({
             brotliSize: true,
         }),
 
-        chunkSplitPlugin({
-            customSplitting: {
-                //'react-vendor': ['react', 'react-dom'],
-                'react-vendor': [/react/, /react-dom/],
-                'radix-ui': [/@radix-ui/],
-            }
-        }),
+        // chunkSplitPlugin({
+        //     customSplitting: {
+        //         'react-vendor': ['react', 'react-dom'],
+        //         'radix-ui': [/@radix-ui/],
+        //     }
+        // }),
     ],
     resolve: {
         alias: {
@@ -58,6 +57,12 @@ export default defineConfig({
     build: {
         minify: "esbuild",
         target: "esnext",
+
+        rollupOptions: {
+            output: {
+                manualChunks,
+            }
+        }
     },
 
     server: {
@@ -65,3 +70,14 @@ export default defineConfig({
     },
 
 });
+
+// load all node_modules in a vendor chunk file
+// see: https://rollupjs.org/configuration-options/#output-manualchunks
+function manualChunks(id: string) {
+    if (id.includes("@radix-ui")) {
+        return "radix-ui";
+    }
+    if (id.includes("node_modules")) {
+        return "vendor";
+    }
+}
