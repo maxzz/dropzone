@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { filteredAtom, UISize, uiSizeAtom } from '@/store';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
 import { classNames } from '@/utils/classnames';
-import { Card } from './Card/Card';
+import { Card } from './Card';
 
 export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);

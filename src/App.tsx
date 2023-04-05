@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { FocusGuards } from '@radix-ui/react-focus-guards';
 import { UIToaster } from '@ui/UIToaster';
-import { Section1_Header } from './components/Section1_Header/Section1_Header';
-import { Section2_Main } from './components/Section2_Main/Section2_Main';
-import { Section4_Dialogs } from './components/Section4_Dialogs/Section4_Dialogs';
+import { Section1_Header } from './components/Section1_Header';
+import { Section2_Main } from './components/Section2_Main';
+import { Section4_Dialogs } from './components/Section4_Dialogs';
 import { UISymbolDefs } from '@ui/UIIconSymbols';
 import './styles/App.scss';
 //import { SpySvgSymbols } from './utils/SpySvgSymbols';
@@ -29,4 +29,4 @@ export function App() {
 }
 
 //C:\Users\maxzz\Desktop\HID bugs\89863\temp-for-max
-//TODO: add orange attention mark to ach card qith duplicated urls and as result domain credentials
+//TODO: add orange attention mark to ach card with duplicated urls and as result domain credentials

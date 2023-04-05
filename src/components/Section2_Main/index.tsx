@@ -1,7 +1,7 @@
 import React from 'react';
 import { a, useSpring } from '@react-spring/web';
-import { Panel1_FilesList } from './Panel1_FilesList/Panel1_FilesList';
-import { Panel2_Right } from './Panel2_Right/Panel2_Right';
+import { Panel1_FilesList } from './Panel1_FilesList';
+import { Panel2_Right } from './Panel2_Right';
 import { SimpleSplitPane } from '@ui/SimpleSplitPane/SimpleSplitPane';
 import { useAtomValue } from 'jotai';
 import { hasFilesAtom } from '@/store';

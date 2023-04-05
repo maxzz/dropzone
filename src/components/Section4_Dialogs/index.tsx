@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useAtom } from 'jotai';
 import { formEditorDataAtom } from '@/store';
 import { OldOverlay_PortalModal } from '@ui/UIDialog';
-const Manifest_FormEditor = React.lazy(() => import('./Dialog_Manifest/Dialog_Manifest'));
+const Manifest_FormEditor = React.lazy(() => import('./Dialog_Manifest'));
 
 function ManifestFormEditorTrigger() {
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);
