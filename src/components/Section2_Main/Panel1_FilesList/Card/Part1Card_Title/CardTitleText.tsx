@@ -1,6 +1,6 @@
 import React from "react";
 import { FileUs, FileUsStats, formCaption } from "@/store";
-import { classNames } from "@/utils/classnames";
+import { classNames } from "@/utils";
 
 export function CardCaption({ stats }: { stats: FileUsStats; }) {
     return (

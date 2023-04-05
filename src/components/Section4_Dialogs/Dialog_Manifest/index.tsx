@@ -1,10 +1,10 @@
-import React, { HTMLAttributes, ReactNode, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { ReactNode, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { atomWithCallback, OnValueChange } from '@/hooks/atomsX';
-import { EditorData, FileUs, formIdxName } from '@/store';
+import { EditorData, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 import { UITip } from '@ui/UITooltip';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
 import { IconInfo } from '@ui/UIIcons';

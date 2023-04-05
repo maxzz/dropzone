@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { filteredAtom, UISize, uiSizeAtom } from '@/store';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 import { Card } from './Card';
 
 export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view

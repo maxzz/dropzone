@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 import { UIPortal } from '@ui/UIPortal';
 
 const BtnGradientShading: React.CSSProperties = {

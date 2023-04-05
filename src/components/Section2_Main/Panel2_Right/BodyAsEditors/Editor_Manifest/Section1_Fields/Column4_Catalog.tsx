@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { FieldTyp, Meta, references, ValueAs, valueAsNames, ValueLife } from "@/store/manifest";
+import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
+import { Meta } from "@/store/manifest";
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils/classnames";
-import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 
 const catalogNo = "Not from catalog";
 const catalogMore = "More fields ...";

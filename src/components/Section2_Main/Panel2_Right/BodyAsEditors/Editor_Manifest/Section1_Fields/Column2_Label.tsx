@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 export function Column2_Label({ useItAtom, valueAtom, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value, setValue] = useAtom(valueAtom);

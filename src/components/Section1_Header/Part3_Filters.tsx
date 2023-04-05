@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { hasFilesAtom, showMani, totalMani } from '@/store';
 import { a, useSpring } from '@react-spring/web';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 import { LabeledSwitch } from '@ui/UiSwitch';
 import { Part2_FilterSearch } from './Part2_FilterSearch';
 

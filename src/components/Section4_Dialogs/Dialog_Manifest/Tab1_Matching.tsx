@@ -4,7 +4,7 @@ import { Matching } from '@/store/manifest';
 import { a, useSpring } from '@react-spring/web';
 import { UIIconUpDown } from '@ui/UIIconUpDown';
 import { UITip, tipSmall } from '@ui/UITooltip';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 type RadioButtonProps = {
     label: string;

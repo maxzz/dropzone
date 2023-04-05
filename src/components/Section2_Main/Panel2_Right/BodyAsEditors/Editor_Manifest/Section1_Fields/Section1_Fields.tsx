@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { atom, useAtom } from 'jotai';
 import { FieldTyp, Meta, TransformValue } from '@/store/manifest';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
 import { Column3_Value } from './Column3_Value';

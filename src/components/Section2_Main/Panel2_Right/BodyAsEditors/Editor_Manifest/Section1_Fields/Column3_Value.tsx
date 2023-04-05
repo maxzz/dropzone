@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from "react";
 import { PrimitiveAtom as PA, useAtom } from "jotai";
 import { FieldTyp, Meta, ReferenceItem, references, ValueAs, valueAsNames, ValueLife } from "@/store/manifest";
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
-import { classNames } from "@/utils/classnames";
+import { classNames } from "@/utils";
 
 function typeRefs(isPsw: boolean | undefined): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
     return references[isPsw ? 'psw' : 'txt'];

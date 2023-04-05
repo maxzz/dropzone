@@ -5,7 +5,7 @@ import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { UIPortal } from '@ui/UIPortal';
 import { EllipsisVerticalIcon as DotsVerticalIcon } from '@heroicons/react/24/solid';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 export function Example() {
     return (

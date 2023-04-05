@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react';
 import { Atomize } from '@/hooks/atomsX';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { Meta } from '@/store/manifest';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 
 type UiPart1General = {

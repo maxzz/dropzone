@@ -1,7 +1,7 @@
 import React from "react";
 import { FileUsStats } from "@/store";
 import { IconAppWebChrome, IconAppWebIESolid, IconAppWindows, IconCatalog } from "@ui/UIIconSymbols";
-import { classNames } from "@/utils/classnames";
+import { classNames } from "@/utils";
 
 const icons = {
     web: { i: IconAppWebIESolid, title: "Webiste trained with IE" },

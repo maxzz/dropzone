@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { splitPaneAtom } from '@/store';
-import { classNames } from '@/utils/classnames';
-import { withDigits } from '@/utils/numbers';
+import { classNames, withDigits } from '@/utils';
 import './SimpleSplitPane.css';
 
 const baseStyle: React.CSSProperties = {

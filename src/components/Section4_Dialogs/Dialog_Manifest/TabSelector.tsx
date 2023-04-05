@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 import { a, useSpring } from "@react-spring/web";
-import { classNames } from "@/utils/classnames";
-import { RefObject, useRef } from "react";
+import { classNames } from '@/utils';
 
 /*
 function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {

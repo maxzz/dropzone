@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldPath, Meta } from '@/store/manifest';
 import { css } from '@/stitches.config';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 const stylesSvg = css({
     // '--size-div': 4,

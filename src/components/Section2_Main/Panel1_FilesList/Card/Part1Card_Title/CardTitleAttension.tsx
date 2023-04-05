@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { FileUs, isAnyWhy } from "@/store";
-import { classNames } from "@/utils/classnames";
+import { classNames } from "@/utils";
 import { IconDot } from "@ui/UIIconSymbols";
 import { UITip } from "@ui/UITooltip";
 

@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { UISemiScrollbar } from '@ui/UISemiScrollbar';
-import { classNames } from '@/utils/classnames';
+import { classNames } from '@/utils';
 
 export function Scroller({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (

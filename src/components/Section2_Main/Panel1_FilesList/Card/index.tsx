@@ -1,9 +1,9 @@
 import React, { HTMLAttributes, memo, useEffect, useState } from 'react';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
+import { classNames } from '@/utils';
 import { allCards, FileUsAtomType } from '@/store';
 import { Part1Card_Title } from './Part1Card_Title';
 import { Part2Card_FormBody } from './Part2Card_FormBody';
-import { classNames } from '@/utils/classnames';
 
 function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;

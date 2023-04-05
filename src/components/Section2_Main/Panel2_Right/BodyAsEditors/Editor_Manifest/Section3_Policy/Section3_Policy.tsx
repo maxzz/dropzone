@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes, useEffect, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx } from '@/store';
-import { classNames } from '@/utils/classnames';
-import { PolicyEditor } from './PolicyEditor';
 import { Meta } from '@/store/manifest';
+import { PolicyEditor } from './PolicyEditor';
+import { classNames } from '@/utils';
 
 function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value, setValue] = useAtom(valueAtom);

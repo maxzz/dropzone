@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
 import { UITip, tipSmall } from "@ui/UITooltip";
 import { IconFolder } from "@ui/UIIconSymbols";
-import { classNames } from "@/utils/classnames";
+import { classNames } from "@/utils";
 
 export type ParsedFnameParams = {
     fname: string;
