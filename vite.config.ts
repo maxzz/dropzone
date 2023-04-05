@@ -77,6 +77,9 @@ function manualChunks(id: string) {
     if (id.includes("@radix-ui")) {
         return "radix-ui";
     }
+    if (id.includes("react")) {
+        return "react-vendor";
+    }
     if (id.includes("node_modules")) {
         return "vendor";
     }
