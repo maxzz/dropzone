@@ -4,8 +4,8 @@ import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSiz
 import { classNames } from '@/utils';
 import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
 import { CardNormalButtons } from '../Part3Card_Shared/CardButtons';
-import { Part1Form_Header } from './Part1Form_Header';
-import { Part2Form_Fields } from './Part2Form_Fields';
+import { Part1Form_Header } from './CardFormBody1_Header';
+import { Part2Form_Fields } from './CardFormBody2_Fields';
 
 export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
