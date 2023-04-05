@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { Meta } from '@/store/manifest';
 import { classNames } from '@/utils';
-import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Part2Card_FormBody/CardFormBody2_Fields/FieldRowTypeIcon';
+import { FormRowTypeIcon } from '@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon';
 
 export function Column5_Type({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const { password, type = 'NOTYPE' } = field.mani;

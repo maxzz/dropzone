@@ -3,7 +3,7 @@ import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { classNames } from '@/utils';
 import { allCards, FileUsAtomType } from '@/store';
 import { Card1_Title } from './Card1_Title';
-import { Part2Card_FormBody } from './Part2Card_FormBody';
+import { Part2Card_FormBody } from './Card2_FormBody';
 
 function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
