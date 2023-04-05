@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUs, FileUsAtomType, rightPanelData, ViewMode } from '@/store';
 import { classNames } from '@/utils';
-import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Part1Card_Title';
+import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Card1_Title';
 import { Scroller } from './Scroller';
 import { ManiActions } from './ManiActions';
 import { BodyAsHighlightedText } from './BodyAsHighlightedText';

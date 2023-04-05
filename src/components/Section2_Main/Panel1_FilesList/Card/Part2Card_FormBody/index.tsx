@@ -4,8 +4,8 @@ import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSiz
 import { classNames } from '@/utils';
 import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
 import { CardNormalButtons } from '../Part3Card_Shared/CardButtons';
-import { Part1Form_Header } from './CardFormBody1_Header';
-import { Part2Form_Fields } from './CardFormBody2_Fields';
+import { CardFormBody1_Header } from './CardFormBody1_Header';
+import { CardFormBody2_Fields } from './CardFormBody2_Fields';
 
 export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
@@ -35,8 +35,8 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
                             {formIdxName(formIdx)}
                         </div>
 
-                        <Part1Form_Header fileUsAtom={fileUsAtom} formIdx={formIdx} selectRowAtoms={selectRowAtoms} />
-                        <Part2Form_Fields fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} />
+                        <CardFormBody1_Header fileUsAtom={fileUsAtom} formIdx={formIdx} selectRowAtoms={selectRowAtoms} />
+                        <CardFormBody2_Fields fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} />
                     </Fragment>
                 ))}
             </div>

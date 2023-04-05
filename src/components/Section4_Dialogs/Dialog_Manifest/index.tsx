@@ -6,7 +6,7 @@ import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils';
 import { UITip } from '@ui/UITooltip';
-import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Part1Card_Title/CardTitleFilename';
+import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Card1_Title/CardTitleFilename';
 import { IconInfo } from '@ui/UIIcons';
 import { IconAttention } from '@ui/UIIconSymbols';
 import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from './Tab1_Matching';

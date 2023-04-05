@@ -2,7 +2,7 @@ import React, { HTMLAttributes, memo, useEffect, useState } from 'react';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { classNames } from '@/utils';
 import { allCards, FileUsAtomType } from '@/store';
-import { Part1Card_Title } from './Part1Card_Title';
+import { Card1_Title } from './Card1_Title';
 import { Part2Card_FormBody } from './Part2Card_FormBody';
 
 function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
@@ -20,7 +20,7 @@ function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAtt
 
     return (
         <div className={classNames("grid grid-rows-[min-content,minmax(auto,1fr)] grid-cols-1 overflow-hidden rounded shadow-md select-none", className)} {...rest}>
-            <Part1Card_Title fileUsAtom={fileUsAtom} openAtom={openAtom} />
+            <Card1_Title fileUsAtom={fileUsAtom} openAtom={openAtom} />
             <Part2Card_FormBody fileUsAtom={fileUsAtom} openAtom={openAtom}  />
         </div>
     );

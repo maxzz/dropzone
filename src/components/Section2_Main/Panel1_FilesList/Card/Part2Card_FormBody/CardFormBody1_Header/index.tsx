@@ -47,7 +47,7 @@ function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
     );
 }
 
-export function Part1Form_Header({ fileUsAtom, formIdx, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formIdx: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
+export function CardFormBody1_Header({ fileUsAtom, formIdx, selectRowAtoms }: { fileUsAtom: FileUsAtomType; formIdx: number; selectRowAtoms: SelectRowAtomsType; }): JSX.Element | null {
     const [small, setSmall] = useState(true);
     const fileUs = useAtomValue(fileUsAtom);
     const meta = fileUs.meta?.[formIdx];

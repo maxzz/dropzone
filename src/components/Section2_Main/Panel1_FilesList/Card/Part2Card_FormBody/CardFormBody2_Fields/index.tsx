@@ -9,7 +9,7 @@ type Part2_FormFieldsProps = {
     selectRowAtoms: SelectRowAtomsType;
 };
 
-export function Part2Form_Fields({ fileUsAtom, formType, selectRowAtoms }: Part2_FormFieldsProps) {
+export function CardFormBody2_Fields({ fileUsAtom, formType, selectRowAtoms }: Part2_FormFieldsProps) {
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
     return (<>
