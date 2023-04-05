@@ -3,9 +3,9 @@ import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
-import { Section1_Fields } from './Section1_Fields/Section1_Fields';
+import { Section1_Fields } from './Section1_Fields';
 import { Section2_Submit } from './Section2_Submit';
-import { Section3_Policy } from './Section3_Policy/Section3_Policy';
+import { Section3_Policy } from './Section3_Policy';
 import { Section4_FormOptions } from './Section4_FormOptions';
 
 function NoForm(formType: FormIdx) {
