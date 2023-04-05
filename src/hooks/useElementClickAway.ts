@@ -5,7 +5,10 @@ const defaultEvents = ['mousedown', 'touchstart'];
 
 export function useClickAway<E extends Event = Event>(ref: RefObject<HTMLElement | null>, onClickAway: (event: E) => void, events: string[] = defaultEvents): void {
     const savedCallback = useRef(onClickAway);
-    useEffect(() => { savedCallback.current = onClickAway; }, [onClickAway]);
+
+    useEffect(() => {
+        savedCallback.current = onClickAway;
+    }, [onClickAway]);
 
     useEffect(() => {
         const handler = (event: E) => {
@@ -25,7 +28,10 @@ export function useClickAway<E extends Event = Event>(ref: RefObject<HTMLElement
 
 export function useElementClickAway<E extends Event = Event>(el: HTMLElement | null, onClickAway: (event: E) => void, events: string[] = defaultEvents): void {
     const savedCallback = useRef(onClickAway);
-    useEffect(() => { savedCallback.current = onClickAway; }, [onClickAway]);
+
+    useEffect(() => {
+        savedCallback.current = onClickAway;
+    }, [onClickAway]);
 
     useEffect(() => {
         const handler = (event: E) => {
