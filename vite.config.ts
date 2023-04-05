@@ -11,19 +11,25 @@ function manualChunks(id: string) { //https://rollupjs.org/configuration-options
         return "radix-ui";
     }
     if (id.includes("react-dropzone")) {
-        return "dropzone";
+        return "rare";
     }
     if (id.includes("react-syntax-highlighter")) {
-        return "highlighter";
+        return "rare";
     }
     if (id.includes("node_modules")) {
         return "vendor";
     }
 }
 
-function buildAt() {
-    const d = new Date();
-    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
+function replaceValues() {
+    return {
+        __BUILD_DATE__: buildAt(),
+    };
+
+    function buildAt() {
+        const d = new Date();
+        return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
+    }
 }
 
 export default defineConfig({ // https://vitejs.dev/config
@@ -33,12 +39,7 @@ export default defineConfig({ // https://vitejs.dev/config
 
         { ...dataUrl({ include: ['**/*.svg'], limit: 15000, }), enforce: 'pre', },
 
-        replace({
-            values: {
-                __BUILD_DATE__: buildAt(),
-            },
-            preventAssignment: true,
-        }),
+        replace({ values: replaceValues(), preventAssignment: true, }),
 
         visualizer({
             filename: 'visualization.html',
