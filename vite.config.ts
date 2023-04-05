@@ -1,30 +1,37 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import url from '@rollup/plugin-url';
+import dataUrl from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
 import { visualizer } from 'rollup-plugin-visualizer';
 //import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 
-const buildAt = () => {
-    var d = new Date();
-    //return `Build ${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()}`;
-    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
-};
+function manualChunks(id: string) { //https://rollupjs.org/configuration-options/#output-manualchunks
+    if (id.includes("@radix-ui")) {
+        return "radix-ui";
+    }
+    if (id.includes("react-dropzone")) {
+        return "dropzone";
+    }
+    if (id.includes("react-syntax-highlighter")) {
+        return "highlighter";
+    }
+    if (id.includes("node_modules")) {
+        return "vendor";
+    }
+}
 
-// https://vitejs.dev/config/
-export default defineConfig({
+function buildAt() {
+    const d = new Date();
+    return `${d.getFullYear().toString().substring(3)}.${d.getMonth() + 1}${d.getDate()} (${d.getHours()}${d.getMinutes()})`;
+}
+
+export default defineConfig({ // https://vitejs.dev/config
     base: '',
     plugins: [
         react(),
 
-        {
-            ...url({
-                include: ['**/*.svg'],
-                limit: 15000,
-            }),
-            enforce: 'pre',
-        },
+        { ...dataUrl({ include: ['**/*.svg'], limit: 15000, }), enforce: 'pre', },
 
         replace({
             values: {
@@ -40,7 +47,7 @@ export default defineConfig({
             brotliSize: true,
         }),
 
-        // chunkSplitPlugin({
+        // chunkSplitPlugin({ // works only w/ "vite-plugin-chunk-split": "0.2.7", but not 0.4.0 and 0.4.7(latest)
         //     customSplitting: {
         //         'react-vendor': ['react', 'react-dom'],
         //         'radix-ui': [/@radix-ui/],
@@ -70,18 +77,3 @@ export default defineConfig({
     },
 
 });
-
-function manualChunks(id: string) { //https://rollupjs.org/configuration-options/#output-manualchunks
-    if (id.includes("@radix-ui")) {
-        return "radix-ui";
-    }
-    if (id.includes("react-dropzone")) {
-        return "dropzone";
-    }
-    if (id.includes("react-syntax-highlighter")) {
-        return "highlighter";
-    }
-    if (id.includes("node_modules")) {
-        return "vendor";
-    }
-}
