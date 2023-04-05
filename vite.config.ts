@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 import url from '@rollup/plugin-url';
 import replace from '@rollup/plugin-replace';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
+//import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 
 const buildAt = () => {
     var d = new Date();
@@ -71,14 +71,15 @@ export default defineConfig({
 
 });
 
-// load all node_modules in a vendor chunk file
-// see: https://rollupjs.org/configuration-options/#output-manualchunks
-function manualChunks(id: string) {
+function manualChunks(id: string) { //https://rollupjs.org/configuration-options/#output-manualchunks
     if (id.includes("@radix-ui")) {
         return "radix-ui";
     }
-    if (id.includes("react")) {
-        return "react-vendor";
+    if (id.includes("react-dropzone")) {
+        return "dropzone";
+    }
+    if (id.includes("react-syntax-highlighter")) {
+        return "highlighter";
     }
     if (id.includes("node_modules")) {
         return "vendor";
