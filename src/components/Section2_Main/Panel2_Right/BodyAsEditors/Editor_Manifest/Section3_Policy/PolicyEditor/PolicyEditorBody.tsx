@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { atom, PrimitiveAtom, useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import * as Dialog from '@radix-ui/react-dialog';
-import { Check, Dropdown, Input, Radio } from "./PolicyeditorUi";
+import { Check, Dropdown, Input, Radio } from "./ui-controls";
 import { IconCross } from "@ui/UIIconSymbols";
 import { ConstrainPsw, ConstrainSet, namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
 

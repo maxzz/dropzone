@@ -10,9 +10,11 @@ import { Section4_FormOptions } from './Section4_FormOptions';
 
 function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";
-    return <div className="px-4 text-lg text-[#32ffdaa0] select-none">
-        {label}
-    </div>;
+    return (
+        <div className="px-4 text-lg text-[#32ffdaa0] select-none">
+            {label}
+        </div>
+    );
 }
 
 function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
