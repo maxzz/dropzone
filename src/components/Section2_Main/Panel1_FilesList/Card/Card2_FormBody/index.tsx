@@ -2,8 +2,8 @@ import React, { Fragment, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils';
-import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
-import { CardNormalButtons } from '../Part3Card_Shared/CardButtons';
+import { getButtonsDisp } from '../Card4_UI/UICardFormButtonTypes';
+import { CardNormalButtons } from '../Card3_Shared/CardButtons';
 import { CardFormBody1_Header } from './CardFormBody1_Header';
 import { CardFormBody2_Fields } from './CardFormBody2_Fields';
 

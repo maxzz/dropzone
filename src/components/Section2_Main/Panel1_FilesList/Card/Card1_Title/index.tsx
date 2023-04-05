@@ -5,8 +5,8 @@ import { CardCaption, CardUsername } from './CardTitleText';
 import { CardTitleIcon } from './CardTitleIcon';
 import { CardTitleFilename } from './CardTitleFilename';
 import { CardTitleAttension } from './CardTitleAttension';
-import { getButtonsDisp } from '../Part4Card_UI/UICardFormButtonTypes';
-import { CardMediumButtons } from '../Part3Card_Shared/CardButtons';
+import { getButtonsDisp } from '../Card4_UI/UICardFormButtonTypes';
+import { CardMediumButtons } from '../Card3_Shared/CardButtons';
 
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);

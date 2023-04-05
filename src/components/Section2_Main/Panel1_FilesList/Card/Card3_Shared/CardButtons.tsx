@@ -2,7 +2,7 @@ import React, { Fragment, MouseEvent } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { IconFormChange, IconFormLogin } from "@ui/UIIconSymbols";
-import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Part4Card_UI/UICardFormButtonTypes";
+import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Card4_UI/UICardFormButtonTypes";
 import { classNames } from "@/utils";
 
 export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {

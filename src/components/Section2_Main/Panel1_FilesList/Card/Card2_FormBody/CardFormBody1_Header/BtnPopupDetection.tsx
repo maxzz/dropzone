@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { FileUsAtomType } from '@/store';
 import { Mani, Matching, Transform } from '@/store/manifest';
 import { ToggleWithPortal } from './HeaderButton';
-import { UITableFromObject } from '../../Part4Card_UI/UITableFromObject';
+import { UITableFromObject } from '../../Card4_UI/UITableFromObject';
 
 function woProtocol(url: string): string {
     return url.replace(/^https?:\/\//, '');

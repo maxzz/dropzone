@@ -3,7 +3,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { Meta } from '@/store/manifest';
 import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/UIIconSymbols';
-import { CardSvgPreview } from '../../Part3Card_Shared/CardSvgPreview';
+import { CardSvgPreview } from '../../Card3_Shared/CardSvgPreview';
 import { BtnPopupDetection } from './BtnPopupDetection';
 import { BtnPopupPool } from './BtnPopupPool';
 import { BtnEdit } from './BtnEdit';
