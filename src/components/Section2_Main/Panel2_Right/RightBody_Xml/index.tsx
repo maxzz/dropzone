@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { SyntaxHighlighterXml } from './SyntaxHighlighterXml';
 import { Scroller } from '../Scroller';
 
-export function BodyAsHighlightedText({ text, ...rest }: { text: string; } & HTMLAttributes<HTMLDivElement>) {
+export function RightBody_Xml({ text, ...rest }: { text: string; } & HTMLAttributes<HTMLDivElement>) {
     return (<>
         {/* Raw data preview (+ codemirror?) */}
         {/* 

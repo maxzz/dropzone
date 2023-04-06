@@ -7,7 +7,7 @@ import { ManiSection1_Fields } from './ManiSection1_Fields';
 import { ManiSection2_Submit } from './ManiSection2_Submit';
 import { ManiSection3_Policy } from './ManiSection3_Policy';
 import { ManiSection4_FormOptions } from './ManiSection4_FormOptions';
-import { Scroller } from '../../Scroller';
+import { Scroller } from '../Scroller';
 
 function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";
@@ -64,7 +64,7 @@ function FormItems({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formId
     );
 }
 
-export function Editor_Manifest({ fileUsAtom, ...rest }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
+export function RightBody_Manifest({ fileUsAtom, ...rest }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
     return (
         <Scroller {...rest}>
             <div className="min-w-[34rem]">

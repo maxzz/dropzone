@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtomType } from '@/store';
-import { Scroller } from '../../Scroller';
+import { Scroller } from '../Scroller';
 import { fieldIcons } from '@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon';
 
 function FieldIcon(isPsw: boolean | undefined, className: string) {
@@ -10,7 +10,7 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
     return Icon;
 }
 
-export function Editor_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function RightBody_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [fileUs] = useAtom(fileUsAtom);
     const names = fileUs.fcat?.names || [];
     return (
