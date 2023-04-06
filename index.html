@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password Manager Investigation Tool (PMIT)</title>
+    <style>
+        html {
+            background-color: #485167;
+        }
+        body {
+            /* background-image: linear-gradient(to right, #1f487894, #031f52a2); */
+            background-image: linear-gradient(to right, var(--tm-primary-300-, #1f487894), var(--tm-primary-800-, #031f52a2));
+            background-color: transparent !important;
+        }
+    </style>
 </head>
-<body>
+<!-- <body style="background-image: linear-gradient(to right, var(--tm-primary-300-, #1f487894), var(--tm-primary-800-, #031f52a2));"> -->
+<!-- <body style="background-image: linear-gradient(to right, #1f487894, #031f52a2);"> -->
+<!-- <body style="background-color: black; transition: background-image 2s;"> -->
+
+<body style="background-color: green;">
     <div id="root"></div>
     <div id="portal" class="z-50"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>
+
 </html>
