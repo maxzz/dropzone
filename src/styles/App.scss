@@ -1,10 +1,6 @@
-//
 body {
-    // background-image: linear-gradient(to right, var(--tm-primary-300-, #607b9894), var(--tm-primary-800-, #c191917d)),
-    // background-image: linear-gradient(to right, var(--tm-primary-300-, #0361c694), var(--tm-primary-800-, #c191917d)),
-    // background-image: linear-gradient(to right, var(--tm-primary-300-, #130f40), var(--tm-primary-800-, #1f3e9d)),
     background-image: linear-gradient(to right, var(--tm-primary-300-, #1f487894), var(--tm-primary-800-, #031f52a2)),
-        url("@/assets/background-bw.jpg") /*http://higeom.math.msu.su/history/delone_r.html*/;
+        url("@/assets/background-bw.jpg"); /*http://higeom.math.msu.su/history/delone_r.html*/
     background-blend-mode: multiply;
 }
 
