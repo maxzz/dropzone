@@ -66,7 +66,7 @@ function TableHeader() {
 }
 
 
-export function Section3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
+export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formIdx];
 

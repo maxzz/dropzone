@@ -3,10 +3,10 @@ import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
-import { Section1_Fields } from './ManiSection1_Fields';
-import { Section2_Submit } from './ManiSection2_Submit';
-import { Section3_Policy } from './ManiSection3_Policy';
-import { Section4_FormOptions } from './ManiSection4_FormOptions';
+import { ManiSection1_Fields } from './ManiSection1_Fields';
+import { ManiSection2_Submit } from './ManiSection2_Submit';
+import { ManiSection3_Policy } from './ManiSection3_Policy';
+import { ManiSection4_FormOptions } from './ManiSection4_FormOptions';
 
 function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";
@@ -44,19 +44,19 @@ function FormItems({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formId
         <SubSection label={<div className="text-lg">{title}</div>} openAtom={openSections.formAtom}>
 
             <SubSection label="Fields" openAtom={openSections.fieldsAtom}>
-                <Section1_Fields fields={metaForm?.fields} />
+                <ManiSection1_Fields fields={metaForm?.fields} />
             </SubSection>
 
             <SubSection label="Submit options" openAtom={openSections.submitAtom}>
-                <Section2_Submit form={metaForm} />
+                <ManiSection2_Submit form={metaForm} />
             </SubSection>
 
             <SubSection label="Policy" openAtom={openSections.policyAtom}>
-                <Section3_Policy fileUsAtom={fileUsAtom} formIdx={formIdx} />
+                <ManiSection3_Policy fileUsAtom={fileUsAtom} formIdx={formIdx} />
             </SubSection>
 
             <SubSection label="Form options" openAtom={openSections.optionsAtom}>
-                <Section4_FormOptions fileUsAtom={fileUsAtom} formIdx={formIdx} />
+                <ManiSection4_FormOptions fileUsAtom={fileUsAtom} formIdx={formIdx} />
             </SubSection>
 
         </SubSection>

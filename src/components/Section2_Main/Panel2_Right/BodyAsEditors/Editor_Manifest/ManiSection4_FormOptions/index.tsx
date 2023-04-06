@@ -195,7 +195,7 @@ function Part5PasswordManagerIcon({ atoms }: { atoms: FormAtoms; }) {
     </>);
 }
 
-export function Section4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
+export function ManiSection4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     // const fileUs = useAtomValue(fileUsAtom);
     // const metaForm = fileUs.meta?.[formIdx];
 

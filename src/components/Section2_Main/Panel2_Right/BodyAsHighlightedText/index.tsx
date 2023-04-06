@@ -1,5 +1,5 @@
 import React from 'react';
-import { SyntaxHighlighterXml } from '@ui/SyntaxHighlighter';
+import { SyntaxHighlighterXml } from './SyntaxHighlighterXml';
 
 export function BodyAsHighlightedText({ text }: { text: string; }) {
     return (<>

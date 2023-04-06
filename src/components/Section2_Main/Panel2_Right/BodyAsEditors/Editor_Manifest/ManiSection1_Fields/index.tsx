@@ -65,7 +65,7 @@ function TableHeader() {
     </>);
 }
 
-export function Section1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
+export function ManiSection1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
     const ourFields = fields?.filter((field) => field.ftyp !== FieldTyp.button);
     return (<>
         {ourFields?.length

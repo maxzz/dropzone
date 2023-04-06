@@ -22,7 +22,7 @@ function RadioGroup({ items, groupName, selected, setSelected }: { items: string
     );
 }
 
-export function Section2_Submit({ form }: { form: Meta.Form | undefined; }) {
+export function ManiSection2_Submit({ form }: { form: Meta.Form | undefined; }) {
     const [items, setItems] = useState<string[]>([]);
     const [selected, setSelected] = useState(0);
 
