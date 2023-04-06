@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { SyntaxHighlighterXml } from './SyntaxHighlighterXml';
+import { Scroller } from '../Scroller';
 
-export function BodyAsHighlightedText({ text }: { text: string; }) {
+export function BodyAsHighlightedText({ text, ...rest }: { text: string; } & HTMLAttributes<HTMLDivElement>) {
     return (<>
         {/* Raw data preview (+ codemirror?) */}
         {/* 
@@ -12,9 +13,11 @@ export function BodyAsHighlightedText({ text }: { text: string; }) {
         </UISemiScrollbar>
          */}
 
-        <SyntaxHighlighterXml>
-            {text}
-        </SyntaxHighlighterXml>
+        <Scroller {...rest}>
+            <SyntaxHighlighterXml>
+                {text}
+            </SyntaxHighlighterXml>
+        </Scroller>
     </>);
 }
 

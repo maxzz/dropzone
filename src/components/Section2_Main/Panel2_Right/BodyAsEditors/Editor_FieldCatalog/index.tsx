@@ -13,7 +13,6 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
 export function Editor_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [fileUs] = useAtom(fileUsAtom);
     const names = fileUs.fcat?.names || [];
-
     return (
         <div className="grid grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
             <div className="px-4 py-3 text-xs text-primary-400 bg-primary-800 border-primary-700 border-b">
