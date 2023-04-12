@@ -11,7 +11,7 @@ import { Column5_Type } from './Column5_Type';
 function TableRow({ field }: { field: Meta.Field; }) {
     const { useit, displayname, type: typ, value: val } = field.mani;
 
-    const state = useState({
+    const rowAtoms = useState({
         useItAtom: atom<boolean>(!!useit),
         labelAtom: atom(displayname || ''),
         typeAtom: atom(''),
@@ -21,11 +21,11 @@ function TableRow({ field }: { field: Meta.Field; }) {
         valueLifeAtom: atom(TransformValue.valueLife4Mani(field.mani)),
     })[0];
 
-    const [useIt, setUseIt] = useAtom(state.useItAtom);
-    const [label, setLabel] = useAtom(state.labelAtom);
-    const [type, setType] = useAtom(state.typeAtom);
-    const [value, setValue] = useAtom(state.valueAtom);
-    const [valueAs, setValueAs] = useAtom(state.valueAsAtom);
+    const [useIt, setUseIt] = useAtom(rowAtoms.useItAtom);
+    const [label, setLabel] = useAtom(rowAtoms.labelAtom);
+    const [type, setType] = useAtom(rowAtoms.typeAtom);
+    const [value, setValue] = useAtom(rowAtoms.valueAtom);
+    const [valueAs, setValueAs] = useAtom(rowAtoms.valueAsAtom);
 
     //const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
     const enableRow = () => !useIt && setUseIt(true);
@@ -39,26 +39,26 @@ function TableRow({ field }: { field: Meta.Field; }) {
     }, [field]);
 
     return (<>
-        <Column1_UseIt useItAtom={state.useItAtom} />
-        <Column2_Label useItAtom={state.useItAtom} valueAtom={state.labelAtom} onClick={enableRow} />
-        <Column3_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} choosevalue={field.mani.choosevalue} onClick={enableRow} />
-        <Column4_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
-        <Column5_Type useItAtom={state.useItAtom} field={field} onClick={enableRow} />
+        <Column1_UseIt useItAtom={rowAtoms.useItAtom} />
+        <Column2_Label useItAtom={rowAtoms.useItAtom} valueAtom={rowAtoms.labelAtom} onClick={enableRow} />
+        <Column3_Value useItAtom={rowAtoms.useItAtom} valueLifeAtom={rowAtoms.valueLifeAtom} choosevalue={field.mani.choosevalue} onClick={enableRow} />
+        <Column4_Catalog useItAtom={rowAtoms.useItAtom} field={field} onClick={enableRow} />
+        <Column5_Type useItAtom={rowAtoms.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
 
-const columns = ["Use it", "Label", "Value", "Shared ID (Catalog)", "Type"];
-const columnHints = [
-    "Use this field or not",
-    "The label is shown to the user next to\nthe field for entering a value",
-    "Specifies the value to fill out the field\nand how it is stored",
-    "The Shared ID determines whether the value\nwill be shared through the field catalog",
-    "Type of field"
+const rowColumns = [
+    ['Use it',              /**/ 'Use this field or not'],
+    ['Label',               /**/ 'The label is shown to the user next to\nthe field for entering a value'],
+    ['Value',               /**/ 'Specifies the value to fill out the field\nand how it is stored'],
+    ['Shared ID (Catalog)', /**/ 'The Shared ID determines whether the value\nwill be shared through the field catalog'],
+    ['Type',                /**/ 'Type of field'],
 ];
+
 function TableHeader() {
     return (<>
-        {columns.map((title, idx) => (
-            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none" title={columnHints[idx]} key={idx}>
+        {rowColumns.map(([title, hint], idx) => (
+            <div className="mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none" title={hint} key={idx}>
                 {title}
             </div>
         ))}
@@ -66,20 +66,21 @@ function TableHeader() {
 }
 
 export function ManiSection1_Fields({ fields }: { fields: Meta.Field[] | undefined; }) {
-    const ourFields = fields?.filter((field) => field.ftyp !== FieldTyp.button);
+    const nonButtonFields = fields?.filter((field) => field.ftyp !== FieldTyp.button); // buttons are shown on another section
     return (<>
-        {ourFields?.length
-            ? <>
+        {nonButtonFields?.length
+            ? (
                 <div className={classNames(
                     "p-2 grid grid-cols-[max-content_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-x-1 gap-y-1",
                     "bg-primary-800 text-primary-200 rounded-sm"
                 )}>
                     <TableHeader />
-                    {ourFields.map((field, idx) => (
+
+                    {nonButtonFields.map((field, idx) => (
                         <TableRow field={field} key={idx} />
                     ))}
                 </div>
-            </>
+            )
             : <div className="">no fields</div>
         }
     </>);
