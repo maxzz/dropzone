@@ -12,7 +12,7 @@ function idx2RefName(v: number, isPsw: boolean) {
     return Object.keys(pickRefsList(isPsw))[v];
 }
 
-function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: string | undefined) {
+function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) {
     const isBtn = valueLife.fType === FieldTyp.button;
     const isPsw = valueLife.fType === FieldTyp.psw;
 
@@ -32,15 +32,16 @@ function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: stri
 
     items.at(-1) === '-' && items.pop();
 
-    const inputText = valueLife.isRef
-        ? refName2Txt(valueLife.value, isPsw)
-        : valueLife.value
-            ? valueLife.value
-            : valueLife.isNon
-                ? ''
-                : isBtn
+    const inputText =
+        valueLife.isRef
+            ? refName2Txt(valueLife.value, isPsw)
+            : valueLife.value
+                ? valueLife.value
+                : valueLife.isNon
                     ? ''
-                    : LIST_valueAskNames[valueLife.valueAs];
+                    : isBtn
+                        ? ''
+                        : LIST_valueAskNames[valueLife.valueAs];
 
     const dropdownSelectedIndex =
         valueLife.isRef
@@ -52,41 +53,39 @@ function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: stri
                 : valueAs2Idx(valueLife.valueAs);
 
     const showAsRef = valueLife.isRef || !valueLife.value;
-    const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
     const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
     const title = disabled ? 'Buttons have no state value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
 
     return {
         items,
-        
+
         itemIdxs,
         idxRefs,
         idxValues,
         listValues,
         dropdownSelectedIndex,
         isPsw,
-        
+
         inputText,
         showAsRef,
-        showInputText,
         disabled,
         title,
     };
-    
-    function refName2Idx(v: string | undefined, isPsw: boolean) {
-        return v ? pickRefsList(isPsw)[v].i : -1;
+
+    function refName2Idx(value: string | undefined, isPsw: boolean) {
+        return value ? pickRefsList(isPsw)[value].i : -1;
     }
-    
-    function refName2Txt(v: string | undefined, isPsw: boolean) {
-        return v ? pickRefsList(isPsw)[v].s : '';
+
+    function refName2Txt(value: string | undefined, isPsw: boolean) {
+        return value ? pickRefsList(isPsw)[value].s : '';
     }
-    
-    function refName2Full(v: string | undefined, isPsw: boolean) {
-        return v ? pickRefsList(isPsw)[v].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
+
+    function refName2Full(value: string | undefined, isPsw: boolean) {
+        return value ? pickRefsList(isPsw)[value].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
     }
-    
-    function valueAs2Idx(v: ValueAs) {
-        return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
+
+    function valueAs2Idx(valueAs: ValueAs) {
+        return valueAs === ValueAs.askReuse ? 0 : valueAs === ValueAs.askConfirm ? 1 : valueAs === ValueAs.askAlways ? 2 : 0;
     }
 }
 
@@ -103,13 +102,14 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
         listValues,
         dropdownSelectedIndex,
         isPsw,
-        
+
         inputText,
         showAsRef,
-        showInputText,
         disabled,
         title,
-    } = getValueUiState(valueLife, useIt, field.mani.choosevalue);
+    } = getValueUiState(valueLife, field.mani.choosevalue);
+
+    const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 
     function onSetText(value: string) {
         setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
