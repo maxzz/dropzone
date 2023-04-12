@@ -28,18 +28,14 @@ function valueAs2Idx(v: ValueAs) {
     return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
 }
 
-export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
-
-    const [useIt, setUseIt] = useAtom(useItAtom);
-    const [valueLife, setValueLife] = useAtom(valueLifeAtom);
-
+function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: string | undefined) {
     const isBtn = valueLife.fType === FieldTyp.button;
     const isPsw = valueLife.fType === FieldTyp.psw;
 
     const listAskNames = isBtn ? [] : [...valueAsNames];
     listAskNames.length && listAskNames.push('-');
 
-    const listValues = field.mani.choosevalue?.split(':') || [];
+    const listValues = choosevalue?.split(':') || [];
     listValues.length && listValues.push('-');
 
     const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.f) : [];
@@ -75,6 +71,45 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
     const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
     const title = disabled ? 'Buttons have no state value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
+
+    return {
+        items,
+        
+        itemIdxs,
+        idxRefs,
+        idxValues,
+        listValues,
+        dropdownSelectedIndex,
+        isPsw,
+        
+        inputText,
+        showAsRef,
+        showInputText,
+        disabled,
+        title,
+    };
+}
+
+export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+
+    const [useIt, setUseIt] = useAtom(useItAtom);
+    const [valueLife, setValueLife] = useAtom(valueLifeAtom);
+
+    const {
+        items,
+        itemIdxs,
+        idxRefs,
+        idxValues,
+        listValues,
+        dropdownSelectedIndex,
+        isPsw,
+        
+        inputText,
+        showAsRef,
+        showInputText,
+        disabled,
+        title,
+    } = getValueUiState(valueLife, useIt, field.mani.choosevalue);
 
     function onSetText(value: string) {
         setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));

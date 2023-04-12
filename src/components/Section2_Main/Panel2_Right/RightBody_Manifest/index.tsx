@@ -67,7 +67,7 @@ function FormItems({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formId
 export function RightBody_Manifest({ fileUsAtom, ...rest }: { fileUsAtom: FileUsAtomType; } & HTMLAttributes<HTMLDivElement>) {
     return (
         <Scroller {...rest}>
-            <div className="min-w-[34rem]">
+            <div className="min-w-[30rem] max-w-[56rem]">
                 <FormItems fileUsAtom={fileUsAtom} formIdx={FormIdx.login} />
                 <FormItems fileUsAtom={fileUsAtom} formIdx={FormIdx.cpass} />
             </div>
