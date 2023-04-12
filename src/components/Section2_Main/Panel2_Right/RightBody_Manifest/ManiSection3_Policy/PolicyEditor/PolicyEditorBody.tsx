@@ -3,7 +3,8 @@ import { atom, useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import { Check, Dropdown, Input, Radio } from "./ui-controls";
 import { ConstrainPsw, ConstrainSet, namesConstrainPsw, UseAs } from "@/store/policy";
-import { Buttons, Header, MinMaxLength, RuleTypes, TestSection } from "./ui-sections";
+import { DialogButtons, DialogHeader, SectionMinMaxLength, SectionRuleTypes, SectionTestRoom } from "./ui-sections";
+import { classNames } from "@/utils";
 
 export type PolicyUi = {
     enabled: boolean;       // Enable password policy
@@ -52,36 +53,38 @@ export function PolicyEditorBody() {
         <div className="p-4 text-sm text-primary-400 bg-primary-800 border-primary-600/20 shadow-primary-700/30 border shadow rounded flex flex-col space-y-4">
 
             {/* Header */}
-            <Header />
+            <DialogHeader />
 
             <Check checked={enabled} onChange={() => setEnabled(v => !v)}>Enable password policy</Check>
 
-            {/* Predefined or Custom rule */}
-            <h2 className="text-sm font-bold border-primary-700 border-b">Complexity</h2>
-            <RuleTypes atoms={atoms} />
+            <div className={classNames("flex flex-col space-y-4", !enabled && "opacity-10 pointer-events-none")}>
+                {/* Predefined or Custom rule */}
+                <h2 className="text-sm font-bold border-primary-700 border-b">Password complexity</h2>
+                <SectionRuleTypes atoms={atoms} />
 
-            {/* Min / Max length */}
-            <MinMaxLength atoms={atoms} />
+                {/* Min / Max length */}
+                <SectionMinMaxLength atoms={atoms} />
 
-            {/* Test section */}
-            <h2 className="text-sm font-bold border-primary-700 border-b">Test complexity</h2>
-            <TestSection atoms={atoms} />
+                {/* Test section */}
+                <h2 className="text-sm font-bold border-primary-700 border-b">Test password complexity</h2>
+                <SectionTestRoom atoms={atoms} />
 
-            {/* History */}
-            <h2 className="text-sm font-bold border-primary-700 border-b">History</h2>
-            <div>
-                <Dropdown items={namesConstrainPsw} valueAtom={atoms.constrainsPswAtom} />
-            </div>
+                {/* History */}
+                <h2 className="text-sm font-bold border-primary-700 border-b">Password history restrictions</h2>
+                <div>
+                    <Dropdown items={namesConstrainPsw} valueAtom={atoms.constrainsPswAtom} />
+                </div>
 
-            {/* Generation */}
-            <h2 className="text-sm font-bold border-primary-700 border-b">Generation</h2>
-            <div className="grid space-y-2">
-                <Radio name="gen-type" checked={useAs === `${UseAs.verify}`} onChange={() => setUseUs(`${UseAs.verify}`)}>By user</Radio>
-                <Radio name="gen-type" checked={useAs === `${UseAs.generate}`} onChange={() => setUseUs(`${UseAs.generate}`)}>By system</Radio>
+                {/* Generation */}
+                <h2 className="text-sm font-bold border-primary-700 border-b">Password generation</h2>
+                <div className="grid space-y-2">
+                    <Radio name="gen-type" checked={useAs === `${UseAs.verify}`} onChange={() => setUseUs(`${UseAs.verify}`)}>By user</Radio>
+                    <Radio name="gen-type" checked={useAs === `${UseAs.generate}`} onChange={() => setUseUs(`${UseAs.generate}`)}>By system</Radio>
+                </div>
             </div>
 
             {/* Buttons */}
-            <Buttons />
+            <DialogButtons />
         </div>
     );
 }

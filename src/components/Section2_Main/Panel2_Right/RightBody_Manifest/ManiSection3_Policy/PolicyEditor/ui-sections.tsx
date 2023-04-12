@@ -6,8 +6,9 @@ import { useAtom } from "jotai";
 import { Dropdown, Input, Radio } from "./ui-controls";
 import { ConstrainPsw, ConstrainSet, namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
 import { IconCross } from "@ui/UIIconSymbols";
+import { classNames } from "@/utils";
 
-export function Header() {
+export function DialogHeader() {
     return (
         <div className="">
             <div className="flex items-center justify-between">
@@ -25,20 +26,20 @@ export function Header() {
     );
 }
 
-export function RuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+export function SectionRuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     const [isCustomRule, setIsCustomRule] = useAtom(atoms.isCustomRuleAtom);
     return (
         <div className="space-y-8">
             <div>
                 <Radio name="rule-type" checked={isCustomRule === '0'} onChange={() => setIsCustomRule('0')}>Predefined rule</Radio>
-                <div className="mt-2">
+                <div className={classNames("mt-2", isCustomRule !== '0' && "opacity-10 pointer-events-none" )}>
                     <Dropdown items={namesConstrainSet} valueAtom={atoms.constrainSetAtom} />
                 </div>
             </div>
 
             <div>
                 <Radio name="rule-type" checked={isCustomRule === '1'} onChange={() => setIsCustomRule('1')}>Custom rule</Radio>
-                <div className="mt-2 flex items-center space-x-2">
+                <div className={classNames("mt-2 flex items-center space-x-2", isCustomRule !== '1' && "opacity-10 pointer-events-none")}>
                     <Input className="flex-1" />
                     <button className="self-stretch px-4 p-1 bg-primary-700 rounded">?</button>
                 </div>
@@ -47,7 +48,7 @@ export function RuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     );
 }
 
-export function MinMaxLength({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+export function SectionMinMaxLength({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     const [min, setMin] = useAtom(atoms.minLengthAtom);
     const [max, setMax] = useAtom(atoms.maxLengthAtom);
     return (
@@ -60,7 +61,7 @@ export function MinMaxLength({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     );
 }
 
-export function TestSection({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+export function SectionTestRoom({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     return (<>
         <div className="flex items-center space-x-2">
             <Input className="" />
@@ -73,7 +74,7 @@ export function TestSection({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     </>);
 }
 
-export function Buttons() {
+export function DialogButtons() {
     return (
         <div className="flex items-center justify-center gap-x-2">
             <DialogCloseButton>
