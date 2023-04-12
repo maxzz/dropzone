@@ -18,18 +18,22 @@ export function PolicyEditor() {
                 Edit
             </Dialog.Trigger>
 
-            {transitions((styles, item) => !item ? null : <>
-                <Dialog.Portal container={document.getElementById('portal')}>
-                    <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
+            {transitions((styles, item) => (
+                !item
+                    ? null
+                    : <>
+                        <Dialog.Portal container={document.getElementById('portal')}>
+                            <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
 
-                    <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
-                        <a.div style={styles}>
-                            <PolicyEditorBody />
-                        </a.div>
-                    </Dialog.Content>
+                            <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
+                                <a.div style={styles}>
+                                    <PolicyEditorBody />
+                                </a.div>
+                            </Dialog.Content>
 
-                </Dialog.Portal>
-            </>)}
+                        </Dialog.Portal>
+                    </>
+            ))}
         </Dialog.Root>
     );
 }

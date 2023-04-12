@@ -110,16 +110,16 @@ function Buttons() {
 function createUiAtoms(policy: string, onChange: () => void): Atomize<PolicyUi> {
     //TODO: parse policy and assign onChange callback
     return {
-        enabledAtom: atom<boolean>(true),
+        enabledAtom: atom(true),
         isCustomRuleAtom: atom<'0' | '1'>('0'),
-        constrainSetAtom: atom<string>(`${ConstrainSet.withspecial}`),
-        customAtom: atom<string>(''),
-        minLengthAtom: atom<number>(8),
-        maxLengthAtom: atom<number>(12),
-        textVerifyAtom: atom<string>(''),
-        textGenerateAtom: atom<string>(''),
-        constrainsPswAtom: atom<string>(`${ConstrainPsw.diffAp}`),
-        useAsAtom: atom<string>(`${UseAs.verify}`),
+        constrainSetAtom: atom(`${ConstrainSet.withspecial}`),
+        customAtom: atom(''),
+        minLengthAtom: atom(8),
+        maxLengthAtom: atom(12),
+        textVerifyAtom: atom(''),
+        textGenerateAtom: atom(''),
+        constrainsPswAtom: atom(`${ConstrainPsw.diffAp}`),
+        useAsAtom: atom(`${UseAs.verify}`),
     };
 }
 
@@ -132,7 +132,7 @@ export function PolicyEditorBody() {
     const [useAs, setUseUs] = useAtom(atoms.useAsAtom);
 
     return (
-        <div className="p-4 text-sm text-primary-400 bg-primary-800 rounded flex flex-col space-y-4">
+        <div className="p-4 text-sm text-primary-400 bg-primary-800 border-primary-600/20 shadow-primary-700/30 border shadow rounded flex flex-col space-y-4">
 
             {/* Header */}
             <Header />

@@ -3,11 +3,11 @@ import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UIArrow } from '@ui/UIArrow';
 import { UIAccordion } from '@ui/UIAccordion';
+import { Scroller } from '../Scroller';
 import { ManiSection1_Fields } from './ManiSection1_Fields';
 import { ManiSection2_Submit } from './ManiSection2_Submit';
 import { ManiSection3_Policy } from './ManiSection3_Policy';
 import { ManiSection4_FormOptions } from './ManiSection4_FormOptions';
-import { Scroller } from '../Scroller';
 
 function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";
@@ -18,7 +18,7 @@ function NoForm(formType: FormIdx) {
     );
 }
 
-function SubSection({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
+function SubSectionAccordion({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);
     return (<>
         <div className="inline-block">
@@ -40,27 +40,27 @@ function FormItems({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formId
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formIdx];
     const title = formIdx === FormIdx.login ? "Login" : "Password change";
-    const openSections = maniOpenSections[formIdx];
+    const openNow = maniOpenSections[formIdx];
     return (!metaForm ? NoForm(formIdx) :
-        <SubSection label={<div className="text-lg">{title}</div>} openAtom={openSections.formAtom}>
+        <SubSectionAccordion label={<div className="text-lg">{title}</div>} openAtom={openNow.formAtom}>
 
-            <SubSection label="Fields" openAtom={openSections.fieldsAtom}>
-                <ManiSection1_Fields fields={metaForm?.fields} />
-            </SubSection>
+            <SubSectionAccordion label="Fields" openAtom={openNow.fieldsAtom}>
+                <ManiSection1_Fields fields={metaForm.fields} />
+            </SubSectionAccordion>
 
-            <SubSection label="Submit options" openAtom={openSections.submitAtom}>
+            <SubSectionAccordion label="Submit options" openAtom={openNow.submitAtom}>
                 <ManiSection2_Submit form={metaForm} />
-            </SubSection>
+            </SubSectionAccordion>
 
-            <SubSection label="Policy" openAtom={openSections.policyAtom}>
+            <SubSectionAccordion label="Policy" openAtom={openNow.policyAtom}>
                 <ManiSection3_Policy fileUsAtom={fileUsAtom} formIdx={formIdx} />
-            </SubSection>
+            </SubSectionAccordion>
 
-            <SubSection label="Form options" openAtom={openSections.optionsAtom}>
+            <SubSectionAccordion label="Form options" openAtom={openNow.optionsAtom}>
                 <ManiSection4_FormOptions fileUsAtom={fileUsAtom} formIdx={formIdx} />
-            </SubSection>
+            </SubSectionAccordion>
 
-        </SubSection>
+        </SubSectionAccordion>
     );
 }
 
