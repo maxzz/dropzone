@@ -3,7 +3,7 @@ import { atom, useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import { Check, Dropdown, Input, Radio } from "./ui-controls";
 import { ConstrainPsw, ConstrainSet, namesConstrainPsw, UseAs } from "@/store/policy";
-import { DialogButtons, DialogHeader, SectionMinMaxLength, SectionRuleTypes, SectionTestRoom } from "./ui-sections";
+import { DialogButtons, DialogHeader, SectionGenerationBy, SectionHistory, SectionMinMaxLength, SectionRuleTypes, SectionTestRoom } from "./ui-sections";
 import { classNames } from "@/utils";
 
 export type PolicyUi = {
@@ -47,7 +47,6 @@ export function PolicyEditorBody() {
     }))[0];
 
     const [enabled, setEnabled] = useAtom(atoms.enabledAtom);
-    const [useAs, setUseUs] = useAtom(atoms.useAsAtom);
 
     return (
         <div className="p-4 text-sm text-primary-400 bg-primary-800 border-primary-600/20 shadow-primary-700/30 border shadow rounded flex flex-col space-y-4">
@@ -71,16 +70,11 @@ export function PolicyEditorBody() {
 
                 {/* History */}
                 <h2 className="text-sm font-bold border-primary-700 border-b">Password history restrictions</h2>
-                <div>
-                    <Dropdown items={namesConstrainPsw} valueAtom={atoms.constrainsPswAtom} />
-                </div>
+                <SectionHistory atoms={atoms} />
 
                 {/* Generation */}
                 <h2 className="text-sm font-bold border-primary-700 border-b">Password generation</h2>
-                <div className="grid space-y-2">
-                    <Radio name="gen-type" checked={useAs === `${UseAs.verify}`} onChange={() => setUseUs(`${UseAs.verify}`)}>By user</Radio>
-                    <Radio name="gen-type" checked={useAs === `${UseAs.generate}`} onChange={() => setUseUs(`${UseAs.generate}`)}>By system</Radio>
-                </div>
+                <SectionGenerationBy atoms={atoms} />
             </div>
 
             {/* Buttons */}

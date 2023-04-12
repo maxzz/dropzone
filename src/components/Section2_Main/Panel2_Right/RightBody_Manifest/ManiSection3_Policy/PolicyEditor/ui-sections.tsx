@@ -1,5 +1,5 @@
 import React from "react";
-import { Close as DialogCloseButton} from '@radix-ui/react-dialog';
+import { Close as DialogCloseButton } from '@radix-ui/react-dialog';
 import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from "./PolicyEditorBody";
 import { useAtom } from "jotai";
@@ -32,7 +32,7 @@ export function SectionRuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {
         <div className="space-y-8">
             <div>
                 <Radio name="rule-type" checked={isCustomRule === '0'} onChange={() => setIsCustomRule('0')}>Predefined rule</Radio>
-                <div className={classNames("mt-2", isCustomRule !== '0' && "opacity-10 pointer-events-none" )}>
+                <div className={classNames("mt-2", isCustomRule !== '0' && "opacity-10 pointer-events-none")}>
                     <Dropdown items={namesConstrainSet} valueAtom={atoms.constrainSetAtom} />
                 </div>
             </div>
@@ -62,16 +62,36 @@ export function SectionMinMaxLength({ atoms }: { atoms: Atomize<PolicyUi>; }) {
 }
 
 export function SectionTestRoom({ atoms }: { atoms: Atomize<PolicyUi>; }) {
-    return (<>
-        <div className="flex items-center space-x-2">
-            <Input className="" />
-            <button className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">Verify</button>
+    return (
+        <div className="flex flex-col space-y-2">
+            <div className="flex items-center space-x-2">
+                <Input className="" />
+                <button className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">Verify</button>
+            </div>
+            <div className="flex items-center space-x-2">
+                <Input className="" />
+                <button className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">Generate</button>
+            </div>
         </div>
-        <div className="flex items-center space-x-2">
-            <Input className="" />
-            <button className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">Generate</button>
+    );
+}
+
+export function SectionHistory({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+    return (
+        <div>
+            <Dropdown items={namesConstrainPsw} valueAtom={atoms.constrainsPswAtom} />
         </div>
-    </>);
+    )
+}
+
+export function SectionGenerationBy({ atoms }: { atoms: Atomize<PolicyUi>; }) {
+    const [useAs, setUseUs] = useAtom(atoms.useAsAtom);
+    return (
+        <div className="grid space-y-2">
+            <Radio name="gen-type" checked={useAs === `${UseAs.verify}`} onChange={() => setUseUs(`${UseAs.verify}`)}>By user</Radio>
+            <Radio name="gen-type" checked={useAs === `${UseAs.generate}`} onChange={() => setUseUs(`${UseAs.generate}`)}>By system</Radio>
+        </div>
+    );
 }
 
 export function DialogButtons() {
