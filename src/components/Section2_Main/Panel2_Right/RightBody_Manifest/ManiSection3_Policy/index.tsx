@@ -43,21 +43,17 @@ function FieldWithPolicy({ field }: { field: Meta.Field; }) {
     </>);
 }
 
-const columns = ["Field", "Policy"];
-const columnHints = [
-    "Field",
-    "Field policy",
-];
-const columnClassNames = [
-    "",
-    "col-span-2",
-];
+const tableColumns = [
+    ["Field",  /**/ "Field",        /**/ "",],
+    ["Policy", /**/ "Field policy", /**/ "col-span-2",],
+] as const;
+
 function TableHeader() {
     return (<>
-        {columns.map((title, idx) => (
+        {tableColumns.map(([title, hint, classes], idx) => (
             <div
-                className={classNames("mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none", columnClassNames[idx],)}
-                title={columnHints[idx]} key={idx}
+                className={classNames("mb-2 px-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none", classes)}
+                title={hint} key={idx}
             >
                 {title}
             </div>
@@ -65,16 +61,15 @@ function TableHeader() {
     </>);
 }
 
-
 export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formIdx];
 
-    const policiesAtom = useState(atom<Meta.Field[]>([]))[0];
+    const policiesAtom = useState(atom<Meta.Field[]>([]))[0]; // TODO: we should monitor current form fields and list here all password fields to allow add to them policy
     const [policies, setPolicies] = useAtom(policiesAtom);
 
     useEffect(() => {
-        const policies2 = metaForm?.fields?.filter((field) => field.mani.policy || field.mani.policy2) || [];    
+        const policies2 = metaForm?.fields?.filter((field) => field.mani.policy || field.mani.policy2) || [];
         setPolicies(policies2);
     }, [fileUs]);
 
@@ -91,6 +86,7 @@ export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileU
         {!policies?.length ? <div className="">Policy not specified</div> :
             <div className="px-3 py-2 grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-1 items-stretch rounded bg-primary-800">
                 <TableHeader />
+
                 {policies.map((field, idx) => (
                     <FieldWithPolicy field={field} key={idx} />
                 ))}
