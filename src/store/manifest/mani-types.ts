@@ -90,7 +90,7 @@ export const enum ValueAs {
     askAlways,
 }
 
-export const valueAsNames = ["Ask - Resuse", "Ask - Confirm", "Ask Always ",];
+export const LIST_valueAskNames = ["Ask - Resuse", "Ask - Confirm", "Ask Always ",];
 
 export type ValueLife = {
     valueAs: ValueAs;       // how to treat value from user
@@ -110,7 +110,7 @@ export type References = {
     psw: Record<string, ReferenceItem>;
 };
 
-export const references: References = {
+export const LIST_references: References = {
     txt: {
         name: { i: 0, f: "Windows User Name", s: "User Name" },
         upnname: { i: 1, f: "Windows User Principal Name", s: "User Principal Name" },

@@ -42,8 +42,8 @@ export type {
 export {
     FieldTyp,
     ValueAs,
-    valueAsNames,
-    references,
+    LIST_valueAskNames,
+    LIST_references,
     SUBMIT,
 } from './mani-types';
 

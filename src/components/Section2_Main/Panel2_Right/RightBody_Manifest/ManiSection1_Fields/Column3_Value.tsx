@@ -1,11 +1,11 @@
 import React, { InputHTMLAttributes } from "react";
 import { PrimitiveAtom as PA, useAtom } from "jotai";
-import { FieldTyp, Meta, ReferenceItem, references, ValueAs, valueAsNames, ValueLife } from "@/store/manifest";
+import { FieldTyp, LIST_references, LIST_valueAskNames, Meta, ReferenceItem, ValueAs, ValueLife } from "@/store/manifest";
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
 function typeRefs(isPsw: boolean | undefined): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
-    return references[isPsw ? 'psw' : 'txt'];
+    return LIST_references[isPsw ? 'psw' : 'txt'];
 }
 
 function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
@@ -32,7 +32,7 @@ function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: stri
     const isBtn = valueLife.fType === FieldTyp.button;
     const isPsw = valueLife.fType === FieldTyp.psw;
 
-    const listAskNames = isBtn ? [] : [...valueAsNames];
+    const listAskNames = isBtn ? [] : [...LIST_valueAskNames];
     listAskNames.length && listAskNames.push('-');
 
     const listValues = choosevalue?.split(':') || [];
@@ -56,7 +56,7 @@ function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: stri
                 ? ''
                 : isBtn
                     ? ''
-                    : valueAsNames[valueLife.valueAs];
+                    : LIST_valueAskNames[valueLife.valueAs];
 
     const dropdownSelectedIndex =
         valueLife.isRef
