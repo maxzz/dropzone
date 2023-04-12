@@ -1,6 +1,4 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { splitPaneAtom } from '@/store';
 import { classNames, withDigits } from '@/utils';
 import './SimpleSplitPane.css';
 
@@ -15,7 +13,7 @@ const styleB: React.CSSProperties = {
     minHeight: 0,
 };
 
-type SplitPaneProps = {
+export type SplitPaneProps = {
     vertical?: boolean;
     minPersent?: number,
     maxPersent?: number,
@@ -29,7 +27,7 @@ type SplitPaneDataProps = {
     setPosition: (value: number) => void,
 };
 
-function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
+export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
     const { vertical = true, minPersent = 1, maxPersent = 99, className, children, position, setPosition, onResize } = props;
 
     const container = React.useRef<HTMLDivElement | null>(null);
@@ -89,16 +87,6 @@ function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
                 {childrenArr[1]}
             </div>
         </div>
-    );
-}
-
-export function SimpleSplitPane(props: SplitPaneProps) {
-    // Position is really the size (width or height) of the first (left or top) panel,
-    // as percentage of the parent containers size. The remaining elements are
-    // sized and layed out through flexbox.
-    const [position, setPosition] = useAtom(splitPaneAtom);
-    return (
-        <SimpleSplitPaneBody position={position} setPosition={setPosition} {...props} />
     );
 }
 
