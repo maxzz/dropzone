@@ -112,19 +112,23 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
 
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 
-    function onSetText(value: string) {
-        setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
+    function mapIndexToValueLife(idx: number, v: ValueLife): ValueLife {
+        const groupIdx = dropdownIdxs[idx];
+        if (groupIdx === idxToRefs) {
+            return { ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, };
+        } else if (groupIdx === idxToValues) {
+            return { ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, };
+        } else {
+            return { ...v, value: '', isRef: false, valueAs: idx, isNon: false, };
+        }
     }
 
     function onSetDropdownIndex(idx: number) {
-        const groupIdx = dropdownIdxs[idx];
-        if (groupIdx === idxToRefs) {
-            setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
-        } else if (groupIdx === idxToValues) {
-            setValueLife((v) => ({ ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
-        } else {
-            setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
-        }
+        setValueLife((v) => mapIndexToValueLife(idx, v));
+    }
+
+    function onSetText(value: string) {
+        setValueLife((v) => ({ ...v, value, isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
     }
 
     function onSetKey(event: React.KeyboardEvent) {
