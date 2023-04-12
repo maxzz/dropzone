@@ -4,28 +4,12 @@ import { FieldTyp, LIST_references, LIST_valueAskNames, Meta, ReferenceItem, Val
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
-function pickRefsList(isPsw: boolean | undefined): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
+function pickRefsList(isPsw: boolean): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
     return LIST_references[isPsw ? 'psw' : 'txt'];
 }
 
-function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? pickRefsList(isPsw)[v].i : -1;
-}
-
-function refName2Txt(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? pickRefsList(isPsw)[v].s : '';
-}
-
-function refName2Full(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? pickRefsList(isPsw)[v].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
-}
-
-function idx2RefName(v: number, isPsw: boolean | undefined) {
+function idx2RefName(v: number, isPsw: boolean) {
     return Object.keys(pickRefsList(isPsw))[v];
-}
-
-function valueAs2Idx(v: ValueAs) {
-    return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
 }
 
 function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: string | undefined) {
@@ -88,6 +72,22 @@ function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: stri
         disabled,
         title,
     };
+    
+    function refName2Idx(v: string | undefined, isPsw: boolean) {
+        return v ? pickRefsList(isPsw)[v].i : -1;
+    }
+    
+    function refName2Txt(v: string | undefined, isPsw: boolean) {
+        return v ? pickRefsList(isPsw)[v].s : '';
+    }
+    
+    function refName2Full(v: string | undefined, isPsw: boolean) {
+        return v ? pickRefsList(isPsw)[v].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
+    }
+    
+    function valueAs2Idx(v: ValueAs) {
+        return v === ValueAs.askReuse ? 0 : v === ValueAs.askConfirm ? 1 : v === ValueAs.askAlways ? 2 : 0;
+    }
 }
 
 export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
