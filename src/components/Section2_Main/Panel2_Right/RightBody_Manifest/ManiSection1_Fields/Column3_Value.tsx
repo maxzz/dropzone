@@ -24,13 +24,13 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
 
     const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(pickRefsList(isPsw)).map((item) => item.f) : [];
 
-    const idxValues = listAskNames.length;
-    const idxRefs = idxValues + listValues.length;
+    const idxToValues = listAskNames.length;
+    const idxToRefs = idxToValues + listValues.length;
 
-    const items = [...listAskNames, ...listValues, ...listRefs];
-    const itemIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxValues), ...listRefs.map(() => idxRefs)];
+    const dropdown = [...listAskNames, ...listValues, ...listRefs];
+    const dropdownIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxToValues), ...listRefs.map(() => idxToRefs)];
 
-    items.at(-1) === '-' && items.pop();
+    dropdown.at(-1) === '-' && dropdown.pop();
 
     const inputText =
         valueLife.isRef
@@ -45,10 +45,10 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
 
     const dropdownSelectedIndex =
         valueLife.isRef
-            ? idxRefs + refName2Idx(valueLife.value, isPsw)
+            ? idxToRefs + refName2Idx(valueLife.value, isPsw)
             : valueLife.value
                 ? listValues.length
-                    ? idxValues + listValues.indexOf(valueLife.value)
+                    ? idxToValues + listValues.indexOf(valueLife.value)
                     : -1
                 : valueAs2Idx(valueLife.valueAs);
 
@@ -57,13 +57,13 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
     const title = disabled ? 'Buttons have no state value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
 
     return {
-        items,
-
-        itemIdxs,
-        idxRefs,
-        idxValues,
-        listValues,
+        dropdown,
+        dropdownIdxs,
         dropdownSelectedIndex,
+
+        idxToRefs,
+        idxToValues,
+        listValues,
         isPsw,
 
         inputText,
@@ -95,12 +95,13 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
     const {
-        items,
-        itemIdxs,
-        idxRefs,
-        idxValues,
-        listValues,
+        dropdown,
+        dropdownIdxs,
         dropdownSelectedIndex,
+
+        idxToRefs,
+        idxToValues,
+        listValues,
         isPsw,
 
         inputText,
@@ -116,11 +117,11 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
     }
 
     function onSetDropdownIndex(idx: number) {
-        const groupIdx = itemIdxs[idx];
-        if (groupIdx === idxRefs) {
-            setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
-        } else if (groupIdx === idxValues) {
-            setValueLife((v) => ({ ...v, value: listValues[idx - idxValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
+        const groupIdx = dropdownIdxs[idx];
+        if (groupIdx === idxToRefs) {
+            setValueLife((v) => ({ ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, }));
+        } else if (groupIdx === idxToValues) {
+            setValueLife((v) => ({ ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, }));
         } else {
             setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: idx, isNon: false, }));
         }
@@ -162,7 +163,7 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
-            {!!items.length && Dropdown(useItAtom, items, dropdownSelectedIndex, onSetDropdownIndex)}
+            {!!dropdown.length && Dropdown(useItAtom, dropdown, dropdownSelectedIndex, onSetDropdownIndex)}
         </div>
     );
 }
