@@ -4,24 +4,24 @@ import { FieldTyp, LIST_references, LIST_valueAskNames, Meta, ReferenceItem, Val
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
-function typeRefs(isPsw: boolean | undefined): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
+function pickRefsList(isPsw: boolean | undefined): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
     return LIST_references[isPsw ? 'psw' : 'txt'];
 }
 
 function refName2Idx(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? typeRefs(isPsw)[v].i : -1;
+    return v ? pickRefsList(isPsw)[v].i : -1;
 }
 
 function refName2Txt(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? typeRefs(isPsw)[v].s : '';
+    return v ? pickRefsList(isPsw)[v].s : '';
 }
 
 function refName2Full(v: string | undefined, isPsw: boolean | undefined) {
-    return v ? typeRefs(isPsw)[v].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
+    return v ? pickRefsList(isPsw)[v].f : ''; //TODO: we can use placeholder on top of input (ingone all events on it) and do multiple lines
 }
 
 function idx2RefName(v: number, isPsw: boolean | undefined) {
-    return Object.keys(typeRefs(isPsw))[v];
+    return Object.keys(pickRefsList(isPsw))[v];
 }
 
 function valueAs2Idx(v: ValueAs) {
@@ -38,7 +38,7 @@ function getValueUiState(valueLife: ValueLife, useIt: boolean, choosevalue: stri
     const listValues = choosevalue?.split(':') || [];
     listValues.length && listValues.push('-');
 
-    const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(typeRefs(isPsw)).map((item) => item.f) : [];
+    const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(pickRefsList(isPsw)).map((item) => item.f) : [];
 
     const idxValues = listAskNames.length;
     const idxRefs = idxValues + listValues.length;
