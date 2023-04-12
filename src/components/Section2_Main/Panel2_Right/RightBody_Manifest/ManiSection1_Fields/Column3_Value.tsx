@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes } from "react";
 import { PrimitiveAtom as PA, useAtom } from "jotai";
-import { FieldTyp, LIST_references, LIST_valueAskNames, Meta, ReferenceItem, ValueAs, ValueLife } from "@/store/manifest";
+import { FieldTyp, LIST_references, LIST_valueAskNames, ReferenceItem, ValueAs, ValueLife } from "@/store/manifest";
 import { Dropdown, isKeyClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
@@ -89,7 +89,7 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
     }
 }
 
-export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; choosevalue: string | undefined; } & InputHTMLAttributes<HTMLInputElement>) {
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
@@ -108,7 +108,7 @@ export function Column3_Value({ useItAtom, valueLifeAtom, field, className, ...r
         showAsRef,
         disabled,
         title,
-    } = getValueUiState(valueLife, field.mani.choosevalue);
+    } = getValueUiState(valueLife, choosevalue);
 
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 

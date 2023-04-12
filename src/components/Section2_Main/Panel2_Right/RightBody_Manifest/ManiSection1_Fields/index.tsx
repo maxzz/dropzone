@@ -41,7 +41,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
     return (<>
         <Column1_UseIt useItAtom={state.useItAtom} />
         <Column2_Label useItAtom={state.useItAtom} valueAtom={state.labelAtom} onClick={enableRow} />
-        <Column3_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} field={field} onClick={enableRow} />
+        <Column3_Value useItAtom={state.useItAtom} valueLifeAtom={state.valueLifeAtom} choosevalue={field.mani.choosevalue} onClick={enableRow} />
         <Column4_Catalog useItAtom={state.useItAtom} field={field} onClick={enableRow} />
         <Column5_Type useItAtom={state.useItAtom} field={field} onClick={enableRow} />
     </>);

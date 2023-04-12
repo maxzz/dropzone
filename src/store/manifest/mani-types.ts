@@ -103,7 +103,7 @@ export type ValueLife = {
     isNon?: boolean;        // true when value is empty and valueAs is default AskReuse, but input cleared by user
 };
 
-export type ReferenceItem = { i: number; f: string; s: string; };
+export type ReferenceItem = { i: number; f: string; s: string; }; // i - index; f - full name; s - short name.
 
 export type References = {
     txt: Record<string, ReferenceItem>;
@@ -112,11 +112,11 @@ export type References = {
 
 export const LIST_references: References = {
     txt: {
-        name: { i: 0, f: "Windows User Name", s: "User Name" },
-        upnname: { i: 1, f: "Windows User Principal Name", s: "User Principal Name" },
-        fullname: { i: 2, f: "Windows Domain\\User Name", s: "Domain\\User Name" },
-        domain: { i: 3, f: "Windows Domain", s: "Windows Domain" },
-        "e-mail": { i: 4, f: "Windows E-mail Address", s: "Windows Email" },
+        name:     /**/ { i: 0, f: "Windows User Name",           /**/ s: "User Name" },
+        upnname:  /**/ { i: 1, f: "Windows User Principal Name", /**/ s: "User Principal Name" },
+        fullname: /**/ { i: 2, f: "Windows Domain\\User Name",   /**/ s: "Domain\\User Name" },
+        domain:   /**/ { i: 3, f: "Windows Domain",              /**/ s: "Windows Domain" },
+        "e-mail": /**/ { i: 4, f: "Windows E-mail Address",      /**/ s: "Windows Email" },
     },
     psw: {
         password: { i: 0, f: "Windows User Password", s: "Windows Password" },
@@ -159,24 +159,24 @@ export enum FieldTyp { //type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo
 
 /*
     Form:
-	namespace SUBMITTYPE {
-		enum type_t {
-			undefined = 0,				// For old manifests its undefined
-			dosubmit,					// Force submit data, even if submit is not mutched or not detected
-			nosubmit,					// Don't submit data. This is statement by User or Admin.
-		};
+    namespace SUBMITTYPE {
+        enum type_t {
+            undefined = 0,				// For old manifests its undefined
+            dosubmit,					// Force submit data, even if submit is not mutched or not detected
+            nosubmit,					// Don't submit data. This is statement by User or Admin.
+        };
 
-		inline string_t toString(const SUBMITTYPE::type_t& v_) {
-			const char* rv;
-			switch (v_) {
-				case SUBMITTYPE::undefined: rv = "undefined"; break;
-				case SUBMITTYPE::dosubmit: rv = "dosubmit"; break;
-				case SUBMITTYPE::nosubmit: rv = "nosubmit"; break;
-				default: return sformat("NEW %d", (unsigned int)v_);
-			}
-			return rv;
-		}
-	}
+        inline string_t toString(const SUBMITTYPE::type_t& v_) {
+            const char* rv;
+            switch (v_) {
+                case SUBMITTYPE::undefined: rv = "undefined"; break;
+                case SUBMITTYPE::dosubmit: rv = "dosubmit"; break;
+                case SUBMITTYPE::nosubmit: rv = "nosubmit"; break;
+                default: return sformat("NEW %d", (unsigned int)v_);
+            }
+            return rv;
+        }
+    }
 
     Field:
     class field_t {
@@ -201,4 +201,3 @@ export const enum SUBMIT {
     dosumbit = 'dosumbit',
     nosumbit = 'nosumbit',
 }
-
