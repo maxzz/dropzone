@@ -1,5 +1,14 @@
 {
     "svg.preview.background": "transparent",
     "editor.matchBrackets": "never",
-    "editor.renderLineHighlight": "none"
+    "editor.renderLineHighlight": "none",
+
+    //G: 'tailwind classnames outside class'
+    //https://tailwindcss.com/docs/content-configuration#class-detection-in-depth 'Class detection in-depth'
+    //https://stackoverflow.com/questions/66614875/how-can-i-enable-tailwind-intellisense-outside-of-classname
+    "tailwindCSS.experimental.classRegex": [
+        ["Classes \\=([^;]*);", "'([^']*)'"],
+        ["Classes \\=([^;]*);", "\"([^\"]*)\""],
+        ["Classes \\=([^;]*);", "\\`([^\\`]*)\\`"]
+    ],
 }
