@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, useState } from "react";
-import { atom, PrimitiveAtom, useAtom, useAtomValue } from "jotai";
+import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
 import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 import { Meta } from "@/store/manifest";
 import { Dropdown, isKeyToClearDefault } from "./Dropdown";
@@ -8,7 +8,9 @@ import { classNames } from "@/utils";
 const CATALOG_No = "Not from catalog";
 const CATALOG_More = "More fields ...";
 
-export function Column4_Catalog({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: PA<string>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+    const { useItAtom, fieldCatAtom, field, className, ...rest } = props;
+    
     const catalogNames = useAtomValue(FieldCatalogItemsAtom);
     const { name: catalogName, names } = getCatalogName(catalogNames, field.mani.password, field.mani.dbname); //TODO: might need memo
 

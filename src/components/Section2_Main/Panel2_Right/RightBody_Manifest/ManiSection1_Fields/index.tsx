@@ -83,7 +83,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
         <Column1_UseIt useItAtom={rowAtoms.useItAtom} />
         <Column2_Label useItAtom={rowAtoms.useItAtom} valueAtom={rowAtoms.labelAtom} onClick={enableRow} />
         <Column3_Value useItAtom={rowAtoms.useItAtom} valueLifeAtom={rowAtoms.valueLifeAtom} choosevalue={field.mani.choosevalue} onClick={enableRow} />
-        <Column4_Catalog useItAtom={rowAtoms.useItAtom} field={field} onClick={enableRow} />
+        <Column4_Catalog useItAtom={rowAtoms.useItAtom} fieldCatAtom={rowAtoms.fieldCatAtom} field={field} onClick={enableRow} />
         <Column5_Type useItAtom={rowAtoms.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
