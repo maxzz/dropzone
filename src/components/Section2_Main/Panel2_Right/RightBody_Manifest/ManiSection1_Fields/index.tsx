@@ -16,6 +16,7 @@ type TableRowAtoms = {
     value: string;
     valueAs: string;
     valueLife: ValueLife;
+    fieldCat: string;
 };
 
 function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get: Getter; set: Setter; }) => void): Atomize<TableRowAtoms> {
@@ -27,7 +28,7 @@ function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get: Getter
         valueAtom: atomWithCallback(val || '', onChange),
         valueAsAtom: atomWithCallback(val || '', onChange),
         valueLifeAtom: atomWithCallback(TransformValue.valueLife4Mani(field.mani), onChange),
-        //TODO: catalog
+        fieldCatAtom: atomWithCallback('', onChange),                         //TODO:
     };
 }
 
@@ -39,25 +40,12 @@ function combineFromAtoms(atoms: Atomize<TableRowAtoms>, get: Getter, set: Sette
         valueAtom: get(atoms.valueAtom),
         valueAsAtom: get(atoms.valueAsAtom),
         valueLifeAtom: get(atoms.valueLifeAtom),
-        //TODO: catalog
+        fieldCatAtom: get(atoms.fieldCatAtom),                     //TODO: catalog
     };
     console.log('TableRow atoms', JSON.stringify(result, null, 4));
 }
 
 function TableRow({ field }: { field: Meta.Field; }) {
-    /*
-    const { useit, displayname, type: typ, value: val } = field.mani;
-
-    const rowAtoms = useState({
-        useItAtom: atom<boolean>(!!useit),
-        labelAtom: atom(displayname || ''),
-        typeAtom: atom(''),
-        valueAtom: atom<string>(val || ''),
-        valueAsAtom: atom(val),
-
-        valueLifeAtom: atom(TransformValue.valueLife4Mani(field.mani)),
-    })[0];
-    */
     const rowAtoms = useState(createUiAtoms(field, ({ get, set }) => {
         console.log('changed', field, field.mani.displayname);
         combineFromAtoms(rowAtoms, get, set);
@@ -69,6 +57,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
     const setValue = useSetAtom(rowAtoms.valueAtom);
     const setValueAs = useSetAtom(rowAtoms.valueAsAtom);
     const setValueLife = useSetAtom(rowAtoms.valueLifeAtom);
+    const setFieldCat = useSetAtom(rowAtoms.fieldCatAtom);
 
     //const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
     const enableRow = () => !useIt && setUseIt(true);
@@ -85,7 +74,7 @@ function TableRow({ field }: { field: Meta.Field; }) {
         setValue(val || '');
         setValueAs(val || '');
         setValueLife(TransformValue.valueLife4Mani(field.mani));
-        //TODO: catalog
+        setFieldCat('');                         //TODO:
     }, [field]);
 
     return (<>
