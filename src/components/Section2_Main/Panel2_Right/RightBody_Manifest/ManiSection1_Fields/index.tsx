@@ -1,14 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { atom, useAtom } from 'jotai';
-import { FieldTyp, Meta, TransformValue } from '@/store/manifest';
+import { Getter, Setter, atom, useAtom, useSetAtom } from 'jotai';
+import { FieldTyp, Meta, TransformValue, ValueLife } from '@/store/manifest';
 import { classNames } from '@/utils';
 import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
 import { Column3_Value } from './Column3_Value';
 import { Column4_Catalog } from './Column4_Catalog';
 import { Column5_Type } from './Column5_Type';
+import { Atomize, atomWithCallback } from '@/hooks/atomsX';
+
+type TableRowAtoms = {
+    useIt: boolean;
+    label: string;
+    type: string;
+    value: string;
+    valueAs: string;
+    valueLife: ValueLife;
+};
+
+function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get: Getter; set: Setter; }) => void): Atomize<TableRowAtoms> {
+    const { useit, displayname, type: typ, value: val } = field.mani;
+    return {
+        useItAtom: atomWithCallback(!!useit, onChange),
+        labelAtom: atomWithCallback(displayname || '', onChange),
+        typeAtom: atomWithCallback('', onChange),                             //TODO:
+        valueAtom: atomWithCallback(val || '', onChange),
+        valueAsAtom: atomWithCallback(val || '', onChange),
+        valueLifeAtom: atomWithCallback(TransformValue.valueLife4Mani(field.mani), onChange),
+        //TODO: catalog
+    };
+}
+
+function combineFromAtoms(atoms: Atomize<TableRowAtoms>, get: Getter, set: Setter) {
+    const result = {
+        useItAtom: get(atoms.useItAtom),
+        labelAtom: get(atoms.labelAtom),
+        typeAtom: get(atoms.typeAtom),                             //TODO:
+        valueAtom: get(atoms.valueAtom),
+        valueAsAtom: get(atoms.valueAsAtom),
+        valueLifeAtom: get(atoms.valueLifeAtom),
+        //TODO: catalog
+    };
+    console.log('TableRow atoms', JSON.stringify(result, null, 4));
+}
 
 function TableRow({ field }: { field: Meta.Field; }) {
+    /*
     const { useit, displayname, type: typ, value: val } = field.mani;
 
     const rowAtoms = useState({
@@ -20,22 +57,35 @@ function TableRow({ field }: { field: Meta.Field; }) {
 
         valueLifeAtom: atom(TransformValue.valueLife4Mani(field.mani)),
     })[0];
+    */
+    const rowAtoms = useState(createUiAtoms(field, ({ get, set }) => {
+        console.log('changed', field, field.mani.displayname);
+        combineFromAtoms(rowAtoms, get, set);
+    }))[0];
 
     const [useIt, setUseIt] = useAtom(rowAtoms.useItAtom);
-    const [label, setLabel] = useAtom(rowAtoms.labelAtom);
-    const [type, setType] = useAtom(rowAtoms.typeAtom);
-    const [value, setValue] = useAtom(rowAtoms.valueAtom);
-    const [valueAs, setValueAs] = useAtom(rowAtoms.valueAsAtom);
+    const setLabel = useSetAtom(rowAtoms.labelAtom);
+    const setType = useSetAtom(rowAtoms.typeAtom);
+    const setValue = useSetAtom(rowAtoms.valueAtom);
+    const setValueAs = useSetAtom(rowAtoms.valueAsAtom);
+    const setValueLife = useSetAtom(rowAtoms.valueLifeAtom);
 
     //const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
     const enableRow = () => !useIt && setUseIt(true);
 
+    console.log('============================================================');
     useEffect(() => {
+        console.log('-----------------------------------');
+
+        const { useit, displayname, type: typ, value: val } = field.mani;
+
         setUseIt(!!useit);
         setLabel(displayname || '');
-        setType('');
+        setType('');                             //TODO:
         setValue(val || '');
-        setValueAs(val);
+        setValueAs(val || '');
+        setValueLife(TransformValue.valueLife4Mani(field.mani));
+        //TODO: catalog
     }, [field]);
 
     return (<>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Getter, Setter, atom } from "jotai";
+import { Getter, Setter } from "jotai";
+import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
-import { PolicyEditorBody } from "./PolicyEditorBody";
-import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/policy";
-import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { Meta } from "@/store/manifest";
+import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/policy";
+import { PolicyEditorBody } from "./PolicyEditorBody";
 
 export type PolicyUi = {
     enabled: boolean;       // Enable password policy
@@ -47,16 +47,16 @@ function createUiAtoms(policy: string | undefined, onChange: ({ get, set }: { ge
 
 function combineValueFromAtoms(atoms: Atomize<PolicyUi>, get: Getter, set: Setter) {
     const result = {
-        'enabledAtom': get(atoms.enabledAtom),
-        'isCustomRuleAtom': get(atoms.isCustomRuleAtom),
-        'constrainSetAtom': get(atoms.constrainSetAtom),
-        'customAtom': get(atoms.customAtom),
-        'minLengthAtom': get(atoms.minLengthAtom),
-        'maxLengthAtom': get(atoms.maxLengthAtom),
-        'textVerifyAtom': get(atoms.textVerifyAtom),
-        'textGenerateAtom': get(atoms.textGenerateAtom),
-        'constrainsPswAtom': get(atoms.constrainsPswAtom),
-        'useAsAtom': get(atoms.useAsAtom),
+        'enabled': get(atoms.enabledAtom),
+        'isCustomRule': get(atoms.isCustomRuleAtom),
+        'constrainSet': get(atoms.constrainSetAtom),
+        'custom': get(atoms.customAtom),
+        'minLength': get(atoms.minLengthAtom),
+        'maxLength': get(atoms.maxLengthAtom),
+        'textVerify': get(atoms.textVerifyAtom),
+        'textGenerate': get(atoms.textGenerateAtom),
+        'constrainsPsw': get(atoms.constrainsPswAtom),
+        'useAs': get(atoms.useAsAtom),
     };
     console.log('PolicyEditor atoms', JSON.stringify(result, null, 4));
 }
