@@ -1,7 +1,7 @@
 import React from "react";
 import { Close as DialogCloseButton } from '@radix-ui/react-dialog';
 import { Atomize } from "@/hooks/atomsX";
-import { PolicyUi } from "./PolicyEditorBody";
+import { PolicyUi } from ".";
 import { useAtom } from "jotai";
 import { Dropdown, Input, Radio } from "./ui-controls";
 import { ConstrainPsw, ConstrainSet, namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";

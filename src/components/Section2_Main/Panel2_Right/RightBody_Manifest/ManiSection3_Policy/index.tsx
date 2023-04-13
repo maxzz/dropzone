@@ -62,28 +62,20 @@ function TableHeader() {
 }
 
 export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
+    const policiesAtom = useState(atom<Meta.Field[]>([]))[0];
+    const [policies, setPolicies] = useAtom(policiesAtom);
+
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formIdx];
 
-    const policiesAtom = useState(atom<Meta.Field[]>([]))[0]; // TODO: we should monitor current form fields and list here all password fields to allow add to them policy
-    const [policies, setPolicies] = useAtom(policiesAtom);
-
     useEffect(() => {
-        const policies2 = metaForm?.fields?.filter((field) => field.mani.policy || field.mani.policy2) || [];
-        setPolicies(policies2);
-    }, [fileUs]);
-
-    /* // No, keep it simple, just check one at time
-
-    if (formIdx === FormIdx.login) {
-        // check in this form (new addition) and cpass
-    } else {
-        // check only in this form
-    }
-    */
+        const fieldsWPolicy = metaForm?.fields?.filter((field) => field.mani.policy || field.mani.policy2) || []; // and add psw fields that may have policy
+        setPolicies(fieldsWPolicy);
+    }, [fileUs]); // TODO: we should monitor current form fields and list here all password fields to allow add to them policy
 
     return (<>
-        {!policies?.length ? <div className="">Policy not specified</div> :
+        {policies?.length
+            ?
             <div className="px-3 py-2 grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-1 items-stretch rounded bg-primary-800">
                 <TableHeader />
 
@@ -91,6 +83,8 @@ export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileU
                     <FieldWithPolicy field={field} key={idx} />
                 ))}
             </div>
+            :
+            <div className="">Policy not specified</div>
         }
     </>);
 }
