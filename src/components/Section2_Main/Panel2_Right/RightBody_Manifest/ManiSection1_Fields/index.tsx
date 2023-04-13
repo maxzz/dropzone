@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Getter, Setter, atom, useAtom, useSetAtom } from 'jotai';
 import { FieldTyp, Meta, TransformValue, ValueLife } from '@/store/manifest';
-import { classNames } from '@/utils';
+import { classNames, debounce } from '@/utils';
 import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
 import { Column3_Value } from './Column3_Value';
@@ -42,13 +42,15 @@ function combineFromAtoms(atoms: Atomize<TableRowAtoms>, get: Getter, set: Sette
         valueLifeAtom: get(atoms.valueLifeAtom),
         fieldCatAtom: get(atoms.fieldCatAtom),                     //TODO: catalog
     };
-    console.log('TableRow atoms', JSON.stringify(result, null, 4));
+    console.log('TableRow atoms', JSON.stringify(result));
 }
+
+const debCombineFromAtoms = debounce(combineFromAtoms);
 
 function TableRow({ field }: { field: Meta.Field; }) {
     const rowAtoms = useState(createUiAtoms(field, ({ get, set }) => {
-        console.log('changed', field, field.mani.displayname);
-        combineFromAtoms(rowAtoms, get, set);
+        //console.log('changed', field, field.mani.displayname);
+        debCombineFromAtoms(rowAtoms, get, set);
     }))[0];
 
     const [useIt, setUseIt] = useAtom(rowAtoms.useItAtom);

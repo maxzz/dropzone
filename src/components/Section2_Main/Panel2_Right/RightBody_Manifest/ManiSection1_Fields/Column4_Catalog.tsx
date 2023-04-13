@@ -2,26 +2,26 @@ import React, { InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 import { Meta } from "@/store/manifest";
-import { Dropdown, isKeyClearDefault } from "./Dropdown";
-import { classNames } from "@/utils/classnames";
+import { Dropdown, isKeyToClearDefault } from "./Dropdown";
+import { classNames } from "@/utils";
 
-const catalogNo = "Not from catalog";
-const catalogMore = "More fields ...";
+const CATALOG_No = "Not from catalog";
+const CATALOG_More = "More fields ...";
 
 export function Column4_Catalog({ useItAtom, field, className, ...rest }: { useItAtom: PrimitiveAtom<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const catalogNames = useAtomValue(FieldCatalogItemsAtom);
     const { name: catalogName, names } = getCatalogName(catalogNames, field.mani.password, field.mani.dbname); //TODO: might need memo
 
-    const textAtom = useState(atom(catalogName ? catalogName : catalogNo))[0];
+    const textAtom = useState(atom(catalogName ? catalogName : CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
-    const items = [catalogNo, ...names, '-', catalogMore];
+    const dropdownItems = [CATALOG_No, ...names, '-', CATALOG_More];
 
     const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
 
-    const onSetIndex = (idx: number) => (setText(items[idx]), setSelectedIndex(idx));
-    const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(items[0]), setSelectedIndex(0)));
-    const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
+    const onSetIndex = (idx: number) => (setText(dropdownItems[idx]), setSelectedIndex(idx));
+    const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(dropdownItems[0]), setSelectedIndex(0)));
+    const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyToClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
     const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
 
     const [useIt, setUseIt] = useAtom(useItAtom);
@@ -48,7 +48,7 @@ export function Column4_Catalog({ useItAtom, field, className, ...rest }: { useI
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {Dropdown(useItAtom, items, selectedIndex, onSetIndex)}
+            {Dropdown(useItAtom, dropdownItems, selectedIndex, onSetIndex)}
         </div>
     );
 }

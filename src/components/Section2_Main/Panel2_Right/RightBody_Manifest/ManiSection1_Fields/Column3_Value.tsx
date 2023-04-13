@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from "react";
 import { PrimitiveAtom as PA, useAtom } from "jotai";
 import { FieldTyp, LIST_references, LIST_valueAskNames, ReferenceItem, ValueAs, ValueLife } from "@/store/manifest";
-import { Dropdown, isKeyClearDefault } from "./Dropdown";
+import { Dropdown, isKeyToClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
 function pickRefsList(isPsw: boolean): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
@@ -132,7 +132,7 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        showAsRef && isKeyClearDefault(event.key) &&
+        showAsRef && isKeyToClearDefault(event.key) &&
             setValueLife((v) => ({ ...v, value: '', isRef: false, valueAs: ValueAs.askReuse, isNon: true, }));
     }
 
