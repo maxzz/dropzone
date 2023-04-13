@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Getter, atom } from "jotai";
+import { Getter, Setter, atom } from "jotai";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import { PolicyEditorBody } from "./PolicyEditorBody";
@@ -26,7 +26,7 @@ export type PolicyUi = {
 };
 
 
-function createUiAtoms(policy: string | undefined, onChange: ({ get }: { get: Getter; }) => void): Atomize<PolicyUi> {
+function createUiAtoms(policy: string | undefined, onChange: ({ get, set }: { get: Getter; set: Setter }) => void): Atomize<PolicyUi> {
     //TODO: parse policy and assign onChange callback
     if (!policy) {
         //TODO: create the default policy but dissabled initially
@@ -45,6 +45,22 @@ function createUiAtoms(policy: string | undefined, onChange: ({ get }: { get: Ge
     };
 }
 
+function combineValueFromAtoms(atoms: Atomize<PolicyUi>, get: Getter, set: Setter) {
+    const result = {
+        'enabledAtom': get(atoms.enabledAtom),
+        'isCustomRuleAtom': get(atoms.isCustomRuleAtom),
+        'constrainSetAtom': get(atoms.constrainSetAtom),
+        'customAtom': get(atoms.customAtom),
+        'minLengthAtom': get(atoms.minLengthAtom),
+        'maxLengthAtom': get(atoms.maxLengthAtom),
+        'textVerifyAtom': get(atoms.textVerifyAtom),
+        'textGenerateAtom': get(atoms.textGenerateAtom),
+        'constrainsPswAtom': get(atoms.constrainsPswAtom),
+        'useAsAtom': get(atoms.useAsAtom),
+    };
+    console.log('PolicyEditor atoms', JSON.stringify(result, null, 4));
+}
+
 export function PolicyEditor({ field }: { field: Meta.Field; }) {
     const [open, setOpen] = React.useState(false);
     const transitions = useTransition(Number(open), {
@@ -54,20 +70,8 @@ export function PolicyEditor({ field }: { field: Meta.Field; }) {
         config: config.stiff,
     });
 
-    const atoms = useState(createUiAtoms(field.mani.policy || field.mani.policy2, ({get}) => {
-        const result = {
-            'enabledAtom': get(atoms.enabledAtom),
-            'isCustomRuleAtom': get(atoms.isCustomRuleAtom),
-            'constrainSetAtom': get(atoms.constrainSetAtom),
-            'customAtom': get(atoms.customAtom),
-            'minLengthAtom': get(atoms.minLengthAtom),
-            'maxLengthAtom': get(atoms.maxLengthAtom),
-            'textVerifyAtom': get(atoms.textVerifyAtom),
-            'textGenerateAtom': get(atoms.textGenerateAtom),
-            'constrainsPswAtom': get(atoms.constrainsPswAtom),
-            'useAsAtom': get(atoms.useAsAtom),
-        };
-        console.log('PolicyEditor atoms', JSON.stringify(result, null, 4));
+    const atoms = useState(createUiAtoms(field.mani.policy || field.mani.policy2, ({ get, set }) => {
+        combineValueFromAtoms(atoms, get, set);
     }))[0];
 
     return (
