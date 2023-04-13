@@ -5,6 +5,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { PolicyEditorBody } from "./PolicyEditorBody";
 import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/policy";
 import { Atomize } from "@/hooks/atomsX";
+import { Meta } from "@/store/manifest";
 
 export type PolicyUi = {
     enabled: boolean;       // Enable password policy
@@ -25,8 +26,11 @@ export type PolicyUi = {
 };
 
 
-function createUiAtoms(policy: string, onChange: () => void): Atomize<PolicyUi> {
+function createUiAtoms(policy: string | undefined, onChange: () => void): Atomize<PolicyUi> {
     //TODO: parse policy and assign onChange callback
+    if (!policy) {
+        //TODO: create the default policy but dissabled initially
+    }
     return {
         enabledAtom: atom(true),
         isCustomRuleAtom: atom<'0' | '1'>('0'),
@@ -41,7 +45,7 @@ function createUiAtoms(policy: string, onChange: () => void): Atomize<PolicyUi> 
     };
 }
 
-export function PolicyEditor() {
+export function PolicyEditor({ field }: { field: Meta.Field; }) {
     const [open, setOpen] = React.useState(false);
     const transitions = useTransition(Number(open), {
         from: { opacity: 0, y: -10, scale: 0.97 },
@@ -50,7 +54,7 @@ export function PolicyEditor() {
         config: config.stiff,
     });
 
-    const atoms = useState(createUiAtoms('', () => {
+    const atoms = useState(createUiAtoms(field.mani.policy || field.mani.policy2, () => {
         console.log('changed');
     }))[0];
 

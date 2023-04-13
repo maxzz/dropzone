@@ -38,7 +38,7 @@ function FieldWithPolicy({ field }: { field: Meta.Field; }) {
         </div>
 
         <div className="flex items-center">
-            <PolicyEditor />
+            <PolicyEditor field={field} />
         </div>
     </>);
 }
