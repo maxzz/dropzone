@@ -64,9 +64,9 @@ function TableRow({ field }: { field: Meta.Field; }) {
     //const rowClassName = useIt ? "" : "opacity-30 pointer-events-none";
     const enableRow = () => !useIt && setUseIt(true);
 
-    console.log('============================================================');
+    //console.log('============================================================');
     useEffect(() => {
-        console.log('-----------------------------------');
+        //console.log('-----------------------------------');
 
         const { useit, displayname, type: typ, value: val } = field.mani;
 
