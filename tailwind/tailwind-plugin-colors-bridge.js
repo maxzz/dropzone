@@ -10,8 +10,18 @@ const defaultColors = require('tailwindcss/colors');
 function buildColorsToBridge(allColors, o) {
     const colorGroup = o.vars ? o.vars : allColors[o.groupName] ? allColors[o.groupName] : defaultColors[o.groupName];
 
+    if (!colorGroup) {
+        throw new Error(`\nThere is no color group '${o.groupName}' in all colors`);
+    }
+
     const bridge = Object.fromEntries(
-        Object.keys(colorGroup).map((colorKey) => [`${o.prefix}${o.groupNameOut || o.groupName}-${colorKey}`, colorGroup[colorKey],])
+        Object.keys(colorGroup).map((colorKey) => {
+            const orgColor = colorGroup[colorKey];
+            if (!orgColor) {
+                throw new Error(`\nThere is no color with <${colorKey}> name in group \n<${JSON.stringify(colorGroup, null, 4)}>`);
+            }
+            return [`${o.prefix}${o.groupNameOut || o.groupName}-${colorKey}`, orgColor,];
+        })
     );
 
     return bridge;
