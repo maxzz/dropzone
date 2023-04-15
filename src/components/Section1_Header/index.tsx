@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { busyAtom, doClearFilesAtom, hasFilesAtom } from '@/store';
 import { useSpring, a } from '@react-spring/web';
@@ -77,11 +77,34 @@ function AppLogo() {
     );
 }
 
+/*
+//http://localhost:8090/tailwind-ui-04-14-23\preview\components\assets
+<div class="ml-auto pointer-events-auto h-6 w-10 rounded-full p-1 ring-1 ring-inset transition duration-200 ease-in-out bg-indigo-600 ring-black/20">
+    <div class="h-4 w-4 rounded-full bg-white shadow-sm ring-1 ring-slate-700/10 transition duration-200 ease-in-out translate-x-4">
+    </div>
+</div>
+*/
+
+function SimpleToogle() {
+    const [on, setOn] = useState(false);
+    return (
+        <div
+            className="ml-auto p-1 h-6 w-10 bg-primary-300/50 ring-primary-100 ring-1 ring-inset rounded-full transition duration-150 ease-in-out pointer-events-auto"
+            onClick={() => setOn(v => !v)}
+        >
+            <div className={`h-4 w-4 rounded-full bg-white ring-1 ring-primary-700/40 shadow-sm transition duration-150 ease-out${on ? ' translate-x-4' : ''}`}>
+            </div>
+        </div>
+    );
+}
+
 export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header {...props}>
             <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-200 ring-1 ring-primary-500 rounded`}>
                 <LeftHeader />
+
+                <SimpleToogle />
 
                 {/* Right header */}
                 <div className="flex items-center justify-end">
