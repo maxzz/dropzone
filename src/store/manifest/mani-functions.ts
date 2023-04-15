@@ -2,6 +2,7 @@ import { Catalog, Mani, Meta, MPath } from './mani';
 import { FieldTyp, ValueAs, ValueLife } from './mani-types';
 import { FieldCatalog } from './field-catalog';
 import { removeQuery, urlDomain } from './url';
+import { uuid } from '@/utils';
 
 export namespace TimeUtils {
 
@@ -394,8 +395,13 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
 
 // Field catalog transformation
 
-export function buildCatalogMeta(fcat?: Catalog.Root | undefined): FieldCatalog {
-    const items = fcat?.names.map((item, idx) => ({ ...item, index: idx })) || [];
+export function buildCatalogMeta(fcat: Catalog.Root | undefined): FieldCatalog {
+    //TODO: handle addtional info
+    return buildCatalogMetaFromNames(fcat?.names);
+}
+
+export function buildCatalogMetaFromNames(names: Catalog.Name[] | undefined): FieldCatalog {
+    const items = names?.map((item, idx) => ({ ...item, index: idx, uuid: uuid(), })) || [];
     return {
         items,
     };
