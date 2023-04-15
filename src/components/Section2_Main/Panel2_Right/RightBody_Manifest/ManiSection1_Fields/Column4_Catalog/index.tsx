@@ -6,7 +6,7 @@ import { Dropdown, isKeyToClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
 const CATALOG_No = "Not from catalog";
-const CATALOG_More = "More fields ...";
+const CATALOG_More = "Manage fields ...";
 
 export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: PA<string>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const { useItAtom, fieldCatAtom, field, className, ...rest } = props;
