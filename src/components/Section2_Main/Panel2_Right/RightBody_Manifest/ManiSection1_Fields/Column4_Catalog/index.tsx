@@ -4,6 +4,7 @@ import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 import { Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
+import { FieldCatalogItemsByTypeAtom } from "@/store/store-file-catalog";
 
 const CATALOG_No = "Not from catalog";
 const CATALOG_More = "Manage fields ...";
@@ -13,8 +14,10 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
 
     const catalogNames = useAtomValue(FieldCatalogItemsAtom);
     const { name: catalogName, names } = getCatalogName(catalogNames, field.mani.password, field.mani.dbname); //TODO: might need memo
-    console.log('catalogName, names',catalogName, names);
+    console.log('names', names);
     
+    const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
+    //console.log('catalogName, names', catalogByType(!!field.mani.password));
 
     const textAtom = useState(atom(catalogName ? catalogName : CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
