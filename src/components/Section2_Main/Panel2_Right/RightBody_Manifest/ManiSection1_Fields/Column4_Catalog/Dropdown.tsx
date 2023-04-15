@@ -21,7 +21,7 @@ export function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], sel
                 <menu.Content
                     className={classNames(
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
-                        "px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
+                        "mx-4 px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
                         "bg-primary-100 dark:bg-gray-800",
                         "overflow-auto max-h-[50vh] smallscroll smallscroll-light" //TODO: maybe have a separate popop for big list and add search; or simplescroll; more fields.. put on top?; scroll to view;
                     )}
@@ -42,7 +42,8 @@ export function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], sel
                                 key={idx}
                             >
                                 {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
-                                <span className="flex-grow">{item}</span>
+                                <span className="flex-0 min-w-[3ch] text-right">{idx}:</span>
+                                <span className="ml-2 flex-grow self-start">{item}</span>
                             </menu.Item>;
                     })}
                 </menu.Content>

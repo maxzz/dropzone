@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
 import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 import { Meta } from "@/store/manifest";
-import { Dropdown, isKeyToClearDefault } from "../Dropdown";
+import { Dropdown, isKeyToClearDefault } from "./Dropdown";
 import { classNames } from "@/utils";
 
 const CATALOG_No = "Not from catalog";
