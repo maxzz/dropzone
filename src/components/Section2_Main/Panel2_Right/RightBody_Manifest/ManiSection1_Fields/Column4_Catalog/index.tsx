@@ -4,7 +4,7 @@ import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 import { Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
-import { FieldCatalogItemsByTypeAtom } from "@/store/store-file-catalog";
+import { FieldCatalogItemsByTypeAtom, getFieldCatalogItem } from "@/store/store-file-catalog";
 
 const CATALOG_No = "Not from catalog";
 const CATALOG_More = "Manage fields ...";
@@ -12,17 +12,23 @@ const CATALOG_More = "Manage fields ...";
 export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: PA<string>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const { useItAtom, fieldCatAtom, field, className, ...rest } = props;
 
-    const catalogNames = useAtomValue(FieldCatalogItemsAtom);
-    const { name: catalogName, names } = getCatalogName(catalogNames, field.mani.password, field.mani.dbname); //TODO: might need memo
-    console.log('names', names);
-    
+    const catalogItems = useAtomValue(FieldCatalogItemsAtom);
+    const catalogItem = getFieldCatalogItem(catalogItems, field.mani.dbname)
+
     const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
-    //console.log('catalogName, names', catalogByType(!!field.mani.password));
+    const catalogItemsByType = catalogByType(!!field.mani.password);
+    const catalogName = catalogItem?.dispname;
+
+    //const { name: catalogName, names: namesByType } = getCatalogName(catalogItems, field.mani.password, field.mani.dbname); //TODO: might need memo
+    
+    // const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
+    // console.log('catalogName, names', catalogByType(!!field.mani.password));
 
     const textAtom = useState(atom(catalogName ? catalogName : CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
-    const dropdownItems = [CATALOG_No, ...names, '-', CATALOG_More];
+    const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
+    // const dropdownItems = [CATALOG_No, ...namesByType, '-', CATALOG_More];
 
     const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
 
