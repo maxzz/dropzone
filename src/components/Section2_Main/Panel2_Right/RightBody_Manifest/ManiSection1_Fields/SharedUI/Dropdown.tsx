@@ -26,31 +26,27 @@ export function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], sel
                         "overflow-auto max-h-[50vh] smallscroll smallscroll-light" //TODO: maybe have a separate popop for big list and add search; or simplescroll; more fields.. put on top?; scroll to view;
                     )}
                 >
-                    {items.map(CatalogItem())}
+                    {items.map((item, idx) => {
+                        const isSelected = selectedIndex === idx;
+                        const isSeparator = item === '-';
+                        return isSeparator
+                            ? <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                            :
+                            <menu.Item
+                                className={classNames(
+                                    "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
+                                    "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
+                                    isSelected && "bg-primary-300"
+                                )}
+                                onSelect={() => onSetIndex(idx)}
+                                key={idx}
+                            >
+                                {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
+                                <span className="flex-grow">{item}</span>
+                            </menu.Item>;
+                    })}
                 </menu.Content>
             </menu.Portal>
         </menu.Root>
     );
-
-    function CatalogItem(): (value: string, index: number, array: string[]) => JSX.Element {
-        return (item, idx) => {
-            const isSelected = selectedIndex === idx;
-            const isSeparator = item === '-';
-            return isSeparator
-                ? <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
-                :
-                <menu.Item
-                    className={classNames(
-                        "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
-                        "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
-                        isSelected && "bg-primary-300"
-                    )}
-                    onSelect={() => onSetIndex(idx)}
-                    key={idx}
-                >
-                    {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
-                    <span className="flex-grow">{item}</span>
-                </menu.Item>;
-        };
-    }
 }

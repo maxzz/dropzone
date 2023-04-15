@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
 import { FieldCatalogItemsAtom, getCatalogName } from "@/store";
 import { Meta } from "@/store/manifest";
-import { Dropdown, isKeyToClearDefault } from "./Dropdown";
+import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
 
 const CATALOG_No = "Not from catalog";
@@ -52,7 +52,7 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {Dropdown(useItAtom, dropdownItems, selectedIndex, onSetIndex)}
+            {CatalogDropdown(useItAtom, dropdownItems, selectedIndex, onSetIndex)}
         </div>
     );
 }
