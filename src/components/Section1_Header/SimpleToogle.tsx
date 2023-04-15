@@ -1,6 +1,7 @@
 import { classNames } from "@/utils";
 import React, { useState } from "react";
 
+/*
 export function SimpleToogleCheckbox() {
     // https://buildui.com/recipes/ios-animated-switch
     const [on, setOn] = useState(false);
@@ -8,8 +9,8 @@ export function SimpleToogleCheckbox() {
 
     return (
         <div className=" transition-all duration-[400ms]">
-            {/* <label className="group inline-flex touch-none items-center" data-selected={on} onClick={() => setOn(v => !v)}> */}
-            {/* <label className="group inline-flex touch-none items-center" data-selected={on}> */}
+            {/* <label className="group inline-flex touch-none items-center" data-selected={on} onClick={() => setOn(v => !v)}> * /}
+            {/* <label className="group inline-flex touch-none items-center" data-selected={on}> * /}
             <label className="group inline-flex touch-none items-center" data-selected={on}>
                 <div
                     style={{
@@ -50,6 +51,7 @@ export function SimpleToogleCheckbox() {
         </div>
     );
 }
+*/
 
 /*
 Alternatives:
