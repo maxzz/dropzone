@@ -10,7 +10,7 @@ import { IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
 import toast from 'react-hot-toast';
-import { SimpleToogle } from './SimpleToogle';
+import { SimpleToogle, SimpleToogleCheckbox } from './SimpleToogle';
 
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },
@@ -84,7 +84,9 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
             <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-200 ring-1 ring-primary-500 rounded`}>
                 <LeftHeader />
 
-                <SimpleToogle />
+                {/* OK but no need now */}
+                {/* <SimpleToogle /> */}
+                <SimpleToogleCheckbox />
 
                 {/* Right header */}
                 <div className="flex items-center justify-end">
