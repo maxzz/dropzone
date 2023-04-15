@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes } from "react";
 import { PrimitiveAtom as PA, useAtom } from "jotai";
 import { FieldTyp, LIST_references, LIST_valueAskNames, ReferenceItem, ValueAs, ValueLife } from "@/store/manifest";
-import { Dropdown, isKeyToClearDefault } from "../Dropdown";
+import { Dropdown, isKeyToClearDefault } from "../SharedUI/Dropdown";
 import { classNames } from "@/utils";
 
 function pickRefsList(isPsw: boolean): Record<string, ReferenceItem> { //TODO: move out value <-> index mappers
