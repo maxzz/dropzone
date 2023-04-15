@@ -10,6 +10,7 @@ import { IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { keyframes } from '@stitches/react';
 import toast from 'react-hot-toast';
+import { SimpleToogle } from './SimpleToogle';
 
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },
@@ -74,27 +75,6 @@ function AppLogo() {
     const title = "Ctrl+Click - Open source code at GitHub\nApp build version: __BUILD_DATE__";
     return (
         <IconAppLogoMicroscope className="w-7 h-7 mx-4 text-primary-300 cursor-pointer" title={title} onClick={doClick} />
-    );
-}
-
-/*
-//http://localhost:8090/tailwind-ui-04-14-23\preview\components\assets
-<div class="ml-auto pointer-events-auto h-6 w-10 rounded-full p-1 ring-1 ring-inset transition duration-200 ease-in-out bg-indigo-600 ring-black/20">
-    <div class="h-4 w-4 rounded-full bg-white shadow-sm ring-1 ring-slate-700/10 transition duration-200 ease-in-out translate-x-4">
-    </div>
-</div>
-*/
-
-function SimpleToogle() {
-    const [on, setOn] = useState(false);
-    return (
-        <div
-            className="ml-auto p-1 h-6 w-10 bg-primary-300/50 ring-primary-100 ring-1 ring-inset rounded-full transition duration-150 ease-in-out pointer-events-auto"
-            onClick={() => setOn(v => !v)}
-        >
-            <div className={`h-4 w-4 rounded-full bg-white ring-1 ring-primary-700/40 shadow-sm transition duration-150 ease-out${on ? ' translate-x-4' : ''}`}>
-            </div>
-        </div>
     );
 }
 
