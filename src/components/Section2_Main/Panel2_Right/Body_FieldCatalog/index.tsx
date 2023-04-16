@@ -10,7 +10,7 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
     return Icon;
 }
 
-export function RightBody_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
+export function Body_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [fileUs] = useAtom(fileUsAtom);
     const names = fileUs.fcat?.names || [];
     return (

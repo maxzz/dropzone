@@ -4,9 +4,9 @@ import { FileUs, FileUsAtomType, rightPanelData, ViewMode } from '@/store';
 import { classNames } from '@/utils';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Card1_Title';
 import { ManiActions } from './ManiActions';
-import { RightBody_Xml } from './Body_Xml';
-import { RightBody_FieldCatalog } from './Body_FieldCatalog';
-import { RightBody_Manifest } from './Body_Manifest';
+import { Body_Xml } from './Body_Xml';
+import { Body_FieldCatalog } from './Body_FieldCatalog';
+import { Body_Manifest } from './Body_Manifest';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelData.panelAtom);
@@ -28,10 +28,10 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                     </div>
 
                     {viewRawText
-                        ? <RightBody_Xml className="font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default" text={fileUs.raw || ''} />
+                        ? <Body_Xml className="font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default" text={fileUs.raw || ''} />
                         : fileUs.fcat
-                            ? <RightBody_FieldCatalog fileUsAtom={fileUsAtom} />
-                            : <RightBody_Manifest className="text-xs text-primary-100" fileUsAtom={fileUsAtom} />
+                            ? <Body_FieldCatalog fileUsAtom={fileUsAtom} />
+                            : <Body_Manifest className="text-xs text-primary-100" fileUsAtom={fileUsAtom} />
                     }
 
                 </div>
