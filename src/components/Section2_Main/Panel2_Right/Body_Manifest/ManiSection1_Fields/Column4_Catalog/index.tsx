@@ -1,10 +1,9 @@
 import React, { InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
-import { FieldCatalogItemAtom, FieldCatalogItemsAtom } from "@/store";
+import { FieldCatalogItemAtom, FieldCatalogPswItemsAtom, FieldCatalogTxtItemsAtom } from "@/store";
 import { Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
-import { FieldCatalogPswItemsAtom, FieldCatalogTxtItemsAtom, getFieldCatalogItem } from "@/store";
 
 const CATALOG_No = "Not from catalog";
 const CATALOG_More = "Manage fields ...";
@@ -12,17 +11,11 @@ const CATALOG_More = "Manage fields ...";
 export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: PA<string>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
     const { useItAtom, fieldCatAtom, field, className, ...rest } = props;
 
-    const catalogItems = useAtomValue(FieldCatalogItemsAtom);
-    //const catalogItem = getFieldCatalogItem(catalogItems, field.mani.dbname);
-    const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
-
-    // const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
-    // const catalogItemsByType = catalogByType(!!field.mani.password);
     const catalogItemsByType = useAtomValue(field.mani.password ? FieldCatalogPswItemsAtom : FieldCatalogTxtItemsAtom);
-
+    const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
     const catalogName = catalogItem?.dispname;
 
-    const textAtom = useState(atom(catalogName ? catalogName : CATALOG_No))[0];
+    const textAtom = useState(atom(catalogName || CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
