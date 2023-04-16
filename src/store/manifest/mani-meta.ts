@@ -395,16 +395,16 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
 
 // Field catalog transformation
 
-export function buildCatalogMeta(fcat: Catalog.Root | undefined): FieldCatalog {
-    //TODO: handle addtional info
-    return buildCatalogMetaFromNames(fcat?.names);
-}
-
 export function buildCatalogMetaFromNames(names: Catalog.Name[] | undefined): FieldCatalog {
     const items = names?.map((item, idx) => ({ ...item, index: idx, uuid: uuid.asRelativeNumber(), })) || [];
     return {
         items,
     };
+}
+
+export function buildCatalogMeta(fcat: Catalog.Root | undefined): FieldCatalog {
+    //TODO: handle addtional info
+    return buildCatalogMetaFromNames(fcat?.names);
 }
 
 // TODO: bailOut: add more checks and explanation why there are issues on each check.

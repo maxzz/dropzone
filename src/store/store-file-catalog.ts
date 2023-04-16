@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { Catalog } from "./manifest";
 import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
-import { buildCatalogMetaFromNames } from "./manifest/mani-functions";
+import { buildCatalogMetaFromNames } from "./manifest/mani-meta";
 
 export const FieldCatalogItemsAtom = atom<Catalog.Name[]>(buildCatalogMetaFromNames(catalogTestNames).items);
 

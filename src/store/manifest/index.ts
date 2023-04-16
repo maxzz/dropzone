@@ -27,7 +27,7 @@ export {
     FieldPath,
     Transform,
     TransformValue,
-} from './mani-functions';
+} from './mani-meta';
 
 export {
     convertToXml,
