@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Catalog, CatalogItem } from "./manifest";
+import { CatalogItem } from "./manifest";
 import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
 import { buildCatalogMetaFromNames } from "./manifest/mani-meta";
 
@@ -23,10 +23,12 @@ export const FieldCatalogPswItemsAtom = atom<CatalogItem[]>((get) => get(FieldCa
 // );
 
 export const FieldCatalogItemAtom = atom(
-    (get) => (dbid: string) => {
-        const all = get(FieldCatalogItemsAtom);
-        const rv = all.find((item) => item.dbname === dbid);
-        return rv;
+    (get) => (dbid: string | undefined) => {
+        if (dbid) {
+            const all = get(FieldCatalogItemsAtom);
+            const rv = all.find((item) => item.dbname === dbid);
+            return rv;
+        }
     }
 );
 

@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
-import { FieldCatalogItemsAtom } from "@/store";
+import { FieldCatalogItemAtom, FieldCatalogItemsAtom } from "@/store";
 import { Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
@@ -13,7 +13,8 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
     const { useItAtom, fieldCatAtom, field, className, ...rest } = props;
 
     const catalogItems = useAtomValue(FieldCatalogItemsAtom);
-    const catalogItem = getFieldCatalogItem(catalogItems, field.mani.dbname);
+    //const catalogItem = getFieldCatalogItem(catalogItems, field.mani.dbname);
+    const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
 
     // const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
     // const catalogItemsByType = catalogByType(!!field.mani.password);
