@@ -60,14 +60,21 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
     }
 
     function onSetText(value: string) {
-        value
-            ? (setText(value), setSelectedIndex(-1))
-            : (setText(dropdownItems[0]), setSelectedIndex(0));
+        if (value) {
+            setText(value);
+            setSelectedIndex(-1);
+        }
+        else {
+            setText(dropdownItems[0]);
+            setSelectedIndex(0);
+        };
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        ~selectedIndex && isKeyToClearDefault(event.key) &&
-            (setText(''), setSelectedIndex(-1));
+        if (~selectedIndex && isKeyToClearDefault(event.key)) {
+            setText('');
+            setSelectedIndex(-1);
+        }
     }
 
     function onBlur() {
