@@ -19,23 +19,12 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
     const catalogItemsByType = catalogByType(!!field.mani.password);
     const catalogName = catalogItem?.dispname;
 
-    //const { name: catalogName, names: namesByType } = getCatalogName(catalogItems, field.mani.password, field.mani.dbname); //TODO: might need memo
-    
-    // const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
-    // console.log('catalogName, names', catalogByType(!!field.mani.password));
-
     const textAtom = useState(atom(catalogName ? catalogName : CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
-    // const dropdownItems = [CATALOG_No, ...namesByType, '-', CATALOG_More];
 
     const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
-
-    const onSetIndex = (idx: number) => (setText(dropdownItems[idx]), setSelectedIndex(idx));
-    const onSetText = (value: string) => (value ? (setText(value), setSelectedIndex(-1)) : (setText(dropdownItems[0]), setSelectedIndex(0)));
-    const onSetKey = (event: React.KeyboardEvent) => ~selectedIndex && isKeyToClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
-    const onBlur = () => ~~selectedIndex && !text && onSetIndex(0);
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name
@@ -64,6 +53,22 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
             {CatalogDropdown(useItAtom, dropdownItems, selectedIndex, onSetIndex)}
         </div>
     );
+
+    function onSetIndex(idx: number) {
+        return (setText(dropdownItems[idx]), setSelectedIndex(idx));
+    }
+
+    function onSetText(value: string) {
+        return (value ? (setText(value), setSelectedIndex(-1)) : (setText(dropdownItems[0]), setSelectedIndex(0)));
+    }
+
+    function onSetKey(event: React.KeyboardEvent) {
+        return ~selectedIndex && isKeyToClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
+    }
+    
+    function onBlur() {
+        return ~~selectedIndex && !text && onSetIndex(0);
+    }
 }
 
 //TODO: buttons are not stored in field catalog

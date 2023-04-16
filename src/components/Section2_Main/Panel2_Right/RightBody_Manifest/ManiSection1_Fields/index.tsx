@@ -42,7 +42,7 @@ function combineFromAtoms(atoms: Atomize<TableRowAtoms>, get: Getter, set: Sette
         valueLifeAtom: get(atoms.valueLifeAtom),
         fieldCatAtom: get(atoms.fieldCatAtom),                     //TODO: catalog
     };
-    console.log('TableRow atoms', JSON.stringify(result));
+    //console.log('TableRow atoms', JSON.stringify(result));
 }
 
 const debCombineFromAtoms = debounce(combineFromAtoms);
