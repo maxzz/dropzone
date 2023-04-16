@@ -22,10 +22,10 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
     const catalogName = catalogItem?.dispname;
 
+    const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
+
     const textAtom = useState(atom(catalogName || CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
-
-    const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
 
     const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
 
@@ -47,22 +47,22 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
                 className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 multiple
                 value={text}
-                onChange={(event) => onSetText(event.target.value)}
+                onChange={(event) => onSetInputText(event.target.value)}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {CatalogDropdown(useItAtom, dropdownItems, selectedIndex, onSetIndex)}
+            {CatalogDropdown(useItAtom, dropdownItems, selectedIndex, onSetDropdownIndex)}
         </div>
     );
 
-    function onSetIndex(idx: number) {
+    function onSetDropdownIndex(idx: number) {
         setText(dropdownItems[idx]);
         setSelectedIndex(idx);
     }
 
-    function onSetText(value: string) {
+    function onSetInputText(value: string) {
         if (value) {
             setText(value);
             setSelectedIndex(-1);
@@ -81,8 +81,9 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     }
 
     function onBlur() {
-        ~~selectedIndex && !text && onSetIndex(0);
+        ~~selectedIndex && !text && onSetDropdownIndex(0);
     }
 }
 
 //TODO: buttons are not stored in field catalog
+//TODO: buttons should not have dbname (it is useless, they don't have state to save)
