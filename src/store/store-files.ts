@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { uuid } from '@/utils/uuid';
+import { uuid } from '@/utils';
 import { buildCatalogMeta, buildManiMetaForms, Catalog, Mani, Meta, parseXMLFile } from './manifest';
 import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from './store-types';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';

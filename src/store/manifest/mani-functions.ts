@@ -401,7 +401,7 @@ export function buildCatalogMeta(fcat: Catalog.Root | undefined): FieldCatalog {
 }
 
 export function buildCatalogMetaFromNames(names: Catalog.Name[] | undefined): FieldCatalog {
-    const items = names?.map((item, idx) => ({ ...item, index: idx, uuid: uuid(), })) || [];
+    const items = names?.map((item, idx) => ({ ...item, index: idx, uuid: uuid.asNumber(), })) || [];
     return {
         items,
     };

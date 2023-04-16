@@ -10,6 +10,10 @@ function asNumber(): number {
     return now();
 }
 
+function asRelativeNumber(): number {
+    return now() - startTime;
+}
+
 export function uuid(short?: boolean): string {
     let n = now();
     if (short) {
@@ -19,3 +23,4 @@ export function uuid(short?: boolean): string {
 }
 
 uuid.asNumber = asNumber;
+uuid.asRelativeNumber = asRelativeNumber;
