@@ -23,11 +23,15 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const catalogName = catalogItem?.dispname;
 
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
+    let catalogItemIdx = catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1;
+    if (catalogItemIdx !== -1) {
+        catalogItemIdx++; // +1 to skip CATALOG_No
+    }
 
     const textAtom = useState(atom(catalogName || CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
-    const [selectedIndex, setSelectedIndex] = useState(catalogName ? -1 : 0); // TODO: instead of 0 find real ref
+    const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name
