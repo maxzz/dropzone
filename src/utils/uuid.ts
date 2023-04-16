@@ -1,9 +1,21 @@
+export const startTime = Date.now();
+
 function now(): number {
     const timeNow = Date.now();
     const last = (now as any).last || timeNow;
     return (now as any).last = timeNow > last ? timeNow : last + 1;
 }
 
-export function uuid(): string {
-    return now().toString(36);
+function asNumber(): number {
+    return now();
 }
+
+export function uuid(short?: boolean): string {
+    let n = now();
+    if (short) {
+        n -= startTime;
+    }
+    return n.toString(36);
+}
+
+uuid.asNumber = asNumber;
