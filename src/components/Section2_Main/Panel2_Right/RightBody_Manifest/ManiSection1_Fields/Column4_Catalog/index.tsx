@@ -13,7 +13,7 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
     const { useItAtom, fieldCatAtom, field, className, ...rest } = props;
 
     const catalogItems = useAtomValue(FieldCatalogItemsAtom);
-    const catalogItem = getFieldCatalogItem(catalogItems, field.mani.dbname)
+    const catalogItem = getFieldCatalogItem(catalogItems, field.mani.dbname);
 
     const catalogByType = useAtomValue(FieldCatalogItemsByTypeAtom);
     const catalogItemsByType = catalogByType(!!field.mani.password);
@@ -55,19 +55,23 @@ export function Column4_Catalog(props: { useItAtom: PA<boolean>; fieldCatAtom: P
     );
 
     function onSetIndex(idx: number) {
-        return (setText(dropdownItems[idx]), setSelectedIndex(idx));
+        setText(dropdownItems[idx]);
+        setSelectedIndex(idx);
     }
 
     function onSetText(value: string) {
-        return (value ? (setText(value), setSelectedIndex(-1)) : (setText(dropdownItems[0]), setSelectedIndex(0)));
+        value
+            ? (setText(value), setSelectedIndex(-1))
+            : (setText(dropdownItems[0]), setSelectedIndex(0));
     }
 
     function onSetKey(event: React.KeyboardEvent) {
-        return ~selectedIndex && isKeyToClearDefault(event.key) && (setText(''), setSelectedIndex(-1));
+        ~selectedIndex && isKeyToClearDefault(event.key) &&
+            (setText(''), setSelectedIndex(-1));
     }
-    
+
     function onBlur() {
-        return ~~selectedIndex && !text && onSetIndex(0);
+        ~~selectedIndex && !text && onSetIndex(0);
     }
 }
 
