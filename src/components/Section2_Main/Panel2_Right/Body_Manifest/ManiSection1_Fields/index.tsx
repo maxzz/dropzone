@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Getter, Setter, atom, useAtom, useSetAtom } from 'jotai';
-import { FieldTyp, Meta, TransformValue, ValueLife } from '@/store/manifest';
+import { CatalogItem, FieldTyp, Meta, TransformValue, ValueLife } from '@/store/manifest';
 import { classNames, debounce } from '@/utils';
 import { Column1_UseIt } from './Column1_UseIt';
 import { Column2_Label } from './Column2_Label';
@@ -79,11 +79,15 @@ function TableRow({ field }: { field: Meta.Field; }) {
         setFieldCat('');                         //TODO:
     }, [field]);
 
+    function onSelectCatItem(item: CatalogItem | undefined) {
+
+    }
+
     return (<>
         <Column1_UseIt useItAtom={rowAtoms.useItAtom} />
         <Column2_Label useItAtom={rowAtoms.useItAtom} valueAtom={rowAtoms.labelAtom} onClick={enableRow} />
         <Column3_Value useItAtom={rowAtoms.useItAtom} valueLifeAtom={rowAtoms.valueLifeAtom} choosevalue={field.mani.choosevalue} onClick={enableRow} />
-        <Column4_Catalog useItAtom={rowAtoms.useItAtom} fieldCatAtom={rowAtoms.fieldCatAtom} field={field} onClick={enableRow} />
+        <Column4_Catalog useItAtom={rowAtoms.useItAtom} fieldCatAtom={rowAtoms.fieldCatAtom} onSelectCatItem={onSelectCatItem} field={field} onClick={enableRow} />
         <Column5_Type useItAtom={rowAtoms.useItAtom} field={field} onClick={enableRow} />
     </>);
 }
