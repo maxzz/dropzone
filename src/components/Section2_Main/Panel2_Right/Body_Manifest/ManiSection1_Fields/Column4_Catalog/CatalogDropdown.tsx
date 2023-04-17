@@ -26,25 +26,27 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
 
 
     return (
-        <menu.Root onOpenChange={(open: boolean) => {
-            console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current.slice(0, 3));
+        <menu.Root
+            onOpenChange={(open: boolean) => {
+                console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current.slice(0, 3));
 
-            if (open) {
-                const el = itemRefs.current[selectedIndex];
-                if (el) {
-                    el.scrollIntoView({ block: 'nearest' });
+                if (open) {
+                    const el = itemRefs.current[selectedIndex];
+                    if (el) {
+                        el.scrollIntoView({ block: 'nearest' });
+                    }
                 }
-            }
-        }}>
+            }}
+        >
             <menu.Trigger asChild>
-                <button className="px-2 border-l border-primary-800 outline-none group">
+                <button  ref={refs.setReference} className="px-2 border-l border-primary-800 outline-none group">
                     <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
                 </button>
             </menu.Trigger>
 
             <menu.Portal container={document.getElementById('portal')}>
                 <menu.Content
-                    ref={refs.setReference}
+                    ref={refs.setFloating}
                     className={classNames(
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "mx-4 px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
