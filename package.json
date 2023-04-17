@@ -11,6 +11,7 @@
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
+        "@floating-ui/react": "^0.23.0",
         "@headlessui/react": "1.7.14",
         "@heroicons/react": "2.0.17",
         "@popperjs/core": "2.11.7",

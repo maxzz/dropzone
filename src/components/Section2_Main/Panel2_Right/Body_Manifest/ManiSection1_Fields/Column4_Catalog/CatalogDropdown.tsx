@@ -3,6 +3,7 @@ import { PrimitiveAtom } from 'jotai';
 import { classNames } from '@/utils';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 import * as menu from '@radix-ui/react-dropdown-menu';
+import { useFloating } from '@floating-ui/react';
 
 export function isKeyToClearDefault(key: string) {
     return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
@@ -18,6 +19,12 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     //         el.scrollIntoView();
     //     }
     // }, [selectedIndex]);
+
+    const { x, y, reference } = useFloating();
+
+    console.log('x,y', x, y);
+
+
     return (
         <menu.Root onOpenChange={(open: boolean) => {
             console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current.slice(0, 3));
@@ -37,6 +44,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
 
             <menu.Portal container={document.getElementById('portal')}>
                 <menu.Content
+                    ref={reference}
                     className={classNames(
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "mx-4 px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
@@ -51,7 +59,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     );
 
     function addItemRef(idx: number, el: HTMLElement | null) {
-        idx < 3 && console.log('----------------add item', {idx, el});
+        idx < 3 && console.log('----------------add item', { idx, el });
         itemRefs.current[idx] = el;
     }
 
