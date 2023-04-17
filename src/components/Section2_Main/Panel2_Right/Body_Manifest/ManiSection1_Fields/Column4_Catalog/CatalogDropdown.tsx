@@ -20,7 +20,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     //     }
     // }, [selectedIndex]);
 
-    const { x, y, reference } = useFloating();
+    const { x, y, refs } = useFloating();
 
     console.log('x,y', x, y);
 
@@ -44,7 +44,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
 
             <menu.Portal container={document.getElementById('portal')}>
                 <menu.Content
-                    ref={reference}
+                    ref={refs.setReference}
                     className={classNames(
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "mx-4 px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
