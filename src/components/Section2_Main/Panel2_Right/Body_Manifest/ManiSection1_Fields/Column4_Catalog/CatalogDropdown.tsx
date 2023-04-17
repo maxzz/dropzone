@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { PrimitiveAtom } from 'jotai';
 import { classNames } from '@/utils';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
@@ -9,6 +9,15 @@ export function isKeyToClearDefault(key: string) {
 }
 
 export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
+    const itemRefs = useRef<HTMLElement[]>([]);
+    useEffect(() => {
+        console.log('itemRefs', itemRefs.current);
+        
+        const el = itemRefs.current[selectedIndex];
+        if (el) {
+            el.scrollIntoView();
+        }
+    }, [selectedIndex]);
     return (
         <menu.Root>
             <menu.Trigger asChild>
@@ -32,6 +41,10 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
         </menu.Root>
     );
 
+    function addItemRef(el: HTMLElement | null) {
+        el && itemRefs.current.push(el);
+    }
+
     function CatalogItem(): (value: string, index: number, items: string[]) => JSX.Element {
         let showIndex = 0;
 
@@ -41,9 +54,10 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
             const isSeparator = showText === '-';
             return isSeparator
                 ?
-                <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                <menu.Separator ref={addItemRef} className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
                 :
                 <menu.Item
+                    ref={addItemRef}
                     className={classNames(
                         "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
                         "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
