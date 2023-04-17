@@ -78,7 +78,13 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                 <menu.Separator ref={(el) => addItemRef(idx, el)} className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
                 :
                 <menu.Item
-                    ref={(el) => addItemRef(idx, el)}
+                    ref={(el) => {
+                        if (el && isSelected) {
+                            // el.scrollIntoView({ block: 'nearest' });
+                            el.scrollIntoView(true);
+                        }
+                    }}
+                    // ref={(el) => addItemRef(idx, el)}
                     className={classNames(
                         "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
                         "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
