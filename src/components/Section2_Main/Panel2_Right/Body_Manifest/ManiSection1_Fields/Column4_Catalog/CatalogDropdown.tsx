@@ -9,17 +9,25 @@ export function isKeyToClearDefault(key: string) {
 }
 
 export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
-    const itemRefs = useRef<HTMLElement[]>([]);
-    useEffect(() => {
-        console.log('itemRefs', itemRefs.current);
-        
-        const el = itemRefs.current[selectedIndex];
-        if (el) {
-            el.scrollIntoView();
-        }
-    }, [selectedIndex]);
+    const itemRefs = useRef<(HTMLElement | null)[]>([]);
+    // useEffect(() => {
+    //     console.log('selectedIndex', selectedIndex, 'itemRefs', itemRefs.current);
+
+    //     const el = itemRefs.current[selectedIndex];
+    //     if (el) {
+    //         el.scrollIntoView();
+    //     }
+    // }, [selectedIndex]);
     return (
-        <menu.Root>
+        <menu.Root onOpenChange={()=>{
+            console.log('openChange', 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current);
+
+            const el = itemRefs.current[selectedIndex];
+            if (el) {
+                el.scrollIntoView();
+            }
+                
+        }}>
             <menu.Trigger asChild>
                 <button className="px-2 border-l border-primary-800 outline-none group">
                     <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
@@ -41,8 +49,8 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
         </menu.Root>
     );
 
-    function addItemRef(el: HTMLElement | null) {
-        el && itemRefs.current.push(el);
+    function addItemRef(idx: number, el: HTMLElement | null) {
+        itemRefs.current[idx] = el;
     }
 
     function CatalogItem(): (value: string, index: number, items: string[]) => JSX.Element {
@@ -54,10 +62,10 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
             const isSeparator = showText === '-';
             return isSeparator
                 ?
-                <menu.Separator ref={addItemRef} className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                <menu.Separator ref={(el) => addItemRef(idx, el)} className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
                 :
                 <menu.Item
-                    ref={addItemRef}
+                    ref={(el) => addItemRef(idx, el)}
                     className={classNames(
                         "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
                         "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
