@@ -19,14 +19,15 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     //     }
     // }, [selectedIndex]);
     return (
-        <menu.Root onOpenChange={()=>{
-            console.log('openChange', 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current);
+        <menu.Root onOpenChange={(open: boolean) => {
+            console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current.slice(0, 3));
 
-            const el = itemRefs.current[selectedIndex];
-            if (el) {
-                el.scrollIntoView();
+            if (open) {
+                const el = itemRefs.current[selectedIndex];
+                if (el) {
+                    el.scrollIntoView({ block: 'nearest' });
+                }
             }
-                
         }}>
             <menu.Trigger asChild>
                 <button className="px-2 border-l border-primary-800 outline-none group">
@@ -50,11 +51,13 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     );
 
     function addItemRef(idx: number, el: HTMLElement | null) {
+        idx < 3 && console.log('----------------add item', {idx, el});
         itemRefs.current[idx] = el;
     }
 
     function CatalogItem(): (value: string, index: number, items: string[]) => JSX.Element {
         let showIndex = 0;
+        //console.log('----------------render items', items);
 
         return (showText, idx) => {
             const isSelected = idx === selectedIndex;
