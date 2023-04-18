@@ -396,7 +396,8 @@ export function buildManiMetaForms(mani: Mani.Manifest | undefined): Meta.Form[]
 // Field catalog transformation
 
 export function buildCatalogMetaFromNames(names: Catalog.Name[] | undefined): FieldCatalog {
-    const items = names?.map((item, idx) => ({ ...item, index: idx, uuid: uuid.asRelativeNumber(), })) || [];
+    const now = uuid.asRelativeNumber();
+    const items = names?.map((item, idx) => ({ ...item, index: idx, uuid: now, mru: now, })) || [];
     return {
         items,
     };
