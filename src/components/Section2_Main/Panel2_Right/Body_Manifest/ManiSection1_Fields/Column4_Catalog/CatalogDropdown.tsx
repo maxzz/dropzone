@@ -9,29 +9,11 @@ export function isKeyToClearDefault(key: string) {
 }
 
 export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
-    const itemRefs = useRef<(HTMLElement | null)[]>([]);
-    // useEffect(() => {
-    //     console.log('selectedIndex', selectedIndex, 'itemRefs', itemRefs.current);
-
-    //     const el = itemRefs.current[selectedIndex];
-    //     if (el) {
-    //         el.scrollIntoView();
-    //     }
-    // }, [selectedIndex]);
-
     const [first, setFirst] = useState(true);
-
     return (
         <menu.Root
             onOpenChange={(open: boolean) => {
-                console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs', itemRefs.current.slice(0, 3));
-
-                if (open) {
-                    const el = itemRefs.current[selectedIndex];
-                    if (el) {
-                        el.scrollIntoView({ block: 'nearest' });
-                    }
-                }
+                console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs');
                 setFirst(open);
             }}
         >
@@ -56,14 +38,8 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
         </menu.Root>
     );
 
-    function addItemRef(idx: number, el: HTMLElement | null) {
-        idx < 3 && console.log('----------------add item', { idx, el });
-        itemRefs.current[idx] = el;
-    }
-
     function CatalogItem(): (value: string, index: number, items: string[]) => JSX.Element {
         let showIndex = 0;
-        //console.log('----------------render items', items);
 
         return (showText, idx) => {
             const isSelected = idx === selectedIndex;
@@ -71,19 +47,15 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
             const isSeparator = showText === '-';
             return isSeparator
                 ?
-                <menu.Separator ref={(el) => addItemRef(idx, el)} className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
                 :
                 <menu.Item
                     ref={(el) => {
                         if (el && isSelected && first) {
-                            // el.scrollIntoView({ block: 'nearest' });
-                            // el.scrollIntoView(true);
-                            console.log('scroll selected');
                             el.scrollIntoView({ block: 'center' });
                             setFirst(false);
                         }
                     }}
-                    // ref={(el) => addItemRef(idx, el)}
                     className={classNames(
                         "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
                         "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
