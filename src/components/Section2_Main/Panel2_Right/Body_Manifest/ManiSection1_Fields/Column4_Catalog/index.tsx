@@ -22,7 +22,8 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
     const catalogName = catalogItem?.dispname;
 
-    const dropdownItems = useMemo(() => [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More], [catalogItemsByType]);
+    const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
+    //const dropdownItems = useMemo(() => [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More], [catalogItemsByType]);
     let catalogItemIdx = catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1;
     if (catalogItemIdx !== -1) {
         catalogItemIdx++; // +1 to skip CATALOG_No
@@ -36,10 +37,10 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name
 
-    const onSetDropdownIndex = useCallback(function onSetDropdownIndex(idx: number) {
-        setText(dropdownItems[idx]);
-        setSelectedIndex(idx);
-    }, [dropdownItems]);
+    // const onSetDropdownIndex = useCallback(function onSetDropdownIndex(idx: number) {
+    //     setText(dropdownItems[idx]);
+    //     setSelectedIndex(idx);
+    // }, [dropdownItems]);
 
     return (
         <div
@@ -66,10 +67,10 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
         </div>
     );
 
-    // function onSetDropdownIndex(idx: number) {
-    //     setText(dropdownItems[idx]);
-    //     setSelectedIndex(idx);
-    // }
+    function onSetDropdownIndex(idx: number) {
+        setText(dropdownItems[idx]);
+        setSelectedIndex(idx);
+    }
 
     function onSetInputText(value: string) {
         if (value) {
