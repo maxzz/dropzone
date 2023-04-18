@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { CatalogItem } from "./manifest";
 import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
-import { buildCatalogMetaFromNames } from "./manifest/mani-meta";
+import { buildCatalogMetaFromNames } from "./manifest/meta-data";
 
 export const FieldCatalogItemsAtom = atom<CatalogItem[]>(buildCatalogMetaFromNames(catalogTestNames).items);
 export const FieldCatalogTxtItemsAtom = atom<CatalogItem[]>((get) => get(FieldCatalogItemsAtom).filter((item) => !item.password));

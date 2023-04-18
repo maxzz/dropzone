@@ -20,14 +20,9 @@ export {
     makeXML,
 } from './mani-o';
 
-export {
-    buildManiMetaForms,
-    buildCatalogMeta,
-    TimeUtils,
-    FieldPath,
-    Transform,
-    TransformValue,
-} from './mani-meta';
+export * from './meta-data';
+
+export * from './meta-data';
 
 export {
     convertToXml,
