@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PrimitiveAtom } from 'jotai';
 import { classNames } from '@/utils';
 import { IconChevronDown, IconDot } from '@ui/UIIconSymbols';
 import * as menu from '@radix-ui/react-dropdown-menu';
-import { useFloating } from '@floating-ui/react';
 
 export function isKeyToClearDefault(key: string) {
     return key === 'Backspace' || /^[a-z0-9]$/i.test(key);
@@ -20,10 +19,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     //     }
     // }, [selectedIndex]);
 
-    const { x, y, refs } = useFloating();
-
-    console.log('x,y', x, y);
-
+    const [first, setFirst] = useState(true);
 
     return (
         <menu.Root
@@ -36,17 +32,17 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                         el.scrollIntoView({ block: 'nearest' });
                     }
                 }
+                setFirst(open);
             }}
         >
             <menu.Trigger asChild>
-                <button  ref={refs.setReference} className="px-2 border-l border-primary-800 outline-none group">
+                <button className="px-2 border-l border-primary-800 outline-none group">
                     <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
                 </button>
             </menu.Trigger>
 
             <menu.Portal container={document.getElementById('portal')}>
                 <menu.Content
-                    ref={refs.setFloating}
                     className={classNames(
                         "radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down",
                         "mx-4 px-1.5 py-1 grid grid-cols-1 rounded-lg shadow-md",
@@ -79,9 +75,12 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                 :
                 <menu.Item
                     ref={(el) => {
-                        if (el && isSelected) {
+                        if (el && isSelected && first) {
                             // el.scrollIntoView({ block: 'nearest' });
-                            el.scrollIntoView(true);
+                            // el.scrollIntoView(true);
+                            console.log('scroll selected');
+                            el.scrollIntoView({ block: 'center' });
+                            setFirst(false);
                         }
                     }}
                     // ref={(el) => addItemRef(idx, el)}
