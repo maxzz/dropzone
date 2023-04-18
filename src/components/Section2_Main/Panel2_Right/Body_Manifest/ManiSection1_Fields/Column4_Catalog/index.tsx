@@ -25,16 +25,13 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
     //const dropdownItems = useMemo(() => [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More], [catalogItemsByType]);
     let catalogItemIdx = catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1;
-    if (catalogItemIdx !== -1) {
-        catalogItemIdx++; // +1 to skip CATALOG_No
-    }
+    catalogItemIdx++; // +1 to skip CATALOG_No
 
     const textAtom = useState(atom(catalogName || CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
     const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
-    console.log('selectedIndex', selectedIndex);
-
+    //console.log('-------selectedIndex', selectedIndex);
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name
