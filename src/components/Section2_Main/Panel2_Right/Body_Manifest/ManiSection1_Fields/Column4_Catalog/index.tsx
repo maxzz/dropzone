@@ -33,6 +33,8 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const [text, setText] = useAtom(textAtom);
 
     const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
+    console.log('selectedIndex', selectedIndex);
+
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name
