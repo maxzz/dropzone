@@ -9,13 +9,13 @@ export function isKeyToClearDefault(key: string) {
 }
 
 export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], selectedIndex: number, onSetIndex: (idx: number) => void) {
-    const [first, setFirst] = useState(true);
+    // const [first, setFirst] = useState(true);
     return (
         <menu.Root
-            onOpenChange={(open: boolean) => {
-                console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs');
-                setFirst(open);
-            }}
+            // onOpenChange={(open: boolean) => {
+            //     console.log('openChange open', open, 'selectedIndex', selectedIndex, 'itemRefs');
+            //     setFirst(open);
+            // }}
         >
             <menu.Trigger asChild>
                 <button className="px-2 border-l border-primary-800 outline-none group">
@@ -39,7 +39,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
     );
 
     function CatalogItem(): (value: string, index: number, items: string[]) => JSX.Element {
-        let showIndex = 0;
+        // let showIndex = 0;
 
         return (showText, idx) => {
             const isSelected = idx === selectedIndex;
@@ -50,12 +50,12 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                 <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
                 :
                 <menu.Item
-                    ref={(el) => {
-                        if (el && isSelected && first) {
-                            el.scrollIntoView({ block: 'center' });
-                            setFirst(false);
-                        }
-                    }}
+                    // ref={(el) => {
+                    //     if (el && isSelected && first) {
+                    //         el.scrollIntoView({ block: 'center' });
+                    //         setFirst(false);
+                    //     }
+                    // }}
                     className={classNames(
                         "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
                         "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
