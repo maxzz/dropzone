@@ -14,7 +14,7 @@ export function PolicyEditorBody({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     return (
         <div className={frameClasses}>
             {/* Header */}
-            <DialogHeader />
+            <DialogHeader header="Policy Editor" subHeader="Specify password complexity, history and generation requirements." />
 
             <Check checked={enabled} onChange={() => setEnabled(v => !v)}>
                 Enable password policy

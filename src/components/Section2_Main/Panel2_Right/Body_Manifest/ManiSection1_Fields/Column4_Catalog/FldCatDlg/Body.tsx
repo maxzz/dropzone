@@ -12,11 +12,11 @@ export function FldCatDlgBody() {
     return (
         <div className={frameClasses}>
             {/* Header */}
-            <DialogHeader />
+            <DialogHeader header="Field Catalog" />
 
             <div className={classNames("flex flex-col space-y-4")}>
                 {/* Predefined or Custom rule */}
-                <h2 className={sectionClasses}>Password complexity</h2>
+                <h2 className={sectionClasses}>Catalog items</h2>
                 <div className="">something</div>
             </div>
 

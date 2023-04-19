@@ -4,24 +4,27 @@ import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from ".";
 import { useAtom } from "jotai";
 import { Dropdown, Input, Radio } from "./ui-controls";
-import { ConstrainPsw, ConstrainSet, namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
+import { namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
 import { IconCross } from "@ui/UIIconSymbols";
 import { classNames } from "@/utils";
 
-export function DialogHeader() {
+export function DialogHeader({ header, subHeader }: { header: string, subHeader?: string; }) {
     return (
-        <div className="">
+        <div>
             <div className="flex items-center justify-between">
                 <div className="text-lg font-bold text-primary-300">
-                    Policy Editor
+                    {header}
                 </div>
                 <DialogCloseButton tabIndex={-1}>
                     <div className="px-2 py-1 hover:bg-primary-700 active:scale-[.97] rounded"><IconCross className="w-5 h-5 py-1" /> </div>
                 </DialogCloseButton>
             </div>
-            <h1 className="mt-4 mb-6">
-                Specify password complexity, history and generation requirements.
-            </h1>
+
+            {subHeader &&
+                <h1 className="mt-4 mb-6">
+                    {subHeader}
+                </h1>
+            }
         </div>
     );
 }
@@ -81,7 +84,7 @@ export function SectionHistory({ atoms }: { atoms: Atomize<PolicyUi>; }) {
         <div>
             <Dropdown items={namesConstrainPsw} valueAtom={atoms.constrainsPswAtom} />
         </div>
-    )
+    );
 }
 
 export function SectionGenerationBy({ atoms }: { atoms: Atomize<PolicyUi>; }) {
