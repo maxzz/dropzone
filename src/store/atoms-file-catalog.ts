@@ -4,8 +4,8 @@ import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
 import { buildCatalogMetaFromNames } from "./manifest/meta-data";
 
 export const FieldCatalogItemsAtom = atom<CatalogItem[]>(buildCatalogMetaFromNames(catalogTestNames).items);
-export const FieldCatalogTxtItemsAtom = atom<CatalogItem[]>((get) => get(FieldCatalogItemsAtom).filter((item) => !item.password));
-export const FieldCatalogPswItemsAtom = atom<CatalogItem[]>((get) => get(FieldCatalogItemsAtom).filter((item) => !!item.password));
+export const FldCatTxtItemsAtom = atom<CatalogItem[]>((get) => get(FieldCatalogItemsAtom).filter((item) => !item.password));
+export const FldCatPswItemsAtom = atom<CatalogItem[]>((get) => get(FieldCatalogItemsAtom).filter((item) => !!item.password));
 
 export const FieldCatalogItemAtom = atom(
     (get) => (dbid: string | undefined) => {
@@ -17,4 +17,18 @@ export const FieldCatalogItemAtom = atom(
     }
 );
 
-export const FldCatMruItemsAtom = atom<CatalogItem[]>([]);
+export const FldCatTxtMruItemsAtom = atom(
+    (get) => {
+        let all = get(FldCatTxtItemsAtom);
+        all = all.slice(0, 5);
+        return all;
+    },
+);
+
+export const FldCatPswMruItemsAtom = atom(
+    (get) => {
+        let all = get(FldCatPswItemsAtom);
+        all = all.slice(0, 5);
+        return all;
+    },
+);
