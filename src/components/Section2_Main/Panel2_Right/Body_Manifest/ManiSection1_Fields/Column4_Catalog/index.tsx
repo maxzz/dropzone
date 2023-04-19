@@ -4,6 +4,7 @@ import { getMruFldCatForItemAtom } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
+import { FldCatDlg } from "./FldCatDlg";
 
 type Column4_CatalogProps = {
     useItAtom: PA<boolean>;
@@ -32,8 +33,11 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
 
     const useIt = useAtomValue(useItAtom);
-    return (
-        <div className={classNames(columnSizeClasses, columnRingClasses, !useIt && "opacity-30 cursor-pointer", className, )} {...rest}>
+
+    const [open, setOpen] = React.useState(false);
+
+    return (<>
+        <div className={classNames(columnSizeClasses, columnRingClasses, !useIt && "opacity-30 cursor-pointer", className,)} {...rest}>
             <input
                 className={classNames(inputClasses, ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 value={inputText}
@@ -45,7 +49,8 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
             <CatalogDropdown items={dropdownItems} selectedIndex={selectedIndex} onSetIndex={onSetDropdownIndex} />
         </div>
-    );
+        <FldCatDlg open={open} setOpen={setOpen} />
+    </>);
 
     function onSetDropdownIndex(idx: number) {
         setInputTextText(dropdownItems[idx]);

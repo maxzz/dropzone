@@ -3,9 +3,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { config, useTransition, a } from "@react-spring/web";
 import { FldCatDlgBody } from "./Body";
 
-export function FldCatDlg() {
-    const [open, setOpen] = React.useState(false);
-    
+export function FldCatDlg({ open, setOpen }: { open: boolean, setOpen: React.Dispatch<React.SetStateAction<boolean>>; }) {
+
     const transitions = useTransition(Number(open), {
         from: { opacity: 0, y: -10, scale: 0.97 },
         enter: { opacity: 1, y: 0, scale: 1 },
