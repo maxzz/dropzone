@@ -16,3 +16,5 @@ export const FieldCatalogItemAtom = atom(
         }
     }
 );
+
+export const FldCatMruItemsAtom = atom<CatalogItem[]>([]);
