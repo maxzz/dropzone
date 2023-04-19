@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useCallback, useMemo, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
-import { FieldCatalogItemAtom, FldCatPswItemsAtom, mruFldCatPswItemsAtom, FldCatTxtItemsAtom, mruFldCatTxtItemsAtom, buildMruWItem } from "@/store";
+import { getMruFldCatForItemAtom } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
@@ -18,24 +18,17 @@ type Column4_CatalogProps = {
 export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttributes<HTMLInputElement>) {
     const { useItAtom, onSelectCatItem, fieldCatAtom, field, className, ...rest } = props;
 
-    // const catalogItemsByType = useAtomValue(field.mani.password ? FldCatPswItemsAtom : FldCatTxtItemsAtom);
-    let catalogItemsByType = useAtomValue(field.mani.password ? mruFldCatPswItemsAtom : mruFldCatTxtItemsAtom);
-
-    const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
+    const { catalogItemsByType, catalogItem, } = useAtomValue(getMruFldCatForItemAtom)(field.mani.password, field.mani.dbname);
     const catalogName = catalogItem?.dispname;
-
-    catalogItemsByType = buildMruWItem(catalogItemsByType, catalogItem);
 
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
     //const dropdownItems = useMemo(() => [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More], [catalogItemsByType]);
-    let catalogItemIdx = catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1;
-    catalogItemIdx++; // +1 to skip CATALOG_No
+    let catalogItemIdx = (catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1) + 1; // +1 to skip CATALOG_No
 
     const textAtom = useState(atom(catalogName || CATALOG_No))[0];
     const [text, setText] = useAtom(textAtom);
 
     const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
-    //console.log('-------selectedIndex', selectedIndex);
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     //TODO: map it to/from catalog name

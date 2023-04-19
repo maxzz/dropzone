@@ -58,7 +58,7 @@ export function buildMruWItem(mru: CatalogItem[], item: CatalogItem | undefined)
 }
 
 export const getMruFldCatForItemAtom = atom(
-    (get) => (isPsw: boolean, dbname: string) => {
+    (get) => (isPsw: boolean | undefined, dbname: string | undefined) => {
         const catalogItem = get(FieldCatalogItemAtom)(dbname);
         let catalogItemsByType = get(isPsw ? mruFldCatPswItemsAtom : mruFldCatTxtItemsAtom);
         catalogItemsByType = buildMruWItem(catalogItemsByType, catalogItem);
