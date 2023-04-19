@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import * as Dialog from '@radix-ui/react-dialog';
 import { config, useTransition, a } from "@react-spring/web";
 import { FldCatDlgBody } from "./Body";
+import { fldCatOpenAtom } from "@/store";
+import { useAtom } from "jotai";
 
-export function FldCatDlg({ open, setOpen }: { open: boolean, setOpen: React.Dispatch<React.SetStateAction<boolean>>; }) {
+export function FldCatDlg() {
+
+    const [open, setOpen] = useAtom(fldCatOpenAtom);
 
     const transitions = useTransition(Number(open), {
         from: { opacity: 0, y: -10, scale: 0.97 },
@@ -14,9 +18,9 @@ export function FldCatDlg({ open, setOpen }: { open: boolean, setOpen: React.Dis
 
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger className="px-4 py-3 text-primary-300 border-primary-500 active:scale-[.97] border rounded select-none">
+            {/* <Dialog.Trigger className="px-4 py-3 text-primary-300 border-primary-500 active:scale-[.97] border rounded select-none">
                 Edit
-            </Dialog.Trigger>
+            </Dialog.Trigger> */}
 
             {transitions((styles, item) => (
                 !item

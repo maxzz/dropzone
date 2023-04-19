@@ -23,6 +23,8 @@ const FieldCatalogItemAtom = atom(
     }
 );
 
+// MRU - most recently used items
+
 const mruSize = 7;
 
 const mruFldCatTxtItemsAtom = atom(
@@ -73,3 +75,7 @@ function mruToString(items: CatalogItem[]) {
     return JSON.stringify(items.map((item) => `${JSON.stringify(item)}\n`), null, 4);
     //console.log('buildMruWItem', `\n${JSON.stringify(item)}\n\n`, mruToString(rv));
 }
+
+// Field catalog dialog UI state
+
+export const fldCatOpenAtom = atom(false);
