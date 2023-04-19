@@ -58,7 +58,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
 
-            {CatalogDropdown(useItAtom, dropdownItems, selectedIndex, onSetDropdownIndex)}
+            <CatalogDropdown useItAtom={useItAtom} items={dropdownItems} selectedIndex={selectedIndex} onSetIndex={onSetDropdownIndex} />
         </div>
     );
 
