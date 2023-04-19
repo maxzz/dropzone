@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useCallback, useMemo, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
-import { FieldCatalogItemAtom, FldCatPswItemsAtom, FldCatPswMruItemsAtom, FldCatTxtItemsAtom, FldCatTxtMruItemsAtom } from "@/store";
+import { FieldCatalogItemAtom, FldCatPswItemsAtom, mruFldCatPswItemsAtom, FldCatTxtItemsAtom, mruFldCatTxtItemsAtom, buildMruWItem } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
@@ -19,9 +19,12 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const { useItAtom, onSelectCatItem, fieldCatAtom, field, className, ...rest } = props;
 
     // const catalogItemsByType = useAtomValue(field.mani.password ? FldCatPswItemsAtom : FldCatTxtItemsAtom);
-    const catalogItemsByType = useAtomValue(field.mani.password ? FldCatPswMruItemsAtom : FldCatTxtMruItemsAtom);
+    let catalogItemsByType = useAtomValue(field.mani.password ? mruFldCatPswItemsAtom : mruFldCatTxtItemsAtom);
+
     const catalogItem = useAtomValue(FieldCatalogItemAtom)(field.mani.dbname);
     const catalogName = catalogItem?.dispname;
+
+    catalogItemsByType = buildMruWItem(catalogItemsByType, catalogItem);
 
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
     //const dropdownItems = useMemo(() => [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More], [catalogItemsByType]);

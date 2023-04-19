@@ -17,18 +17,40 @@ export const FieldCatalogItemAtom = atom(
     }
 );
 
-export const FldCatTxtMruItemsAtom = atom(
+const mruSize = 7;
+
+export const mruFldCatTxtItemsAtom = atom(
     (get) => {
         let all = get(FldCatTxtItemsAtom);
-        all = all.slice(0, 5);
+        all = all.slice(0, mruSize);
+        console.log('all txt', JSON.stringify(all.map((item) => `${JSON.stringify(item)}\n`), null, 4));
         return all;
     },
 );
 
-export const FldCatPswMruItemsAtom = atom(
+export const mruFldCatPswItemsAtom = atom(
     (get) => {
         let all = get(FldCatPswItemsAtom);
-        all = all.slice(0, 5);
+        all = all.slice(0, mruSize);
+        console.log('all psw', JSON.stringify(all.map((item) => `${JSON.stringify(item)}\n`), null, 4));
         return all;
     },
 );
+
+function deleteMruWItem(mru: CatalogItem[], delItem: CatalogItem): CatalogItem[] {
+    return mru.filter((item) => item.uuid !== delItem.uuid);
+}
+
+export function buildMruWItem(mru: CatalogItem[], item: CatalogItem | undefined): CatalogItem[] {
+    let rv = mru;
+    if (item) {
+        rv = deleteMruWItem(mru, item);
+        console.log('after delete', `\n${JSON.stringify(item)}\n\n`, JSON.stringify(rv.map((item) => `${JSON.stringify(item)}\n`), null, 4));
+
+        rv.unshift(item);
+        rv.length > mruSize && rv.pop();
+
+        console.log('buildMruWItem', `\n${JSON.stringify(item)}\n\n`, JSON.stringify(rv.map((item) => `${JSON.stringify(item)}\n`), null, 4));
+    }
+    return rv;
+}
