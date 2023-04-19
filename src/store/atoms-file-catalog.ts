@@ -4,10 +4,16 @@ import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
 import { buildCatalogMetaFromNames } from "./manifest/meta-data";
 
 export const FldCatItemsAtom = atom<CatalogItem[]>(buildCatalogMetaFromNames(catalogTestNames).items);
-export const FldCatTxtItemsAtom = atom<CatalogItem[]>((get) => get(FldCatItemsAtom).filter((item) => !item.password));
-export const FldCatPswItemsAtom = atom<CatalogItem[]>((get) => get(FldCatItemsAtom).filter((item) => !!item.password));
 
-export const FieldCatalogItemAtom = atom(
+const FldCatTxtItemsAtom = atom<CatalogItem[]>(
+    (get) => get(FldCatItemsAtom).filter((item) => !item.password),
+);
+
+const FldCatPswItemsAtom = atom<CatalogItem[]>(
+    (get) => get(FldCatItemsAtom).filter((item) => !!item.password),
+);
+
+const FieldCatalogItemAtom = atom(
     (get) => (dbid: string | undefined) => {
         if (dbid) {
             const all = get(FldCatItemsAtom);
@@ -17,15 +23,9 @@ export const FieldCatalogItemAtom = atom(
     }
 );
 
-function mruToString(items: CatalogItem[]) {
-    return JSON.stringify(items.map((item) => `${JSON.stringify(item)}\n`), null, 4);
-}
-
-//console.log('buildMruWItem', `\n${JSON.stringify(item)}\n\n`, mruToString(rv));
-
 const mruSize = 7;
 
-export const mruFldCatTxtItemsAtom = atom(
+const mruFldCatTxtItemsAtom = atom(
     (get) => {
         let all = get(FldCatTxtItemsAtom);
         all = all.slice(0, mruSize);
@@ -34,7 +34,7 @@ export const mruFldCatTxtItemsAtom = atom(
     },
 );
 
-export const mruFldCatPswItemsAtom = atom(
+const mruFldCatPswItemsAtom = atom(
     (get) => {
         let all = get(FldCatPswItemsAtom);
         all = all.slice(0, mruSize);
@@ -47,7 +47,7 @@ function deleteMruWItem(mru: CatalogItem[], delItem: CatalogItem): CatalogItem[]
     return mru.filter((item) => item.uuid !== delItem.uuid);
 }
 
-export function buildMruWItem(mru: CatalogItem[], item: CatalogItem | undefined): CatalogItem[] {
+function buildMruWItem(mru: CatalogItem[], item: CatalogItem | undefined): CatalogItem[] {
     let rv = mru;
     if (item) {
         rv = deleteMruWItem(mru, item);
@@ -68,3 +68,8 @@ export const getMruFldCatForItemAtom = atom(
         };
     }
 );
+
+function mruToString(items: CatalogItem[]) {
+    return JSON.stringify(items.map((item) => `${JSON.stringify(item)}\n`), null, 4);
+    //console.log('buildMruWItem', `\n${JSON.stringify(item)}\n\n`, mruToString(rv));
+}
