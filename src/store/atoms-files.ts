@@ -5,7 +5,7 @@ import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from './store-type
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';
 import { busyAtom, orderAtom, searchFilterData, showMani, sortByAtom, totalMani, _foldAllCardsAtom } from './atoms-ui-state';
 import { rightPanelData } from './atoms-ui-right-panel';
-import { FieldCatalogItemsAtom } from './atoms-file-catalog';
+import { FldCatItemsAtom } from './atoms-file-catalog';
 
 // Files
 
@@ -156,7 +156,7 @@ const doUpdateCacheAtom = atom(
 
                         if (fcat) {
                             const { items } = buildCatalogMeta(fcat); //TODO: we need to load multiple catalog files
-                            set(FieldCatalogItemsAtom, items);
+                            set(FldCatItemsAtom, items);
                         }
                     } catch (error) {
                         console.log('%ctm parse error', 'color: red', error, '\n', file.fname, raw);
