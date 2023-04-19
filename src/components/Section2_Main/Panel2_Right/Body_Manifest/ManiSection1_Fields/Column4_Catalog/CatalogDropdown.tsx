@@ -34,9 +34,7 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
 
     function CatalogItem(showText: string, idx: number): JSX.Element {
         const isSelected = idx === selectedIndex;
-        const isLast = idx === items.length - 1;
-        const isSeparator = showText === '-';
-        const item = isSeparator
+        const rv = showText === '-'
             ?
             <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
             :
@@ -52,6 +50,6 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                 {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
                 <span className="ml-2 flex-grow self-start">{showText}</span>
             </menu.Item>;
-        return item;
+        return rv;
     }
 }
