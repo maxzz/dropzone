@@ -26,18 +26,17 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                         "overflow-auto max-h-[50vh] smallscroll smallscroll-light" //TODO: maybe have a separate popop for big list and add search; or simplescroll; more fields.. put on top?; scroll to view;
                     )}
                 >
-                    {/* {items.map(CatalogItem())} */}
                     {items.map(CatalogItem)}
                 </menu.Content>
             </menu.Portal>
         </menu.Root>
     );
 
-    function CatalogItem(showText: string, idx: number) {
+    function CatalogItem(showText: string, idx: number): JSX.Element {
         const isSelected = idx === selectedIndex;
         const isLast = idx === items.length - 1;
         const isSeparator = showText === '-';
-        return isSeparator
+        const item = isSeparator
             ?
             <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
             :
@@ -53,29 +52,6 @@ export function CatalogDropdown(useItAtom: PrimitiveAtom<boolean>, items: string
                 {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
                 <span className="ml-2 flex-grow self-start">{showText}</span>
             </menu.Item>;
+        return item;
     }
-
-    // function CatalogItem(): (value: string, index: number, items: string[]) => JSX.Element {
-    //     return (showText, idx) => {
-    //         const isSelected = idx === selectedIndex;
-    //         const isLast = idx === items.length - 1;
-    //         const isSeparator = showText === '-';
-    //         return isSeparator
-    //             ?
-    //             <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
-    //             :
-    //             <menu.Item
-    //                 className={classNames(
-    //                     "relative pl-8 pr-4 py-2 text-xs flex items-center cursor-default select-none rounded-md outline-none",
-    //                     "text-primary-700 data-highlighted:bg-primary-700 data-highlighted:text-primary-100",
-    //                     isSelected && "bg-primary-300"
-    //                 )}
-    //                 onSelect={() => onSetIndex(idx)}
-    //                 key={idx}
-    //             >
-    //                 {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
-    //                 <span className="ml-2 flex-grow self-start">{showText}</span>
-    //             </menu.Item>;
-    //     };
-    // }
 }
