@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes, useEffect, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { Meta } from '@/store/manifest';
-import { PolicyEditor } from './PolicyEditor';
+import { PolicyEditorDlg } from './PolicyEditorDlg';
 import { classNames } from '@/utils';
 
 function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
@@ -38,14 +38,14 @@ function FieldWithPolicy({ field }: { field: Meta.Field; }) {
         </div>
 
         <div className="flex items-center">
-            <PolicyEditor field={field} />
+            <PolicyEditorDlg field={field} />
         </div>
     </>);
 }
 
 const tableColumns = [
-    ["Field",  /**/ "Field",        /**/ "",],
-    ["Policy", /**/ "Field policy", /**/ "col-span-2",],
+    ["Field",  /*hint*/ "Field",        /*classes*/ "",],
+    ["Policy", /*hint*/ "Field policy", /*classes*/ "col-span-2",],
 ] as const;
 
 function TableHeader() {

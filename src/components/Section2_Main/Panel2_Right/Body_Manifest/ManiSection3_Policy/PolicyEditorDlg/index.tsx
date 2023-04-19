@@ -61,7 +61,7 @@ function combineValueFromAtoms(atoms: Atomize<PolicyUi>, get: Getter, set: Sette
     console.log('PolicyEditor atoms', JSON.stringify(result, null, 4));
 }
 
-export function PolicyEditor({ field }: { field: Meta.Field; }) {
+export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
     const [open, setOpen] = React.useState(false);
     const transitions = useTransition(Number(open), {
         from: { opacity: 0, y: -10, scale: 0.97 },
