@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useCallback, useMemo, useState } from "react";
+import React, { ChangeEvent, InputHTMLAttributes, useCallback, useMemo, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
 import { getMruFldCatForItemAtom } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
@@ -19,14 +19,13 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const { useItAtom, onSelectCatItem, fieldCatAtom, field, className, ...rest } = props;
 
     const { catalogItemsByType, catalogItem, } = useAtomValue(getMruFldCatForItemAtom)(field.mani.password, field.mani.dbname);
-    const catalogName = catalogItem?.dispname;
 
     const dropdownItems = [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More];
     //const dropdownItems = useMemo(() => [CATALOG_No, ...catalogItemsByType.map((item) => item.dispname), '-', CATALOG_More], [catalogItemsByType]);
     let catalogItemIdx = (catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1) + 1; // +1 to skip CATALOG_No
 
-    const textAtom = useState(atom(catalogName || CATALOG_No))[0];
-    const [text, setText] = useAtom(textAtom);
+    const textAtom = useState(atom(catalogItem?.dispname || CATALOG_No))[0];
+    const [inputText, setInputTextText] = useAtom(textAtom);
 
     const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
 
@@ -52,8 +51,8 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
             <input
                 className={classNames("px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none", ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 multiple
-                value={text}
-                onChange={(event) => onSetInputText(event.target.value)}
+                value={inputText}
+                onChange={onSetInputText}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
@@ -64,30 +63,31 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     );
 
     function onSetDropdownIndex(idx: number) {
-        setText(dropdownItems[idx]);
+        setInputTextText(dropdownItems[idx]);
         setSelectedIndex(idx);
     }
 
-    function onSetInputText(value: string) {
+    function onSetInputText(event: ChangeEvent<HTMLInputElement>) {
+        const value: string = event.target.value;
         if (value) {
-            setText(value);
+            setInputTextText(value);
             setSelectedIndex(-1);
         }
         else {
-            setText(dropdownItems[0]);
+            setInputTextText(CATALOG_No);
             setSelectedIndex(0);
         };
     }
 
     function onSetKey(event: React.KeyboardEvent) {
         if (~selectedIndex && isKeyToClearDefault(event.key)) {
-            setText('');
+            setInputTextText('');
             setSelectedIndex(-1);
         }
     }
 
     function onBlur() {
-        ~~selectedIndex && !text && onSetDropdownIndex(0);
+        ~~selectedIndex && !inputText && onSetDropdownIndex(0);
     }
 }
 
