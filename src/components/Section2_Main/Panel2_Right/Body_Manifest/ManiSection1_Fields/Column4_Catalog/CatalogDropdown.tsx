@@ -9,13 +9,12 @@ export function isKeyToClearDefault(key: string) {
 }
 
 type CatalogDropdownProps = {
-    useItAtom: PrimitiveAtom<boolean>;
     items: string[];
     selectedIndex: number;
     onSetIndex: (idx: number) => void;
 };
 
-export function CatalogDropdown({ useItAtom, items, selectedIndex, onSetIndex }: CatalogDropdownProps) {
+export function CatalogDropdown({ items, selectedIndex, onSetIndex }: CatalogDropdownProps) {
     return (
         <menu.Root>
             <menu.Trigger asChild>

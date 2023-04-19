@@ -29,7 +29,7 @@ const mruFldCatTxtItemsAtom = atom(
     (get) => {
         let all = get(FldCatTxtItemsAtom);
         all = all.slice(0, mruSize);
-        console.log('all txt', mruToString(all));
+        //console.log('all txt', mruToString(all));
         return all;
     },
 );
@@ -38,7 +38,7 @@ const mruFldCatPswItemsAtom = atom(
     (get) => {
         let all = get(FldCatPswItemsAtom);
         all = all.slice(0, mruSize);
-        console.log('all psw', mruToString(all));
+        //console.log('all psw', mruToString(all));
         return all;
     },
 );
