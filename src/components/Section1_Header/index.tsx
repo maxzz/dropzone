@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { doClearFilesAtom, fldCatOpenAtom, hasFilesAtom } from '@/store';
 import { IconCatalog, IconMenuHamburger, IconTrash } from '@ui/icons';
-import { Part0_TopMenu } from './menu/Part0_TopMenu';
+import { Part0_TopMenu } from './menu';
 import { Part1_DropzoneArea } from './Part1_DropzoneArea';
 import { Part3_Filters } from './fiters';
 import { AppLogo, BusyIndicator } from './header-controls';
