@@ -1,7 +1,7 @@
 import React from "react";
 import { useSetAtom } from "jotai";
 import { FileUsAtomType, formEditorDataAtom } from "@/store";
-import { IconGear } from "@ui/icons/UIIconSymbols";
+import { IconGear } from "@ui/icons";
 
 export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
     const setFormEditorData = useSetAtom(formEditorDataAtom);

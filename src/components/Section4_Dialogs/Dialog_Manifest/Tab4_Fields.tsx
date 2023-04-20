@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '@/store';
-import { UIIconUpDown } from '@ui/icons/UIIconUpDown';
+import { UIIconUpDown } from '@ui/icons';
 import { DummyPlaceholder } from './Tab3_Options';
 
 function TabFieldsScript({ editorData }: { editorData: EditorData; }) {

@@ -3,8 +3,7 @@ import { useAtom } from 'jotai';
 import { useKey } from 'react-use';
 import { turnOffAutoComplete } from '@/utils';
 import { searchFilterData } from '@/store';
-import { IconDot } from '@ui/icons/UIIconSymbols';
-import { IconCaseSensitive, IconClose, IconSearch } from '@ui/icons/UIIcons';
+import { IconCaseSensitive, IconClose, IconDot, IconSearch } from '@ui/icons';
 import { UITip } from '@ui/UITooltip';
 
 function ToggleCaseSensitive() {

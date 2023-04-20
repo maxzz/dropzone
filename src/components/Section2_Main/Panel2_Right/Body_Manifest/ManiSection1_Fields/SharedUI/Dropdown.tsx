@@ -1,7 +1,7 @@
 import React from 'react';
 import { PrimitiveAtom } from 'jotai';
 import { classNames } from '@/utils';
-import { IconChevronDown, IconDot } from '@ui/icons/UIIconSymbols';
+import { IconChevronDown, IconDot } from '@ui/icons';
 import * as menu from '@radix-ui/react-dropdown-menu';
 
 export function isKeyToClearDefault(key: string) {

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, HTMLAttributes, useEffect, useState } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from 'jotai';
-import { Matching } from '@/store/manifest';
 import { a, useSpring } from '@react-spring/web';
-import { UIIconUpDown } from '@ui/icons/UIIconUpDown';
+import { Matching } from '@/store/manifest';
+import { UIIconUpDown } from '@ui/icons';
 import { UITip, tipSmall } from '@ui/UITooltip';
 import { classNames } from '@/utils';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { EditorData } from '@/store';
-import { UIIconUpDown } from '@ui/icons/UIIconUpDown';
+import { UIIconUpDown } from '@ui/icons';
 
 export function DummyPlaceholder() {
     return (<>

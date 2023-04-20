@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { FileUs, isAnyWhy } from "@/store";
 import { classNames } from "@/utils";
-import { IconDot } from "@ui/icons/UIIconSymbols";
+import { IconDot } from "@ui/icons";
 import { UITip } from "@ui/UITooltip";
 
 export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: boolean; }) {

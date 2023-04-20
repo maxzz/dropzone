@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { Meta } from '@/store/manifest';
-import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/icons/UIIconSymbols';
+import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/icons';
 import { CardSvgPreview } from '../../Card3_Shared/CardSvgPreview';
 import { BtnPopupDetection } from './BtnPopupDetection';
 import { BtnPopupPool } from './BtnPopupPool';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mani } from '@/store/manifest';
-import { IconFieldBtn, IconFieldTxt, IconFieldChk, IconFieldLst, IconFieldPsw, IconFieldEdt } from '@ui/icons/UIIconSymbols';
+import { IconFieldBtn, IconFieldTxt, IconFieldChk, IconFieldLst, IconFieldPsw, IconFieldEdt } from '@ui/icons';
 
 export const fieldIcons = {
     edit: IconFieldEdt,

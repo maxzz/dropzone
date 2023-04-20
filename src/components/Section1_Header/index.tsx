@@ -1,14 +1,13 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { doClearFilesAtom, fldCatOpenAtom, hasFilesAtom } from '@/store';
-import { IconTrash } from '@ui/icons/UIIcons';
+import { IconCatalog, IconMenuHamburger, IconTrash } from '@ui/icons';
 import { Part0_TopMenu } from './menu/Part0_TopMenu';
 import { Part1_DropzoneArea } from './Part1_DropzoneArea';
 import { Part3_Filters } from './fiters';
-import { IconCatalog, IconMenuHamburger } from '@ui/icons/UIIconSymbols';
+import { AppLogo, BusyIndicator } from './header-controls';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { SimpleToogle } from './fiters/SimpleToogle';
-import { AppLogo, BusyIndicator } from './header-controls';
 
 const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center";
 

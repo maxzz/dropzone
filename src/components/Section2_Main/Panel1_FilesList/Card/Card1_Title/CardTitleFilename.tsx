@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
 import { UITip, tipSmall } from "@ui/UITooltip";
-import { IconFolder } from "@ui/icons/UIIconSymbols";
+import { IconFolder } from "@ui/icons";
 import { classNames } from "@/utils";
 
 export type ParsedFnameParams = {
