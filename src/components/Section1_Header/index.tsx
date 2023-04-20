@@ -7,7 +7,6 @@ import { Part1_DropzoneArea } from './droparea';
 import { Part3_Filters } from './fiters';
 import { AppLogo, BusyIndicator } from './header-controls';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
-import { SimpleToogle } from './fiters/SimpleToogle';
 
 const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center";
 
@@ -66,10 +65,6 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
                 {/* Right part of header */}
                 <div className="flex items-center justify-end">
                     <Part3_Filters className="flex-1" />
-
-                    {/* Very good alternative but no need it now */}
-                    {/* <SimpleToogle /> */}
-
                     <AppLogo />
                 </div>
             </div>
