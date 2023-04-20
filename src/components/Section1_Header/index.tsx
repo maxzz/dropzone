@@ -56,18 +56,21 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
     return (
         <header {...props}>
             <div className={`min-h-[40px] flex justify-between bg-primary-700 text-primary-200 ring-1 ring-primary-500 rounded`}>
+
+                {/* Left part of header */}
                 <div className="flex-1 flex items-center my-0.5">
                     <Part1_DropzoneArea />
                     <TopMenuItems />
                     <BusyIndicator />
                 </div>
 
-                {/* OK but no need now */}
-                {/* <SimpleToogle /> */}
-
-                {/* Right header */}
+                {/* Right part of header */}
                 <div className="flex items-center justify-end">
                     <Part3_Filters className="flex-1" />
+                    
+                    {/* Very good alternative but no need it now */}
+                    {/* <SimpleToogle /> */}
+
                     <AppLogo />
                 </div>
             </div>

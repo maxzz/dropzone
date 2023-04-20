@@ -34,8 +34,8 @@ export type {
 export * from './atoms-file-catalog';
 
 export {
-    showMani,
-    totalMani,
+    showManiAtoms,
+    totalManiAtoms,
 
     hasFilesAtom,
 

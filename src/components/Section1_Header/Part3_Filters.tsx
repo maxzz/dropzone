@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
-import { hasFilesAtom, showMani, totalMani } from '@/store';
+import { hasFilesAtom, showManiAtoms, totalManiAtoms } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { classNames } from '@/utils';
 import { LabeledSwitch } from '@ui/UiSwitch';
@@ -30,18 +30,20 @@ function ManiFilter({ showAtom, counterAtom, label, title }: { showAtom: Primiti
     );
 }
 
-export function Part3_Filters({className, ...rest}: HTMLAttributes<HTMLDivElement>) {
+const containerClasses = "p-2 md:p-0 flex flex-col md:flex-row items-end justify-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200";
+
+export function Part3_Filters({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const hasFiles = useAtomValue(hasFilesAtom);
-    const styles = useSpring({ opacity: hasFiles ? 1 : 0 });
+    const styles = useSpring({
+        opacity: hasFiles ? 1 : 0,
+    });
     return (
-        <a.div style={styles} className={classNames(
-            "p-2 md:p-0 flex flex-col md:flex-row items-end justify-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200",
-            className,
-        )} {...rest}>
+        <a.div style={styles} className={classNames(containerClasses, className)} {...rest}>
             <Part2_FilterSearch />
-            <ManiFilter showAtom={showMani.normalAtom} counterAtom={totalMani.normalAtom} label="Normal" title="Show normal mode manifests" />
-            <ManiFilter showAtom={showMani.manualAtom} counterAtom={totalMani.manualAtom} label="Manual" title="Show manual mode manifests" />
-            <ManiFilter showAtom={showMani.emptyAtom} counterAtom={totalMani.emptyAtom} label="Empty" title="Show excluded manifests" />
+
+            <ManiFilter showAtom={showManiAtoms.normalAtom} counterAtom={totalManiAtoms.normalAtom} label="Normal" title="Show normal mode manifests" />
+            <ManiFilter showAtom={showManiAtoms.manualAtom} counterAtom={totalManiAtoms.manualAtom} label="Manual" title="Show manual mode manifests" />
+            <ManiFilter showAtom={showManiAtoms.emptyAtom} counterAtom={totalManiAtoms.emptyAtom} label="Empty" title="Show excluded manifests" />
         </a.div>
     );
 }
