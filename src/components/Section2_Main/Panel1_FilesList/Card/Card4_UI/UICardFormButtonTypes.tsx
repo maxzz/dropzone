@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileUs } from '@/store';
 import { Meta } from '@/store/manifest';
-import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconManualMode as IconManual } from '@ui/UIIconSymbols';
+import { IconAppWebChrome as IconWebCho, IconAppWebIESolid as IconWebIe6, IconAppWindows as IconWinApp, IconManualMode as IconManual } from '@ui/icons/UIIconSymbols';
 
 const tips = {
     winApp: "Windows application",

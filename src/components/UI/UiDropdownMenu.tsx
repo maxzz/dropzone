@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { styled, keyframes } from '@stitches/react';
-import { IconChevronRight, IconDot } from './UIIconSymbols';
+import { IconChevronRight, IconDot } from './icons/UIIconSymbols';
 import type { PopperContentProps } from '@radix-ui/react-popper';
 import * as Primitive from '@radix-ui/react-dropdown-menu';
 

@@ -5,7 +5,7 @@ import { PolicyUi } from ".";
 import { useAtom } from "jotai";
 import { Dropdown, Input, Radio } from "./ui-controls";
 import { namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
-import { IconCross } from "@ui/UIIconSymbols";
+import { IconCross } from "@ui/icons/UIIconSymbols";
 import { classNames } from "@/utils";
 
 export function DialogHeader({ header, subHeader }: { header: string, subHeader?: string; }) {

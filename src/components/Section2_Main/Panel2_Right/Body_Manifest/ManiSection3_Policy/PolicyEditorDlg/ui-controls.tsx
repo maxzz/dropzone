@@ -2,7 +2,7 @@ import React, { HTMLAttributes, InputHTMLAttributes } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import * as Select from '@radix-ui/react-select';
 import { classNames } from '@/utils';
-import { IconChevronDown } from "@ui/UIIconSymbols";
+import { IconChevronDown } from "@ui/icons/UIIconSymbols";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 export function Check({ children, checked, onChange, className, ...rest }: { checked: boolean; } & HTMLAttributes<HTMLElement>) {

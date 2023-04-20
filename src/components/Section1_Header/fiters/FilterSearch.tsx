@@ -1,11 +1,11 @@
-import React, { AllHTMLAttributes } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
-import { searchFilterData } from '@/store';
 import { useKey } from 'react-use';
-import { IconDot } from '@ui/UIIconSymbols';
-import { IconCaseSensitive, IconClose, IconSearch } from '@ui/UIIcons';
-import { UITip } from '@ui/UITooltip';
 import { turnOffAutoComplete } from '@/utils';
+import { searchFilterData } from '@/store';
+import { IconDot } from '@ui/icons/UIIconSymbols';
+import { IconCaseSensitive, IconClose, IconSearch } from '@ui/icons/UIIcons';
+import { UITip } from '@ui/UITooltip';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterData.caseSensitiveAtom);

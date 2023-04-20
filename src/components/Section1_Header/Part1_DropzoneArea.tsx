@@ -2,7 +2,7 @@ import React, { CSSProperties, useCallback } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { filesAtom, filteredAtom, doSetFilesAtom, } from '@/store';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
-import { IconDocumentsAccepted } from '@ui/UIIcons';
+import { IconDocumentsAccepted } from '@ui/icons/UIIcons';
 import { classNames, plural } from '@/utils';
 import toast from 'react-hot-toast';
 

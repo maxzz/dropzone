@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import { busyAtom } from "@/store";
 import { useSpring, a } from "@react-spring/web";
 import { keyframes } from "@stitches/react";
-import { IconRocket } from "@ui/UIIcons";
+import { IconRocket } from "@ui/icons/UIIcons";
 
 const rocketAnimation = keyframes({
     '0%': { transform: 'scale(1) translateY(0px)', opacity: 1 },

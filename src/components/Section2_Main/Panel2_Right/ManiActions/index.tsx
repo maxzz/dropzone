@@ -1,7 +1,7 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { FileUsAtomType, formEditorDataAtom, rightPanelData, ViewMode } from "@/store";
-import { IconGear, IconMenuHamburger, IconOpenLink, IconPen } from "@ui/UIIconSymbols";
+import { IconGear, IconMenuHamburger, IconOpenLink, IconPen } from "@ui/icons/UIIconSymbols";
 import { CardTitleMenu } from "./ManiMenu";
 
 function CardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
