@@ -70,9 +70,11 @@ const Command_Links_Items = [
 ];
 
 export function Command_Links() {
-    return Command_Links_Items.map(({ txt, url }, idx) => (
-        <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}>
-            {txt}
-        </MenuItem>
-    ));
+    return (<>
+        {Command_Links_Items.map(({ txt, url }, idx) => (
+            <MenuItem onSelect={async () => window.open(url, '_blank')} key={idx}>
+                {txt}
+            </MenuItem>
+        ))}
+    </>);
 }
