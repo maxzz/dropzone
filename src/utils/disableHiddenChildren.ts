@@ -1,3 +1,5 @@
+import { AllHTMLAttributes } from "react";
+
 export function disableHiddenChildren(visible: boolean, parent: HTMLElement | null | undefined) {
     if (!parent) return;
 
@@ -20,3 +22,5 @@ export function disableHiddenChildren(visible: boolean, parent: HTMLElement | nu
         });
     }
 }
+
+export const turnOffAutoComplete: AllHTMLAttributes<HTMLElement> = { autoComplete: "new-password", list: "autocompleteOff", spellCheck: "false", };
