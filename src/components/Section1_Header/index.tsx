@@ -1,32 +1,54 @@
 import React, { useState } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { doClearFilesAtom, hasFilesAtom } from '@/store';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { doClearFilesAtom, fldCatOpenAtom, hasFilesAtom } from '@/store';
 import { IconTrash } from '@ui/UIIcons';
 import { Part0_TopMenu } from './Part0_TopMenu';
 import { Part1_DropzoneArea } from './Part1_DropzoneArea';
 import { Part3_Filters } from './Part3_Filters';
-import { IconMenuHamburger } from '@ui/UIIconSymbols';
+import { IconCatalog, IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
 import { SimpleToogle } from './SimpleToogle';
 import { AppLogo, BusyIndicator } from './header-controls';
 
 const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center";
 
+function MenuTrigger() {
+    return (
+        <div className={`${buttonClasses} cursor-pointer`}>
+            <Part0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 hover:bg-primary-700 rounded" />} />
+        </div>
+    );
+}
+
+function FldCatTrigger() {
+    const setOpen = useSetAtom(fldCatOpenAtom);
+    return (
+        <button className={buttonClasses}>
+            <IconCatalog className="p-2 w-8 h-8 hover:bg-red-500 rounded active:scale-[.97]" onClick={() => setOpen(v => !v)} />
+        </button>
+    );
+}
+
+function ClearLoadedTrigger() {
+    const clearFiles = useSetAtom(doClearFilesAtom);
+    return (
+        <button className={buttonClasses}>
+            <IconTrash className="p-2 w-8 h-8 hover:bg-red-500 rounded active:scale-[.97]" onClick={() => clearFiles()} />
+        </button>
+    );
+}
+
 function TopMenuItems() {
     const hasFiles = useAtomValue(hasFilesAtom);
-    const clearFiles = useSetAtom(doClearFilesAtom);
     return (<>
-        {hasFiles && <>
-            <div className={`${buttonClasses} cursor-pointer`}>
-                <Part0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 rounded hover:bg-primary-700" />} />
-            </div>
-
-            <button className={buttonClasses}>
-                <IconTrash className="w-8 h-8 p-2 rounded hover:bg-red-500 active:scale-[.97]" onClick={() => clearFiles()} />
-            </button>
-
-            {/* <PopoverMenu /> */}
-        </>}
+        {hasFiles &&
+            <>
+                <MenuTrigger />
+                <FldCatTrigger />
+                <ClearLoadedTrigger />
+                {/* <PopoverMenu /> */}
+            </>
+        }
     </>);
 }
 
