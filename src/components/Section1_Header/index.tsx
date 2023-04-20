@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import React from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { doClearFilesAtom, fldCatOpenAtom, hasFilesAtom } from '@/store';
 import { IconTrash } from '@ui/UIIcons';
-import { Part0_TopMenu } from './Part0_TopMenu';
+import { Part0_TopMenu } from './menu/Part0_TopMenu';
 import { Part1_DropzoneArea } from './Part1_DropzoneArea';
-import { Part3_Filters } from './Part3_Filters';
+import { Part3_Filters } from './fiters';
 import { IconCatalog, IconMenuHamburger } from '@ui/UIIconSymbols';
 //import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
-import { SimpleToogle } from './SimpleToogle';
+import { SimpleToogle } from './fiters/SimpleToogle';
 import { AppLogo, BusyIndicator } from './header-controls';
 
 const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center";
@@ -67,7 +67,7 @@ export function Section1_Header(props: React.HTMLAttributes<HTMLElement>) {
                 {/* Right part of header */}
                 <div className="flex items-center justify-end">
                     <Part3_Filters className="flex-1" />
-                    
+
                     {/* Very good alternative but no need it now */}
                     {/* <SimpleToogle /> */}
 

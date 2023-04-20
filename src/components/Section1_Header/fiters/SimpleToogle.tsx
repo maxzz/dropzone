@@ -12,7 +12,12 @@ export function SimpleToogle() {
             )}
             onClick={() => setOn(v => !v)}
         >
-            <div className={classNames("h-4 w-4 rounded-full bg-white ring-1 ring-primary-500/50 shadow-[0px_3px_3px_#0005] transition duration-100 ease", on && " translate-x-[100%]")}>
+            <div
+                className={classNames(
+                    "h-4 w-4 rounded-full bg-white ring-1 ring-primary-500/50 shadow-[0px_3px_3px_#0005] transition duration-100 ease",
+                    on && " translate-x-[100%]"
+                )}
+            >
             </div>
         </button>
     );
