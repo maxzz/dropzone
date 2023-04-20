@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { FileUs, FileUsAtomType, rightPanelData, ViewMode } from '@/store';
 import { classNames } from '@/utils';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Card1_Title';
-import { ManiActions } from './ManiActions';
+import { Body_CaptionActions } from './Body_CaptionActions';
 import { Body_Xml } from './Body_Xml';
 import { Body_FieldCatalog } from './Body_FieldCatalog';
 import { Body_Manifest } from './Body_Manifest';
@@ -23,7 +23,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                     <div className="px-2 pt-1 pb-3 text-gray-100 bg-primary-900 border-b-[0.5px] border-primary-600">
                         <CardTitleTextNormal
                             fileUsAtom={fileUsAtom}
-                            actions={<ManiActions fileUsAtom={fileUsAtom} />}
+                            actions={<Body_CaptionActions fileUsAtom={fileUsAtom} />}
                         />
                     </div>
 
