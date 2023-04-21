@@ -23,20 +23,12 @@ function TableHeader() {
 export function FldCatItemsGrid() {
     const names = useAtomValue(FldCatItemsAtom);
     return (
-        <div className="grid grid-rows-[auto_minmax(0,1fr)]">
-
-            <div className="px-4 py-3 text-xs text-primary-400 bg-primary-800 border-primary-700 border-b">
-                {/* filters */}
-                {names.length} item{names.length === 1 ? '' : 's'}
+        <Scroller className="pt-2 text-xs overflow-auto">
+            <div className="grid grid-cols-[1fr_auto_auto_auto_1fr] gap-x-4 text-primary-400">
+                <TableHeader />
+                {names.map(mapItem)}
             </div>
-
-            <Scroller className="pt-2 text-xs overflow-hidden">
-                <div className="grid grid-cols-[1fr_auto_auto_auto_1fr] gap-x-4 text-primary-400">
-                    <TableHeader />
-                    {names.map(mapItem)}
-                </div>
-            </Scroller>
-        </div>
+        </Scroller>
     );
 
     function mapItem(item: CatalogItem, idx: number) {
