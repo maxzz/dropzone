@@ -1,27 +1,10 @@
-import React, { Suspense } from 'react';
-import { useAtom } from 'jotai';
-import { formEditorDataAtom } from '@/store';
-import { OldOverlay_PortalModal } from '@ui/UIDialog';
+import React from 'react';
+import { ManifestFormEditorTrigger } from './Dialog_Manifest';
 import { FldCatDlg } from './FldCatDlg';
 
-const Manifest_FormEditor = React.lazy(() => import('./Dialog_Manifest'));
-
-function ManifestFormEditorTrigger() {
-    const [editorData, setEditorData] = useAtom(formEditorDataAtom);
+export function Section4_Dialogs() {
     return (<>
-        {editorData &&
-            <Suspense fallback={"Loading"} >
-                <OldOverlay_PortalModal show={true} setShow={(v: boolean) => !v && setEditorData(null)}>
-                    <Manifest_FormEditor editorData={editorData} />
-                </OldOverlay_PortalModal>
-            </Suspense>
-        }
+        <ManifestFormEditorTrigger />
         <FldCatDlg />
     </>);
-}
-
-export function Section4_Dialogs() {
-    return (
-        <ManifestFormEditorTrigger />
-    );
 }
