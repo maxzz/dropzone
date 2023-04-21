@@ -6,7 +6,7 @@ import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
 
 function FieldIcon(isPsw: boolean | undefined, className: string) {
     const type = isPsw ? 'psw' : 'edit';
-    const Icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) || <div className="text-red-500">nan</div>;
+    const Icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) || <div className="text-red-500">NaN</div>;
     return Icon;
 }
 
@@ -15,7 +15,6 @@ const tableHeaderClasses = 'mb-2 text-[.65rem] text-primary-400 border-primary-1
 function TableHeader() {
     return (<>
         <div className={`col-start-2 text-right ${tableHeaderClasses}`}>#</div>
-        {/* <div className={`col-start-3 ${tableHeaderClasses}`}>Type</div> */}
         <div className={`col-start-3 ${tableHeaderClasses}`}>Name</div>
         <div className={`col-start-4 ${tableHeaderClasses}`}>ID</div>
     </>);
@@ -43,11 +42,15 @@ export function FldCatItemsGrid() {
     function mapItem(item: CatalogItem, idx: number) {
         return (
             <Fragment key={idx}>
-                <div className="col-start-2 text-right">{idx + 1}</div>
+                <div className="col-start-2 text-right">
+                    {idx + 1}
+                </div>
 
                 <div className="col-start-3 flex items-center gap-x-2 leading-[18px]">
                     {FieldIcon(item.password, "w-4 h-4 opacity-25")}
-                    <div className="">{item.dispname}</div>
+                    <div>
+                        {item.dispname}
+                    </div>
                 </div>
 
                 <div className="col-start-4 font-mono text-[.6rem]">
