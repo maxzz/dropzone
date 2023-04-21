@@ -7,6 +7,7 @@ import { classNames } from "@/utils";
 
 const frameClasses = 'p-4 text-sm text-primary-400 bg-primary-800 border-primary-600/20 shadow-primary-700/30 border shadow rounded flex flex-col space-y-4';
 const subSectionClasses = 'my-1 pb-2 text-xs text-primary-400 bg-primary-800 border-primary-700 border-b';
+const captionClasses = 'my-1 text-xs font-thin text-primary-400 bg-primary-800';
 
 function SubTitle() {
     const totalItems = useAtomValue(FldCatItemsAtom).length;
@@ -17,13 +18,25 @@ function SubTitle() {
     </>);
 }
 
+function Header() {
+    const totalItems = useAtomValue(FldCatItemsAtom).length;
+    return (<>
+        <div className="pr-1 flex items-center justify-between">
+            <div>Field Catalog</div>
+            <div className={captionClasses}>({totalItems} item{totalItems === 1 ? '' : 's'})</div>
+        </div>
+    </>);
+}
+
 export function FldCatDlgBody() {
     return (
         <div className={classNames(frameClasses, "min-w-[540px]")}>
-            <DialogHeader header="Field Catalog" />
+            {/* <DialogHeader header="Field Catalog" /> */}
+            {/* <DialogHeader header={<SubTitle />} /> */}
+            <DialogHeader header={<Header />} />
 
             <div>
-                <SubTitle />
+                {/* <SubTitle /> */}
 
                 <div className="h-[50vh] min-h-[120px]">
                     <FldCatItemsGrid />

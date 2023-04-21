@@ -24,7 +24,7 @@ export function FldCatItemsGrid() {
     const names = useAtomValue(FldCatItemsAtom);
     return (
         <Scroller className="pt-2 text-xs overflow-auto">
-            <div className="grid grid-cols-[1fr_auto_auto_auto_1fr] gap-x-4 text-primary-400">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto_minmax(0,1fr)] gap-x-4 text-primary-400">
                 <TableHeader />
                 {names.map(mapItem)}
             </div>
