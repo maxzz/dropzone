@@ -1,5 +1,5 @@
 import React from "react";
-import { DialogButtons, DialogHeader } from "../../../ManiSection3_Policy/PolicyEditorDlg/ui-sections";
+import { DialogButtons, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { classNames } from "@/utils";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 

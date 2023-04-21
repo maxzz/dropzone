@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useAtom } from 'jotai';
 import { formEditorDataAtom } from '@/store';
 import { OldOverlay_PortalModal } from '@ui/UIDialog';
-import { FldCatDlg } from '../Section2_Main/Panel2_Right/Body_Manifest/ManiSection1_Fields/Column4_Catalog/FldCatDlg';
+import { FldCatDlg } from './FldCatDlg';
 
 const Manifest_FormEditor = React.lazy(() => import('./Dialog_Manifest'));
 
