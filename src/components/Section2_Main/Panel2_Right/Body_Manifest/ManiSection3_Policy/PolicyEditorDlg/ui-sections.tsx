@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Close as DialogCloseButton } from '@radix-ui/react-dialog';
 import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from ".";
@@ -8,15 +8,15 @@ import { namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/policy";
 import { IconCross } from "@ui/icons";
 import { classNames } from "@/utils";
 
-export function DialogHeader({ header, subHeader }: { header: string, subHeader?: string; }) {
+export function DialogHeader({ header, subHeader }: { header: ReactNode, subHeader?: ReactNode; }) {
     return (
         <div>
             <div className="flex items-center justify-between">
-                <div className="text-lg font-bold text-primary-300">
+                <div className="flex-1 text-lg font-bold text-primary-300">
                     {header}
                 </div>
-                <DialogCloseButton tabIndex={-1}>
-                    <div className="px-2 py-1 hover:bg-primary-700 active:scale-[.97] rounded"><IconCross className="w-5 h-5 py-1" /> </div>
+                <DialogCloseButton tabIndex={-1} className="px-1.5 py-1.5 hover:bg-primary-700 active:scale-[.97] rounded">
+                    <IconCross className="w-5 h-5 py-1" />
                 </DialogCloseButton>
             </div>
 
