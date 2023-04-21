@@ -5,7 +5,7 @@ import { OldOverlay_PortalModal } from '@ui/UIDialog';
 
 const Manifest_FormEditor = React.lazy(() => import('./Body'));
 
-export function ManifestFormEditorTrigger() {
+export function ManifestOldDlgTrigger() {
     const [editorData, setEditorData] = useAtom(formEditorDataAtom);
     return (<>
         {editorData &&

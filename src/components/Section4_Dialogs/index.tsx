@@ -1,10 +1,10 @@
 import React from 'react';
-import { ManifestFormEditorTrigger } from './Dialog_Manifest';
+import { ManifestOldDlgTrigger } from './ManifestOldDlg';
 import { FldCatDlg } from './FldCatDlg';
 
 export function Section4_Dialogs() {
     return (<>
-        <ManifestFormEditorTrigger />
+        <ManifestOldDlgTrigger />
         <FldCatDlg />
     </>);
 }
