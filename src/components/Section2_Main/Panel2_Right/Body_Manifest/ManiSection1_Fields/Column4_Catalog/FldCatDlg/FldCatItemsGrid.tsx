@@ -10,26 +10,28 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
     return Icon;
 }
 
+const tableHeaderClasses = 'mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
+
 function TableHeader() {
     return (<>
-        <div className="col-start-2 mb-2 text-[.65rem] text-right text-primary-400 border-primary-100 border-b select-none">#</div>
-        {/* <div className="col-start-3 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">Type</div> */}
-        <div className="col-start-3 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">Name</div>
-        <div className="col-start-4 mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none">ID</div>
+        <div className={`col-start-2 text-right ${tableHeaderClasses}`}>#</div>
+        {/* <div className={`col-start-3 ${tableHeaderClasses}`}>Type</div> */}
+        <div className={`col-start-3 ${tableHeaderClasses}`}>Name</div>
+        <div className={`col-start-4 ${tableHeaderClasses}`}>ID</div>
     </>);
 }
 
 export function FldCatItemsGrid() {
     const names = useAtomValue(FldCatItemsAtom);
     return (
-        <div className="grid grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
+        <div className="grid grid-rows-[auto_minmax(0,1fr)]">
 
             <div className="px-4 py-3 text-xs text-primary-400 bg-primary-800 border-primary-700 border-b">
                 {/* filters */}
                 {names.length} item{names.length === 1 ? '' : 's'}
             </div>
 
-            <Scroller className="pt-2 text-xs text-primary-100">
+            <Scroller className="pt-2 text-xs overflow-hidden">
                 <div className="grid grid-cols-[1fr_auto_auto_auto_1fr] gap-x-4 text-primary-400">
                     <TableHeader />
                     {names.map(mapItem)}
