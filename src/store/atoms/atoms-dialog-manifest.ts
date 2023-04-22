@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { FileUsFormData } from "./store-types";
+import { FileUsFormData } from "../store-types";
 
 // Form editor data
 

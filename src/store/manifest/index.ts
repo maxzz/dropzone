@@ -5,10 +5,7 @@ export type {
     MPath,
 } from './mani';
 
-export type {
-    CatalogItem,
-    FieldCatalog,
-} from './field-catalog';
+export * from './field-catalog';
 
 export * from './mani-i';
 export * from './mani-o';

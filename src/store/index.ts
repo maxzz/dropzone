@@ -24,14 +24,14 @@ export {
     doSetFilesAtom,
     doClearFilesAtom,
     filteredAtom,
-} from './atoms-files';
+} from './atoms/atoms-files';
 
 export type {
     CatalogItem,
     FieldCatalog,
 } from './manifest/field-catalog';
 
-export * from './atoms-file-catalog';
+export * from './atoms/atoms-file-catalog';
 
 export {
     showManiAtoms,
@@ -53,29 +53,29 @@ export {
 
     uiSizeAtom,
 
-} from './atoms-ui-state';
+} from './atoms/atoms-ui-state';
 
 export type {
     ManiOpenSections,
-} from './atoms-ui-right-panel';
+} from './atoms/atoms-ui-right-panel';
 
 export {
     ViewMode,
     rightPanelData,
     maniOpenSections,
-} from './atoms-ui-right-panel';
+} from './atoms/atoms-ui-right-panel';
 
 export {
     doSetCurrentCardAtom,
-} from './atoms-selections';
+} from './atoms/atoms-selections';
 
 export type {
     EditorData,
-} from './atoms-dialog-manifest';
+} from './atoms/atoms-dialog-manifest';
 
 export {
     formEditorDataAtom,
-} from './atoms-dialog-manifest';
+} from './atoms/atoms-dialog-manifest';
 
 export {
     formCaption,

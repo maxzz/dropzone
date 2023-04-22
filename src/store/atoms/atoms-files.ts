@@ -1,8 +1,8 @@
 import { atom } from 'jotai';
 import { uuid } from '@/utils';
-import { buildCatalogMeta, buildManiMetaForms, Catalog, Mani, Meta, parseXMLFile } from './manifest';
-import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from './store-types';
-import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from './store-utils';
+import { buildCatalogMeta, buildManiMetaForms, Catalog, Mani, Meta, parseXMLFile } from '../manifest';
+import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from '../store-types';
+import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from '../store-utils';
 import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom, totalManiAtoms, _foldAllCardsAtom } from './atoms-ui-state';
 import { rightPanelData } from './atoms-ui-right-panel';
 import { FldCatItemsAtom } from './atoms-file-catalog';

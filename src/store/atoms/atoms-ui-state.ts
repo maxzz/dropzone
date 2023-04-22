@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
-import { FileUsAtomType, Order, SortBy, UISize } from "./store-types";
-import { LocalStorageSave, } from "./store-localstorage-save";
-import { LocalStorage } from "./store-localstorage-load";
+import { FileUsAtomType, Order, SortBy, UISize } from "../store-types";
+import { LocalStorageSave, } from "../store-localstorage-save";
+import { LocalStorage } from "../store-localstorage-load";
 import { filesAtom, } from "./atoms-files";
 
 // Busy indicator

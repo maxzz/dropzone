@@ -10,9 +10,9 @@ export function FldCatDlg() {
     const [open, setOpen] = useAtom(fldCatOpenAtom);
 
     const transitions = useTransition(Number(open), {
-        from: { opacity: 0, y: -10, scale: 0.97 },
+        from: { opacity: 0, y: -50, scale: 0.97 },
         enter: { opacity: 1, y: 0, scale: 1 },
-        leave: { opacity: 0, y: 10, scale: 0.97 },
+        leave: { opacity: 0, y: 50, scale: 0.97 },
         config: config.stiff,
     });
 
