@@ -37,14 +37,15 @@ export function FldCatDlgBody() {
 
             <div>
                 {/* <SubTitle /> */}
-
                 <div className="h-[50vh] min-h-[120px]">
                     <FldCatItemsGrid />
                 </div>
             </div>
 
             {/* Buttons */}
-            <DialogButtons />
+            <div className="pt-4 flex justify-end">
+                <DialogButtons />
+            </div>
         </div>
     );
 }
