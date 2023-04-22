@@ -1,27 +1,6 @@
 import { atom } from "jotai";
-import { CatalogItem } from "../manifest";
-import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
-import { buildCatalogMetaFromNames } from "../manifest/meta-data";
-
-export const FldCatItemsAtom = atom<CatalogItem[]>(buildCatalogMetaFromNames(catalogTestNames).items);
-
-const FldCatTxtItemsAtom = atom<CatalogItem[]>(
-    (get) => get(FldCatItemsAtom).filter((item) => !item.password),
-);
-
-const FldCatPswItemsAtom = atom<CatalogItem[]>(
-    (get) => get(FldCatItemsAtom).filter((item) => !!item.password),
-);
-
-const FieldCatalogItemAtom = atom(
-    (get) => (dbid: string | undefined) => {
-        if (dbid) {
-            const all = get(FldCatItemsAtom);
-            const rv = all.find((item) => item.dbname === dbid);
-            return rv;
-        }
-    }
-);
+import { CatalogItem } from '@/store/manifest/field-catalog';
+import { FieldCatalogItemAtom, FldCatPswItemsAtom, FldCatTxtItemsAtom } from "./atoms-file-catalog";
 
 // MRU - most recently used items
 
@@ -70,12 +49,3 @@ export const getMruFldCatForItemAtom = atom(
         };
     }
 );
-
-function mruToString(items: CatalogItem[]) {
-    return JSON.stringify(items.map((item) => `${JSON.stringify(item)}\n`), null, 4);
-    //console.log('buildMruWItem', `\n${JSON.stringify(item)}\n\n`, mruToString(rv));
-}
-
-// Field catalog dialog UI state
-
-export const fldCatOpenAtom = atom(false);

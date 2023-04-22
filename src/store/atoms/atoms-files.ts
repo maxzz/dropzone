@@ -5,7 +5,7 @@ import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from '../store-typ
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from '../store-utils';
 import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom, totalManiAtoms, _foldAllCardsAtom } from './atoms-ui-state';
 import { rightPanelData } from './atoms-ui-right-panel';
-import { FldCatItemsAtom } from './atoms-file-catalog';
+import { FldCatItemsAtom } from './field-catalog/atoms-file-catalog';
 
 // Files
 
