@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { CatalogItem } from '@/store/manifest/field-catalog';
-import { FieldCatalogItemAtom, FldCatPswItemsAtom, FldCatTxtItemsAtom } from "./atoms-file-catalog";
+import { FieldCatalogItemAtom, FldCatPswItemsAtom, FldCatTxtItemsAtom } from "./all-items";
 
 // MRU - most recently used items
 

@@ -23,7 +23,3 @@ export const FieldCatalogItemAtom = atom(
         }
     }
 );
-
-// Field catalog dialog UI state
-
-export const fldCatOpenAtom = atom(false);
