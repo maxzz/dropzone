@@ -1,6 +1,6 @@
 import React from "react";
 import { PrimitiveAtom, useAtomValue, useSetAtom } from "jotai";
-import { FldCatItemsAtom } from "@/store";
+import { FldCatItemsAtom, fldCatOutDataAtom } from "@/store";
 import { DialogButtons, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames } from "@/utils";
@@ -30,6 +30,7 @@ function Header() {
 
 export function FldCatDlgBody({ onCloseDialogAtom }: { onCloseDialogAtom: PrimitiveAtom<boolean>; }) {
     const onCloseDialog = useSetAtom(onCloseDialogAtom);
+    const fldCatOutData = useSetAtom(fldCatOutDataAtom);
     return (
         <div className={classNames(frameClasses, "min-w-[540px]")}>
             {/* <DialogHeader header="Field Catalog" /> */}
@@ -49,7 +50,10 @@ export function FldCatDlgBody({ onCloseDialogAtom }: { onCloseDialogAtom: Primit
 
                 <div
                     className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none"
-                    onClick={() => onCloseDialog(false)}
+                    onClick={() => {
+                        fldCatOutData({ dbid: '55' });
+                        onCloseDialog(false);
+                    }}
                 >
                     Select
                 </div>
