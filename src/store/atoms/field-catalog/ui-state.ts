@@ -1,4 +1,4 @@
-import { SetStateAction, atom } from "jotai";
+import { PrimitiveAtom, SetStateAction, atom } from "jotai";
 
 // Field catalog dialog UI state
 
@@ -21,6 +21,8 @@ export type FldCatOutData = {
 
 export const fldCatInDataAtom = atom<FldCatInData | null>(null);
 export const fldCatOutDataAtom = atom<FldCatOutData | null>(null); // null is initial state when dialog just opened
+
+export type FldCatOutDataAtom = PrimitiveAtom<FldCatOutData | null>;
 
 export const doSelectFldCatDialogAtom = atom(
     null,

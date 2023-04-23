@@ -2,8 +2,8 @@ import React from "react";
 import * as Dialog from '@radix-ui/react-dialog';
 import { config, useTransition, a } from "@react-spring/web";
 import { FldCatDlgBody } from "./Body";
-import { fldCatOpenAtom } from "@/store";
-import { useAtom } from "jotai";
+import { fldCatOpenAtom, fldCatOutDataAtom } from "@/store";
+import { useAtom, useSetAtom } from "jotai";
 
 export function FldCatDlg() {
 
@@ -31,7 +31,7 @@ export function FldCatDlg() {
 
                             <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
                                 <a.div style={styles}>
-                                    <FldCatDlgBody onCloseDialogAtom={fldCatOpenAtom} />
+                                    <FldCatDlgBody setOpen={setOpen} outDataAtom={fldCatOutDataAtom} />
                                 </a.div>
                             </Dialog.Content>
 
