@@ -1,6 +1,6 @@
 import React, { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { getMruFldCatForItemAtom, doSelectFldCatDialogAtom, fldCatOutDataAtom } from "@/store";
+import { FldCatOutData, fldCatTriggerAtom, getMruFldCatForItemAtom, openFldCatDialogAtom, closeFldCatDialogAtom } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
@@ -33,8 +33,10 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     const useIt = useAtomValue(useItAtom);
 
-    const setOpen = useSetAtom(doSelectFldCatDialogAtom);
-    const outData = useAtomValue(fldCatOutDataAtom);
+    const openFldCatDialog = useSetAtom(openFldCatDialogAtom);
+
+    const outDataAtom = useState(atom<FldCatOutData>({ dbid: '33' }))[0];
+    const outData = useAtomValue(outDataAtom);
 
     useEffect(() => {
         if (outData) {
@@ -59,7 +61,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     function onSetDropdownIndex(idx: number) {
         if (idx === dropdownItems.length - 1) {
-            setOpen({ dbid: catalogItem?.dbname });
+            openFldCatDialog({ dbid: catalogItem?.dbname, outDataAtom: outDataAtom });
             return;
         }
         setInputTextText(dropdownItems[idx]);
