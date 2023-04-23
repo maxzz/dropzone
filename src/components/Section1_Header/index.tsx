@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { doClearFilesAtom, fldCatOpenAtom, hasFilesAtom } from '@/store';
+import { doClearFilesAtom, hasFilesAtom, openFldCatDialogAtom } from '@/store';
 import { IconCatalog, IconMenuHamburger, IconTrash } from '@ui/icons';
 import { Part0_TopMenu } from './menu';
 import { Part1_DropzoneArea } from './droparea';
@@ -19,7 +19,7 @@ function MenuTrigger() {
 }
 
 function FldCatTrigger() {
-    const setOpen = useSetAtom(fldCatOpenAtom);
+    const setOpen = useSetAtom(openFldCatDialogAtom);
     return (
         <button className={buttonClasses}>
             <IconCatalog className="p-2 w-8 h-8 hover:bg-red-500 rounded active:scale-[.97]" onClick={() => setOpen(v => !v)} />

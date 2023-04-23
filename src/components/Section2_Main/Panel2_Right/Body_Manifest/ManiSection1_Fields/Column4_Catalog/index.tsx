@@ -1,6 +1,6 @@
 import React, { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue } from "jotai";
-import { fldCatOpenAtom, getMruFldCatForItemAtom } from "@/store";
+import { getMruFldCatForItemAtom, openFldCatDialogAtom } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
@@ -33,7 +33,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     const useIt = useAtomValue(useItAtom);
 
-    const [open, setOpen] = useAtom(fldCatOpenAtom);
+    const [open, setOpen] = useAtom(openFldCatDialogAtom);
 
     return (
         <div className={classNames(columnSizeClasses, columnRingClasses, !useIt && "opacity-30 cursor-pointer", className,)} {...rest}>
