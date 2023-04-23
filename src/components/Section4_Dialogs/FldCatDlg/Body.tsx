@@ -46,15 +46,7 @@ export function FldCatDlgBody() {
             {/* Buttons */}
             <div className="pt-4 flex justify-end">
                 <DialogButtons />
-
                 <BottomButton onClick={() => closeFldCatDialog({ dbid: '44' })}>Select</BottomButton>
-                {/* <div
-                    className={dlgBottomButtonClasses}
-                    onClick={() => closeFldCatDialog({ dbid: '44' })}
-                >
-                    Select
-                </div> */}
-
             </div>
         </div>
     );
