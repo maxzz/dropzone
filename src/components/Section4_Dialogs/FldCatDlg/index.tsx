@@ -1,16 +1,12 @@
 import React from "react";
-import * as Dialog from '@radix-ui/react-dialog';
-import { config, useTransition, a } from "@react-spring/web";
-import { FldCatDlgBody } from "./Body";
-import { fldCatTriggerAtom } from "@/store";
 import { useAtom } from "jotai";
+import { config, useTransition, a } from "@react-spring/web";
+import * as Dialog from '@radix-ui/react-dialog';
+import { fldCatTriggerAtom } from "@/store";
+import { FldCatDlgBody } from "./Body";
 
 export function FldCatDlg() {
     const [fldCatInData, setFldCatInData] = useAtom(fldCatTriggerAtom);
-    
-    function closeDialog() {
-        setFldCatInData(null);
-    }
 
     const transitions = useTransition(Number(!!fldCatInData), {
         from: { opacity: 0, y: -50, scale: 0.97 },
@@ -20,7 +16,7 @@ export function FldCatDlg() {
     });
 
     return (
-        <Dialog.Root open={!!fldCatInData} onOpenChange={closeDialog}>
+        <Dialog.Root open={!!fldCatInData} onOpenChange={() => setFldCatInData(null)}>
             {/* <Dialog.Trigger className="px-4 py-3 text-primary-300 border-primary-500 active:scale-[.97] border rounded select-none">
                 Edit
             </Dialog.Trigger> */}
@@ -34,7 +30,7 @@ export function FldCatDlg() {
 
                             <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
                                 <a.div style={styles}>
-                                    <FldCatDlgBody setOpen={closeDialog} inDataAtom={fldCatTriggerAtom} />
+                                    <FldCatDlgBody />
                                 </a.div>
                             </Dialog.Content>
 

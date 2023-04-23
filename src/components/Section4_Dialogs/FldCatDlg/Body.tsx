@@ -1,6 +1,6 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { FldCatInDataAtom, FldCatItemsAtom, closeFldCatDialogAtom } from "@/store";
+import { FldCatItemsAtom, closeFldCatDialogAtom } from "@/store";
 import { DialogButtons, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames } from "@/utils";
@@ -28,7 +28,7 @@ function Header() {
     </>);
 }
 
-export function FldCatDlgBody({ setOpen, inDataAtom }: { setOpen: (open: boolean) => void; inDataAtom: FldCatInDataAtom; }) {
+export function FldCatDlgBody() {
     const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
     return (
         <div className={classNames(frameClasses, "min-w-[540px]")}>
@@ -49,12 +49,7 @@ export function FldCatDlgBody({ setOpen, inDataAtom }: { setOpen: (open: boolean
 
                 <div
                     className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none"
-                    onClick={() => {
-                        //setOpen(false);
-                        closeFldCatDialog({ dbid: '44' });
-                        
-                        //inData({ dbid: '55' });
-                    }}
+                    onClick={() => closeFldCatDialog({ dbid: '44' })}
                 >
                     Select
                 </div>
