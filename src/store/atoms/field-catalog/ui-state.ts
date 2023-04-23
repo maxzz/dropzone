@@ -44,13 +44,13 @@ export const openFldCatDialogAtom = atom(
 
 export const closeFldCatDialogAtom = atom(
     null,
-    (get, set, { inDataAtom, outData }: { inDataAtom: FldCatInDataAtom, outData: FldCatOutData; }) => {
-        const inData = get(inDataAtom);
+    (get, set, outData: FldCatOutData) => {
+        const inData = get(fldCatTriggerAtom);
         const out = inData?.outDataAtom;
         if (out) {
             set(out, outData);
         }
-        inData && set(inDataAtom, null);
+        inData && set(fldCatTriggerAtom, null);
 
         //set(fldCatInDataAtom, value);
 

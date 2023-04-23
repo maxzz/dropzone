@@ -28,8 +28,8 @@ function Header() {
     </>);
 }
 
-export function FldCatDlgBody({ setOpen, inDataAtom }: { setOpen: (open: boolean) => void; inDataAtom: FldCatInDataAtom }) {
-    const setOutDataFldCatDialog = useSetAtom(closeFldCatDialogAtom);
+export function FldCatDlgBody({ setOpen, inDataAtom }: { setOpen: (open: boolean) => void; inDataAtom: FldCatInDataAtom; }) {
+    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
     return (
         <div className={classNames(frameClasses, "min-w-[540px]")}>
             {/* <DialogHeader header="Field Catalog" /> */}
@@ -50,8 +50,9 @@ export function FldCatDlgBody({ setOpen, inDataAtom }: { setOpen: (open: boolean
                 <div
                     className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none"
                     onClick={() => {
-                        setOpen(false);
-                        setOutDataFldCatDialog({inDataAtom: inDataAtom, outData: {dbid: '44'}})
+                        //setOpen(false);
+                        closeFldCatDialog({ dbid: '44' });
+                        
                         //inData({ dbid: '55' });
                     }}
                 >
