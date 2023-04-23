@@ -11,21 +11,22 @@ export const doOpenFldCatDialogAtom = atom(
     }
 );
 
-export type FldCatSelectData = {
+export type FldCatInData = {
     dbid: string | undefined;
 }
 
-export const fldCatSelectDataAtom = atom<FldCatSelectData | null>(null);
+export type FldCatOutData = {
+    dbid: string | undefined;
+}
+
+export const fldCatInDataAtom = atom<FldCatInData | null>(null);
+export const fldCatOutDataAtom = atom<FldCatOutData | null>(null); // null is initial state when dialog just opened
 
 export const doSelectFldCatDialogAtom = atom(
     null,
-    (get, set, value: SetStateAction<FldCatSelectData | null>) => {
-        set(fldCatSelectDataAtom, value);
-
-        if (value) {
-            set(fldCatOpenAtom, true);    
-        } else {
-            set(fldCatOpenAtom, false);
-        }
+    (get, set, value: FldCatInData | null) => {
+        set(fldCatInDataAtom, value);
+        set(fldCatOutDataAtom, null);
+        set(fldCatOpenAtom, !!value);
     }
 );
