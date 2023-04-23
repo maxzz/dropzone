@@ -97,16 +97,18 @@ export function SectionGenerationBy({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     );
 }
 
+export const dlgBottomButtonClasses = "px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none";
+
 export function DialogButtons() {
     return (
         <div className="flex items-center justify-center gap-x-2">
             <DialogCloseButton>
-                <div className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">
+                <div className={dlgBottomButtonClasses}>
                     OK
                 </div>
             </DialogCloseButton>
             <DialogCloseButton>
-                <div className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none">
+                <div className={dlgBottomButtonClasses}>
                     Cancel
                 </div>
             </DialogCloseButton>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { FldCatItemsAtom, closeFldCatDialogAtom } from "@/store";
-import { DialogButtons, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
+import { DialogButtons, DialogHeader, dlgBottomButtonClasses } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames } from "@/utils";
 
@@ -48,7 +48,7 @@ export function FldCatDlgBody() {
                 <DialogButtons />
 
                 <div
-                    className="px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none"
+                    className={dlgBottomButtonClasses}
                     onClick={() => closeFldCatDialog({ dbid: '44' })}
                 >
                     Select
