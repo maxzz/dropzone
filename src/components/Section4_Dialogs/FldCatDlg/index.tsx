@@ -31,7 +31,7 @@ export function FldCatDlg() {
 
                             <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
                                 <a.div style={styles}>
-                                    <FldCatDlgBody />
+                                    <FldCatDlgBody onCloseDialogAtom={fldCatOpenAtom} />
                                 </a.div>
                             </Dialog.Content>
 
