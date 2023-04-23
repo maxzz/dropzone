@@ -1,7 +1,7 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { FldCatItemsAtom, closeFldCatDialogAtom } from "@/store";
-import { BottomButton, DialogButtons, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
+import { BottomButton, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames } from "@/utils";
 
@@ -44,8 +44,9 @@ export function FldCatDlgBody() {
             </div>
 
             {/* Buttons */}
-            <div className="pt-4 flex justify-end">
-                <DialogButtons />
+            <div className="pt-4 flex items-center justify-end gap-x-2">
+                <BottomButton>OK</BottomButton>
+                <BottomButton>Cancel</BottomButton>
                 <BottomButton onClick={() => closeFldCatDialog({ dbid: '44' })}>Select</BottomButton>
             </div>
         </div>
