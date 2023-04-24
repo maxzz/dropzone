@@ -20,36 +20,70 @@ function TableHeader() {
     </>);
 }
 
+// export function FldCatItemsGrid() {
+//     const names = useAtomValue(FldCatItemsAtom);
+
+//     return (
+//         <Scroller className="pt-2 text-xs overflow-auto">
+//             <div className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto_minmax(0,1fr)] gap-x-4 text-primary-400">
+//                 <TableHeader />
+//                 {names.map(mapItem)}
+//             </div>
+//         </Scroller>
+//     );
+
+//     function mapItem(item: CatalogItem, idx: number) {
+//         return (
+//             <Fragment key={idx}>
+//                 <div className="col-start-2 text-right">
+//                     {idx + 1}
+//                 </div>
+
+//                 <div className="col-start-3 flex items-center gap-x-2 leading-[18px]">
+//                     {FieldIcon(item.password, "w-4 h-4 opacity-25")}
+//                     <div>
+//                         {item.dispname}
+//                     </div>
+//                 </div>
+
+//                 <div className="col-start-4 font-mono text-[.6rem]">
+//                     {item.dbname}
+//                 </div>
+//             </Fragment>
+//         );
+//     }
+// }
+
 export function FldCatItemsGrid() {
     const names = useAtomValue(FldCatItemsAtom);
-    
+
     return (
         <Scroller className="pt-2 text-xs overflow-auto">
-            <div className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto_minmax(0,1fr)] gap-x-4 text-primary-400">
-                <TableHeader />
+            <div className="grid grid-cols-[minmax(0,1fr)_max-content_minmax(0,1fr)] text-primary-400">
+                {/* <TableHeader /> */}
                 {names.map(mapItem)}
             </div>
         </Scroller>
     );
 
     function mapItem(item: CatalogItem, idx: number) {
-        return (
-            <Fragment key={idx}>
-                <div className="col-start-2 text-right">
+        return (<Fragment key={idx}>
+            <div className="col-start-2 flex space-x-2" key={idx}>
+                <div className="w-[4ch] text-right">
                     {idx + 1}
                 </div>
 
-                <div className="col-start-3 flex items-center gap-x-2 leading-[18px]">
+                <div className="w-[45%] flex items-center gap-x-2 leading-[18px]">
                     {FieldIcon(item.password, "w-4 h-4 opacity-25")}
-                    <div>
+                    <div className="whitespace-nowrap">
                         {item.dispname}
                     </div>
                 </div>
 
-                <div className="col-start-4 font-mono text-[.6rem]">
+                <div className="w-[45%] whitespace-nowrap font-mono text-[.6rem]">
                     {item.dbname}
                 </div>
-            </Fragment>
-        );
+            </div>
+        </Fragment>);
     }
 }
