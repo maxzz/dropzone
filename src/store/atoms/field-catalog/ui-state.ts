@@ -31,3 +31,7 @@ export const closeFldCatDialogAtom = atom(
         inData && set(fldCatTriggerAtom, null);
     }
 );
+
+function creteOutBoxAtom<T>() {
+    return atom<T | null>(null);
+}

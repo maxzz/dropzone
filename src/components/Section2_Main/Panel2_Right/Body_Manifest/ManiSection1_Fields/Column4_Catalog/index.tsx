@@ -35,7 +35,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     const openFldCatDialog = useSetAtom(openFldCatDialogAtom);
 
-    const fldCatOutBoxAtom = useState(atom<FldCatOutData | null>(null))[0];
+    const fldCatOutBoxAtom = useState(creteOutBoxAtom<FldCatOutData>())[0];
     const fldCatOutBox = useAtomValue(fldCatOutBoxAtom);
 
     useEffect(() => {
@@ -91,5 +91,9 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     }
 }
 
+
+function creteOutBoxAtom<T>(): any {
+    throw new Error("Function not implemented.");
+}
 //TODO: buttons are not stored in field catalog
 //TODO: buttons should not have dbname (it is useless, they don't have state to save)
