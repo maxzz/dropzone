@@ -35,14 +35,14 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     const openFldCatDialog = useSetAtom(openFldCatDialogAtom);
 
-    const outDataAtom = useState(atom<FldCatOutData>({ dbid: '33' }))[0];
-    const outData = useAtomValue(outDataAtom);
+    const fldCatOutBoxAtom = useState(atom<FldCatOutData | null>(null))[0];
+    const fldCatOutBox = useAtomValue(fldCatOutBoxAtom);
 
     useEffect(() => {
-        if (outData) {
-            console.log('outData', outData);
+        if (fldCatOutBox) {
+            console.log('outData', fldCatOutBox);
         }
-    }, [outData]);
+    }, [fldCatOutBox]);
 
     return (
         <div className={classNames(columnSizeClasses, columnRingClasses, !useIt && "opacity-30 cursor-pointer", className,)} {...rest}>
@@ -61,7 +61,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     function onSetDropdownIndex(idx: number) {
         if (idx === dropdownItems.length - 1) {
-            openFldCatDialog({ dbid: catalogItem?.dbname, outDataAtom: outDataAtom });
+            openFldCatDialog({ dbid: catalogItem?.dbname, outBoxAtom: fldCatOutBoxAtom });
             return;
         }
         setInputTextText(dropdownItems[idx]);

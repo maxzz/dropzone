@@ -46,7 +46,6 @@ export function PolicyEditorBody({ atoms }: { atoms: Atomize<PolicyUi>; }) {
                 <BottomButton>OK</BottomButton>
                 <BottomButton>Cancel</BottomButton>
             </div>
-
         </div>
     );
 }

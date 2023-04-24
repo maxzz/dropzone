@@ -4,7 +4,7 @@ import { PrimitiveAtom, atom } from "jotai";
 
 export type FldCatInData = {
     dbid?: string | undefined;
-    outDataAtom?: PrimitiveAtom<FldCatOutData>;
+    outBoxAtom?: PrimitiveAtom<FldCatOutData | null>;
 };
 
 export type FldCatOutData = {
@@ -24,9 +24,9 @@ export const closeFldCatDialogAtom = atom(
     null,
     (get, set, outData: FldCatOutData) => {
         const inData = get(fldCatTriggerAtom);
-        const out = inData?.outDataAtom;
-        if (out) {
-            set(out, outData);
+        const outBox = inData?.outBoxAtom;
+        if (outBox) {
+            set(outBox, outData);
         }
         inData && set(fldCatTriggerAtom, null);
     }
