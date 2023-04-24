@@ -1,6 +1,6 @@
 import React, { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { atom, PrimitiveAtom as PA, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { FldCatOutData, fldCatTriggerAtom, getMruFldCatForItemAtom, openFldCatDialogAtom, closeFldCatDialogAtom } from "@/store";
+import { FldCatOutData, getMruFldCatForItemAtom, openFldCatDialogAtom, creteOutBoxAtom } from "@/store";
 import { CatalogItem, Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./CatalogDropdown";
 import { classNames } from "@/utils";
@@ -91,9 +91,5 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     }
 }
 
-
-function creteOutBoxAtom<T>(): any {
-    throw new Error("Function not implemented.");
-}
 //TODO: buttons are not stored in field catalog
 //TODO: buttons should not have dbname (it is useless, they don't have state to save)

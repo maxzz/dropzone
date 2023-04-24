@@ -108,3 +108,5 @@ export function Card1_Title({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomTy
         </CardTitleSelect>
     );
 }
+
+//TODO: copy to clipboard filename

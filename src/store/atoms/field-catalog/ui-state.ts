@@ -32,6 +32,6 @@ export const closeFldCatDialogAtom = atom(
     }
 );
 
-function creteOutBoxAtom<T>() {
+export function creteOutBoxAtom<T>() {
     return atom<T | null>(null);
 }
