@@ -10,49 +10,21 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
     return Icon;
 }
 
-const tableHeaderClasses = 'mb-2 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
+const col1Classes = 'w-[4ch] text-right';
+const col2Classes = 'w-[45%] flex items-center gap-x-2 leading-[18px]';
+const col3Classes = 'w-[45%] whitespace-nowrap font-mono text-[.6rem]';
+
+const tableHeaderClasses = 'mb-2 pl-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
 
 function TableHeader() {
-    return (<>
-        <div className={`col-start-2 text-right ${tableHeaderClasses}`}>#</div>
-        <div className={`col-start-3 ${tableHeaderClasses}`}>Name</div>
-        <div className={`col-start-4 ${tableHeaderClasses}`}>ID</div>
-    </>);
+    return (
+        <div className="col-start-2 flex space-x-2">
+            <div className={`${col1Classes} ${tableHeaderClasses}`}>#</div>
+            <div className={`${col2Classes} ${tableHeaderClasses}`}>Name</div>
+            <div className={`${col3Classes} ${tableHeaderClasses}`}>ID</div>
+        </div>
+    );
 }
-
-// export function FldCatItemsGrid() {
-//     const names = useAtomValue(FldCatItemsAtom);
-
-//     return (
-//         <Scroller className="pt-2 text-xs overflow-auto">
-//             <div className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto_minmax(0,1fr)] gap-x-4 text-primary-400">
-//                 <TableHeader />
-//                 {names.map(mapItem)}
-//             </div>
-//         </Scroller>
-//     );
-
-//     function mapItem(item: CatalogItem, idx: number) {
-//         return (
-//             <Fragment key={idx}>
-//                 <div className="col-start-2 text-right">
-//                     {idx + 1}
-//                 </div>
-
-//                 <div className="col-start-3 flex items-center gap-x-2 leading-[18px]">
-//                     {FieldIcon(item.password, "w-4 h-4 opacity-25")}
-//                     <div>
-//                         {item.dispname}
-//                     </div>
-//                 </div>
-
-//                 <div className="col-start-4 font-mono text-[.6rem]">
-//                     {item.dbname}
-//                 </div>
-//             </Fragment>
-//         );
-//     }
-// }
 
 export function FldCatItemsGrid() {
     const names = useAtomValue(FldCatItemsAtom);
@@ -60,7 +32,7 @@ export function FldCatItemsGrid() {
     return (
         <Scroller className="pt-2 text-xs overflow-auto">
             <div className="grid grid-cols-[minmax(0,1fr)_max-content_minmax(0,1fr)] text-primary-400">
-                {/* <TableHeader /> */}
+                <TableHeader />
                 {names.map(mapItem)}
             </div>
         </Scroller>
@@ -69,18 +41,18 @@ export function FldCatItemsGrid() {
     function mapItem(item: CatalogItem, idx: number) {
         return (<Fragment key={idx}>
             <div className="col-start-2 flex space-x-2" key={idx}>
-                <div className="w-[4ch] text-right">
+                <div className={col1Classes}>
                     {idx + 1}
                 </div>
 
-                <div className="w-[45%] flex items-center gap-x-2 leading-[18px]">
+                <div className={col2Classes}>
                     {FieldIcon(item.password, "w-4 h-4 opacity-25")}
                     <div className="whitespace-nowrap">
                         {item.dispname}
                     </div>
                 </div>
 
-                <div className="w-[45%] whitespace-nowrap font-mono text-[.6rem]">
+                <div className={col3Classes}>
                     {item.dbname}
                 </div>
             </div>
