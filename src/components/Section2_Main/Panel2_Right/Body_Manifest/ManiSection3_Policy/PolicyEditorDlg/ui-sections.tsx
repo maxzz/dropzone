@@ -106,12 +106,3 @@ export function BottomButton({ className, children, ...rest }: HTMLAttributes<HT
         </DialogCloseButton>
     );
 }
-
-export function DialogButtons() {
-    return (
-        <div className="flex items-center justify-center gap-x-2">
-            <BottomButton>OK</BottomButton>
-            <BottomButton>Cancel</BottomButton>
-        </div>
-    );
-}

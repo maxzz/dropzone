@@ -2,7 +2,7 @@ import React from "react";
 import { useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import { Check } from "./ui-controls";
-import { DialogButtons, DialogHeader, SectionGenerationBy, SectionHistory, SectionMinMaxLength, SectionRuleTypes, SectionTestRoom } from "./ui-sections";
+import { BottomButton, DialogHeader, SectionGenerationBy, SectionHistory, SectionMinMaxLength, SectionRuleTypes, SectionTestRoom } from "./ui-sections";
 import { classNames } from "@/utils";
 import { PolicyUi } from ".";
 
@@ -42,7 +42,11 @@ export function PolicyEditorBody({ atoms }: { atoms: Atomize<PolicyUi>; }) {
             </div>
 
             {/* Buttons */}
-            <DialogButtons />
+            <div className="flex items-center justify-center gap-x-2">
+                <BottomButton>OK</BottomButton>
+                <BottomButton>Cancel</BottomButton>
+            </div>
+
         </div>
     );
 }
