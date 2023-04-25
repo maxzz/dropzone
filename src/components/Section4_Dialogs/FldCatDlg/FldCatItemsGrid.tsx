@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { CatalogItem, fldCatItemsAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
@@ -31,6 +31,13 @@ function TableHeader() {
 export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: PrimitiveAtom<number>; }) {
     const fldCatItems = useAtomValue(fldCatItemsAtom);
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
+    
+    const prevSelectedIdx = useRef(selectedIdx);
+    useEffect(() => {
+        if (selectedIdx !== -1) {
+            prevSelectedIdx.current = selectedIdx;
+        }
+    }, [selectedIdx]);
 
     return (
         <Scroller className="pt-2 text-xs overflow-auto">
@@ -54,7 +61,8 @@ export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: Primitiv
                     setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx);
                 }}
                 onDoubleClick={() => {
-                    console.log('double');
+                    console.log('double', prevSelectedIdx.current);
+                    setSelectedIdx(prevSelectedIdx.current);
                 }}
                 key={idx}
             >
