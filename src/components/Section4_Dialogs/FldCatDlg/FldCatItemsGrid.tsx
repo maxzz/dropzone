@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { CatalogItem, FldCatItemsAtom } from "@/store";
+import { CatalogItem, fldCatItemsAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
 import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
 import { classNames } from "@/utils";
@@ -29,7 +29,7 @@ function TableHeader() {
 }
 
 export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: PrimitiveAtom<number>; }) {
-    const fldCatItems = useAtomValue(FldCatItemsAtom);
+    const fldCatItems = useAtomValue(fldCatItemsAtom);
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
 
     return (
@@ -49,7 +49,13 @@ export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: Primitiv
                     "cursor-default select-none",
                     selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
                 )}
-                onClick={() => setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx)}
+                onClick={() => {
+                    console.log('click');
+                    setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx);
+                }}
+                onDoubleClick={() => {
+                    console.log('double');
+                }}
                 key={idx}
             >
                 <div className={col1Classes}>

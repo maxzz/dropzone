@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { CatalogItem } from '@/store/manifest/field-catalog';
-import { FieldCatalogItemAtom, FldCatPswItemsAtom, FldCatTxtItemsAtom } from "./all-items";
+import { fldCatItemAtom, fldCatPswItemsAtom, fldCatTxtItemsAtom } from "./all-items";
 
 // MRU - most recently used items
 
@@ -8,7 +8,7 @@ const mruSize = 7;
 
 const mruFldCatTxtItemsAtom = atom(
     (get) => {
-        let all = get(FldCatTxtItemsAtom);
+        let all = get(fldCatTxtItemsAtom);
         all = all.slice(0, mruSize);
         //console.log('all txt', mruToString(all));
         return all;
@@ -17,7 +17,7 @@ const mruFldCatTxtItemsAtom = atom(
 
 const mruFldCatPswItemsAtom = atom(
     (get) => {
-        let all = get(FldCatPswItemsAtom);
+        let all = get(fldCatPswItemsAtom);
         all = all.slice(0, mruSize);
         //console.log('all psw', mruToString(all));
         return all;
@@ -40,7 +40,7 @@ function buildMruWItem(mru: CatalogItem[], item: CatalogItem | undefined): Catal
 
 export const getMruFldCatForItemAtom = atom(
     (get) => (isPsw: boolean | undefined, dbname: string | undefined) => {
-        const catalogItem = get(FieldCatalogItemAtom)(dbname);
+        const catalogItem = get(fldCatItemAtom)(dbname);
         let catalogItemsByType = get(isPsw ? mruFldCatPswItemsAtom : mruFldCatTxtItemsAtom);
         catalogItemsByType = buildMruWItem(catalogItemsByType, catalogItem);
         return {
