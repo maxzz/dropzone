@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useAtomValue } from "jotai";
 import { CatalogItem, FldCatItemsAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
@@ -11,10 +11,10 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
 }
 
 const col1Classes = 'w-[4ch] text-right';
-const col2Classes = 'w-[45%] flex items-center gap-x-2 leading-[18px]';
-const col3Classes = 'w-[45%] whitespace-nowrap font-mono text-[.6rem]';
+const col2Classes = 'w-[48%] flex items-center gap-x-2 leading-[18px]';
+const col3Classes = 'w-[48%] whitespace-nowrap font-mono text-[.6rem]';
 
-const tableHeaderClasses = 'mb-2 pl-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
+const tableHeaderClasses = 'mb-2 ml-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
 
 function TableHeader() {
     return (
@@ -39,7 +39,7 @@ export function FldCatItemsGrid() {
     );
 
     function mapItem(item: CatalogItem, idx: number) {
-        return (<Fragment key={idx}>
+        return (
             <div className="col-start-2 flex space-x-2" key={idx}>
                 <div className={col1Classes}>
                     {idx + 1}
@@ -56,6 +56,6 @@ export function FldCatItemsGrid() {
                     {item.dbname}
                 </div>
             </div>
-        </Fragment>);
+        );
     }
 }
