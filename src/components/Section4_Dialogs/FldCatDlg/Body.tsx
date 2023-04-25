@@ -51,9 +51,15 @@ export function FldCatDlgBody() {
 
             {/* Buttons */}
             <div className="pt-4 flex items-center justify-end gap-x-2">
-                <BottomButton>OK</BottomButton>
+                {/* <BottomButton>OK</BottomButton> */}
+                <BottomButton
+                    className={classNames("disabled:opacity-25")}
+                    disabled={selectedIdx === -1}
+                    onClick={() => closeFldCatDialog({ dbid: '44' })}
+                >
+                    Select
+                </BottomButton>
                 <BottomButton>Cancel</BottomButton>
-                <BottomButton onClick={() => closeFldCatDialog({ dbid: '44' })}>Select</BottomButton>
             </div>
         </div>
     );

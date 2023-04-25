@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { Close as DialogCloseButton } from '@radix-ui/react-dialog';
 import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from ".";
@@ -99,7 +99,7 @@ export function SectionGenerationBy({ atoms }: { atoms: Atomize<PolicyUi>; }) {
 
 export const dlgBottomButtonClasses = "px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none";
 
-export function BottomButton({ className, children, ...rest }: HTMLAttributes<HTMLButtonElement>) {
+export function BottomButton({ className, children, ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) {
     return (
         <DialogCloseButton className={classNames(dlgBottomButtonClasses, className)} {...rest}>
             {children}
