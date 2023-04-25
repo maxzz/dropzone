@@ -64,10 +64,13 @@ export function FldCatDlgBody() {
             <div>
                 {/* <SubTitle /> */}
                 <div className="h-[50vh] min-h-[120px]">
-                    <FldCatItemsGrid selectedItemAtom={selectedItemAtom} />
+                    <FldCatItemsGrid selectedItemAtom={selectedItemAtom} onDoubleClick={(item: CatalogItem) => {
+                        closeFldCatDialog({ fldCatItem: item });
+                    }}
+                    />
                 </div>
 
-                <div className="">{JSON.stringify(selectedItem || {})}</div>
+                <div className="h-32">{JSON.stringify(selectedItem || {})}</div>
             </div>
 
             {/* Buttons */}

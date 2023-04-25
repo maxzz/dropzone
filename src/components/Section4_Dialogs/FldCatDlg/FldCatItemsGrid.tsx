@@ -28,15 +28,14 @@ function TableHeader() {
     );
 }
 
-export function FldCatItemsGrid({ selectedItemAtom }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null> }) {
-    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
+export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; onDoubleClick: (item: CatalogItem) => void; }) {
     const fldCatItems = useAtomValue(fldCatItemsAtom);
 
-    const [selectedItem, setSelectedItem] = useAtom(selectedItemAtom);
+    const setSelectedItem = useSetAtom(selectedItemAtom);
 
     const selectedIdxAtom = useState(atom(-1))[0];
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
-    
+
     const prevSelectedIdx = useRef(selectedIdx);
     useEffect(() => {
         if (selectedIdx !== -1) {
@@ -69,7 +68,7 @@ export function FldCatItemsGrid({ selectedItemAtom }: { selectedItemAtom: Primit
                 onDoubleClick={() => {
                     console.log('double', prevSelectedIdx.current);
                     setSelectedIdx(prevSelectedIdx.current);
-                    closeFldCatDialog({ fldCatItem: selectedItem })
+                    onDoubleClick(fldCatItems[prevSelectedIdx.current]);
                 }}
                 key={idx}
             >
