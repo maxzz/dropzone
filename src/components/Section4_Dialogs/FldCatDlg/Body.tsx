@@ -1,9 +1,9 @@
-import React, { ButtonHTMLAttributes, useState } from "react";
-import { PrimitiveAtom, atom, useAtomValue, useSetAtom } from "jotai";
+import React, { ButtonHTMLAttributes, InputHTMLAttributes, useEffect, useState } from "react";
+import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom, CatalogItem } from "@/store";
 import { BottomButton, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
-import { classNames } from "@/utils";
+import { classNames, turnOffAutoComplete } from "@/utils";
 
 const gridFrameClasses = 'p-4 text-sm text-primary-400 bg-primary-800 border-primary-600/20 shadow-primary-700/30 border shadow rounded flex flex-col space-y-4';
 const dlgHeaderClasses = 'my-1 text-xs font-thin text-primary-400 bg-primary-800';
@@ -47,6 +47,52 @@ export function SelectButton({ selectedItemAtom, ...rest }: { selectedItemAtom: 
     );
 }
 
+export function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
+    return (
+        <input className={classNames("p-2 h-7 text-primary-300 bg-primary-700 rounded", className)} {...rest} />
+    );
+}
+
+function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; }) {
+    const selectedItem = useAtomValue(selectedItemAtom);
+
+    const nameAtom = useState(atom(selectedItem?.dispname || ''))[0];
+    const [localName, setLocalName] = useAtom(nameAtom);
+
+    const valueAtom = useState(atom(selectedItem?.value || ''))[0];
+    const [localValue, setLocalValue] = useAtom(valueAtom);
+
+    const typeAtom = useState(atom(!selectedItem ? '': selectedItem?.password ? 'psw' : 'txt'))[0];
+    const [localType, setLocalType] = useAtom(typeAtom);
+
+    useEffect(() => {
+        setLocalName(selectedItem?.dispname || '');
+        setLocalValue(selectedItem?.value || '');
+        setLocalType(!selectedItem ? '': selectedItem?.password ? 'psw' : 'txt');
+    }, [selectedItem]);
+
+    return (
+        <div className="">
+            <div className="flex flex-col items-start">
+                <div className="">Name</div>
+                <Input value={localName} onChange={(e) => setLocalName(e.target.value)} {...turnOffAutoComplete} />
+            </div>
+
+            <div className="flex flex-col items-start">
+                <div className="">Value</div>
+                <Input value={localValue} onChange={(e) => setLocalValue(e.target.value)} {...turnOffAutoComplete} />
+            </div>
+
+            <div className="flex flex-col items-start">
+                <div className="">Type</div>
+                <Input value={localType} onChange={(e) => setLocalType(e.target.value)} {...turnOffAutoComplete} />
+            </div>
+
+            <div className="mt-2 p-1 max-w-[340px] h-12 text-[.65rem] leading-3 bg-primary-700 rounde-sm">{JSON.stringify(selectedItem || {})}</div>
+        </div>
+    );
+}
+
 export function FldCatDlgBody() {
     const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
 
@@ -73,7 +119,7 @@ export function FldCatDlgBody() {
                 </div>
 
                 <SubTitleB />
-                <div className="max-w-[340px] h-32">{JSON.stringify(selectedItem || {})}</div>
+                <SelectedItemData selectedItemAtom={selectedItemAtom} />
             </div>
 
             {/* Buttons */}
