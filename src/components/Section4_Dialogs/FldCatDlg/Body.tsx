@@ -72,7 +72,7 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
     }, [selectedItem]);
 
     return (
-        <div className="">
+        <div className="text-xs flex flex-col space-y-2">
             <div className="flex flex-col items-start">
                 <div className="">Name</div>
                 <Input value={localName} onChange={(e) => setLocalName(e.target.value)} {...turnOffAutoComplete} />
