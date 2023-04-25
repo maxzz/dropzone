@@ -54,25 +54,21 @@ export function FldCatDlgBody() {
     const selectedItemAtom = useState(atom<CatalogItem | null>(null))[0];
     const selectedItem = useAtomValue(selectedItemAtom);
 
-    //const selectedIdxAtom = useState(atom(-1))[0];
-    //const selectedIdx = useAtomValue(selectedIdxAtom);
-
-    const fldCatItems = useAtomValue(fldCatItemsAtom);
-
     return (
         <div className={classNames(frameClasses, "min-w-[540px]")}>
             {/* <DialogHeader header="Field Catalog" /> */}
             {/* <DialogHeader header={<SubTitle />} /> */}
             <DialogHeader header={<Header />} />
 
+            {/* Body */}
             <div>
                 {/* <SubTitle /> */}
                 <div className="h-[50vh] min-h-[120px]">
                     <FldCatItemsGrid selectedItemAtom={selectedItemAtom} />
                 </div>
-            </div>
 
-            <div className="">{JSON.stringify(selectedItem || {})}</div>
+                <div className="">{JSON.stringify(selectedItem || {})}</div>
+            </div>
 
             {/* Buttons */}
             <div className="pt-4 flex items-center justify-end gap-x-2">

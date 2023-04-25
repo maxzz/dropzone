@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { CatalogItem, fldCatItemsAtom } from "@/store";
+import { CatalogItem, closeFldCatDialogAtom, fldCatItemsAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
 import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
 import { classNames } from "@/utils";
@@ -29,9 +29,10 @@ function TableHeader() {
 }
 
 export function FldCatItemsGrid({ selectedItemAtom }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null> }) {
+    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
     const fldCatItems = useAtomValue(fldCatItemsAtom);
 
-    const setSelectedItem = useSetAtom(selectedItemAtom);
+    const [selectedItem, setSelectedItem] = useAtom(selectedItemAtom);
 
     const selectedIdxAtom = useState(atom(-1))[0];
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
@@ -68,6 +69,7 @@ export function FldCatItemsGrid({ selectedItemAtom }: { selectedItemAtom: Primit
                 onDoubleClick={() => {
                     console.log('double', prevSelectedIdx.current);
                     setSelectedIdx(prevSelectedIdx.current);
+                    closeFldCatDialog({ fldCatItem: selectedItem })
                 }}
                 key={idx}
             >

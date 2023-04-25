@@ -9,7 +9,6 @@ export type FldCatInData = {
 };
 
 export type FldCatOutData = {
-    //dbid: string | undefined;
     fldCatItem: CatalogItem | null;
 };
 
