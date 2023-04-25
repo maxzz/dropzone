@@ -1,5 +1,5 @@
-import React from "react";
-import { useAtomValue, useSetAtom } from "jotai";
+import React, { useState } from "react";
+import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { FldCatItemsAtom, closeFldCatDialogAtom } from "@/store";
 import { BottomButton, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
@@ -30,6 +30,10 @@ function Header() {
 
 export function FldCatDlgBody() {
     const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
+    const selectedIdxAtom = useState(atom(-1))[0];
+
+    const selectedIdx = useAtomValue(selectedIdxAtom);
+
     return (
         <div className={classNames(frameClasses, "min-w-[540px]")}>
             {/* <DialogHeader header="Field Catalog" /> */}
@@ -39,9 +43,11 @@ export function FldCatDlgBody() {
             <div>
                 {/* <SubTitle /> */}
                 <div className="h-[50vh] min-h-[120px]">
-                    <FldCatItemsGrid />
+                    <FldCatItemsGrid selectedIdxAtom={selectedIdxAtom} />
                 </div>
             </div>
+
+            <div className="">{selectedIdx + 1}</div>
 
             {/* Buttons */}
             <div className="pt-4 flex items-center justify-end gap-x-2">

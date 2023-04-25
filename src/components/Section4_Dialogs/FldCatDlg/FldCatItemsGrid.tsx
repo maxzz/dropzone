@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAtomValue } from "jotai";
+import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { CatalogItem, FldCatItemsAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
 import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
@@ -28,15 +28,15 @@ function TableHeader() {
     );
 }
 
-export function FldCatItemsGrid() {
-    const names = useAtomValue(FldCatItemsAtom);
-    const [selectedIdx, setSelectedIdx] = useState(-1);
+export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: PrimitiveAtom<number>; }) {
+    const fldCatItems = useAtomValue(FldCatItemsAtom);
+    const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
 
     return (
         <Scroller className="pt-2 text-xs overflow-auto">
             <div className="grid grid-cols-[minmax(0,1fr)_max-content_minmax(0,1fr)] text-primary-400">
                 <TableHeader />
-                {names.map(mapItem)}
+                {fldCatItems.map(mapItem)}
             </div>
         </Scroller>
     );
@@ -57,7 +57,7 @@ export function FldCatItemsGrid() {
                 </div>
 
                 <div className={col2Classes}>
-                    {FieldIcon(item.password, "w-4 h-4 opacity-25")}
+                    {FieldIcon(item.password, "w-4 h-4 opacity-50")}
                     <div className="whitespace-nowrap">
                         {item.dispname}
                     </div>
