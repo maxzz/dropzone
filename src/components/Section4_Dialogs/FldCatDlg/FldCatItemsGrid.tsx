@@ -11,7 +11,7 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
     return Icon;
 }
 
-const rowClasses = 'px-2 col-start-2 flex space-x-2';
+const rowClasses = 'px-2 py-px col-start-2 flex items-center space-x-2';
 const col1Classes = 'w-[4ch] text-right';
 const col2Classes = 'w-[48%] flex items-center gap-x-2 leading-[18px]';
 const col3Classes = 'w-[48%] whitespace-nowrap font-mono text-[.6rem]';
@@ -46,13 +46,11 @@ export function FldCatItemsGrid() {
             <div
                 className={classNames(
                     rowClasses,
-                    "hover:bg-primary-700 cursor-default select-none",
-                    selectedIdx === idx && "text-primary-900 bg-primary-400 rounded-sm hover:text-red-500 hover:bg-primay-400",
+                    "cursor-default select-none",
+                    selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
                 )}
+                onClick={() => setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx)}
                 key={idx}
-                onClick={() => {
-                    setSelectedIdx((v) => v !== idx ? idx : -1);
-                }}
             >
                 <div className={col1Classes}>
                     {idx + 1}
