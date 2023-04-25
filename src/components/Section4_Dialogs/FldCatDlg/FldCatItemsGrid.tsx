@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
+import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { CatalogItem, fldCatItemsAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
 import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
@@ -28,8 +28,12 @@ function TableHeader() {
     );
 }
 
-export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: PrimitiveAtom<number>; }) {
+export function FldCatItemsGrid({ selectedItemAtom }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null> }) {
     const fldCatItems = useAtomValue(fldCatItemsAtom);
+
+    const setSelectedItem = useSetAtom(selectedItemAtom);
+
+    const selectedIdxAtom = useState(atom(-1))[0];
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
     
     const prevSelectedIdx = useRef(selectedIdx);
@@ -37,6 +41,7 @@ export function FldCatItemsGrid({ selectedIdxAtom }: { selectedIdxAtom: Primitiv
         if (selectedIdx !== -1) {
             prevSelectedIdx.current = selectedIdx;
         }
+        setSelectedItem(selectedIdx === -1 ? null : fldCatItems[selectedIdx]);
     }, [selectedIdx]);
 
     return (

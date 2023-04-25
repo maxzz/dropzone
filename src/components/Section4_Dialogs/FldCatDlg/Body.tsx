@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, useState } from "react";
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom } from "@/store";
+import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom, CatalogItem } from "@/store";
 import { BottomButton, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames } from "@/utils";
@@ -28,32 +28,34 @@ function Header() {
     );
 }
 
-export function SelectButton({ selectedIdxAtom, ...rest }: { selectedIdxAtom: PrimitiveAtom<number>; } & ButtonHTMLAttributes<HTMLButtonElement>) {
-    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
+// export function SelectButton({ selectedIdxAtom, ...rest }: { selectedIdxAtom: PrimitiveAtom<number>; } & ButtonHTMLAttributes<HTMLButtonElement>) {
+//     const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
 
-    const selectedIdx = useAtomValue(selectedIdxAtom);
-    const fldCatItems = useAtomValue(fldCatItemsAtom);
+//     const selectedIdx = useAtomValue(selectedIdxAtom);
+//     const fldCatItems = useAtomValue(fldCatItemsAtom);
 
-    return (
-        <BottomButton
-            className={classNames("disabled:opacity-25")}
-            disabled={selectedIdx === -1}
-            onClick={() => closeFldCatDialog({ dbid: fldCatItems[selectedIdx].dbname })}
-            {...rest}
-        >
-            Select
-        </BottomButton>
-    );
-}
-
+//     return (
+//         <BottomButton
+//             className={classNames("disabled:opacity-25")}
+//             disabled={selectedIdx === -1}
+//             onClick={() => closeFldCatDialog({ dbid: fldCatItems[selectedIdx].dbname })}
+//             {...rest}
+//         >
+//             Select
+//         </BottomButton>
+//     );
+// }
 
 export function FldCatDlgBody() {
     const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
 
     const inData = useAtomValue(fldCatTriggerAtom);
 
-    const selectedIdxAtom = useState(atom(-1))[0];
-    const selectedIdx = useAtomValue(selectedIdxAtom);
+    const selectedItemAtom = useState(atom<CatalogItem | null>(null))[0];
+    const selectedItem = useAtomValue(selectedItemAtom);
+
+    //const selectedIdxAtom = useState(atom(-1))[0];
+    //const selectedIdx = useAtomValue(selectedIdxAtom);
 
     const fldCatItems = useAtomValue(fldCatItemsAtom);
 
@@ -66,24 +68,24 @@ export function FldCatDlgBody() {
             <div>
                 {/* <SubTitle /> */}
                 <div className="h-[50vh] min-h-[120px]">
-                    <FldCatItemsGrid selectedIdxAtom={selectedIdxAtom} />
+                    <FldCatItemsGrid selectedItemAtom={selectedItemAtom} />
                 </div>
             </div>
 
-            <div className="">{selectedIdx + 1}</div>
+            <div className="">{JSON.stringify(selectedItem || {})}</div>
 
             {/* Buttons */}
             <div className="pt-4 flex items-center justify-end gap-x-2">
                 {!!inData
                     ?
-                    // <BottomButton
-                    //     className={classNames("disabled:opacity-25")}
-                    //     disabled={selectedIdx === -1}
-                    //     onClick={() => closeFldCatDialog({ dbid: fldCatItems[selectedIdx].dbname })}
-                    // >
-                    //     Select
-                    // </BottomButton>
-                    <SelectButton selectedIdxAtom={selectedIdxAtom} />
+                    <BottomButton
+                        className={classNames("disabled:opacity-25")}
+                        disabled={!selectedItem}
+                        onClick={() => closeFldCatDialog({ fldCatItem: selectedItem })}
+                    >
+                        Select
+                    </BottomButton>
+                    // <SelectButton selectedIdxAtom={selectedIdxAtom} />
                     :
                     <BottomButton>OK</BottomButton>
                 }

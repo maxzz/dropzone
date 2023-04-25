@@ -1,3 +1,4 @@
+import { CatalogItem } from "@/store/manifest";
 import { PrimitiveAtom, atom } from "jotai";
 
 // Field catalog dialog UI state
@@ -8,7 +9,8 @@ export type FldCatInData = {
 };
 
 export type FldCatOutData = {
-    dbid: string | undefined;
+    //dbid: string | undefined;
+    fldCatItem: CatalogItem | null;
 };
 
 export const fldCatTriggerAtom = atom<FldCatInData | null>(null);
