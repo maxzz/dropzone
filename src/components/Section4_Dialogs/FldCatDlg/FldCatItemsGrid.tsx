@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { CatalogItem, closeFldCatDialogAtom, fldCatItemsAtom } from "@/store";
+import { CatalogItem, fldCatItemsAtom, fldCatTriggerAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
 import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
 import { classNames } from "@/utils";
@@ -30,13 +30,15 @@ function TableHeader() {
 
 export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; onDoubleClick: (item: CatalogItem) => void; }) {
     const fldCatItems = useAtomValue(fldCatItemsAtom);
-
     const setSelectedItem = useSetAtom(selectedItemAtom);
 
     const selectedIdxAtom = useState(atom(-1))[0];
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
-
     const prevSelectedIdx = useRef(selectedIdx);
+
+    const inData = useAtomValue(fldCatTriggerAtom);
+    const needSelect = !!inData?.outBoxAtom;
+
     useEffect(() => {
         if (selectedIdx !== -1) {
             prevSelectedIdx.current = selectedIdx;
@@ -61,15 +63,8 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedI
                     "cursor-default select-none",
                     selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
                 )}
-                onClick={() => {
-                    console.log('click');
-                    setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx);
-                }}
-                onDoubleClick={() => {
-                    console.log('double', prevSelectedIdx.current);
-                    setSelectedIdx(prevSelectedIdx.current);
-                    onDoubleClick(fldCatItems[prevSelectedIdx.current]);
-                }}
+                onClick={() => setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx)}
+                onDoubleClick={() => { setSelectedIdx(prevSelectedIdx.current); needSelect && onDoubleClick(fldCatItems[prevSelectedIdx.current]); }}
                 key={idx}
             >
                 <div className={col1Classes}>

@@ -97,7 +97,7 @@ export function SectionGenerationBy({ atoms }: { atoms: Atomize<PolicyUi>; }) {
     );
 }
 
-export const dlgBottomButtonClasses = "px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded select-none";
+export const dlgBottomButtonClasses = "px-4 py-2 inline-block hover:bg-primary-700 border-primary-500 active:scale-[.97] border rounded disabled:opacity-25 select-none";
 
 export function BottomButton({ className, children, ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) {
     return (
