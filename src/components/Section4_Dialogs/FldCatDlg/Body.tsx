@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { fldCatItemsAtom, closeFldCatDialogAtom } from "@/store";
+import React, { ButtonHTMLAttributes, useState } from "react";
+import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom } from "@/store";
 import { BottomButton, DialogHeader } from "../../Section2_Main/Panel2_Right/Body_Manifest/ManiSection3_Policy/PolicyEditorDlg/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames } from "@/utils";
@@ -28,10 +28,31 @@ function Header() {
     );
 }
 
+export function SelectButton({ selectedIdxAtom, ...rest }: { selectedIdxAtom: PrimitiveAtom<number>; } & ButtonHTMLAttributes<HTMLButtonElement>) {
+    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
+
+    const selectedIdx = useAtomValue(selectedIdxAtom);
+    const fldCatItems = useAtomValue(fldCatItemsAtom);
+
+    return (
+        <BottomButton
+            className={classNames("disabled:opacity-25")}
+            disabled={selectedIdx === -1}
+            onClick={() => closeFldCatDialog({ dbid: fldCatItems[selectedIdx].dbname })}
+            {...rest}
+        >
+            Select
+        </BottomButton>
+    );
+}
+
+
 export function FldCatDlgBody() {
     const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
-    const selectedIdxAtom = useState(atom(-1))[0];
 
+    const inData = useAtomValue(fldCatTriggerAtom);
+
+    const selectedIdxAtom = useState(atom(-1))[0];
     const selectedIdx = useAtomValue(selectedIdxAtom);
 
     const fldCatItems = useAtomValue(fldCatItemsAtom);
@@ -53,14 +74,20 @@ export function FldCatDlgBody() {
 
             {/* Buttons */}
             <div className="pt-4 flex items-center justify-end gap-x-2">
-                {/* <BottomButton>OK</BottomButton> */}
-                <BottomButton
-                    className={classNames("disabled:opacity-25")}
-                    disabled={selectedIdx === -1}
-                    onClick={() => closeFldCatDialog({ dbid: fldCatItems[selectedIdx].dbname })}
-                >
-                    Select
-                </BottomButton>
+                {!!inData
+                    ?
+                    // <BottomButton
+                    //     className={classNames("disabled:opacity-25")}
+                    //     disabled={selectedIdx === -1}
+                    //     onClick={() => closeFldCatDialog({ dbid: fldCatItems[selectedIdx].dbname })}
+                    // >
+                    //     Select
+                    // </BottomButton>
+                    <SelectButton selectedIdxAtom={selectedIdxAtom} />
+                    :
+                    <BottomButton>OK</BottomButton>
+                }
+
                 <BottomButton>Cancel</BottomButton>
             </div>
         </div>
