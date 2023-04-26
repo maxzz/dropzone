@@ -49,16 +49,11 @@ export function SelectButton({ selectedItemAtom, ...rest }: { selectedItemAtom: 
 
 const inputHeight28Classes = 'px-2 py-1.5 text-xs'; // h-7
 const inputHeight32Classes = 'px-2 py-1.5 text-sm'; // h-8
+const inputFocusClasses = "focus:outline-none focus:ring-1 focus:ring-primary-400  focus:ring-offset-1 focus:ring-offset-primary-800";
 
 export function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
     return (
-        <input
-            className={classNames(
-                "px-2 py-1.5 text-primary-300 bg-primary-700 rounded",
-                className,
-            )}
-            {...rest}
-        />
+        <input className={classNames("px-2 py-1.5 text-primary-300 bg-primary-700 rounded", inputFocusClasses, className,)} {...rest} />
     );
 }
 
@@ -137,7 +132,7 @@ export function FldCatDlgBody() {
                     ? (
                         <>
                             <SelectButton selectedItemAtom={selectedItemAtom} />
-                            <BottomButton>Cancel</BottomButton>
+                            <BottomButton className={inputFocusClasses}>Cancel</BottomButton>
                         </>
                     )
                     : <BottomButton>Close</BottomButton>
