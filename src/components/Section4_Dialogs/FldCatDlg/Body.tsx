@@ -47,9 +47,18 @@ export function SelectButton({ selectedItemAtom, ...rest }: { selectedItemAtom: 
     );
 }
 
+const inputHeight28Classes = 'px-2 py-1.5 text-xs'; // h-7
+const inputHeight32Classes = 'px-2 py-1.5 text-sm'; // h-8
+
 export function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
     return (
-        <input className={classNames("p-2 h-7 text-primary-300 bg-primary-700 rounded", className)} {...rest} />
+        <input
+            className={classNames(
+                "px-2 py-1.5 text-primary-300 bg-primary-700 rounded",
+                className,
+            )}
+            {...rest}
+        />
     );
 }
 
@@ -62,13 +71,13 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
     const valueAtom = useState(atom(selectedItem?.value || ''))[0];
     const [localValue, setLocalValue] = useAtom(valueAtom);
 
-    const typeAtom = useState(atom(!selectedItem ? '': selectedItem?.password ? 'psw' : 'txt'))[0];
+    const typeAtom = useState(atom(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt'))[0];
     const [localType, setLocalType] = useAtom(typeAtom);
 
     useEffect(() => {
         setLocalName(selectedItem?.dispname || '');
         setLocalValue(selectedItem?.value || '');
-        setLocalType(!selectedItem ? '': selectedItem?.password ? 'psw' : 'txt');
+        setLocalType(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt');
     }, [selectedItem]);
 
     return (
@@ -88,7 +97,7 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
                 <Input value={localType} onChange={(e) => setLocalType(e.target.value)} {...turnOffAutoComplete} />
             </div>
 
-            <div className="mt-2 p-1 max-w-[340px] h-12 text-[.65rem] leading-3 bg-primary-700 rounde-sm">{JSON.stringify(selectedItem || {})}</div>
+            <div className="mt-2 p-1 max-w-[340px] min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded">{JSON.stringify(selectedItem || {})}</div>
         </div>
     );
 }
