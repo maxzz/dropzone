@@ -76,25 +76,28 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
     }, [selectedItem]);
 
     return (
-        <div className="text-xs flex flex-col space-y-2">
-            <div className="flex flex-col items-start">
-                <div className="">Name</div>
-                <Input value={localName} onChange={(e) => setLocalName(e.target.value)} {...turnOffAutoComplete} />
+        <div className="text-xs grid">
+
+            <div className="text-xs flex space-x-2">
+                <div className="flex flex-col items-start">
+                    <div className="">Type</div>
+                    <Input className="w-[3rem]" value={localType} onChange={(e) => setLocalType(e.target.value)} {...turnOffAutoComplete} />
+                </div>
+
+                <div className="flex flex-col items-start">
+                    <div className="">Name</div>
+                    <Input value={localName} onChange={(e) => setLocalName(e.target.value)} {...turnOffAutoComplete} />
+                </div>
+
+                <div className="flex flex-col items-start">
+                    <div className="">Value</div>
+                    <Input value={localValue} onChange={(e) => setLocalValue(e.target.value)} {...turnOffAutoComplete} />
+                </div>
             </div>
 
-            <div className="flex flex-col items-start">
-                <div className="">Value</div>
-                <Input value={localValue} onChange={(e) => setLocalValue(e.target.value)} {...turnOffAutoComplete} />
-            </div>
-
-            <div className="flex flex-col items-start">
-                <div className="">Type</div>
-                <Input value={localType} onChange={(e) => setLocalType(e.target.value)} {...turnOffAutoComplete} />
-            </div>
-
-            <div className="mt-2 p-1 max-w-[340px] min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded">{JSON.stringify(selectedItem || {})}</div>
+            <div className="mt-2 p-1  min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded">{JSON.stringify(selectedItem || {})}</div>
         </div>
-    );
+    );//max-w-[340px]
 }
 
 export function FldCatDlgBody() {
@@ -107,7 +110,7 @@ export function FldCatDlgBody() {
     const selectedItem = useAtomValue(selectedItemAtom);
 
     return (
-        <div className={classNames(gridFrameClasses, "min-w-[540px]")}>
+        <div className={classNames(gridFrameClasses, "w-[540px]")}>
             {/* <DialogHeader header="Field Catalog" /> */}
             {/* <DialogHeader header={<SubTitle />} /> */}
             <DialogHeader header={<Header />} />
