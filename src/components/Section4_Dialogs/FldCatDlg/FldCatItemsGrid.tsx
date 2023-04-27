@@ -13,8 +13,9 @@ function FieldIcon(isPsw: boolean | undefined, className: string) {
 
 const rowClasses = 'px-2 py-px col-start-2 flex items-center space-x-2';
 const col1Classes = 'w-[4ch] text-right';
-const col2Classes = 'w-[48%] flex items-center gap-x-2 leading-[18px]';
-const col3Classes = 'w-[48%] whitespace-nowrap font-mono text-[.6rem]';
+const col2Classes = 'w-[1.5rem] flex items-center justify-center gap-x-2 leading-[18px]';
+const col3Classes = 'w-[48%] flex items-center gap-x-2 leading-[18px]';
+const col4Classes = 'w-[48%] whitespace-nowrap font-mono text-[.6rem]';
 
 const tableHeaderClasses = 'mb-2 ml-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
 
@@ -22,8 +23,9 @@ function TableHeader() {
     return (
         <div className={rowClasses}>
             <div className={`${col1Classes} ${tableHeaderClasses}`}>#</div>
-            <div className={`${col2Classes} ${tableHeaderClasses}`}>Name</div>
-            <div className={`${col3Classes} ${tableHeaderClasses}`}>ID</div>
+            <div className={`${col2Classes} ${tableHeaderClasses}`}>Type</div>
+            <div className={`${col3Classes} ${tableHeaderClasses}`}>Name</div>
+            <div className={`${col4Classes} ${tableHeaderClasses}`}>ID</div>
         </div>
     );
 }
@@ -73,12 +75,13 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedI
 
                 <div className={col2Classes}>
                     {FieldIcon(item.password, "w-4 h-4 opacity-50")}
-                    <div className="whitespace-nowrap">
-                        {item.dispname}
-                    </div>
                 </div>
 
-                <div className={col3Classes}>
+                <div className={`${col3Classes} whitespace-nowrap`}>
+                    {item.dispname}
+                </div>
+
+                <div className={col4Classes}>
                     {item.dbname}
                 </div>
             </div>
