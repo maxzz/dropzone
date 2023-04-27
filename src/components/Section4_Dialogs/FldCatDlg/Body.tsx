@@ -69,10 +69,14 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
     const typeAtom = useState(atom(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt'))[0];
     const [localType, setLocalType] = useAtom(typeAtom);
 
+    const ownernoteAtom = useState(atom(selectedItem?.ownernote || ''))[0];
+    const [ownernote, setOwnernote] = useAtom(ownernoteAtom);
+
     useEffect(() => {
         setLocalName(selectedItem?.dispname || '');
         setLocalValue(selectedItem?.value || '');
         setLocalType(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt');
+        setOwnernote(selectedItem?.ownernote || JSON.stringify(selectedItem || {}));
     }, [selectedItem]);
 
     return (
@@ -95,7 +99,15 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
                 </div>
             </div>
 
-            <div className="mt-2 p-1  min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded">{JSON.stringify(selectedItem || {})}</div>
+            <div className="mt-2 flex flex-col items-start">
+                <div className="">Description</div>
+                <textarea
+                    className="p-1 w-full min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded" rows={3}
+                    value={ownernote}
+                    onChange={(e) => { setOwnernote(e.target.value); }}
+                    {...turnOffAutoComplete}
+                />
+            </div>
         </div>
     );//max-w-[340px]
 }
