@@ -12,7 +12,10 @@ const subSectionClasses = 'mt-4 pb-0.5 text-sm text-primary-400 bg-primary-800 b
 function SubTitleA() {
     return (
         <div className={subSectionClasses}>
-            Catlog items
+            <div className="flex items-center justify-between">
+                <div className="">Catlog items</div>
+                <button className="px-2 border border-primary-700/50 rounded">+</button>
+            </div>
         </div>
     );
 }
