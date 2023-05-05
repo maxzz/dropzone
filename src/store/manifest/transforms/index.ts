@@ -3,4 +3,4 @@ export * from './transform-mani-pool';
 export * from './transform-time';
 export * from './transform-xml-enc';
 export * from './transform-path';
-export * from './file-to-meta';
+export * from '../io/file-to-meta';
