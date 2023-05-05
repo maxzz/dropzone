@@ -1,7 +1,7 @@
-import { Catalog, Mani, Meta } from '../mani';
+import { Catalog, Mani, Meta, fieldTyp4Str } from '../mani';
 import { FieldCatalog } from '../field-catalog';
 import { removeQuery, urlDomain } from '../url';
-import { getPool, fieldTyp4Str } from './transform-xml-mani';
+import { getPool } from './transform-xml-mani';
 import { TransformValue } from './transform-valuelife';
 import { FieldPath } from './transform-path';
 import { uuid } from '@/utils';

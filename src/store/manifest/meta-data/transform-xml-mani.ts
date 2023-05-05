@@ -1,13 +1,5 @@
 import { Transform } from "..";
 import { Mani } from "../mani";
-import { FieldTyp } from "../mani-types";
-
-// FieldTyp convert
-
-export function fieldTyp4Str(field: Mani.Field): FieldTyp {
-    let rv = FieldTyp[field.type] || FieldTyp.und;
-    return rv === FieldTyp.edit && field.password ? FieldTyp.psw : rv;
-}
 
 // Manifest specific functions
 
