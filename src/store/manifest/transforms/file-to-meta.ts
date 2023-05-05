@@ -2,7 +2,7 @@ import { Catalog, FieldCatalog, Mani, Meta, fieldTyp4Str } from '../mani-types';
 import { getPool } from './transform-mani-pool';
 import { TransformValue } from './transform-valuelife';
 import { FieldPath } from './transform-path';
-import { removeQuery, urlDomain } from '../url';
+import { removeQuery, urlDomain } from './url';
 import { uuid } from '@/utils';
 
 namespace Bailouts {

@@ -1,5 +1,5 @@
-import { FileUs } from '../store-types';
-import { makeXML, showError } from '.';
+import { FileUs } from '../../store-types';
+import { makeXML, showError } from '..';
 //import { fileDownload } from '@/utils/file-download';
 
 export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; } | { xml: string; error?: undefined; } {
