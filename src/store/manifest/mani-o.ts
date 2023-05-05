@@ -1,7 +1,7 @@
 import { Mani } from "./mani-types";
 import { parseOptionsRead } from "./mani-i";
 import { showError } from "./mani-show-error";
-import { TransformEncoding } from "./meta-data";
+import { TransformEncoding } from "./transforms";
 import { J2xParser } from "@/utils/json2xml";
 
 export const parseOptionsWrite = {
