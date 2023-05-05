@@ -1,4 +1,4 @@
-import { Catalog } from "./mani";
+import { Catalog } from "./mani-types";
 
 // Catalog
 

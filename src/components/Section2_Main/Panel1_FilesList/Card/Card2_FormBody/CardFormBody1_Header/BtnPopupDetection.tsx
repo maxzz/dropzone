@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUsAtomType } from '@/store';
-import { Mani, Matching, Transform } from '@/store/manifest';
+import { Mani, Matching, TransformEncoding } from '@/store/manifest';
 import { ToggleWithPortal } from './HeaderButton';
 import { UITableFromObject } from '../../Card4_UI/UITableFromObject';
 
@@ -49,8 +49,8 @@ function filterDetection(detection: Mani.Detection) {
         commandline = undefined;
     }
 
-    processname && (processname = Transform.persentRemove(processname));
-    commandline && (commandline = Transform.xmlRestore(Transform.persentRemove(commandline)));
+    processname && (processname = TransformEncoding.persentRemove(processname));
+    commandline && (commandline = TransformEncoding.xmlRestore(TransformEncoding.persentRemove(commandline)));
 
     return {
         ...(matchOptions && { 'match as': matchOptions.join }),

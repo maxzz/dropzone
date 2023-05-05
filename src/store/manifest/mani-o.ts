@@ -1,7 +1,7 @@
-import { Mani } from "./mani";
+import { Mani } from "./mani-types";
 import { parseOptionsRead } from "./mani-i";
 import { showError } from "./mani-show-error";
-import { Transform } from "./meta-data";
+import { TransformEncoding } from "./meta-data";
 import { J2xParser } from "@/utils/json2xml";
 
 export const parseOptionsWrite = {
@@ -11,7 +11,7 @@ export const parseOptionsWrite = {
     attrValueProcessor: (attrValue: string | any, attrName: string): string => {
         const val =
             typeof attrValue === 'string'
-                ? Transform.xmlEscape(attrValue)
+                ? TransformEncoding.xmlEscape(attrValue)
                 : typeof attrValue === 'boolean'
                     ? attrValue ? '1' : '0'
                     : attrValue; //console.log(`    ${attrName} = ${val}`);

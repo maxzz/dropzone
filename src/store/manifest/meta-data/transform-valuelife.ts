@@ -1,4 +1,4 @@
-import { Mani, ValueAs, ValueLife, fieldTyp4Str } from "../mani";
+import { Mani, ValueAs, ValueLife, fieldTyp4Str } from "../mani-types";
 
 export namespace TransformValue {
 

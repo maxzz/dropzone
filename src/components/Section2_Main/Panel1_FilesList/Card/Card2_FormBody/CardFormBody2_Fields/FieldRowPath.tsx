@@ -1,5 +1,5 @@
 import React, { Fragment, ReactNode } from 'react';
-import { Meta, MPath, Transform } from '@/store/manifest';
+import { Meta, MPath, TransformEncoding } from '@/store/manifest';
 
 function Section({ label }: { label: ReactNode; }) {
     return (
@@ -22,7 +22,7 @@ function PartSid({ part, label }: { part: MPath.sid; label: string; }) {
                     {items.map(([key, val]) => (
                         <Fragment key={key}>
                             <div className="font-bold text-primary-700">{key}</div>
-                            <div>{Transform.xmlRestore(val) || `""`}</div>
+                            <div>{TransformEncoding.xmlRestore(val) || `""`}</div>
                         </Fragment>
                     ))}
                 </div>

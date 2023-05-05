@@ -1,4 +1,4 @@
-export * from './mani';
+export * from './mani-types';
 
 export * from './field-catalog';
 

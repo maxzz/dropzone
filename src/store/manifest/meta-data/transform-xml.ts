@@ -1,4 +1,4 @@
-export namespace Transform { // encode/decode functions
+export namespace TransformEncoding { // encode/decode functions
 
     export function removeEscapeChars(s: string, escapeChar: string): string {
         // 0. '\1\\ab\2\.3' --> '1\ab2.3' with escapeChar: '\' i.e. remove non duplicated.
@@ -70,4 +70,4 @@ export namespace Transform { // encode/decode functions
         }
     }
 
-} //namespace Transform
+} //namespace TransformEncoding

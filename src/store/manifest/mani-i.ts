@@ -1,6 +1,6 @@
 import { XMLParser } from 'fast-xml-parser';
-import { Catalog, Mani } from './mani';
-import { Transform } from './meta-data';
+import { Catalog, Mani } from './mani-types';
+import { TransformEncoding } from './meta-data';
 //import test from '../../assets/{ff06f637-4270-4a0e-95a3-6f4995dceae6}.dpm';
 
 export function beautifyXMLManifest(manifest: Mani.Manifest): Mani.Manifest {
@@ -116,14 +116,14 @@ export namespace Matching {
         if (m) {
             rv.style = +m[1] as Style; // style
             rv.opt = +m[2] as Options; // options
-            rv.url = Transform.cppRestore(m[3]); // pattern
+            rv.url = TransformEncoding.cppRestore(m[3]); // pattern
         }
         return rv;
     }
 
     export function makeRawMatchData({ style, opt, url }: RawMatchData, ourl: string): string {
         url = (style !== Style.undef ? url || '' : ourl).trim();
-        return style !== Style.undef || opt !== Options.undef ? `[m0]:${style}:${opt}:${Transform.colonEscape(url)}` : url;
+        return style !== Style.undef || opt !== Options.undef ? `[m0]:${style}:${opt}:${TransformEncoding.colonEscape(url)}` : url;
     }
 
     function styleName(style: number): string {

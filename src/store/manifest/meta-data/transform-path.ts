@@ -1,6 +1,6 @@
-import { Transform } from "..";
-import { MPath, Meta } from "../mani";
-import { getPoolName } from "./transform-xml-mani";
+import { MPath, Meta } from "../mani-types";
+import { TransformEncoding } from "..";
+import { getPoolName } from "./transform-mani-pool";
 
 export namespace FieldPath {
     function p4a(pool: string[], s: string): MPath.p4a {
@@ -8,8 +8,8 @@ export namespace FieldPath {
         let rv: MPath.p4a = {
             rnumber: 0,
             roleString: getPoolName(pool, ss[1]),
-            className: Transform.cppRestore(getPoolName(pool, ss[2])),
-            name: Transform.cppRestore(getPoolName(pool, ss[3]))
+            className: TransformEncoding.cppRestore(getPoolName(pool, ss[2])),
+            name: TransformEncoding.cppRestore(getPoolName(pool, ss[3]))
         };
         return rv;
     }
@@ -17,7 +17,7 @@ export namespace FieldPath {
     function sid(pool: string[], v: string): MPath.sid {
         let sid = {} as any;
         v.split('.').forEach((_, index) => {
-            let s = Transform.cppRestore(getPoolName(pool, _));
+            let s = TransformEncoding.cppRestore(getPoolName(pool, _));
             switch (index) {
                 case 0: sid.version = s; break;
                 case 1: sid.generatedId = s; break;
