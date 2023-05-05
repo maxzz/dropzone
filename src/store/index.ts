@@ -19,11 +19,6 @@ export {
     orderNames,
 } from './store-types';
 
-export type {
-    CatalogItem,
-    FieldCatalog,
-} from './manifest/field-catalog';
-
 export * from './atoms';
 
 export {

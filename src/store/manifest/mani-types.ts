@@ -109,6 +109,8 @@ export module Mani {
 
 } //module Mani
 
+// Catalog
+
 export module Catalog {         // pmat/include/ots_storagecatalog_io.h
     export interface Descriptor {
         id?: string;            // default as guid
@@ -129,6 +131,18 @@ export module Catalog {         // pmat/include/ots_storagecatalog_io.h
         names: Name[];
     }
 }
+
+export type CatalogItem =
+    Catalog.Name
+    & {
+        index: number;          // index in loaded file.
+        uuid: number;           // local (in memory only) unique ID (not updated through one session).
+        mru: number;            // most recently used timestamp (as uuid but updated on each use through one session)
+    };
+
+export type FieldCatalog = {
+    items: CatalogItem[];
+};
 
 export module MPath {           // Meta path. Manifest unpacked path data
 
@@ -322,14 +336,14 @@ export const enum ValueAs {
 export const LIST_valueAskNames = ["Ask - Resuse", "Ask - Confirm", "Ask Always ",];
 
 export type ValueLife = {
-    valueAs: ValueAs;       // how to treat value from user
-    value?: string;         // key in 'references' if started with '@' otherwise it's a constant value
-    isRef?: boolean;        // true if value started with '@' but not '@@'
+    valueAs: ValueAs;           // how to treat value from user
+    value?: string;             // key in 'references' if started with '@' otherwise it's a constant value
+    isRef?: boolean;            // true if value started with '@' but not '@@'
 
-    fType?: FieldTyp;       // now it has type psw and edit/psw/rest information
-  //isPsw?: boolean;        // it comes from field.password, and not from ref @password (ref should reflect field type not opposite).
-  //isBtn?: boolean;        // any type but not edit or password
-    isNon?: boolean;        // true when value is empty and valueAs is default AskReuse, but input cleared by user
+    fType?: FieldTyp;           // now it has type psw and edit/psw/rest information
+  //isPsw?: boolean;            // it comes from field.password, and not from ref @password (ref should reflect field type not opposite).
+  //isBtn?: boolean;            // any type but not edit or password
+    isNon?: boolean;            // true when value is empty and valueAs is default AskReuse, but input cleared by user
 };
 
 export type ReferenceItem = { i: number; f: string; s: string; }; // i - index; f - full name; s - short name.
@@ -384,9 +398,7 @@ export enum FieldTyp { //type FieldTypeStr = 'edit' | 'button' | 'list' | 'combo
     psw, // combined value 'edit' and 'password'
 }
 
-// FieldTyp convert
-
-export function fieldTyp4Str(field: Mani.Field): FieldTyp {
+export function fieldTyp4Str(field: Mani.Field): FieldTyp { // Convert FieldTyp from string
     let rv = FieldTyp[field.type] || FieldTyp.und;
     return rv === FieldTyp.edit && field.password ? FieldTyp.psw : rv;
 }
@@ -397,9 +409,9 @@ export function fieldTyp4Str(field: Mani.Field): FieldTyp {
     Form:
     namespace SUBMITTYPE {
         enum type_t {
-            undefined = 0,				// For old manifests its undefined
-            dosubmit,					// Force submit data, even if submit is not mutched or not detected
-            nosubmit,					// Don't submit data. This is statement by User or Admin.
+            undefined = 0,		// For old manifests its undefined
+            dosubmit,			// Force submit data, even if submit is not mutched or not detected
+            nosubmit,			// Don't submit data. This is statement by User or Admin.
         };
 
         inline string_t toString(const SUBMITTYPE::type_t& v_) {

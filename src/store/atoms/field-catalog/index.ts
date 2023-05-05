@@ -1,4 +1,4 @@
-import { CatalogItem } from '@/store/manifest/field-catalog';
+import { CatalogItem } from '@/store/manifest';
 
 export * from './all-items';
 export * from './mru-items';

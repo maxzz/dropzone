@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { CatalogItem, fldCatItemsAtom, fldCatTriggerAtom } from "@/store";
+import { CatalogItem } from "@/store/manifest";
+import { fldCatItemsAtom, fldCatTriggerAtom } from "@/store";
 import { fieldIcons } from "@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon";
 import { Scroller } from "@/components/Section2_Main/Panel2_Right/Scroller";
 import { classNames } from "@/utils";
