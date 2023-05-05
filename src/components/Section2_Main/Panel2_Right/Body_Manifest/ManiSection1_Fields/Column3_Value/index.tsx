@@ -27,10 +27,10 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
     const idxToValues = listAskNames.length;
     const idxToRefs = idxToValues + listValues.length;
 
-    const dropdown = [...listAskNames, ...listValues, ...listRefs];
+    const dropdownAllItems = [...listAskNames, ...listValues, ...listRefs];
     const dropdownIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxToValues), ...listRefs.map(() => idxToRefs)];
 
-    dropdown.at(-1) === '-' && dropdown.pop();
+    dropdownAllItems.at(-1) === '-' && dropdownAllItems.pop();
 
     const inputText =
         valueLife.isRef
@@ -57,14 +57,16 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
     const title = disabled ? 'Buttons have no state value' : valueLife.isRef && refName2Full(valueLife.value, isPsw) || undefined;
 
     return {
-        dropdown,
-        dropdownIdxs,
+        dropdownAllItems,
         dropdownSelectedIndex,
 
-        idxToRefs,
-        idxToValues,
-        listValues,
-        isPsw,
+        context: {
+            dropdownIdxs,
+            idxToRefs,
+            idxToValues,
+            listValues,
+            isPsw,
+        },
 
         inputText,
         showAsRef,
@@ -89,20 +91,41 @@ function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) 
     }
 }
 
+type Context = {
+    dropdownIdxs: number[];
+    idxToRefs: number;
+    idxToValues: number;
+    listValues: string[];
+    isPsw: boolean;
+};
+
+function mapIndexToValueLife(idx: number, v: ValueLife, context: Context): ValueLife {
+    const { dropdownIdxs, idxToRefs, idxToValues, listValues, isPsw, } = context;
+    const groupIdx = dropdownIdxs[idx];
+    if (groupIdx === idxToRefs) {
+        return { ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, };
+    } else if (groupIdx === idxToValues) {
+        return { ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, };
+    } else {
+        return { ...v, value: '', isRef: false, valueAs: idx, isNon: false, };
+    }
+}
+
 export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; choosevalue: string | undefined; } & InputHTMLAttributes<HTMLInputElement>) {
 
     const [useIt, setUseIt] = useAtom(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
 
     const {
-        dropdown,
-        dropdownIdxs,
+        dropdownAllItems,
         dropdownSelectedIndex,
 
-        idxToRefs,
-        idxToValues,
-        listValues,
-        isPsw,
+        context,
+        // dropdownIdxs,
+        // idxToRefs,
+        // idxToValues,
+        // listValues,
+        // isPsw,
 
         inputText,
         showAsRef,
@@ -112,19 +135,20 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
 
     const showInputText = !useIt && !valueLife.isRef && !valueLife.value;
 
-    function mapIndexToValueLife(idx: number, v: ValueLife): ValueLife {
-        const groupIdx = dropdownIdxs[idx];
-        if (groupIdx === idxToRefs) {
-            return { ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, };
-        } else if (groupIdx === idxToValues) {
-            return { ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, };
-        } else {
-            return { ...v, value: '', isRef: false, valueAs: idx, isNon: false, };
-        }
-    }
+    // function mapIndexToValueLife(idx: number, v: ValueLife): ValueLife {
+    //     const { dropdownIdxs, idxToRefs, idxToValues, listValues, isPsw, } = context;
+    //     const groupIdx = dropdownIdxs[idx];
+    //     if (groupIdx === idxToRefs) {
+    //         return { ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, };
+    //     } else if (groupIdx === idxToValues) {
+    //         return { ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, };
+    //     } else {
+    //         return { ...v, value: '', isRef: false, valueAs: idx, isNon: false, };
+    //     }
+    // }
 
     function onSetDropdownIndex(idx: number) {
-        setValueLife((v) => mapIndexToValueLife(idx, v));
+        setValueLife((v) => mapIndexToValueLife(idx, v, context));
     }
 
     function onSetText(value: string) {
@@ -167,7 +191,7 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
-            {!!dropdown.length && Dropdown(useItAtom, dropdown, dropdownSelectedIndex, onSetDropdownIndex)}
+            {!!dropdownAllItems.length && Dropdown(useItAtom, dropdownAllItems, dropdownSelectedIndex, onSetDropdownIndex)}
         </div>
     );
 }
