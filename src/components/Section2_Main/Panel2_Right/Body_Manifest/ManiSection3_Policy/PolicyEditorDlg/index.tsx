@@ -4,7 +4,7 @@ import { Atomize, atomWithCallback } from "@/hooks/atomsX";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Meta } from "@/store/manifest";
-import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/policy";
+import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/manifest/policy";
 import { PolicyEditorBody } from "./PolicyEditorBody";
 
 export type PolicyUi = {
