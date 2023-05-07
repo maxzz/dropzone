@@ -1,5 +1,5 @@
 import { MPath, Meta } from "../mani-types";
-import { TransformEncoding } from "..";
+import { TransformEncoding } from "./transform-xml-enc";
 import { getPoolName } from "./transform-mani-pool";
 
 export namespace FieldPath {
