@@ -5,6 +5,12 @@ import { getValueUiState, mapIndexToValueLife } from "./select-uitils";
 import { Dropdown, isKeyToClearDefault } from "../SharedUI/Dropdown";
 import { classNames } from "@/utils";
 
+const inputParentClasses = "\
+grid grid-cols-[minmax(0,1fr)_auto] rounded overflow-hidden \
+bg-primary-700 \
+ring-primary-600 focus-within:ring-offset-primary-800 focus-within:ring-primary-400 \
+focus-within:ring-1 focus-within:ring-offset-1";
+
 export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; choosevalue: string | undefined; } & InputHTMLAttributes<HTMLInputElement>) {
     const useIt = useAtomValue(useItAtom);
     const [valueLife, setValueLife] = useAtom(valueLifeAtom);
@@ -40,16 +46,7 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
     }
 
     return (
-        <div
-            className={classNames(
-                "grid grid-cols-[minmax(0,1fr)_auto] bg-primary-700 rounded overflow-hidden",
-                "focus-within:ring-offset-primary-800 focus-within:ring-primary-400 ring-primary-600",
-                "focus-within:ring-1 focus-within:ring-offset-1",
-                !useIt && "opacity-30 cursor-pointer",
-                className,
-            )}
-            {...rest}
-        >
+        <div className={classNames(inputParentClasses, !useIt && "opacity-30 cursor-pointer", className)} {...rest}>
             <input
                 className={classNames(
                     "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
@@ -65,7 +62,10 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
                 title={title}
                 autoComplete="off" list="autocompleteOff" spellCheck={false}
             />
-            {!!dropdownAllItems.length && Dropdown(useItAtom, dropdownAllItems, dropdownSelectedIndex, onSetDropdownIndex)}
+
+            {!!dropdownAllItems.length &&
+                Dropdown(useItAtom, dropdownAllItems, dropdownSelectedIndex, onSetDropdownIndex)
+            }
         </div>
     );
 }
