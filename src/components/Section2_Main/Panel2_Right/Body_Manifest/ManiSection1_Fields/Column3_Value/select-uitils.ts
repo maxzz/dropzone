@@ -109,10 +109,13 @@ export function mapIndexToValueLife(idx: number, v: ValueLife, context: Context)
     const { dropdownIdxs, idxToStartRefs: idxToRefs, idxToStartValues: idxToValues, listValues, isPsw, } = context;
     const groupIdx = dropdownIdxs[idx];
     if (groupIdx === idxToRefs) {
+        // refs group
         return { ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, };
     } else if (groupIdx === idxToValues) {
+        // values group
         return { ...v, value: listValues[idx - idxToValues], isRef: false, valueAs: ValueAs.askReuse, isNon: false, };
     } else {
+        // ask group
         return { ...v, value: '', isRef: false, valueAs: idx, isNon: false, };
     }
 }
