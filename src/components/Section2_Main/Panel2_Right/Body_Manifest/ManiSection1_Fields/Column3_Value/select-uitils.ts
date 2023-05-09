@@ -8,7 +8,17 @@ function idx2RefName(v: number, isPsw: boolean) {
     return Object.keys(pickRefsList(isPsw))[v];
 }
 
-export function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined) {
+type getValueUiStateReturn = {
+    dropdownAllItems: string[];
+    dropdownSelectedIndex: number;
+    context: Context;
+    inputText: string;
+    showAsRef: boolean;
+    disabled: boolean | undefined;
+    title: string | undefined;
+};
+
+export function getValueUiState(valueLife: ValueLife, choosevalue: string | undefined): getValueUiStateReturn {
     const isBtn = valueLife.fType === FieldTyp.button;
     const isPsw = valueLife.fType === FieldTyp.psw;
 
