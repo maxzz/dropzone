@@ -20,11 +20,11 @@ export function getValueUiState(valueLife: ValueLife, choosevalue: string | unde
 
     const listRefs = isPsw || valueLife.fType === FieldTyp.edit ? Object.values(pickRefsList(isPsw)).map((item) => item.f) : [];
 
-    const idxToValues = listAskNames.length;
-    const idxToRefs = idxToValues + listValues.length;
+    const idxToStartValues = listAskNames.length;
+    const idxToStartRefs = idxToStartValues + listValues.length;
 
     const dropdownAllItems = [...listAskNames, ...listValues, ...listRefs];
-    const dropdownIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxToValues), ...listRefs.map(() => idxToRefs)];
+    const dropdownIdxs = [...listAskNames.map(() => 0), ...listValues.map(() => idxToStartValues), ...listRefs.map(() => idxToStartRefs)];
 
     dropdownAllItems.at(-1) === '-' && dropdownAllItems.pop();
 
@@ -41,10 +41,10 @@ export function getValueUiState(valueLife: ValueLife, choosevalue: string | unde
 
     const dropdownSelectedIndex =
         valueLife.isRef
-            ? idxToRefs + refName2Idx(valueLife.value, isPsw)
+            ? idxToStartRefs + refName2Idx(valueLife.value, isPsw)
             : valueLife.value
                 ? listValues.length
-                    ? idxToValues + listValues.indexOf(valueLife.value)
+                    ? idxToStartValues + listValues.indexOf(valueLife.value)
                     : -1
                 : valueAs2Idx(valueLife.valueAs);
 
@@ -58,8 +58,8 @@ export function getValueUiState(valueLife: ValueLife, choosevalue: string | unde
 
         context: {
             dropdownIdxs,
-            idxToRefs,
-            idxToValues,
+            idxToStartRefs,
+            idxToStartValues,
             listValues,
             isPsw,
         },
@@ -89,14 +89,14 @@ export function getValueUiState(valueLife: ValueLife, choosevalue: string | unde
 
 type Context = {
     dropdownIdxs: number[];
-    idxToRefs: number;
-    idxToValues: number;
+    idxToStartRefs: number;
+    idxToStartValues: number;
     listValues: string[];
     isPsw: boolean;
 };
 
 export function mapIndexToValueLife(idx: number, v: ValueLife, context: Context): ValueLife {
-    const { dropdownIdxs, idxToRefs, idxToValues, listValues, isPsw, } = context;
+    const { dropdownIdxs, idxToStartRefs: idxToRefs, idxToStartValues: idxToValues, listValues, isPsw, } = context;
     const groupIdx = dropdownIdxs[idx];
     if (groupIdx === idxToRefs) {
         return { ...v, value: idx2RefName(idx - idxToRefs, isPsw), isRef: true, valueAs: ValueAs.askReuse, isNon: false, };
