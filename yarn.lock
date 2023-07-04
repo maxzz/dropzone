@@ -1369,6 +1369,13 @@ fast-xml-parser@4.2.2:
   dependencies:
     strnum "^1.0.5"
 
+fast-xml-parser@^4.2.5:
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.2.5.tgz#a6747a09296a6cb34f2ae634019bf1738f3b421f"
+  integrity sha512-B9/wizE4WngqQftFPmdaMYlXoJlJOYxGQOanC77fq9k8+Z0v5dDSVh+3glErdIROP//s/jgb7ZuxKfB8nVyo0g==
+  dependencies:
+    strnum "^1.0.5"
+
 fastest-stable-stringify@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/fastest-stable-stringify/-/fastest-stable-stringify-2.0.2.tgz#3757a6774f6ec8de40c4e86ec28ea02417214c76"
@@ -1856,6 +1863,13 @@ pirates@^4.0.1:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.5.tgz#feec352ea5c3268fb23a37c702ab1699f35a5f3b"
   integrity sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==
+
+pm-manifest@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.2.tgz#dd3ce80bf638963dfd02df1569e781027ddb3e18"
+  integrity sha512-8pfiUSs22stmHlLkNKxHNc0/LGlZwBGlfNV8qLDtpM21kCpwS9HP7G0nPMVkkLBILE7KdkEIj5bNHjItYoL9JQ==
+  dependencies:
+    fast-xml-parser "^4.2.5"
 
 postcss-import@^15.1.0:
   version "15.1.0"

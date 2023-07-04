@@ -1,1 +1,1 @@
-export * from './poly-types';
+export * from 'pm-manifest/src/policy'
