@@ -4,7 +4,7 @@ import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from ".";
 import { useAtom } from "jotai";
 import { Dropdown, Input, Radio } from "./ui-controls";
-import { namesConstrainPsw, namesConstrainSet, UseAs } from "@/store/manifest/policy";
+import { namesConstrainPsw, namesConstrainSet, UseAs  } from "@/store/manifest";
 import { IconCross } from "@ui/icons";
 import { classNames } from "@/utils";
 

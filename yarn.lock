@@ -1864,10 +1864,10 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.5.tgz#feec352ea5c3268fb23a37c702ab1699f35a5f3b"
   integrity sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==
 
-pm-manifest@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.2.tgz#dd3ce80bf638963dfd02df1569e781027ddb3e18"
-  integrity sha512-8pfiUSs22stmHlLkNKxHNc0/LGlZwBGlfNV8qLDtpM21kCpwS9HP7G0nPMVkkLBILE7KdkEIj5bNHjItYoL9JQ==
+pm-manifest@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.3.tgz#a273f09d896ca9d989b04f8d521913863739f926"
+  integrity sha512-v2VqrNBICqBBxWG9BXCMxl/2zHSYr6D30z6EegG1karD40GKnT86907iBJez6t/OqDIDPFEN9jSSaLE1Rm2NtA==
   dependencies:
     fast-xml-parser "^4.2.5"
 
