@@ -1,15 +1,26 @@
 import React, { HTMLAttributes, SVGAttributes, SVGProps } from 'react';
 
-export function DefFieldUseIt() {
+function SymbolUseIt0() {
     return (<>
         <symbol id="ifield-useit-0" viewBox="0 0 24 24">
             <path d="M4.41 19.59 19.59 4.41" />
             <path d="M19.59 19.59 4.41 4.41" />
         </symbol>
+    </>);
+}
 
+function SymbolUseIt1() {
+    return (<>
         <symbol id="ifield-useit-1" viewBox="0 0 24 24">
             <path d="m3.1 12 5.94 5.94L20.9 6.06" />
         </symbol>
+    </>);
+}
+
+export function DefFieldUseIt() {
+    return (<>
+        {SymbolUseIt0()}
+        {SymbolUseIt1()}
     </>);
 }
 
