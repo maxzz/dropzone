@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
-import { UiPortal } from '../UPortal';
+import { UiPortal } from '../UiPortal';
 import { classNames } from '@/utils';
 import './styles.css';
 
