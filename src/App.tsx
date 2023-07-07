@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FocusGuards } from '@radix-ui/react-focus-guards';
-import { UIToaster } from '@ui/UIToaster';
+import { UIToaster } from '@ui/UiToaster';
 import { Section1_Header } from './components/Section1_Header';
 import { Section2_Main } from './components/Section2_Main';
 import { Section4_Dialogs } from './components/Section4_Dialogs';
