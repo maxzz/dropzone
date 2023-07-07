@@ -1,7 +1,6 @@
-import React, { HTMLAttributes, SVGAttributes, SVGProps } from 'react';
 import { DefAllOther } from './symbols/all-other';
 import { DefAppTypes } from './symbols/app';
-import { DefFieldTypes } from './symbols/field';
+import { SymbolFieldBtn, SymbolFieldChk, SymbolFieldEdt, SymbolFieldLst, SymbolFieldPsw, SymbolFieldTxt } from './symbols/field';
 import { SymbolUseIt0, SymbolUseIt1 } from './symbols/useit';
 
 export * from './symbols/all-other';
@@ -16,7 +15,13 @@ export function UISymbolDefs() {
         >
             <defs>
                 {DefAppTypes()}
-                {DefFieldTypes()}
+
+                {SymbolFieldEdt()}
+                {SymbolFieldPsw()}
+                {SymbolFieldChk()}
+                {SymbolFieldLst()}
+                {SymbolFieldTxt()}
+                {SymbolFieldBtn()}
 
                 {SymbolUseIt0()}
                 {SymbolUseIt1()}
