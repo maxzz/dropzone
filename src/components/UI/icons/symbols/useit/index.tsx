@@ -1,2 +1,2 @@
-export { IconUseIt0 } from './ifield-useit-0';
-export { IconUseIt1 } from './ifield-useit-1';
+export * from './ifield-useit-0';
+export * from './ifield-useit-1';
