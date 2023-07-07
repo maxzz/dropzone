@@ -1,5 +1,5 @@
 import React, { Fragment, HTMLAttributes, ReactNode } from 'react';
-import { UiSemiScrollbar } from '@ui/USemiScrollbar';
+import { UiSemiScrollbar } from '@ui/UiSemiScrollbar';
 
 export function FieldFirstCol({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;

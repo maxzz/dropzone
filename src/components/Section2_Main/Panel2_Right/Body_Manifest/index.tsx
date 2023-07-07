@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
-import { UiArrow } from '@ui/UArrow';
-import { UiAccordion } from '@ui/UAccordion';
+import { UiArrow } from '@ui/UiArrow';
+import { UiAccordion } from '@ui/UiAccordion';
 import { Scroller } from '../Scroller';
 import { ManiSection1_Fields } from './ManiSection1_Fields';
 import { ManiSection2_Submit } from './ManiSection2_Submit';

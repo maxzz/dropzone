@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom, WritableAtom } from '
 import { a, useSpring } from '@react-spring/web';
 import { Matching } from '@/store/manifest';
 import { UIIconUpDown } from '@ui/icons';
-import { UiTip, tipSmall } from '@ui/UTooltip';
+import { UiTip, tipSmall } from '@ui/UiTooltip';
 import { classNames } from '@/utils';
 
 type RadioButtonProps = {
