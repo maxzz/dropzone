@@ -79,10 +79,8 @@ function Symbol() {
 
 export function DefAppTypes() {
     return (<>
-        {/* {SymbolWin95Solid()} */}
-        {SymbolAppWindows()}
-        {SymbolAppWebIeSolid()}
-        {SymbolAppWebIe()}
+        {SymbolAppWindows()} {/* {SymbolWin95Solid()} */}
+        {SymbolAppWebIeSolid()} {/* {SymbolAppWebIe()} */}
         {SymbolAppWebChrome()}
         {SymbolCatalog()}
         {SymbolIconManualMode()}
@@ -93,14 +91,14 @@ export function DefAppTypes() {
 
 // apps
 
-// export function IconAppWindows95({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
-//     return (
-//         <svg fill="currentColor" {...rest}>
-//             {title && <title>{title}</title>}
-//             <use xlinkHref="#app-windows-95" />
-//         </svg>
-//     );
-// }
+function IconAppWindows95({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg fill="currentColor" {...rest}>
+            {title && <title>{title}</title>}
+            <use xlinkHref="#app-windows-95" />
+        </svg>
+    );
+}
 
 export function IconAppWindows({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -121,7 +119,7 @@ export function IconAppWebIESolid({ title, ...rest }: SVGAttributes<SVGSVGElemen
     );
 }
 
-export function IconAppWebIE({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+function IconAppWebIE({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         // TODO: use prev solid version for title and outline for buttons: // <svg fill="currentColor" stroke="black" strokeWidth={.7} {...rest}>
 

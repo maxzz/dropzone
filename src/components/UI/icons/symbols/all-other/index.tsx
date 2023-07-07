@@ -134,6 +134,78 @@ function SymbolPen() {
     </>);
 }
 
+// Login and password change
+
+function SymbolFormLogin() {
+    return (<>
+        <symbol id="icon-login" viewBox="0 0 24 24">
+            <path d="m17.93 8.75-4.49 4.49 2.1 2.07a.99.99 0 0 1-.68 1.69s-1.79.2-4.05.2-3.45-.08-3.45-.08a1 1 0 0 1-1.01-.99s-.11-1.96-.11-3.78.11-3.75.11-3.75a.98.98 0 0 1 1.68-.7l2.4 2.37 4.51-4.51a1.03 1.03 0 0 1 1.47 0l1.51 1.51c.41.41.41 1.07 0 1.48Z" />
+            <path d="M19.35 21.66s-3.87.18-7.3.18-7.3-.18-7.3-.18a2.25 2.25 0 0 1-2.25-2.25s-.35-2.65-.35-7.41c0-4.4.16-5.64.35-7.41.13-1.24 1.01-2.25 2.25-2.25 0 0 3.9-.18 7.3-.18s7.3.18 7.3.18a2.25 2.25 0 0 1 2.25 2.25s.24 3.69.24 7.41-.24 7.41-.24 7.41a2.25 2.25 0 0 1-2.25 2.25Z" />
+        </symbol>
+    </>);
+}
+
+function SymbolFormChange() {
+    return (<>
+        <symbol id="icon-change" viewBox="0 0 24 24">
+            <path d="m21.5 10-3 2.8c-.4.5-1.1.5-1.6 0L14 10c-.4-.5.1-1.4.8-1.4H16V7.4c0-1.4-1-2.5-2.4-2.5H10C8.6 5 7.5 6 7.5 7.4c0 .4-.4.7-.8.7H5.6c-.6 0-1.1-.4-1.1-1v-.7c0-2.3 1.9-4.2 4.2-4.2h6.6c2.3 0 4.2 1.9 4.2 4.2v2.2h1.2c.7 0 1.3.9.8 1.4ZM2.5 14l3-2.8c.4-.5 1.1-.5 1.6 0l3 2.8c.4.5-.1 1.4-.8 1.4H8v1.2c0 1.4 1 2.5 2.4 2.5H14c1.3 0 2.4-1.1 2.4-2.5 0-.4.4-.8.8-.8h1.1c.6 0 1.1.5 1.1 1.2v.6c0 2.3-1.9 4.2-4.2 4.2H8.7c-2.3 0-4.2-1.9-4.2-4.2v-2.2H3.3c-.7 0-1.3-.9-.8-1.4Z" />
+        </symbol>
+    </>);
+}
+
+// classic check boxes
+
+function SymbolClassicCheck() {
+    return (<>
+        <symbol id="classic-chk" viewBox="0 0 21 21">
+            <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
+            <path d="M7.5 10.5l2 2l4-4" />
+        </symbol>
+    </>);
+}
+
+function SymbolClassicCheckEmpty() {
+    return (<>
+        <symbol id="classic-chk-empty" viewBox="0 0 21 21">
+            <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
+        </symbol>
+    </>);
+}
+
+// chevrons
+
+function SymbolChevronDown() {
+    return (<>
+        <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+            <path d="M5.843 9.593L11.5 15.25l5.657-5.657l-.707-.707l-4.95 4.95l-4.95-4.95l-.707.707z" />
+        </symbol>
+    </>);
+}
+
+function SymbolChevronUp() {
+    return (<>
+        <symbol id="icon-chevron-up" viewBox="0 0 24 24">
+            <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
+        </symbol>
+    </>);
+}
+
+function SymbolChevronDoubleDown() {
+    return (<>
+        <symbol id="icon-doubledown" viewBox="0 0 24 24">
+            <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />
+        </symbol>
+    </>);
+}
+
+function SymbolChevronDoubleUp() {
+    return (<>
+        <symbol id="icon-chevron-right" viewBox="0 0 15 15">
+            <path d="M6.16 3.14a.5.5 0 0 1 .7.02l3.76 4c.18.19.18.49 0 .68l-3.75 4a.5.5 0 1 1-.73-.68L9.56 7.5 6.14 3.84a.5.5 0 0 1 .02-.7Z" />
+        </symbol>
+    </>);
+}
+
 function Symbol() {
     return (<>
     </>);
@@ -168,46 +240,25 @@ export function DefAllOther() {
 
         {/* Login and password change */}
 
-        <symbol id="icon-login" viewBox="0 0 24 24">
-            <path d="m17.93 8.75-4.49 4.49 2.1 2.07a.99.99 0 0 1-.68 1.69s-1.79.2-4.05.2-3.45-.08-3.45-.08a1 1 0 0 1-1.01-.99s-.11-1.96-.11-3.78.11-3.75.11-3.75a.98.98 0 0 1 1.68-.7l2.4 2.37 4.51-4.51a1.03 1.03 0 0 1 1.47 0l1.51 1.51c.41.41.41 1.07 0 1.48Z" />
-            <path d="M19.35 21.66s-3.87.18-7.3.18-7.3-.18-7.3-.18a2.25 2.25 0 0 1-2.25-2.25s-.35-2.65-.35-7.41c0-4.4.16-5.64.35-7.41.13-1.24 1.01-2.25 2.25-2.25 0 0 3.9-.18 7.3-.18s7.3.18 7.3.18a2.25 2.25 0 0 1 2.25 2.25s.24 3.69.24 7.41-.24 7.41-.24 7.41a2.25 2.25 0 0 1-2.25 2.25Z" />
-        </symbol>
-
-        <symbol id="icon-change" viewBox="0 0 24 24">
-            <path d="m21.5 10-3 2.8c-.4.5-1.1.5-1.6 0L14 10c-.4-.5.1-1.4.8-1.4H16V7.4c0-1.4-1-2.5-2.4-2.5H10C8.6 5 7.5 6 7.5 7.4c0 .4-.4.7-.8.7H5.6c-.6 0-1.1-.4-1.1-1v-.7c0-2.3 1.9-4.2 4.2-4.2h6.6c2.3 0 4.2 1.9 4.2 4.2v2.2h1.2c.7 0 1.3.9.8 1.4ZM2.5 14l3-2.8c.4-.5 1.1-.5 1.6 0l3 2.8c.4.5-.1 1.4-.8 1.4H8v1.2c0 1.4 1 2.5 2.4 2.5H14c1.3 0 2.4-1.1 2.4-2.5 0-.4.4-.8.8-.8h1.1c.6 0 1.1.5 1.1 1.2v.6c0 2.3-1.9 4.2-4.2 4.2H8.7c-2.3 0-4.2-1.9-4.2-4.2v-2.2H3.3c-.7 0-1.3-.9-.8-1.4Z" />
-        </symbol>
+        {SymbolFormLogin()}
+        {SymbolFormChange()}
 
         {/* classic check boxes */}
 
-        <symbol id="classic-chk" viewBox="0 0 21 21">
-            <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
-            <path d="M7.5 10.5l2 2l4-4" />
-        </symbol>
-
-        <symbol id="classic-chk-empty" viewBox="0 0 21 21">
-            <path d="M5.5 3.5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2z" />
-        </symbol>
+        {SymbolClassicCheck()}
+        {SymbolClassicCheckEmpty()}
 
         {/* chevrons */}
 
-        <symbol id="icon-chevron-down" viewBox="0 0 24 24">
-            <path d="M5.843 9.593L11.5 15.25l5.657-5.657l-.707-.707l-4.95 4.95l-4.95-4.95l-.707.707z" />
-        </symbol>
-
-        <symbol id="icon-chevron-up" viewBox="0 0 24 24">
-            <path d="M5.843 15.407L11.5 9.75l5.657 5.657l-.707.707l-4.95-4.95l-4.95 4.95l-.707-.707z" />
-        </symbol>
-
-        <symbol id="icon-doubledown" viewBox="0 0 24 24">
-            <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />
-        </symbol>
-
-        <symbol id="icon-chevron-right" viewBox="0 0 15 15">
-            <path d="M6.16 3.14a.5.5 0 0 1 .7.02l3.76 4c.18.19.18.49 0 .68l-3.75 4a.5.5 0 1 1-.73-.68L9.56 7.5 6.14 3.84a.5.5 0 0 1 .02-.7Z" />
-        </symbol>
+        {SymbolChevronDown()}
+        {SymbolChevronUp()}
+        {SymbolChevronDoubleDown()}
+        {SymbolChevronDoubleUp()}
 
         {/* good but not used */}
-        {/* <symbol id="icon-quill" viewBox="0 0 32 32">
+        {/* 
+        
+        <symbol id="icon-quill" viewBox="0 0 32 32">
             <path d="M0 32c4-12 14.469-32 32-32-8.219 6.594-12 22-18 22s-6 0-6 0l-6 10h-2z"></path>
         </symbol>
         <symbol id="icon-user" viewBox="0 0 32 32">
@@ -222,7 +273,9 @@ export function DefAllOther() {
             <path
                 d="M10.225 24.854c1.728-1.13 3.877-1.989 6.243-2.513-0.47-0.556-0.897-1.176-1.265-1.844-0.95-1.726-1.453-3.627-1.453-5.497 0-2.689 0-5.228 0.956-7.305 0.928-2.016 2.598-3.265 4.976-3.734-0.529-2.39-1.936-3.961-5.682-3.961-6 0-6 4.029-6 9 0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h8.719c0.454-0.403 0.956-0.787 1.506-1.146z">
             </path>
-        </symbol> */}
+        </symbol> 
+
+        */}
     </>);
 }
 
