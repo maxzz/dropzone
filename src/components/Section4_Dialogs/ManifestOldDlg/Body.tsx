@@ -5,7 +5,7 @@ import { EditorData, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils';
-import { UITip } from '@ui/UITooltip';
+import { UiTip } from '@ui/UiTooltip';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Card1_Title/CardTitleFilename';
 import { IconAttention, IconInfo } from '@ui/icons';
 import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from './Tab1_Matching';
@@ -13,7 +13,7 @@ import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
 import { TabSelector } from './TabSelector';
-import { UISemiScrollbar } from '@ui/UISemiScrollbar';
+import { UiSemiScrollbar } from '@ui/UiSemiScrollbar';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 //import { toastWarning } from '@ui/UIToaster';
 
@@ -38,7 +38,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
     const formName = `${formIdxName(editorData.formIdx)}`;
     const fname = ManiFilenameParts({ fname: fileUs.fname, classLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
     return (
-        <UITip
+        <UiTip
             trigger={
                 <IconInfo
                     className="w-7 h-7 text-gray-300"
@@ -73,7 +73,7 @@ function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
                     <div>{stats.dateModified}</div>
                 </>}
             </div>
-        </UITip>
+        </UiTip>
     );
 }
 
@@ -144,9 +144,9 @@ export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selec
 
             {/* Pages */}
             <div className="text-sm bg-white">
-                <UISemiScrollbar className="text-gray-500 overflow-auto w-full h-full" scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
+                <UiSemiScrollbar className="text-gray-500 overflow-auto w-full h-full" scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
                     {dialogContentBody}
-                </UISemiScrollbar>
+                </UiSemiScrollbar>
             </div>
         </div>
     );

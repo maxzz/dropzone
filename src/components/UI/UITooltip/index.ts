@@ -1,4 +1,4 @@
 export { 
-    OldPopper_UITooltip as UITip,
+    OldPopper_UITooltip as UiTip,
     OldPopper_optionsUITooltipSmall as tipSmall,
-} from './UITooltip';
+} from './UiTooltip';

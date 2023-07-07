@@ -3,7 +3,7 @@ import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 import { UIIconUpDown } from '@ui/icons';
 import { classNames } from '@/utils';
-import { UIPortal } from '@ui/UIPortal';
+import { UiPortal } from '@ui/UiPortal';
 
 const BtnGradientShading: React.CSSProperties = {
     backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
@@ -53,7 +53,7 @@ export function ToggleWithPortal({ children, text }: { children?: React.ReactNod
         <HeaderButton text={text} ref={setReferenceElm} open={open} setOpen={setOpen} />
 
         {open &&
-            <UIPortal>
+            <UiPortal>
                 <div
                     ref={setPopperElm}
                     style={{ ...styles.popper, zIndex: 'inherit' }}
@@ -62,7 +62,7 @@ export function ToggleWithPortal({ children, text }: { children?: React.ReactNod
                 >
                     {children}
                 </div>
-            </UIPortal>
+            </UiPortal>
         }
     </>);
 }

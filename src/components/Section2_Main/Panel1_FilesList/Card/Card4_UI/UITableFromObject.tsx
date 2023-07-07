@@ -1,5 +1,5 @@
 import React, { Fragment, HTMLAttributes, ReactNode } from 'react';
-import { UISemiScrollbar } from '@ui/UISemiScrollbar';
+import { UiSemiScrollbar } from '@ui/UiSemiScrollbar';
 
 export function FieldFirstCol({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
@@ -13,12 +13,12 @@ export function FieldFirstCol({ children, ...rest }: { children?: ReactNode; } &
 export function FieldSecondCol({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
     return (
-        <UISemiScrollbar>
+        <UiSemiScrollbar>
             <div className={`border-l border-gray-500 pl-1 h-5 leading-5 whitespace-nowrap ${className}`} {...attrs}>
                 {/* <div className={`border-l border-gray-500 pl-1 h-6 leading-6 smallscroll smallscroll-light overflow-x-auto overflow-y-hidden whitespace-nowrap ${className}`} {...attrs}> */}
                 {children}
             </div>
-        </UISemiScrollbar>
+        </UiSemiScrollbar>
     );
 }
 

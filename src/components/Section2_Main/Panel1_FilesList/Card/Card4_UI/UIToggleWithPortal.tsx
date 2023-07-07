@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useState } from 'react';
-import { UIPortal } from '@ui/UIPortal';
+import { UiPortal } from '@ui/UiPortal';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 
@@ -21,11 +21,11 @@ export function UIToggleWithPortal({ toggle, children, ...rest }: { toggle?: Rea
         </button>
 
         {open && children &&
-            <UIPortal>
+            <UiPortal>
                 <div ref={setPopperElm} style={{ ...styles.popper, zIndex: 'inherit' }} {...attributes.popper} onClick={() => setOpen((v) => !v)}>
                     {children}
                 </div>
-            </UIPortal>
+            </UiPortal>
         }
     </>);
 }

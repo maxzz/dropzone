@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FocusGuards } from '@radix-ui/react-focus-guards';
-import { UIToaster } from '@ui/UiToaster';
+import { UiToaster } from '@ui/UiToaster';
 import { Section1_Header } from './components/Section1_Header';
 import { Section2_Main } from './components/Section2_Main';
 import { Section4_Dialogs } from './components/Section4_Dialogs';
@@ -15,7 +15,7 @@ export function App() {
     }, []);
     return (
         <FocusGuards>
-            <UIToaster />
+            <UiToaster />
             <UISymbolDefs />
 
             <div className="h-screen p-1 pt-2 space-y-2 flex flex-col overflow-hidden">

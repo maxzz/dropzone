@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useAtom } from 'jotai';
 import { formEditorDataAtom } from '@/store';
-import { OldOverlay_PortalModal } from '@ui/UIDialog';
+import { OldOverlay_PortalModal } from '@ui/UiDialog';
 
 const Manifest_FormEditor = React.lazy(() => import('./Body'));
 

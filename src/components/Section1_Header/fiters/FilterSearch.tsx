@@ -4,7 +4,7 @@ import { useKey } from 'react-use';
 import { turnOffAutoComplete } from '@/utils';
 import { searchFilterData } from '@/store';
 import { IconCaseSensitive, IconClose, IconDot, IconSearch } from '@ui/icons';
-import { UITip } from '@ui/UITooltip';
+import { UiTip } from '@ui/UiTooltip';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterData.caseSensitiveAtom);
@@ -30,7 +30,7 @@ export function FilterSearch() {
     const isEmpty = !filterTxt;
     return (
         <div className="flex-1 min-h-[32px] max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
-            <UITip
+            <UiTip
                 trigger={
                     <div className={``}>
                         <div
@@ -85,7 +85,7 @@ export function FilterSearch() {
                     <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cap:</span> logins with window caption</div>
                     <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cls:</span> logins with window classname</div>
                 </div>
-            </UITip>
+            </UiTip>
         </div>
     );
 }

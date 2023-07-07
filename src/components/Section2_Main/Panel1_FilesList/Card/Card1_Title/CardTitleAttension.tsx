@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { FileUs, isAnyWhy } from "@/store";
 import { classNames } from "@/utils";
 import { IconDot } from "@ui/icons";
-import { UITip } from "@ui/UITooltip";
+import { UiTip } from "@ui/UiTooltip";
 
 export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: boolean; }) {
     return (
@@ -27,7 +27,7 @@ export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
     }
     const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
     return (
-        <UITip
+        <UiTip
             trigger={
                 <CardTitleFileIndex idx={fileIndex} errors={true} />
             }
@@ -60,6 +60,6 @@ export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
                     </Fragment>
                 ))}
             </div>
-        </UITip>
+        </UiTip>
     );
 }

@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { filteredAtom, UISize, uiSizeAtom } from '@/store';
-import { UISemiScrollbar } from '@ui/UISemiScrollbar';
+import { UiSemiScrollbar } from '@ui/UiSemiScrollbar';
 import { classNames } from '@/utils';
 import { Card } from './Card';
 
@@ -9,13 +9,13 @@ export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElem
     const files = useAtomValue(filteredAtom);
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
     return (
-        <UISemiScrollbar className={classNames("p-3 text-gray-500 bg-gray-700 overflow-auto w-full h-full", className)} {...rest}>
+        <UiSemiScrollbar className={classNames("p-3 text-gray-500 bg-gray-700 overflow-auto w-full h-full", className)} {...rest}>
             <div className={`grid ${minimal ? "gap-0.5" : "gap-4"}`}>
                 {files.map((atom) => (
                     <Card fileUsAtom={atom} key={`${atom}`} />
                 ))}
             </div>
-        </UISemiScrollbar>
+        </UiSemiScrollbar>
     );
 }
 

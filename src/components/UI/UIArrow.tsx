@@ -2,7 +2,7 @@ import React, { SVGAttributes } from "react";
 import { a, useSpring } from "@react-spring/web";
 import { classNames } from '@/utils';
 
-export function UIArrow({ open, className, ...rest }: { open: boolean; } & SVGAttributes<SVGSVGElement>) {
+export function UiArrow({ open, className, ...rest }: { open: boolean; } & SVGAttributes<SVGSVGElement>) {
     const styles = useSpring({ open: open ? 1 : 0, config: { mass: 0.2, tension: 492, clamp: true } });
     return (
         <svg className={classNames("stroke-current stroke-[.6rem] fill-transparent", className)} viewBox="0 0 100 100" {...rest}>

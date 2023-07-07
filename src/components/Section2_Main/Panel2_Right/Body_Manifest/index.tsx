@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
-import { UIArrow } from '@ui/UIArrow';
-import { UIAccordion } from '@ui/UIAccordion';
+import { UiArrow } from '@ui/UiArrow';
+import { UiAccordion } from '@ui/UiAccordion';
 import { Scroller } from '../Scroller';
 import { ManiSection1_Fields } from './ManiSection1_Fields';
 import { ManiSection2_Submit } from './ManiSection2_Submit';
@@ -23,16 +23,16 @@ function SubSectionAccordion({ label, openAtom, children }: { label: ReactNode; 
     return (<>
         <div className="inline-block">
             <div className="pb-1 text-base flex items-center select-none cursor-pointer text-[#32ffdaa0]" onClick={() => setOpen(v => !v)}>
-                <UIArrow className="w-4 h-4 pt-1" open={open} />
+                <UiArrow className="w-4 h-4 pt-1" open={open} />
                 {label}
             </div>
         </div>
 
-        <UIAccordion open={open}>
+        <UiAccordion open={open}>
             <div className="ml-4 pt-2 pb-4">
                 {children}
             </div>
-        </UIAccordion>
+        </UiAccordion>
     </>);
 }
 

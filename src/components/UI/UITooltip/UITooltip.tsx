@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
 import { Config, usePopperTooltip } from 'react-popper-tooltip';
-import { UIPortal } from '../UIPortal';
+import { UiPortal } from '../UiPortal';
 import { classNames } from '@/utils';
 import './styles.css';
 
@@ -49,6 +49,6 @@ export function OldPopper_UITooltip({ trigger, children, className, arrow = fals
             {trigger}
         </div>
 
-        {visible && (portal ? <UIPortal>{poperBody}</UIPortal> : <>{poperBody}</>)}
+        {visible && (portal ? <UiPortal>{poperBody}</UiPortal> : <>{poperBody}</>)}
     </>);
 }

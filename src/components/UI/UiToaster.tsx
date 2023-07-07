@@ -1,7 +1,7 @@
 import React from 'react';
 import toast, { Toaster as ToasterComponent } from 'react-hot-toast';
 
-export function UIToaster() {
+export function UiToaster() {
     return (
         <div className="toaser">
             <ToasterComponent

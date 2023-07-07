@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
-import { UITip, tipSmall } from "@ui/UITooltip";
+import { UiTip, tipSmall } from "@ui/UiTooltip";
 import { IconFolder } from "@ui/icons";
 import { classNames } from "@/utils";
 
@@ -45,7 +45,7 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
 
     const FilenameMemo = React.useMemo(() => {
         return (
-            <UITip
+            <UiTip
                 trigger={
                     <ManiFilenameParts fname={fileUs.fname} />
                 }
@@ -72,7 +72,7 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
                         <div>{stats.dateModified}</div>
                     </>}
                 </div>
-            </UITip>
+            </UiTip>
         );
     }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]);
 
