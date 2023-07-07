@@ -2,7 +2,7 @@ import React, { HTMLAttributes, SVGAttributes, SVGProps } from 'react';
 import { DefAllOther } from './symbols/all-other';
 import { DefAppTypes } from './symbols/app';
 import { DefFieldTypes } from './symbols/field';
-import { DefFieldUseIt } from './symbols/useit';
+import { IconUseIt0, IconUseIt1 } from './symbols/useit';
 
 export * from './symbols/all-other';
 export * from './symbols/app';
@@ -17,7 +17,10 @@ export function UISymbolDefs() {
             <defs>
                 {DefAppTypes()}
                 {DefFieldTypes()}
-                {DefFieldUseIt()}
+
+                {IconUseIt0.symbol()}
+                {IconUseIt1.symbol()}
+
                 {DefAllOther()}
             </defs>
         </svg>
