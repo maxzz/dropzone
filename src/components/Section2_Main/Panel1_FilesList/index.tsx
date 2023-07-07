@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { filteredAtom, UISize, uiSizeAtom } from '@/store';
-import { UiSemiScrollbar } from '@ui/UiSemiScrollbar';
+import { UiSemiScrollbar } from '@ui/USemiScrollbar';
 import { classNames } from '@/utils';
 import { Card } from './Card';
 

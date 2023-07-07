@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelData, selected4ActionAtom } from '@/store';
-import { MenuItem } from '@ui/UiDropdownMenu';
+import { MenuItem } from '@ui/UDropdownMenu';
 import toast from 'react-hot-toast';
 
 export function Command_MarkSelected() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
-import { OldOverlay_Dialog } from '@ui/UiDialog';
-import { MenuTrigger, MenuPortal, MenuContent, MenuItem, MenuSeparator, Menu } from '@ui/UiDropdownMenu';
+import { OldOverlay_Dialog } from '@ui/UDialog';
+import { MenuTrigger, MenuPortal, MenuContent, MenuItem, MenuSeparator, Menu } from '@ui/UDropdownMenu';
 import { IconMenuHamburger } from '@ui/icons';
 import toast from 'react-hot-toast';
 import { FileUsAtomType } from '@/store';

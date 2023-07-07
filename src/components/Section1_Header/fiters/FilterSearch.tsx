@@ -4,7 +4,7 @@ import { useKey } from 'react-use';
 import { turnOffAutoComplete } from '@/utils';
 import { searchFilterData } from '@/store';
 import { IconCaseSensitive, IconClose, IconDot, IconSearch } from '@ui/icons';
-import { UiTip } from '@ui/UiTooltip';
+import { UiTip } from '@ui/UTooltip';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterData.caseSensitiveAtom);

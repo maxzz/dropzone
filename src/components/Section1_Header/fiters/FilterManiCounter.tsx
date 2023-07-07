@@ -1,6 +1,6 @@
 import React from 'react';
 import { PrimitiveAtom as PA, useAtom, useAtomValue } from 'jotai';
-import { LabeledSwitch } from '@ui/UiSwitch';
+import { LabeledSwitch } from '@ui/USwitch';
 
 function LabeWithNumber({ label, counterAtom }: { label: string; counterAtom: PA<number>; }) {
     const total = useAtomValue(counterAtom);
