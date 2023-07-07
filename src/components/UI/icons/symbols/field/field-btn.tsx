@@ -14,10 +14,11 @@ export function SymbolFieldBtn() {
     </>);
 }
 
-export function IconFieldBtn({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconFieldBtn({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={.7} {...rest}>
             {title && <title>{title}</title>}
+            {children}
             <use xlinkHref="#ifield-btn" />
         </svg>
     );

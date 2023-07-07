@@ -8,10 +8,11 @@ export function SymbolFieldTxt() {
         </symbol>
     </>);
 }
-export function IconFieldTxt({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconFieldTxt({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={.8} {...rest}>
             {title && <title>{title}</title>}
+            {children}
             <use xlinkHref="#ifield-txt" />
         </svg>
     );

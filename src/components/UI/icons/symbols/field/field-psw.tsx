@@ -13,10 +13,11 @@ export function SymbolFieldPsw() {
     </>);
 }
 
-export function IconFieldPsw({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconFieldPsw({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
+            {children}
             <use xlinkHref="#ifield-psw" />
         </svg>
     );

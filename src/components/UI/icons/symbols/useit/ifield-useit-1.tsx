@@ -10,10 +10,11 @@ export function SymbolUseIt1() {
     </>);
 }
 
-export function IconUseIt1({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconUseIt1({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
+            {children}
             <use xlinkHref="#ifield-useit-1" />
         </svg>
     );

@@ -10,10 +10,11 @@ export function SymbolFieldChk() {
     </>);
 }
 
-export function IconFieldChk({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconFieldChk({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
+            {children}
             <use xlinkHref="#ifield-chk" />
         </svg>
     );
