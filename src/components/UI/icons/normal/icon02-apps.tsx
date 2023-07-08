@@ -1,7 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-/*
-function IconManualMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconManualMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
@@ -13,7 +12,7 @@ function IconManualMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTML
     );
 }
 
-function IconManualMode1({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconManualMode1({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".5" {...rest}>
             {title && <title>{title}</title>}
@@ -22,8 +21,7 @@ function IconManualMode1({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTML
         </svg>
     );
 }
-*/
-/*
+
 export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".6" {...rest}>
@@ -32,9 +30,8 @@ export function IconManualMode({ title, ...rest }: SVGAttributes<SVGSVGElement> 
         </svg>
     );
 }
-*/
-/*
-function IconAutoMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+
+export function IconAutoMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" {...rest}>
             {title && <title>{title}</title>}
@@ -45,7 +42,7 @@ function IconAutoMode0({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAt
         </svg>
     );
 }
-*/
+
 // small car
 export function IconAutoMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -57,7 +54,6 @@ export function IconAutoMode({ title, ...rest }: SVGAttributes<SVGSVGElement> & 
     );
 }
 
-/** /
 export function IconAppWindows({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="currentColor" {...rest}>
@@ -66,8 +62,7 @@ export function IconAppWindows({ title, ...rest }: SVGAttributes<SVGSVGElement> 
         </svg>
     );
 }
-/**/
-/*
+
 export function IconAppWebChrome({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...rest}>
@@ -79,8 +74,7 @@ export function IconAppWebChrome({ title, ...rest }: SVGAttributes<SVGSVGElement
         </svg>
     );
 }
-*/
-/** /
+
 export function IconAppWebIE({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 32 32" fill="currentColor" {...rest}>
@@ -89,4 +83,3 @@ export function IconAppWebIE({ title, ...rest }: SVGAttributes<SVGSVGElement> & 
         </svg>
     );
 }
-/**/
