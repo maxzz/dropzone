@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { doClearFilesAtom, hasFilesAtom, openFldCatDialogAtom } from '@/store';
-import { IconCatalog, IconMenuHamburger, IconTrash } from '@ui/icons';
+import { IconCatalog, IconMenuBurger, IconTrash } from '@ui/icons';
 import { Part0_TopMenu } from './menu';
 import { Part1_DropzoneArea } from './droparea';
 import { Part3_Filters } from './fiters';
@@ -13,7 +13,7 @@ const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 borde
 function MenuTrigger() {
     return (
         <div className={`${buttonClasses} cursor-pointer`}>
-            <Part0_TopMenu icon={<IconMenuHamburger className="p-1 w-8 h-8 hover:bg-primary-700 rounded" />} />
+            <Part0_TopMenu icon={<IconMenuBurger className="p-1 w-8 h-8 hover:bg-primary-700 rounded" />} />
         </div>
     );
 }

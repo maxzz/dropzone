@@ -7,7 +7,7 @@ import { SymbolAttention } from './all07-attention';
 import { SymbolDot } from './all08-dot';
 import { SymbolOpenLink } from './all09-open-link';
 import { SymbolGear } from './all10-gear';
-import { SymbolMenuHamburger } from './all12-menu-burger';
+import { SymbolMenuBurger } from './all12-menu-burger';
 import { SymbolCross } from './all13-cross';
 import { SymbolPen } from './all14-pen';
 import { SymbolFormLogin } from './all15-form-login';
@@ -64,7 +64,7 @@ export function DefAllOther() {
 
         {/* misc */}
 
-        {SymbolMenuHamburger()}
+        {SymbolMenuBurger()}
         {SymbolCross()}
         {SymbolPen()}
 

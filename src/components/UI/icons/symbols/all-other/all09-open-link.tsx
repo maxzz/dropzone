@@ -2,7 +2,7 @@ import { HTMLAttributes, SVGAttributes } from 'react';
 
 export function SymbolOpenLink() {
     return (<>
-        <symbol id="open-link" viewBox="0 0 24 24">
+        <symbol id="icon-open-link" viewBox="0 0 24 24">
             <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </symbol>
     </>);
@@ -13,7 +13,7 @@ export function IconOpenLink({ title, children, ...rest }: SVGAttributes<SVGSVGE
         <svg fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" {...rest}>
             {title && <title>{title}</title>}
             {children}
-            <use xlinkHref="#open-link" />
+            <use xlinkHref="#icon-open-link" />
         </svg>
     );
 }
