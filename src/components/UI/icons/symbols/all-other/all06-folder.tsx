@@ -8,7 +8,7 @@ export function SymbolDefFolder() {
     </>);
 }
 
-export function IconFolder({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFolder({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}

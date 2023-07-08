@@ -14,7 +14,7 @@ export function SymbolDefFieldBtn() {
     </>);
 }
 
-export function IconFieldBtn({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFieldBtn({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={.7} {...rest}>
             {title && <title>{title}</title>}

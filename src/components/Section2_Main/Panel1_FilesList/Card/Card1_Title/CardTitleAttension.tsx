@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { FileUs, isAnyWhy } from "@/store";
 import { classNames } from "@/utils";
-import { IconDot } from "@ui/icons";
+import { SymbolDot } from "@ui/icons";
 import { UiTip } from "@ui/UiTooltip";
 
 export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: boolean; }) {
@@ -51,7 +51,7 @@ export function CardTitleAttension({ fileUs }: { fileUs: FileUs; }) {
 
                                 {bailOut.map((item, key) => (
                                     <div className="flex items-center" key={key}>
-                                        <IconDot className="ml-1 w-4 h-4 flex-none self-start mt-0.5" />
+                                        <SymbolDot className="ml-1 w-4 h-4 flex-none self-start mt-0.5" />
                                         {item}
                                     </div>
                                 ))}

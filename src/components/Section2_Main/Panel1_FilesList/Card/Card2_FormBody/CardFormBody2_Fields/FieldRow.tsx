@@ -6,12 +6,12 @@ import { CardSvgPreview } from '../../Card3_Shared/CardSvgPreview';
 import { FormRowTypeIcon } from './FieldRowTypeIcon';
 import { FieldRowPath } from './FieldRowPath';
 import { UIToggleWithPortal } from '../../Card4_UI/UIToggleWithPortal';
-import { IconInOut, IconPreview, IconFieldUseIt0, IconFieldUseIt1 } from '@ui/icons';
+import { SymbolInOut, SymbolPreview, SymbolFieldUseIt0, SymbolFieldUseIt1 } from '@ui/icons';
 import { classNames } from '@/utils';
 
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
-    const icon = useIt ? IconFieldUseIt1 : IconFieldUseIt0;
+    const icon = useIt ? SymbolFieldUseIt1 : SymbolFieldUseIt0;
     return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
 }
 
@@ -30,7 +30,7 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
     return (
         <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
             toggle={
-                <IconPreview className={classNames("w-4 h-4", !hasPreview && 'opacity-25')} />
+                <SymbolPreview className={classNames("w-4 h-4", !hasPreview && 'opacity-25')} />
             }
         >
             {/* Popup content */}
@@ -119,7 +119,7 @@ function part7_FormCrossrefs(field: Meta.Field) {
     const low = !rfield && !rfieldform;
     return (
         <div className={classNames("row-field-framed", low && 'opacity-25')} title={title}>
-            <IconInOut className="w-3 h-4" />
+            <SymbolInOut className="w-3 h-4" />
         </div>
     );
 }

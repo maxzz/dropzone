@@ -10,7 +10,7 @@ export function SymbolDefAppWebIe() {
     </>);
 }
 
-export function IconAppWebIE({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolAppWebIE({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         // TODO: use prev solid version for title and outline for buttons: // <svg fill="currentColor" stroke="black" strokeWidth={.7} {...rest}>
 

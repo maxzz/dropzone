@@ -10,7 +10,7 @@ export function SymbolDefCatalog() {
     </>);
 }
 
-export function IconCatalog({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolCatalog({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
             {title && <title>{title}</title>}

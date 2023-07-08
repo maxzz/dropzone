@@ -10,7 +10,7 @@ export function SymbolDefAttention() {
     </>);
 }
 
-export function IconAttention({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolAttention({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" {...rest}>
             {title && <title>{title}</title>}

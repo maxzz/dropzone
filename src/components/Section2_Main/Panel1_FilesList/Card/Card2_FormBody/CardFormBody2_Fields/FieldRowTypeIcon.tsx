@@ -1,15 +1,15 @@
 import React from 'react';
 import { Mani } from '@/store/manifest';
-import { IconFieldBtn, IconFieldTxt, IconFieldChk, IconFieldLst, IconFieldPsw, IconFieldEdt } from '@ui/icons';
+import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from '@ui/icons';
 
 export const fieldIcons = {
-    edit: IconFieldEdt,
-    psw: IconFieldPsw,
-    check: IconFieldChk,
-    list: IconFieldLst,
-    combo: IconFieldLst,
-    text: IconFieldTxt,
-    button: IconFieldBtn,
+    edit: SymbolFieldEdt,
+    psw: SymbolFieldPsw,
+    check: SymbolFieldChk,
+    list: SymbolFieldLst,
+    combo: SymbolFieldLst,
+    text: SymbolFieldTxt,
+    button: SymbolFieldBtn,
 };
 
 export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {

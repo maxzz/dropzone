@@ -1,13 +1,13 @@
 import React from "react";
 import { FileUsStats } from "@/store";
-import { IconAppWebChrome, IconAppWebIESolid, IconAppWindows, IconCatalog } from "@ui/icons";
+import { SymbolAppWebChrome, SymbolAppWebIESolid, SymbolAppWindows, SymbolCatalog } from "@ui/icons";
 import { classNames } from "@/utils";
 
 const icons = {
-    web: { i: IconAppWebIESolid, title: "Webiste trained with IE" },
-    chr: { i: IconAppWebChrome, title: "Webiste trained with Chrome" },
-    cat: { i: IconCatalog, title: "Field catalog", c: "fill-primary-300 stroke-primary-900" },
-    app: { i: IconAppWindows, title: "Windows application", c: "fill-primary-300 stroke-transparent" },
+    web: { i: SymbolAppWebIESolid, title: "Webiste trained with IE" },
+    chr: { i: SymbolAppWebChrome, title: "Webiste trained with Chrome" },
+    cat: { i: SymbolCatalog, title: "Field catalog", c: "fill-primary-300 stroke-primary-900" },
+    app: { i: SymbolAppWindows, title: "Windows application", c: "fill-primary-300 stroke-transparent" },
 };
 
 export function CardTitleIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {

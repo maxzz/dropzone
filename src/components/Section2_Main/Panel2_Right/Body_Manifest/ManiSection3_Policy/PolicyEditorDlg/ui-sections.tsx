@@ -5,7 +5,7 @@ import { PolicyUi } from ".";
 import { useAtom } from "jotai";
 import { Dropdown, Input, Radio } from "./ui-controls";
 import { namesConstrainPsw, namesConstrainSet, UseAs  } from "@/store/manifest";
-import { IconCross } from "@ui/icons";
+import { SymbolCross } from "@ui/icons";
 import { classNames } from "@/utils";
 
 export function DialogHeader({ header, subHeader }: { header: ReactNode, subHeader?: ReactNode; }) {
@@ -16,7 +16,7 @@ export function DialogHeader({ header, subHeader }: { header: ReactNode, subHead
                     {header}
                 </div>
                 <DialogCloseButton tabIndex={-1} className="px-1.5 py-1.5 hover:bg-primary-700 active:scale-[.97] rounded">
-                    <IconCross className="w-5 h-5 py-1" />
+                    <SymbolCross className="w-5 h-5 py-1" />
                 </DialogCloseButton>
             </div>
 

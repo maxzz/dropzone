@@ -8,7 +8,7 @@ export function SymbolDefOptionsQl_firstVersion() {
     </>);
 }
 
-export function IconOptionsQL_firstVersion({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolOptionsQL_firstVersion({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}

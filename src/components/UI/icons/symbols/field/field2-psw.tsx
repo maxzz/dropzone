@@ -13,7 +13,7 @@ export function SymbolDefFieldPsw() {
     </>);
 }
 
-export function IconFieldPsw({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFieldPsw({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}

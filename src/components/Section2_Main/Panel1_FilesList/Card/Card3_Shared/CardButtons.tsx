@@ -1,7 +1,7 @@
 import React, { Fragment, MouseEvent } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
-import { IconFormChange, IconFormLogin } from "@ui/icons";
+import { SymbolFormChange, SymbolFormLogin } from "@ui/icons";
 import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../Card4_UI/UICardFormButtonTypes";
 import { classNames } from "@/utils";
 
@@ -35,7 +35,7 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
     const prefixClass = { className: minimal ? "self-start w-2 h-2" : "self-start w-3 h-3" };
-    const prefix = (idx: FormIdx) => idx === FormIdx.login ? IconFormLogin(prefixClass) : IconFormChange(prefixClass);
+    const prefix = (idx: FormIdx) => idx === FormIdx.login ? SymbolFormLogin(prefixClass) : SymbolFormChange(prefixClass);
     return (
         <button
             className={classNames(

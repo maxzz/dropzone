@@ -1,7 +1,7 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { FileUsAtomType, rightPanelData, ViewMode } from "@/store";
-import { IconOpenLink, IconPen } from "@ui/icons";
+import { SymbolOpenLink, SymbolPen } from "@ui/icons";
 
 const itemClasses = "p-1 w-8 h-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400";
 
@@ -16,7 +16,7 @@ export function ButtonCardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtom
             onClick={() => setViewMode((v) => v === ViewMode.edit ? ViewMode.raw : ViewMode.edit)}
         >
             {/* <IconGear className="w-4 h-4 stroke-[0.7] hover:stroke-[1]" /> */}
-            <IconPen className="w-3.5 h-3.5 stroke-[0.8] hover:stroke-[1]" />
+            <SymbolPen className="w-3.5 h-3.5 stroke-[0.8] hover:stroke-[1]" />
         </button>
     );
 }
@@ -35,7 +35,7 @@ export function ButtonCardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; 
                 onClick={(event) => event.stopPropagation()}
                 className={itemClasses}
             >
-                <IconOpenLink className="w-4 h-4" />
+                <SymbolOpenLink className="w-4 h-4" />
             </a>
         }
     </>);

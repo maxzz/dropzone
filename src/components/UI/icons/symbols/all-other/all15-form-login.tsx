@@ -9,7 +9,7 @@ export function SymbolDefFormLogin() {
     </>);
 }
 
-export function IconFormLogin({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFormLogin({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeMiterlimit={2} strokeWidth={1.44} {...rest}>
             {title && <title>{title}</title>}

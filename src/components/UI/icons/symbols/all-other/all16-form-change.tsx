@@ -8,7 +8,7 @@ export function SymbolDefFormChange() {
     </>);
 }
 
-export function IconFormChange({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFormChange({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeMiterlimit={10} strokeWidth={1.39} {...rest}>
             {title && <title>{title}</title>}

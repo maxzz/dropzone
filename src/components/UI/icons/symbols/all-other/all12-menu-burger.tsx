@@ -10,7 +10,7 @@ export function SymbolDefMenuBurger() {
     </>);
 }
 
-export function IconMenuBurger({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolMenuBurger({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth={1.2} {...rest}>
             {title && <title>{title}</title>}

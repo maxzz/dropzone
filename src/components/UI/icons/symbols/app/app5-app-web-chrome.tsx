@@ -13,7 +13,7 @@ export function SymbolDefAppWebChrome() {
     </>);
 }
 
-export function IconAppWebChrome({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolAppWebChrome({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth=".9" {...rest}>
             {title && <title>{title}</title>}

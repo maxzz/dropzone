@@ -7,7 +7,7 @@ import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils';
 import { UiTip } from '@ui/UiTooltip';
 import { ManiFilenameParts } from '@/components/Section2_Main/Panel1_FilesList/Card/Card1_Title/CardTitleFilename';
-import { IconAttention, IconInfo } from '@ui/icons';
+import { SymbolAttention, IconInfo } from '@ui/icons';
 import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from './Tab1_Matching';
 import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { Tab3_Options } from './Tab3_Options';
@@ -22,7 +22,7 @@ function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const dirty = useAtomValue(urls.dirtyAtom);
     return (<>
         {dirty &&
-            <IconAttention
+            <SymbolAttention
                 className="self-end w-4 h-4 text-[#f6673b]"
                 fill="#ffad42" // #ff5400 stroke="#f6673b" strokeWidth={0.8}
                 style={{ filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' }}

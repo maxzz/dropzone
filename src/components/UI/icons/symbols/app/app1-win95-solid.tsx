@@ -8,7 +8,7 @@ export function SymbolDefWin95Solid() {
     </>);
 }
 
-export function IconAppWin95({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolAppWin95({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}

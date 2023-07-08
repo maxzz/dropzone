@@ -9,7 +9,7 @@ export function SymbolDefIconManualMode() {
     </>);
 }
 
-export function IconManualMode({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolManualMode({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth=".6" {...rest}>
             {title && <title>{title}</title>}

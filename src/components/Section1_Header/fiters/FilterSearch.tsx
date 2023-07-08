@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useKey } from 'react-use';
 import { turnOffAutoComplete } from '@/utils';
 import { searchFilterData } from '@/store';
-import { IconCaseSensitive, IconClose, IconDot, IconSearch } from '@ui/icons';
+import { IconCaseSensitive, IconClose, SymbolDot, IconSearch } from '@ui/icons';
 import { UiTip } from '@ui/UiTooltip';
 
 function ToggleCaseSensitive() {
@@ -79,11 +79,11 @@ export function FilterSearch() {
                 <div className="text-sm py-1 px-1">
                     <div className="font-bold">Search (Ctrl+D)</div>
                     <div className="pb-1">Use the search prefix to dispay only:</div>
-                    <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">win:</span> logins for Windows apps</div>
-                    <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">web:</span> logins for web apps</div>
-                    <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">why:</span> logins with problems to check why</div>
-                    <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cap:</span> logins with window caption</div>
-                    <div className=""><IconDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cls:</span> logins with window classname</div>
+                    <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">win:</span> logins for Windows apps</div>
+                    <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">web:</span> logins for web apps</div>
+                    <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">why:</span> logins with problems to check why</div>
+                    <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cap:</span> logins with window caption</div>
+                    <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cls:</span> logins with window classname</div>
                 </div>
             </UiTip>
         </div>

@@ -10,7 +10,7 @@ export function SymbolDefOptionsLock() {
     </>);
 }
 
-export function IconOptionsLock({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolOptionsLock({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}

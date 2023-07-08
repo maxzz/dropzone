@@ -8,7 +8,7 @@ export function SymbolDefChevronDoubleDown() {
     </>);
 }
 
-export function IconDoubleDown({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolDoubleDown({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}

@@ -8,7 +8,7 @@ export function SymbolDefChevronUp() {
     </>);
 }
 
-export function IconChevronUp({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolChevronUp({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}

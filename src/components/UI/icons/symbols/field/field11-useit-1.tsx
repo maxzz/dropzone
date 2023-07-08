@@ -10,7 +10,7 @@ export function SymbolDefFieldUseIt1() {
     </>);
 }
 
-export function IconFieldUseIt1({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFieldUseIt1({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}

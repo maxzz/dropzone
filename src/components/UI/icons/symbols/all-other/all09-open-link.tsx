@@ -8,7 +8,7 @@ export function SymbolDefOpenLink() {
     </>);
 }
 
-export function IconOpenLink({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolOpenLink({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" {...rest}>
             {title && <title>{title}</title>}

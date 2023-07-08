@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { OldOverlay_Dialog } from '@ui/UiDialog';
 import { MenuTrigger, MenuPortal, MenuContent, MenuItem, MenuSeparator, Menu } from '@ui/UiDropdownMenu';
-import { IconMenuBurger } from '@ui/icons';
+import { SymbolMenuBurger } from '@ui/icons';
 import toast from 'react-hot-toast';
 import { FileUsAtomType } from '@/store';
 import { TestDialogContent, saveXmlFile } from './menu-commands';
@@ -14,7 +14,7 @@ export function CardTitleMenu({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (
         <Menu>
             <MenuTrigger>
-                <IconMenuBurger className={iconMenuHamburgerClasses} />
+                <SymbolMenuBurger className={iconMenuHamburgerClasses} />
             </MenuTrigger>
 
             <MenuPortal container={document.getElementById('portal')}>

@@ -9,7 +9,7 @@ export function SymbolDefGear() {
     </>);
 }
 
-export function IconGear({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolGear({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeLinecap="round" {...rest}>
             {title && <title>{title}</title>}

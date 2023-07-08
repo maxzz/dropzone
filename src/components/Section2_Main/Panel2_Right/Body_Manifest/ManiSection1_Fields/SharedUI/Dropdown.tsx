@@ -1,7 +1,7 @@
 import React from 'react';
 import { PrimitiveAtom } from 'jotai';
 import { classNames } from '@/utils';
-import { IconChevronDown, IconDot } from '@ui/icons';
+import { SymbolChevronDown, SymbolDot } from '@ui/icons';
 import * as menu from '@radix-ui/react-dropdown-menu';
 
 export function isKeyToClearDefault(key: string) {
@@ -13,7 +13,7 @@ export function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], sel
         <menu.Root>
             <menu.Trigger asChild>
                 <button className="px-2 border-l border-primary-800 outline-none group">
-                    <IconChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
+                    <SymbolChevronDown className="w-4 h-4 border-primary-500 rounded group-focus-within:border" />
                 </button>
             </menu.Trigger>
 
@@ -41,7 +41,7 @@ export function Dropdown(useItAtom: PrimitiveAtom<boolean>, items: string[], sel
                                 onSelect={() => onSetIndex(idx)}
                                 key={idx}
                             >
-                                {isSelected && <IconDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
+                                {isSelected && <SymbolDot className="absolute left-2 w-5 h-5 fill-primary-700" />}
                                 <span className="flex-grow">{item}</span>
                             </menu.Item>;
                     })}

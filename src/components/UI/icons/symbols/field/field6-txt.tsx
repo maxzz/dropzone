@@ -8,7 +8,7 @@ export function SymbolDefFieldTxt() {
         </symbol>
     </>);
 }
-export function IconFieldTxt({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolFieldTxt({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={.8} {...rest}>
             {title && <title>{title}</title>}

@@ -1,8 +1,8 @@
-import { IconChevronDown, IconChevronUp, IconDoubleDown } from './symbols/UIIconSymbols';
+import { SymbolChevronDown, SymbolChevronUp, SymbolDoubleDown } from './symbols/UIIconSymbols';
 
 export function UIIconUpDown({ isUp, double = false, className }: { isUp: boolean; double?: boolean; className: string; }) {
     if (double) {
-        const component = IconDoubleDown;
+        const component = SymbolDoubleDown;
         return component({
             className,
             style: {
@@ -10,7 +10,7 @@ export function UIIconUpDown({ isUp, double = false, className }: { isUp: boolea
             }
         });
     } else {
-        const component = isUp ? IconChevronUp : IconChevronDown;
+        const component = isUp ? SymbolChevronUp : SymbolChevronDown;
         return component({
             className
         });

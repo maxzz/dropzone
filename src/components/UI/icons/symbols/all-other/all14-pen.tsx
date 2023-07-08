@@ -9,7 +9,7 @@ export function SymbolDefPen() {
     </>);
 }
 
-export function IconPen({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolPen({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} {...rest}>
             {title && <title>{title}</title>}

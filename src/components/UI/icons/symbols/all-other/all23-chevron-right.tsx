@@ -8,7 +8,7 @@ export function SymbolDefChevronRight() {
     </>);
 }
 
-export function IconChevronRight({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolChevronRight({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="currentColor" {...rest}>
             {title && <title>{title}</title>}

@@ -11,7 +11,7 @@ export function SymbolDefPreview() {
     </>);
 }
 
-export function IconPreview({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolPreview({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} {...rest}>
             {title && <title>{title}</title>}

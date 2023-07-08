@@ -8,7 +8,7 @@ export function SymbolDefClassicCheckEmpty() {
     </>);
 }
 
-export function IconCheckboxEmpty({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolCheckboxEmpty({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSetAtom } from "jotai";
 import { FileUsAtomType, formEditorDataAtom } from "@/store";
-import { IconGear } from "@ui/icons";
+import { SymbolGear } from "@ui/icons";
 
 export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
     const setFormEditorData = useSetAtom(formEditorDataAtom);
@@ -11,7 +11,7 @@ export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; f
             onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
             title="Edit detection options"
         >
-            <IconGear className="w-4 h-4 stroke-[1.2]" />
+            <SymbolGear className="w-4 h-4 stroke-[1.2]" />
         </button>
     );
 }

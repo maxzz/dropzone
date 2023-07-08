@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { Meta } from '@/store/manifest';
-import { IconCross, IconOptionsLock, IconOptionsQL, IconPreview } from '@ui/icons';
+import { SymbolCross, SymbolOptionsLock, SymbolOptionsQL, SymbolPreview } from '@ui/icons';
 import { CardSvgPreview } from '../../Card3_Shared/CardSvgPreview';
 import { BtnPopupDetection } from './BtnPopupDetection';
 import { BtnPopupPool } from './BtnPopupPool';
@@ -11,13 +11,13 @@ import { BtnEdit } from './BtnEdit';
 function Icon_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
     const title = `Lock fields ${useit ? '= 1 (lock)' : `${lockfields} don\'t lock`}`;
-    return useit ? IconOptionsLock({className:"w-3 h-3", title}) : null;
+    return useit ? SymbolOptionsLock({className:"w-3 h-3", title}) : null;
 }
 
 function Icon_QuickLink({ ql }: { ql: string | undefined; }) {
     const useit = ql == '1';
     const title = `Quick link ${useit ? '= 1 (use)' : ql == '2' ? '= 2 (don\'t use)' : `'${ql}''`}`;
-    return useit ? IconOptionsQL({className:"w-3.5 h-3.5", title}) : null;
+    return useit ? SymbolOptionsQL({className:"w-3.5 h-3.5", title}) : null;
 }
 
 function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
@@ -25,8 +25,8 @@ function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
 }) {
     const [selectedRow, setSelectedRow] = useAtom(formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom);
     const icon = small
-        ? IconPreview({ className: "w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97] opacity-75", title: "Open preview" })
-        : IconCross({ className: "p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" });
+        ? SymbolPreview({ className: "w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97] opacity-75", title: "Open preview" })
+        : SymbolCross({ className: "p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" });
     return (
         <div className="grid grid-cols-[minmax(0,1fr)_24px] mr-1 overflow-hidden">
             <div className="w-6 h-6 col-start-2 row-start-1 cursor-pointer flex items-center justify-center z-10" onClick={() => setSmall((v) => !v)}>

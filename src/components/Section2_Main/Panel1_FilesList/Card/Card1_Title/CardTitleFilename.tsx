@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
 import { UiTip, tipSmall } from "@ui/UiTooltip";
-import { IconFolder } from "@ui/icons";
+import { SymbolFolder } from "@ui/icons";
 import { classNames } from "@/utils";
 
 export type ParsedFnameParams = {
@@ -79,7 +79,7 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
     return (
         <div className={classNames("text-sm font-light font-mono grid grid-cols-[minmax(0,min-content)_auto] items-center gap-x-1", className)} {...rest}>
             {FilenameMemo}
-            {stats.isSubFolder && <IconFolder className=" w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
+            {stats.isSubFolder && <SymbolFolder className=" w-4 h-4 text-gray-500" title={`Folder: "${stats.subFolder}"`} />}
         </div>
     );
 }

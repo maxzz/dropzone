@@ -11,7 +11,7 @@ export function SymbolDefAppWindows() {
     </>);
 }
 
-export function IconAppWindows({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function SymbolAppWindows({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
             {title && <title>{title}</title>}

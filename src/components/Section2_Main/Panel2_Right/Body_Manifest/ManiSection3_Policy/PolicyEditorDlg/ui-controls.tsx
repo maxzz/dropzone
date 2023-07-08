@@ -2,7 +2,7 @@ import React, { HTMLAttributes, InputHTMLAttributes } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import * as Select from '@radix-ui/react-select';
 import { classNames } from '@/utils';
-import { IconChevronDown } from "@ui/icons";
+import { SymbolChevronDown } from "@ui/icons";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 export function Check({ children, checked, onChange, className, ...rest }: { checked: boolean; } & HTMLAttributes<HTMLElement>) {
@@ -36,7 +36,7 @@ export function Dropdown({ items, valueAtom, className }: { items: string[]; val
             <Select.Trigger className={className}>
                 <div className="p-2 flex items-center justify-between space-x-1 text-primary-300 bg-primary-700 rounded">
                     <Select.Value />
-                    <Select.Icon><IconChevronDown className="w-4 h-4" /></Select.Icon>
+                    <Select.Icon><SymbolChevronDown className="w-4 h-4" /></Select.Icon>
                 </div>
             </Select.Trigger>
 
