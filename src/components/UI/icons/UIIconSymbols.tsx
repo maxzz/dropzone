@@ -1,6 +1,6 @@
 import { DefAllOther } from './symbols/all-other';
-import { DefAppTypes } from './symbols/app';
-import { SymbolFieldBtn, SymbolFieldChk, SymbolFieldEdt, SymbolFieldLst, SymbolFieldPsw, SymbolFieldTxt } from './symbols/field';
+import { SymbolAppWindows, SymbolAppWebIeSolid, SymbolAppWebChrome, SymbolCatalog, SymbolIconManualMode } from './symbols/app';
+import { SymbolFieldEdt, SymbolFieldPsw, SymbolFieldChk, SymbolFieldLst, SymbolFieldTxt, SymbolFieldBtn } from './symbols/field';
 import { SymbolUseIt0, SymbolUseIt1 } from './symbols/useit';
 
 export * from './symbols/all-other';
@@ -14,7 +14,11 @@ export function UISymbolDefs() {
             xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1"
         >
             <defs>
-                {DefAppTypes()}
+                {SymbolAppWindows()} {/* {SymbolWin95Solid()} */}
+                {SymbolAppWebIeSolid()} {/* {SymbolAppWebIe()} */}
+                {SymbolAppWebChrome()}
+                {SymbolCatalog()}
+                {SymbolIconManualMode()}
 
                 {SymbolFieldEdt()}
                 {SymbolFieldPsw()}
