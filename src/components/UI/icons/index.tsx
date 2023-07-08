@@ -1,3 +1,3 @@
 export * from './normal';
-export * from './symbols/UIIconSymbols';
+export * from './symbols';
 export * from './UIIconUpDown';
