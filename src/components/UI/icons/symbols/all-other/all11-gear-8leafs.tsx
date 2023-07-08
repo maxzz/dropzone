@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolGear_8leafs_nun() {
+export function SymbolDefGear_8leafs_nun() {
     return (<>
         <symbol id="icon-gear-8" viewBox="0 0 24 24">
             <path d="M12.05 7.1a4.9 4.9 0 1 0-.02 9.8 4.9 4.9 0 0 0 .02-9.8Z" />

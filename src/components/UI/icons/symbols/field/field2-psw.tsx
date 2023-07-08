@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolFieldPsw() {
+export function SymbolDefFieldPsw() {
     return (<>
         <symbol id="ifield-psw" viewBox="0 0 24 24">
             <path fill="#ffdbb8" d="M2.05 6.01h19.89v11.98H2.05z" />

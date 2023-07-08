@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolFieldBtn() {
+export function SymbolDefFieldBtn() {
     return (<>
         <symbol id="ifield-btn" viewBox="0 0 24 24">
             <rect fill="#82daff" x="5.33" y="6.92" width="13.45" height="9.79" rx="2.11" ry="2.11" />

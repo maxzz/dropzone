@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolChevronDoubleDown() {
+export function SymbolDefChevronDoubleDown() {
     return (<>
         <symbol id="icon-chevron-down-2" viewBox="0 0 24 24">
             <path d="M17.157 7.593L11.5 13.25L5.843 7.593l.707-.707l4.95 4.95l4.95-4.95l.707.707zm0 4L11.5 17.25l-5.657-5.657l.707-.707l4.95 4.95l4.95-4.95l.707.707z" />

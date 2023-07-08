@@ -1,11 +1,11 @@
-import { SymbolFieldEdt } from './field1-edt';
-import { SymbolFieldPsw } from './field2-psw';
-import { SymbolFieldLst } from './field3-lst';
-import { SymbolFieldChk } from './field4-chk';
-import { SymbolFieldBtn } from './field5-btn';
-import { SymbolFieldTxt } from './field6-txt';
-import { SymbolFieldUseIt0 } from './field10-useit-0';
-import { SymbolFieldUseIt1 } from './field11-useit-1';
+import { SymbolDefFieldEdt } from './field1-edt';
+import { SymbolDefFieldPsw } from './field2-psw';
+import { SymbolDefFieldLst } from './field3-lst';
+import { SymbolDefFieldChk } from './field4-chk';
+import { SymbolDefFieldBtn } from './field5-btn';
+import { SymbolDefFieldTxt } from './field6-txt';
+import { SymbolDefFieldUseIt0 } from './field10-useit-0';
+import { SymbolDefFieldUseIt1 } from './field11-useit-1';
 
 export * from './field1-edt';
 export * from './field2-psw';
@@ -18,13 +18,13 @@ export * from './field11-useit-1';
 
 export function DefFieldTypes() {
     return (<>
-        {SymbolFieldEdt()}
-        {SymbolFieldPsw()}
-        {SymbolFieldChk()}
-        {SymbolFieldLst()}
-        {SymbolFieldTxt()}
-        {SymbolFieldBtn()}
-        {SymbolFieldUseIt0()}
-        {SymbolFieldUseIt1()}
+        {SymbolDefFieldEdt()}
+        {SymbolDefFieldPsw()}
+        {SymbolDefFieldChk()}
+        {SymbolDefFieldLst()}
+        {SymbolDefFieldTxt()}
+        {SymbolDefFieldBtn()}
+        {SymbolDefFieldUseIt0()}
+        {SymbolDefFieldUseIt1()}
     </>);
 }

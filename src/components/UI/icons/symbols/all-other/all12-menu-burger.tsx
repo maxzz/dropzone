@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolMenuBurger() {
+export function SymbolDefMenuBurger() {
     return (<>
         <symbol id="icon-menu" viewBox="0 0 21 21">
             <path d="M4.5 6.5h12" />

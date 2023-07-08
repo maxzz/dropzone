@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolFieldTxt() {
+export function SymbolDefFieldTxt() {
     return (<>
         <symbol id="ifield-txt" viewBox="0 0 24 24">
             <path fill="#5e9eff" d="M2.05 6.01h19.89v11.98H2.05z" />

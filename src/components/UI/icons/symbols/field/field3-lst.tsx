@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolFieldLst() {
+export function SymbolDefFieldLst() {
     return (<>
         <symbol id="ifield-lst" viewBox="0 0 24 24">
             <rect x="2.5" y="4.66" width="15.3" height="6.38" rx=".89" ry=".89" />

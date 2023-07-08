@@ -1,23 +1,23 @@
-import { SymbolPreview } from './all01-preview';
-import { SymbolInOut } from './all02-in-out';
-import { SymbolOptionsLock } from './all03-options-lock';
-import { SymbolOptionsQl } from './all05-options-ql';
-import { SymbolFolder } from './all06-folder';
-import { SymbolAttention } from './all07-attention';
-import { SymbolDot } from './all08-dot';
-import { SymbolOpenLink } from './all09-open-link';
-import { SymbolGear } from './all10-gear';
-import { SymbolMenuBurger } from './all12-menu-burger';
-import { SymbolCross } from './all13-cross';
-import { SymbolPen } from './all14-pen';
-import { SymbolFormLogin } from './all15-form-login';
-import { SymbolFormChange } from './all16-form-change';
-import { SymbolClassicCheck } from './all17-checkbox-classic';
-import { SymbolClassicCheckEmpty } from './all18-checkbox-classic-empty';
-import { SymbolChevronDown } from './all20-chevron-down';
-import { SymbolChevronUp } from './all21-chevron-up';
-import { SymbolChevronDoubleDown } from './all22-chevron-double-down';
-import { SymbolChevronRight } from './all23-chevron-right';
+import { SymbolDefPreview } from './all01-preview';
+import { SymbolDefInOut } from './all02-in-out';
+import { SymbolDefOptionsLock } from './all03-options-lock';
+import { SymbolDefOptionsQl } from './all05-options-ql';
+import { SymbolDefFolder } from './all06-folder';
+import { SymbolDefAttention } from './all07-attention';
+import { SymbolDefDot } from './all08-dot';
+import { SymbolDefOpenLink } from './all09-open-link';
+import { SymbolDefGear } from './all10-gear';
+import { SymbolDefMenuBurger } from './all12-menu-burger';
+import { SymbolDefCross } from './all13-cross';
+import { SymbolDefPen } from './all14-pen';
+import { SymbolDefFormLogin } from './all15-form-login';
+import { SymbolDefFormChange } from './all16-form-change';
+import { SymbolDefClassicCheck } from './all17-checkbox-classic';
+import { SymbolDefClassicCheckEmpty } from './all18-checkbox-classic-empty';
+import { SymbolDefChevronDown } from './all20-chevron-down';
+import { SymbolDefChevronUp } from './all21-chevron-up';
+import { SymbolDefChevronDoubleDown } from './all22-chevron-double-down';
+import { SymbolDefChevronRight } from './all23-chevron-right';
 
 export * from './all01-preview';
 export * from './all02-in-out';
@@ -46,44 +46,44 @@ export function DefAllOther() {
     return (<>
         {/* field row state */}
 
-        {SymbolPreview()}
-        {SymbolInOut()}
+        {SymbolDefPreview()}
+        {SymbolDefInOut()}
 
         {/* form options */}
 
-        {SymbolOptionsLock()}
-        {SymbolOptionsQl()} {/* {SymbolOptionsQl_firstVersion()} */}
+        {SymbolDefOptionsLock()}
+        {SymbolDefOptionsQl()} {/* {SymbolOptionsQl_firstVersion()} */}
 
         {/* info */}
 
-        {SymbolFolder()}
-        {SymbolAttention()}
-        {SymbolDot()}
-        {SymbolOpenLink()}
-        {SymbolGear()} {/* {SymbolGear_8leafs()} */}
+        {SymbolDefFolder()}
+        {SymbolDefAttention()}
+        {SymbolDefDot()}
+        {SymbolDefOpenLink()}
+        {SymbolDefGear()} {/* {SymbolGear_8leafs()} */}
 
         {/* misc */}
 
-        {SymbolMenuBurger()}
-        {SymbolCross()}
-        {SymbolPen()}
+        {SymbolDefMenuBurger()}
+        {SymbolDefCross()}
+        {SymbolDefPen()}
 
         {/* Login and password change */}
 
-        {SymbolFormLogin()}
-        {SymbolFormChange()}
+        {SymbolDefFormLogin()}
+        {SymbolDefFormChange()}
 
         {/* classic check boxes */}
 
-        {SymbolClassicCheck()}
-        {SymbolClassicCheckEmpty()}
+        {SymbolDefClassicCheck()}
+        {SymbolDefClassicCheckEmpty()}
 
         {/* chevrons */}
 
-        {SymbolChevronDown()}
-        {SymbolChevronUp()}
-        {SymbolChevronDoubleDown()}
-        {SymbolChevronRight()}
+        {SymbolDefChevronDown()}
+        {SymbolDefChevronUp()}
+        {SymbolDefChevronDoubleDown()}
+        {SymbolDefChevronRight()}
     </>);
 }
 

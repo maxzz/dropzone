@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolAppWebIe() {
+export function SymbolDefAppWebIe() {
     return (<>
         {/* ie outline w/ stroke */}
         <symbol id="app-web-ie" viewBox="0 0 24 24">

@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolAppWebChrome() {
+export function SymbolDefAppWebChrome() {
     return (<>
         <symbol id="app-web-chrome" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" />

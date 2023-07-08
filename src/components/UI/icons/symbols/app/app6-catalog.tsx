@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolCatalog() {
+export function SymbolDefCatalog() {
     return (<>
         <symbol id="app-catalog" viewBox="0 0 24 24">
             <path d="M12.17 5.2Q18 2.23 23 5.2V20a12.15 12.15 0 0 0-10.83.53" />

@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolIconManualMode() {
+export function SymbolDefIconManualMode() {
     return (<>
         {/* one hand */}
         <symbol id="app-manual-mode" viewBox="0 0 24 24">

@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolPreview() {
+export function SymbolDefPreview() {
     return (<>
         <symbol id="icon-preview" viewBox="0 0 24 24">
             <rect x="1.49" y="3.46" width="21.02" height="17.08" rx=".73" ry=".73" />
