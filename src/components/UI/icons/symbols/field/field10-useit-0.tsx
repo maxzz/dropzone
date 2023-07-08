@@ -2,7 +2,7 @@ import { HTMLAttributes, SVGAttributes } from 'react';
 
 // field use-it
 
-export function SymbolUseIt0() {
+export function SymbolFieldUseIt0() {
     return (<>
         <symbol id="ifield-useit-0" viewBox="0 0 24 24">
             <path d="M4.41 19.59 19.59 4.41" />
@@ -11,7 +11,7 @@ export function SymbolUseIt0() {
     </>);
 }
 
-export function IconUseIt0({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconFieldUseIt0({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" {...rest}>
             {title && <title>{title}</title>}
