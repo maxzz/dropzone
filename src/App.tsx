@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { FocusGuards } from '@radix-ui/react-focus-guards';
 import { UiToaster } from '@ui/UiToaster';
 import { Section1_Header } from './components/Section1_Header';
@@ -6,7 +6,7 @@ import { Section2_Main } from './components/Section2_Main';
 import { Section4_Dialogs } from './components/Section4_Dialogs';
 import { UISymbolDefs } from '@ui/icons';
 import './styles/App.scss';
-import { SpySvgSymbols } from './utils/SpySvgSymbols';
+// import { SpySvgSymbols } from './utils/SpySvgSymbols';
 
 export function App() {
     useEffect(() => {
@@ -22,7 +22,8 @@ export function App() {
                 <Section1_Header className="flex-none" />
                 <Section2_Main />
                 <Section4_Dialogs />
-                <SpySvgSymbols />
+                
+                {/* <SpySvgSymbols /> */}
             </div>
         </FocusGuards>
     );
