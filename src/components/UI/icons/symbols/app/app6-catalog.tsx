@@ -10,11 +10,10 @@ export function SymbolCatalog() {
     </>);
 }
 
-export function IconCatalog({ title, children, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+export function IconCatalog({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
         <svg fill="none" stroke="currentColor" strokeWidth={1} {...rest}>
             {title && <title>{title}</title>}
-            {children}
             <use xlinkHref="#app-catalog" />
         </svg>
     );
