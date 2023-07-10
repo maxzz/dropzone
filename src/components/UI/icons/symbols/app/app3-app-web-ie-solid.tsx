@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolDefAppWebIeSolid() {
+export function SvgSymbolAppWebIeSolid() {
     return (<>
         {/* ie solid */}
         <symbol id="app-web-ie-solid" viewBox="0 0 32 32">

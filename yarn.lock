@@ -1826,10 +1826,10 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.6.tgz#3018ae32ecfcff6c29ba2267cbf21166ac1f36b9"
   integrity sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==
 
-pm-manifest-icons@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pm-manifest-icons/-/pm-manifest-icons-1.0.0.tgz#79da9e48c814b9c7ddb92a294182c81cdb595a35"
-  integrity sha512-ZySgNIrSMQexNlkVwYJ75C6q+cE4UIeeLahvupUzh51fVjnPq4DsipJAdwa8y2XBBsnRcmetWPLJ9C5PQX07tw==
+pm-manifest-icons@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/pm-manifest-icons/-/pm-manifest-icons-1.0.3.tgz#a9c6939802398a3705e11265a87f9fa41de7c9a1"
+  integrity sha512-KIYGr2leVRRohxcfi/2doprvF64c7M+8YZcvLNMTT6m8bDqs4EYiK1ZDcMM1M7jbnoigUIVfjU5bzXCndGK1xw==
 
 pm-manifest@^1.0.6:
   version "1.0.6"

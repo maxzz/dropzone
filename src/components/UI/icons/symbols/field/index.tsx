@@ -1,1 +1,1 @@
-export * from 'pm-manifest-icons';
+export * from 'pm-manifest-icons/src/symbols/field';

@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolDefInOut() {
+export function SvgSymbolInOut() {
     return (<>
         <symbol id="icon-inout" viewBox="0 0 24 24">
             <path d="m7.7 19-4.55-5.51h13.3" />

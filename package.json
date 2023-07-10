@@ -28,7 +28,7 @@
         "fast-xml-parser": "4.2.5",
         "jotai": "2.2.2",
         "pm-manifest": "^1.0.6",
-        "pm-manifest-icons": "^1.0.0",
+        "pm-manifest-icons": "1.0.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-dropzone": "14.2.3",

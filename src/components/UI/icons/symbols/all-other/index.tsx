@@ -1,23 +1,25 @@
-import { SymbolDefPreview } from './all01-preview';
-import { SymbolDefInOut } from './all02-in-out';
-import { SymbolDefOptionsLock } from './all03-options-lock';
-import { SymbolDefOptionsQl } from './all05-options-ql';
-import { SymbolDefFolder } from './all06-folder';
-import { SymbolDefAttention } from './all07-attention';
-import { SymbolDefDot } from './all08-dot';
-import { SymbolDefOpenLink } from './all09-open-link';
-import { SymbolDefGear } from './all10-gear';
-import { SymbolDefMenuBurger } from './all12-menu-burger';
-import { SymbolDefCross } from './all13-cross';
-import { SymbolDefPen } from './all14-pen';
-import { SymbolDefFormLogin } from './all15-form-login';
-import { SymbolDefFormChange } from './all16-form-change';
-import { SymbolDefClassicCheck } from './all17-checkbox-classic';
-import { SymbolDefClassicCheckEmpty } from './all18-checkbox-classic-empty';
-import { SymbolDefChevronDown } from './all20-chevron-down';
-import { SymbolDefChevronUp } from './all21-chevron-up';
-import { SymbolDefChevronDoubleDown } from './all22-chevron-double-down';
-import { SymbolDefChevronRight } from './all23-chevron-right';
+import { SvgSymbolPreview } from './all01-preview';
+import { SvgSymbolInOut } from './all02-in-out';
+import { SvgSymbolOptionsLock } from './all03-options-lock';
+//import { SvgSymbolOptionsQl_firstVersion } from './all04-options-ql-1st';
+import { SvgSymbolOptionsQl } from './all05-options-ql';
+import { SvgSymbolFolder } from './all06-folder';
+import { SvgSymbolAttention } from './all07-attention';
+import { SvgSymbolDot } from './all08-dot';
+import { SvgSymbolOpenLink } from './all09-open-link';
+import { SvgSymbolGear } from './all10-gear';
+//import { SvgSymbolGear_8leafs } from './all11-gear-8leafs';
+import { SvgSymbolMenuBurger } from './all12-menu-burger';
+import { SvgSymbolCross } from './all13-cross';
+import { SvgSymbolPen } from './all14-pen';
+import { SvgSymbolFormLogin } from './all15-form-login';
+import { SvgSymbolFormChange } from './all16-form-change';
+import { SvgSymbolClassicCheck } from './all17-checkbox-classic';
+import { SvgSymbolClassicCheckEmpty } from './all18-checkbox-classic-empty';
+import { SvgSymbolChevronDown } from './all20-chevron-down';
+import { SvgSymbolChevronUp } from './all21-chevron-up';
+import { SvgSymbolChevronDoubleDown } from './all22-chevron-double-down';
+import { SvgSymbolChevronRight } from './all23-chevron-right';
 
 export * from './all01-preview';
 export * from './all02-in-out';
@@ -46,44 +48,44 @@ export function DefAllOther() {
     return (<>
         {/* field row state */}
 
-        {SymbolDefPreview()}
-        {SymbolDefInOut()}
+        {SvgSymbolPreview()}
+        {SvgSymbolInOut()}
 
         {/* form options */}
 
-        {SymbolDefOptionsLock()}
-        {SymbolDefOptionsQl()} {/* {SymbolOptionsQl_firstVersion()} */}
+        {SvgSymbolOptionsLock()}
+        {SvgSymbolOptionsQl()} {/* {SvgSymbolOptionsQl_firstVersion()} */}
 
         {/* info */}
 
-        {SymbolDefFolder()}
-        {SymbolDefAttention()}
-        {SymbolDefDot()}
-        {SymbolDefOpenLink()}
-        {SymbolDefGear()} {/* {SymbolGear_8leafs()} */}
+        {SvgSymbolFolder()}
+        {SvgSymbolAttention()}
+        {SvgSymbolDot()}
+        {SvgSymbolOpenLink()}
+        {SvgSymbolGear()} {/* {SvgSymbolGear_8leafs()} */}
 
         {/* misc */}
 
-        {SymbolDefMenuBurger()}
-        {SymbolDefCross()}
-        {SymbolDefPen()}
+        {SvgSymbolMenuBurger()}
+        {SvgSymbolCross()}
+        {SvgSymbolPen()}
 
         {/* Login and password change */}
 
-        {SymbolDefFormLogin()}
-        {SymbolDefFormChange()}
+        {SvgSymbolFormLogin()}
+        {SvgSymbolFormChange()}
 
         {/* classic check boxes */}
 
-        {SymbolDefClassicCheck()}
-        {SymbolDefClassicCheckEmpty()}
+        {SvgSymbolClassicCheck()}
+        {SvgSymbolClassicCheckEmpty()}
 
         {/* chevrons */}
 
-        {SymbolDefChevronDown()}
-        {SymbolDefChevronUp()}
-        {SymbolDefChevronDoubleDown()}
-        {SymbolDefChevronRight()}
+        {SvgSymbolChevronDown()}
+        {SvgSymbolChevronUp()}
+        {SvgSymbolChevronDoubleDown()}
+        {SvgSymbolChevronRight()}
     </>);
 }
 

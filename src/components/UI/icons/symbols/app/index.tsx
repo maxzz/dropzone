@@ -1,10 +1,10 @@
-//import { SymbolWin95Solid } from './app1-win95-solid';
-import { SymbolDefAppWindows } from './app2-app-windows';
-import { SymbolDefAppWebIeSolid } from './app3-app-web-ie-solid';
-//import { SymbolAppWebIe } from './app4-app-web-ie';
-import { SymbolDefAppWebChrome } from './app5-app-web-chrome';
-import { SymbolDefCatalog } from './app6-catalog';
-import { SymbolDefIconManualMode } from './app7-manual-mode';
+//import { SvgSymbolWin95Solid } from './app1-win95-solid';
+import { SvgSymbolAppWindows } from './app2-app-windows';
+import { SvgSymbolAppWebIeSolid } from './app3-app-web-ie-solid';
+//import { SvgSymbolAppWebIe } from './app4-app-web-ie';
+import { SvgSymbolAppWebChrome } from './app5-app-web-chrome';
+import { SvgSymbolCatalog } from './app6-catalog';
+import { SvgSymbolIconManualMode } from './app7-manual-mode';
 
 //export * from './app1-win95-solid';
 export * from './app2-app-windows';
@@ -16,14 +16,14 @@ export * from './app7-manual-mode';
 
 export function DefAppTypes() {
     return (<>
-        {SymbolDefAppWindows()} 
+        {SvgSymbolAppWindows()} 
         
-        {/* {SymbolWin95Solid()} */}
-        {SymbolDefAppWebIeSolid()} 
+        {/* {SvgSymbolWin95Solid()} */}
+        {SvgSymbolAppWebIeSolid()} 
         
-        {/* {SymbolAppWebIe()} */}
-        {SymbolDefAppWebChrome()}
-        {SymbolDefCatalog()}
-        {SymbolDefIconManualMode()}
+        {/* {SvgSymbolAppWebIe()} */}
+        {SvgSymbolAppWebChrome()}
+        {SvgSymbolCatalog()}
+        {SvgSymbolIconManualMode()}
     </>);
 }

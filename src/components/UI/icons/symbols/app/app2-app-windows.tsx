@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolDefAppWindows() {
+export function SvgSymbolAppWindows() {
     return (<>
         {/* WinXp outlined flag */}
         <symbol id="app-win32" viewBox="0 0 24 24">

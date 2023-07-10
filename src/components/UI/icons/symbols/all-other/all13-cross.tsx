@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolDefCross() {
+export function SvgSymbolCross() {
     return (<>
         <symbol id="icon-cross" viewBox="0 0 24 24">
             <path d="m2 2 20 20" />

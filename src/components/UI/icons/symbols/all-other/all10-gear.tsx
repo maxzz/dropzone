@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolDefGear() {
+export function SvgSymbolGear() {
     return (<>
         <symbol id="icon-gear" viewBox="0 0 24 24">
             <path d="M14.84 11.99a2.84 2.84 0 0 1-3.6 2.78 2.6 2.6 0 0 1-1.32-.79 2.6 2.6 0 0 1-.7-1.2 2.63 2.63 0 0 1 0-1.59c.12-.46.37-.87.7-1.2a2.8 2.8 0 0 1 2.75-.79 2.79 2.79 0 0 1 2.06 2.01c.07.24.11.5.11.76Z" />

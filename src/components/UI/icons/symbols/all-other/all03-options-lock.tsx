@@ -1,6 +1,6 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
 
-export function SymbolDefOptionsLock() {
+export function SvgSymbolOptionsLock() {
     return (<>
         <symbol id="icon-options-lock" viewBox="0 0 24 24">
             <path d="M5.99 8.57h12.02c1.09 0 1.98.89 1.98 1.98v4.01a8 8 0 0 1-15.98 0v-4.01c0-1.09.89-1.98 1.98-1.98Z" />
