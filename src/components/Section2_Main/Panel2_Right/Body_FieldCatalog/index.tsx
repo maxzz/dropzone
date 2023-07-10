@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtomType } from '@/store';
 import { Scroller } from '../Scroller';
-import { fieldIcons } from '@/components/Section2_Main/Panel1_FilesList/Card/Card2_FormBody/CardFormBody2_Fields/FieldRowTypeIcon';
+import { fieldIcons } from '@/store/manifest/manifest-field-icons';
 
 function FieldIcon(isPsw: boolean | undefined, className: string) {
     const type = isPsw ? 'psw' : 'edit';

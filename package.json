@@ -27,7 +27,7 @@
         "@use-gesture/react": "10.2.27",
         "fast-xml-parser": "4.2.5",
         "jotai": "2.2.2",
-        "pm-manifest": "^1.0.6",
+        "pm-manifest": "1.0.8",
         "pm-manifest-icons": "1.0.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",

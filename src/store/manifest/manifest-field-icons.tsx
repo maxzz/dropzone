@@ -1,18 +1,22 @@
-import React from 'react';
-import { Mani } from '@/store/manifest';
+import React, { FC } from 'react';
+import { FieldTyp, Mani } from '@/store/manifest';
 import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from '@ui/icons';
 
-export const fieldIcons = {
+export const fieldIcons: Record<Exclude<keyof typeof FieldTyp, 'und'>, FC> = {
     edit: SymbolFieldEdt,
     psw: SymbolFieldPsw,
     check: SymbolFieldChk,
+    radio: SymbolFieldChk,
     list: SymbolFieldLst,
     combo: SymbolFieldLst,
     text: SymbolFieldTxt,
     button: SymbolFieldBtn,
+    listbx: SymbolFieldLst,
 };
 
-export function FormRowTypeIcon({ field, className }: { field: Mani.Field; className?: string; }) {
+export type FieldIconTypes = Pick<Mani.Field, 'type' | 'password' | 'choosevalue'>;
+
+export function FieldTypeIconComponent({ field, className }: { field: FieldIconTypes; className?: string; }) {
     const type = field.password ? "psw" : field.type as keyof typeof fieldIcons;
     const Icon =
         fieldIcons[type]?.({
