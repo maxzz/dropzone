@@ -44,11 +44,11 @@
         "@rollup/plugin-replace": "5.0.2",
         "@rollup/plugin-url": "8.0.1",
         "@tailwindcss/forms": "0.5.3",
-        "@types/node": "20.4.1",
+        "@types/node": "20.5.0",
         "@types/react": "18.2.14",
         "@types/react-dom": "18.2.6",
         "@types/react-syntax-highlighter": "15.5.7",
-        "@vitejs/plugin-react": "4.0.2",
+        "@vitejs/plugin-react": "4.0.4",
         "autoprefixer": "10.4.14",
         "postcss": "8.4.25",
         "rollup-plugin-visualizer": "5.9.2",
@@ -56,6 +56,6 @@
         "tailwindcss": "3.3.2",
         "tailwindcss-radix": "2.8.0",
         "typescript": "5.1.6",
-        "vite": "4.4.2"
+        "vite": "4.4.9"
     }
 }
