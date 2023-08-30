@@ -1,5 +1,5 @@
 import { PrimitiveAtom, WritableAtom } from "jotai";
-import { Catalog, Mani, Meta } from "./manifest";
+import { CatalogFile, Mani, Meta } from "./manifest";
 
 export type FileUsState = {
     isGroupAtom: PrimitiveAtom<boolean>,   // this fileUs selected for bulk group operation
@@ -31,7 +31,7 @@ export type FileUs = {
     raw?: string;               // raw manifest as it was loaded
     mani?: Mani.Manifest;       // json raw manifest
     meta?: Meta.Form[],         // meta data on manifest
-    fcat?: Catalog.Root;        // field catalog
+    fcat?: CatalogFile.Root;    // field catalog
     file?: File;                // file OS handle
     state: FileUsState;         // local state atoms: is currnet; is selected
     stats: FileUsStats;         // quick access statistics

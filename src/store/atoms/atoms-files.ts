@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { uuid } from '@/utils';
-import { buildCatalogMeta, buildManiMetaForms, Catalog, Mani, Meta, parseXMLFile } from '../manifest';
+import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '../manifest';
 import { FileUs, FileUsAtomType, FileUsStats, Order, SortBy } from '../store-types';
 import { createRegexByFilter, delay, fileUsStats, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, textFileReader, useFileUsByFilter } from '../store-utils';
 import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom, totalManiAtoms, _foldAllCardsAtom } from './atoms-ui-state';
@@ -146,7 +146,7 @@ const doUpdateCacheAtom = atom(
                     const raw = await textFileReader(file.file);
 
                     let mani: Mani.Manifest | undefined;
-                    let fcat: Catalog.Root | undefined;
+                    let fcat: CatalogFile.Root | undefined;
                     let meta: Meta.Form[] | undefined;
                     try {
                         const res = parseXMLFile(raw);

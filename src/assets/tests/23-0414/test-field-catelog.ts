@@ -1,6 +1,6 @@
-import { Catalog } from "@/store/manifest";
+import { CatalogFile } from "@/store/manifest";
 
-type XmlName = Omit<Catalog.NameInCatalogFile, 'password' | 'askalways' | 'onetvalue'> & {
+type XmlName = Omit<CatalogFile.ItemInFile, 'password' | 'askalways' | 'onetvalue'> & {
     password?: boolean | '1';     // undefined : '1'
     askalways?: boolean | '1';    // undefined : '1' 
     onetvalue?: boolean | '1';    // undefined : '1'
@@ -505,10 +505,10 @@ const fileNames: XmlName[] = [
     // },
 ];
 
-export const catalogTestNames: Catalog.NameInCatalogFile[] = (
-    function convert(): Catalog.NameInCatalogFile[] {
+export const catalogTestNames: CatalogFile.ItemInFile[] = (
+    function convert(): CatalogFile.ItemInFile[] {
         return fileNames.map((item) => {
-            const newItem: Catalog.NameInCatalogFile = {
+            const newItem: CatalogFile.ItemInFile = {
                 dispname: item.dispname,
                 dbname: item.dbname,
                 ...(item.value && { value: item.value }),
