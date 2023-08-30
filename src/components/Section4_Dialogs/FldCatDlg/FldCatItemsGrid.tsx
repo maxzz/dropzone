@@ -79,7 +79,7 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedI
                 </div>
 
                 <div className={`${col3Classes} whitespace-nowrap`}>
-                    {item.dispname}
+                    {item.displayname}
                 </div>
 
                 <div className={col4Classes}>

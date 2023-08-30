@@ -62,7 +62,7 @@ export function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputEleme
 function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; }) {
     const selectedItem = useAtomValue(selectedItemAtom);
 
-    const nameAtom = useState(atom(selectedItem?.dispname || ''))[0];
+    const nameAtom = useState(atom(selectedItem?.displayname || ''))[0];
     const [localName, setLocalName] = useAtom(nameAtom);
 
     const valueAtom = useState(atom(selectedItem?.value || ''))[0];
@@ -75,7 +75,7 @@ function SelectedItemData({ selectedItemAtom }: { selectedItemAtom: PrimitiveAto
     const [ownernote, setOwnernote] = useAtom(ownernoteAtom);
 
     useEffect(() => {
-        setLocalName(selectedItem?.dispname || '');
+        setLocalName(selectedItem?.displayname || '');
         setLocalValue(selectedItem?.value || '');
         setLocalType(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt');
         setOwnernote(selectedItem?.ownernote || JSON.stringify(selectedItem || {}));

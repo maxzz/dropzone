@@ -1,13 +1,9 @@
 import { Catalog } from "@/store/manifest";
 
-interface XmlName {
-    dispname: string;
-    dbname: string;
-    value?: string;
-    ownernote?: string;
+type XmlName = Omit<Catalog.NameInCatalogFile, 'password' | 'askalways' | 'onetvalue'> & {
+    password?: boolean | '1';     // undefined : '1'
     askalways?: boolean | '1';    // undefined : '1' 
     onetvalue?: boolean | '1';    // undefined : '1'
-    password?: boolean | '1';     // undefined : '1'
 }
 
 const fileNames: XmlName[] = [
@@ -509,17 +505,19 @@ const fileNames: XmlName[] = [
     // },
 ];
 
-export const catalogTestNames = (function convert(): Catalog.Name[] {
-    return fileNames.map((item) => {
-        const newItem: Catalog.Name = {
-            dispname: item.dispname,
-            dbname: item.dbname,
-            ...(item.value && { value: item.value }),
-            ...(item.ownernote && { ownernote: item.ownernote }),
-            ...(item.askalways && { askalways: !!item.askalways }),
-            ...(item.onetvalue && { onetvalue: !!item.onetvalue }),
-            ...(item.password && { password: !!item.password }),
-        };
-        return newItem;
-    });
-})();
+export const catalogTestNames: Catalog.NameInCatalogFile[] = (
+    function convert(): Catalog.NameInCatalogFile[] {
+        return fileNames.map((item) => {
+            const newItem: Catalog.NameInCatalogFile = {
+                dispname: item.dispname,
+                dbname: item.dbname,
+                ...(item.value && { value: item.value }),
+                ...(item.ownernote && { ownernote: item.ownernote }),
+                ...(item.askalways && { askalways: !!item.askalways }),
+                ...(item.onetvalue && { onetvalue: !!item.onetvalue }),
+                ...(item.password && { password: !!item.password }),
+            };
+            return newItem;
+        });
+    }
+)();
