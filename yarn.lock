@@ -1890,15 +1890,15 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.6.tgz#3018ae32ecfcff6c29ba2267cbf21166ac1f36b9"
   integrity sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==
 
-pm-manifest-icons@1.0.3:
+pm-manifest-icons@latest:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/pm-manifest-icons/-/pm-manifest-icons-1.0.3.tgz#a9c6939802398a3705e11265a87f9fa41de7c9a1"
   integrity sha512-KIYGr2leVRRohxcfi/2doprvF64c7M+8YZcvLNMTT6m8bDqs4EYiK1ZDcMM1M7jbnoigUIVfjU5bzXCndGK1xw==
 
-pm-manifest@1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.14.tgz#757b1bbcb68d3ec405aff365cba107f8ef31a901"
-  integrity sha512-HABM32yWvoUpjVHrHKd1D4NVm82ndFgNQk0bgWM386EOcTOhTOYs81hoM8OPpy+G2fxl1/7bPvmCeWU3na/i5Q==
+pm-manifest@latest:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.1.0.tgz#a63ea6a2519adb750c44edd3074fda3063aa72c0"
+  integrity sha512-EuaC2oNu4EmqeaLCPj5We9wz0TmiXsSQPqEvP7tAp4DtBY3vAkSFw6Hr1bonbRrpQKSionpOWr4Cj6M1T6cwGA==
   dependencies:
     fast-xml-parser "^4.2.5"
 
