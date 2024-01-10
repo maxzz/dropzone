@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, InputHTMLAttributes, useEffect, useState } from "react";
+import { ButtonHTMLAttributes, InputHTMLAttributes, useEffect, useState } from "react";
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { CatalogItem } from "@/store/manifest";
 import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom } from "@/store";
