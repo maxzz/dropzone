@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useAtom } from 'jotai';
 import { FileUsAtomType } from '@/store';
-import { Scroller } from '../Scroller';
+import { Scroller } from '../scroller';
 import { fieldIcons } from '@/store/manifest/manifest-field-icons';
 
 function FieldIcon(isPsw: boolean | undefined, className: string) {

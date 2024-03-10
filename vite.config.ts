@@ -57,7 +57,7 @@ export default defineConfig({ // https://vitejs.dev/config
     ],
     resolve: {
         alias: {
-            '@ui': path.resolve(__dirname, './src/components/UI'),
+            '@ui': path.resolve(__dirname, './src/components/ui'),
             '@': path.resolve(__dirname, './src'),
         },
     },

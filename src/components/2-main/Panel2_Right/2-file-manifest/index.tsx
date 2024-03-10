@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UiArrow } from '@ui/UiArrow';
 import { UiAccordion } from '@ui/UiAccordion';
-import { Scroller } from '../Scroller';
+import { Scroller } from '../scroller';
 import { ManiSection1_Fields } from './1-tab-fields';
 import { ManiSection2_Submit } from './2-tab-submit';
 import { ManiSection3_Policy } from './3-tab-policy';

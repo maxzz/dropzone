@@ -23,7 +23,7 @@
         "module": "ESNext",
         
         "paths": {
-            "@ui/*": [ "./src/components/UI/*" ],
+            "@ui/*": [ "./src/components/ui/*" ],
             "@/*": [ "./src/*" ]
         },
     },
