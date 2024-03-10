@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, InputHTMLAttributes, useEffect, useState } from "
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { CatalogItem } from "@/store/manifest";
 import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom } from "@/store";
-import { BottomButton, DialogHeader } from "../../2-main/Panel2_Right/2-file-manifest/3-tab-policy/dlg-policy-editor/ui-sections";
+import { BottomButton, DialogHeader } from "../../2-main/2-right/2-file-manifest/3-tab-policy/dlg-policy-editor/ui-sections";
 import { FldCatItemsGrid } from "./FldCatItemsGrid";
 import { classNames, turnOffAutoComplete } from "@/utils";
 

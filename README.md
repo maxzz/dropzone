@@ -48,8 +48,8 @@ Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:
 
 * Card/CardMenuOverlays.tsx - https://github.com/react-bootstrap/react-overlays
     Section2_Main.tsx:
-        // import { CardMenuOverlays } from './Panel1_FilesList/Card/CardMenuOverlays';
-        // import { CardMenu } from './Panel1_FilesList/Card/CardMenu';
+        // import { CardMenuOverlays } from './1-files-list/Card/CardMenuOverlays';
+        // import { CardMenu } from './1-files-list/Card/CardMenu';
         // import { Panel3_SelectedItems } from './Panel3_SelectedItems/Panel3_SelectedItems';
                 {/* <CardMenuOverlays /> */}
                 {/* <CardMenu /> */}
@@ -59,7 +59,7 @@ Tested project and now moved into 'not-used-now' src/components/UI/nun/nun.zip:
 
     folder useVirtual and
 
-    Panel1_FilesList.tsx:
+    1-files-list.tsx:
         //old: import Card, { CardWRef } from './Card/Card';
         //old: import useVirtual, { Item } from 'react-cool-virtual';
         //import useVirtual from '../../../hooks/useVirtual/useVirtual';

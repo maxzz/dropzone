@@ -3,7 +3,7 @@ import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { CatalogItem } from "@/store/manifest";
 import { fldCatItemsAtom, fldCatTriggerAtom } from "@/store";
 import { fieldIcons } from "@/store/manifest/manifest-field-icons";
-import { Scroller } from "@/components/2-main/Panel2_Right/scroller";
+import { Scroller } from "@/components/2-main/2-right/scroller";
 import { classNames } from "@/utils";
 
 function FieldIcon(isPsw: boolean | undefined, className: string) {
