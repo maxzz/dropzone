@@ -6,7 +6,7 @@ import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Card1_Title';
 import { Body_CaptionActions } from './1-caption-actions';
 import { Body_Xml } from './3-file-xml';
 import { Body_FieldCatalog } from './4-file-field-catalog';
-import { Body_Manifest } from './Body_Manifest';
+import { Body_Manifest } from './2-file-manifest';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelData.panelAtom);

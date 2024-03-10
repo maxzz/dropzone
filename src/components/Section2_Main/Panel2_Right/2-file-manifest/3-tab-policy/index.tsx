@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes, useEffect, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { Meta } from '@/store/manifest';
-import { PolicyEditorDlg } from './PolicyEditorDlg';
+import { PolicyEditorDlg } from './dlg-policy-editor';
 import { classNames } from '@/utils';
 
 function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
