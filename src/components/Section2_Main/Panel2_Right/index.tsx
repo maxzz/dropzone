@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { FileUs, FileUsAtomType, rightPanelData, ViewMode } from '@/store';
 import { classNames } from '@/utils';
 import { CardTitleTextNormal } from '../Panel1_FilesList/Card/Card1_Title';
-import { Body_CaptionActions } from './Body_CaptionActions';
+import { Body_CaptionActions } from './1-caption-actions';
 import { Body_Xml } from './Body_Xml';
 import { Body_FieldCatalog } from './Body_FieldCatalog';
 import { Body_Manifest } from './Body_Manifest';
