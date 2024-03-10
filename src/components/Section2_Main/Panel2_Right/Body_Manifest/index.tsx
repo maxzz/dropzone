@@ -4,10 +4,10 @@ import { FileUsAtomType, FormIdx, maniOpenSections } from '@/store';
 import { UiArrow } from '@ui/UiArrow';
 import { UiAccordion } from '@ui/UiAccordion';
 import { Scroller } from '../Scroller';
-import { ManiSection1_Fields } from './ManiSection1_Fields';
-import { ManiSection2_Submit } from './ManiSection2_Submit';
-import { ManiSection3_Policy } from './ManiSection3_Policy';
-import { ManiSection4_FormOptions } from './ManiSection4_FormOptions';
+import { ManiSection1_Fields } from './1-tab-fields';
+import { ManiSection2_Submit } from './2-tab-submit';
+import { ManiSection3_Policy } from './3-tab-policy';
+import { ManiSection4_FormOptions } from './4-tab-form-options';
 
 function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";
