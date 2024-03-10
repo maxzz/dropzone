@@ -1,6 +1,6 @@
 import React from 'react';
-import { ManifestOldDlgTrigger } from './ManifestOldDlg';
-import { FldCatDlg } from './FldCatDlg';
+import { ManifestOldDlgTrigger } from './dlg-manifest-old';
+import { FldCatDlg } from './dlg-fld-catalog';
 
 export function Section4_Dialogs() {
     return (<>
