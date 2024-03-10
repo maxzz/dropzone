@@ -3,7 +3,7 @@ import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { CatalogItem } from "@/store/manifest";
 import { fldCatItemsAtom, closeFldCatDialogAtom, fldCatTriggerAtom } from "@/store";
 import { BottomButton, DialogHeader } from "../../2-main/2-right/2-file-manifest/3-tab-policy/dlg-policy-editor/ui-sections";
-import { FldCatItemsGrid } from "./FldCatItemsGrid";
+import { FldCatItemsGrid } from "./2-fld-cat-items-grid";
 import { classNames, turnOffAutoComplete } from "@/utils";
 
 const gridFrameClasses = 'p-4 text-sm text-primary-400 bg-primary-800 border-primary-600/20 shadow-primary-700/30 border shadow rounded flex flex-col space-y-4';

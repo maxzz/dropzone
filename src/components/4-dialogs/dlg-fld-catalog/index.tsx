@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import * as Dialog from '@radix-ui/react-dialog';
 import { config, useTransition, a } from "@react-spring/web";
 import { fldCatTriggerAtom } from "@/store";
-import { FldCatDlgBody } from "./Body";
+import { FldCatDlgBody } from "./1-body";
 
 export function FldCatDlg() {
     const [fldCatInData, setFldCatInData] = useAtom(fldCatTriggerAtom);
