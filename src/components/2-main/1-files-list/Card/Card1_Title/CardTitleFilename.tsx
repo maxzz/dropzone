@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { FileUs } from "@/store";
-import { UiTip, tipSmall } from "@ui/UiTooltip";
+import { UiTip, tipSmall } from "@ui/ui-tooltip";
 import { SymbolFolder } from "@ui/icons";
 import { classNames } from "@/utils";
 

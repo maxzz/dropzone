@@ -5,7 +5,7 @@ import { EditorData, formIdxName } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { classNames } from '@/utils';
-import { UiTip } from '@ui/UiTooltip';
+import { UiTip } from '@ui/ui-tooltip';
 import { ManiFilenameParts } from '@/components/2-main/1-files-list/Card/Card1_Title/CardTitleFilename';
 import { SymbolAttention, IconInfo } from '@ui/icons';
 import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from './Tab1_Matching';
@@ -13,7 +13,7 @@ import { Tab2_MatchWindows } from './Tab2_MatchWindows';
 import { Tab3_Options } from './Tab3_Options';
 import { Tab4_Fields } from './Tab4_Fields';
 import { TabSelector } from './TabSelector';
-import { UiSemiScrollbar } from '@ui/UiSemiScrollbar';
+import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 //import { toastWarning } from '@ui/UIToaster';
 

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { FileUs, isAnyWhy } from "@/store";
 import { classNames } from "@/utils";
 import { SymbolDot } from "@ui/icons";
-import { UiTip } from "@ui/UiTooltip";
+import { UiTip } from "@ui/ui-tooltip";
 
 export function CardTitleFileIndex({ idx, errors }: { idx: number; errors?: boolean; }) {
     return (

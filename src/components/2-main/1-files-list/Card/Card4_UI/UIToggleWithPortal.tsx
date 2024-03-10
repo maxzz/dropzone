@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useState } from 'react';
-import { UiPortal } from '@ui/UiPortal';
+import { UiPortal } from '@ui/ui-portal';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 

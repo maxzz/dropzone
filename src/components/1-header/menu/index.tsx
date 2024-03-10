@@ -1,6 +1,6 @@
 import React from 'react';
 import { orderAtom, orderNames, sortByAtom, sortByNames, uiSizeAtom, uiSizeNames } from '@/store';
-import { Menu, MenuContentPortal, MenuLabel, MenuRadioGroupValue, MenuSeparator, MenuSub, MenuSubContent, MenuTrigger, TriggerSubs } from '@ui/UiDropdownMenu';
+import { Menu, MenuContentPortal, MenuLabel, MenuRadioGroupValue, MenuSeparator, MenuSub, MenuSubContent, MenuTrigger, TriggerSubs } from '@ui/ui-dropdown-menu';
 import { Command_Links, Command_ToggleFolding } from './menu-commands';
 
 export const Part0_TopMenu = ({ icon }: { icon: React.ReactNode; }) => {
