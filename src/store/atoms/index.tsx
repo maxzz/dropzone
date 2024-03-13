@@ -1,4 +1,4 @@
-export * from './atoms-files';
+export * from './0-files-atom';
 export * from './field-catalog';
 export * from './atoms-ui-state';
 export * from './atoms-ui-right-panel';

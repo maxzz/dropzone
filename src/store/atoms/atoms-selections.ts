@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { filesAtom } from "./atoms-files";
+import { filesAtom } from './0-files-atom/0-files-atom';
 import { FileUsAtomType } from "../store-types";
 
 // Current card selection
