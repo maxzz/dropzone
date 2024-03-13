@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { FileUs, FileUsAtomType, FileUsStats } from '../../store-types';
+import { FileUs, FileUsAtomType, FileUsStats } from "@/store/store-types/0-file-us-type";
 import { _foldAllCardsAtom } from '../atoms-ui-state';
 import { rightPanelData } from '../atoms-ui-right-panel';
 import { doUpdateCacheAtom } from './4-do-update-cache';

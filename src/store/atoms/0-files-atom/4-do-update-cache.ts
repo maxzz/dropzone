@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { FileUs } from '../../store-types';
+import { FileUs } from "@/store/store-types/0-file-us-type";
 import { filesAtom } from './0-files-atom';
 import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '../../manifest';
 import { fileUsStats, isEmpty, isManual, textFileReader } from '../../store-utils';

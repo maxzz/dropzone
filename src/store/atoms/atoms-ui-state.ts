@@ -1,6 +1,8 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "@/hooks/atomsX";
-import { FileUsAtomType, Order, SortBy, UISize } from "../store-types";
+import { Order, SortBy } from "../store-types/4-file-list-sort-by";
+import { UISize } from "../store-types/3-file-list-size";
+import { FileUsAtomType } from "../store-types/0-file-us-type";
 import { LocalStorageSave, } from "../store-localstorage-save";
 import { LocalStorage } from "../store-localstorage-load";
 import { filesAtom } from './0-files-atom/0-files-atom';
