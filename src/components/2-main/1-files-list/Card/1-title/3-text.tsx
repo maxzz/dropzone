@@ -1,4 +1,3 @@
-import React from "react";
 import { FileUs, FileUsStats, formCaption } from "@/store";
 import { classNames } from "@/utils";
 
@@ -16,10 +15,25 @@ export function CardUsername({ fileUs }: { fileUs: FileUs; }) {
     return (
         <div className="ml-0.5 text-sm font-light opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">
             {stats.isCustomization
-                ? <span title="This file is for configuring the application">Excluded app</span>
+                ? (
+                    <span title="This file is for configuring the application">
+                        Excluded app
+                    </span>
+                )
                 : stats.isFCat
-                    ? <span title="Number of items in the Field Catalog">{fcatSize ? `${fcatSize} item${fcatSize === 1 ? '' : 's'}` : `Empty catalog`}</span>
-                    : <span title="Login name">{stats.title || 'No login title'}</span>
+                    ? (
+                        <span title="Number of items in the Field Catalog">
+                            {fcatSize
+                                ? `${fcatSize} item${fcatSize === 1 ? '' : 's'}`
+                                : `Empty catalog`
+                            }
+                        </span>
+                    )
+                    : (
+                        <span title="Login name">
+                            {stats.title || 'No login title'}
+                        </span>
+                    )
             }
         </div>
     );

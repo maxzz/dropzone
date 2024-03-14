@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import { PrimitiveAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, rightPanelData, uiSizeAtom, UISize, doSetCurrentCardAtom } from '@/store';
-import { CardCaption, CardUsername } from './CardTitleText';
-import { CardTitleIcon } from './CardTitleIcon';
-import { CardTitleFilename } from './CardTitleFilename';
-import { CardTitleAttension } from './CardTitleAttension';
+import { CardCaption, CardUsername } from './3-text';
+import { CardTitleIcon } from './2-icon';
+import { CardTitleFilename } from './4-filename';
+import { CardTitleAttension } from './1-attension';
 import { getButtonsDisp } from '../Card4_UI/UICardFormButtonTypes';
 import { CardMediumButtons } from '../Card3_Shared/CardButtons';
 

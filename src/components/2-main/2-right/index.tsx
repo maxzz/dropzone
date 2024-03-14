@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { FileUs, FileUsAtomType, rightPanelData, ViewMode } from '@/store';
 import { classNames } from '@/utils';
-import { CardTitleTextNormal } from '../1-files-list/Card/Card1_Title';
+import { CardTitleTextNormal } from '../1-files-list/Card/1-title';
 import { Body_CaptionActions } from './1-caption-actions';
 import { Body_Xml } from './3-file-xml';
 import { Body_FieldCatalog } from './4-file-field-catalog';

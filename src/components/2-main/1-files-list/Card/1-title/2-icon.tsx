@@ -1,4 +1,3 @@
-import React from "react";
 import { FileUsStats } from "@/store";
 import { SymbolAppWebChrome, SymbolAppWebIESolid, SymbolAppWindows, SymbolCatalog } from "@ui/icons";
 import { classNames } from "@/utils";
