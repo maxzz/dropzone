@@ -3,7 +3,7 @@ import { FileUs } from "@/store/store-types";
 import { filesAtom } from './0-files-atom';
 import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '@/store/manifest';
 import { fileUsStats, isEmpty, isManual, textFileReader } from '@/store/store-utils';
-import { fldCatItemsAtom } from '../field-catalog/all-items';
+import { fldCatItemsAtom } from '../8-field-catalog/all-items';
 import { busyAtom, totalManiAtoms } from '../9-ui-state';
 
 // Cache

@@ -1,6 +1,6 @@
 import { atom } from "jotai";
-import { filesAtom } from './0-files-atom/0-files-atom';
-import { FileUsAtomType } from "../store-types";
+import { filesAtom } from '../0-files-atom/0-files-atom';
+import { FileUsAtomType } from "../../store-types";
 
 // Current card selection
 
@@ -12,6 +12,7 @@ const getCurrentCardAtom = atom( // TODO: it should be function instead of atom,
         return sel;
     }
 );
+
 
 export const doSetCurrentCardAtom = atom(
     null,

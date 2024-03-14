@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { PrimitiveAtom, useAtomValue, useSetAtom } from 'jotai';
-import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom, uiSizeAtom, UISize } from '@/store';
+import { FileUsAtomType, rightPanelData, uiSizeAtom, UISize, doSetCurrentCardAtom } from '@/store';
 import { CardCaption, CardUsername } from './CardTitleText';
 import { CardTitleIcon } from './CardTitleIcon';
 import { CardTitleFilename } from './CardTitleFilename';
