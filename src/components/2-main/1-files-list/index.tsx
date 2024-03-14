@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { filteredAtom, UISize, uiSizeAtom } from '@/store';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
