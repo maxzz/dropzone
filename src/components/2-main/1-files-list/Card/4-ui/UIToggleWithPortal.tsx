@@ -1,9 +1,9 @@
-import React, { HTMLAttributes, useState } from 'react';
+import { HTMLAttributes, ReactNode, useState } from 'react';
 import { UiPortal } from '@ui/ui-portal';
 import { usePopper } from 'react-popper';
 import { useElementClickAway } from '@/hooks/useElementClickAway';
 
-export function UIToggleWithPortal({ toggle, children, ...rest }: { toggle?: React.ReactNode; } & HTMLAttributes<HTMLButtonElement>) {
+export function UIToggleWithPortal({ toggle, children, ...rest }: { toggle?: ReactNode; } & HTMLAttributes<HTMLButtonElement>) {
     const [referenceElm, setReferenceElm] = useState<HTMLButtonElement | null>(null);
     const [popperElm, setPopperElm] = useState<HTMLDivElement | null>(null);
     const { styles, attributes } = usePopper(referenceElm, popperElm, { placement: 'bottom-end' });

@@ -2,10 +2,10 @@ import React from 'react';
 import { SetStateAction, useAtom, useSetAtom } from 'jotai';
 import { FileUs, SelectRowAtomsType, SelectRowType } from '@/store';
 import { FieldTyp, Mani, Meta } from '@/store/manifest';
-import { CardSvgPreview } from '../../Card3_Shared/CardSvgPreview';
+import { CardSvgPreview } from '../../3-shared/2-card-svg-preview';
 import { FieldTypeIconComponent } from '../../../../../../store/manifest/manifest-field-icons';
 import { FieldRowPath } from './FieldRowPath';
-import { UIToggleWithPortal } from '../../Card4_UI/UIToggleWithPortal';
+import { UIToggleWithPortal } from '../../4-ui/UIToggleWithPortal';
 import { SymbolInOut, SymbolPreview, SymbolFieldUseIt0, SymbolFieldUseIt1 } from '@ui/icons';
 import { classNames } from '@/utils';
 

@@ -5,7 +5,7 @@ import { allCards, FileUsAtomType } from '@/store';
 import { Card1_Title } from './1-title';
 import { Part2Card_FormBody } from './2-form-body';
 
-function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
+function CardWoMemo({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
     const openAtom = useState(atom(false))[0];
 
@@ -26,7 +26,7 @@ function Card_({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAtt
     );
 }
 
-export const Card = memo(Card_);
+export const Card = memo(CardWoMemo);
 
 //OK: but no need
 /*

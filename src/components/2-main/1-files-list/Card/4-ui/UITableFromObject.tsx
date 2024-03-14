@@ -1,4 +1,4 @@
-import React, { Fragment, HTMLAttributes, ReactNode } from 'react';
+import { Fragment, HTMLAttributes, ReactNode } from 'react';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
 
 export function FieldFirstCol({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
