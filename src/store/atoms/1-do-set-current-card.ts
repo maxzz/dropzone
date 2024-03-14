@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { filesAtom } from './0-files-atom/0-files-atom';
-import { FileUsAtomType } from "../store-types/0-file-us-type";
+import { FileUsAtomType } from "../store-types";
 
 // Current card selection
 
@@ -17,9 +17,11 @@ export const doSetCurrentCardAtom = atom(
     null,
     (get, set, { fileUsAtom, setCurrent }: { fileUsAtom: FileUsAtomType, setCurrent: boolean; }) => {
         const files = get(filesAtom);
+
         files.forEach((currentFileUsAtom) => {
             const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
             const thisCurrentNow = get(thisCurrentAtom);
+            
             if (currentFileUsAtom === fileUsAtom) {
                 (thisCurrentNow !== setCurrent) && set(thisCurrentAtom, setCurrent);
             } else {

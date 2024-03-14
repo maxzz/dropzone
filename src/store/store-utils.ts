@@ -1,5 +1,4 @@
-import { FileUs, FileUsStats } from "./store-types";
-import { FormIdx } from "./store-types/1-file-us-form-data";
+import { FileUs, FileUsStats, FormIdx } from "./store-types";
 import { TimeUtils, Meta } from './manifest';
 
 export function textFileReader(file: File): Promise<string> {

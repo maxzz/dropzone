@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
-import { totalManiAtoms } from '../atoms-ui-state';
-import { rightPanelData } from '../atoms-ui-right-panel';
+import { totalManiAtoms } from '../9-ui-state';
+import { rightPanelData } from '../2-right-panel';
 import { filesAtom } from './0-files-atom';
 
 export const doClearFilesAtom = atom(

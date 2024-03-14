@@ -1,9 +1,8 @@
 import { atom } from 'jotai';
-import { Order, SortBy } from "@/store/store-types/4-file-list-sort-by";
-import { FileUsAtomType } from "@/store/store-types/0-file-us-type";
 import { filesAtom } from './0-files-atom';
-import { createRegexByFilter, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, useFileUsByFilter } from '../../store-utils';
-import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom } from '../atoms-ui-state';
+import { FileUsAtomType, Order, SortBy } from "@/store/store-types";
+import { createRegexByFilter, isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual, useFileUsByFilter } from '@/store/store-utils';
+import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom } from '../9-ui-state';
 
 export const filteredAtom = atom<FileUsAtomType[]>(
     (get) => {

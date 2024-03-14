@@ -1,5 +1,4 @@
-import { Order, SortBy } from "./store-types/4-file-list-sort-by";
-import { UISize } from "./store-types/3-file-list-size";
+import { Order, SortBy, UISize } from "./store-types";
 
 export namespace LocalStorage {
     export const KEY = 'pmit-01';
@@ -28,6 +27,6 @@ export namespace LocalStorage {
             }
         }
     }
-    load();
 
-} //namespace LocalStorage
+    load();
+}

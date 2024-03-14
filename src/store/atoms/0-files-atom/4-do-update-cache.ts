@@ -1,10 +1,10 @@
 import { atom } from 'jotai';
-import { FileUs } from "@/store/store-types/0-file-us-type";
+import { FileUs } from "@/store/store-types";
 import { filesAtom } from './0-files-atom';
-import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '../../manifest';
-import { fileUsStats, isEmpty, isManual, textFileReader } from '../../store-utils';
-import { busyAtom, totalManiAtoms } from '../atoms-ui-state';
+import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '@/store/manifest';
+import { fileUsStats, isEmpty, isManual, textFileReader } from '@/store/store-utils';
 import { fldCatItemsAtom } from '../field-catalog/all-items';
+import { busyAtom, totalManiAtoms } from '../9-ui-state';
 
 // Cache
 
