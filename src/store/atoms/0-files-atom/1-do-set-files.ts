@@ -6,8 +6,8 @@ import { _foldAllCardsAtom } from '../9-ui-state';
 import { rightPanelData } from '../2-right-panel';
 import { uuid } from '@/utils';
 
-function pathWoFilename(file: File): string {
-    const rv = ((file as any).path as string || '')
+function pathWoFilename(fileHandle: File): string {
+    const rv = ((fileHandle as any).path as string || '')
         .replace(/^\//, '')
         .split(/[\\\/]/);
     rv.pop(); // remove filename as the last item
