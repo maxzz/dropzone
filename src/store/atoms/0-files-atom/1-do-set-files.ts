@@ -26,8 +26,7 @@ export const doSetFilesAtom = atom(
                         idx,
                         fname: fileHandle.name,
                         fpath: pathWoFilename(fileHandle),
-                        fmodi: (fileHandle as any).lastModified || 0,
-                        modified: fileHandle.lastModified,
+                        fmodi: fileHandle.lastModified || 0,
                         size: fileHandle.size,
                         file: fileHandle,
                         state: {

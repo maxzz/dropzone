@@ -30,8 +30,7 @@ export type FileUs = {
 
     fname: string;              // filename
     fpath: string;              // file relative path to the dropped folder
-    fmodi: number;              // lastModified
-    modified: number;           // last modified
+    fmodi: number;              // file.lastModified
     size: number;               // file size
 
     raw?: string;               // raw manifest as it was loaded
