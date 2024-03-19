@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { FileUs, FileUsAtomType, FileUsStats } from "@/store/store-types";
 import { filesAtom } from './0-files-atom';
-import { doUpdateCacheAtom } from './4-do-update-cache';
+import { doUpdateCacheAtom } from './2-do-update-cache';
 import { _foldAllCardsAtom } from '../9-ui-state';
 import { rightPanelData } from '../2-right-panel';
 import { uuid } from '@/utils';
