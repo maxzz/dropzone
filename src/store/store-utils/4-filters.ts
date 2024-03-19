@@ -1,4 +1,4 @@
-import { FileUs } from "../store-types";
+import { FileUs } from "@/store/store-types";
 
 // Regex
 

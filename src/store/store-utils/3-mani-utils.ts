@@ -1,5 +1,5 @@
-import { FileUs } from "../store-types";
-import { Meta } from '../manifest';
+import { FileUs } from "@/store/store-types";
+import { Meta } from '@/store/manifest';
 
 // Utilities
 
