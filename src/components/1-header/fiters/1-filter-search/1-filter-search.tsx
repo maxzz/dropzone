@@ -5,6 +5,7 @@ import { turnOffAutoComplete } from '@/utils';
 import { searchFilterData } from '@/store';
 import { IconCaseSensitive, IconClose, SymbolDot, IconSearch } from '@ui/icons';
 import { UiTip } from '@ui/ui-tooltip';
+import { Config } from 'react-popper-tooltip';
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterData.caseSensitiveAtom);
@@ -45,55 +46,59 @@ function TipTrigger() {
                 />
 
                 {isEmpty
-                    ?
-                    // Ctrl+D and Search icon
-                    <div className="flex-none relative">
-                        {/* Ctrl+D */}
-                        {/*
-                                    {!active && <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-400 pointer-events-none">
-                                        <IconCtrl className="w-3 h-3" />
-                                        <div className="text-[.5rem] leading-[.5rem]">D</div>
-                                    </div>}
-                                    */}
-                        <IconSearch className="w-4 h-4" />
-                    </div>
-                    :
-                    <>
+                    ? (
+                        // Ctrl+D and Search icon
+                        <div className="flex-none relative">
+                            {/* Ctrl+D */}
+                            {/* 
+                            {!active && (
+                                <div className="absolute -left-3.5 -top-0.5 flex flex-col items-center text-gray-400 pointer-events-none">
+                                    <IconCtrl className="w-3 h-3" />
+                                    <div className="text-[.5rem] leading-[.5rem]">D</div>
+                                </div>
+                            )}
+                            */}
+                            <IconSearch className="w-4 h-4" />
+                        </div>
+                    )
+                    : (<>
                         <ToggleCaseSensitive />
                         <IconClose onClick={() => setFilterTxt('')} className="w-6 h-6 p-0.5 cursor-pointer" />
-                    </>
+                    </>)
+
                 }
             </div>
         </div>
     );
 }
 
+const popupContentDotClasses = "w-3 h-3 inline fill-none stroke-black";
+const popupContentTextClasses = "inline-block font-bold font-mono tracking-tight w-8";
+
 function PopupContent() {
     return (
         <div className="text-sm py-1 px-1">
             <div className="font-bold">Search (Ctrl+D)</div>
             <div className="pb-1">Use the search prefix to dispay only:</div>
-            <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">win:</span> logins for Windows apps</div>
-            <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">web:</span> logins for web apps</div>
-            <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">why:</span> logins with problems to check why</div>
-            <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cap:</span> logins with window caption</div>
-            <div className=""><SymbolDot className="w-3 h-3 inline" fill="none" stroke="black" /><span className="inline-block font-bold font-mono tracking-tight w-8">cls:</span> logins with window classname</div>
+            <div className=""><SymbolDot className={popupContentDotClasses} /><span className={popupContentTextClasses}>win:</span> logins for Windows apps</div>
+            <div className=""><SymbolDot className={popupContentDotClasses} /><span className={popupContentTextClasses}>web:</span> logins for web apps</div>
+            <div className=""><SymbolDot className={popupContentDotClasses} /><span className={popupContentTextClasses}>why:</span> logins with problems to check why</div>
+            <div className=""><SymbolDot className={popupContentDotClasses} /><span className={popupContentTextClasses}>cap:</span> logins with window caption</div>
+            <div className=""><SymbolDot className={popupContentDotClasses} /><span className={popupContentTextClasses}>cls:</span> logins with window classname</div>
         </div>
     );
 }
 
+const popperOptions: Config = {
+    delayShow: 700,
+    offset: [0, 8],
+    //defaultVisible: true,
+};
+
 export function FilterSearch() {
     return (
         <div className="flex-1 min-h-[32px] max-w-[40rem] ml-2 md:ml-4 sm:self-stretch md:self-end md:pb-2 lg:pb-0 lg:self-auto flex justify-end items-center">
-            <UiTip
-                trigger={<TipTrigger />}
-                arrow
-                popperOptions={{
-                    delayShow: 700,
-                    offset: [0, 8],
-                    //defaultVisible: true,
-                }}
-            >
+            <UiTip trigger={<TipTrigger />} arrow popperOptions={popperOptions}>
                 <PopupContent />
             </UiTip>
         </div>
