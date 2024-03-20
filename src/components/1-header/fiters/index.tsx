@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { hasFilesAtom, showManiAtoms, totalManiAtoms } from '@/store';
-import { FilterSearch } from './FilterSearch';
+import { FilterSearch } from './1-filter-search';
 import { FilterManiCounter } from './FilterManiCounter';
 import { classNames } from '@/utils';
 import { SimpleToogle } from './SimpleToogle';
