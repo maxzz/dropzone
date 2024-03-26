@@ -1,4 +1,3 @@
-import React from 'react';
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, uiSizeAtom, UISize } from '@/store';
 import { CardTitleTextMinimal } from './1-minimal';

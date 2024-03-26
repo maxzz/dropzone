@@ -10,20 +10,22 @@ export function CardTitleTextNormal({ fileUsAtom, actions }: { fileUsAtom: FileU
     const fileUs = useAtomValue(fileUsAtom);
     const stats = fileUs?.stats;
     return (<>
-        {stats && <>
-            {/* Icon, website/app name and optional menu */}
-            <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-                <CardTitleIcon stats={stats} />
-                <CardCaption stats={stats} />
-                <div className="justify-self-end">{actions}</div>
-            </div>
+        {stats && (
+            <>
+                {/* Icon, website/app name and optional menu */}
+                <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                    <CardTitleIcon stats={stats} />
+                    <CardCaption stats={stats} />
+                    <div className="justify-self-end">{actions}</div>
+                </div>
 
-            <CardUsername fileUs={fileUs} />
+                <CardUsername fileUs={fileUs} />
 
-            <div className="flex items-center justify-between">
-                <CardTitleFilename fileUs={fileUs} />
-                <CardTitleAttention fileUs={fileUs} />
-            </div>
-        </>}
+                <div className="flex items-center justify-between">
+                    <CardTitleFilename fileUs={fileUs} />
+                    <CardTitleAttention fileUs={fileUs} />
+                </div>
+            </>
+        )}
     </>);
 }

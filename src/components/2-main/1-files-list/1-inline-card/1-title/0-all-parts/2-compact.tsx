@@ -12,24 +12,26 @@ export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: Fil
     const stats = fileUs?.stats;
     const buttons = getButtonsDisp(fileUs);
     return (<>
-        {stats && <div className="grid grid-cols-[minmax(0,1fr)_auto]">
-            <div>
-                <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
-                    <CardTitleIcon stats={stats} />
-                    <CardCaption stats={stats} />
+        {stats && (
+            <div className="grid grid-cols-[minmax(0,1fr)_auto]">
+                <div>
+                    <div className="grid grid-cols-[min-content_minmax(0,min-content)_1fr] items-center gap-x-0.5">
+                        <CardTitleIcon stats={stats} />
+                        <CardCaption stats={stats} />
+                    </div>
+
+                    <CardUsername fileUs={fileUs} />
+                    <CardTitleFilename fileUs={fileUs} />
                 </div>
 
-                <CardUsername fileUs={fileUs} />
-                <CardTitleFilename fileUs={fileUs} />
-            </div>
+                <div className="grid">
+                    <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
 
-            <div className="grid">
-                <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
-
-                <div className="place-self-end">
-                    <CardTitleAttention fileUs={fileUs} />
+                    <div className="place-self-end">
+                        <CardTitleAttention fileUs={fileUs} />
+                    </div>
                 </div>
             </div>
-        </div>}
+        )}
     </>);
 }
