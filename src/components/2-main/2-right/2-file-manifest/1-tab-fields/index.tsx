@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Getter, Setter, atom, useAtom, useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import { Getter, Setter, useAtom, useSetAtom } from 'jotai';
 import { CatalogItem, FieldTyp, Meta, TransformValue, ValueLife } from '@/store/manifest';
 import { classNames, debounce } from '@/utils';
 import { Column1_UseIt } from './column1-useIt';

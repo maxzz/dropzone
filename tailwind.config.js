@@ -48,7 +48,7 @@ module.exports = {
     },
     plugins: [
         customAdditionsPlugin,
-        require('./tailwind/tailwnid-plugin-debug-styles'),
+        require('./tailwind/tailwind-plugin-debug-styles'),
         require('./tailwind/tailwind-plugin-debug-screens'),
         require('./tailwind/tailwind-plugin-colors-bridge')([
             { prefix: '--tm-', groupName: 'primary' },
