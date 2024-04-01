@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Getter, Setter, useAtom, useSetAtom } from 'jotai';
 import { CatalogItem, FieldTyp, Meta, TransformValue, ValueLife } from '@/store/manifest';
 import { classNames, debounce } from '@/utils';
-import { Column1_UseIt } from './column1-useIt';
-import { Column2_Label } from './column2-label';
-import { Column3_Value } from './column3-value';
-import { Column4_Catalog } from './column4-catalog';
-import { Column5_Type } from './column5-type';
+import { Column1_UseIt } from './1-column-useIt';
+import { Column2_Label } from './2-column-label';
+import { Column3_Value } from './3-column-value';
+import { Column4_Catalog } from './4-column-catalog';
+import { Column5_Type } from './5-column-type';
 import { Atomize, atomWithCallback } from '@/hooks/atomsX';
 
 type TableRowAtoms = {
