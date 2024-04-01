@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, InputHTMLAttributes } from "react";
+import { HTMLAttributes, InputHTMLAttributes } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import * as Select from '@radix-ui/react-select';
 import { classNames } from '@/utils';
