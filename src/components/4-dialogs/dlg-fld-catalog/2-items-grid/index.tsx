@@ -2,34 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { CatalogItem } from "@/store/manifest";
 import { fldCatItemsAtom, fldCatTriggerAtom } from "@/store";
-import { fieldIcons } from "@/store/manifest/manifest-field-icons";
 import { Scroller } from "@ui/scroller";
 import { classNames } from "@/utils";
-
-function FieldIcon(isPsw: boolean | undefined, className: string) {
-    const type = isPsw ? 'psw' : 'edit';
-    const Icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) || <div className="text-red-500">NaN</div>;
-    return Icon;
-}
-
-const rowClasses = 'px-2 py-px col-start-2 flex items-center space-x-2';
-const col1Classes = 'w-[4ch] text-right';
-const col2Classes = 'w-[1.5rem] flex items-center justify-center gap-x-2 leading-[18px]';
-const col3Classes = 'w-[41%] flex items-center gap-x-2 leading-[18px]';
-const col4Classes = 'w-[44%] whitespace-nowrap font-mono text-[.6rem]';
-
-const tableHeaderClasses = 'mb-2 ml-1 text-[.65rem] text-primary-400 border-primary-100 border-b select-none';
-
-function TableHeader() {
-    return (
-        <div className={rowClasses}>
-            <div className={`${col1Classes} ${tableHeaderClasses}`}>#</div>
-            <div className={`${col2Classes} ${tableHeaderClasses}`}>Type</div>
-            <div className={`${col3Classes} ${tableHeaderClasses}`}>Name</div>
-            <div className={`${col4Classes} ${tableHeaderClasses}`}>ID</div>
-        </div>
-    );
-}
+import { TableHeader, rowClasses, col1Classes, col2Classes, col3Classes, col4Classes } from "./1-header";
+import { FieldIcon } from "./4-field-icon";
 
 export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; onDoubleClick: (item: CatalogItem) => void; }) {
     const fldCatItems = useAtomValue(fldCatItemsAtom);
@@ -49,6 +25,9 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedI
         setSelectedItem(selectedIdx === -1 ? null : fldCatItems[selectedIdx]);
     }, [selectedIdx]);
 
+    const itemClick = (idx: number) => setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx);
+    const itemDoubleClick = () => { setSelectedIdx(prevSelectedIdx.current); needSelect && onDoubleClick(fldCatItems[prevSelectedIdx.current]); };
+
     return (
         <Scroller className="pt-2 text-xs overflow-auto">
             <div className="grid grid-cols-[minmax(0,1fr)_max-content_minmax(0,1fr)] text-primary-400">
@@ -66,8 +45,8 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedI
                     "cursor-default select-none",
                     selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
                 )}
-                onClick={() => setSelectedIdx((currentIdx) => currentIdx === idx ? -1 : idx)}
-                onDoubleClick={() => { setSelectedIdx(prevSelectedIdx.current); needSelect && onDoubleClick(fldCatItems[prevSelectedIdx.current]); }}
+                onClick={() => itemClick(idx)}
+                onDoubleClick={() => itemDoubleClick()}
                 key={idx}
             >
                 <div className={col1Classes}>
