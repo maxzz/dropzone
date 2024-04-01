@@ -38,25 +38,8 @@ export function getValueUiState(valueLife: ValueLife, choosevalue: string | unde
 
     dropdownAllItems.at(-1) === '-' && dropdownAllItems.pop();
 
-    const inputText =
-        valueLife.isRef
-            ? refName2Txt(valueLife.value, isPsw)
-            : valueLife.value
-                ? valueLife.value
-                : valueLife.isNon
-                    ? ''
-                    : isBtn
-                        ? ''
-                        : LIST_valueAskNames[valueLife.valueAs];
-
-    const dropdownSelectedIndex =
-        valueLife.isRef
-            ? idxToStartRefs + refName2Idx(valueLife.value, isPsw)
-            : valueLife.value
-                ? listValues.length
-                    ? idxToStartValues + listValues.indexOf(valueLife.value)
-                    : -1
-                : valueAs2Idx(valueLife.valueAs);
+    const inputText = getInpuText(valueLife, isBtn, isPsw);
+    const dropdownSelectedIndex = getDropdownSelectedIndex(valueLife, idxToStartRefs, idxToStartValues, listValues, isPsw);
 
     const showAsRef = valueLife.isRef || !valueLife.value;
     const disabled = isBtn ? true : undefined; //readOnly={valueLife.fType === FieldTyp.list ? true : undefined} // OK but it is too match, admin should have it
@@ -94,6 +77,32 @@ export function getValueUiState(valueLife: ValueLife, choosevalue: string | unde
 
     function valueAs2Idx(valueAs: ValueAs) {
         return valueAs === ValueAs.askReuse ? 0 : valueAs === ValueAs.askConfirm ? 1 : valueAs === ValueAs.askAlways ? 2 : 0;
+    }
+
+    function getInpuText(valueLife: ValueLife, isBtn: boolean, isPsw: boolean) {
+        const inputText =
+            valueLife.isRef
+                ? refName2Txt(valueLife.value, isPsw)
+                : valueLife.value
+                    ? valueLife.value
+                    : valueLife.isNon
+                        ? ''
+                        : isBtn
+                            ? ''
+                            : LIST_valueAskNames[valueLife.valueAs];
+        return inputText;
+    }
+    
+    function getDropdownSelectedIndex(valueLife: ValueLife, idxToStartRefs: number, idxToStartValues: number, listValues: string[], isPsw: boolean) {
+        const dropdownSelectedIndex =
+            valueLife.isRef
+                ? idxToStartRefs + refName2Idx(valueLife.value, isPsw)
+                : valueLife.value
+                    ? listValues.length
+                        ? idxToStartValues + listValues.indexOf(valueLife.value)
+                        : -1
+                    : valueAs2Idx(valueLife.valueAs);
+        return dropdownSelectedIndex;
     }
 }
 

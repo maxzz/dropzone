@@ -6,10 +6,18 @@ import { Dropdown, isKeyToClearDefault } from "../6-shared-ui/Dropdown";
 import { classNames } from "@/utils";
 
 const inputParentClasses = "\
-grid grid-cols-[minmax(0,1fr)_auto] rounded overflow-hidden \
+grid grid-cols-[minmax(0,1fr)_auto] \
+\
 bg-primary-700 \
+\
 ring-primary-600 focus-within:ring-offset-primary-800 focus-within:ring-primary-400 \
-focus-within:ring-1 focus-within:ring-offset-1";
+focus-within:ring-1 focus-within:ring-offset-1 \
+rounded overflow-hidden";
+
+const inputClasses = "\
+px-2 py-3 h-8 \
+!bg-primary-700 !text-primary-200 \
+outline-none";
 
 export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className, ...rest }: { useItAtom: PA<boolean>; valueLifeAtom: PA<ValueLife>; choosevalue: string | undefined; } & InputHTMLAttributes<HTMLInputElement>) {
     const useIt = useAtomValue(useItAtom);
@@ -49,7 +57,7 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
         <div className={classNames(inputParentClasses, !useIt && "opacity-30 cursor-pointer", className)} {...rest}>
             <input
                 className={classNames(
-                    "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none",
+                    inputClasses,
                     showAsRef && !valueLife.isNon && "text-[0.6rem] !text-blue-400 cursor-default",
                     disabled && "pointer-events-none",
                 )}
