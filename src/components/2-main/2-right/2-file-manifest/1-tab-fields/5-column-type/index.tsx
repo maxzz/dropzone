@@ -1,10 +1,15 @@
-import React, { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 import { PrimitiveAtom as PA, useAtomValue } from 'jotai';
 import { Meta } from '@/store/manifest';
 import { classNames } from '@/utils';
 import { FieldTypeIconComponent } from '@/store/manifest/manifest-field-icons';
 
-export function Column5_Type({ useItAtom, field, className, ...rest }: { useItAtom: PA<boolean>; field: Meta.Field; } & InputHTMLAttributes<HTMLInputElement>) {
+type Column5_TypeProps = {
+    useItAtom: PA<boolean>;
+    field: Meta.Field;
+} & InputHTMLAttributes<HTMLInputElement>;
+
+export function Column5_Type({ useItAtom, field, className, ...rest }: Column5_TypeProps) {
     const { password, type = 'NOTYPE' } = field.mani;
     const useIt = useAtomValue(useItAtom);
     return (
