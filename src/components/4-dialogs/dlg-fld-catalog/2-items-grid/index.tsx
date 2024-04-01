@@ -32,39 +32,74 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: { selectedI
         <Scroller className="pt-2 text-xs overflow-auto">
             <div className="grid grid-cols-[minmax(0,1fr)_max-content_minmax(0,1fr)] text-primary-400">
                 <TableHeader />
-                {fldCatItems.map(mapItem)}
+                
+                {/* {fldCatItems.map(mapItem)} */}
+                {fldCatItems.map((item, idx) => (
+                    <MapItem item={item} idx={idx} selectedIdx={selectedIdx} itemClick={itemClick} itemDoubleClick={itemDoubleClick} key={idx} />
+                ))}
             </div>
         </Scroller>
     );
 
-    function mapItem(item: CatalogItem, idx: number) {
-        return (
-            <div
-                className={classNames(
-                    rowClasses,
-                    "cursor-default select-none",
-                    selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
-                )}
-                onClick={() => itemClick(idx)}
-                onDoubleClick={() => itemDoubleClick()}
-                key={idx}
-            >
-                <div className={col1Classes}>
-                    {idx + 1}
-                </div>
+    // function mapItem(item: CatalogItem, idx: number) {
+    //     return (
+    //         <div
+    //             className={classNames(
+    //                 rowClasses,
+    //                 "cursor-default select-none",
+    //                 selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
+    //             )}
+    //             onClick={() => itemClick(idx)}
+    //             onDoubleClick={() => itemDoubleClick()}
+    //             key={idx}
+    //         >
+    //             <div className={col1Classes}>
+    //                 {idx + 1}
+    //             </div>
 
-                <div className={col2Classes}>
-                    {FieldIcon(item.password, "w-4 h-4 opacity-50")}
-                </div>
+    //             <div className={col2Classes}>
+    //                 {FieldIcon(item.password, "w-4 h-4 opacity-50")}
+    //             </div>
 
-                <div className={`${col3Classes} whitespace-nowrap`}>
-                    {item.displayname}
-                </div>
+    //             <div className={`${col3Classes} whitespace-nowrap`}>
+    //                 {item.displayname}
+    //             </div>
 
-                <div className={col4Classes}>
-                    {item.dbname}
-                </div>
+    //             <div className={col4Classes}>
+    //                 {item.dbname}
+    //             </div>
+    //         </div>
+    //     );
+    // }
+}
+
+function MapItem({ item, idx, selectedIdx, itemClick, itemDoubleClick }: { item: CatalogItem; idx: number; selectedIdx: number; itemClick: (idx: number) => void; itemDoubleClick: () => void; }) {
+    return (
+        <div
+            className={classNames(
+                rowClasses,
+                "cursor-default select-none",
+                selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200",
+            )}
+            onClick={() => itemClick(idx)}
+            onDoubleClick={() => itemDoubleClick()}
+            key={idx}
+        >
+            <div className={col1Classes}>
+                {idx + 1}
             </div>
-        );
-    }
+
+            <div className={col2Classes}>
+                {FieldIcon(item.password, "w-4 h-4 opacity-50")}
+            </div>
+
+            <div className={`${col3Classes} whitespace-nowrap`}>
+                {item.displayname}
+            </div>
+
+            <div className={col4Classes}>
+                {item.dbname}
+            </div>
+        </div>
+    );
 }
