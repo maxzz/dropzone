@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
 import { classNames } from '@/utils';
 
