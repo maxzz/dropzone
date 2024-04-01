@@ -1,8 +1,8 @@
 import { useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import { namesConstrainSet } from "@/store/manifest";
-import { Dropdown, Input, Radio } from "../4-constrols";
 import { PolicyUi } from "../1-create-ui-atoms";
+import { Radio, Input, Dropdown } from "../4-constrols";
 import { classNames } from "@/utils";
 
 export function SectionRuleTypes({ atoms }: { atoms: Atomize<PolicyUi>; }) {

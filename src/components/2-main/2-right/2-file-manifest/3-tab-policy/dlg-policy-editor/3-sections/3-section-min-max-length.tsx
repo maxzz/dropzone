@@ -1,6 +1,6 @@
+import { useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from "../1-create-ui-atoms";
-import { useAtom } from "jotai";
 import { Input } from "../4-constrols";
 
 export function SectionMinMaxLength({ atoms }: { atoms: Atomize<PolicyUi>; }) {

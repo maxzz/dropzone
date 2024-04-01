@@ -1,9 +1,9 @@
 import { useAtom } from "jotai";
 import { Atomize } from "@/hooks/atomsX";
 import { PolicyUi } from "./1-create-ui-atoms";
+import { DialogHeader, SectionRuleTypes, SectionMinMaxLength, SectionTestRoom, SectionHistory, SectionGenerationBy, BottomButton } from "./3-sections";
 import { Check } from "./4-constrols";
 import { classNames } from "@/utils";
-import { DialogHeader, SectionRuleTypes, SectionMinMaxLength, SectionTestRoom, SectionHistory, SectionGenerationBy, BottomButton } from "./3-sections";
 
 const frameClasses = "p-4 \
 text-sm \
@@ -30,22 +30,30 @@ export function PolicyEditorBody({ atoms }: { atoms: Atomize<PolicyUi>; }) {
 
             <div className={classNames("flex flex-col space-y-4", !enabled && "opacity-10 pointer-events-none")}>
                 {/* Predefined or Custom rule */}
-                <h2 className={sectionClasses}>Password complexity</h2>
+                <h2 className={sectionClasses}>
+                    Password complexity
+                </h2>
                 <SectionRuleTypes atoms={atoms} />
 
                 {/* Min / Max length */}
                 <SectionMinMaxLength atoms={atoms} />
 
                 {/* Test section */}
-                <h2 className={sectionClasses}>Test password complexity</h2>
+                <h2 className={sectionClasses}>
+                    Test password complexity
+                </h2>
                 <SectionTestRoom atoms={atoms} />
 
                 {/* History */}
-                <h2 className={sectionClasses}>Password history restrictions</h2>
+                <h2 className={sectionClasses}>
+                    Password history restrictions
+                </h2>
                 <SectionHistory atoms={atoms} />
 
                 {/* Generation */}
-                <h2 className={sectionClasses}>Password generation</h2>
+                <h2 className={sectionClasses}>
+                    Password generation
+                </h2>
                 <SectionGenerationBy atoms={atoms} />
             </div>
 
