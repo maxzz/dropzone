@@ -1,5 +1,5 @@
 import { Atomize } from "@/hooks/atomsX";
-import { PolicyUi } from "../1-create-ui-atoms";
+import { PolicyUi } from "../0-create-ui-atoms";
 import { Input } from "../4-constrols";
 
 export function SectionTestRoom({ atoms }: { atoms: Atomize<PolicyUi>; }) {

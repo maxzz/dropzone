@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Meta } from "@/store/manifest";
-import { createUiAtoms, combineValueFromAtoms } from "./1-create-ui-atoms";
+import { createUiAtoms, combineValueFromAtoms } from "./0-create-ui-atoms";
 import { PolicyEditorBody } from "./2-editor-body";
 
 export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
