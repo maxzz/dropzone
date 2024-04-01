@@ -1,6 +1,6 @@
 import { PrimitiveAtom } from 'jotai';
-import { classNames } from '@/utils';
 import * as menu from '@radix-ui/react-dropdown-menu';
+import { classNames } from '@/utils';
 import { SymbolChevronDown, SymbolDot } from '@ui/icons';
 
 const menuContentClasses = "\

@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useEffect, useState } from 'react';
+import { InputHTMLAttributes, useEffect, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { Meta } from '@/store/manifest';
