@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { classNames } from '@/utils';
 
@@ -6,7 +6,7 @@ export function Column1_UseIt({ useItAtom, className, ...rest }: { useItAtom: Pr
     const [useIt, setUseIt] = useAtom(useItAtom);
     return (
         <input
-            className={classNames("place-self-center w-4 h-4 dark-checkbox", className,)}
+            className={classNames("place-self-center size-4 dark-checkbox", className)}
             type="checkbox"
             checked={useIt}
             onChange={() => setUseIt(v => !v)}
