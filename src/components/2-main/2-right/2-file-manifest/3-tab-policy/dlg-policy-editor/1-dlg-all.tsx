@@ -14,7 +14,7 @@ export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
         config: config.stiff,
     });
 
-    const atoms = useState(createUiAtoms(field.mani.policy || field.mani.policy2, ({ get, set }) => {
+    const atoms = useState(() => createUiAtoms(field.mani.policy || field.mani.policy2, ({ get, set }) => {
         combineValueFromAtoms(atoms, get, set);
     }))[0];
 

@@ -7,7 +7,7 @@ import { Part2Card_FormBody } from './2-form-body';
 
 function CardWoMemo({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;
-    const openAtom = useState(atom(false))[0];
+    const openAtom = useState(() => atom(false))[0];
 
     const setOpen = useSetAtom(openAtom);
     const allOpenCounter = useAtomValue(allCards.areFoldedCounterAtom);

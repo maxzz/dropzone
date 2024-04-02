@@ -16,16 +16,16 @@ function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
 export function SelectedItemBody({ selectedItemAtom }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; }) {
     const selectedItem = useAtomValue(selectedItemAtom);
 
-    const nameAtom = useState(atom(selectedItem?.displayname || ''))[0];
+    const nameAtom = useState(() => atom(selectedItem?.displayname || ''))[0];
     const [localName, setLocalName] = useAtom(nameAtom);
 
-    const valueAtom = useState(atom(selectedItem?.value || ''))[0];
+    const valueAtom = useState(() => atom(selectedItem?.value || ''))[0];
     const [localValue, setLocalValue] = useAtom(valueAtom);
 
-    const typeAtom = useState(atom(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt'))[0];
+    const typeAtom = useState(() => atom(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt'))[0];
     const [localType, setLocalType] = useAtom(typeAtom);
 
-    const ownernoteAtom = useState(atom(selectedItem?.ownernote || ''))[0];
+    const ownernoteAtom = useState(() => atom(selectedItem?.ownernote || ''))[0];
     const [ownernote, setOwnernote] = useAtom(ownernoteAtom);
 
     useEffect(() => {

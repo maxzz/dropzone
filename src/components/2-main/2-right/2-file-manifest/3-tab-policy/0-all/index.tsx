@@ -6,7 +6,7 @@ import { TableHeader } from './1-table-header';
 import { PoliciesGrid } from './3-policies-grid';
 
 export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
-    const policiesAtom = useState(atom<Meta.Field[]>([]))[0];
+    const policiesAtom = useState(() => atom<Meta.Field[]>([]))[0];
     const [policies, setPolicies] = useAtom(policiesAtom);
 
     const fileUs = useAtomValue(fileUsAtom);

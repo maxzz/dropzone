@@ -34,7 +34,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
     const dropdownItems = [CATALOG_Not, ...catalogItemsByType.map((item) => item.displayname), '-', CATALOG_More];
     let catalogItemIdx = (catalogItem ? catalogItemsByType.findIndex((item) => item === catalogItem) : -1) + 1; // +1 to skip CATALOG_Not
 
-    const textAtom = useState(atom(catalogItem?.displayname || CATALOG_Not))[0];
+    const textAtom = useState(() => atom(catalogItem?.displayname || CATALOG_Not))[0];
     const [inputText, setInputTextText] = useAtom(textAtom);
     const [selectedIndex, setSelectedIndex] = useState(catalogItemIdx);
 

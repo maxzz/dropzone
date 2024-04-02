@@ -9,7 +9,7 @@ import { Column4_Catalog } from '../4-column-catalog';
 import { Column5_Type } from '../5-column-type';
 
 export function TableRow({ field }: { field: Meta.Field; }) {
-    const rowAtoms = useState(createUiAtoms(field,
+    const rowAtoms = useState(() => createUiAtoms(field,
         ({ get, set }) => {
             //console.log('changed', field, field.mani.displayname);
             debCombineFromAtoms(rowAtoms, get, set);

@@ -15,7 +15,7 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: FldCatItems
     const fldCatItems = useAtomValue(fldCatItemsAtom);
     const setSelectedItem = useSetAtom(selectedItemAtom);
 
-    const selectedIdxAtom = useState(atom(-1))[0];
+    const selectedIdxAtom = useState(() => atom(-1))[0];
     const [selectedIdx, setSelectedIdx] = useAtom(selectedIdxAtom);
     const prevSelectedIdx = useRef(selectedIdx);
 
