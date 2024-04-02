@@ -2,28 +2,6 @@ import React, { RefObject, useEffect, useRef } from "react";
 import { a, useSpring } from "@react-spring/web";
 import { classNames } from '@/utils';
 
-/*
-function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
-    return (
-        <div className="flex justify-items-start space-x-1">
-            {tabs.map((pageTitle, idx) => (
-                <button
-                    className={classNames(
-                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
-                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
-                    )}
-                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
-                    key={pageTitle}
-                    onClick={() => setActive(idx)}
-                >
-                    {pageTitle}
-                </button>
-            ))}
-        </div>
-    );
-}
-*/
-
 export function TabSelector({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
     const $root = useRef<HTMLDivElement>(null);
     const $indicator = useRef<HTMLDivElement>(null);
@@ -48,14 +26,14 @@ export function TabSelector({ tabs, active, setActive }: { tabs: string[], activ
             }
         }
         animate();
-    }, [active, $root.current, $indicator.current, $items.current,]);
+    }, [active, $root.current, $indicator.current, $items.current]);
 
     return (
         <div ref={$root} className="relative flex">
             <a.div
                 ref={$indicator}
                 style={{ ...indicatorStyles, filter: 'drop-shadow(#0003 0px 0px .05rem)' }}
-                className="absolute bg-gray-50 rounded border border-gray-900/50 z-[1] shadow"
+                className="absolute bg-gray-50 border-gray-900/50 rounded border shadow z-[1]"
             />
 
             <div className="flex justify-items-start space-x-1">
@@ -77,3 +55,25 @@ export function TabSelector({ tabs, active, setActive }: { tabs: string[], activ
         </div>
     );
 }
+
+/*
+function TabSelectorOld({ tabs, active, setActive }: { tabs: string[], active: number, setActive: (v: number) => void; }) {
+    return (
+        <div className="flex justify-items-start space-x-1">
+            {tabs.map((pageTitle, idx) => (
+                <button
+                    className={classNames(
+                        'px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none transition-colors',
+                        active === idx ? 'bg-white shadow' : 'text-gray-700/80 hover:bg-white/[0.4] hover:text-white'
+                    )}
+                    style={{ filter: 'drop-shadow(#0000003f 0px 0px 0.15rem)' }}
+                    key={pageTitle}
+                    onClick={() => setActive(idx)}
+                >
+                    {pageTitle}
+                </button>
+            ))}
+        </div>
+    );
+}
+*/
