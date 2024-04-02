@@ -1,7 +1,12 @@
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 import { classNames } from '@/utils';
 
-export function RealPages({ pageComponents, selectedTabAtom }: { pageComponents: JSX.Element[]; selectedTabAtom: PrimitiveAtom<number>; }) {
+type RealPagesProps = {
+    pageComponents: JSX.Element[];
+    selectedTabAtom: PrimitiveAtom<number>;
+};
+
+export function RealPages({ pageComponents, selectedTabAtom }: RealPagesProps) {
     const selectedTab = useAtomValue(selectedTabAtom);
     return (<>
         {pageComponents.map((pageContent, idx) => (

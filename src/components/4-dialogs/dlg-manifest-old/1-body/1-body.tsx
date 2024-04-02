@@ -2,10 +2,11 @@ import { useCallback, useState } from 'react';
 import { OnValueChange } from '@/hooks/atomsX';
 import { EditorData } from '@/store';
 import { createUrlsAtom } from './0-create-urls-atom';
-import { EditorInfoTooltip } from './2-EditorInfoTooltip';
-import { BottomButtons } from './3-BottomButtons';
-import { TopTabsAndBody } from './6-TopTabsAndBody';
+import { EditorInfoTooltip } from './2-editor-info-tooltip';
+import { BottomButtons } from './3-bottom-buttons';
+import { TopTabsAndBody } from './6-top-tabs-and-body';
 import { MatchWebState } from '../3-tabs/3-tab1-matching';
+import { useAtomValue } from 'jotai';
 
 type Dialog_ManifestProps = {
     editorData: EditorData;
@@ -13,13 +14,15 @@ type Dialog_ManifestProps = {
 };
 
 export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: Dialog_ManifestProps) { /*lazy load*/
-    const urlsAtom = useState(() => createUrlsAtom(editorData, onUrlsUpdate))[0];
+    const fileUs = useAtomValue(editorData.fileUsAtom);
 
     const onUrlsUpdate = useCallback<OnValueChange<MatchWebState>>(
         ({ nextValue }) => {
             console.log('urls updated', nextValue);
         }, []
     );
+
+    const urlsAtom = useState(() => createUrlsAtom(fileUs, editorData.formIdx, onUrlsUpdate))[0];
 
     return (
         <TopTabsAndBody

@@ -7,14 +7,25 @@ import { Tab1_MatchWeb, MatchWebState } from '../3-tabs/3-tab1-matching';
 import { Tab2_MatchWindows } from '../3-tabs/3-tab2-match-windows';
 import { Tab3_Options } from '../3-tabs/3-tab3-options';
 import { Tab4_Fields } from '../3-tabs/3-tab4-fields';
-import { ManifestState } from './1-ManifestState';
-import { RealPages } from './4-RealPages';
-import { EditorTabs } from './5-EditorTabs';
+import { ManifestState } from './1-manifest-state';
+import { RealPages } from './4-real-pages';
+import { EditorTabs } from './5-dditor-tabs';
 
-export function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: ReactNode; urlsAtom: PrimitiveAtom<MatchWebState>; editorData: EditorData; }) {
+type TopTabsAndBodyProps = {
+    footer: ReactNode;
+    urlsAtom: PrimitiveAtom<MatchWebState>;
+    editorData: EditorData;
+};
+
+export function TopTabsAndBody({ footer, urlsAtom, editorData }: TopTabsAndBodyProps) {
+
     // Caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
-    const dragBind = useDrag(({ down, offset: [mx, my] }) => api.start({ x: mx, y: my, immediate: down }));
+    const dragBind = useDrag(
+        ({ down, offset: [mx, my] }) => {
+            api.start({ x: mx, y: my, immediate: down });
+        }
+    );
 
     // Pages
     const pages = {
@@ -23,6 +34,7 @@ export function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: React
         'Options': <Tab3_Options editorData={editorData} />,
         'Fields': <Tab4_Fields editorData={editorData} />,
     };
+
     const pageNames = Object.keys(pages);
     const pageComponents = Object.values(pages);
 
@@ -30,12 +42,15 @@ export function TopTabsAndBody({ footer, urlsAtom, editorData }: { footer: React
 
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto]  bg-gray-200 rounded overflow-hidden">
+
             <EditorTabs
                 pageNames={pageNames}
                 stateIndicator={<ManifestState urlsAtom={urlsAtom} />}
                 dialogContentBody={<RealPages pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />}
                 selectedTabAtom={selectedTabAtom}
-                dragBind={dragBind} />
+                dragBind={dragBind}
+            />
+
             {footer}
         </a.div>
     );
