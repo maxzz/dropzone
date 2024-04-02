@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { atom, PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 import { atomWithCallback, OnValueChange } from '@/hooks/atomsX';
 import { EditorData, formIdxName } from '@/store';
@@ -8,11 +8,11 @@ import { classNames } from '@/utils';
 import { UiTip } from '@ui/ui-tooltip';
 import { ManiFilenameParts } from '@/components/2-main/1-files-list/1-inline-card/1-title/4-filename';
 import { SymbolAttention, IconInfo } from '@ui/icons';
-import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from './3-tab1-matching';
-import { Tab2_MatchWindows } from './3-tab2-match-windows';
-import { Tab3_Options } from './3-tab3-options';
-import { Tab4_Fields } from './3-tab4-fields';
-import { TabSelector } from './2-tab-selector';
+import { Tab1_MatchWeb, MatchWebState, MatchWebStateAtom } from '../3-tabs/3-tab1-matching';
+import { Tab2_MatchWindows } from '../3-tabs/3-tab2-match-windows';
+import { Tab3_Options } from '../3-tabs/3-tab3-options';
+import { Tab4_Fields } from '../3-tabs/3-tab4-fields';
+import { TabSelector } from '../2-tab-selector';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 //import { toastWarning } from '@ui/UIToaster';
@@ -204,7 +204,7 @@ function createUrlsAtom(editorData: EditorData, onChange: OnValueChange<MatchWeb
     );
 }
 
-export default function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
+export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: { editorData: EditorData; setShow?: (v: boolean) => void; }) { /*lazy load*/
 
     const onUrlsUpdate = useCallback<OnValueChange<MatchWebState>>(({ nextValue }) => {
         console.log('urls updated', nextValue);
