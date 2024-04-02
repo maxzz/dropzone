@@ -31,7 +31,6 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
 
     return (<>
         <div className="flex space-x-4">
-
             {/* How match radio buttons */}
             <RadioGroupTooltips
                 value={rawMD.style}
@@ -46,57 +45,11 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
             {!!initialMD.opt && (
                 <MatchingCheckboxes rawMD={rawMD} urls={urls} setUrls={setUrls} setDirty={setDirty} />
             )}
-            
         </div>
 
-        <div className={`mt-1 mb-1 ${disabled ? 'opacity-50' : ''}`}>
-            {messageStyle(rawMD.style)}
-        </div>
-
-        <input
-            className={classNames(
-                "px-2 py-1.5 w-full border rounded shadow-inner",
-                errorHint ? 'border-red-400' : 'border-gray-400',
-                disabled ? 'opacity-50' : ''
-            )}
-            {...(errorHint && { title: errorHint })}
-            disabled={disabled}
-            spellCheck={false}
-            value={rawMD.url}
-            title={urls.m}
-            onChange={(e) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, url: e.target.value }, urls.o) })}
-        />
-
-        {/* <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm cursor-default" title="This is how url will be stored">
-            <div className="-mt-4 ">
-                <span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm select-none">
-                    Final raw format
-                </span>
-            </div>
-
-            <div className="overflow-x-auto break-all">
-                {urls.m}
-            </div>
-        </div> */}
+        <MatchUrlInput rawMD={rawMD} urls={urls} setUrls={setUrls} errorHint={errorHint} disabled={disabled} />
         <FinalMatchUrl urls={urls} />
-
     </>);
-}
-
-function FinalMatchUrl({ urls }: { urls: MatchWebState; }) {
-    return (
-        <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm cursor-default" title="This is how url will be stored">
-        <div className="-mt-4 ">
-            <span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm select-none">
-                Final raw format
-            </span>
-        </div>
-
-        <div className="overflow-x-auto break-all">
-            {urls.m}
-        </div>
-    </div>
-    );
 }
 
 function messageStyle(style: Matching.Style) {
@@ -123,7 +76,7 @@ function Checkbox({ label, checked, onChange }: { label: string; checked: boolea
     );
 }
 
-function MatchingCheckboxes({rawMD, urls, setUrls, setDirty}: {rawMD: Matching.RawMatchData; urls: MatchWebState; setUrls: (urls: MatchWebState) => void; setDirty: (dirty: boolean) => void; }) {
+function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: Matching.RawMatchData; urls: MatchWebState; setUrls: (urls: MatchWebState) => void; setDirty: (dirty: boolean) => void; }) {
     return (
         <div>
             <Checkbox
@@ -158,6 +111,52 @@ function MatchingCheckboxes({rawMD, urls, setUrls, setDirty}: {rawMD: Matching.R
                     setDirty(urlsDirty(newState));
                 }}
             />
+        </div>
+    );
+}
+
+type MatchUrlInputProps = {
+    rawMD: Matching.RawMatchData;
+    urls: MatchWebState;
+    setUrls: (urls: MatchWebState) => void;
+    errorHint: string;
+    disabled: boolean;
+};
+
+function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: MatchUrlInputProps) {
+    return (<>
+        <div className={`mt-1 mb-1 ${disabled ? 'opacity-50' : ''}`}>
+            {messageStyle(rawMD.style)}
+        </div>
+
+        <input
+            className={classNames(
+                "px-2 py-1.5 w-full border rounded shadow-inner",
+                errorHint ? 'border-red-400' : 'border-gray-400',
+                disabled ? 'opacity-50' : ''
+            )}
+            {...(errorHint && { title: errorHint })}
+            disabled={disabled}
+            spellCheck={false}
+            value={rawMD.url}
+            title={urls.m}
+            onChange={(e) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, url: e.target.value }, urls.o) })}
+        />
+    </>);
+}
+
+function FinalMatchUrl({ urls }: { urls: MatchWebState; }) {
+    return (
+        <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm cursor-default" title="This is how url will be stored">
+            <div className="-mt-4 ">
+                <span className="px-1 bg-yellow-200 border border-yellow-500 rounded-sm select-none">
+                    Final raw format
+                </span>
+            </div>
+
+            <div className="overflow-x-auto break-all">
+                {urls.m}
+            </div>
         </div>
     );
 }
