@@ -158,7 +158,7 @@ export function TriggerSubs({ label }: { label: string; }) {
         <MenuSubTrigger>
             {label}
             <RightSlot>
-                <SymbolChevronRight className="w-4 h-4" />
+                <SymbolChevronRight className="size-4" />
             </RightSlot>
         </MenuSubTrigger>
     );
@@ -197,7 +197,7 @@ export function MenuRadioGroupValue({ radioAtom, names }: { radioAtom: Primitive
             {names.map((name, idx) => (
                 <MenuRadioItem value={`${idx}`} key={idx}>
                     <MenuItemIndicator>
-                        <SymbolDot className="w-3 h-3" />
+                        <SymbolDot className="size-3" />
                     </MenuItemIndicator>
                     {name}
                 </MenuRadioItem>

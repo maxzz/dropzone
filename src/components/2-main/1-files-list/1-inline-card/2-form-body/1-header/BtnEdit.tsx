@@ -11,7 +11,7 @@ export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; f
             onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
             title="Edit detection options"
         >
-            <SymbolGear className="w-4 h-4 stroke-[1.2]" />
+            <SymbolGear className="size-4 stroke-[1.2]" />
         </button>
     );
 }

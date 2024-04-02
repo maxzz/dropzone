@@ -14,7 +14,7 @@ function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtomType; }) {
             className={`w-[max(4rem,8vh)] h-auto ratio11 p-2 ${mark ? 'bg-gray-800' : 'bg-gray-600'} rounded border border-gray-500 text-xs grid overflow-hidden shadow-lg select-none cursor-pointer`}
             title={`"${selected.fname}"`}
         >
-            <IconDocument className="w-6 h-6 mb-1 place-self-center" />
+            <IconDocument className="size-6 mb-1 place-self-center" />
             <div className="overflow-hidden whitespace-nowrap overflow-ellipsis text-center">{selected.fname}</div>
         </div>
     );

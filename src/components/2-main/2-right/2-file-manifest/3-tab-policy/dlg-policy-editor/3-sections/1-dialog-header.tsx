@@ -11,7 +11,7 @@ export function DialogHeader({ header, subHeader }: { header: ReactNode, subHead
                 </div>
                 
                 <DialogCloseButton tabIndex={-1} className="px-1.5 py-1.5 hover:bg-primary-700 active:scale-[.97] rounded">
-                    <SymbolCross className="w-5 h-5 py-1" />
+                    <SymbolCross className="size-5 py-1" />
                 </DialogCloseButton>
             </div>
 

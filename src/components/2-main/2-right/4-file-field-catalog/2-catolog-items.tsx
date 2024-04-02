@@ -16,7 +16,7 @@ export function CatologItems({ names }: { names: CatalogFile.ItemInFile[]; }) {
                 </div>
 
                 <div className="col-start-3 flex items-center gap-x-2 leading-[18px]">
-                    {FieldIcon(item.password, "w-4 h-4 opacity-25")}
+                    {FieldIcon(item.password, "size-4 opacity-25")}
 
                     <div>
                         {item.dispname}

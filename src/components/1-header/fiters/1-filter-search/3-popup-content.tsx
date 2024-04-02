@@ -1,6 +1,6 @@
 import { SymbolDot } from '@ui/icons';
 
-const popupContentDotClasses = "w-3 h-3 inline fill-none stroke-black";
+const popupContentDotClasses = "size-3 inline fill-none stroke-black";
 const popupContentTextClasses = "inline-block font-bold font-mono tracking-tight w-8";
 
 export function PopupContent() {

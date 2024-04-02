@@ -34,7 +34,7 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
-    const prefixClass = { className: minimal ? "self-start w-2 h-2" : "self-start w-3 h-3" };
+    const prefixClass = { className: minimal ? "self-start size-2" : "self-start size-3" };
     const prefix = (idx: FormIdx) => idx === FormIdx.login ? SymbolFormLogin(prefixClass) : SymbolFormChange(prefixClass);
     return (
         <button
@@ -51,7 +51,7 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Butt
                     {prefix(idx)}
                     {hasForm
                         ? <div className="flex">{icons[idx]}</div>
-                        : <div className="w-5 h-5"></div>
+                        : <div className="size-5"></div>
                     }
                 </div>
             ))}

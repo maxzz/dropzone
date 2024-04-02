@@ -27,7 +27,7 @@ export function FldCatItem({ item, idx, selectedIdx, itemClick, itemDoubleClick 
             </div>
 
             <div className={col2Classes}>
-                {FieldIcon(item.password, "w-4 h-4 opacity-50")}
+                {FieldIcon(item.password, "size-4 opacity-50")}
             </div>
 
             <div className={`${col3Classes} whitespace-nowrap`}>

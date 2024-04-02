@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { FileUsAtomType } from '@/store';
 import { TestDialogContent, saveXmlFile } from './menu-commands';
 
-const iconMenuHamburgerClasses = 'w-8 h-8 p-1 stroke-[0.8] hover:bg-primary-700 rounded opacity-60 hover:opacity-100 active:scale-[.97] outline-none focus:ring-1 ring-primary-400';
+const iconMenuHamburgerClasses = 'size-8 p-1 stroke-[0.8] hover:bg-primary-700 rounded opacity-60 hover:opacity-100 active:scale-[.97] outline-none focus:ring-1 ring-primary-400';
 
 export function CardTitleMenu({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);

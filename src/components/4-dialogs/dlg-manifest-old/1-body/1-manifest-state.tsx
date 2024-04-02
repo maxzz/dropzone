@@ -10,7 +10,7 @@ export function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const dirty = useAtomValue(urls.dirtyAtom);
     return (<>
         {dirty && (
-            <SymbolAttention className="self-end w-4 h-4 text-[#f6673b] fill-[#ffad42]" style={shadowStyles} title="Modified" />
+            <SymbolAttention className="self-end size-4 text-[#f6673b] fill-[#ffad42]" style={shadowStyles} title="Modified" />
         )}
     </>);
 }

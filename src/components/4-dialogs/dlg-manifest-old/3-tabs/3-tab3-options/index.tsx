@@ -7,7 +7,7 @@ export function DummyPlaceholder() {
         <div className="mt-1 mb-1 font-bold text-gray-600">
             Quicklink name
         </div>
-        
+
         <input
             className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
             spellCheck={false}
@@ -57,7 +57,7 @@ export function Tab3_Options({ editorData }: { editorData: EditorData; }) {
                 <div className="">
                     Group 1
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen1} className="size-5 border rounded" />
             </div>
             {isOpen1 && (<>
                 <DummyPlaceholder />
@@ -74,7 +74,7 @@ export function Tab3_Options({ editorData }: { editorData: EditorData; }) {
                 <div className="">
                     Group 2
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen2} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen2} className="size-5 border rounded" />
             </div>
             {isOpen2 && (<>
                 <DummyPlaceholder />

@@ -31,7 +31,7 @@ export function Tab4_Fields({ editorData }: { editorData: EditorData; }) {
                         <div className="">
                             Policy
                         </div>
-                        <UIIconUpDown double={true} isUp={isOpen1} className="w-5 h-5 border rounded" />
+                        <UIIconUpDown double={true} isUp={isOpen1} className="size-5 border rounded" />
                     </div>
 
                     {isOpen1 && (<>

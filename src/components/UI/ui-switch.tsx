@@ -76,7 +76,7 @@ export function LabeledSwitch({ children, className, title, value, onChange }: L
                 onCheckedChange={onChange}
             >
                 {/* <Switch className="ml-2 w-[42px] h-6 flex items-center bg-gray-700 rounded-full relative shadow ring-2 ring-gray-400 focus:ring-gray-900"> */}
-                <SwitchThumb className="mb-px w-5 h-5" />
+                <SwitchThumb className="mb-px size-5" />
             </Switch>
         </label>
     );

@@ -12,13 +12,13 @@ import { classNames } from '@/utils';
 function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
     const icon = useIt ? SymbolFieldUseIt1 : SymbolFieldUseIt0;
-    return icon({ title, className: classNames("ml-0.5 px-0.5 w-3 h-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
+    return icon({ title, className: classNames("ml-0.5 px-0.5 size-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
 }
 
 function part2_FieldType(type: Mani.FieldTypeStr | 'NOTYPE', field: Meta.Field) {
     const password = field.ftyp === FieldTyp.psw ? 'psw' : type;
     return (<>
-        <FieldTypeIconComponent className="w-5 h-5 flex-none" field={field.mani} />
+        <FieldTypeIconComponent className="size-5 flex-none" field={field.mani} />
 
         <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password}`}>
             {`${password}`}
@@ -30,7 +30,7 @@ function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, 
     return (
         <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
             toggle={
-                <SymbolPreview className={classNames("w-4 h-4", !hasPreview && 'opacity-25')} />
+                <SymbolPreview className={classNames("size-4", !hasPreview && 'opacity-25')} />
             }
         >
             {/* Popup content */}

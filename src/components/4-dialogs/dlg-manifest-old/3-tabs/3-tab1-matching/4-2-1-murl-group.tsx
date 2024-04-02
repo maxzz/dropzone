@@ -4,7 +4,7 @@ import { a, useSpring } from '@react-spring/web';
 import { Matching } from '@/store/manifest';
 import { UIIconUpDown } from '@ui/icons';
 import { MatchWebStateAtom } from './4-0-urls-dirty';
-import { MatchHow } from './4-1-2-match-how';
+import { MatchHow } from './4-2-2-match-how';
 
 export function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
@@ -18,12 +18,12 @@ export function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     });
 
     return (<>
-        <div className="mt-6 mb-1 flex items-center">
+        <div className="mt-4 mb-1 flex items-center">
             <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div>
                     Matching url
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen} className="size-5 border rounded" />
             </div>
 
             {urls.o === urls.m && (

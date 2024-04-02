@@ -16,12 +16,12 @@ export function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     });
 
     return (<>
-        <div className="mt-6 mb-1 flex items-center">
+        <div className="mt-4 mb-1 flex items-center">
             <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div>
                     Quicklink url
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen} className="w-5 h-5 border rounded" />
+                <UIIconUpDown double={true} isUp={isOpen} className="size-5 border rounded" />
             </div>
 
             {urls.o === urls.q && (

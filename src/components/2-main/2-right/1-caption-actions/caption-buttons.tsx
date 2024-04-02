@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { FileUsAtomType, rightPanelData, ViewMode } from "@/store";
 import { SymbolOpenLink, SymbolPen } from "@ui/icons";
 
-const itemClasses = "p-1 w-8 h-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400";
+const itemClasses = "p-1 size-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400";
 
 export function ButtonCardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
     //const setFormEditorData = useSetAtom(formEditorDataAtom);
@@ -15,7 +15,7 @@ export function ButtonCardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtom
             //onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
             onClick={() => setViewMode((v) => v === ViewMode.edit ? ViewMode.raw : ViewMode.edit)}
         >
-            {/* <IconGear className="w-4 h-4 stroke-[0.7] hover:stroke-[1]" /> */}
+            {/* <IconGear className="size-4 stroke-[0.7] hover:stroke-[1]" /> */}
             <SymbolPen className="w-3.5 h-3.5 stroke-[0.8] hover:stroke-[1]" />
         </button>
     );
@@ -35,7 +35,7 @@ export function ButtonCardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; 
                 onClick={(event) => event.stopPropagation()}
                 className={itemClasses}
             >
-                <SymbolOpenLink className="w-4 h-4" />
+                <SymbolOpenLink className="size-4" />
             </a>
         }
     </>);

@@ -11,7 +11,7 @@ import { BtnEdit } from './BtnEdit';
 function Icon_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';
     const title = `Lock fields ${useit ? '= 1 (lock)' : `${lockfields} don\'t lock`}`;
-    return useit ? SymbolOptionsLock({className:"w-3 h-3", title}) : null;
+    return useit ? SymbolOptionsLock({className:"size-3", title}) : null;
 }
 
 function Icon_QuickLink({ ql }: { ql: string | undefined; }) {
@@ -25,11 +25,11 @@ function BtnPreview({ form, formIdx, selectRowAtoms, small, setSmall, }: {
 }) {
     const [selectedRow, setSelectedRow] = useAtom(formIdx === 0 ? selectRowAtoms.loginAtom : selectRowAtoms.cpassAtom);
     const icon = small
-        ? SymbolPreview({ className: "w-5 h-5 hover:bg-primary-200 rounded active:scale-[.97] opacity-75", title: "Open preview" })
-        : SymbolCross({ className: "p-1.5 w-5 h-5 bg-orange-500/50 text-primary-100" });
+        ? SymbolPreview({ className: "size-5 hover:bg-primary-200 rounded active:scale-[.97] opacity-75", title: "Open preview" })
+        : SymbolCross({ className: "p-1.5 size-5 bg-orange-500/50 text-primary-100" });
     return (
         <div className="grid grid-cols-[minmax(0,1fr)_24px] mr-1 overflow-hidden">
-            <div className="w-6 h-6 col-start-2 row-start-1 cursor-pointer flex items-center justify-center z-10" onClick={() => setSmall((v) => !v)}>
+            <div className="size-6 col-start-2 row-start-1 cursor-pointer flex items-center justify-center z-10" onClick={() => setSmall((v) => !v)}>
                 {icon}
             </div>
             {!small &&

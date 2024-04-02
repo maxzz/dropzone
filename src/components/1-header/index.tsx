@@ -13,7 +13,7 @@ const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 borde
 function MenuTrigger() {
     return (
         <div className={`${buttonClasses} cursor-pointer`}>
-            <Part0_TopMenu icon={<SymbolMenuBurger className="p-1 w-8 h-8 hover:bg-primary-700 rounded" />} />
+            <Part0_TopMenu icon={<SymbolMenuBurger className="p-1 size-8 hover:bg-primary-700 rounded" />} />
         </div>
     );
 }
@@ -22,7 +22,7 @@ function FldCatTrigger() {
     const openFldCatDialog = useSetAtom(openFldCatDialogAtom);
     return (
         <button className={buttonClasses} onClick={() => openFldCatDialog()}>
-            <SymbolCatalog className="p-2 w-8 h-8 hover:bg-red-500 rounded active:scale-[.97]" />
+            <SymbolCatalog className="p-2 size-8 hover:bg-red-500 rounded active:scale-[.97]" />
         </button>
     );
 }
@@ -31,7 +31,7 @@ function ClearLoadedTrigger() {
     const clearFiles = useSetAtom(doClearFilesAtom);
     return (
         <button className={buttonClasses}>
-            <IconTrash className="p-2 w-8 h-8 hover:bg-red-500 rounded active:scale-[.97]" onClick={() => clearFiles()} />
+            <IconTrash className="p-2 size-8 hover:bg-red-500 rounded active:scale-[.97]" onClick={() => clearFiles()} />
         </button>
     );
 }

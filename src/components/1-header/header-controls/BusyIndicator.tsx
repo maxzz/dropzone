@@ -19,7 +19,7 @@ export function BusyIndicator() {
         <a.div style={styles} className="grid md:flex md:space-x-1">
             {/* Busy icon animation */}
             <IconRocket
-                className="ml-2 w-5 h-5 -mt-6 md:mt-0"
+                className="ml-2 size-5 -mt-6 md:mt-0"
                 style={{ animation: busyText ? `${rocketAnimation} 1.2s infinite` : '' }}
             />
             {/* Busy explanation text */}

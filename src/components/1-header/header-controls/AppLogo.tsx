@@ -13,6 +13,6 @@ export function AppLogo() {
     }
     const title = "Ctrl+Click - Open source code at GitHub\nApp build version: __BUILD_DATE__";
     return (
-        <IconAppLogoMicroscope className="w-7 h-7 mx-4 text-primary-300 cursor-pointer" title={title} onClick={doClick} />
+        <IconAppLogoMicroscope className="size-7 mx-4 text-primary-300 cursor-pointer" title={title} onClick={doClick} />
     );
 }

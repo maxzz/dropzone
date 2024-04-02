@@ -6,7 +6,7 @@ export function RowBoolean({ useItAtom, className, ...rest }: { useItAtom: Primi
     const [useIt, setUseIt] = useAtom(useItAtom);
     return (
         <input
-            className={classNames("place-self-center w-4 h-4 dark-checkbox", className)}
+            className={classNames("place-self-center size-4 dark-checkbox", className)}
             type="checkbox"
             checked={useIt}
             onChange={() => setUseIt(v => !v)}

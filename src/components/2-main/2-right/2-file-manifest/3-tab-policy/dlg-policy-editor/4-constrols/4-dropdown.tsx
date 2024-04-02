@@ -13,7 +13,7 @@ export function Dropdown({ items, valueAtom, className }: { items: string[]; val
             <Select.Trigger className={className}>
                 <div className="p-2 flex items-center justify-between space-x-1 text-primary-300 bg-primary-700 rounded">
                     <Select.Value />
-                    <Select.Icon><SymbolChevronDown className="w-4 h-4" /></Select.Icon>
+                    <Select.Icon><SymbolChevronDown className="size-4" /></Select.Icon>
                 </div>
             </Select.Trigger>
 

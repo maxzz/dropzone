@@ -13,5 +13,5 @@ export function CardTitleIcon({ stats: { isWeb, isChrome, isFCat, isCustomizatio
     const type = isWeb ? 'web' : isChrome ? 'chr' : isFCat ? 'cat' : 'app';
     type iconsType<T> = { [K in keyof T]: T[K] & { c?: string; }; };
     const { i, title, c = "text-primary-300" } = (icons as iconsType<typeof icons>)[type];
-    return i({ title, className: classNames("w-5 h-5", c) });
+    return i({ title, className: classNames("size-5", c) });
 }
