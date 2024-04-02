@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { Matching } from '@/store/manifest';
 import { classNames } from '@/utils';
-import { RadioGroup } from './2-radio-group';
+import { RadioGroupTooltips } from './2-radio-group-tooltips';
 import { MatchWebStateAtom, urlsDirty } from './4-0-urls-dirty';
 
 function messageStyle(style: Matching.Style) {
@@ -45,7 +45,7 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         <div className="flex space-x-4">
 
             {/* How match radio buttons */}
-            <RadioGroup
+            <RadioGroupTooltips
                 value={rawMD.style}
                 setValue={(v: number) => {
                     const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) };

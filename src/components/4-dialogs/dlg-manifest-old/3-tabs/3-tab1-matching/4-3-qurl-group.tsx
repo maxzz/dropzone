@@ -10,8 +10,8 @@ export function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const stylesDropdown = useSpring({
-        height: isOpen ? 'auto' : 0, 
-        opacity: isOpen ? 1 : 0, 
+        height: isOpen ? 'auto' : 0,
+        opacity: isOpen ? 1 : 0,
         config: { duration: 200 },
     });
 
@@ -31,7 +31,7 @@ export function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
             )}
         </div>
 
-        {isOpen &&
+        {isOpen && (
             <a.div style={stylesDropdown}>
                 <input
                     className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
@@ -43,6 +43,7 @@ export function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                         setDirty(urlsDirty(newState));
                     }}
                 />
-            </a.div>}
+            </a.div>
+        )}
     </>);
 }
