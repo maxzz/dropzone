@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { UiTip, tipSmall } from '@ui/ui-tooltip';
-import { RadioButton } from './3-radio-button';
+import { RadioButton } from './2-radio-button';
 
 function RadioTooltip({ value, curValue, label, title }: { value: number; curValue: number; label: string; title?: string; }) {
     return (

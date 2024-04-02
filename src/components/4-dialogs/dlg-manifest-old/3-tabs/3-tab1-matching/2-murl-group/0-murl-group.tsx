@@ -3,8 +3,8 @@ import { useAtomValue } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
 import { Matching } from '@/store/manifest';
 import { UIIconUpDown } from '@ui/icons';
-import { MatchWebStateAtom } from '../4-0-urls-dirty';
-import { MatchHow } from './2-murl-how';
+import { MatchWebStateAtom } from '../0-urls-dirty';
+import { MatchHow } from './1-murl-how';
 
 export function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
