@@ -4,6 +4,7 @@ import { Matching } from '@/store/manifest';
 import { classNames } from '@/utils';
 import { RadioGroupTooltips } from './4-radio-group-tooltips';
 import { MatchWebStateAtom, urlsDirty } from '../4-0-urls-dirty';
+import { on } from 'events';
 
 function messageStyle(style: Matching.Style) {
     const names = [
@@ -17,6 +18,7 @@ function messageStyle(style: Matching.Style) {
     ];
     return names[style] || 'No way';
 }
+
 export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
     const setDirty = useSetAtom(urls.dirtyAtom);
@@ -57,7 +59,17 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
             {/* Match case: show only for legacy manifests to allow reset this to none */}
             {!!initialMD.opt && (
                 <div>
-                    <label className="mt-1 h-6 flex items-center space-x-1">
+                    <Checkbox
+                        label="Case sensitive"
+                        checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
+                        onChange={(event) => {
+                            let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
+                            const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
+                            setUrls(newState);
+                            setDirty(urlsDirty(newState));
+                        }}
+                    />
+                    {/* <label className="mt-1 h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                             checked={(rawMD.opt & Matching.Options.caseinsensitive) !== 0}
                             onChange={(event) => {
@@ -70,9 +82,19 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
                         <div>
                             Case sensitive
                         </div>
-                    </label>
+                    </label> */}
 
-                    <label className="mt-1 h-6 flex items-center space-x-1">
+                    <Checkbox
+                        label="Match text"
+                        checked={(rawMD.opt & Matching.Options.matchtext) !== 0}
+                        onChange={(event) => {
+                            let opt = event.target.checked ? rawMD.opt | Matching.Options.matchtext : rawMD.opt & ~Matching.Options.matchtext;
+                            const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
+                            setUrls(newState);
+                            setDirty(urlsDirty(newState));
+                        }}
+                    />
+                    {/* <label className="mt-1 h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                             checked={(rawMD.opt & Matching.Options.matchtext) !== 0}
                             onChange={(event) => {
@@ -85,9 +107,19 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
                         <div>
                             Match text
                         </div>
-                    </label>
+                    </label> */}
 
-                    <label className="mt-1 h-6 flex items-center space-x-1">
+                    <Checkbox
+                        label="Use url query params"
+                        checked={(rawMD.opt & Matching.Options.usequery) !== 0}
+                        onChange={(event) => {
+                            let opt = event.target.checked ? rawMD.opt | Matching.Options.usequery : rawMD.opt & ~Matching.Options.usequery;
+                            const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
+                            setUrls(newState);
+                            setDirty(urlsDirty(newState));
+                        }}
+                    />
+                    {/* <label className="mt-1 h-6 flex items-center space-x-1">
                         <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0"
                             checked={(rawMD.opt & Matching.Options.usequery) !== 0}
                             onChange={(event) => {
@@ -100,7 +132,7 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
                         <div>
                             Use url query params
                         </div>
-                    </label>
+                    </label> */}
                 </div>
             )}
         </div>
@@ -136,4 +168,15 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         </div>
 
     </>);
+}
+
+function Checkbox({ label, checked, onChange }: { label: string; checked: boolean; onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; }) {
+    return (
+        <label className="mt-1 h-6 flex items-center space-x-1">
+            <input type="checkbox" className="rounded focus:ring-indigo-500 focus:ring-offset-0" checked={checked} onChange={onChange} />
+            <div>
+                {label}
+            </div>
+        </label>
+    );
 }

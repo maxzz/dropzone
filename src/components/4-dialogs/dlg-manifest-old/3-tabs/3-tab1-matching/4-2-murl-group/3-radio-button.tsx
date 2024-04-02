@@ -17,7 +17,7 @@ export function RadioButton({ label, groupName, value, checked, ...rest }: Radio
                 defaultChecked={checked}
                 {...(groupName && { name: groupName })}
             />
-            
+
             <div>
                 {label}
             </div>
