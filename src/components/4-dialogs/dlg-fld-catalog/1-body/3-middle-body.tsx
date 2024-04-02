@@ -15,6 +15,7 @@ function SubTitleA() {
         </div>
     );
 }
+
 function SubTitleB() {
     return (
         <div className={subSectionClasses}>

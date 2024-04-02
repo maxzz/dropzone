@@ -8,14 +8,13 @@ export function BottomButtons({ selectedItemAtom, needSelect }: { selectedItemAt
     return (
         <div className="pt-4 flex items-center justify-end gap-x-2">
             {needSelect
-                ? (
-                    <>
-                        <SelectButton selectedItemAtom={selectedItemAtom} />
-                        <BottomButton className={inputFocusClasses}>Cancel</BottomButton>
-                    </>
-                )
-                : <BottomButton>Close</BottomButton>}
+                ? (<>
+                    <SelectButton selectedItemAtom={selectedItemAtom} />
+                    <BottomButton className={inputFocusClasses}>Cancel</BottomButton>
+                </>)
+                : (
+                    <BottomButton>Close</BottomButton>
+                )}
         </div>
-
     );
 }

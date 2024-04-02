@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { Matching } from '@/store/manifest';
 import { classNames } from '@/utils';
-import { RadioGroupTooltips } from './2-radio-group-tooltips';
-import { MatchWebStateAtom, urlsDirty } from './4-0-urls-dirty';
+import { RadioGroupTooltips } from './4-radio-group-tooltips';
+import { MatchWebStateAtom, urlsDirty } from '../4-0-urls-dirty';
 
 function messageStyle(style: Matching.Style) {
     const names = [
