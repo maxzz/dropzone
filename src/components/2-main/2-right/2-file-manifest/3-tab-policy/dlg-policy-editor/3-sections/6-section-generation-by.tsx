@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { Atomize } from "@/hooks/atomsX";
+import { Atomize } from "@/hooks";
 import { UseAs } from "@/store/manifest";
 import { PolicyUi } from "../0-create-ui-atoms";
 import { Radio } from "../4-constrols";

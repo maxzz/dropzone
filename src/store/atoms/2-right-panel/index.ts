@@ -1,6 +1,6 @@
 import { atom, Atom, PrimitiveAtom } from "jotai";
 import { FileUs, FileUsAtomType } from "@/store/store-types";
-import { Atomize } from "@/hooks/atomsX";
+import { Atomize } from "@/hooks";
 
 // Right panel data
 

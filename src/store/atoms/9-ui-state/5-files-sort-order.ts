@@ -1,4 +1,4 @@
-import { atomWithCallback } from "@/hooks/atomsX";
+import { atomWithCallback } from "@/hooks";
 import { Order, SortBy } from "@/store/store-types";
 import { LocalStorageSave, } from "@/store/store-localstorage-save";
 import { LocalStorage } from "@/store/store-localstorage-load";

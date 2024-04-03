@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { Atomize } from '@/hooks/atomsX';
+import { Atomize } from "@/hooks";
 import { FileUsAtomType, FormIdx } from '@/store';
 
 type UiPart1General = {

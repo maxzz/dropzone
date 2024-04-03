@@ -1,6 +1,6 @@
 import { Getter, Setter } from 'jotai';
 import { Meta, TransformValue, ValueLife } from '@/store/manifest';
-import { Atomize, atomWithCallback } from '@/hooks/atomsX';
+import { Atomize, atomWithCallback } from '@/hooks';
 import { debounce } from '@/utils';
 
 type TableRowAtoms = {

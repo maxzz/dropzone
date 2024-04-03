@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { OnValueChange } from '@/hooks/atomsX';
+import { OnValueChange } from '@/hooks';
 import { EditorData } from '@/store';
 import { createUrlsAtom } from './0-create-urls-atom';
 import { EditorInfoTooltip } from './2-editor-info-tooltip';

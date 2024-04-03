@@ -1,4 +1,4 @@
-import { Atomize } from "@/hooks/atomsX";
+import { Atomize } from "@/hooks";
 import { namesConstrainPsw } from "@/store/manifest";
 import { PolicyUi } from "../0-create-ui-atoms";
 import { Dropdown } from "../4-constrols";
