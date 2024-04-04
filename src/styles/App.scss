@@ -1,7 +1,0 @@
-body {
-    background-image: linear-gradient(to right, var(--tm-primary-300-, #1f487894), var(--tm-primary-800-, #031f52a2)),
-        url("@/assets/background-bw.jpg"); /*http://higeom.math.msu.su/history/delone_r.html*/
-    background-blend-mode: multiply;
-}
-
-//font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320)); //https://codepen.io/maxzz/pen/KKvzLvB

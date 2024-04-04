@@ -1,7 +1,6 @@
-import React from 'react';
 import { classNames } from '@/utils';
-import { SymbolChevronDown, SymbolDot } from '@ui/icons';
 import * as menu from '@radix-ui/react-dropdown-menu';
+import { SymbolChevronDown, SymbolDot } from '@ui/icons';
 
 type CatalogDropdownProps = {
     items: string[];

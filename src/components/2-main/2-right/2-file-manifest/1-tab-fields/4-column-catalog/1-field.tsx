@@ -19,14 +19,16 @@ focus-within:ring-offset-1";
 
 const inputClasses = "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none";
 
-type Column4_CatalogProps = {
-    useItAtom: PA<boolean>;
-    fieldCatAtom: PA<string>;
-    onSelectCatItem: (item: CatalogItem | undefined) => void;
-    field: Meta.Field;
-};
+type Column4_CatalogProps =
+    & {
+        useItAtom: PA<boolean>;
+        fieldCatAtom: PA<string>;
+        onSelectCatItem: (item: CatalogItem | undefined) => void;
+        field: Meta.Field;
+    }
+    & InputHTMLAttributes<HTMLInputElement>;
 
-export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttributes<HTMLInputElement>) {
+export function Column4_Catalog(props: Column4_CatalogProps) {
     const { useItAtom, onSelectCatItem, fieldCatAtom, field, className, ...rest } = props;
 
     const { catalogItemsByType, catalogItem, } = useAtomValue(getMruFldCatForItemAtom)(field.mani.password, field.mani.dbname);
@@ -53,7 +55,7 @@ export function Column4_Catalog(props: Column4_CatalogProps & InputHTMLAttribute
 
     return (
         <div className={classNames(columnSizeClasses, columnRingClasses, !useIt && "opacity-30 cursor-pointer", className,)} {...rest}>
-            
+
             <input
                 className={classNames(inputClasses, ~selectedIndex && "text-[0.6rem] !text-blue-400")} //TODO: we can use placeholder on top and ingone all events on placeholder and do multiple lines
                 value={inputText}
