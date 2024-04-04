@@ -1,12 +1,4 @@
-import { CatalogItem } from '@/store/manifest';
-
-export * from './all-items';
-export * from './mru-items';
-export * from './ui-state';
-
-// For debugging
-
-export function mruToString(items: CatalogItem[]) {
-    return JSON.stringify(items.map((item) => `${JSON.stringify(item)}\n`), null, 4);
-    //console.log('buildMruWItem', `\n${JSON.stringify(item)}\n\n`, mruToString(rv));
-}
+export * from './0-all-items-atom';
+export * from './1-ui-state';
+export * from './2-mru-items';
+export * from './3-mru-debug';

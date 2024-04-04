@@ -5,7 +5,7 @@ import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXML
 import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
 import { isEmpty, isManual } from "@/store/store-utils/3-mani-utils";
 import { textFileReader } from "@/store/store-utils/1-text-file-reader";
-import { fldCatItemsAtom } from '../8-field-catalog/all-items';
+import { fldCatItemsAtom } from '../8-field-catalog/0-all-items-atom';
 import { busyAtom, totalManiAtoms } from '../9-ui-state';
 
 // Cache

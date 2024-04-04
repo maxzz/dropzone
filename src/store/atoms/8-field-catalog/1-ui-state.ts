@@ -1,5 +1,5 @@
-import { CatalogItem } from "@/store/manifest";
 import { PrimitiveAtom, atom } from "jotai";
+import { CatalogItem } from "@/store/manifest";
 
 // Field catalog dialog UI state
 
@@ -9,8 +9,10 @@ export type FldCatInData = {
 };
 
 export type FldCatOutData = {
-    fldCatItem: CatalogItem | null;
+    fldCatItem: CatalogItem | null; // selected item
 };
+
+// Field catalog dialog in data
 
 export const fldCatTriggerAtom = atom<FldCatInData | null>(null);
 
@@ -21,17 +23,23 @@ export const openFldCatDialogAtom = atom(
     }
 );
 
+// Field catalog dialog output data
+
 export const closeFldCatDialogAtom = atom(
     null,
     (get, set, outData: FldCatOutData) => {
         const inData = get(fldCatTriggerAtom);
+        
         const outBox = inData?.outBoxAtom;
         if (outBox) {
             set(outBox, outData);
         }
+
         inData && set(fldCatTriggerAtom, null);
     }
 );
+
+// atom to store result of the field catalog dialog
 
 export function creteOutBoxAtom<T>() {
     return atom<T | null>(null);
