@@ -7,6 +7,9 @@ import { visualizer } from 'rollup-plugin-visualizer';
 //import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 
 function manualChunks(id: string) { //https://rollupjs.org/configuration-options/#output-manualchunks
+    if (id.includes("react-dom")) {
+        return "vendor-dom";
+    }
     if (id.includes("@radix-ui")) {
         return "radix-ui";
     }
@@ -63,6 +66,7 @@ export default defineConfig({ // https://vitejs.dev/config
     },
 
     build: {
+        // cssMinify: false,
         minify: "esbuild",
         target: "esnext",
 
