@@ -18,10 +18,10 @@ import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/typ
 type TabsCombinedProps = {
     urlsAtom: PrimitiveAtom<MatchWebState>;
     editorData: EditorData;
-    dragBind: (...args: any[]) => ReactDOMAttributes;
+    captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-function TabsCombined({ urlsAtom, editorData, dragBind }: TabsCombinedProps) {
+function TabsCombined({ urlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
     // Pages
     const pages = {
         'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
@@ -41,7 +41,7 @@ function TabsCombined({ urlsAtom, editorData, dragBind }: TabsCombinedProps) {
             stateIndicator={<ManiModifiedState urlsAtom={urlsAtom} />}
             dialogContentBody={<PageContentRender pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />}
             selectedTabAtom={selectedTabAtom}
-            dragBind={dragBind}
+            captionDragBind={captionDragBind}
         />
     );
 }
@@ -56,7 +56,7 @@ export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrame
 
     // Dialog caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
-    const dragBind = useDrag(
+    const captionDragBind = useDrag(
         ({ down, offset: [mx, my] }) => {
             api.start({ x: mx, y: my, immediate: down });
         }
@@ -65,9 +65,11 @@ export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrame
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto] bg-gray-200 rounded overflow-hidden">
 
-            <TabsCombined urlsAtom={urlsAtom} editorData={editorData} dragBind={dragBind} />
+            <TabsCombined urlsAtom={urlsAtom} editorData={editorData} captionDragBind={captionDragBind} />
 
             {footer}
         </a.div>
     );
 }
+
+//TODO: add dialog x, y to atom
