@@ -6,7 +6,7 @@ import { IconInfo } from '@ui/icons';
 
 const shadowStyles = { filter: 'drop-shadow(#907bdab0 0px 0px .2rem)' };
 
-export function EditorInfoTooltip({ editorData }: { editorData: EditorData; }) {
+export function ManiInfoTooltip({ editorData }: { editorData: EditorData; }) {
 
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;

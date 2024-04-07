@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { OnValueChange } from '@/hooks';
 import { EditorData } from '@/store';
 import { createUrlsAtom } from './0-create-urls-atom';
-import { EditorInfoTooltip } from './2-editor-info-tooltip';
+import { ManiInfoTooltip } from './2-mani-info-tooltip';
 import { BottomButtons } from './3-bottom-buttons';
 import { DialogFrameAndTabs } from './6-dialog-frame-and-tabs';
 import { MatchWebState } from '../2-tabs/1-matching/0-urls-dirty';
@@ -30,7 +30,7 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
             editorData={editorData}
             footer={
                 <div className="px-4 py-4 bg-white flex items-center justify-between">
-                    <EditorInfoTooltip editorData={editorData} />
+                    <ManiInfoTooltip editorData={editorData} />
                     <BottomButtons setShow={setShow} />
                 </div>
             }

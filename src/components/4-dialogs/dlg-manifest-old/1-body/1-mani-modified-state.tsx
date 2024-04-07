@@ -5,7 +5,7 @@ import { MatchWebStateAtom } from '../2-tabs/1-matching/0-urls-dirty';
 
 const shadowStyles = { filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' };
 
-export function ManifestState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+export function ManiModifiedState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
     const dirty = useAtomValue(urls.dirtyAtom);
     return (<>

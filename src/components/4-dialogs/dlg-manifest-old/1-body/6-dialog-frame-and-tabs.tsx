@@ -9,8 +9,8 @@ import { Tab2_MatchWindows } from '../2-tabs/2-match-windows';
 import { Tab3_Options } from '../2-tabs/3-options';
 import { Tab4_Fields } from '../2-tabs/4-fields';
 
-import { ManifestState } from './1-manifest-state';
-import { RealPages } from './4-real-pages';
+import { ManiModifiedState } from './1-mani-modified-state';
+import { PageContentRender } from './4-page-content-render';
 import { EditorTabs } from './5-editor-tabs';
 
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
@@ -21,7 +21,7 @@ type TabsCombinedProps = {
     dragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-function TabsCombined({urlsAtom, editorData, dragBind}: TabsCombinedProps) {
+function TabsCombined({ urlsAtom, editorData, dragBind }: TabsCombinedProps) {
     // Pages
     const pages = {
         'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
@@ -38,12 +38,8 @@ function TabsCombined({urlsAtom, editorData, dragBind}: TabsCombinedProps) {
     return (
         <EditorTabs
             pageNames={pageNames}
-            stateIndicator={
-                <ManifestState urlsAtom={urlsAtom} />
-            }
-            dialogContentBody={
-                <RealPages pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />
-            }
+            stateIndicator={<ManiModifiedState urlsAtom={urlsAtom} />}
+            dialogContentBody={<PageContentRender pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />}
             selectedTabAtom={selectedTabAtom}
             dragBind={dragBind}
         />
@@ -58,7 +54,7 @@ type DialogFrameAndTabsProps = {
 
 export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrameAndTabsProps) {
 
-    // Caption dragging
+    // Dialog caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
     const dragBind = useDrag(
         ({ down, offset: [mx, my] }) => {
@@ -66,35 +62,10 @@ export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrame
         }
     );
 
-    // Pages
-    // const pages = {
-    //     'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
-    //     'Win32': <Tab2_MatchWindows editorData={editorData} />,
-    //     'Options': <Tab3_Options editorData={editorData} />,
-    //     'Fields': <Tab4_Fields editorData={editorData} />,
-    // };
-
-    // const pageNames = Object.keys(pages);
-    // const pageComponents = Object.values(pages);
-
-    // const selectedTabAtom = useState(() => atom(0))[0];
-
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto] bg-gray-200 rounded overflow-hidden">
 
             <TabsCombined urlsAtom={urlsAtom} editorData={editorData} dragBind={dragBind} />
-
-            {/* <EditorTabs
-                pageNames={pageNames}
-                stateIndicator={
-                    <ManifestState urlsAtom={urlsAtom} />
-                }
-                dialogContentBody={
-                    <RealPages pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />
-                }
-                selectedTabAtom={selectedTabAtom}
-                dragBind={dragBind}
-            /> */}
 
             {footer}
         </a.div>
