@@ -43,14 +43,21 @@ export function CatalogDropdown({ items, selectedIndex, onSetIndex }: CatalogDro
 
     function CatalogItem(item: string, idx: number): JSX.Element {
         const isSelected = idx === selectedIndex;
-        const rv = item === '-'
-            ?
-            <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
-            :
-            <menu.Item className={classNames(menuItemClasses, isSelected && "bg-primary-300")} onSelect={() => onSetIndex(idx)} key={idx}>
-                {isSelected && <SymbolDot className={`absolute left-2 size-5 ${isSelected ? 'hover:fill-primary-200':'fill-primary-700'}`} />}
-                <span className="ml-2 flex-grow self-start">{item}</span>
-            </menu.Item>;
+        const rv =
+            item === '-'
+                ? (
+                    <menu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" key={idx} />
+                )
+                : (
+                    <menu.Item className={classNames(menuItemClasses, isSelected && "bg-primary-300")} onSelect={() => onSetIndex(idx)} key={idx}>
+                        {isSelected && (
+                            <SymbolDot className={`absolute left-2 size-5 ${isSelected ? 'hover:fill-primary-200' : 'fill-primary-700'}`} />
+                        )}
+                        <span className="ml-2 flex-grow self-start">
+                            {item}
+                        </span>
+                    </menu.Item>
+                );
         return rv;
     }
 }
