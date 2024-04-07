@@ -3,7 +3,7 @@ import { Meta, TransformValue, ValueLife } from '@/store/manifest';
 import { Atomize, atomWithCallback } from '@/hooks';
 import { debounce } from '@/utils';
 
-type TableRowAtoms = {
+type TableRowForAtoms = {
     useIt: boolean;
     label: string;
     type: string;
@@ -13,7 +13,9 @@ type TableRowAtoms = {
     fieldCat: string;
 };
 
-export function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get: Getter; set: Setter; }) => void): Atomize<TableRowAtoms> {
+type TableRowAtoms = Prettify<Atomize<TableRowForAtoms>>;
+
+export function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get: Getter; set: Setter; }) => void): TableRowAtoms {
     const { useit, displayname, type: typ, value: val } = field.mani;
     return {
         useItAtom: atomWithCallback(!!useit, onChange),
@@ -26,17 +28,19 @@ export function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get:
     };
 }
 
-function combineFromAtoms(atoms: Atomize<TableRowAtoms>, get: Getter, set: Setter) {
+function combineResultFromAtoms(atoms: TableRowAtoms, get: Getter, set: Setter) {
     const result = {
-        useItAtom: get(atoms.useItAtom),
-        labelAtom: get(atoms.labelAtom),
-        typeAtom: get(atoms.typeAtom), //TODO:
-        valueAtom: get(atoms.valueAtom),
-        valueAsAtom: get(atoms.valueAsAtom),
-        valueLifeAtom: get(atoms.valueLifeAtom),
-        fieldCatAtom: get(atoms.fieldCatAtom), //TODO: catalog
+        useIt: get(atoms.useItAtom),
+        label: get(atoms.labelAtom),
+        type: get(atoms.typeAtom), //TODO:
+        value: get(atoms.valueAtom),
+        valueAs: get(atoms.valueAsAtom),
+        valueLife: get(atoms.valueLifeAtom),
+        fieldCat: get(atoms.fieldCatAtom), //TODO: catalog
     };
-    //console.log('TableRow atoms', JSON.stringify(result));
+    
+    console.log('TableRow atoms', JSON.stringify(result));
+    //TODO: use result
 }
 
-export const debCombineFromAtoms = debounce(combineFromAtoms);
+export const debouncedCombinedResultFromAtoms = debounce(combineResultFromAtoms);
