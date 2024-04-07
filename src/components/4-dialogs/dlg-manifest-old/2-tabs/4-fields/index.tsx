@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-import { EditorData } from '@/store';
+import { ManiEditorData } from '@/store';
 import { UIIconUpDown } from '@ui/icons';
 import { DummyPlaceholder } from '../3-options';
 
-function TabFieldsScript({ editorData }: { editorData: EditorData; }) {
+function TabFieldsScript({ editorData }: { editorData: ManiEditorData; }) {
     return (
         <div className="p-4">
             Windows form script fields editor is comming soon...
@@ -12,7 +12,7 @@ function TabFieldsScript({ editorData }: { editorData: EditorData; }) {
     );
 }
 
-export function Tab4_Fields({ editorData }: { editorData: EditorData; }) {
+export function Tab4_Fields({ editorData }: { editorData: ManiEditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
     const isScript = fileUs.meta?.[editorData.formIdx]?.disp.isScript;
 

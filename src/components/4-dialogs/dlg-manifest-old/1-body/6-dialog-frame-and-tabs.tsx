@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { atom, PrimitiveAtom } from 'jotai';
-import { EditorData } from '@/store';
+import { ManiEditorData } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 
@@ -17,7 +17,7 @@ import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/typ
 
 type TabsCombinedProps = {
     urlsAtom: PrimitiveAtom<MatchWebState>;
-    editorData: EditorData;
+    editorData: ManiEditorData;
     captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
@@ -49,7 +49,7 @@ function TabsCombined({ urlsAtom, editorData, captionDragBind }: TabsCombinedPro
 type DialogFrameAndTabsProps = {
     footer: ReactNode;
     urlsAtom: PrimitiveAtom<MatchWebState>;
-    editorData: EditorData;
+    editorData: ManiEditorData;
 };
 
 export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrameAndTabsProps) {

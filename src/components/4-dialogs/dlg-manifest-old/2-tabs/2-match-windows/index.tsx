@@ -1,6 +1,6 @@
-import { EditorData } from '@/store';
+import { ManiEditorData } from '@/store';
 
-export function Tab2_MatchWindows({ editorData }: { editorData: EditorData; }) {
+export function Tab2_MatchWindows({ editorData }: { editorData: ManiEditorData; }) {
     return (
         <div className="p-4">
             Windows match is comming soon...

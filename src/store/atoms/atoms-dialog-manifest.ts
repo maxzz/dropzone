@@ -3,6 +3,6 @@ import { FileUsFormData } from "../store-types";
 
 // Form editor data
 
-export type EditorData = FileUsFormData;
+export type ManiEditorData = FileUsFormData;
 
-export const formEditorDataAtom = atom<EditorData | null>(null);
+export const formEditorDataAtom = atom<ManiEditorData | null>(null);

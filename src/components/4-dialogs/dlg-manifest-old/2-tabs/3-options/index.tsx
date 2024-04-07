@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { EditorData } from '@/store';
+import { ManiEditorData } from '@/store';
 import { UIIconUpDown } from '@ui/icons';
 
 export function DummyPlaceholder() {
@@ -16,7 +16,7 @@ export function DummyPlaceholder() {
     </>);
 }
 
-export function Tab3_Options({ editorData }: { editorData: EditorData; }) {
+export function Tab3_Options({ editorData }: { editorData: ManiEditorData; }) {
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     return (
