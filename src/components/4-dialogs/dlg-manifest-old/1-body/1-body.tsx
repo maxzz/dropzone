@@ -4,7 +4,7 @@ import { EditorData } from '@/store';
 import { createUrlsAtom } from './0-create-urls-atom';
 import { EditorInfoTooltip } from './2-editor-info-tooltip';
 import { BottomButtons } from './3-bottom-buttons';
-import { TopTabsAndBody } from './6-top-tabs-and-body';
+import { DialogFrameAndTabs } from './6-dialog-frame-and-tabs';
 import { MatchWebState } from '../2-tabs/1-matching/0-urls-dirty';
 import { useAtomValue } from 'jotai';
 
@@ -25,7 +25,7 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
     const urlsAtom = useState(() => createUrlsAtom(fileUs, editorData.formIdx, onUrlsUpdate))[0];
 
     return (
-        <TopTabsAndBody
+        <DialogFrameAndTabs
             urlsAtom={urlsAtom}
             editorData={editorData}
             footer={
