@@ -3,6 +3,8 @@ import { OurlGroup } from './1-ourl-group';
 import { QurlGroup } from './3-qurl-group';
 import { MatchWebStateAtom } from './0-urls-dirty';
 
+export * from './0-urls-dirty';
+
 export function Tab1_MatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     return (
         <div className="p-4">

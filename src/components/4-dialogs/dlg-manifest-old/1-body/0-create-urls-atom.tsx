@@ -1,7 +1,7 @@
 import { atom, PrimitiveAtom } from 'jotai';
 import { atomWithCallback, OnValueChange } from '@/hooks';
 import { FileUs, FormIdx } from '@/store';
-import { MatchWebState } from '../3-tabs/3-tab1-matching/0-urls-dirty';
+import { MatchWebState } from '../2-tabs/1-matching/0-urls-dirty';
 
 export function createUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<MatchWebState>): PrimitiveAtom<MatchWebState> {
 

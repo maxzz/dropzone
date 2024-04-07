@@ -5,7 +5,7 @@ import { createUrlsAtom } from './0-create-urls-atom';
 import { EditorInfoTooltip } from './2-editor-info-tooltip';
 import { BottomButtons } from './3-bottom-buttons';
 import { TopTabsAndBody } from './6-top-tabs-and-body';
-import { MatchWebState } from '../3-tabs/3-tab1-matching/0-urls-dirty';
+import { MatchWebState } from '../2-tabs/1-matching/0-urls-dirty';
 import { useAtomValue } from 'jotai';
 
 type Dialog_ManifestProps = {

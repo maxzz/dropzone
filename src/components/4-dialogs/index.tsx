@@ -1,4 +1,3 @@
-import React from 'react';
 import { ManifestOldDlgTrigger } from './dlg-manifest-old';
 import { FldCatDlg } from './dlg-fld-catalog';
 

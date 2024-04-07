@@ -1,6 +1,6 @@
 import { ReactNode, useLayoutEffect, useRef } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
-import { TabSelector } from '../2-tab-selector';
+import { TabSelector } from '../3-ui-tab-selector';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 

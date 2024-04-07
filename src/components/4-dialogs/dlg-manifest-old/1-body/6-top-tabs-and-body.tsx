@@ -3,14 +3,15 @@ import { atom, PrimitiveAtom } from 'jotai';
 import { EditorData } from '@/store';
 import { a, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { Tab1_MatchWeb } from '../3-tabs/3-tab1-matching';
-import { MatchWebState } from '../3-tabs/3-tab1-matching/0-urls-dirty';
-import { Tab2_MatchWindows } from '../3-tabs/3-tab2-match-windows';
-import { Tab3_Options } from '../3-tabs/3-tab3-options';
-import { Tab4_Fields } from '../3-tabs/3-tab4-fields';
+
+import { MatchWebState, Tab1_MatchWeb } from '../2-tabs/1-matching';
+import { Tab2_MatchWindows } from '../2-tabs/2-match-windows';
+import { Tab3_Options } from '../2-tabs/3-options';
+import { Tab4_Fields } from '../2-tabs/4-fields';
+
 import { ManifestState } from './1-manifest-state';
 import { RealPages } from './4-real-pages';
-import { EditorTabs } from './5-dditor-tabs';
+import { EditorTabs } from './5-editor-tabs';
 
 type TopTabsAndBodyProps = {
     footer: ReactNode;
