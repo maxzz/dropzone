@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { Meta } from '@/store/manifest';
 import { PolicyEditorDlg } from '../dlg-policy-editor';
-import { classNames } from '@/utils';
+import { classNames, turnOffAutoComplete } from '@/utils';
 
 function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value, setValue] = useAtom(valueAtom);
@@ -17,7 +17,7 @@ function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<str
             )}
             value={value}
             onChange={(event) => setValue(event.target.value)}
-            autoComplete="off" list="autocompleteOff" spellCheck={false}
+            {...turnOffAutoComplete}
             {...rest} />
     );
 }
