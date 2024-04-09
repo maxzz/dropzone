@@ -7,15 +7,15 @@ body {
         url("@/assets/background-bw.jpg"); /*http://higeom.math.msu.su/history/delone_r.html*/
     background-blend-mode: multiply;
 }
-/* font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320)); //https://codepen.io/maxzz/pen/KKvzLvB */
 
-/**/
 @layer base {
     html {
         font-family: "Source Sans Pro", system-ui, sans-serif;
     }
 }
+/* font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320)); //https://codepen.io/maxzz/pen/KKvzLvB */
 
+/**/
 @font-face {
     font-family: "Source Sans Pro";
     font-style: normal;
@@ -29,6 +29,7 @@ body {
     src: local(""), url("@/assets/fonts/source-sans-pro-v21-latin-regular.woff2") format("woff2");
 }
 /**/
+
 /** /
 @font-face {
     font-family: "source sans pro";
@@ -37,16 +38,6 @@ body {
     src: local(""), url("./assets/fonts/source-sans-pro-v21-latin-700.woff2") format("woff2");
 }
 /**/
-
-@layer components {
-    .sb {
-        @apply scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray;
-    }
-
-    .sb-transparent {
-        @apply scrollbar-w-2 scrollbar-track-transparent scrollbar-thumb-rounded scrollbar-thumb-transparent;
-    }
-}
 
 @layer utilities {
     .ratio11 {
@@ -78,32 +69,44 @@ body {
     }
 }
 
-/* Checkboxes */
+/* Checkboxes, Radio */
 
 @layer components {
     .dark-checkbox {
         @apply form-checkbox 
-        text-primary-700 bg-primary-800 ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 
+        /**/
+        text-primary-700 bg-primary-800 
+        /**/
+        ring-1 focus:ring-1 focus:ring-offset-primary-800 ring-primary-600 focus:ring-primary-400 
+        /**/
         rounded border-none cursor-pointer transition-all;
     }
-}
 
-/* Radio buttons */
-
-@layer components {
     .dark-radio {
         @apply form-radio
+        /**/
         text-primary-700 bg-primary-800 border-none
+        /**/
         ring-1 focus:ring-1 ring-primary-600 focus:ring-primary-400 checked:ring-primary-600 focus:ring-offset-primary-800
+        /**/
         transition-shadow cursor-pointer;
     }
 }
 
+@layer components {
+    .sb {
+        @apply scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray;
+    }
+
+    .sb-transparent {
+        @apply scrollbar-w-2 scrollbar-track-transparent scrollbar-thumb-rounded scrollbar-thumb-transparent;
+    }
+}
+
 /* Scrollbars */
-
-/* @layer components {
+/*
+@layer components {
     /* Firefox scrollbars * /
-
     .smallscroll {
         --sb-width: 8px;
         scrollbar-color: #666b7a transparent;
@@ -120,21 +123,22 @@ body {
     .smallscroll::-webkit-scrollbar-thumb {
         background-color: #666b7a;
     }
-} */
+}
+*/
 
 /* Firefox scrollbars */
 .smallscroll {
     --sb-width: 6px;
-    --sb-clr: #c1c1c178; /* #666b7a */
-    --sb-bkg: transparent; /* transparent */ /*#30303080*/
+    --sb-clr: #c1c1c178;    /* #666b7a */
+    --sb-bkg: transparent;      /* transparent */ /*#30303080*/
     scrollbar-color: var(--sb-clr) var(--sb-bkg);
     scrollbar-width: thin;
 }
 
 .smallscroll-light {
     --sb-width: 6px;
-    --sb-clr: #30303080; /* #666b7a */
-    --sb-bkg: transparent; /* transparent */ /*#c1c1c178*/
+    --sb-clr: #30303080;    /* #666b7a */
+    --sb-bkg: transparent;      /* transparent */ /*#c1c1c178*/
 }
 
 /* Chrome scrollbars */
