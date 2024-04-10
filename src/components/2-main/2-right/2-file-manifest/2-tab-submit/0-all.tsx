@@ -23,6 +23,11 @@ export function ManiSection2_Submit({ form }: { form: Meta.Form | undefined; }) 
     }, [form]);
 
     return (
-        <RadioGroup items={items} groupName={`submit-form-${form?.type}`} selected={selected} setSelected={setSelected} />
+        <RadioGroup
+            items={items}
+            groupName={`submit-form-${form?.type}`}
+            selected={selected}
+            setSelected={setSelected}
+        />
     );
 }
