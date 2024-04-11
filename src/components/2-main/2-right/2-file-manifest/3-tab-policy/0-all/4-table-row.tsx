@@ -22,17 +22,28 @@ function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<str
     );
 }
 
-export function FieldWithPolicy({ field }: { field: Meta.Field; }) {
+export function FieldWithPolicyRow({ field }: { field: Meta.Field; }) {
     return (<>
-        <div className="px-2 py-1 text-primary-200 bg-primary-700 rounded flex items-center">
-            {field.mani.displayname || 'no name'}
+        <div className="px-2 py-1 text-primary-200 bg-primary-700 rounded flex items-start">
+            {field.mani.displayname || 'no name field'}
         </div>
 
         <div className="px-2 py-1 bg-primary-700 rounded grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2">
-            <div className="text-primary-500">Main</div>
-            <div className="text-blue-400 text-[.7rem] font-mono">{field.mani.policy}</div>
-            {field.mani.policy2 && <div className="text-primary-500">Custom</div>}
-            {field.mani.policy2 && <div className="text-blue-400 text-[.7rem] font-mono">{field.mani.policy2}</div>}
+            <div className="text-primary-500">
+                Main
+            </div>
+            <div className="text-blue-400 text-[.7rem] font-mono">
+                {field.mani.policy}
+            </div>
+
+            {field.mani.policy2 && (<>
+                <div className="text-primary-500">
+                    Custom
+                </div>
+                <div className="text-blue-400 text-[.7rem] font-mono">
+                    {field.mani.policy2}
+                </div>
+            </>)}
         </div>
 
         <div className="flex items-center">

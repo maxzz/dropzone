@@ -78,4 +78,4 @@ export function Column3_Value({ useItAtom, valueLifeAtom, choosevalue, className
     );
 }
 
-//Note: Theoretically, two buttons cannot be selected. Only the first one will be pressed, but it depends on the application (submit vs. trigger).
+//NOTE: Theoretically, two buttons cannot be selected. Only the first one will be pressed, but it depends on the application (submit vs. trigger).

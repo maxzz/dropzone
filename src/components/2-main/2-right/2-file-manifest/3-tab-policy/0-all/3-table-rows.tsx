@@ -1,11 +1,12 @@
 import { Meta } from '@/store/manifest';
-import { FieldWithPolicy } from './2-field-with-policy';
+import { FieldWithPolicyRow } from './4-table-row';
 
 export function PoliciesGrid({ policies }: { policies: Meta.Field[]; }) {
     return (<>
         {policies.map(
             (field, idx) => (
-                <FieldWithPolicy field={field} key={idx} />
-            ))}
+                <FieldWithPolicyRow field={field} key={idx} />
+            ))
+        }
     </>);
 }
