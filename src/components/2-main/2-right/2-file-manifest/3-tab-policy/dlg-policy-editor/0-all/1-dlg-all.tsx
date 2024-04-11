@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Meta } from "@/store/manifest";
@@ -6,7 +6,7 @@ import { createUiAtoms, combineValueFromAtoms } from "./0-create-ui-atoms";
 import { PolicyEditorBody } from "./2-editor-body";
 
 export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const transitions = useTransition(Number(open), {
         from: { opacity: 0, y: -10, scale: 0.97 },
         enter: { opacity: 1, y: 0, scale: 1 },
