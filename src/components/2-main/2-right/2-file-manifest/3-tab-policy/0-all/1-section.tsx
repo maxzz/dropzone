@@ -3,7 +3,7 @@ import { atom, useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx } from '@/store';
 import { Meta } from '@/store/manifest';
 import { TableHeader } from './2-table-header';
-import { PoliciesGrid } from './3-table-rows';
+import { PoliciesGrid } from './3-table-grid';
 
 export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const policiesAtom = useState(() => atom<Meta.Field[]>([]))[0];
@@ -24,7 +24,7 @@ export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileU
     }
 
     return (
-        <div className="px-3 py-2 grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-1 items-stretch rounded bg-primary-800">
+        <div className="px-3 py-2 bg-primary-800 grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-1 items-stretch rounded">
             <TableHeader />
             <PoliciesGrid policies={policies} />
         </div>

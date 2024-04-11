@@ -28,19 +28,19 @@ export function FieldWithPolicyRow({ field }: { field: Meta.Field; }) {
             {field.mani.displayname || 'no name field'}
         </div>
 
-        <div className="px-2 py-1 bg-primary-700 rounded grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2">
-            <div className="text-primary-500">
+        <div className="px-2 py-1 bg-primary-700 rounded grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2 gap-y-1">
+            <div className="text-primary-300">
                 Main
             </div>
-            <div className="text-blue-400 text-[.7rem] font-mono">
+            <div className="text-blue-400 text-xs font-mono">
                 {field.mani.policy}
             </div>
 
             {field.mani.policy2 && (<>
-                <div className="text-primary-500">
+                <div className="text-primary-300">
                     Custom
                 </div>
-                <div className="text-blue-400 text-[.7rem] font-mono">
+                <div className="text-xs font-mono text-blue-400">
                     {field.mani.policy2}
                 </div>
             </>)}
