@@ -28,8 +28,8 @@ export function CatalogDropdown({ items, selectedIndex, onSetIndex }: CatalogDro
     return (
         <menu.Root>
             <menu.Trigger asChild>
-                <button className="px-2 border-l border-primary-800 outline-none group">
-                    <SymbolChevronDown className="size-4 border-primary-500 rounded group-focus-within:border" />
+                <button className="px-2 border-l border-primary-800 outline-none group/btn">
+                    <SymbolChevronDown className="size-4 border-primary-500 rounded group-focus-within/btn:border" />
                 </button>
             </menu.Trigger>
 
