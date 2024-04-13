@@ -1,5 +1,5 @@
 import { Getter, Setter, atom } from 'jotai';
-import { Atomize, OnValueChangeAny, atomWithCallback } from "@/hooks";
+import { Atomize, OnValueChangeAny, atomWithCallback } from "@/util-hooks";
 import { FileUsAtomType, FormIdx } from '@/store';
 import { debounce } from '@/utils';
 
@@ -77,7 +77,7 @@ export function createAtoms(v: string, onChange: OnValueChangeAny, fileUsAtom: F
 
 export function combineOptionsFromAtoms(atoms: FormOptionsAtoms, get: Getter, set: Setter) {
     const { uiPart1General, uiPart2ScreenDetection, uiPart3Authentication, uiPart4QL, uiPart5PasswordManagerIcon } = atoms;
-    
+
     const result = {
         uiPart1General: {
             'name': get(uiPart1General.nameAtom),

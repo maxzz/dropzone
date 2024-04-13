@@ -1,5 +1,5 @@
 import { Getter, Setter } from 'jotai';
-import { Atomize, OnValueChangeAny, atomWithCallback } from '@/hooks';
+import { Atomize, OnValueChangeAny, atomWithCallback } from '@/util-hooks';
 import { Meta } from '@/store/manifest';
 import { debounce } from '@/utils';
 

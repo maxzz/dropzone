@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { OnValueChange } from '@/hooks';
+import { OnValueChange } from '@/util-hooks';
 import { ManiEditorData } from '@/store';
 import { createUrlsAtom } from './0-create-urls-atom';
 import { ManiInfoTooltip } from './2-mani-info-tooltip';

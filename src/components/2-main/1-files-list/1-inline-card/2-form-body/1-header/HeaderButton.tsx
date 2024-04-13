@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { usePopper } from 'react-popper';
-import { useElementClickAway } from '@/hooks';
+import { useElementClickAway } from '@/util-hooks';
 import { UIIconUpDown } from '@ui/icons';
 import { classNames } from '@/utils';
 import { UiPortal } from '@ui/ui-portal';
