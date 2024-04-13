@@ -2,7 +2,7 @@ import { useState } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Meta } from "@/store/manifest";
-import { createUiAtoms, combineValueFromAtoms } from "./0-create-ui-atoms";
+import { createUiAtoms, combineValueFromAtoms, debouncedCombinedResultFromAtoms } from "./0-create-ui-atoms";
 import { PolicyEditorBody } from "./2-editor-body";
 
 export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
@@ -17,7 +17,8 @@ export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
 
     const atoms = useState(
         () => createUiAtoms(field.mani.policy || field.mani.policy2, ({ get, set }) => {
-            combineValueFromAtoms(atoms, get, set);
+            //console.log('policy changed', field, field.mani.displayname);
+            debouncedCombinedResultFromAtoms(atoms, get, set);
         })
     )[0];
 
@@ -28,22 +29,23 @@ export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
             </Dialog.Trigger>
 
             {transitions(
-                (styles, item) => (
-                    !item
-                        ? null
-                        : (<>
-                            <Dialog.Portal container={document.getElementById('portal')}>
-                                <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
+                (styles, item) => {
+                    if (!item) {
+                        return null;
+                    }
+                    return (
+                        <Dialog.Portal container={document.getElementById('portal')}>
+                            {/* Backdrop */}
+                            <a.div className="fixed inset-0 bg-primary-900/80" style={{ opacity: styles.opacity, }} />
 
-                                <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
-                                    <a.div style={styles}>
-                                        <PolicyEditorBody atoms={atoms} />
-                                    </a.div>
-                                </Dialog.Content>
-
-                            </Dialog.Portal>
-                        </>)
-                )
+                            <Dialog.Content forceMount asChild className="fixed inset-0 flex justify-center items-center">
+                                <a.div style={styles}>
+                                    <PolicyEditorBody atoms={atoms} />
+                                </a.div>
+                            </Dialog.Content>
+                        </Dialog.Portal>
+                    );
+                }
             )}
         </Dialog.Root>
     );

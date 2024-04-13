@@ -1,6 +1,6 @@
 import { FileUsAtomType, FormIdx } from '@/store';
 import { useAtomValue } from 'jotai';
-import { createAtoms } from './0-create-atoms';
+import { createAtoms, debouncedCombinedResultFromAtoms } from './0-create-atoms';
 import { Section } from '../4-controls';
 import { Part1General, Part2ScreenDetection, Part3Authentication, Part4QL, Part5PasswordManagerIcon } from '../3-sections';
 
@@ -8,9 +8,12 @@ export function ManiSection4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: 
     // const fileUs = useAtomValue(fileUsAtom);
     // const metaForm = fileUs.meta?.[formIdx];
 
-    const atoms = createAtoms('', () => {
-        console.log('changed');
-    }, fileUsAtom, formIdx);
+    const atoms = createAtoms('',
+        ({ get, set }) => {
+            //console.log('options changed', field, field.mani.displayname);
+            debouncedCombinedResultFromAtoms(atoms, get, set);
+        }, fileUsAtom, formIdx
+    );
 
     const fileUs = useAtomValue(atoms.fileUsAtom);
     const isWeb = fileUs.stats.isWeb; // TODO: why this is not per form?

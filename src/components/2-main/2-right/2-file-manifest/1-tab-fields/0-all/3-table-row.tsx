@@ -11,7 +11,7 @@ import { Column5_Type } from '../5-column-type';
 export function TableRow({ field }: { field: Meta.Field; }) {
     const rowAtoms = useState(() => createUiAtoms(field,
         ({ get, set }) => {
-            //console.log('changed', field, field.mani.displayname);
+            //console.log('row changed', field, field.mani.displayname);
             debouncedCombinedResultFromAtoms(rowAtoms, get, set);
         })
     )[0];

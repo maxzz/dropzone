@@ -1,6 +1,7 @@
 import { Getter, Setter } from "jotai";
 import { Atomize, OnValueChangeAny, atomWithCallback } from "@/hooks";
 import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/manifest";
+import { debounce } from "@/utils";
 
 export type PolicyUi = {
     enabled: boolean;           // Enable password policy
@@ -57,3 +58,5 @@ export function combineValueFromAtoms(atoms: Atomize<PolicyUi>, get: Getter, set
     
     console.log('PolicyEditor atoms', JSON.stringify(result, null, 4));
 }
+
+export const debouncedCombinedResultFromAtoms = debounce(combineValueFromAtoms);
