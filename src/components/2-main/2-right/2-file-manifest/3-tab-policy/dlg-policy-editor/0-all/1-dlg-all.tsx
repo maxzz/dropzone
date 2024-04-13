@@ -2,7 +2,7 @@ import { useState } from "react";
 import { a, config, useTransition } from "@react-spring/web";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Meta } from "@/store/manifest";
-import { createUiAtoms, combineValueFromAtoms, debouncedCombinedResultFromAtoms } from "./0-create-ui-atoms";
+import { createUiAtoms, debouncedCombinedResultFromAtoms } from "./0-create-ui-atoms";
 import { PolicyEditorBody } from "./2-editor-body";
 
 export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
@@ -15,11 +15,14 @@ export function PolicyEditorDlg({ field }: { field: Meta.Field; }) {
         config: config.stiff,
     });
 
-    const atoms = useState(
-        () => createUiAtoms(field.mani.policy || field.mani.policy2, ({ get, set }) => {
-            //console.log('policy changed', field, field.mani.displayname);
-            debouncedCombinedResultFromAtoms(atoms, get, set);
-        })
+    const atoms = useState( //TODO: use memo or update atoms value?
+        () => createUiAtoms(
+            field.mani.policy || field.mani.policy2,
+            ({ get, set }) => {
+                //console.log('policy changed', field, field.mani.displayname);
+                debouncedCombinedResultFromAtoms(atoms, get, set);
+            }
+        )
     )[0];
 
     return (

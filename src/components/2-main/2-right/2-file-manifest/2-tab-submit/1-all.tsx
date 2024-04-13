@@ -4,7 +4,7 @@ import { RadioGroup } from './2-radio-group';
 import { createUiAtoms, debouncedCombinedResultFromAtoms } from './0-create-ui-atoms';
 
 export function ManiSection2_Submit({ form }: { form: Meta.Form; }) {
-    
+
     const [items, setItems] = useState<string[]>([]);
     const [selected, setSelected] = useState(0);
 
@@ -14,7 +14,7 @@ export function ManiSection2_Submit({ form }: { form: Meta.Form; }) {
                 debouncedCombinedResultFromAtoms(atoms, get, set);
             }
         )
-    )[0];
+    )[0]; //TODO: not used yet
 
     useEffect(() => {
         const isWeb = !!form?.mani.detection.web_ourl;
