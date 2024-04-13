@@ -1,12 +1,12 @@
 import { useAtom } from 'jotai';
-import { FormAtoms } from '../0-all/0-create-atoms';
+import { FormOptionsAtoms } from '../0-all/0-create-atoms';
 import { RowInput, RowBoolean } from '../4-controls';
 
-export function Part4QL({ atoms }: { atoms: FormAtoms; }) {
+export function Part4QL({ atoms }: { atoms: FormOptionsAtoms; }) {
     const [dashboard, setDashboard] = useAtom(atoms.uiPart4QL.dashboardAtom);
     const [name, setName] = useAtom(atoms.uiPart4QL.nameAtom);
     const [url, setUrl] = useAtom(atoms.uiPart4QL.urlAtom);
-    
+
     return (<>
         <div className="">
             Quick Link URL

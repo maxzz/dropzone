@@ -1,5 +1,5 @@
 import { Getter, Setter } from "jotai";
-import { Atomize, atomWithCallback } from "@/hooks";
+import { Atomize, OnValueChangeAny, atomWithCallback } from "@/hooks";
 import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/manifest";
 
 export type PolicyUi = {
@@ -20,7 +20,7 @@ export type PolicyUi = {
     useAs: string;              // UseAs; by user / by system
 };
 
-export function createUiAtoms(policy: string | undefined, onChange: ({ get, set }: { get: Getter; set: Setter; }) => void): Atomize<PolicyUi> {
+export function createUiAtoms(policy: string | undefined, onChange: OnValueChangeAny): Atomize<PolicyUi> {
     
     //TODO: parse policy and assign onChange callback
     if (!policy) {

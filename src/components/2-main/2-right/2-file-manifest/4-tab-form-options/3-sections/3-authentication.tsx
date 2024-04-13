@@ -1,7 +1,7 @@
-import { FormAtoms } from '../0-all/0-create-atoms';
+import { FormOptionsAtoms } from '../0-all/0-create-atoms';
 import { RowBoolean } from '../4-controls';
 
-export function Part3Authentication({ atoms }: { atoms: FormAtoms; }) {
+export function Part3Authentication({ atoms }: { atoms: FormOptionsAtoms; }) {
     return (<>
         <div className="mb-1" title="Start authentication immediately">
             Authenticate immediately

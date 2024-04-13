@@ -1,6 +1,6 @@
 import { Getter, Setter } from 'jotai';
 import { Meta, TransformValue, ValueLife } from '@/store/manifest';
-import { Atomize, atomWithCallback } from '@/hooks';
+import { Atomize, OnValueChangeAny, atomWithCallback } from '@/hooks';
 import { debounce } from '@/utils';
 
 type TableRowForAtoms = {
@@ -15,7 +15,7 @@ type TableRowForAtoms = {
 
 type TableRowAtoms = Prettify<Atomize<TableRowForAtoms>>;
 
-export function createUiAtoms(field: Meta.Field, onChange: ({ get, set }: { get: Getter; set: Setter; }) => void): TableRowAtoms {
+export function createUiAtoms(field: Meta.Field, onChange: OnValueChangeAny): TableRowAtoms {
     const { useit, displayname, type: typ, value: val } = field.mani;
     return {
         useItAtom: atomWithCallback(!!useit, onChange),
