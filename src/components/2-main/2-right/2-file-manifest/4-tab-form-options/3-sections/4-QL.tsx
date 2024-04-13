@@ -6,15 +6,22 @@ export function Part4QL({ atoms }: { atoms: FormAtoms; }) {
     const [dashboard, setDashboard] = useAtom(atoms.uiPart4QL.dashboardAtom);
     const [name, setName] = useAtom(atoms.uiPart4QL.nameAtom);
     const [url, setUrl] = useAtom(atoms.uiPart4QL.urlAtom);
+    
     return (<>
-        <div className="">Quick Link URL</div>
+        <div className="">
+            Quick Link URL
+        </div>
         <RowInput value={url} onChange={(e) => setUrl(e.target.value)} />
 
-        <div className="my-1">Display on mini-dashboard</div>
+        <div className="my-1">
+            Display on mini-dashboard
+        </div>
         <RowBoolean className="my-1 justify-self-start" useItAtom={atoms.uiPart4QL.dashboardAtom} />
 
         {dashboard && <>
-            <div className="">Quick Link Name</div>
+            <div className="">
+                Quick Link Name
+            </div>
             <RowInput value={name} onChange={(e) => setName(e.target.value)} />
         </>}
     </>);

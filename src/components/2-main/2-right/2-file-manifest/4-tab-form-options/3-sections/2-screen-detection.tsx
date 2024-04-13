@@ -9,18 +9,25 @@ export function Part2ScreenDetection({ atoms }: { atoms: FormAtoms; }) {
 
     const fileUs = useAtomValue(atoms.fileUsAtom);
     const isWeb = fileUs.stats.isWeb;
+
     return (
-        isWeb ?
-            <>
-                <div className="">URL</div>
+        isWeb
+            ? (<>
+                <div className="">
+                    URL
+                </div>
                 <RowInput value={url} onChange={(e) => setUrl(e.target.value)} />
-            </>
-            : <>
-                <div className="">Windows Caption</div>
+            </>)
+            : (<>
+                <div className="">
+                    Windows Caption
+                </div>
                 <RowInput value={caption} onChange={(e) => setCaption(e.target.value)} />
 
-                <div className="">Monitor screen changes</div>
+                <div className="">
+                    Monitor screen changes
+                </div>
                 <RowInput value={monitor ? '1' : '0'} onChange={(e) => setMonitor(e.target.value === '1')} />
-
-            </>);
+            </>)
+    );
 }
