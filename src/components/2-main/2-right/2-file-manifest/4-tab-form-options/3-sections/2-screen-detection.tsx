@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { FormAtoms } from '../0-create-atoms';
+import { FormAtoms } from '../0-all/0-create-atoms';
 import { RowInput } from '../4-controls';
 
 export function Part2ScreenDetection({ atoms }: { atoms: FormAtoms; }) {

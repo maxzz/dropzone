@@ -1,8 +1,8 @@
 import { FileUsAtomType, FormIdx } from '@/store';
 import { useAtomValue } from 'jotai';
 import { createAtoms } from './0-create-atoms';
-import { Section } from './4-controls';
-import { Part1General, Part2ScreenDetection, Part3Authentication, Part4QL, Part5PasswordManagerIcon } from './3-sections';
+import { Section } from '../4-controls';
+import { Part1General, Part2ScreenDetection, Part3Authentication, Part4QL, Part5PasswordManagerIcon } from '../3-sections';
 
 export function ManiSection4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     // const fileUs = useAtomValue(fileUsAtom);
