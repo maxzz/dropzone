@@ -76,33 +76,35 @@ export function createAtoms(v: string, onChange: OnValueChangeAny, fileUsAtom: F
 }
 
 export function combineOptionsFromAtoms(atoms: FormOptionsAtoms, get: Getter, set: Setter) {
+    const { uiPart1General, uiPart2ScreenDetection, uiPart3Authentication, uiPart4QL, uiPart5PasswordManagerIcon } = atoms;
+    
     const result = {
         uiPart1General: {
-            'name': get(atoms.uiPart1General.nameAtom),
-            'desc': get(atoms.uiPart1General.descAtom),
-            'hint': get(atoms.uiPart1General.hintAtom),
-            'balloon': get(atoms.uiPart1General.balloonAtom),
+            'name': get(uiPart1General.nameAtom),
+            'desc': get(uiPart1General.descAtom),
+            'hint': get(uiPart1General.hintAtom),
+            'balloon': get(uiPart1General.balloonAtom),
         },
         uiPart2ScreenDetection: {
-            'caption': get(atoms.uiPart2ScreenDetection.captionAtom),
-            'monitor': get(atoms.uiPart2ScreenDetection.monitorAtom),
-            'url': get(atoms.uiPart2ScreenDetection.urlAtom),
+            'caption': get(uiPart2ScreenDetection.captionAtom),
+            'monitor': get(uiPart2ScreenDetection.monitorAtom),
+            'url': get(uiPart2ScreenDetection.urlAtom),
         },
         uiPart3Authentication: {
-            'aim': get(atoms.uiPart3Authentication.aimAtom),
-            'lock': get(atoms.uiPart3Authentication.lockAtom),
+            'aim': get(uiPart3Authentication.aimAtom),
+            'lock': get(uiPart3Authentication.lockAtom),
         },
         uiPart4QL: {
-            'dashboard': get(atoms.uiPart4QL.dashboardAtom),
-            'name': get(atoms.uiPart4QL.nameAtom),
-            'url': get(atoms.uiPart4QL.urlAtom),
+            'dashboard': get(uiPart4QL.dashboardAtom),
+            'name': get(uiPart4QL.nameAtom),
+            'url': get(uiPart4QL.urlAtom),
         },
         uiPart5PasswordManagerIcon: {
-            'id': get(atoms.uiPart5PasswordManagerIcon.idAtom),
-            'loc': get(atoms.uiPart5PasswordManagerIcon.locAtom),
+            'id': get(uiPart5PasswordManagerIcon.idAtom),
+            'loc': get(uiPart5PasswordManagerIcon.locAtom),
         },
     };
-    
+
     console.log('PolicyEditor atoms', JSON.stringify(result, null, 4));
 }
 

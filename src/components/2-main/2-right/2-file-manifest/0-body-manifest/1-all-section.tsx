@@ -5,7 +5,7 @@ import { Scroller } from '@ui/scroller';
 import { SubSectionAccordion } from './2-sub-section-accordion';
 import { NoForm } from './3-no-form';
 import { ManiSection1_Fields } from '../1-tab-fields';
-import { ManiSection2_Submit } from '../2-tab-submit/0-all';
+import { ManiSection2_Submit } from '../2-tab-submit/1-all';
 import { ManiSection3_Policy } from '../3-tab-policy';
 import { ManiSection4_FormOptions } from '../4-tab-form-options';
 
