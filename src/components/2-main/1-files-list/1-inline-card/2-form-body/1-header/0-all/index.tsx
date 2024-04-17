@@ -6,7 +6,7 @@ import { BtnPopupPool } from '../2-btn-popup-pool';
 import { BtnEdit } from '../3-btn-edit';
 import { Icon_LockFields } from './1-icon-lock-fields';
 import { Icon_QuickLink } from './2-icon-quick-link';
-import { BtnPreview } from './3-btn-preview';
+import { BtnSvgPreview } from './3-btn-preview';
 
 type CardFormBody1_HeaderProps = {
     fileUsAtom: FileUsAtomType;
@@ -43,7 +43,7 @@ export function CardFormBody1_Header({ fileUsAtom, formIdx, selectRowAtoms }: Ca
             </div>
 
             {hasFormPreview && (
-                <BtnPreview
+                <BtnSvgPreview
                     form={meta}
                     formIdx={formIdx}
                     selectRowAtoms={selectRowAtoms}
