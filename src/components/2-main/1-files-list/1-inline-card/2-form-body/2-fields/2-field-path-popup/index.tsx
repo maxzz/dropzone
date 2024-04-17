@@ -1,4 +1,4 @@
-import React, { Fragment, ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Meta, MPath, TransformEncoding } from '@/store/manifest';
 
 function Section({ label }: { label: ReactNode; }) {
