@@ -12,8 +12,10 @@ export function CardFormBody2_Fields({ fileUsAtom, formType, selectRowAtoms }: P
     const fileUs = useAtomValue(fileUsAtom);
     const metaForm = fileUs.meta?.[formType];
     return (<>
-        {metaForm && metaForm.fields?.map((field, idx) => (
-            <FieldRow fileUs={fileUs} form={metaForm} field={field} selectRowAtoms={selectRowAtoms} key={idx} />
-        ))}
+        {metaForm?.fields?.map(
+            (field, idx) => (
+                <FieldRow fileUs={fileUs} form={metaForm} field={field} selectRowAtoms={selectRowAtoms} key={idx} />
+            ))
+        }
     </>);
 }

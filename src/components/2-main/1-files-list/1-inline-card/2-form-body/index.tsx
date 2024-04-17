@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils';
@@ -10,6 +10,7 @@ import { CardFormBody2_Fields } from './2-fields';
 export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const open = useAtomValue(openAtom);
     const fileUs = useAtomValue(fileUsAtom);
+
     const [selectRowAtoms] = useState<SelectRowAtomsType>({
         loginAtom: atom({ field: -1, form: -1 }),
         cpassAtom: atom({ field: -1, form: -1 }),
@@ -25,20 +26,22 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
         {(hasLogin || hasCpass) &&
             <div className={classNames("px-2 bg-primary-200 text-primary-800", open && "pb-2")}>
 
-                {sizeNormal &&
+                {sizeNormal && (
                     <CardNormalButtons buttonsDisp={buttons} openAtom={openAtom} />
+                )}
+
+                {open && items.map(
+                    ([hasForm, formIdx]) => hasForm && (
+                        <Fragment key={formIdx}>
+                            <div className="pt-2 text-sm font-bold">
+                                {formIdxName(formIdx)}
+                            </div>
+
+                            <CardFormBody1_Header fileUsAtom={fileUsAtom} formIdx={formIdx} selectRowAtoms={selectRowAtoms} />
+                            <CardFormBody2_Fields fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} />
+                        </Fragment>
+                    ))
                 }
-
-                {open && items.map(([hasForm, formIdx]) => hasForm && (
-                    <Fragment key={formIdx}>
-                        <div className="pt-2 text-sm font-bold">
-                            {formIdxName(formIdx)}
-                        </div>
-
-                        <CardFormBody1_Header fileUsAtom={fileUsAtom} formIdx={formIdx} selectRowAtoms={selectRowAtoms} />
-                        <CardFormBody2_Fields fileUsAtom={fileUsAtom} formType={formIdx} selectRowAtoms={selectRowAtoms} />
-                    </Fragment>
-                ))}
             </div>
         }
     </>);
