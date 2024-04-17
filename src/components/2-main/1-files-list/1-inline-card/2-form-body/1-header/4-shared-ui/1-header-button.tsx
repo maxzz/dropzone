@@ -2,14 +2,15 @@ import { forwardRef } from 'react';
 import { UIIconUpDown } from '@ui/icons';
 import { classNames } from '@/utils';
 
-const BtnGradientShading: React.CSSProperties = {
-    backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
-    boxShadow: '0px 1px #64646420',
-};
 type DropDownButtonProps = {
     open?: boolean;
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
     text: string;
+};
+
+const BtnGradientShading: React.CSSProperties = {
+    backgroundImage: 'linear-gradient(360deg, #ffffff3f 0%, #9d9d9d2f 30%, #9d9d9d2f 70%, #ffffff3f 100%)',
+    boxShadow: '0px 1px #64646420',
 };
 
 export const HeaderButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(function ({ open = false, setOpen, text }, ref) {
