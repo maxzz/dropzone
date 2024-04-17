@@ -9,7 +9,7 @@ export function Icon_LockFields({ lockfields }: { lockfields: string | undefined
 
     const title = `Lock fields ${useit
             ? '= 1 (lock)'
-            : `${lockfields} don\'t lock`}`;
+            : `${lockfields} don't lock`}`;
 
-    return SymbolOptionsLock({ className: "size-3", title });
+    return <SymbolOptionsLock className="size-3" title={title} />;
 }

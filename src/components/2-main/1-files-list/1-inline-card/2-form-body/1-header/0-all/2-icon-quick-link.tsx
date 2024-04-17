@@ -11,7 +11,7 @@ export function Icon_QuickLink({ ql }: { ql: string | undefined; }) {
         ? '= 1 (use)'
         : ql == '2'
             ? '= 2 (don\'t use)'
-            : `'${ql}''`}`;
+            : `'${ql}'`}`;
 
-    return SymbolOptionsQL({ className: "w-3.5 h-3.5", title });
+    return <SymbolOptionsQL className="size-3.5" title={title} />;
 }
