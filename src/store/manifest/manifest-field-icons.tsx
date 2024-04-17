@@ -29,3 +29,15 @@ export function FieldTypeIconComponent({ field, className }: { field: TypeFields
     const Icon = fieldIcons[type]?.({ className, title }) || <div className="text-red-500">nan</div>;
     return Icon;
 }
+
+export function fieldTypeTitle(field: TypeFieldsForIcon) {
+    const type = field.password
+        ? "psw"
+        : field.type as keyof typeof fieldIcons;
+        
+    const title =
+        type === "list"
+            ? `Field choices: ${field.choosevalue}`
+            : `Field type: ${type}`;
+    return title;
+}
