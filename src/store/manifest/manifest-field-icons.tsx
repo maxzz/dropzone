@@ -43,10 +43,11 @@ export function fieldTypeTitle(field: FieldPartsToSelectIcon) {
     const type = field.password
         ? "psw"
         : field.type as keyof typeof fieldTitle;
+    const typeName = fieldTitle[type]
 
     const title =
         type === "list"
-            ? `Field choices:\n${field.choosevalue?.split(':').join('\n') || 'No choices'}`
-            : `Field type: ${fieldTitle[type]}`;
+            ? `Field ${typeName} choices:\n${field.choosevalue?.split(':').join('\n') || 'No choices'}`
+            : `Field type: ${typeName}`;
     return title;
 }
