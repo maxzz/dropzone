@@ -1,9 +1,9 @@
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType } from '@/store';
-import { CardCaption, CardUsername } from '../3-text';
-import { CardTitleIcon } from '../2-icon';
-import { CardTitleFilename } from '../4-filename';
 import { CardTitleAttention } from '../1-attention';
+import { CardTitleIcon } from '../2-icon';
+import { CardCaption, CardUsername } from '../3-text';
+import { CardTitleFilename } from "../4-filename";
 import { getButtonsDisp } from '../../4-ui/UICardFormButtonTypes';
 import { CardMediumButtons } from '../../3-shared/1-card-buttons';
 

@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { ManiEditorData, formIdxName } from '@/store';
 import { UiTip } from '@ui/ui-tooltip';
-import { ManiFilenameParts } from '@/components/2-main/1-files-list/1-inline-card/1-title/4-filename';
+import { ManiFilenameParts } from "@/components/2-main/1-files-list/1-inline-card/1-title/4-filename/1-mani-filename-parts";
 import { IconInfo } from '@ui/icons';
 
 const shadowStyles = { filter: 'drop-shadow(#907bdab0 0px 0px .2rem)' };
