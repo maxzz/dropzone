@@ -10,34 +10,32 @@ function PopupBody({ fileUs }: { fileUs: FileUs; }) {
     return (
         <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
 
-            {fileUs.fpath && (
-                <>
-                    <div className="font-bold">Sub-folder</div>
-                    <div>{fileUs.fpath}</div>
-                </>
-            )}
+            {fileUs.fpath && (<>
+                <div className="font-bold">Sub-folder</div>
+                <div>
+                    {fileUs.fpath}
+                </div>
+            </>)}
 
-            <div className="font-bold">
-                Filename
-            </div>
-
+            <div className="font-bold">Filename</div>
             <div>
                 {fileUs.fname}
             </div>
 
-            {stats.dateCreated && (
-                <>
-                    <div className="font-bold">Created</div>
-                    <div>{stats.dateCreated}</div>
-                </>
-            )}
+            {stats.dateCreated && (<>
+                <div className="font-bold">Created</div>
+                <div>
+                    {stats.dateCreated}
+                </div>
+            </>)}
 
-            {stats.dateModified && (
-                <>
-                    <div className="font-bold">Modified</div>
-                    <div>{stats.dateModified}</div>
-                </>
-            )}
+            {stats.dateModified && (<>
+                <div className="font-bold">Modified</div>
+                <div>
+                    {stats.dateModified}
+                </div>
+            </>)}
+
         </div>
     );
 }
@@ -48,10 +46,7 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
     const FilenameTooltipMemo = useMemo(
         () => {
             return (
-                <UiTip
-                    trigger={<ManiFilenameParts fname={fileUs.fname} />}
-                    {...tipSmall()}
-                >
+                <UiTip trigger={<ManiFilenameParts fname={fileUs.fname} />} {...tipSmall()}>
                     <PopupBody fileUs={fileUs} />
                 </UiTip>
             );

@@ -11,7 +11,6 @@ export function ManiInfoTooltip({ editorData }: { editorData: ManiEditorData; })
     const fileUs = useAtomValue(editorData.fileUsAtom);
     const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
-    const fname = ManiFilenameParts({ fname: fileUs.fname, classLg: "px-1 text-[.65rem] font-bold text-gray-600 opacity-100" });
 
     const Icon = <IconInfo className="size-7 text-gray-300 fill-white stroke-[#0004] stroke-1" style={shadowStyles} />;
 
@@ -19,26 +18,37 @@ export function ManiInfoTooltip({ editorData }: { editorData: ManiEditorData; })
         <UiTip trigger={Icon} arrow={true}>
             {/* Popup content */}
             <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
-                <div className="font-bold">Form</div>
-                <div>{formName}</div>
 
-                {stats.domain && <>
+                <div className="font-bold">Form</div>
+                <div>
+                    {formName}
+                </div>
+
+                {stats.domain && (<>
                     <div className="font-bold">Domain</div>
-                    <div>{stats.domain}</div>
-                </>}
+                    <div>
+                        {stats.domain}
+                    </div>
+                </>)}
 
                 <div className="font-bold">Filename</div>
-                <div>{fname}</div>
+                <div>
+                    <ManiFilenameParts fname={fileUs.fname} large />
+                </div>
 
-                {stats.dateCreated && <>
+                {stats.dateCreated && (<>
                     <div className="font-bold">Created</div>
-                    <div>{stats.dateCreated}</div>
-                </>}
+                    <div>
+                        {stats.dateCreated}
+                    </div>
+                </>)}
 
-                {stats.dateModified && <>
+                {stats.dateModified && (<>
                     <div className="font-bold">Modified</div>
-                    <div>{stats.dateModified}</div>
-                </>}
+                    <div>
+                        {stats.dateModified}
+                    </div>
+                </>)}
             </div>
         </UiTip>
     );
