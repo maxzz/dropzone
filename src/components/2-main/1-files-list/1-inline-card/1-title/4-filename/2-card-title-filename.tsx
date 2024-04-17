@@ -41,7 +41,6 @@ function PopupBody({ fileUs }: { fileUs: FileUs; }) {
 }
 
 export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: FileUs; } & HTMLAttributes<HTMLDivElement>) {
-    const stats = fileUs.stats;
 
     const FilenameTooltipMemo = useMemo(
         () => {
@@ -52,6 +51,8 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
             );
         }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]
     );
+
+    const stats = fileUs.stats;
 
     return (
         <div className={classNames("text-sm font-light font-mono grid grid-cols-[minmax(0,min-content)_auto] items-center gap-x-1", className)} {...rest}>

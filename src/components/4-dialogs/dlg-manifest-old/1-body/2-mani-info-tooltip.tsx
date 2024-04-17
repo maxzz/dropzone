@@ -9,8 +9,8 @@ const shadowStyles = { filter: 'drop-shadow(#907bdab0 0px 0px .2rem)' };
 export function ManiInfoTooltip({ editorData }: { editorData: ManiEditorData; }) {
 
     const fileUs = useAtomValue(editorData.fileUsAtom);
-    const stats = fileUs.stats;
     const formName = `${formIdxName(editorData.formIdx)}`;
+    const stats = fileUs.stats;
 
     const Icon = <IconInfo className="size-7 text-gray-300 fill-white stroke-[#0004] stroke-1" style={shadowStyles} />;
 

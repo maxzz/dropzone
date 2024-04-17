@@ -1,12 +1,12 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, SelectRowAtomsType } from '@/store';
 import { Meta } from '@/store/manifest';
 import { SymbolCross, SymbolOptionsLock, SymbolOptionsQL, SymbolPreview } from '@ui/icons';
 import { CardSvgPreview } from '../../3-shared/2-card-svg-preview';
-import { BtnPopupDetection } from './BtnPopupDetection';
-import { BtnPopupPool } from './BtnPopupPool';
-import { BtnEdit } from './BtnEdit';
+import { BtnPopupDetection } from './1-btn-popup-detection';
+import { BtnPopupPool } from './2-btn-popup-pool';
+import { BtnEdit } from './3-btn-edit';
 
 function Icon_LockFields({ lockfields }: { lockfields: string | undefined; }) {
     const useit = lockfields == '1';

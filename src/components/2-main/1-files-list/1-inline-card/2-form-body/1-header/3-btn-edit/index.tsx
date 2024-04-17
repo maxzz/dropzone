@@ -1,4 +1,3 @@
-import React from "react";
 import { useSetAtom } from "jotai";
 import { FileUsAtomType, formEditorDataAtom } from "@/store";
 import { SymbolGear } from "@ui/icons";
