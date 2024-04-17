@@ -1,156 +1,16 @@
-import { SetStateAction, useAtom, useSetAtom } from 'jotai';
-import { FileUs, SelectRowAtomsType, SelectRowType } from '@/store';
-import { FieldTyp, Mani, Meta } from '@/store/manifest';
-import { FieldTypeIconComponent } from '@/store/manifest/manifest-field-icons';
-import { CardSvgPreview } from '../../../3-shared/2-card-svg-preview';
-import { FieldRowPath } from '../2-field-path-popup';
-import { UIToggleWithPortal } from '../../../4-ui/UIToggleWithPortal';
-import { SymbolInOut, SymbolPreview, SymbolFieldUseIt0, SymbolFieldUseIt1 } from '@ui/icons';
+import { useAtom, useSetAtom } from 'jotai';
+import { FileUs, SelectRowAtomsType } from '@/store';
+import { Meta } from '@/store/manifest';
 import { classNames } from '@/utils';
-
-function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
-    const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;
-    const icon = useIt ? SymbolFieldUseIt1 : SymbolFieldUseIt0;
-    return icon({ title, className: classNames("ml-0.5 px-0.5 size-3 flex-none", useIt ? "stroke-[#216100] stroke-[3]" : "stroke-[#888]") });
-}
-
-function part2_FieldType(type: Mani.FieldTypeStr | 'NOTYPE', field: Meta.Field) {
-    const password = field.ftyp === FieldTyp.psw ? 'psw' : type;
-    return (<>
-        <FieldTypeIconComponent className="size-5 flex-none" field={field.mani} />
-
-        <div className="w-11 text-xs flex-shrink-0" title={`Field type: ${password}`}>
-            {`${password}`}
-        </div>
-    </>);
-}
-
-function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, setSelectedRowThis: (update: SetStateAction<SelectRowType>) => void) {
-    return (
-        <UIToggleWithPortal title={`${hasPreview ? 'preview' : 'no preview'}`}
-            toggle={
-                <SymbolPreview className={classNames("size-4", !hasPreview && 'opacity-25')} />
-            }
-        >
-            {/* Popup content */}
-            {hasPreview &&
-                <div className="w-[calc(1920px/4)] bg-primary-200 p-0.5 border border-primary-700">
-                    <CardSvgPreview
-                        form={form}
-                        small={false}
-                        selected={field.ridx} onSelected={(selected: number) => { setSelectedRowThis({ field: selected, form: form.type }); }}
-                        className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
-                    />
-                    <div className="mt-0.5 p-1 text-xs text-blue-200 bg-blue-500">
-                        X1 x Y1, X2 x Y2:<br /> {field.path.loc?.replace(/\|/g, ' | ')}
-                    </div>
-                </div>
-            }
-        </UIToggleWithPortal>
-    );
-}
-
-function part4_DispText(useIt: boolean | undefined, type: Mani.FieldTypeStr | 'NOTYPE', displayname: string) {
-    return (
-        <div className="flex-1 cursor-default whitespace-nowrap">
-            {type === 'text'
-                ?
-                <div className="flex">
-                    <div
-                        className={classNames(
-                            "px-1 h-4 text-[10px] leading-[12px] border-primary-600 border border-dotted rounded-sm cursor-default",
-                            useIt ? "bg-primary-300 text-primary-800" : "opacity-50",
-                        )}
-                        title={`Matching pattern:\n${displayname}`}
-                    >
-                        patern
-                    </div>
-                </div>
-                :
-                //displayname
-                <div title={`Dispaly name: ${displayname}`}>
-                    {`${displayname.substring(0, 15)}${displayname.length > 15 ? '...' : ''}`}
-                </div>}
-
-            {/* TODO: */}
-            {/* <div className="w-[20%] pr-2 cursor-default overflow-hidden">
-                <div className="whitespace-nowrap overflow-ellipsis">{disp}</div>
-            </div> */}
-
-        </div>
-    );
-}
-
-//TODO: why row w/ pattern selected w/ prev edit field?
-//TODO: move color primary and top parent, i.e. single place
-
-//TODO: className={classNames("row-field-framed", low && "opacity-25")}
-// function borderDiv(low: boolean) {
-//     return (
-//         <div className=""></div>
-//     );
-// }
-
-function part5_Policy(field: Meta.Field) {
-    const { policy } = field.mani;
-    const low = !policy;
-    return (
-        <div className={classNames("row-field-framed", low && "opacity-25")} title={`Field policy: ${policy}`}>
-            policy
-        </div>
-    );
-}
-
-function part6_Value(field: Meta.Field) {
-    const { value, choosevalue } = field.mani;
-    const title = `Field value: ${value}${choosevalue ? ` | Choices: ${choosevalue}` : ''}`;
-    const low = !value;
-    return (
-        <div className={classNames("row-field-framed", low && "opacity-25")} title={title}>
-            value
-        </div>
-    );
-}
-
-function part7_FormCrossrefs(field: Meta.Field) {
-    const { rfield, rfieldindex, rfieldform } = field.mani;
-    const title = `Ref.index: ${rfield ? `[${rfield}]:` : ''}${rfieldindex} Ref.form: ${rfieldform}`;
-    const low = !rfield && !rfieldform;
-    return (
-        <div className={classNames("row-field-framed", low && 'opacity-25')} title={title}>
-            <SymbolInOut className="w-3 h-4" />
-        </div>
-    );
-}
-
-function part8_Id(field: Meta.Field) {
-    const { dbname } = field.mani;
-    return (
-        <div className="row-field-framed" title={`Value ID: ${dbname}`}>
-            id
-        </div>
-    );
-}
-
-function part9_Path(hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
-    const { path_ext } = field.mani;
-    return (
-        <UIToggleWithPortal title={hasPath ? path_ext : 'no path'}
-            toggle={<>path</>}
-            className={classNames("row-field-framed", !hasPath && 'text-red-500 opacity-50')}
-        >
-            {/* Popup content */}
-            {hasPath
-                ?
-                <FieldRowPath field={field} />
-                :
-                <div className="px-2 py-1 text-xs text-red-500 bg-primary-100 border-primary-400 border">
-                    This field has no path and cannot be used.
-                </div>
-            }
-        </UIToggleWithPortal>
-    );
-}
+import { part1_UseIt } from './1-use-it';
+import { part2_FieldType } from './2-field-type';
+import { part3_Preview } from './3-preview';
+import { part4_DispText } from './4-disp-text';
+import { part5_Policy } from './5-policy';
+import { part6_Value } from './6-value';
+import { part7_FormCrossrefs } from './7-form-cross-refs';
+import { part8_Id } from './8-id';
+import { part9_Path } from './9-path';
 
 type FieldRowProps = {
     fileUs: FileUs;
@@ -176,6 +36,7 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
         if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.rother) {
             setSelectedRowThem({ field: rfieldindex && form.rother[rfieldindex] || -1, form: 0 });
         }
+        
         setSelectedRowThis({ field: isSelected ? -1 : field.ridx, form: form.type });
     }
 
