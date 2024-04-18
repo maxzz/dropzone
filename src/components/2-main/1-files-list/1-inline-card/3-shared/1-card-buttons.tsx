@@ -5,56 +5,79 @@ import { SymbolFormChange, SymbolFormLogin } from "@ui/icons";
 import { appBigIcons, appMediumIcons, ButtonsDisp, dispToIcons } from "../4-ui/UICardFormButtonTypes";
 import { classNames } from "@/utils";
 
+const normalTriggerClasses = "p-2 border-primary-700 border rounded shadow-md active:scale-[.97] select-none flex items-center";
+
 export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
+
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appBigIcons));
+
     return (
         <div className="py-2 flex items-center space-x-2 text-sm">
-            {buttonsDisp.map(([hasForm, disp], idx) => (
-                <Fragment key={idx}>
-                    {hasForm &&
-                        <button
-                            className={classNames(
-                                "p-2 border-primary-700 border rounded shadow-md active:scale-[.97] select-none flex items-center",
-                                open ? 'bg-primary-800 text-primary-100' : "hover:bg-primary-300"
-                            )}
-                            onClick={() => setOpen((v) => !v)}
-                        >
-                            {formIdxName(idx)}
-                            {icons[idx]}
-                        </button>
-                    }
-                </Fragment>
-            ))}
+            {buttonsDisp.map(
+                ([hasForm, disp], idx) => (
+                    <Fragment key={idx}>
+                        {hasForm && (
+                            <button
+                                className={classNames(normalTriggerClasses, open ? 'bg-primary-800 text-primary-100' : "hover:bg-primary-300")}
+                                onClick={() => setOpen((v) => !v)}
+                            >
+                                {formIdxName(idx)}
+                                {icons[idx]}
+                            </button>
+                        )}
+                    </Fragment>
+                )
+            )}
         </div>
     );
 }
 
+const mediumTriggerClasses = "\
+px-1.5 py-0.5 \
+\
+border-primary-700 \
+hover:bg-primary-800 \
+active:scale-[.97] \
+\
+border border-dotted rounded shadow-md \
+\
+flex items-stretch space-x-1 \
+select-none";
+
 export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
+
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
+
     const [open, setOpen] = useAtom(openAtom);
+
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appMediumIcons));
-    const prefixClass = { className: minimal ? "self-start size-2" : "self-start size-3" };
-    const prefix = (idx: FormIdx) => idx === FormIdx.login ? SymbolFormLogin(prefixClass) : SymbolFormChange(prefixClass);
+
+    const PrefixIcon = (idx: FormIdx) => {
+        const prefixClasses = { className: minimal ? "self-start size-2" : "self-start size-3" };
+        return idx === FormIdx.login
+            ? SymbolFormLogin(prefixClasses)
+            : SymbolFormChange(prefixClasses)
+    };
+
+    const triggerClasses = classNames(mediumTriggerClasses, minimal ? "h-8" : "h-10", open ? 'bg-primary-800 text-primary-300' : "text-primary-500")
+
     return (
-        <button
-            className={classNames(
-                "px-1.5 py-0.5 hover:bg-primary-800 border-primary-700 border border-dotted rounded shadow-md active:scale-[.97] select-none",
-                "flex items-stretch space-x-1",
-                minimal ? "h-8" : "h-10",
-                open ? 'bg-primary-800 text-primary-300' : "text-primary-500",
+        <button className={triggerClasses} onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}>
+
+            {buttonsDisp.map(
+                ([hasForm, disp], idx) => (
+                    <div className="flex items-end pb-0.5" title={formIdxName(idx)} key={idx}>
+                        {PrefixIcon(idx)}
+
+                        {hasForm
+                            ? <div className="flex">{icons[idx]}</div>
+                            : <div className="size-5"></div>
+                        }
+                    </div>
+                )
             )}
-            onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}
-        >
-            {buttonsDisp.map(([hasForm, disp], idx) => (
-                <div className="flex items-end pb-0.5" title={formIdxName(idx)} key={idx}>
-                    {prefix(idx)}
-                    {hasForm
-                        ? <div className="flex">{icons[idx]}</div>
-                        : <div className="size-5"></div>
-                    }
-                </div>
-            ))}
+
         </button>
     );
 }
