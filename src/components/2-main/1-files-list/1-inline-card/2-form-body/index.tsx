@@ -12,8 +12,8 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
     const fileUs = useAtomValue(fileUsAtom);
 
     const [selectRowAtoms] = useState<SelectRowAtomsType>({
-        loginAtom: atom({ field: -1, form: -1 }),
-        cpassAtom: atom({ field: -1, form: -1 }),
+        loginAtom: atom({ fieldIdx: -1, formType: -1 }),
+        cpassAtom: atom({ fieldIdx: -1, formType: -1 }),
     });
     const sizeNormal = useAtomValue(uiSizeAtom) === UISize.normal;
 
