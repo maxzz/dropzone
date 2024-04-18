@@ -11,10 +11,10 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
     const open = useAtomValue(openAtom);
     const fileUs = useAtomValue(fileUsAtom);
 
-    const [selectRowAtoms] = useState<SelectRowAtomsType>({
+    const [selectRowAtoms] = useState<SelectRowAtomsType>(() => ({
         loginAtom: atom({ fieldIdx: -1, formType: -1 }),
         cpassAtom: atom({ fieldIdx: -1, formType: -1 }),
-    });
+    }));
     const sizeNormal = useAtomValue(uiSizeAtom) === UISize.normal;
 
     const buttons = getButtonsDisp(fileUs);
