@@ -4,7 +4,7 @@ import { CardCaption } from '../3-text';
 import { CardTitleIcon } from '../2-icon';
 import { CardTitleAttention } from '../1-attention';
 import { getButtonsDisp } from '../../4-ui/UICardFormButtonTypes';
-import { CardMediumButtons } from '../../3-shared/1-card-buttons';
+import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
