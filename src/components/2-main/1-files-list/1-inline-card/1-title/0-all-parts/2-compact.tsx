@@ -4,7 +4,7 @@ import { CardTitleAttention } from '../1-attention';
 import { CardTitleIcon } from '../2-icon';
 import { CardCaption, CardUsername } from '../3-text';
 import { CardTitleFilename } from "../4-filename";
-import { getDispArrFromFileUs } from '../../4-ui/2-card-form-button-types';
+import { getDispArrFromFileUs } from '../../4-ui/4-form-disp-arr';
 import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 
 export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {

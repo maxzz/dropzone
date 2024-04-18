@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils';
-import { getDispArrFromFileUs } from '../4-ui/2-card-form-button-types';
+import { getDispArrFromFileUs } from '../4-ui/4-form-disp-arr';
 import { CardNormalButtons } from "../3-shared/1-card-buttons-normal";
 import { CardFormBody1_Header } from './1-header';
 import { CardFormBody2_Fields } from './2-fields';

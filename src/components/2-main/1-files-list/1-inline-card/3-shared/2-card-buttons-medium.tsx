@@ -2,7 +2,8 @@ import { MouseEvent } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { SymbolFormChange, SymbolFormLogin } from "@ui/icons";
-import { appMediumIcons, FormDispArr, dispToIcons } from "../4-ui/2-card-form-button-types";
+import { appMediumIcons, dispToIcons } from "../4-ui/3-card-form-button-types";
+import { FormDispArr } from '../4-ui/4-form-disp-arr';
 import { classNames } from "@/utils";
 
 const mediumTriggerClasses = "\

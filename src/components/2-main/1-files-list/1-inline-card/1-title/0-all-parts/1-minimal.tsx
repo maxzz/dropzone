@@ -3,7 +3,7 @@ import { FileUsAtomType } from '@/store';
 import { CardCaption } from '../3-text';
 import { CardTitleIcon } from '../2-icon';
 import { CardTitleAttention } from '../1-attention';
-import { getDispArrFromFileUs } from '../../4-ui/2-card-form-button-types';
+import { getDispArrFromFileUs } from '../../4-ui/4-form-disp-arr';
 import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 
 export function CardTitleTextMinimal({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
