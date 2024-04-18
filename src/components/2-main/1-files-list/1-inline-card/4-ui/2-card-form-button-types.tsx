@@ -27,6 +27,7 @@ export function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JS
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
     const isWeb = !!disp?.domain;
+
     return [
         isWeb ? isIe ? tags.webIe6 : tags.webCho : tags.winApp,
         !isWeb && isIe && tags.webIe6,
@@ -34,14 +35,17 @@ export function dispToIcons(disp: Meta.Disp | undefined, tags: Record<string, JS
     ];
 }
 
-export type ButtonsDisp = readonly [boolean, Meta.Disp | undefined][];
+export type FormDispArr = readonly [boolean, Meta.Disp | undefined][];
 
-export function getButtonsDisp(fileUs: FileUs): ButtonsDisp {
+export function getDispArrFromFileUs(fileUs: FileUs): FormDispArr {
+
+    function formDispInfo(formType: number): Meta.Disp | undefined {
+        return fileUs?.meta?.[formType]?.disp;
+    }
 
     const nForms = fileUs.mani?.forms?.length || 0;
     const hasLogin = nForms > 0;
     const hasCpass = nForms > 1;
-    const disp = (type: number) => fileUs?.meta?.[type]?.disp;
-    
-    return [[hasLogin, disp(0)], [hasCpass, disp(1)]];
+
+    return [[hasLogin, formDispInfo(0)], [hasCpass, formDispInfo(1)]];
 }

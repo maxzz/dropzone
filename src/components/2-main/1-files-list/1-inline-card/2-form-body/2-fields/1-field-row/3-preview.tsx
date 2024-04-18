@@ -2,7 +2,7 @@ import { SetStateAction } from 'jotai';
 import { SelectRowType } from '@/store';
 import { Meta } from '@/store/manifest';
 import { CardSvgPreview } from '../../../3-shared/2-card-svg-preview';
-import { UIToggleWithPortal } from '../../../4-ui/UIToggleWithPortal';
+import { UIToggleWithPortal } from '../../../4-ui/1-toggle-with-portal';
 import { SymbolPreview } from '@ui/icons';
 import { classNames } from '@/utils';
 

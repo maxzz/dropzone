@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { SymbolFormChange, SymbolFormLogin } from "@ui/icons";
-import { appMediumIcons, ButtonsDisp, dispToIcons } from "../4-ui/UICardFormButtonTypes";
+import { appMediumIcons, FormDispArr, dispToIcons } from "../4-ui/2-card-form-button-types";
 import { classNames } from "@/utils";
 
 const mediumTriggerClasses = "\
@@ -17,7 +17,7 @@ border border-dotted rounded shadow-md \
 flex items-stretch space-x-1 \
 select-none";
 
-export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
+export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: FormDispArr; openAtom: PrimitiveAtom<boolean>; }) {
 
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
 

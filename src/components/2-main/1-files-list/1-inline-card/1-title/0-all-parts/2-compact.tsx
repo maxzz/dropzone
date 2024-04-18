@@ -4,7 +4,7 @@ import { CardTitleAttention } from '../1-attention';
 import { CardTitleIcon } from '../2-icon';
 import { CardCaption, CardUsername } from '../3-text';
 import { CardTitleFilename } from "../4-filename";
-import { getButtonsDisp } from '../../4-ui/UICardFormButtonTypes';
+import { getDispArrFromFileUs } from '../../4-ui/2-card-form-button-types';
 import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 
 export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
@@ -15,7 +15,7 @@ export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: Fil
         return null;
     }
 
-    const buttons = getButtonsDisp(fileUs);
+    const buttons = getDispArrFromFileUs(fileUs);
     return (<>
         <div className="grid grid-cols-[minmax(0,1fr)_auto]">
             <div>

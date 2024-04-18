@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
 import { formIdxName } from "@/store";
-import { appBigIcons, ButtonsDisp, dispToIcons } from "../4-ui/UICardFormButtonTypes";
+import { appBigIcons, FormDispArr, dispToIcons } from "../4-ui/2-card-form-button-types";
 import { classNames } from "@/utils";
 
 const normalTriggerClasses = "p-2 border-primary-700 border rounded shadow-md active:scale-[.97] select-none flex items-center";
 
-export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: ButtonsDisp; openAtom: PrimitiveAtom<boolean>; }) {
+export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: FormDispArr; openAtom: PrimitiveAtom<boolean>; }) {
 
     const [open, setOpen] = useAtom(openAtom);
     const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, appBigIcons));
