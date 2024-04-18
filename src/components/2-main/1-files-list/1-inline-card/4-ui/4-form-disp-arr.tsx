@@ -1,9 +1,9 @@
 import { FileUs } from '@/store';
 import { Meta } from '@/store/manifest';
 
-export type FormDispArr = readonly [boolean, Meta.Disp | undefined][];
+export type DispArrForTwoForm = readonly [boolean, Meta.Disp | undefined][];
 
-export function getDispArrFromFileUs(fileUs: FileUs): FormDispArr {
+export function getDispArrForTwoForms(fileUs: FileUs): DispArrForTwoForm {
 
     function formDispInfo(formType: number): Meta.Disp | undefined {
         return fileUs?.meta?.[formType]?.disp;

@@ -2,8 +2,8 @@ import { MouseEvent } from "react";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { SymbolFormChange, SymbolFormLogin } from "@ui/icons";
-import { dispToIcons } from "../4-ui/3-card-form-button-types";
-import { FormDispArr } from '../4-ui/4-form-disp-arr';
+import { getUpToTreeIconsForForm } from "../4-ui/3-card-form-button-types";
+import { DispArrForTwoForm } from '../4-ui/4-form-disp-arr';
 import { classNames } from "@/utils";
 
 const mediumTriggerClasses = "\
@@ -18,13 +18,13 @@ border border-dotted rounded shadow-md \
 flex items-stretch space-x-1 \
 select-none";
 
-export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: FormDispArr; openAtom: PrimitiveAtom<boolean>; }) {
+export function CardMediumButtons({ dispArrForTwoForm, openAtom }: { dispArrForTwoForm: DispArrForTwoForm; openAtom: PrimitiveAtom<boolean>; }) {
 
     const minimal = useAtomValue(uiSizeAtom) === UISize.minimal;
 
     const [open, setOpen] = useAtom(openAtom);
 
-    const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, true));
+    const trippleIcons = dispArrForTwoForm.map(([_, disp]) => getUpToTreeIconsForForm(disp, true));
 
     const PrefixIcon = (idx: FormIdx) => {
         const prefixClasses = { className: minimal ? "self-start size-2" : "self-start size-3" };
@@ -42,13 +42,13 @@ export function CardMediumButtons({ buttonsDisp, openAtom }: { buttonsDisp: Form
     return (
         <button className={triggerClasses} onClick={(event: MouseEvent) => { event.stopPropagation(); setOpen((v) => !v); }}>
 
-            {buttonsDisp.map(
+            {dispArrForTwoForm.map(
                 ([hasForm, disp], idx) => (
                     <div className="flex items-end pb-0.5" title={formIdxName(idx)} key={idx}>
                         {PrefixIcon(idx)}
 
                         {hasForm
-                            ? <div className="flex">{icons[idx]}</div>
+                            ? <div className="flex">{trippleIcons[idx]}</div>
                             : <div className="size-5"></div>}
                     </div>
                 )

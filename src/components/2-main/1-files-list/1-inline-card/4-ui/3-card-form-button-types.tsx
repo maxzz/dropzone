@@ -23,20 +23,28 @@ const appMediumIcons = {
     manual: <IconManual key="manual" title={tips.manual} className="size-5 stroke-[.9]" />,
 };
 
-export function dispToIcons(disp: Meta.Disp | undefined, useSmallIcons: boolean): ReactNode[] {
+/**
+ * We can show up to 3 icons for the form: windows/browser, not web by IE, manual mode
+ * @returns always 3 icon entries, but React will render only those that are not undefined
+ */
+export function getUpToTreeIconsForForm(disp: Meta.Disp | undefined, useSmallIcons: boolean): readonly [ReactNode, ReactNode, ReactNode] {
     const isIe = disp?.isIe;
     const isScript = disp?.isScript;
     const isWeb = !!disp?.domain;
 
-    const tags = useSmallIcons ? appMediumIcons : appBigIcons;
+    const icn = useSmallIcons ? appMediumIcons : appBigIcons;
 
-    return [
+    const rv: readonly [ReactNode, ReactNode, ReactNode] = [
         isWeb
             ? isIe
-                ? tags.webIe6
-                : tags.webCho
-            : tags.winApp,
-        !isWeb && isIe && tags.webIe6,
-        isScript && tags.manual,
+                ? icn.webIe6
+                : icn.webCho
+            : icn.winApp,
+
+        !isWeb && isIe && icn.webIe6,
+
+        isScript && icn.manual,
     ];
+
+    return rv;
 }

@@ -4,7 +4,7 @@ import { CardTitleAttention } from '../1-attention';
 import { CardTitleIcon } from '../2-icon';
 import { CardCaption, CardUsername } from '../3-text';
 import { CardTitleFilename } from "../4-filename";
-import { getDispArrFromFileUs } from '../../4-ui/4-form-disp-arr';
+import { getDispArrForTwoForms } from '../../4-ui/4-form-disp-arr';
 import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 
 export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
@@ -15,7 +15,7 @@ export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: Fil
         return null;
     }
 
-    const buttons = getDispArrFromFileUs(fileUs);
+    const buttons = getDispArrForTwoForms(fileUs);
     return (<>
         <div className="grid grid-cols-[minmax(0,1fr)_auto]">
             <div>
@@ -29,7 +29,7 @@ export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: Fil
             </div>
 
             <div className="grid">
-                <CardMediumButtons buttonsDisp={buttons} openAtom={openAtom} />
+                <CardMediumButtons dispArrForTwoForm={buttons} openAtom={openAtom} />
 
                 <div className="place-self-end">
                     <CardTitleAttention fileUs={fileUs} />

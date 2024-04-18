@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { atom, PrimitiveAtom, useAtomValue } from 'jotai';
 import { FileUsAtomType, FormIdx, formIdxName, SelectRowAtomsType, UISize, uiSizeAtom } from '@/store';
 import { classNames } from '@/utils';
-import { getDispArrFromFileUs } from '../4-ui/4-form-disp-arr';
+import { getDispArrForTwoForms } from '../4-ui/4-form-disp-arr';
 import { CardNormalButtons } from "../3-shared/1-card-buttons-normal";
 import { CardFormBody1_Header } from './1-header';
 import { CardFormBody2_Fields } from './2-fields';
@@ -18,7 +18,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
 
     const sizeNormal = useAtomValue(uiSizeAtom) === UISize.normal;
 
-    const buttons = getDispArrFromFileUs(fileUs);
+    const buttons = getDispArrForTwoForms(fileUs);
     const hasLogin = buttons[0][0];
     const hasCpass = buttons[1][0];
 
@@ -35,7 +35,7 @@ export function Part2Card_FormBody({ fileUsAtom, openAtom }: { fileUsAtom: FileU
         <div className={classNames("px-2 bg-primary-200 text-primary-800", open && "pb-2")}>
 
             {sizeNormal && (
-                <CardNormalButtons buttonsDisp={buttons} openAtom={openAtom} />
+                <CardNormalButtons dispArrForTwoForm={buttons} openAtom={openAtom} />
             )}
 
             {open && items.map(

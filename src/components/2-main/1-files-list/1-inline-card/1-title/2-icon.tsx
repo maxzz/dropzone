@@ -17,7 +17,13 @@ type AppIcons<T = typeof appIcons> = {
 };
 
 export function CardTitleIcon({ stats: { isWeb, isChrome, isFCat, isCustomization } }: { stats: FileUsStats; }) {
-    const iconKey = (isWeb ? 'web' : isChrome ? 'chr' : isFCat ? 'cat' : 'app');
+    const iconKey = isWeb
+        ? 'web'
+        : isChrome
+            ? 'chr'
+            : isFCat
+                ? 'cat'
+                : 'app';
 
     const { icn, title, cls = "text-primary-300" } = (appIcons as AppIcons)[iconKey];
 

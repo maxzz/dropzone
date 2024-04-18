@@ -1,20 +1,20 @@
 import { PrimitiveAtom, useAtom } from "jotai";
 import { formIdxName } from "@/store";
-import { dispToIcons } from "../4-ui/3-card-form-button-types";
-import { FormDispArr } from '../4-ui/4-form-disp-arr';
+import { getUpToTreeIconsForForm } from "../4-ui/3-card-form-button-types";
+import { DispArrForTwoForm } from '../4-ui/4-form-disp-arr';
 import { classNames } from "@/utils";
 
 const triggerClasses = "p-2 border-primary-700 border rounded shadow-md active:scale-[.97] select-none flex items-center";
 
-export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: FormDispArr; openAtom: PrimitiveAtom<boolean>; }) {
+export function CardNormalButtons({ dispArrForTwoForm, openAtom }: { dispArrForTwoForm: DispArrForTwoForm; openAtom: PrimitiveAtom<boolean>; }) {
 
     const [open, setOpen] = useAtom(openAtom);
 
-    const icons = buttonsDisp.map(([_, disp]) => dispToIcons(disp, false));
+    const trippleIcons = dispArrForTwoForm.map(([_, disp]) => getUpToTreeIconsForForm(disp, false));
 
     return (
         <div className="py-2 flex items-center space-x-2 text-sm">
-            {buttonsDisp.map(
+            {dispArrForTwoForm.map(
                 ([hasForm, disp], idx) => {
                     if (!hasForm) {
                         return null;
@@ -26,7 +26,7 @@ export function CardNormalButtons({ buttonsDisp, openAtom }: { buttonsDisp: Form
                             key={idx}
                         >
                             {formIdxName(idx)}
-                            {icons[idx]}
+                            {trippleIcons[idx]}
                         </button>
                     );
                 }
