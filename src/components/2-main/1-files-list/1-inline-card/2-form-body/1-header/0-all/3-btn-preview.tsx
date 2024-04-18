@@ -34,8 +34,8 @@ export function BtnSvgPreview({ form, formIdx, selectRowAtoms, small, setSmall }
                         className={`${small ? 'w-24 max-h-24' : 'w-96 max-h-96'}`}
                         small={small}
                         form={form}
-                        selected={selectedRow.field}
-                        onSelected={(selected: number) => setSelectedRow({ field: selected, form: form.type })}
+                        selectedIdx={selectedRow.field}
+                        onSelectedIdx={(selected: number) => setSelectedRow({ field: selected, form: form.type })}
                     />
                 </div>
             )}

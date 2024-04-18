@@ -20,7 +20,7 @@ export function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.
                     <CardSvgPreview
                         form={form}
                         small={false}
-                        selected={field.ridx} onSelected={(selected: number) => { setSelectedRowThis({ field: selected, form: form.type }); }}
+                        selectedIdx={field.ridx} onSelectedIdx={(selected: number) => { setSelectedRowThis({ field: selected, form: form.type }); }}
                         className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
                     />
 
