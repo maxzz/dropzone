@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue } from 'jotai';
-import { FileUs, FileUsAtomType, rightPanelData, ViewMode } from '@/store';
+import { FileUs, FileUsAtomType, rightPanelAtoms, ViewMode } from '@/store';
 import { classNames } from '@/utils';
 import { CardTitleTextNormal } from '../1-files-list/1-inline-card/1-title';
 import { Body_CaptionActions } from './1-caption-actions';
@@ -9,9 +9,9 @@ import { Body_FieldCatalog } from './4-file-field-catalog';
 import { Body_Manifest } from './2-file-manifest';
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-    const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelData.panelAtom);
-    const fileUs: FileUs | undefined = useAtomValue(rightPanelData.fileUsAtom);
-    const viewRawText = useAtomValue(rightPanelData.viewModeAtom) === ViewMode.raw;
+    const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelAtoms.panelAtom);
+    const fileUs: FileUs | undefined = useAtomValue(rightPanelAtoms.fileUsAtom);
+    const viewRawText = useAtomValue(rightPanelAtoms.viewModeAtom) === ViewMode.raw;
 
     return (
         <div className={classNames("flex-auto pt-2 pb-2 w-full h-full overflow-hidden bg-primary-900", className)} {...rest}>

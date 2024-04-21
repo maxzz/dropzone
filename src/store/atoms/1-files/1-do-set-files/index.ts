@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
 import { FileUs, FileUsAtomType, FileUsStats } from "@/store/store-types";
-import { filesAtom } from './0-files-atom';
-import { doUpdateCacheAtom } from './2-do-update-cache';
-import { _foldAllCardsAtom } from '../9-ui-state';
-import { rightPanelData } from '../2-right-panel';
+import { filesAtom } from '../0-files-atom';
+import { doUpdateCacheAtom } from '../5-do-update-cache';
+import { _foldAllCardsAtom } from '../../9-ui-state';
+import { rightPanelAtoms } from '../../2-right-panel';
 import { uuid } from '@/utils';
 
 function pathWoFilename(fileHandle: File): string {
@@ -42,6 +42,6 @@ export const doSetFilesAtom = atom(
         set(_foldAllCardsAtom, -1);
         set(filesAtom, droppedIn);
         set(doUpdateCacheAtom);
-        set(rightPanelData.panelAtom, undefined);
+        set(rightPanelAtoms.panelAtom, undefined);
     }
 );

@@ -1,13 +1,13 @@
 import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { FileUsAtomType, rightPanelData, ViewMode } from "@/store";
+import { FileUsAtomType, rightPanelAtoms, ViewMode } from "@/store";
 import { SymbolOpenLink, SymbolPen } from "@ui/icons";
 
 const itemClasses = "p-1 size-8 hover:bg-primary-700 rounded active:scale-[.97] flex items-center justify-center outline-none focus:ring-1 ring-primary-400";
 
 export function ButtonCardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
     //const setFormEditorData = useSetAtom(formEditorDataAtom);
-    const setViewMode = useSetAtom(rightPanelData.viewModeAtom);
+    const setViewMode = useSetAtom(rightPanelAtoms.viewModeAtom);
     return (
         <button
             className={itemClasses}

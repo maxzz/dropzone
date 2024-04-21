@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, rightPanelData, selected4ActionAtom } from '@/store';
+import { allCards, rightPanelAtoms, selected4ActionAtom } from '@/store';
 import { MenuItem } from '@ui/ui-dropdown-menu';
 import toast from 'react-hot-toast';
 
 export function Command_MarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);
-    const rightPanelAtom = useAtomValue(rightPanelData.panelAtom);
+    const rightPanelAtom = useAtomValue(rightPanelAtoms.panelAtom);
     const disabled = !rightPanelAtom;
     return (
         <MenuItem disabled={disabled} onClick={click} title="Mark manifest. Select manifest first.">

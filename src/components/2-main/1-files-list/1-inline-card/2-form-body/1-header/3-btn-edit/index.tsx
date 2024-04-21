@@ -1,9 +1,9 @@
 import { useSetAtom } from "jotai";
-import { FileUsAtomType, formEditorDataAtom } from "@/store";
+import { FileUsAtomType, dialogManiEditorDataAtom } from "@/store";
 import { SymbolGear } from "@ui/icons";
 
 export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: number; }) {
-    const setFormEditorData = useSetAtom(formEditorDataAtom);
+    const setFormEditorData = useSetAtom(dialogManiEditorDataAtom);
     return (
         <button
             className={`px-1 h-6 card-header-btn__edit`}

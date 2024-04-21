@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { FileUsAtomType, rightPanelData, doSetCurrentCardAtom } from '@/store';
+import { FileUsAtomType, rightPanelAtoms, doSetCurrentCardAtom } from '@/store';
 
 export function CardTitleSelector({ fileUsAtom, children }: { fileUsAtom: FileUsAtomType; children: ReactNode; }) {
     const isCurrentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
     const doSetCurrentCard = useSetAtom(doSetCurrentCardAtom);
-    const setRightPanel = useSetAtom(rightPanelData.panelAtom);
+    const setRightPanel = useSetAtom(rightPanelAtoms.panelAtom);
 
     function toggleCardSelection() {
         doSetCurrentCard({ fileUsAtom, setCurrent: !isCurrentCard });

@@ -1,12 +1,12 @@
 import { atom } from 'jotai';
 import { FileUs } from "@/store/store-types";
-import { filesAtom } from './0-files-atom';
+import { filesAtom } from '../0-files-atom';
 import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '@/store/manifest';
 import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
 import { isEmpty, isManual } from "@/store/store-utils/3-mani-utils";
 import { textFileReader } from "@/store/store-utils/1-text-file-reader";
-import { fldCatItemsAtom } from '../8-field-catalog/0-all-items-atom';
-import { busyAtom, totalManiAtoms } from '../9-ui-state';
+import { fldCatItemsAtom } from '../../8-field-catalog/0-all-items-atom';
+import { busyAtom, totalManiAtoms } from '../../9-ui-state';
 
 // Cache
 

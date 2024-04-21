@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { filesAtom } from '../0-files-atom';
+import { filesAtom } from '../1-files';
 
 // UI has files
 
