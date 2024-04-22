@@ -1,4 +1,3 @@
-import React from 'react';
 import { FileUsAtomType } from '@/store';
 import { ButtonCardEdit, ButtonCardOpenUrl } from './caption-buttons';
 import { CardTitleMenu } from './menu';
