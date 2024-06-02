@@ -1,6 +1,6 @@
 import { Getter, Setter } from "jotai";
 import { Atomize, OnValueChangeAny, atomWithCallback } from "@/util-hooks";
-import { ConstrainPsw, ConstrainSet, UseAs } from "@/store/manifest";
+import { Poli } from "pm-manifest";
 import { debounce } from "@/utils";
 
 export type PolicyUi = {
@@ -31,14 +31,14 @@ export function createUiAtoms(policy: string | undefined, onChange: OnValueChang
     return {
         enabledAtom: atomWithCallback(true, onChange),
         isCustomRuleAtom: atomWithCallback<'0' | '1'>('0', onChange),
-        constrainSetAtom: atomWithCallback(`${ConstrainSet.withspecial}`, onChange),
+        constrainSetAtom: atomWithCallback(`${Poli.ConstrainSet.withspecial}`, onChange),
         customAtom: atomWithCallback('', onChange),
         minLengthAtom: atomWithCallback(8, onChange),
         maxLengthAtom: atomWithCallback(12, onChange),
         textVerifyAtom: atomWithCallback('', onChange),
         textGenerateAtom: atomWithCallback('', onChange),
-        constrainsPswAtom: atomWithCallback(`${ConstrainPsw.diffAp}`, onChange),
-        useAsAtom: atomWithCallback(`${UseAs.verify}`, onChange),
+        constrainsPswAtom: atomWithCallback(`${Poli.ConstrainPsw.diffAp}`, onChange),
+        useAsAtom: atomWithCallback(`${Poli.UseAs.verify}`, onChange),
     };
 }
 
