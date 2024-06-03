@@ -1,11 +1,12 @@
-import { FileUs, isAnyWhy } from "@/store";
+import { FileUs } from "@/store";
+import { isAnyWhy } from "pm-manifest";
 import { UiTip } from "@ui/ui-tooltip";
 import { CardTitleFileIndex } from "./1-card-title-file-index";
 import { TooltipBody } from "./2-tooltip-body";
 
 export function CardTitleAttention({ fileUs }: { fileUs: FileUs; }) {
     const fileIndex = fileUs.idx + 1;
-    
+
     const hasBailOut = isAnyWhy(fileUs.meta);
     if (!hasBailOut) {
         return <CardTitleFileIndex idx={fileIndex} />;
