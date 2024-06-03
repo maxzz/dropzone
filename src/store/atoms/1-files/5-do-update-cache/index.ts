@@ -56,9 +56,9 @@ export const doUpdateCacheAtom = atom(
                     forNewAtom.stats = fileUsStats(forNewAtom);
                     set(fileAtom, forNewAtom);
 
-                    if (isEmpty(forNewAtom)) {
+                    if (isEmpty(forNewAtom.meta)) {
                         set(totalManiAtoms.emptyAtom, ++total.empty);
-                    } else if (isManual(forNewAtom)) {
+                    } else if (isManual(forNewAtom.meta)) {
                         set(totalManiAtoms.manualAtom, ++total.manual);
                     } else {
                         set(totalManiAtoms.normalAtom, ++total.normal);

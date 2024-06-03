@@ -6,7 +6,7 @@ import { TooltipBody } from "./2-tooltip-body";
 export function CardTitleAttention({ fileUs }: { fileUs: FileUs; }) {
     const fileIndex = fileUs.idx + 1;
     
-    const hasBailOut = isAnyWhy(fileUs);
+    const hasBailOut = isAnyWhy(fileUs.meta);
     if (!hasBailOut) {
         return <CardTitleFileIndex idx={fileIndex} />;
     }
