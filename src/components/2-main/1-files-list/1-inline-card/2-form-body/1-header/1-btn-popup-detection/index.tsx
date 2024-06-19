@@ -9,7 +9,7 @@ export function BtnPopupDetection({ fileUsAtom, formType }: { fileUsAtom: FileUs
     const fileUs = useAtomValue(fileUsAtom);
 
     const form = fileUs.mani?.forms[formType];
-    const toShowDetection = filterDetection(form?.detection || {});
+    const toShowDetection = filterDetection(form?.detection || {} as Mani.Detection);
     const toShowOptions = filterUnwantedOptions(form?.options || {});
 
     return (
