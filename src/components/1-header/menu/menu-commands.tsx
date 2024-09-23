@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { allCards, rightPanelAtoms, selected4ActionAtom } from '@/store';
 import { MenuItem } from '@ui/ui-dropdown-menu';

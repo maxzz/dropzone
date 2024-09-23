@@ -2,8 +2,11 @@ import React, { HTMLAttributes } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { styled, keyframes } from '@stitches/react';
 import { SymbolChevronRight, SymbolDot } from './icons';
-import { PopperContentProps } from '@radix-ui/react-select';
+//import { PopperContentProps } from '@radix-ui/react-select';
 import * as Primitive from '@radix-ui/react-dropdown-menu';
+
+import * as PopperPrimitive from '@radix-ui/react-popper';
+type PopperContentProps = React.ComponentPropsWithoutRef<typeof PopperPrimitive.Content>;
 
 //#region content and trigger
 
@@ -100,7 +103,7 @@ const itemStyles = {
 
 const StyledItem = styled(Primitive.Item, { ...itemStyles });
 
-const StyledMenuItem = ({ disabled, ...rest }: { disabled?: boolean; } & Primitive.MenuItemProps) => {
+const StyledMenuItem = ({ disabled, ...rest }: { disabled?: boolean; } & Primitive.DropdownMenuItemProps) => {
     return <StyledItem {...rest} {...(disabled && { 'data-disabled': '' })} />;
 };
 
