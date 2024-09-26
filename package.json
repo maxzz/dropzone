@@ -4,8 +4,8 @@
     "license": "MIT",
     "type": "module",
     "dependencies": {
-        "@floating-ui/react": "0.26.22",
-        "@headlessui/react": "2.1.2",
+        "@floating-ui/react": "0.26.24",
+        "@headlessui/react": "2.1.8",
         "@heroicons/react": "2.1.5",
         "@popperjs/core": "2.11.8",
         "@radix-ui/colors": "3.0.0",
