@@ -60,8 +60,8 @@ importers:
         specifier: 2.9.3
         version: 2.9.3(@types/react@18.3.3)(react@18.3.1)
       pm-manifest:
-        specifier: ^1.2.43
-        version: 1.2.43
+        specifier: ^1.2.47
+        version: 1.2.47
       pm-manifest-icons:
         specifier: latest
         version: 1.0.3(react@18.3.1)
@@ -1702,8 +1702,8 @@ packages:
     peerDependencies:
       react: ^16.x || ^17.x || ^18.x
 
-  pm-manifest@1.2.43:
-    resolution: {integrity: sha512-LZvmY3IPOcooPJ2TzbMrXERc8SDyFmlXxi8kqFIhecEVBoZ7Pm7syixF0h247ZdtLKWQRu/+zVD0iNz7/a/Hkw==}
+  pm-manifest@1.2.47:
+    resolution: {integrity: sha512-aZAB9lGNmqfZABO4hMRckTtq8AICYKETfgmzSYOCLYh44QH0fCzhh7+d/vD8c287s83dkUHE+3dJM6+jwxodQA==}
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -3623,7 +3623,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  pm-manifest@1.2.43:
+  pm-manifest@1.2.47:
     dependencies:
       '@types/uuid': 10.0.0
       fast-xml-parser: 4.5.0
