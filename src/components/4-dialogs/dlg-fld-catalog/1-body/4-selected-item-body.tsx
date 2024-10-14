@@ -28,12 +28,14 @@ export function SelectedItemBody({ selectedItemAtom }: { selectedItemAtom: Primi
     const ownernoteAtom = useState(() => atom(selectedItem?.ownernote || ''))[0];
     const [ownernote, setOwnernote] = useAtom(ownernoteAtom);
 
-    useEffect(() => {
-        setLocalName(selectedItem?.displayname || '');
-        setLocalValue(selectedItem?.value || '');
-        setLocalType(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt');
-        setOwnernote(selectedItem?.ownernote || JSON.stringify(selectedItem || {}));
-    }, [selectedItem]);
+    useEffect(
+        () => {
+            setLocalName(selectedItem?.displayname || '');
+            setLocalValue(selectedItem?.value || '');
+            setLocalType(!selectedItem ? '' : selectedItem?.password ? 'psw' : 'txt');
+            setOwnernote(selectedItem?.ownernote || JSON.stringify(selectedItem || {}));
+        }, [selectedItem]
+    );
 
     const itemClasses = "flex flex-col items-start";
 
@@ -61,9 +63,9 @@ export function SelectedItemBody({ selectedItemAtom }: { selectedItemAtom: Primi
                     className="p-1 w-full min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded" rows={3}
                     value={ownernote}
                     onChange={(e) => { setOwnernote(e.target.value); }}
-                    {...turnOffAutoComplete} />
+                    {...turnOffAutoComplete}
+                />
             </div>
-
         </div>
     ); //max-w-[340px]
 }

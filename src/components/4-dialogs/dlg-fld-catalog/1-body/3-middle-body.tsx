@@ -5,6 +5,7 @@ import { FldCatItemsGrid } from "../2-items-grid";
 import { SelectedItemBody } from "./4-selected-item-body";
 
 const subSectionClasses = 'mt-4 pb-0.5 text-sm text-primary-400 bg-primary-800 border-primary-700 border-b';
+
 function SubTitleA() {
     return (
         <div className={subSectionClasses}>
@@ -24,14 +25,20 @@ function SubTitleB() {
     );
 }
 
-export function MiddleBody({ selectedItemAtom, closeDlg }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; closeDlg: (data: FldCatOutData) => void; }) {
+type MiddleBodyProps = {
+    selectedItemAtom: PrimitiveAtom<CatalogItem | null>;
+    closeDlg: (data: FldCatOutData) => void;
+};
+
+export function MiddleBody({ selectedItemAtom, closeDlg }: MiddleBodyProps) {
     return (
         <div>
             <SubTitleA />
             <div className="h-[50vh] min-h-[120px]">
                 <FldCatItemsGrid
                     selectedItemAtom={selectedItemAtom}
-                    onDoubleClick={(item: CatalogItem) => closeDlg({ fldCatItem: item })} />
+                    onDoubleClick={(item: CatalogItem) => closeDlg({ fldCatItem: item })}
+                />
             </div>
 
             <SubTitleB />

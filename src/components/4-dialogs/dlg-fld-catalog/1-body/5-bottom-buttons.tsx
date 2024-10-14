@@ -4,7 +4,12 @@ import { BottomButton } from "@/components/2-main/2-right/2-file-manifest/3-tab-
 import { inputFocusClasses } from "./4-selected-item-body";
 import { SelectButton } from "./6-select-button";
 
-export function BottomButtons({ selectedItemAtom, needSelect }: { selectedItemAtom: PrimitiveAtom<CatalogItem | null>; needSelect: boolean; }) {
+type BottomButtonsProps = {
+    selectedItemAtom: PrimitiveAtom<CatalogItem | null>;
+    needSelect: boolean;
+};
+
+export function BottomButtons({ selectedItemAtom, needSelect }: BottomButtonsProps) {
     return (
         <div className="pt-4 flex items-center justify-end gap-x-2">
             {needSelect
@@ -14,7 +19,8 @@ export function BottomButtons({ selectedItemAtom, needSelect }: { selectedItemAt
                 </>)
                 : (
                     <BottomButton>Close</BottomButton>
-                )}
+                )
+            }
         </div>
     );
 }

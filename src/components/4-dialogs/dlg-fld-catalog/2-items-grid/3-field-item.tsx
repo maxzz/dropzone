@@ -10,14 +10,14 @@ type FldCatItemProps = {
     itemClick: (idx: number) => void;
     itemDoubleClick: () => void;
 };
+
+const itemNormalClasses = "hover:text-primary-200";
+const itemSelectedClasses = "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors";
+
 export function FldCatItem({ item, idx, selectedIdx, itemClick, itemDoubleClick }: FldCatItemProps) {
     return (
         <div
-            className={classNames(
-                rowClasses,
-                "cursor-default select-none",
-                selectedIdx === idx ? "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors" : "hover:text-primary-200"
-            )}
+            className={classNames(rowClasses, "cursor-default select-none", selectedIdx === idx ? itemSelectedClasses : itemNormalClasses)}
             onClick={() => itemClick(idx)}
             onDoubleClick={itemDoubleClick}
             key={item.uuid}
