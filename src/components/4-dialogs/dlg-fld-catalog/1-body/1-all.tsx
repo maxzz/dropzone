@@ -35,7 +35,7 @@ export function FldCatDlgBody() {
 
             <MiddleBody selectedItemAtom={selectedItemAtom} closeDlg={closeFldCatDialog} />
 
-            <BottomButtons selectedItemAtom={selectedItemAtom} needSelect={needSelect} />
+            <BottomButtons selectedItemAtom={selectedItemAtom} showSelectBtn={needSelect} />
         </div>
     );
 }

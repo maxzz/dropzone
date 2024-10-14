@@ -19,14 +19,12 @@ focus-within:ring-offset-1";
 
 const inputClasses = "px-2 py-3 h-8 !bg-primary-700 !text-primary-200 outline-none";
 
-type Column4_CatalogProps =
-    & {
-        useItAtom: PA<boolean>;
-        fieldCatAtom: PA<string>;
-        onSelectCatItem: (item: CatalogItem | undefined) => void;
-        field: Meta.Field;
-    }
-    & InputHTMLAttributes<HTMLInputElement>;
+type Column4_CatalogProps = InputHTMLAttributes<HTMLInputElement> & {
+    useItAtom: PA<boolean>;
+    fieldCatAtom: PA<string>;
+    onSelectCatItem: (item: CatalogItem | undefined) => void;
+    field: Meta.Field;
+};
 
 export function Column4_Catalog(props: Column4_CatalogProps) {
     const { useItAtom, onSelectCatItem, fieldCatAtom, field, className, ...rest } = props;
@@ -47,11 +45,13 @@ export function Column4_Catalog(props: Column4_CatalogProps) {
     const fldCatOutBoxAtom = useState(() => creteOutBoxAtom<FldCatOutData>())[0];
     const fldCatOutBox = useAtomValue(fldCatOutBoxAtom);
 
-    useEffect(() => {
-        if (fldCatOutBox) {
-            console.log('Result of the field catalog dialog', fldCatOutBox);
-        }
-    }, [fldCatOutBox]);
+    useEffect(
+        () => {
+            if (fldCatOutBox) {
+                console.log('Result of the field catalog dialog', fldCatOutBox);
+            }
+        }, [fldCatOutBox]
+    );
 
     return (
         <div className={classNames(columnSizeClasses, columnRingClasses, !useIt && "opacity-30 cursor-pointer", className,)} {...rest}>
@@ -62,7 +62,7 @@ export function Column4_Catalog(props: Column4_CatalogProps) {
                 onChange={onSetInputText}
                 onKeyDown={onSetKey}
                 onBlur={onBlur}
-                multiple 
+                multiple
                 {...turnOffAutoComplete}
             />
 

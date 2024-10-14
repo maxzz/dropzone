@@ -6,21 +6,19 @@ import { SelectButton } from "./6-select-button";
 
 type BottomButtonsProps = {
     selectedItemAtom: PrimitiveAtom<CatalogItem | null>;
-    needSelect: boolean;
+    showSelectBtn: boolean;
 };
 
-export function BottomButtons({ selectedItemAtom, needSelect }: BottomButtonsProps) {
+export function BottomButtons({ selectedItemAtom, showSelectBtn }: BottomButtonsProps) {
     return (
         <div className="pt-4 flex items-center justify-end gap-x-2">
-            {needSelect
-                ? (<>
-                    <SelectButton selectedItemAtom={selectedItemAtom} />
-                    <BottomButton className={inputFocusClasses}>Cancel</BottomButton>
-                </>)
-                : (
-                    <BottomButton>Close</BottomButton>
-                )
-            }
+            {showSelectBtn && (
+                <SelectButton selectedItemAtom={selectedItemAtom} />
+            )}
+
+            <BottomButton className={inputFocusClasses}>
+                {showSelectBtn ? 'Cancel' : 'Close'}
+            </BottomButton>
         </div>
     );
 }
