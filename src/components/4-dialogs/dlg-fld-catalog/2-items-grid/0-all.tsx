@@ -50,8 +50,8 @@ export function FldCatItemsGrid({ selectedItemAtom, onDoubleClick }: FldCatItems
                             item={item}
                             idx={idx}
                             selectedIdx={selectedIdx}
-                            itemClick={itemClick}
-                            itemDoubleClick={itemDoubleClick} key={idx}
+                            onItemClick={itemClick}
+                            onItemDoubleClick={itemDoubleClick} key={idx}
                         />
                     )
                 )}

@@ -1,6 +1,6 @@
-import { PrimitiveAtom } from "jotai";
-import { CatalogItem } from "@/store/manifest";
-import { FldCatOutData } from "@/store";
+import { type PrimitiveAtom, useSetAtom } from "jotai";
+import { type CatalogItem } from "@/store/manifest";
+import { closeFldCatDialogAtom } from "@/store";
 import { FldCatItemsGrid } from "../2-items-grid";
 import { SelectedItemBody } from "./4-selected-item-body";
 
@@ -27,17 +27,17 @@ function SubTitleB() {
 
 type MiddleBodyProps = {
     selectedItemAtom: PrimitiveAtom<CatalogItem | null>;
-    closeDlg: (data: FldCatOutData) => void;
 };
 
-export function MiddleBody({ selectedItemAtom, closeDlg }: MiddleBodyProps) {
+export function MiddleBody({ selectedItemAtom }: MiddleBodyProps) {
+    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
     return (
         <div>
             <SubTitleA />
             <div className="h-[50vh] min-h-[120px]">
                 <FldCatItemsGrid
                     selectedItemAtom={selectedItemAtom}
-                    onDoubleClick={(item: CatalogItem) => closeDlg({ fldCatItem: item })}
+                    onDoubleClick={(item: CatalogItem) => closeFldCatDialog({ fldCatItem: item })}
                 />
             </div>
 

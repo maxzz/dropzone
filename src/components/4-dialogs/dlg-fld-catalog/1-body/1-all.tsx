@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { atom, useAtomValue, useSetAtom } from "jotai";
-import { CatalogItem } from "@/store/manifest";
-import { closeFldCatDialogAtom, fldCatTriggerAtom } from "@/store";
+import { atom, useAtomValue } from "jotai";
+import { type CatalogItem } from "@/store/manifest";
+import { fldCatTriggerAtom } from "@/store";
 import { DialogHeader } from "@/components/2-main/2-right/2-file-manifest/3-tab-policy/dlg-policy-editor/3-sections";
 import { Header } from "./2-header";
 import { MiddleBody } from "./3-middle-body";
@@ -19,8 +19,6 @@ border rounded shadow \
 flex flex-col space-y-4";
 
 export function FldCatDlgBody() {
-    const closeFldCatDialog = useSetAtom(closeFldCatDialogAtom);
-
     const inData = useAtomValue(fldCatTriggerAtom);
     const needSelect = !!inData?.outBoxAtom;
 
@@ -33,7 +31,7 @@ export function FldCatDlgBody() {
             {/* <DialogHeader header={<SubTitle />} /> */}
             <DialogHeader header={<Header />} />
 
-            <MiddleBody selectedItemAtom={selectedItemAtom} closeDlg={closeFldCatDialog} />
+            <MiddleBody selectedItemAtom={selectedItemAtom} />
 
             <BottomButtons selectedItemAtom={selectedItemAtom} showSelectBtn={needSelect} />
         </div>

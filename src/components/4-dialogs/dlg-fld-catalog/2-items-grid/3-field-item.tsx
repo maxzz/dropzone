@@ -7,19 +7,19 @@ type FldCatItemProps = {
     item: CatalogItem;
     idx: number;
     selectedIdx: number;
-    itemClick: (idx: number) => void;
-    itemDoubleClick: () => void;
+    onItemClick: (idx: number) => void;
+    onItemDoubleClick: () => void;
 };
 
 const itemNormalClasses = "hover:text-primary-200";
 const itemSelectedClasses = "text-primary-200 bg-primary-600 rounded-sm hover:text-primary-100 hover:bg-primay-400 transition-colors";
 
-export function FldCatItem({ item, idx, selectedIdx, itemClick, itemDoubleClick }: FldCatItemProps) {
+export function FldCatItem({ item, idx, selectedIdx, onItemClick, onItemDoubleClick }: FldCatItemProps) {
     return (
         <div
             className={classNames(rowClasses, "cursor-default select-none", selectedIdx === idx ? itemSelectedClasses : itemNormalClasses)}
-            onClick={() => itemClick(idx)}
-            onDoubleClick={itemDoubleClick}
+            onClick={() => onItemClick(idx)}
+            onDoubleClick={onItemDoubleClick}
             key={item.uuid}
         >
             <div className={col1Classes}>
