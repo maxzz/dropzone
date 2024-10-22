@@ -30,7 +30,11 @@ export const doSetFilesAtom = atom(
                             fmodi: fileHandle.lastModified || 0,
                             size: fileHandle.size,
                             file: fileHandle,
-                            parsedSrc: {},
+                            parsedSrc: {
+                                mani: undefined,
+                                meta: undefined,
+                                fcat: undefined,
+                            },
                             state: {
                                 isGroupAtom: atom<boolean>(false),
                                 isCurrentAtom: atom<boolean>(false),

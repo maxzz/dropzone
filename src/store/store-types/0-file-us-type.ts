@@ -25,9 +25,9 @@ export type FileUsStats = {
 };
 
 export type ParsedSrc = {
-    mani?: Mani.Manifest;               // for manifest raw json
-    meta?: Meta.Form[];                 // for manifest file parsed content and meta forms
-    fcat?: CatalogFile.Root;            // for field catalog file parsed content
+    mani: Mani.Manifest | undefined;    // for manifest raw json
+    meta: Meta.Form[] | undefined;      // for manifest file parsed content and meta forms
+    fcat: CatalogFile.Root | undefined; // for field catalog file parsed content
 };
 
 export type FileUs = {
