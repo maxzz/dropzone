@@ -1,5 +1,5 @@
-import { PrimitiveAtom, WritableAtom } from "jotai";
-import { CatalogFile, Mani, Meta } from "../manifest";
+import { type PrimitiveAtom, type WritableAtom } from "jotai";
+import { type CatalogFile, type Mani, type Meta } from "../manifest";
 
 export type FileUsState = {
     isGroupAtom: PrimitiveAtom<boolean>;    // this fileUs selected for bulk group operation
@@ -30,23 +30,23 @@ export type ParsedSrc = {
     fcat: CatalogFile.Root | undefined; // for field catalog file parsed content
 };
 
-export type FileUs = {
-    id: string;                         // unique id
+export type FileContent = {
+    unid: string;                       // unique number ID (as relative time from the start of the app).
     idx: number;                        // index in the loaded list wo/ counting on filters, i.e. absolute index
 
     fname: string;                      // filename
     fpath: string;                      // file relative path to the dropped folder
     fmodi: number;                      // file.lastModified
     size: number;                       // file size
-
     raw?: string;                       // raw manifest as it was loaded
+}
 
+export type FileUs = FileContent & {
     parsedSrc: ParsedSrc;               // parsed content from the file
+    stats: FileUsStats;                 // quick access statistics
+    state: FileUsState;                 // local state atoms: is currnet; is selected
 
     file?: File;                        // file OS handle
-
-    state: FileUsState;                 // local state atoms: is currnet; is selected
-    stats: FileUsStats;                 // quick access statistics
 };
 
 export type FileUsAtomType = WritableAtom<FileUs, [FileUs], void>;

@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { FieldTyp, Mani } from '@/store/manifest';
+import { type FC } from 'react';
+import { type FieldTyp, type Mani } from '@/store/manifest';
 import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from '@ui/icons';
 
 type FieldValidKeys = Exclude<keyof typeof FieldTyp, 'und'>;

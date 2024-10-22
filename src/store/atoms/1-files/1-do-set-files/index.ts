@@ -23,7 +23,7 @@ export const doSetFilesAtom = atom(
                 .map(
                     (fileHandle, idx) => {
                         const newFileUs: FileUs = {
-                            id: uuid(),
+                            unid: uuid(),
                             idx,
                             fname: fileHandle.name,
                             fpath: pathWoFilename(fileHandle),

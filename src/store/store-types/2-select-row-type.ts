@@ -1,4 +1,4 @@
-import { PrimitiveAtom } from "jotai";
+import { type PrimitiveAtom } from "jotai";
 
 // Fields selection
 

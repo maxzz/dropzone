@@ -1,4 +1,4 @@
-import { CatalogItem } from "@/store/manifest";
+import { type CatalogItem } from "@/store/manifest";
 import { rowClasses, col1Classes, col2Classes, col3Classes, col4Classes } from "./1-header";
 import { FieldIcon } from "./4-field-icon";
 import { classNames } from "@/utils";

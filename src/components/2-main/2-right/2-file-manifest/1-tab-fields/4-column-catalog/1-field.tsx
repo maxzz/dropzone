@@ -1,7 +1,7 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
-import { atom, PrimitiveAtom as PA, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { FldCatOutData, getMruFldCatForItemAtom, openFldCatDialogAtom, creteOutBoxAtom } from "@/store";
-import { CatalogItem, Meta } from "@/store/manifest";
+import { type ChangeEvent, type InputHTMLAttributes, useEffect, useState } from "react";
+import { atom, type PrimitiveAtom as PA, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { type FldCatOutData, getMruFldCatForItemAtom, openFldCatDialogAtom, creteOutBoxAtom } from "@/store";
+import { type CatalogItem, type Meta } from "@/store/manifest";
 import { CatalogDropdown, isKeyToClearDefault } from "./2-catalog-dropdown";
 import { classNames, turnOffAutoComplete } from "@/utils";
 

@@ -1,4 +1,4 @@
-import { FileUs } from "@/store/store-types";
+import { type FileUs } from "@/store/store-types";
 import { makeXML, showError } from '..';
 //import { fileDownload } from '@/utils/file-download';
 
