@@ -7,7 +7,7 @@ import { FileUsAtomType } from "../../store-types";
 const getCurrentCardAtom = atom( // TODO: it should be function instead of atom, since there is no reactivity
     (get) => {
         const files = get(filesAtom);
-        const sel = files.find((currentFileUsAtom) => get(get(currentFileUsAtom).state.isCurrentAtom));
+        const sel = files.find((currentFileUsAtom) => get(get(currentFileUsAtom).uiState.isCurrentAtom));
         //console.log('get selected', `${sel}`, 'all', files.map((fileAtom) => `${fileAtom}`));
         return sel;
     }
@@ -20,7 +20,7 @@ export const doSetCurrentCardAtom = atom(
 
         files.forEach(
             (currentFileUsAtom) => {
-                const thisCurrentAtom = get(currentFileUsAtom).state.isCurrentAtom;
+                const thisCurrentAtom = get(currentFileUsAtom).uiState.isCurrentAtom;
                 const thisCurrentNow = get(thisCurrentAtom);
 
                 if (currentFileUsAtom === fileUsAtom) {

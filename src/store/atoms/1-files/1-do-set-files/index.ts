@@ -31,7 +31,7 @@ export const doSetFilesAtom = atom(
                             size: fileHandle.size,
                             file: fileHandle,
                             parsedSrc: {} as ParsedSrc,
-                            state: {
+                            uiState: {
                                 isGroupAtom: atom<boolean>(false),
                                 isCurrentAtom: atom<boolean>(false),
                             },

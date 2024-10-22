@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { FileUsAtomType, rightPanelAtoms, doSetCurrentCardAtom } from '@/store';
 
 export function CardTitleSelector({ fileUsAtom, children }: { fileUsAtom: FileUsAtomType; children: ReactNode; }) {
-    const isCurrentCard = useAtomValue(useAtomValue(fileUsAtom).state.isCurrentAtom);
+    const isCurrentCard = useAtomValue(useAtomValue(fileUsAtom).uiState.isCurrentAtom);
     const doSetCurrentCard = useSetAtom(doSetCurrentCardAtom);
     const setRightPanel = useSetAtom(rightPanelAtoms.panelAtom);
 

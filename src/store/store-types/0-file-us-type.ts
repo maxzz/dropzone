@@ -1,7 +1,7 @@
 import { type PrimitiveAtom, type WritableAtom } from "jotai";
 import { type CatalogFile, type Mani, type Meta } from "../manifest";
 
-export type FileUsState = {
+export type FileUsUiState = {
     isGroupAtom: PrimitiveAtom<boolean>;    // this fileUs selected for bulk group operation
     isCurrentAtom: PrimitiveAtom<boolean>;  // this fileUs is current and shown in the right panel
 };
@@ -44,7 +44,7 @@ export type FileContent = {
 
 export type FileUs = FileContent & {
     parsedSrc: ParsedSrc;               // parsed content from the file
-    state: FileUsState;                 // local state atoms: is currnet; is selected
+    uiState: FileUsUiState;             // local state atoms: is currnet; is selected
 
     file?: File;                        // file OS handle
 };
