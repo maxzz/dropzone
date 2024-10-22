@@ -8,7 +8,7 @@ export function Part2ScreenDetection({ atoms }: { atoms: FormOptionsAtoms; }) {
     const [monitor, setMonitor] = useAtom(atoms.uiPart2ScreenDetection.monitorAtom);
 
     const fileUs = useAtomValue(atoms.fileUsAtom);
-    const isWeb = fileUs.stats.isWeb;
+    const isWeb = fileUs.parsedSrc.stats.isWeb;
 
     return (
         isWeb

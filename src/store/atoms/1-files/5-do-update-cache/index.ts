@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { FileUs } from "@/store/store-types";
+import { FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
 import { filesAtom } from '../0-files-atom';
 import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '@/store/manifest';
 import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
@@ -53,9 +53,10 @@ export const doUpdateCacheAtom = atom(
                             mani,
                             meta,
                             fcat,
+                            stats: {} as FileUsStats, // the real one will be assigned after caching content
                         },
                     };
-                    forNewAtom.stats = fileUsStats(forNewAtom);
+                    forNewAtom.parsedSrc.stats = fileUsStats(forNewAtom);
                     set(fileAtom, forNewAtom);
 
                     if (isEmpty(forNewAtom.parsedSrc.meta)) {

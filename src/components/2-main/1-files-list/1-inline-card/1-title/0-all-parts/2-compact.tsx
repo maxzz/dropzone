@@ -10,7 +10,7 @@ import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {
     const fileUs = useAtomValue(fileUsAtom);
 
-    const stats = fileUs?.stats;
+    const stats = fileUs?.parsedSrc.stats;
     if (!stats) {
         return null;
     }

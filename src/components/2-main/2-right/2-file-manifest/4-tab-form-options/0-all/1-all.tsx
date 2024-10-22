@@ -16,7 +16,7 @@ export function ManiSection4_FormOptions({ fileUsAtom, formIdx }: { fileUsAtom: 
     );
 
     const fileUs = useAtomValue(atoms.fileUsAtom);
-    const isWeb = fileUs.stats.isWeb; // TODO: why this is not per form?
+    const isWeb = fileUs.parsedSrc.stats.isWeb; // TODO: why this is not per form?
 
     return (
         <div className="mr-1 grid grid-cols-[auto_minmax(0,1fr)] gap-x-2 gap-y-0.5 items-center font-light text-primary-400">

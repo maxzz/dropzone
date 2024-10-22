@@ -6,7 +6,7 @@ import { classNames } from "@/utils";
 import { ManiFilenameParts } from "./1-mani-filename-parts";
 
 function PopupBody({ fileUs }: { fileUs: FileUs; }) {
-    const stats = fileUs.stats;
+    const stats = fileUs.parsedSrc.stats;
     return (
         <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
 
@@ -49,10 +49,10 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
                     <PopupBody fileUs={fileUs} />
                 </UiTip>
             );
-        }, [fileUs.fname, fileUs.stats.dateCreated, fileUs.stats.dateModified, fileUs.fpath, fileUs.fname]
+        }, [fileUs.fname, fileUs.parsedSrc.stats.dateCreated, fileUs.parsedSrc.stats.dateModified, fileUs.fpath, fileUs.fname]
     );
 
-    const stats = fileUs.stats;
+    const stats = fileUs.parsedSrc.stats;
 
     return (
         <div className={classNames("text-sm font-light font-mono grid grid-cols-[minmax(0,min-content)_auto] items-center gap-x-1", className)} {...rest}>

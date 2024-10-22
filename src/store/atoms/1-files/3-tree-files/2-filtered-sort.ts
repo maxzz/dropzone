@@ -25,8 +25,8 @@ export function sortResult(sortBy: SortBy, order: Order, result: FileUsAtomType[
         const fileUsA = get(atomA);
         const fileUsB = get(atomB);
 
-        const a = fileUsA?.stats?.domain || 'zz';
-        const b = fileUsB?.stats?.domain || 'zz';
+        const a = fileUsA?.parsedSrc.stats?.domain || 'zz';
+        const b = fileUsB?.parsedSrc.stats?.domain || 'zz';
         
         if (order === Order.lowToHigh) {
             return a < b ? -1 : a > b ? 1 : 0;

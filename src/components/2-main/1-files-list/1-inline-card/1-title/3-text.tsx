@@ -10,7 +10,7 @@ export function CardCaption({ stats }: { stats: FileUsStats; }) {
 }
 
 export function CardUsername({ fileUs }: { fileUs: FileUs; }) {
-    const stats = fileUs.stats;
+    const stats = fileUs.parsedSrc.stats;
     const fcatSize = fileUs.parsedSrc.fcat?.names.length;
     return (
         <div className="ml-0.5 text-sm font-light opacity-75 overflow-hidden whitespace-nowrap overflow-ellipsis">

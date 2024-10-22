@@ -28,6 +28,7 @@ export type ParsedSrc = {
     mani: Mani.Manifest | undefined;    // for manifest raw json
     meta: Meta.Form[] | undefined;      // for manifest file parsed content and meta forms
     fcat: CatalogFile.Root | undefined; // for field catalog file parsed content
+    stats: FileUsStats;                 // quick access statistics
 };
 
 export type FileContent = {
@@ -43,7 +44,6 @@ export type FileContent = {
 
 export type FileUs = FileContent & {
     parsedSrc: ParsedSrc;               // parsed content from the file
-    stats: FileUsStats;                 // quick access statistics
     state: FileUsState;                 // local state atoms: is currnet; is selected
 
     file?: File;                        // file OS handle

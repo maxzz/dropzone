@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { FileUs, FileUsAtomType, FileUsStats } from "@/store/store-types";
+import { type FileUs, type FileUsAtomType, type ParsedSrc } from "@/store/store-types";
 import { filesAtom } from '../0-files-atom';
 import { doUpdateCacheAtom } from '../5-do-update-cache';
 import { _foldAllCardsAtom } from '../../9-ui-state';
@@ -30,16 +30,11 @@ export const doSetFilesAtom = atom(
                             fmodi: fileHandle.lastModified || 0,
                             size: fileHandle.size,
                             file: fileHandle,
-                            parsedSrc: {
-                                mani: undefined,
-                                meta: undefined,
-                                fcat: undefined,
-                            },
+                            parsedSrc: {} as ParsedSrc,
                             state: {
                                 isGroupAtom: atom<boolean>(false),
                                 isCurrentAtom: atom<boolean>(false),
                             },
-                            stats: {} as FileUsStats, // the real one will be assigned after caching content
                         };
                         return atom<FileUs>(newFileUs);
                     }

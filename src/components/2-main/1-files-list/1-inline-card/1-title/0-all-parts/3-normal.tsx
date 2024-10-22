@@ -9,7 +9,7 @@ import { CardTitleAttention } from '../1-attention';
 export function CardTitleTextNormal({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);
     
-    const stats = fileUs?.stats;
+    const stats = fileUs?.parsedSrc.stats;
     if (!stats) {
         return null;
     }
