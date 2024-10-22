@@ -25,8 +25,8 @@ export const filteredAtom = atom<FileUsAtomType[]>(
         const rv = files.filter(
             (fileAtom: FileUsAtomType) => {
                 const fileUs = get(fileAtom);
-                const mani = fileUs.mani;
-                const meta = fileUs.meta;
+                const mani = fileUs.parsedSrc.mani;
+                const meta = fileUs.parsedSrc.meta;
 
                 if (capOnly) {
                     return isAnyCap(mani, regex);

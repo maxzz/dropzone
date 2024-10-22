@@ -23,8 +23,8 @@ export function ButtonCardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtom
 
 export function ButtonCardOpenUrl({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const url = fileUs.mani?.forms[0]?.detection?.web_ourl;
-    const domain = fileUs.meta?.[0]?.disp?.domain;
+    const url = fileUs.parsedSrc.mani?.forms[0]?.detection?.web_ourl;
+    const domain = fileUs.parsedSrc.meta?.[0]?.disp?.domain;
     return (<>
         {url &&
             <a

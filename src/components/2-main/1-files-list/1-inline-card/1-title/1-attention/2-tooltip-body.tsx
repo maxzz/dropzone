@@ -3,7 +3,7 @@ import { FileUs } from "@/store";
 import { SymbolDot } from "@ui/icons";
 
 export function TooltipBody({ fileUs, fileIndex }: { fileUs: FileUs; fileIndex: number; }) {
-    const bailOuts = [fileUs.meta?.[0]?.disp.bailOut, fileUs.meta?.[1]?.disp.bailOut];
+    const bailOuts = [fileUs.parsedSrc.meta?.[0]?.disp.bailOut, fileUs.parsedSrc.meta?.[1]?.disp.bailOut];
     return (
         <div className="pb-2 max-w-[17rem] text-sm bg-primary-100 rounded-[2px]">
 

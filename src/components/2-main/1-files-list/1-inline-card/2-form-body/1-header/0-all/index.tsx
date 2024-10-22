@@ -18,7 +18,7 @@ export function CardFormBody1_Header({ fileUsAtom, formIdx, selectRowAtoms }: Ca
     const [small, setSmall] = useState(true);
     const fileUs = useAtomValue(fileUsAtom);
     
-    const meta = fileUs.meta?.[formIdx];
+    const meta = fileUs.parsedSrc.meta?.[formIdx];
     if (!meta) {
         return null;
     }

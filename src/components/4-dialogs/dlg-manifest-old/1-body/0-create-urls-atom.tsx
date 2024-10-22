@@ -10,7 +10,7 @@ export function createUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnVal
         web_ourl: o = '',
         web_murl: m = '',
         web_qurl: q = '',
-    } = fileUs.meta?.[formIdx]?.mani?.detection || {};
+    } = fileUs.parsedSrc.meta?.[formIdx]?.mani?.detection || {};
 
     const initial = { o, m, q, };
 

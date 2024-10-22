@@ -14,7 +14,7 @@ function TabFieldsScript({ editorData }: { editorData: ManiEditorData; }) {
 
 export function Tab4_Fields({ editorData }: { editorData: ManiEditorData; }) {
     const [fileUs, setFileUs] = useAtom(editorData.fileUsAtom);
-    const isScript = fileUs.meta?.[editorData.formIdx]?.disp.isScript;
+    const isScript = fileUs.parsedSrc.meta?.[editorData.formIdx]?.disp.isScript;
 
     const [isOpen1, setIsOpen1] = useState(false);
 

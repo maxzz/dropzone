@@ -24,6 +24,12 @@ export type FileUsStats = {
     dateModified?: string;              // TimeUtils.dpTimeToShow(fileUs.mani?.descriptor?.modified)
 };
 
+export type ParsedSrc = {
+    mani?: Mani.Manifest;               // for manifest raw json
+    meta?: Meta.Form[];                 // for manifest file parsed content and meta forms
+    fcat?: CatalogFile.Root;            // for field catalog file parsed content
+};
+
 export type FileUs = {
     id: string;                         // unique id
     idx: number;                        // index in the loaded list wo/ counting on filters, i.e. absolute index
@@ -34,10 +40,8 @@ export type FileUs = {
     size: number;                       // file size
 
     raw?: string;                       // raw manifest as it was loaded
-    mani?: Mani.Manifest;               // json raw manifest
-    meta?: Meta.Form[];                 // meta data on manifest
 
-    fcat?: CatalogFile.Root;            // field catalog
+    parsedSrc: ParsedSrc;               // parsed content from the file
 
     file?: File;                        // file OS handle
 

@@ -6,7 +6,7 @@ import { CatologItems } from './2-catolog-items';
 
 export function Body_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [fileUs] = useAtom(fileUsAtom);
-    const names = fileUs.fcat?.names || [];
+    const names = fileUs.parsedSrc.fcat?.names || [];
     return (
         <div className="grid grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
 

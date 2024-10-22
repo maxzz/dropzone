@@ -8,7 +8,7 @@ import { filterDetection } from './1-filter-detection';
 export function BtnPopupDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
     const fileUs = useAtomValue(fileUsAtom);
 
-    const form = fileUs.mani?.forms[formType];
+    const form = fileUs.parsedSrc.mani?.forms[formType];
     const toShowDetection = filterDetection(form?.detection || {});
     const toShowOptions = filterUnwantedOptions(form?.options || {});
 

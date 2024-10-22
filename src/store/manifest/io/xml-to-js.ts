@@ -9,7 +9,7 @@ export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; 
     let xml = '';
     try {
         // 1.
-        xml = makeXML(fileUs.mani) || '';
+        xml = makeXML(fileUs.parsedSrc.mani) || '';
         //console.log('%c---------new xml from converted---------', 'color: green', `\n${xml}`);
         // 2.
         //fileDownload({ data: xml, filename: fileUs.fname, mime: 'text/plain;charset=utf-8' });

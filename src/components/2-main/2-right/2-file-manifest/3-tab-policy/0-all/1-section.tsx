@@ -11,7 +11,7 @@ export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileU
     const [policies, setPolicies] = useAtom(policiesAtom);
 
     const fileUs = useAtomValue(fileUsAtom);
-    const metaForm = fileUs.meta?.[formIdx];
+    const metaForm = fileUs.parsedSrc.meta?.[formIdx];
 
     const atoms = useState(
         () => createUiAtoms(metaForm,

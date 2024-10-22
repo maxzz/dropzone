@@ -11,7 +11,7 @@ import { ManiSection4_FormOptions } from '../4-tab-form-options';
 
 function FormItems({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const fileUs = useAtomValue(fileUsAtom);
-    const metaForm = fileUs.meta?.[formIdx];
+    const metaForm = fileUs.parsedSrc.meta?.[formIdx];
     const title = formIdx === FormIdx.login ? "Login" : "Password change";
     const openNow = maniOpenSections[formIdx];
     return (!metaForm ? NoForm(formIdx) :

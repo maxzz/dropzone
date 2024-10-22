@@ -33,7 +33,7 @@ export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivEleme
                         ? (
                             <Body_Xml className="font-mono text-xs text-primary-100 bg-[#011627] opacity-60 cursor-default" text={fileUs.raw || ''} />
                         )
-                        : fileUs.fcat
+                        : fileUs.parsedSrc.fcat
                             ? (
                                 <Body_FieldCatalog fileUsAtom={fileUsAtom} />
                             )

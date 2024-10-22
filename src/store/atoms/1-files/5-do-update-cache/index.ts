@@ -49,16 +49,18 @@ export const doUpdateCacheAtom = atom(
                     const forNewAtom: FileUs = {
                         ...file,
                         raw,
-                        mani,
-                        fcat,
-                        meta,
+                        parsedSrc: {
+                            mani,
+                            meta,
+                            fcat,
+                        },
                     };
                     forNewAtom.stats = fileUsStats(forNewAtom);
                     set(fileAtom, forNewAtom);
 
-                    if (isEmpty(forNewAtom.meta)) {
+                    if (isEmpty(forNewAtom.parsedSrc.meta)) {
                         set(totalManiAtoms.emptyAtom, ++total.empty);
-                    } else if (isManual(forNewAtom.meta)) {
+                    } else if (isManual(forNewAtom.parsedSrc.meta)) {
                         set(totalManiAtoms.manualAtom, ++total.manual);
                     } else {
                         set(totalManiAtoms.normalAtom, ++total.normal);
