@@ -42,7 +42,8 @@ export type FileContent = {
     raw?: string;                       // raw manifest as it was loaded
 }
 
-export type FileUs = FileContent & {
+export type FileUs = {
+    fileCnt: FileContent;               // file content
     parsedSrc: ParsedSrc;               // parsed content from the file
     uiState: FileUsUiState;             // local state atoms: is currnet; is selected
 

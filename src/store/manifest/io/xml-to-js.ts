@@ -3,7 +3,7 @@ import { makeXML, showError } from '..';
 //import { fileDownload } from '@/utils/file-download';
 
 export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; } | { xml: string; error?: undefined; } {
-    if (!fileUs.raw) {
+    if (!fileUs.fileCnt.raw) {
         return { error: 'empty file' };
     }
     let xml = '';

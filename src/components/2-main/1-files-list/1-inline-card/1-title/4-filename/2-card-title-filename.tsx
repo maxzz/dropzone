@@ -10,16 +10,16 @@ function PopupBody({ fileUs }: { fileUs: FileUs; }) {
     return (
         <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
 
-            {fileUs.fpath && (<>
+            {fileUs.fileCnt.fpath && (<>
                 <div className="font-bold">Sub-folder</div>
                 <div>
-                    {fileUs.fpath}
+                    {fileUs.fileCnt.fpath}
                 </div>
             </>)}
 
             <div className="font-bold">Filename</div>
             <div>
-                {fileUs.fname}
+                {fileUs.fileCnt.fname}
             </div>
 
             {stats.dateCreated && (<>
@@ -45,11 +45,11 @@ export function CardTitleFilename({ fileUs, className, ...rest }: { fileUs: File
     const FilenameTooltipMemo = useMemo(
         () => {
             return (
-                <UiTip trigger={<ManiFilenameParts fname={fileUs.fname} />} {...tipSmall()}>
+                <UiTip trigger={<ManiFilenameParts fname={fileUs.fileCnt.fname} />} {...tipSmall()}>
                     <PopupBody fileUs={fileUs} />
                 </UiTip>
             );
-        }, [fileUs.fname, fileUs.parsedSrc.stats.dateCreated, fileUs.parsedSrc.stats.dateModified, fileUs.fpath, fileUs.fname]
+        }, [fileUs.fileCnt.fname, fileUs.parsedSrc.stats.dateCreated, fileUs.parsedSrc.stats.dateModified, fileUs.fileCnt.fpath, fileUs.fileCnt.fname]
     );
 
     const stats = fileUs.parsedSrc.stats;

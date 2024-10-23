@@ -5,7 +5,7 @@ import { CardTitleFileIndex } from "./1-card-title-file-index";
 import { TooltipBody } from "./2-tooltip-body";
 
 export function CardTitleAttention({ fileUs }: { fileUs: FileUs; }) {
-    const fileIndex = fileUs.idx + 1;
+    const fileIndex = fileUs.fileCnt.idx + 1;
 
     const hasBailOut = isAnyWhy(fileUs.parsedSrc.meta);
     if (!hasBailOut) {

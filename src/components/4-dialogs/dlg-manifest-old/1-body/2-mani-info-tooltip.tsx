@@ -33,7 +33,7 @@ export function ManiInfoTooltip({ editorData }: { editorData: ManiEditorData; })
 
                 <div className="font-bold">Filename</div>
                 <div>
-                    <ManiFilenameParts fname={fileUs.fname} large />
+                    <ManiFilenameParts fname={fileUs.fileCnt.fname} large />
                 </div>
 
                 {stats.dateCreated && (<>

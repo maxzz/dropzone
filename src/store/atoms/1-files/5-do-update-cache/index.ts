@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
-import { FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
+import { FileContent, FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
 import { filesAtom } from '../0-files-atom';
-import { buildCatalogMeta, buildManiMetaForms, CatalogFile, Mani, Meta, parseXMLFile } from '@/store/manifest';
+import { buildCatalogMeta, buildManiMetaForms, parseXMLFile } from '@/store/manifest';
 import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
 import { isEmpty, isManual } from "pm-manifest";
 import { textFileReader } from "@/store/store-utils/1-text-file-reader";
@@ -24,39 +24,17 @@ export const doUpdateCacheAtom = atom(
 
         for (let fileAtom of files) {
             try {
-                const file = get(fileAtom);
+                const fileUsItem = get(fileAtom);
 
-                if (file.file && !file.raw) {
-                    const raw = await textFileReader(file.file);
-
-                    let mani: Mani.Manifest | undefined;
-                    let fcat: CatalogFile.Root | undefined;
-                    let meta: Meta.Form[] | undefined;
-                    try {
-                        const res = parseXMLFile(raw);
-                        mani = res.mani;
-                        fcat = res.fcat;
-                        meta = buildManiMetaForms(mani);
-
-                        if (fcat) {
-                            const { items } = buildCatalogMeta(fcat); //TODO: we need to load multiple catalog files
-                            set(fldCatItemsAtom, items);
-                        }
-                    } catch (error) {
-                        console.log('%ctm parse error', 'color: red', error, '\n', file.fname, raw);
-                    }
+                if (fileUsItem.file && !fileUsItem.fileCnt.raw) {
+                    fileUsItem.fileCnt.raw = await textFileReader(fileUsItem.file);
+                    fileUsItem.parsedSrc = createParsedData(fileUsItem.fileCnt);
 
                     const forNewAtom: FileUs = {
-                        ...file,
-                        raw,
-                        parsedSrc: {
-                            mani,
-                            meta,
-                            fcat,
-                            stats: {} as FileUsStats, // the real one will be assigned after caching content
-                        },
+                        ...fileUsItem,
+                        parsedSrc: createParsedData(fileUsItem.fileCnt),
                     };
-                    forNewAtom.parsedSrc.stats = fileUsStats(forNewAtom);
+
                     set(fileAtom, forNewAtom);
 
                     if (isEmpty(forNewAtom.parsedSrc.meta)) {
@@ -77,3 +55,36 @@ export const doUpdateCacheAtom = atom(
         set(busyAtom, '');
     }
 );
+
+function createParsedData(fileCnt: FileContent): ParsedSrc {
+    const rv: ParsedSrc = {
+        mani: undefined,
+        meta: undefined,
+        fcat: undefined,
+        stats: {} as FileUsStats, // the real one will be assigned after parsing content
+    };
+
+    try {
+        const res = parseXMLFile(fileCnt.raw || '');
+        rv.mani = res.mani;
+        rv.fcat = res.fcat;
+        rv.meta = buildManiMetaForms(res.mani);
+
+        if (rv.fcat) {
+            /**
+             * TODO: later. one per root folder including A, B, C subfolders
+             *
+            const { items } = buildCatalogMeta(fcat); //TODO: we need to load multiple catalog files
+            set(fldCatItemsAtom, items);
+            */
+        }
+    } catch (error) {
+        const msg = `tm parse error: ${error}\n${fileCnt.fname}\n${fileCnt.raw}`;
+        fileCnt.raw = msg;
+        // fileCnt.failed = true; //TODO: we don't have this flag yet, but we need it
+        console.error(msg);
+    }
+
+    rv.stats = fileUsStats(fileCnt, rv);
+    return rv;
+}
