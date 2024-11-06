@@ -5,7 +5,7 @@
     "type": "module",
     "dependencies": {
         "@floating-ui/react": "0.26.27",
-        "@headlessui/react": "2.1.10",
+        "@headlessui/react": "2.2.0",
         "@heroicons/react": "2.1.5",
         "@popperjs/core": "2.11.8",
         "@radix-ui/colors": "3.0.0",
