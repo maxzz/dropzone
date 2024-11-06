@@ -30,7 +30,7 @@
         "react-overlays": "5.2.1",
         "react-popper": "2.3.0",
         "react-popper-tooltip": "4.4.2",
-        "react-syntax-highlighter": "^15.5.0",
+        "react-syntax-highlighter": "^15.6.1",
         "react-use": "17.5.1",
         "simplebar-react": "3.2.6"
     },
