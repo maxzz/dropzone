@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "module",
     "dependencies": {
-        "@floating-ui/react": "0.26.25",
+        "@floating-ui/react": "0.26.27",
         "@headlessui/react": "2.1.10",
         "@heroicons/react": "2.1.5",
         "@popperjs/core": "2.11.8",
@@ -25,7 +25,7 @@
         "pm-manifest-icons": "latest",
         "react": "18.3.1",
         "react-dom": "18.3.1",
-        "react-dropzone": "14.2.9",
+        "react-dropzone": "14.3.5",
         "react-hot-toast": "2.4.1",
         "react-overlays": "5.2.1",
         "react-popper": "2.3.0",
