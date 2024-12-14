@@ -20,7 +20,7 @@
         "@stitches/react": "1.2.8",
         "@use-gesture/react": "10.3.1",
         "fast-xml-parser": "4.5.0",
-        "jotai": "2.10.1",
+        "jotai": "2.10.3",
         "pm-manifest": "^1.2.59",
         "pm-manifest-icons": "latest",
         "react": "18.3.1",
@@ -31,7 +31,7 @@
         "react-popper": "2.3.0",
         "react-popper-tooltip": "4.4.2",
         "react-syntax-highlighter": "^15.6.1",
-        "react-use": "17.5.1",
+        "react-use": "17.6.0",
         "simplebar-react": "3.3.0"
     },
     "devDependencies": {
