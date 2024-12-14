@@ -60,8 +60,8 @@ importers:
         specifier: 2.10.3
         version: 2.10.3(@types/react@18.3.12)(react@18.3.1)
       pm-manifest:
-        specifier: ^1.2.59
-        version: 1.2.59
+        specifier: ^1.2.63
+        version: 1.2.63
       pm-manifest-icons:
         specifier: latest
         version: 1.0.3(react@18.3.1)
@@ -1791,8 +1791,8 @@ packages:
     peerDependencies:
       react: ^16.x || ^17.x || ^18.x
 
-  pm-manifest@1.2.59:
-    resolution: {integrity: sha512-nevWIB0voiqI1wDnguexkXAeklARf1xUTi1jRxtglFlTr9kRaPgT1DIc4JNRxd/BKo3/xQ1Mh/4/ol2PhmswpQ==}
+  pm-manifest@1.2.63:
+    resolution: {integrity: sha512-O02Lzunj33A8t9v43QfAiBkC97/vVEsLQG9zoMt3SeswWiDRsvGbhvLZfdIm/QgeaCM/ah0dwfH71JN6h/f6eg==}
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -2202,8 +2202,8 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  uuid@10.0.0:
-    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+  uuid@11.0.3:
+    resolution: {integrity: sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==}
     hasBin: true
 
   vite@5.4.10:
@@ -3757,11 +3757,11 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  pm-manifest@1.2.59:
+  pm-manifest@1.2.63:
     dependencies:
       '@types/uuid': 10.0.0
       fast-xml-parser: 4.5.0
-      uuid: 10.0.0
+      uuid: 11.0.3
 
   postcss-import@15.1.0(postcss@8.4.49):
     dependencies:
@@ -4231,7 +4231,7 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  uuid@10.0.0: {}
+  uuid@11.0.3: {}
 
   vite@5.4.10(@types/node@22.10.2)(sass@1.83.0):
     dependencies:
