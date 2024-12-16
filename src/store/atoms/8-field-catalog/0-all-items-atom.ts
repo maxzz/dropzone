@@ -1,10 +1,10 @@
 import { atom } from "jotai";
-import { CatalogItem, buildCatalogMetaFromNames } from "@/store/manifest";
+import { CatalogItem, fcFileToFcInMemory } from "@/store/manifest";
 import { catalogTestNames } from "@/assets/tests/23-0414/test-field-catelog";
 
 // All field catalog items
 
-export const fldCatItemsAtom = atom<CatalogItem[]>(buildCatalogMetaFromNames(catalogTestNames).items);
+export const fldCatItemsAtom = atom<CatalogItem[]>(fcFileToFcInMemory({descriptor: {}, names: catalogTestNames}).items);
 
 // Field catalog items split into text and password items
 

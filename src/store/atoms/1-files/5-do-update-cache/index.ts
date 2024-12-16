@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { FileContent, FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
 import { filesAtom } from '../0-files-atom';
-import { buildCatalogMeta, buildManiMetaForms, parseXMLFile } from '@/store/manifest';
+import { buildManiMetaForms, parseXMLFile } from '@/store/manifest';
 import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
 import { isEmpty, isManual } from "pm-manifest";
 import { textFileReader } from "@/store/store-utils/1-text-file-reader";
