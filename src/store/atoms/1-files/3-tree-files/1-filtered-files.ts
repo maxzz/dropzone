@@ -3,7 +3,7 @@ import { filesAtom } from '../0-files-atom';
 import { FileUsAtomType } from "@/store/store-types";
 import { useFileUsByFilter } from '@/store/store-utils';
 import { createRegexByFilter } from "@/store/store-utils/3-filters";
-import { isAnyCap, isAnyCls, isAnyWeb, isAnyWhy, isEmpty, isManual } from 'pm-manifest';
+import { isAnyMatchedCap, isAnyMatchedCls, isAnyWeb, isAnyWhy, isAnyEmpty, isAnyManual } from 'pm-manifest';
 import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom } from '../../9-ui-state';
 import { sortResult } from './2-filtered-sort';
 
@@ -29,11 +29,11 @@ export const filteredAtom = atom<FileUsAtomType[]>(
                 const meta = fileUs.parsedSrc.meta;
 
                 if (capOnly) {
-                    return isAnyCap(mani, regex);
+                    return isAnyMatchedCap(mani, regex);
                 }
 
                 if (clsOnly) {
-                    return isAnyCls(mani, regex);
+                    return isAnyMatchedCls(mani, regex);
                 }
 
                 const isWeb = isAnyWeb(meta);
@@ -41,7 +41,7 @@ export const filteredAtom = atom<FileUsAtomType[]>(
                     return false;
                 }
 
-                let useItNow = isEmpty(meta) ? showEmpty : isManual(meta) ? showManual : showNormal;
+                let useItNow = isAnyEmpty(meta) ? showEmpty : isAnyManual(meta) ? showManual : showNormal;
                 if (useItNow && regex) {
                     useItNow = useFileUsByFilter(fileUs, regex);
                 }

@@ -3,7 +3,7 @@ import { FileContent, FileUs, FileUsStats, ParsedSrc } from "@/store/store-types
 import { filesAtom } from '../0-files-atom';
 import { buildManiMetaForms, parseXMLFile } from '@/store/manifest';
 import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
-import { isEmpty, isManual } from "pm-manifest";
+import { isAnyEmpty, isAnyManual } from "pm-manifest";
 import { textFileReader } from "@/store/store-utils/1-text-file-reader";
 import { fldCatItemsAtom } from '../../8-field-catalog/0-all-items-atom';
 import { busyAtom, totalManiAtoms } from '../../9-ui-state';
@@ -37,9 +37,9 @@ export const doUpdateCacheAtom = atom(
 
                     set(fileAtom, forNewAtom);
 
-                    if (isEmpty(forNewAtom.parsedSrc.meta)) {
+                    if (isAnyEmpty(forNewAtom.parsedSrc.meta)) {
                         set(totalManiAtoms.emptyAtom, ++total.empty);
-                    } else if (isManual(forNewAtom.parsedSrc.meta)) {
+                    } else if (isAnyManual(forNewAtom.parsedSrc.meta)) {
                         set(totalManiAtoms.manualAtom, ++total.manual);
                     } else {
                         set(totalManiAtoms.normalAtom, ++total.normal);
