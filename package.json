@@ -19,7 +19,7 @@
         "@react-spring/web": "9.7.5",
         "@stitches/react": "1.2.8",
         "@use-gesture/react": "10.3.1",
-        "fast-xml-parser": "4.5.0",
+        "fast-xml-parser": "4.5.1",
         "jotai": "2.10.3",
         "pm-manifest": "^1.2.70",
         "pm-manifest-icons": "latest",
