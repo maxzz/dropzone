@@ -26,7 +26,7 @@
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-dropzone": "14.3.5",
-        "react-hot-toast": "2.4.1",
+        "react-hot-toast": "2.5.1",
         "react-overlays": "5.2.1",
         "react-popper": "2.3.0",
         "react-popper-tooltip": "4.4.2",
@@ -47,7 +47,7 @@
         "postcss": "8.4.49",
         "rollup-plugin-visualizer": "5.12.0",
         "sass": "1.83.0",
-        "tailwindcss": "3.4.16",
+        "tailwindcss": "3.4.17",
         "tailwindcss-radix": "3.0.5",
         "typescript": "5.7.2",
         "vite": "5.4.10"
