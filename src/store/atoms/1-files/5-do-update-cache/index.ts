@@ -68,7 +68,7 @@ function createParsedData(fileCnt: FileContent): ParsedSrc {
         const res = parseXMLFile(fileCnt.raw || '');
         rv.mani = res.mani;
         rv.fcat = res.fcat;
-        rv.meta = buildManiMetaForms(res.mani);
+        rv.meta = buildManiMetaForms(res.mani?.forms);
 
         if (rv.fcat) {
             /**
