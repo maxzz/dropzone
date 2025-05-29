@@ -3,6 +3,12 @@
     "version": "0.1.0",
     "license": "MIT",
     "type": "module",
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "@parcel/watcher",
+            "esbuild"
+        ]
+    },
     "dependencies": {
         "@floating-ui/react": "0.27.3",
         "@headlessui/react": "2.2.0",
