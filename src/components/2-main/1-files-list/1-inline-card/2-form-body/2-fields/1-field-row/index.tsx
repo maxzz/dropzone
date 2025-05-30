@@ -30,14 +30,14 @@ export function FieldRow({ fileUs, form, field, selectRowAtoms }: FieldRowProps)
     const hasPreview = !!field.path.loc;
     const hasPath = !!Object.keys(field.path).length;
 
-    const isSelected = form.view?.rects.length && field.ridx === selectedRowThis.fieldIdx;
+    const isSelected = form.view?.rects.length && field.previewIdx === selectedRowThis.fieldIdx;
 
     function selectRow() {
-        if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.rother) {
-            setSelectedRowThem({ fieldIdx: rfieldindex && form.rother[rfieldindex] || -1, formType: 0 });
+        if (form.type === 1 /*Mani.FORMNAME.pchange*/ && form.previewOther) {
+            setSelectedRowThem({ fieldIdx: rfieldindex && form.previewOther[rfieldindex] || -1, formType: 0 });
         }
 
-        setSelectedRowThis({ fieldIdx: isSelected ? -1 : field.ridx, formType: form.type });
+        setSelectedRowThis({ fieldIdx: isSelected ? -1 : field.previewIdx, formType: form.type });
     }
 
     return (
