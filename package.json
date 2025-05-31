@@ -38,7 +38,7 @@
         "react-popper-tooltip": "4.4.2",
         "react-syntax-highlighter": "^15.6.1",
         "react-use": "17.6.0",
-        "simplebar-react": "3.3.0"
+        "simplebar-react": "3.3.1"
     },
     "devDependencies": {
         "@rollup/plugin-replace": "6.0.2",
