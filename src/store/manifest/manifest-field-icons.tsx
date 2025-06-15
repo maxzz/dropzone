@@ -4,7 +4,7 @@ import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolF
 
 type FieldValidKeys = Exclude<keyof typeof FieldTyp, 'und'>;
 
-export const fieldIcons: Record<FieldValidKeys, (props: {}) => ReactNode> = {
+export const fieldIcons: Record<FieldValidKeys, (props: {}) => ReactNode> = { // remove Promise<ReactNode> from value
     edit: SymbolFieldEdt,
     psw: SymbolFieldPsw,
     check: SymbolFieldChk,
