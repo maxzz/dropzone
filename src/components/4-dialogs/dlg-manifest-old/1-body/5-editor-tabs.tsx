@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
+import { type JSX, type ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { PrimitiveAtom, useAtom } from 'jotai';
 import { TabSelector } from '../3-ui-tab-selector';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';

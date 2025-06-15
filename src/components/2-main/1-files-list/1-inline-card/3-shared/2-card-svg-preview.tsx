@@ -1,5 +1,5 @@
-import { HTMLAttributes, MouseEvent } from 'react';
-import { FieldPath, Meta } from '@/store/manifest';
+import { type JSX, type HTMLAttributes, type MouseEvent } from 'react';
+import { FieldPath, type Meta } from '@/store/manifest';
 import { css } from '@/stitches.config';
 import { classNames } from '@/utils';
 

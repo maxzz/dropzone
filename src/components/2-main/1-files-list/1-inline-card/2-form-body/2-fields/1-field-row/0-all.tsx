@@ -1,3 +1,4 @@
+import { type JSX } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { FileUs, SelectRowAtomsType } from '@/store';
 import { Meta } from '@/store/manifest';
