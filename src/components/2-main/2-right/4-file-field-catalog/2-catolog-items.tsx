@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { type JSX, Fragment } from 'react';
 import { CatalogFile } from 'pm-manifest';
 import { fieldIcons } from '@/store/manifest/manifest-field-icons';
 
@@ -28,6 +28,11 @@ export function CatologItems({ names }: { names: CatalogFile.ItemInFile[]; }) {
 
 function FieldIcon(isPsw: boolean | undefined, className: string) {
     const type = isPsw ? 'psw' : 'edit';
-    const Icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) || <div className="text-red-500">nan</div>;
-    return Icon;
+    const icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) as JSX.Element;
+    const rv = icon || (
+        <div className="text-red-500">
+            nan
+        </div>
+    );
+    return rv;
 }
