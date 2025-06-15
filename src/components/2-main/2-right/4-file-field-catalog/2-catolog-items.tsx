@@ -2,11 +2,6 @@ import { Fragment } from 'react';
 import { CatalogFile } from 'pm-manifest';
 import { fieldIcons } from '@/store/manifest/manifest-field-icons';
 
-function FieldIcon(isPsw: boolean | undefined, className: string) {
-    const type = isPsw ? 'psw' : 'edit';
-    const Icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) || <div className="text-red-500">nan</div>;
-    return Icon;
-}
 export function CatologItems({ names }: { names: CatalogFile.ItemInFile[]; }) {
     return (<>
         {names.map((item, idx) => (
@@ -29,4 +24,10 @@ export function CatologItems({ names }: { names: CatalogFile.ItemInFile[]; }) {
             </Fragment>
         ))}
     </>);
+}
+
+function FieldIcon(isPsw: boolean | undefined, className: string) {
+    const type = isPsw ? 'psw' : 'edit';
+    const Icon = fieldIcons[type]?.({ className, title: `Field type: ${type}`, }) || <div className="text-red-500">nan</div>;
+    return Icon;
 }

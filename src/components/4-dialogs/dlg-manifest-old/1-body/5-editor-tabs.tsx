@@ -15,7 +15,7 @@ type EditorTabsProps = {
 export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selectedTabAtom, captionDragBind }: EditorTabsProps) {
     const [selectedTabId, setSelectedTabId] = useAtom(selectedTabAtom);
 
-    const scrollableNodeRef = useRef<HTMLDivElement>();
+    const scrollableNodeRef = useRef<HTMLDivElement | null>(null);
     const pageScrollOfs = useState<number[]>(() => Array(pageNames.length).fill(0))[0];
 
     useLayoutEffect(() => {
