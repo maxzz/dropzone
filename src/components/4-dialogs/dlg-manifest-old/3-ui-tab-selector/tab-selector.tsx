@@ -18,7 +18,7 @@ const buttonStyles = { filter: 'drop-shadow(#0005 0px 0px .1rem)' };
 export function TabSelector({ tabs, active, setActive }: TabSelectorPrps) {
     const $root = useRef<HTMLDivElement>(null);
     const $indicator = useRef<HTMLDivElement>(null);
-    const $items = useState(() => tabs.map<RefObject<HTMLButtonElement>>(createRef))[0];
+    const $items = useState(() => tabs.map<RefObject<HTMLButtonElement | null>>(createRef))[0];
 
     const [indicatorStyles, api] = useSpring(() => ({ x: 0, y: 0, width: 0, height: 0, config: { mass: .3, tension: 280, friction: 14 } }));
 
