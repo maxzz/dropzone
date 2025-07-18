@@ -1,7 +1,7 @@
-import { atom, PrimitiveAtom } from 'jotai';
-import { atomWithCallback, OnValueChange } from '@/util-hooks';
-import { FileUs, FormIdx } from '@/store';
-import { MatchWebState } from '..';
+import { type PrimitiveAtom, atom } from 'jotai';
+import { type OnValueChange, atomWithCallback } from '@/util-hooks';
+import { type FileUs, FormIdx } from '@/store';
+import { type MatchWebState } from './9-types';
 
 export function createUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<MatchWebState>): PrimitiveAtom<MatchWebState> {
 
