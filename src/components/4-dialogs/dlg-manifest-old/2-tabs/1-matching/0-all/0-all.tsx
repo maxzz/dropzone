@@ -1,4 +1,4 @@
-import { MatchWebStateAtom } from './9-types';
+import { type MatchWebStateAtom } from './9-types';
 import { OurlGroup } from './1-group-ourl';
 import { MurlGroup } from '../2-murl-group';
 import { QurlGroup } from './3-group-qurl';

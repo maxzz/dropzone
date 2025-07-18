@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { Matching } from '@/store/manifest';
-import { type MatchWebStateAtom, urlsDirty } from '../0-all';
+import { type MatchWebStateAtom, areUrlsChanged } from '../0-all';
 import { RadioGroupTooltips } from './2-radio-group-tooltips';
 import { MatchingCheckboxes } from './3-matching-checkboxes';
 import { MatchUrlInput } from './4-match-url-input';
@@ -9,7 +9,7 @@ import { FinalMatchUrl } from './5-final-match-url';
 
 export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const setDirty = useSetAtom(urls.dirtyAtom);
+    const setIsChanged = useSetAtom(urls.isChangedAtom);
     const [rawMD, setRawMD] = useState<Matching.RawMatchData>(initialMD);
 
     useEffect(
@@ -23,7 +23,7 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
             if (rawMD.style === Matching.Style.undef) {
                 const newState = { ...urls, m: urls.o };
                 setUrls(newState);
-                setDirty(urlsDirty(newState));
+                setIsChanged(areUrlsChanged(newState));
             }
         }, [urls.o]
     );
@@ -39,13 +39,13 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
                 setValue={(v: number) => {
                     const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) };
                     setUrls(newState);
-                    setDirty(urlsDirty(newState));
+                    setIsChanged(areUrlsChanged(newState));
                 }}
             />
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
             {!!initialMD.opt && (
-                <MatchingCheckboxes rawMD={rawMD} urls={urls} setUrls={setUrls} setDirty={setDirty} />
+                <MatchingCheckboxes rawMD={rawMD} urls={urls} setUrls={setUrls} setDirty={setIsChanged} />
             )}
         </div>
 

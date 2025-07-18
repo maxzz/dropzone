@@ -31,12 +31,14 @@ function RadioTooltip({ value, curValue, label, title }: { value: number; curVal
     );
 }
 
-type RadioButtonProps = {
-    label: string;
-    groupName?: string;
-    value?: number;
-    checked: boolean;
-} & HTMLAttributes<HTMLLabelElement>;
+type RadioButtonProps =
+    & {
+        label: string;
+        groupName?: string;
+        value?: number;
+        checked: boolean;
+    }
+    & HTMLAttributes<HTMLLabelElement>;
 
 export function RadioButton({ label, groupName, value, checked, ...rest }: RadioButtonProps) {
     return (

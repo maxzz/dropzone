@@ -1,5 +1,5 @@
 import { type JSX } from 'react';
-import { PrimitiveAtom, useAtomValue } from 'jotai';
+import { type PrimitiveAtom, useAtomValue } from 'jotai';
 import { classNames } from '@/utils';
 
 type PageComponentsProps = {

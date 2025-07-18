@@ -1,12 +1,11 @@
 import { useCallback, useState } from 'react';
-import { OnValueChange } from '@/util-hooks';
-import { ManiEditorData } from '@/store';
-import { createUrlsAtom } from './0-create-urls-atom';
+import { useAtomValue } from 'jotai';
+import { type OnValueChange } from '@/util-hooks';
+import { type ManiEditorData } from '@/store';
+import { type MatchWebState, createUrlsAtom } from '../2-tabs/1-matching';
 import { ManiInfoTooltip } from './2-mani-info-tooltip';
 import { BottomButtons } from './3-bottom-buttons';
 import { DialogFrameAndTabs } from './6-dialog-frame-and-tabs';
-import { MatchWebState } from '../2-tabs/1-matching';
-import { useAtomValue } from 'jotai';
 
 type Dialog_ManifestProps = {
     editorData: ManiEditorData;

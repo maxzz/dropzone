@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { a, useSpring } from '@react-spring/web';
 import { UIIconUpDown } from '@ui/icons';
-import { MatchWebStateAtom, urlsDirty } from './9-types';
+import { MatchWebStateAtom, areUrlsChanged } from './9-types';
 
 export function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
-    const setDirty = useSetAtom(urls.dirtyAtom);
+    const setIsChanged = useSetAtom(urls.isChangedAtom);
     const [isOpen, setIsOpen] = useState(false);
 
     const stylesDropdown = useSpring({
@@ -40,7 +40,7 @@ export function QurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
                     onChange={(event) => {
                         const newState = { ...urls, q: event.target.value };
                         setUrls(newState);
-                        setDirty(urlsDirty(newState));
+                        setIsChanged(areUrlsChanged(newState));
                     }}
                 />
             </a.div>

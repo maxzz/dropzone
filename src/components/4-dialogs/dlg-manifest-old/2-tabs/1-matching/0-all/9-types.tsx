@@ -6,13 +6,16 @@ type UrlsState = {
     q: string;
 };
 
-export type MatchWebState = UrlsState & {
-    initial: UrlsState;
-    dirtyAtom: PrimitiveAtom<boolean>; // it should be not dirty but: is initial value?
-};
+export type MatchWebState = Prettify<
+    & UrlsState
+    & {
+        initial: UrlsState;                         // Initial state of urls from file
+        isChangedAtom: PrimitiveAtom<boolean>;      // It should be not dirty but: is initial value?
+    }
+>;
 
 export type MatchWebStateAtom = WritableAtom<MatchWebState, [MatchWebState], void>;
 
-export function urlsDirty(urls: MatchWebState): boolean {
+export function areUrlsChanged(urls: MatchWebState): boolean {
     return urls.m !== urls.initial.m || urls.o !== urls.initial.o || urls.q !== urls.initial.q;
 }

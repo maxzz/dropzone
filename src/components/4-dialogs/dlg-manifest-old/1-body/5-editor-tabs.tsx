@@ -1,8 +1,8 @@
 import { type JSX, type ReactNode, useLayoutEffect, useRef, useState } from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
-import { TabSelector } from '../3-ui-tab-selector';
+import { type PrimitiveAtom, useAtom } from 'jotai';
+import { type ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
 import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
-import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
+import { TabSelector } from '../3-ui-tab-selector';
 
 type EditorTabsProps = {
     pageNames: string[];
@@ -18,9 +18,11 @@ export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selec
     const scrollableNodeRef = useRef<HTMLDivElement | null>(null);
     const pageScrollOfs = useState<number[]>(() => Array(pageNames.length).fill(0))[0];
 
-    useLayoutEffect(() => {
-        scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs[selectedTabId]);
-    }, [selectedTabId]);
+    useLayoutEffect(
+        () => {
+            scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs[selectedTabId]);
+        }, [selectedTabId]
+    );
 
     function onSetActive(tabId: number) {
         pageScrollOfs[selectedTabId] = scrollableNodeRef.current?.scrollTop || 0;

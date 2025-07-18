@@ -1,5 +1,5 @@
 import { Matching } from '@/store/manifest';
-import { MatchWebState, urlsDirty } from '../0-all';
+import { MatchWebState, areUrlsChanged } from '../0-all';
 
 export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: Matching.RawMatchData; urls: MatchWebState; setUrls: (urls: MatchWebState) => void; setDirty: (dirty: boolean) => void; }) {
     return (
@@ -11,7 +11,7 @@ export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: 
                     let opt = event.target.checked ? rawMD.opt | Matching.Options.caseinsensitive : rawMD.opt & ~Matching.Options.caseinsensitive;
                     const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
                     setUrls(newState);
-                    setDirty(urlsDirty(newState));
+                    setDirty(areUrlsChanged(newState));
                 }}
             />
 
@@ -22,7 +22,7 @@ export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: 
                     let opt = event.target.checked ? rawMD.opt | Matching.Options.matchtext : rawMD.opt & ~Matching.Options.matchtext;
                     const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
                     setUrls(newState);
-                    setDirty(urlsDirty(newState));
+                    setDirty(areUrlsChanged(newState));
                 }}
             />
 
@@ -33,7 +33,7 @@ export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: 
                     let opt = event.target.checked ? rawMD.opt | Matching.Options.usequery : rawMD.opt & ~Matching.Options.usequery;
                     const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, opt }, urls.o) };
                     setUrls(newState);
-                    setDirty(urlsDirty(newState));
+                    setDirty(areUrlsChanged(newState));
                 }}
             />
         </div>
