@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom } from 'jotai';
 import { MatchWebStateAtom, areUrlsChanged } from './9-types';
 
-export function OurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+export function Section_Ourl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
     const setIsChanged = useSetAtom(urls.isChangedAtom);
 

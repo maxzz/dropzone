@@ -6,7 +6,7 @@ import { UIIconUpDown } from '@ui/icons';
 import { MatchWebStateAtom } from '../0-all';
 import { MatchHow } from './1-murl-how';
 
-export function MurlGroup({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
+export function Section_Murl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
     const [isOpen, setIsOpen] = useState(urls.o !== urls.m);
     const [initialMD] = useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
