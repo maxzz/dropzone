@@ -1,4 +1,4 @@
-import { MatchWebState } from '../0-urls-dirty';
+import { MatchWebState } from '../0-all';
 
 export function FinalMatchUrl({ urls }: { urls: MatchWebState; }) {
     return (

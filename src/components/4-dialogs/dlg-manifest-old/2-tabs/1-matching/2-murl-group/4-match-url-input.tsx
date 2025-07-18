@@ -1,19 +1,6 @@
 import { Matching } from '@/store/manifest';
 import { classNames } from '@/utils';
-import { MatchWebState } from '../0-urls-dirty';
-
-function messageStyle(style: Matching.Style) {
-    const names = [
-        "Original url",
-        "Match only domain of original url",
-        "Wildcard string",
-        "Regular expresssion",
-        (<>
-            Match original url <span className="text-xs">(url params will be ignored)</span>
-        </>), // without params
-    ];
-    return names[style] || 'No way';
-}
+import { MatchWebState } from '../0-all';
 
 type MatchUrlInputProps = {
     rawMD: Matching.RawMatchData;
@@ -41,4 +28,17 @@ export function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: Mat
             onChange={(e) => setUrls({ ...urls, m: Matching.makeRawMatchData({ ...rawMD, url: e.target.value }, urls.o) })}
         />
     </>);
+}
+
+function messageStyle(style: Matching.Style) {
+    const names = [
+        "Original url",
+        "Match only domain of original url",
+        "Wildcard string",
+        "Regular expresssion",
+        (<>
+            Match original url <span className="text-xs">(url params will be ignored)</span>
+        </>), // without params
+    ];
+    return names[style] || 'No way';
 }

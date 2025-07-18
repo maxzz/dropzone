@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { Matching } from '@/store/manifest';
-import { MatchWebStateAtom, urlsDirty } from '../0-urls-dirty';
+import { type MatchWebStateAtom, urlsDirty } from '../0-all';
 import { RadioGroupTooltips } from './2-radio-group-tooltips';
 import { MatchingCheckboxes } from './3-matching-checkboxes';
 import { MatchUrlInput } from './4-match-url-input';

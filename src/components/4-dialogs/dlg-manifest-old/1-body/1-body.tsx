@@ -5,7 +5,7 @@ import { createUrlsAtom } from './0-create-urls-atom';
 import { ManiInfoTooltip } from './2-mani-info-tooltip';
 import { BottomButtons } from './3-bottom-buttons';
 import { DialogFrameAndTabs } from './6-dialog-frame-and-tabs';
-import { MatchWebState } from '../2-tabs/1-matching/0-urls-dirty';
+import { MatchWebState } from '../2-tabs/1-matching';
 import { useAtomValue } from 'jotai';
 
 type Dialog_ManifestProps = {
