@@ -1,32 +1,39 @@
 import { type ReactNode, useLayoutEffect, useRef, useState } from "react";
-import { type PrimitiveAtom, useAtom } from "jotai";
+import { type PrimitiveAtom, useAtom, useSetAtom } from "jotai";
 import { type ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
 import { UiSemiScrollbar } from "@ui/ui-semi-scrollbar";
 import { TabSelector } from "../3-ui-tab-selector";
 
 type EditorTabsProps = {
     pageNames: string[];
+    pageScrollOfsAtom: PrimitiveAtom<number[]>;
     stateIndicator: ReactNode;
     dialogContentBody: ReactNode;
     selectedTabAtom: PrimitiveAtom<number>;
     captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selectedTabAtom, captionDragBind }: EditorTabsProps) {
+export function EditorTabs({ pageNames, pageScrollOfsAtom, stateIndicator, dialogContentBody, selectedTabAtom, captionDragBind }: EditorTabsProps) {
     const [selectedTabId, setSelectedTabId] = useAtom(selectedTabAtom);
+    const [pageScrollOfs, setPageScrollOfs] = useAtom(pageScrollOfsAtom);
 
     const scrollableNodeRef = useRef<HTMLDivElement | null>(null);
-    const pageScrollOfs = useState<number[]>(() => Array(pageNames.length).fill(0))[0];
+    //const pageScrollOfs = useState<number[]>(() => Array(pageNames.length).fill(0))[0];
 
     useLayoutEffect(
         () => {
+            // scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs[selectedTabId]);
             scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs[selectedTabId]);
         }, [selectedTabId]
     );
 
-    function onSetActive(tabId: number) {
-        pageScrollOfs[selectedTabId] = scrollableNodeRef.current?.scrollTop || 0;
-        setSelectedTabId(tabId);
+    function onSetActive(newTabId: number) {
+        console.log(`onSetActive current:${selectedTabId} new:${newTabId}`);
+        
+        // pageScrollOfs[selectedTabId] = scrollableNodeRef.current?.scrollTop || 0;
+        // setPageScrollOfs(pageScrollOfs.map((v, i) => i === tabId ? scrollableNodeRef.current?.scrollTop || 0 : v));
+        setPageScrollOfs(pageScrollOfs.map((v, i) => i === selectedTabId ? scrollableNodeRef.current?.scrollTop || 0 : v));
+        setSelectedTabId(newTabId);
     }
 
     return (

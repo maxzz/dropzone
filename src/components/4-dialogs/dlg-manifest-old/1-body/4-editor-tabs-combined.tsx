@@ -32,9 +32,12 @@ export function TabsCombined({ editorUrlsAtom, editorData, captionDragBind }: Ta
 
     const selectedTabAtom = useState(() => atom(0))[0];
 
+    const pageScrollOfsAtom = useState(() => atom(Array(pageNames.length).fill(0)))[0];
+
     return (
         <EditorTabs
             pageNames={pageNames}
+            pageScrollOfsAtom={pageScrollOfsAtom}
             stateIndicator={<ManiModifiedIndicator editorUrlsAtom={editorUrlsAtom} />}
             dialogContentBody={<PageContentRender pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />}
             selectedTabAtom={selectedTabAtom}
