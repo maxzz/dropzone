@@ -3,7 +3,7 @@ import { type OnValueChange, atomWithCallback } from "@/utils/util-hooks";
 import { type FileUs, FormIdx } from "@/store";
 import { type MatchWebState } from "./9-types";
 
-export function createUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<MatchWebState>): PrimitiveAtom<MatchWebState> {
+export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<MatchWebState>): PrimitiveAtom<MatchWebState> {
 
     // Page Web Matching
     const {

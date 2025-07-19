@@ -6,8 +6,8 @@ import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, UIIconUpDown } from "@ui/
 import { MatchWebStateAtom } from "../0-all";
 import { MatchHow } from "./1-murl-how";
 
-export function Section_Murl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
-    const urls = useAtomValue(urlsAtom);
+export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
+    const urls = useAtomValue(editorUrlsAtom);
     const [isOpen, setIsOpen] = useState(urls.o !== urls.m);
     const [initialMD] = useState<Matching.RawMatchData>(Matching.parseRawMatchData(urls.m));
 
@@ -41,7 +41,7 @@ export function Section_Murl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
 
         {isOpen && (
             <a.div style={stylesDropdown}>
-                <MatchHow urlsAtom={urlsAtom} initialMD={initialMD} />
+                <MatchHow urlsAtom={editorUrlsAtom} initialMD={initialMD} />
             </a.div>
         )}
     </>);

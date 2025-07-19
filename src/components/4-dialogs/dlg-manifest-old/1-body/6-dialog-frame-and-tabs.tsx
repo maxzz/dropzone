@@ -10,11 +10,17 @@ import { Tab2_MatchWindows } from "../2-tabs/2-match-windows";
 import { Tab3_Options } from "../2-tabs/3-options";
 import { Tab4_Fields } from "../2-tabs/4-fields";
 
-import { ManiModifiedState } from "./1-mani-modified-state";
+import { ManiModifiedIndicator } from "./1-mani-modified-indicator";
 import { PageContentRender } from "./4-page-content-render";
 import { EditorTabs } from "./5-editor-tabs";
 
-export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrameAndTabsProps) {
+type DialogFrameAndTabsProps = {
+    footer: ReactNode;
+    editorUrlsAtom: PrimitiveAtom<MatchWebState>;
+    editorData: ManiEditorData;
+};
+
+export function DialogFrameAndTabs({ footer, editorUrlsAtom, editorData }: DialogFrameAndTabsProps) {
 
     // Dialog caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
@@ -26,24 +32,26 @@ export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrame
 
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr)_auto] bg-gray-200 rounded overflow-hidden">
-
-            <TabsCombined urlsAtom={urlsAtom} editorData={editorData} captionDragBind={captionDragBind} />
-
+            <TabsCombined
+                editorUrlsAtom={editorUrlsAtom}
+                editorData={editorData}
+                captionDragBind={captionDragBind}
+            />
             {footer}
         </a.div>
     );
 }
 
 type TabsCombinedProps = {
-    urlsAtom: PrimitiveAtom<MatchWebState>;
+    editorUrlsAtom: PrimitiveAtom<MatchWebState>;
     editorData: ManiEditorData;
     captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-function TabsCombined({ urlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
+function TabsCombined({ editorUrlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
     // Pages
     const pages = {
-        'Web': <Tab1_MatchWeb urlsAtom={urlsAtom} />,
+        'Web': <Tab1_MatchWeb editorUrlsAtom={editorUrlsAtom} />,
         'Win32': <Tab2_MatchWindows editorData={editorData} />,
         'Options': <Tab3_Options editorData={editorData} />,
         'Fields': <Tab4_Fields editorData={editorData} />,
@@ -57,18 +65,12 @@ function TabsCombined({ urlsAtom, editorData, captionDragBind }: TabsCombinedPro
     return (
         <EditorTabs
             pageNames={pageNames}
-            stateIndicator={<ManiModifiedState urlsAtom={urlsAtom} />}
+            stateIndicator={<ManiModifiedIndicator editorUrlsAtom={editorUrlsAtom} />}
             dialogContentBody={<PageContentRender pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />}
             selectedTabAtom={selectedTabAtom}
             captionDragBind={captionDragBind}
         />
     );
 }
-
-type DialogFrameAndTabsProps = {
-    footer: ReactNode;
-    urlsAtom: PrimitiveAtom<MatchWebState>;
-    editorData: ManiEditorData;
-};
 
 //TODO: add dialog x, y to atom

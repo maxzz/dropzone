@@ -4,8 +4,8 @@ import { a, useSpring } from "@react-spring/web";
 import { UIIconUpDown } from "@ui/icons";
 import { MatchWebStateAtom, areUrlsChanged } from "./9-types";
 
-export function Section_Qurl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
-    const [urls, setUrls] = useAtom(urlsAtom);
+export function Section_Qurl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
+    const [urls, setUrls] = useAtom(editorUrlsAtom);
     const setIsChanged = useSetAtom(urls.isChangedAtom);
     const [isOpen, setIsOpen] = useState(false);
 

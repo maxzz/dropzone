@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { type Getter, useAtomValue } from "jotai";
 import { type OnValueChange } from "@/utils";
 import { type ManiEditorData } from "@/store";
-import { type MatchWebState, createUrlsAtom } from "../2-tabs/1-matching";
+import { type MatchWebState, createEditorUrlsAtom } from "../2-tabs/1-matching";
 import { ManiInfoTooltip } from "./2-mani-info-tooltip";
 import { BottomButtons } from "./3-bottom-buttons";
 import { DialogFrameAndTabs } from "./6-dialog-frame-and-tabs";
@@ -15,17 +15,17 @@ type Dialog_ManifestProps = {
 export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: Dialog_ManifestProps) { /*lazy load*/
     const fileUs = useAtomValue(editorData.fileUsAtom);
 
-    const onUrlsUpdate = useCallback<OnValueChange<MatchWebState>>(
+    const onChangeEditorUrls = useCallback<OnValueChange<MatchWebState>>(
         ({ get, set, nextValue }) => {
             printMatchWebState(nextValue, get);
         }, []
     );
 
-    const urlsAtom = useState(() => createUrlsAtom(fileUs, editorData.formIdx, onUrlsUpdate))[0];
+    const editorUrlsAtom = useState(() => createEditorUrlsAtom(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
 
     return (
         <DialogFrameAndTabs
-            urlsAtom={urlsAtom}
+            editorUrlsAtom={editorUrlsAtom}
             editorData={editorData}
             footer={
                 <div className="px-4 py-4 bg-white flex items-center justify-between">

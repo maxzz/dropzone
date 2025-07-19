@@ -5,8 +5,8 @@ import { MatchWebStateAtom } from "../2-tabs/1-matching";
 
 const shadowStyles = { filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' };
 
-export function ManiModifiedState({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
-    const urls = useAtomValue(urlsAtom);
+export function ManiModifiedIndicator({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
+    const urls = useAtomValue(editorUrlsAtom);
     const isChanged = useAtomValue(urls.isChangedAtom);
 
     if (!isChanged) {
