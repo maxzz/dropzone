@@ -1,5 +1,5 @@
 import { type PrimitiveAtom, atom } from 'jotai';
-import { type OnValueChange, atomWithCallback } from '@/util-hooks';
+import { type OnValueChange, atomWithCallback } from '@/utils/util-hooks';
 import { type FileUs, FormIdx } from '@/store';
 import { type MatchWebState } from './9-types';
 
@@ -13,6 +13,8 @@ export function createUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnVal
     } = fileUs.parsedSrc.meta?.[formIdx]?.mani?.detection || {};
 
     const initial = { o, m, q, };
+
+    console.log('createUrlsAtom', initial);
 
     return atomWithCallback<MatchWebState>(
         {

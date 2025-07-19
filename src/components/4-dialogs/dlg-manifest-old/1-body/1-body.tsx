@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { type Getter, useAtomValue } from 'jotai';
-import { type OnValueChange } from '@/util-hooks';
+import { type OnValueChange } from '@/utils';
 import { type ManiEditorData } from '@/store';
 import { type MatchWebState, createUrlsAtom } from '../2-tabs/1-matching';
 import { ManiInfoTooltip } from './2-mani-info-tooltip';
