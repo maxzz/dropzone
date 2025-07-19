@@ -1,5 +1,5 @@
-import { atomWithCallback } from "@/util-hooks";
-import { UISize } from "@/store/store-types";
+import { atomWithCallback } from "@/utils";
+import { type UISize } from "@/store/store-types";
 import { LocalStorageSave, } from "@/store/store-localstorage-save";
 import { LocalStorage } from "@/store/store-localstorage-load";
 

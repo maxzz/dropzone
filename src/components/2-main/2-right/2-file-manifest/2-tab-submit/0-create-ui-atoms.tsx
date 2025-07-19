@@ -1,7 +1,6 @@
-import { Getter, Setter } from 'jotai';
-import { Atomize, OnValueChangeAny, atomWithCallback } from '@/util-hooks';
+import { type Getter, type Setter } from 'jotai';
+import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from '@/utils';
 import { Meta } from '@/store/manifest';
-import { debounce } from '@/utils';
 
 type SubitForAtoms = {
     doSubmit: boolean;
@@ -11,7 +10,7 @@ type SubitAtoms = Prettify<Atomize<SubitForAtoms>>;
 
 export function createUiAtoms(form: Meta.Form, onChange: OnValueChangeAny): SubitAtoms {
     return {
-        doSubmitAtom: atomWithCallback(true, onChange),
+        doSubmitAtom: atomWithCallback<boolean>(true, onChange),
     };
 }
 

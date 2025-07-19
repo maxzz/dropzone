@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
-import { useElementClickAway } from '@/util-hooks';
+import { useElementClickAway } from '@/utils';
 import { UiPortal } from '@ui/ui-portal';
 import { HeaderButton } from './1-header-button';
 

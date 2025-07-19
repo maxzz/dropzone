@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Atomize } from "@/util-hooks";
+import { type Atomize } from "@/utils";
 
 // Open sections
 
