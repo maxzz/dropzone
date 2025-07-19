@@ -24,6 +24,19 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
     const editorUrlsAtom = useState(() => createEditorUrlsAtom(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
 
     return (
+        // <DialogFrameAndTabs>
+        //     <TabsCombined
+        //         editorUrlsAtom={editorUrlsAtom}
+        //         editorData={editorData}
+        //         captionDragBind={captionDragBind}
+        //     />
+
+        //     <div className="px-4 py-4 bg-white flex items-center justify-between">
+        //         <ManiInfoTooltip editorData={editorData} />
+        //         <BottomButtons setShow={setShow} />
+        //     </div>
+        // </DialogFrameAndTabs>
+
         <DialogFrameAndTabs
             editorUrlsAtom={editorUrlsAtom}
             editorData={editorData}
