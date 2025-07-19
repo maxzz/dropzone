@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useAtomValue } from 'jotai';
+import { type Getter, useAtomValue } from 'jotai';
 import { type OnValueChange } from '@/util-hooks';
 import { type ManiEditorData } from '@/store';
 import { type MatchWebState, createUrlsAtom } from '../2-tabs/1-matching';
@@ -16,8 +16,8 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
     const fileUs = useAtomValue(editorData.fileUsAtom);
 
     const onUrlsUpdate = useCallback<OnValueChange<MatchWebState>>(
-        ({ nextValue }) => {
-            console.log('urls updated', nextValue);
+        ({ get, set, nextValue }) => {
+            printMatchWebState(nextValue, get);
         }, []
     );
 
@@ -35,6 +35,10 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
             }
         />
     );
+}
+
+function printMatchWebState(urls: MatchWebState, get: Getter) {
+    console.log('MatchWebState', JSON.stringify(urls, null, 4));
 }
 
 //TODO: events onTabChange w/ ability to cancel
