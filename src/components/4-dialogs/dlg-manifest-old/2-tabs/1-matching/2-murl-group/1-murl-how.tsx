@@ -16,13 +16,13 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
 
     useEffect(
         () => {
-            setRawMD(Matching.getMatchRawData(urls.m));
+            setRawMD(Matching.parseRawMatchData(urls.m));
         }, [urls.m]
     );
 
     useEffect(
         () => {
-            if (rawMD.style === Matching.Style.undef) {
+            if (rawMD.how === Matching.How.undef) {
                 const newState = { ...urls, m: urls.o };
                 setUrls(newState);
                 setIsChanged(areUrlsChanged(newState));
@@ -30,18 +30,18 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         }, [urls.o]
     );
 
-    function setSelectedMatch(v: Matching.Style) {
-        const newState = { ...urls, m: Matching.makeRawMatchData({ ...rawMD, style: v, }, urls.o) };
+    function setSelectedMatch(v: Matching.How) {
+        const newState = { ...urls, m: Matching.stringifyRawMatchData({ ...rawMD, how: v, }, urls.o) };
         setUrls(newState);
         setIsChanged(areUrlsChanged(newState));
     }
 
-    const disabled = rawMD.style === Matching.Style.undef;
+    const disabled = rawMD.how === Matching.How.undef;
 
     return (<>
         <div className="flex space-x-4">
             {/* How match radio buttons */}
-            <RadioGroupTooltips value={rawMD.style} setValue={setSelectedMatch} />
+            <RadioGroupTooltips value={rawMD.how} setValue={setSelectedMatch} />
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
             {!!initialMD.opt && (

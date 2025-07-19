@@ -16,7 +16,7 @@ export function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: Mat
     function onChange(event: ChangeEvent<HTMLInputElement>) {
         setUrls({
             ...urls,
-            m: Matching.makeRawMatchData(
+            m: Matching.stringifyRawMatchData(
                 { ...rawMD, url: event.target.value, },
                 urls.o,
             ),
@@ -25,7 +25,7 @@ export function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: Mat
 
     return (<>
         <div className={classNames('mt-1 mb-1', disabled && 'opacity-50')}>
-            <MatchUrlInputLabel matchStyle={rawMD.style} />
+            <MatchUrlInputLabel matchStyle={rawMD.how} />
         </div>
 
         <input
@@ -40,7 +40,7 @@ export function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: Mat
     </>);
 }
 
-function MatchUrlInputLabel({ matchStyle }: { matchStyle: Matching.Style; }) {
+function MatchUrlInputLabel({ matchStyle }: { matchStyle: Matching.How; }) {
     const names = [
         "Original url",
         "Match only domain of original url",

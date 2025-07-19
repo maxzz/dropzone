@@ -9,7 +9,7 @@ import { MatchHow } from "./1-murl-how";
 export function Section_Murl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);
     const [isOpen, setIsOpen] = useState(urls.o !== urls.m);
-    const [initialMD] = useState<Matching.RawMatchData>(Matching.getMatchRawData(urls.m));
+    const [initialMD] = useState<Matching.RawMatchData>(Matching.parseRawMatchData(urls.m));
 
     const stylesDropdown = useSpring({
         height: isOpen ? 'auto' : 0,
