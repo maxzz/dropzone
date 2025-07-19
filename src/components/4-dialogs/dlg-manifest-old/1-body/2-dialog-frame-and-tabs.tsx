@@ -10,9 +10,9 @@ import { Tab2_MatchWindows } from "../2-tabs/2-match-windows";
 import { Tab3_Options } from "../2-tabs/3-options";
 import { Tab4_Fields } from "../2-tabs/4-fields";
 
-import { ManiModifiedIndicator } from "./1-mani-modified-indicator";
-import { PageContentRender } from "./4-page-content-render";
-import { EditorTabs } from "./5-editor-tabs";
+import { ManiModifiedIndicator } from "./8-mani-modified-indicator";
+import { PageContentRender } from "./3-page-content-render";
+import { EditorTabs } from "./4-editor-tabs";
 
 type DialogFrameAndTabsProps = {
     footer: ReactNode;

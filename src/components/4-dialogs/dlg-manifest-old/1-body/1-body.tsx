@@ -3,9 +3,9 @@ import { type Getter, useAtomValue } from "jotai";
 import { type OnValueChange } from "@/utils";
 import { type ManiEditorData } from "@/store";
 import { type MatchWebState, createEditorUrlsAtom } from "../2-tabs/1-matching";
-import { ManiInfoTooltip } from "./2-mani-info-tooltip";
-import { BottomButtons } from "./3-bottom-buttons";
-import { DialogFrameAndTabs } from "./6-dialog-frame-and-tabs";
+import { ManiInfoTooltip } from "./8-mani-info-tooltip";
+import { BottomButtons } from "./5-bottom-buttons";
+import { DialogFrameAndTabs } from "./2-dialog-frame-and-tabs";
 
 type Dialog_ManifestProps = {
     editorData: ManiEditorData;
