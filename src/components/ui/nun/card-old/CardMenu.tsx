@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
-import { classNames } from '@/utils';
-import { EllipsisVerticalIcon as DotsVerticalIcon } from '@heroicons/react/24/solid';
+import { Fragment } from "react";
+import { classNames } from "@/utils";
+import { EllipsisVerticalIcon as DotsVerticalIcon } from "@heroicons/react/24/solid";
 
 /* This example requires Tailwind CSS v2.0+ */
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
-import { UiPortal } from '@ui/ui-portal';
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
+import { UiPortal } from "@ui/ui-portal";
 
 export function Example() {
     return (

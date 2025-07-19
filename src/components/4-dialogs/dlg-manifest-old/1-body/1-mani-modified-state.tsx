@@ -1,7 +1,7 @@
-import { useAtomValue } from 'jotai';
-import { SymbolAttention } from '@ui/icons';
-import { MatchWebStateAtom } from '../2-tabs/1-matching';
-//import { toastWarning } from '@ui/UIToaster';
+import { useAtomValue } from "jotai";
+import { SymbolAttention } from "@ui/icons";
+import { MatchWebStateAtom } from "../2-tabs/1-matching";
+//import { toastWarning } from "@ui/UIToaster";
 
 const shadowStyles = { filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' };
 

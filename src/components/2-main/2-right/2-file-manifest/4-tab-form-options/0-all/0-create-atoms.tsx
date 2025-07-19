@@ -1,6 +1,6 @@
-import { type Getter, type Setter, atom } from 'jotai';
+import { type Getter, type Setter } from "jotai";
 import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from "@/utils";
-import { type FileUsAtomType, FormIdx } from '@/store';
+import { type FileUsAtomType, FormIdx } from "@/store";
 
 type UiPart1General = {
     name: string;       // login name

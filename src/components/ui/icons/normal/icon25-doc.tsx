@@ -1,4 +1,4 @@
-import { HTMLAttributes, SVGAttributes } from 'react';
+import { HTMLAttributes, SVGAttributes } from "react";
 
 export function IconDocument({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) { // temp for now as a copy of IconDocumentsAccepted() wo/ horizontal alignment
     return (

@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useAtom } from 'jotai';
-import { ManiEditorData } from '@/store';
-import { UIIconUpDown } from '@ui/icons';
-import { DummyPlaceholder } from '../3-options';
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { ManiEditorData } from "@/store";
+import { UIIconUpDown } from "@ui/icons";
+import { DummyPlaceholder } from "../3-options";
 
 function TabFieldsScript({ editorData }: { editorData: ManiEditorData; }) {
     return (

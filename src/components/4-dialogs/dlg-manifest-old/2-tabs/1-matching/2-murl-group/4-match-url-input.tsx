@@ -1,7 +1,7 @@
-import { Matching } from '@/store/manifest';
-import { classNames } from '@/utils';
-import { MatchWebState } from '../0-all';
-import { ChangeEvent } from 'react';
+import { Matching } from "@/store/manifest";
+import { classNames } from "@/utils";
+import { MatchWebState } from "../0-all";
+import { ChangeEvent } from "react";
 
 type MatchUrlInputProps = {
     rawMD: Matching.RawMatchData;

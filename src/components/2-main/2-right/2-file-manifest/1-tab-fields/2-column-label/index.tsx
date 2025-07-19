@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
-import { classNames, turnOffAutoComplete } from '@/utils';
+import { InputHTMLAttributes } from "react";
+import { PrimitiveAtom, useAtom } from "jotai";
+import { classNames, turnOffAutoComplete } from "@/utils";
 
 type Column2_LabelProps =
     & {

@@ -1,6 +1,6 @@
-import { type Getter, type Setter } from 'jotai';
-import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from '@/utils';
-import { type Meta, type ValueLife, TransformValue } from '@/store/manifest';
+import { type Getter, type Setter } from "jotai";
+import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from "@/utils";
+import { type Meta, type ValueLife, TransformValue } from "@/store/manifest";
 
 type TableRowForAtoms = {
     useIt: boolean;

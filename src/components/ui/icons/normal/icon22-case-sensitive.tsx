@@ -1,4 +1,4 @@
-import { HTMLAttributes, SVGAttributes } from 'react';
+import { HTMLAttributes, SVGAttributes } from "react";
 
 export function IconCaseSensitive({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (

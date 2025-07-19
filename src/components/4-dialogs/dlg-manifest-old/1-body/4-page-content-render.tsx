@@ -1,6 +1,6 @@
-import { type JSX } from 'react';
-import { type PrimitiveAtom, useAtomValue } from 'jotai';
-import { classNames } from '@/utils';
+import { type JSX } from "react";
+import { type PrimitiveAtom, useAtomValue } from "jotai";
+import { classNames } from "@/utils";
 
 type PageComponentsProps = {
     pageComponents: JSX.Element[];

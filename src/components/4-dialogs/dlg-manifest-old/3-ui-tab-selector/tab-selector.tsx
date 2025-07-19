@@ -1,6 +1,6 @@
 import { RefObject, createRef, useEffect, useRef, useState } from "react";
 import { a, useSpring } from "@react-spring/web";
-import { classNames } from '@/utils';
+import { classNames } from "@/utils";
 
 export function TabSelector({ tabs, active, setActive }: TabSelectorPrps) {
     const $root = useRef<HTMLDivElement>(null);

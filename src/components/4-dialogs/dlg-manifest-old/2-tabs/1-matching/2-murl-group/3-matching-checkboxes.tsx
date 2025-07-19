@@ -1,5 +1,5 @@
-import { Matching } from '@/store/manifest';
-import { type MatchWebState, areUrlsChanged } from '../0-all';
+import { Matching } from "@/store/manifest";
+import { type MatchWebState, areUrlsChanged } from "../0-all";
 
 export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: Matching.RawMatchData; urls: MatchWebState; setUrls: (urls: MatchWebState) => void; setDirty: (dirty: boolean) => void; }) {
 

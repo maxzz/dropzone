@@ -1,7 +1,7 @@
-import { type MatchWebStateAtom } from './9-types';
-import { Section_Ourl } from './1-section-ourl';
-import { Section_Murl } from '../2-murl-group';
-import { Section_Qurl } from './3-section-qurl';
+import { type MatchWebStateAtom } from "./9-types";
+import { Section_Ourl } from "./1-section-ourl";
+import { Section_Murl } from "../2-murl-group";
+import { Section_Qurl } from "./3-section-qurl";
 
 export function Tab1_MatchWeb({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     return (

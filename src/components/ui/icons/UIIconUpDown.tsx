@@ -1,4 +1,4 @@
-import { SymbolChevronDown, SymbolChevronUp, SymbolDoubleDown } from './symbols';
+import { SymbolChevronDown, SymbolChevronUp, SymbolDoubleDown } from "./symbols";
 
 export function UIIconUpDown({ isUp, double = false, className }: { isUp: boolean; double?: boolean; className: string; }) {
     if (double) {

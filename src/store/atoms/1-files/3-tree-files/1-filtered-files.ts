@@ -1,11 +1,11 @@
-import { atom } from 'jotai';
-import { filesAtom } from '../0-files-atom';
+import { atom } from "jotai";
+import { filesAtom } from "../0-files-atom";
 import { FileUsAtomType } from "@/store/store-types";
-import { useFileUsByFilter } from '@/store/store-utils';
+import { useFileUsByFilter } from "@/store/store-utils";
 import { createRegexByFilter } from "@/store/store-utils/3-filters";
-import { isAnyMatchedCap, isAnyMatchedCls, isAnyWeb, isAnyWhy, isAnyEmpty, isAnyManual } from 'pm-manifest';
-import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom } from '../../9-ui-state';
-import { sortResult } from './2-filtered-sort';
+import { isAnyMatchedCap, isAnyMatchedCls, isAnyWeb, isAnyWhy, isAnyEmpty, isAnyManual } from "pm-manifest";
+import { busyAtom, orderAtom, searchFilterData, showManiAtoms, sortByAtom } from "../../9-ui-state";
+import { sortResult } from "./2-filtered-sort";
 
 export const filteredAtom = atom<FileUsAtomType[]>(
     (get) => {

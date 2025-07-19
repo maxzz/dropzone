@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import { PrimitiveAtom, useAtom } from "jotai";
-import * as Select from '@radix-ui/react-select';
+import * as Select from "@radix-ui/react-select";
 import { SymbolChevronDown } from "@ui/icons";
 import { CheckIcon } from "@radix-ui/react-icons";
 

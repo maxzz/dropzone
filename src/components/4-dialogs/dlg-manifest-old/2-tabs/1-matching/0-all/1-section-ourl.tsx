@@ -1,5 +1,5 @@
-import { useAtom, useSetAtom } from 'jotai';
-import { MatchWebStateAtom, areUrlsChanged } from './9-types';
+import { useAtom, useSetAtom } from "jotai";
+import { MatchWebStateAtom, areUrlsChanged } from "./9-types";
 
 export function Section_Ourl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);

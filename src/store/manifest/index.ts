@@ -1,1 +1,1 @@
-export * from 'pm-manifest';
+export * from "pm-manifest";

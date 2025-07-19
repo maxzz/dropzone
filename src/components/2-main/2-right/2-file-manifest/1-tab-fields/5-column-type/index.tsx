@@ -1,8 +1,8 @@
-import { InputHTMLAttributes } from 'react';
-import { PrimitiveAtom as PA, useAtomValue } from 'jotai';
-import { Meta } from '@/store/manifest';
-import { classNames } from '@/utils';
-import { FieldTypeIconComponent, fieldTypeTitle } from '@/store/manifest/manifest-field-icons';
+import { InputHTMLAttributes } from "react";
+import { PrimitiveAtom as PA, useAtomValue } from "jotai";
+import { Meta } from "@/store/manifest";
+import { classNames } from "@/utils";
+import { FieldTypeIconComponent, fieldTypeTitle } from "@/store/manifest/manifest-field-icons";
 
 type Column5_TypeProps = InputHTMLAttributes<HTMLInputElement> & {
     useItAtom: PA<boolean>;

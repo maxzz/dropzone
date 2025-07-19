@@ -1,5 +1,5 @@
-import { type ChangeEvent, type HTMLAttributes } from 'react';
-import { UiTip, tipSmall } from '@ui/ui-tooltip';
+import { type ChangeEvent, type HTMLAttributes } from "react";
+import { UiTip, tipSmall } from "@ui/ui-tooltip";
 
 export function RadioGroupTooltips({ value, setValue }: { value: number; setValue: (v: number) => void; }) {
     return (

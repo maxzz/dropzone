@@ -1,4 +1,4 @@
-import { classNames } from '@/utils';
+import { classNames } from "@/utils";
 
 const tableColumns = [
     ["Field for", "Name of the field to which the policy will be applied" /*hint*/, "" /*classes*/],

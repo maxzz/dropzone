@@ -1,6 +1,6 @@
-import { useAtom } from 'jotai';
-import { FormOptionsAtoms } from '../0-all/0-create-atoms';
-import { RowInput, RowBoolean } from '../4-controls';
+import { useAtom } from "jotai";
+import { FormOptionsAtoms } from "../0-all/0-create-atoms";
+import { RowInput, RowBoolean } from "../4-controls";
 
 export function Part4QL({ atoms }: { atoms: FormOptionsAtoms; }) {
     const [dashboard, setDashboard] = useAtom(atoms.uiPart4QL.dashboardAtom);

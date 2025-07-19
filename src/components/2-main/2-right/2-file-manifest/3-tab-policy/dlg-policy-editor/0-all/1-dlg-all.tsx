@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { a, config, useTransition } from "@react-spring/web";
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from "@radix-ui/react-dialog";
 import { Meta } from "@/store/manifest";
 import { createUiAtoms, debouncedCombinedResultFromAtoms } from "./0-create-ui-atoms";
 import { PolicyEditorBody } from "./2-editor-body";

@@ -1,4 +1,4 @@
-import { FormIdx } from '@/store';
+import { FormIdx } from "@/store";
 
 export function NoForm(formType: FormIdx) {
     const label = formType === FormIdx.login ? "No login form" : "No password change form";

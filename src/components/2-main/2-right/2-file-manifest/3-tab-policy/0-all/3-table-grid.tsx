@@ -1,5 +1,5 @@
-import { Meta } from '@/store/manifest';
-import { FieldWithPolicyRow } from './4-table-row';
+import { Meta } from "@/store/manifest";
+import { FieldWithPolicyRow } from "./4-table-row";
 
 export function PoliciesGrid({ policies }: { policies: Meta.Field[]; }) {
     return (<>

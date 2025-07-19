@@ -1,6 +1,6 @@
-import React, { InputHTMLAttributes } from 'react';
-import { classNames } from '@/utils';
-import { PrimitiveAtom, useAtom } from 'jotai';
+import React, { InputHTMLAttributes } from "react";
+import { classNames } from "@/utils";
+import { PrimitiveAtom, useAtom } from "jotai";
 
 type RowBooleanProps = InputHTMLAttributes<HTMLInputElement> & {
     useItAtom: PrimitiveAtom<boolean>;

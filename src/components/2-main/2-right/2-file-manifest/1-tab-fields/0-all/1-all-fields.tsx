@@ -1,6 +1,6 @@
-import { FieldTyp, Meta } from '@/store/manifest';
-import { TableHeader } from './2-table-header';
-import { TableRow } from './3-table-row';
+import { FieldTyp, Meta } from "@/store/manifest";
+import { TableHeader } from "./2-table-header";
+import { TableRow } from "./3-table-row";
 
 const gridClasses = "\
 p-2 \

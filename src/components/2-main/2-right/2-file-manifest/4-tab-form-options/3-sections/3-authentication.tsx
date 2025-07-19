@@ -1,5 +1,5 @@
-import { FormOptionsAtoms } from '../0-all/0-create-atoms';
-import { RowBoolean } from '../4-controls';
+import { FormOptionsAtoms } from "../0-all/0-create-atoms";
+import { RowBoolean } from "../4-controls";
 
 export function Part3Authentication({ atoms }: { atoms: FormOptionsAtoms; }) {
     return (<>

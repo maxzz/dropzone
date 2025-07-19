@@ -1,8 +1,8 @@
-import { type JSX, type ReactNode, useLayoutEffect, useRef, useState } from 'react';
-import { type PrimitiveAtom, useAtom } from 'jotai';
-import { type ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
-import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
-import { TabSelector } from '../3-ui-tab-selector';
+import { type JSX, type ReactNode, useLayoutEffect, useRef, useState } from "react";
+import { type PrimitiveAtom, useAtom } from "jotai";
+import { type ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
+import { UiSemiScrollbar } from "@ui/ui-semi-scrollbar";
+import { TabSelector } from "../3-ui-tab-selector";
 
 type EditorTabsProps = {
     pageNames: string[];

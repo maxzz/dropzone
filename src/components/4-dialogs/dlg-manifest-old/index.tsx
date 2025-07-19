@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react';
-import { useAtom } from 'jotai';
-import { dialogManiEditorDataAtom } from '@/store';
-import { OldOverlay_PortalModal } from '@ui/ui-dialog';
+import React, { Suspense } from "react";
+import { useAtom } from "jotai";
+import { dialogManiEditorDataAtom } from "@/store";
+import { OldOverlay_PortalModal } from "@ui/ui-dialog";
 
 const Manifest_FormEditor = React.lazy(() => import("./1-body"));
 

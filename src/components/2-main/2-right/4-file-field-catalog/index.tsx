@@ -1,8 +1,8 @@
-import { useAtom } from 'jotai';
-import { FileUsAtomType } from '@/store';
-import { Scroller } from '../../../ui/scroller';
-import { CatologHeader } from './1-catolog-header';
-import { CatologItems } from './2-catolog-items';
+import { useAtom } from "jotai";
+import { FileUsAtomType } from "@/store";
+import { Scroller } from "../../../ui/scroller";
+import { CatologHeader } from "./1-catolog-header";
+import { CatologItems } from "./2-catolog-items";
 
 export function Body_FieldCatalog({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     const [fileUs] = useAtom(fileUsAtom);

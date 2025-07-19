@@ -1,4 +1,4 @@
-import { type PrimitiveAtom, type WritableAtom } from 'jotai';
+import { type PrimitiveAtom, type WritableAtom } from "jotai";
 
 type UrlsState = {
     o: string;

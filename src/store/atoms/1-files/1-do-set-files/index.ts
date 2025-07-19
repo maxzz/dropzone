@@ -1,10 +1,10 @@
-import { atom } from 'jotai';
+import { atom } from "jotai";
 import { type FileContent, type FileUs, type FileUsAtomType, type ParsedSrc } from "@/store/store-types";
-import { filesAtom } from '../0-files-atom';
-import { doUpdateCacheAtom } from '../5-do-update-cache';
-import { _foldAllCardsAtom } from '../../9-ui-state';
-import { rightPanelAtoms } from '../../2-right-panel';
-import { uuid } from '@/utils';
+import { filesAtom } from "../0-files-atom";
+import { doUpdateCacheAtom } from "../5-do-update-cache";
+import { _foldAllCardsAtom } from "../../9-ui-state";
+import { rightPanelAtoms } from "../../2-right-panel";
+import { uuid } from "@/utils";
 
 function pathWoFilename(fileHandle: File): string {
     const rv = ((fileHandle as any).path as string || '')

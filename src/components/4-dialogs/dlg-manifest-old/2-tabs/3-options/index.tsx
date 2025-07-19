@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { ManiEditorData } from '@/store';
-import { UIIconUpDown } from '@ui/icons';
+import { useState } from "react";
+import { ManiEditorData } from "@/store";
+import { UIIconUpDown } from "@ui/icons";
 
 export function DummyPlaceholder() {
     return (<>

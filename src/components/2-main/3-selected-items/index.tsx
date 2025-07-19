@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAtomValue } from 'jotai';
-import { FileUsAtomType, selected4ActionAtom } from '@/store';
-import { IconDocument } from '@ui/icons';
+import React from "react";
+import { useAtomValue } from "jotai";
+import { FileUsAtomType, selected4ActionAtom } from "@/store";
+import { IconDocument } from "@ui/icons";
 
 function SelectedItem({ selectedAtom }: { selectedAtom: FileUsAtomType; }) {
     const selected = useAtomValue(selectedAtom);

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { atom, useAtom, useAtomValue } from 'jotai';
-import { FileUsAtomType, FormIdx } from '@/store';
-import { Meta } from '@/store/manifest';
-import { createUiAtoms, debouncedCombinedResultFromAtoms } from './0-create-ui-atoms';
-import { TableHeader } from './2-table-header';
-import { PoliciesGrid } from './3-table-grid';
+import { useEffect, useState } from "react";
+import { atom, useAtom, useAtomValue } from "jotai";
+import { FileUsAtomType, FormIdx } from "@/store";
+import { Meta } from "@/store/manifest";
+import { createUiAtoms, debouncedCombinedResultFromAtoms } from "./0-create-ui-atoms";
+import { TableHeader } from "./2-table-header";
+import { PoliciesGrid } from "./3-table-grid";
 
 export function ManiSection3_Policy({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; formIdx: FormIdx; }) {
     const policiesAtom = useState(() => atom<Meta.Field[]>([]))[0];

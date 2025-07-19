@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
-import { CatalogFile } from 'pm-manifest';
-import { FieldIcon } from '@/components/4-dialogs/dlg-fld-catalog';
+import { Fragment } from "react";
+import { CatalogFile } from "pm-manifest";
+import { FieldIcon } from "@/components/4-dialogs/dlg-fld-catalog";
 
 export function CatologItems({ names }: { names: CatalogFile.ItemInFile[]; }) {
     return (<>

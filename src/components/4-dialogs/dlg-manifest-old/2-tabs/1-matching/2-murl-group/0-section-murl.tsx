@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useAtomValue } from 'jotai';
-import { a, useSpring } from '@react-spring/web';
-import { Matching } from '@/store/manifest';
-import { UIIconUpDown } from '@ui/icons';
-import { MatchWebStateAtom } from '../0-all';
-import { MatchHow } from './1-murl-how';
+import { useState } from "react";
+import { useAtomValue } from "jotai";
+import { a, useSpring } from "@react-spring/web";
+import { Matching } from "@/store/manifest";
+import { UIIconUpDown } from "@ui/icons";
+import { MatchWebStateAtom } from "../0-all";
+import { MatchHow } from "./1-murl-how";
 
 export function Section_Murl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const urls = useAtomValue(urlsAtom);

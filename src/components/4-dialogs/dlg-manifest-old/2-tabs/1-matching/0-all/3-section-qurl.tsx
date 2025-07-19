@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useAtom, useSetAtom } from 'jotai';
-import { a, useSpring } from '@react-spring/web';
-import { UIIconUpDown } from '@ui/icons';
-import { MatchWebStateAtom, areUrlsChanged } from './9-types';
+import { useState } from "react";
+import { useAtom, useSetAtom } from "jotai";
+import { a, useSpring } from "@react-spring/web";
+import { UIIconUpDown } from "@ui/icons";
+import { MatchWebStateAtom, areUrlsChanged } from "./9-types";
 
 export function Section_Qurl({ urlsAtom }: { urlsAtom: MatchWebStateAtom; }) {
     const [urls, setUrls] = useAtom(urlsAtom);

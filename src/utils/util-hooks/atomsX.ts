@@ -1,4 +1,4 @@
-import { atom, Getter, PrimitiveAtom, SetStateAction, Setter, WritableAtom } from 'jotai';
+import { atom, Getter, PrimitiveAtom, SetStateAction, Setter, WritableAtom } from "jotai";
 
 // version: 04.03.24, 07.04.25
 

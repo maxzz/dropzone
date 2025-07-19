@@ -1,18 +1,18 @@
-import { type ReactNode, useState } from 'react';
-import { type PrimitiveAtom, atom } from 'jotai';
-import { type ManiEditorData } from '@/store';
-import { useDrag } from '@use-gesture/react';
-import { a, useSpring } from '@react-spring/web';
-import { type ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types';
+import { type ReactNode, useState } from "react";
+import { type PrimitiveAtom, atom } from "jotai";
+import { type ManiEditorData } from "@/store";
+import { useDrag } from "@use-gesture/react";
+import { a, useSpring } from "@react-spring/web";
+import { type ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
 
-import { type MatchWebState, Tab1_MatchWeb } from '../2-tabs/1-matching';
-import { Tab2_MatchWindows } from '../2-tabs/2-match-windows';
-import { Tab3_Options } from '../2-tabs/3-options';
-import { Tab4_Fields } from '../2-tabs/4-fields';
+import { type MatchWebState, Tab1_MatchWeb } from "../2-tabs/1-matching";
+import { Tab2_MatchWindows } from "../2-tabs/2-match-windows";
+import { Tab3_Options } from "../2-tabs/3-options";
+import { Tab4_Fields } from "../2-tabs/4-fields";
 
-import { ManiModifiedState } from './1-mani-modified-state';
-import { PageContentRender } from './4-page-content-render';
-import { EditorTabs } from './5-editor-tabs';
+import { ManiModifiedState } from "./1-mani-modified-state";
+import { PageContentRender } from "./4-page-content-render";
+import { EditorTabs } from "./5-editor-tabs";
 
 export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrameAndTabsProps) {
 

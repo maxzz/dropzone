@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAtom } from 'jotai';
-import { splitPaneAtom } from '@/store';
-import { SimpleSplitPaneBody, SplitPaneProps } from './SimpleSplitPane';
+import React from "react";
+import { useAtom } from "jotai";
+import { splitPaneAtom } from "@/store";
+import { SimpleSplitPaneBody, SplitPaneProps } from "./SimpleSplitPane";
 
 export function SimpleSplitPane(props: SplitPaneProps) {
     // Position is really the size (width or height) of the first (left or top) panel,

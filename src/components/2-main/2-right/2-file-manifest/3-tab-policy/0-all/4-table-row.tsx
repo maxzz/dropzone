@@ -1,8 +1,8 @@
-import { InputHTMLAttributes } from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
-import { Meta } from '@/store/manifest';
-import { PolicyEditorDlg } from '../dlg-policy-editor';
-import { classNames, turnOffAutoComplete } from '@/utils';
+import { InputHTMLAttributes } from "react";
+import { PrimitiveAtom, useAtom } from "jotai";
+import { Meta } from "@/store/manifest";
+import { PolicyEditorDlg } from "../dlg-policy-editor";
+import { classNames, turnOffAutoComplete } from "@/utils";
 
 function Input({ valueAtom, className, ...rest }: { valueAtom: PrimitiveAtom<string>; } & InputHTMLAttributes<HTMLInputElement>) {
     const [value, setValue] = useAtom(valueAtom);

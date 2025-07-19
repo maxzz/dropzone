@@ -1,5 +1,5 @@
 import { FileContent, FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
-import { TimeUtils } from '@/store/manifest';
+import { TimeUtils } from "@/store/manifest";
 
 export function fileUsStats(fileCnt: FileContent, parsedSrc: ParsedSrc): FileUsStats {
     const loginForm = parsedSrc.mani?.forms[0];
