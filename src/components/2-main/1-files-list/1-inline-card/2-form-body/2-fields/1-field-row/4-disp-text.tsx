@@ -1,5 +1,5 @@
-import { Mani } from '@/store/manifest';
-import { classNames } from '@/utils';
+import { Mani } from "@/store/manifest";
+import { classNames } from "@/utils";
 
 export function part4_DispText(useIt: boolean | undefined, type: Mani.FieldTypeStr | 'NOTYPE', displayname: string) {
     return (

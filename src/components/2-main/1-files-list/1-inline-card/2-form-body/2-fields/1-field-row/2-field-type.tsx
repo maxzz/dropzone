@@ -1,5 +1,5 @@
-import { FieldTyp, Mani, Meta } from '@/store/manifest';
-import { FieldTypeIconComponent, fieldTypeTitle } from '@/store/manifest/manifest-field-icons';
+import { FieldTyp, Mani, Meta } from "@/store/manifest";
+import { FieldTypeIconComponent, fieldTypeTitle } from "@/store/manifest/manifest-field-icons";
 
 export function part2_FieldType(type: Mani.FieldTypeStr | 'NOTYPE', field: Meta.Field) {
     const shortTitle = field.ftyp === FieldTyp.psw ? 'psw' : type;

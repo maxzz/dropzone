@@ -1,17 +1,17 @@
-import { type JSX } from 'react';
-import { useAtom, useSetAtom } from 'jotai';
-import { FileUs, SelectRowAtomsType } from '@/store';
-import { Meta } from '@/store/manifest';
-import { classNames } from '@/utils';
-import { part1_UseIt } from './1-use-it';
-import { part2_FieldType } from './2-field-type';
-import { part3_Preview } from './3-preview';
-import { part4_DispText } from './4-disp-text';
-import { part5_Policy } from './5-policy';
-import { part6_Value } from './6-value';
-import { part7_FormCrossrefs } from './7-form-cross-refs';
-import { part8_Id } from './8-id';
-import { part9_Path } from './9-path';
+import { type JSX } from "react";
+import { useAtom, useSetAtom } from "jotai";
+import { FileUs, SelectRowAtomsType } from "@/store";
+import { Meta } from "@/store/manifest";
+import { classNames } from "@/utils";
+import { part1_UseIt } from "./1-use-it";
+import { part2_FieldType } from "./2-field-type";
+import { part3_Preview } from "./3-preview";
+import { part4_DispText } from "./4-disp-text";
+import { part5_Policy } from "./5-policy";
+import { part6_Value } from "./6-value";
+import { part7_FormCrossrefs } from "./7-form-cross-refs";
+import { part8_Id } from "./8-id";
+import { part9_Path } from "./9-path";
 
 type FieldRowProps = {
     fileUs: FileUs;

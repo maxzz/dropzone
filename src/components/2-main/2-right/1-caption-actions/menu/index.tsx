@@ -1,11 +1,11 @@
-import React from 'react';
-import { useAtomValue } from 'jotai';
-import { OldOverlay_Dialog } from '@ui/ui-dialog';
-import { MenuTrigger, MenuPortal, MenuContent, MenuItem, MenuSeparator, Menu } from '@ui/ui-dropdown-menu';
-import { SymbolMenuBurger } from '@ui/icons';
-import toast from 'react-hot-toast';
-import { FileUsAtomType } from '@/store';
-import { TestDialogContent, saveXmlFile } from './menu-commands';
+import React from "react";
+import { useAtomValue } from "jotai";
+import { OldOverlay_Dialog } from "@ui/ui-dialog";
+import { MenuTrigger, MenuPortal, MenuContent, MenuItem, MenuSeparator, Menu } from "@ui/ui-dropdown-menu";
+import { SymbolMenuBurger } from "@ui/icons";
+import toast from "react-hot-toast";
+import { FileUsAtomType } from "@/store";
+import { TestDialogContent, saveXmlFile } from "./menu-commands";
 
 const iconMenuHamburgerClasses = 'size-8 p-1 stroke-[0.8] hover:bg-primary-700 rounded opacity-60 hover:opacity-100 active:scale-[.97] outline-none focus:ring-1 ring-primary-400';
 

@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
-import { TransformEncoding } from '@/store/manifest';
-import { ToggleWithPortal } from '../4-shared-ui/2-toggle-w-portal';
-import { HeaderButton } from '../4-shared-ui/1-header-button';
+import { Fragment } from "react";
+import { TransformEncoding } from "@/store/manifest";
+import { ToggleWithPortal } from "../4-shared-ui/2-toggle-w-portal";
+import { HeaderButton } from "../4-shared-ui/1-header-button";
 
 export function BtnPopupPool({ names_ext }: { names_ext: string | undefined; }) {
     if (!names_ext) {

@@ -1,9 +1,9 @@
-import { a, useSpring } from '@react-spring/web';
-import { Panel1_FilesList } from './1-files-list';
-import { Panel2_Right } from './2-right';
-import { SimpleSplitPane } from '@ui/simple-split-pane';
-import { useAtomValue } from 'jotai';
-import { hasFilesAtom } from '@/store';
+import { a, useSpring } from "@react-spring/web";
+import { Panel1_FilesList } from "./1-files-list";
+import { Panel2_Right } from "./2-right";
+import { SimpleSplitPane } from "@ui/simple-split-pane";
+import { useAtomValue } from "jotai";
+import { hasFilesAtom } from "@/store";
 
 export function Section2_Main() {
     const hasFiles = useAtomValue(hasFilesAtom);

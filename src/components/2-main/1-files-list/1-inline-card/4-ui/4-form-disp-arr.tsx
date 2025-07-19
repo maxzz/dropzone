@@ -1,5 +1,5 @@
-import { FileUs } from '@/store';
-import { Meta } from '@/store/manifest';
+import { FileUs } from "@/store";
+import { Meta } from "@/store/manifest";
 
 export type DispArrForTwoForm = readonly [boolean, Meta.Disp | undefined][];
 

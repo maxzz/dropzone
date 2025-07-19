@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 export function Section({ label }: { label: ReactNode; }) {
     return (

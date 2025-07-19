@@ -1,7 +1,6 @@
-import React from 'react';
-import { FileUs } from '@/store';
-import { convertToXml } from '@/store/manifest/io/xml-to-js';
-import toast from 'react-hot-toast';
+import { FileUs } from "@/store";
+import { convertToXml } from "@/store/manifest/io/xml-to-js";
+import toast from "react-hot-toast";
 
 export function TestDialogContent({ setShow }: { setShow?: (v: boolean) => void; }) {
     return (

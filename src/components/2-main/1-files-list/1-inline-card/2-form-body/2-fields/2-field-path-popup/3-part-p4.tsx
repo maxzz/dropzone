@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
-import { MPath } from '@/store/manifest';
-import { Section } from './5-section';
+import { Fragment } from "react";
+import { MPath } from "@/store/manifest";
+import { Section } from "./5-section";
 
 export function Part_P4({ part, label }: { part: MPath.p4[]; label: string; }) {
 

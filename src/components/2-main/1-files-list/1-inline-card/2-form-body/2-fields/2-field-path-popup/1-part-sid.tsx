@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
-import { MPath, TransformEncoding } from '@/store/manifest';
-import { Section } from './5-section';
+import { Fragment } from "react";
+import { MPath, TransformEncoding } from "@/store/manifest";
+import { Section } from "./5-section";
 
 export function PartSid({ part, label }: { part: MPath.sid; label: string; }) {
     const { version, ...rest } = part;

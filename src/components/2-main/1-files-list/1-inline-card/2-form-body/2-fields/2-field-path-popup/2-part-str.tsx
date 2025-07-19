@@ -1,4 +1,4 @@
-import { Section } from './5-section';
+import { Section } from "./5-section";
 
 export function PartStr({ part, label }: { part: string | object; label: string; }) {
     const text = typeof part === 'string' ? part : JSON.stringify(part, null, 4);

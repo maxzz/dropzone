@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
-import { UIIconUpDown } from '@ui/icons';
-import { classNames } from '@/utils';
+import { forwardRef } from "react";
+import { UIIconUpDown } from "@ui/icons";
+import { classNames } from "@/utils";
 
 type DropDownButtonProps = {
     open?: boolean;

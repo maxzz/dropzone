@@ -1,5 +1,5 @@
-import { Meta } from '@/store/manifest';
-import { classNames } from '@/utils';
+import { Meta } from "@/store/manifest";
+import { classNames } from "@/utils";
 
 export function part5_Policy(field: Meta.Field) {
     const { policy } = field.mani;

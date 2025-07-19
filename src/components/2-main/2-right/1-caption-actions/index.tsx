@@ -1,6 +1,6 @@
-import { FileUsAtomType } from '@/store';
-import { ButtonCardEdit, ButtonCardOpenUrl } from './caption-buttons';
-import { CardTitleMenu } from './menu';
+import { FileUsAtomType } from "@/store";
+import { ButtonCardEdit, ButtonCardOpenUrl } from "./caption-buttons";
+import { CardTitleMenu } from "./menu";
 
 export function Body_CaptionActions({ fileUsAtom }: { fileUsAtom: FileUsAtomType; }) {
     return (

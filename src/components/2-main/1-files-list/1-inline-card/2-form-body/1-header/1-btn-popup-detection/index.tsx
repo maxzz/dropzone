@@ -1,9 +1,9 @@
-import { useAtomValue } from 'jotai';
-import { FileUsAtomType } from '@/store';
-import { Mani } from '@/store/manifest';
-import { ToggleWithPortal } from '../4-shared-ui/2-toggle-w-portal';
-import { UITableFromObject } from '../../../4-ui/2-table-from-object';
-import { filterDetection } from './1-filter-detection';
+import { useAtomValue } from "jotai";
+import { FileUsAtomType } from "@/store";
+import { Mani } from "@/store/manifest";
+import { ToggleWithPortal } from "../4-shared-ui/2-toggle-w-portal";
+import { UITableFromObject } from "../../../4-ui/2-table-from-object";
+import { filterDetection } from "./1-filter-detection";
 
 export function BtnPopupDetection({ fileUsAtom, formType }: { fileUsAtom: FileUsAtomType; formType: number; }) {
     const fileUs = useAtomValue(fileUsAtom);

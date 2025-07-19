@@ -1,7 +1,7 @@
-import { type HTMLAttributes, type ReactNode, useState } from 'react';
-import { useElementClickAway } from '@/utils';
-import { usePopper } from 'react-popper';
-import { UiPortal } from '@ui/ui-portal';
+import { type HTMLAttributes, type ReactNode, useState } from "react";
+import { useElementClickAway } from "@/utils";
+import { usePopper } from "react-popper";
+import { UiPortal } from "@ui/ui-portal";
 
 export function UIToggleWithPortal({ toggle, children, ...rest }: { toggle?: ReactNode; } & HTMLAttributes<HTMLButtonElement>) {
     const [open, setOpen] = useState(false);

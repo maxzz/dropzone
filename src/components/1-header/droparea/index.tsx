@@ -1,10 +1,10 @@
-import { CSSProperties } from 'react';
-import { useAtomValue } from 'jotai';
-import { filesAtom, } from '@/store';
-import { IconDocumentsAccepted } from '@ui/icons';
-import { classNames, plural } from '@/utils';
-import { DropzoneRoot } from './1-root';
-import { ShowingNowCounter } from './3-showing-now-counter';
+import { CSSProperties } from "react";
+import { useAtomValue } from "jotai";
+import { filesAtom, } from "@/store";
+import { IconDocumentsAccepted } from "@ui/icons";
+import { classNames, plural } from "@/utils";
+import { DropzoneRoot } from "./1-root";
+import { ShowingNowCounter } from "./3-showing-now-counter";
 
 const dropzoneBgCss: CSSProperties = {
     backgroundImage: "conic-gradient(at right 0%, #103062b0 214deg, #28446f 264deg, #647897 274deg)",

@@ -1,8 +1,8 @@
-import { FileUs } from '@/store';
-import { Meta } from '@/store/manifest';
-import { FieldRowPath } from '../2-field-path-popup';
-import { UIToggleWithPortal } from '../../../4-ui/1-toggle-with-portal';
-import { classNames } from '@/utils';
+import { FileUs } from "@/store";
+import { Meta } from "@/store/manifest";
+import { FieldRowPath } from "../2-field-path-popup";
+import { UIToggleWithPortal } from "../../../4-ui/1-toggle-with-portal";
+import { classNames } from "@/utils";
 
 export function part9_Path(hasPath: boolean, fileUs: FileUs, form: Meta.Form, field: Meta.Field) {
     const { path_ext } = field.mani;

@@ -1,9 +1,9 @@
-import { PrimitiveAtom, useAtomValue } from 'jotai';
-import { FileUsAtomType, uiSizeAtom, UISize } from '@/store';
-import { CardTitleTextMinimal } from './1-minimal';
-import { CardTitleTextCompact } from './2-compact';
-import { CardTitleTextNormal } from './3-normal';
-import { CardTitleSelector } from './4-selector';
+import { PrimitiveAtom, useAtomValue } from "jotai";
+import { FileUsAtomType, uiSizeAtom, UISize } from "@/store";
+import { CardTitleTextMinimal } from "./1-minimal";
+import { CardTitleTextCompact } from "./2-compact";
+import { CardTitleTextNormal } from "./3-normal";
+import { CardTitleSelector } from "./4-selector";
 
 export * from "./1-minimal";
 export * from "./2-compact";

@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
-import { Section } from './5-section';
+import { Fragment } from "react";
+import { Section } from "./5-section";
 
 export function PartLoc({ part, label }: { part: string; label: string; }) {
     const items = part.split('|');

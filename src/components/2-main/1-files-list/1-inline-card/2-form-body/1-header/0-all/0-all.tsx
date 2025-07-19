@@ -1,12 +1,12 @@
-import { type JSX, useState } from 'react';
-import { useAtomValue } from 'jotai';
-import { FileUsAtomType, SelectRowAtomsType } from '@/store';
-import { BtnPopupDetection } from '../1-btn-popup-detection';
-import { BtnPopupPool } from '../2-btn-popup-pool';
-import { BtnEdit } from '../3-btn-edit';
-import { Icon_LockFields } from './1-icon-lock-fields';
-import { Icon_QuickLink } from './2-icon-quick-link';
-import { BtnSvgPreview } from './3-btn-preview';
+import { type JSX, useState } from "react";
+import { useAtomValue } from "jotai";
+import { FileUsAtomType, SelectRowAtomsType } from "@/store";
+import { BtnPopupDetection } from "../1-btn-popup-detection";
+import { BtnPopupPool } from "../2-btn-popup-pool";
+import { BtnEdit } from "../3-btn-edit";
+import { Icon_LockFields } from "./1-icon-lock-fields";
+import { Icon_QuickLink } from "./2-icon-quick-link";
+import { BtnSvgPreview } from "./3-btn-preview";
 
 type CardFormBody1_HeaderProps = {
     fileUsAtom: FileUsAtomType;

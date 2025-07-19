@@ -1,4 +1,4 @@
-import { Mani, Matching, TransformEncoding } from '@/store/manifest';
+import { Mani, Matching, TransformEncoding } from "@/store/manifest";
 
 type FilterDetectionResult = {
     checkurl?: true | undefined;
