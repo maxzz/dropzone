@@ -1,0 +1,16 @@
+import { type HTMLAttributes, type SVGAttributes } from "react"; //match-stash--equal-duotone.svg
+import { classNames } from "@/utils";
+
+export function IconCaseSame({ className, title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
+    return (
+        <svg className={classNames("fill-current", className)} viewBox="0 0 24 24" {...rest}>
+            {title && <title>{title}</title>}
+            <path d="M6 10a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1m0 4a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1" />
+        </svg>
+    );
+}
+
+{/* <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+    <!-- https://icon-sets.iconify.design/?query=equal&search-page=1 match-stash--equal-duotone -->
+    <path fill="currentColor" d="M6 10a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1m0 4a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1" />
+</svg> */}

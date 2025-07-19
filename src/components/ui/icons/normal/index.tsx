@@ -10,6 +10,9 @@ export * from "./icon09-search-doc";
 export * from "./icon10-preview";
 
 export * from "./icon21-ctrl";
+export * from "./icon22-case-regex";
+export * from "./icon22-case-same-doc";
+export * from "./icon22-case-same";
 export * from "./icon22-case-sensitive";
 export * from "./icon23-info";
 export * from "./icon24-docs-accepted";
