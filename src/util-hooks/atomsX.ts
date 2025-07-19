@@ -1,8 +1,15 @@
 import { atom, Getter, PrimitiveAtom, SetStateAction, Setter, WritableAtom } from 'jotai';
-// version: 04.03.24
 
-export type OnValueChange<Value> = ({ get, set, nextValue }: { get: Getter; set: Setter; nextValue: Value; }) => void;
-export type OnValueChangeAny = ({ get, set }: { get: Getter; set: Setter; }) => void;
+// version: 04.03.24, 07.04.25
+
+export type OnValueChangeParams<Value = any> = { get: Getter; set: Setter; nextValue: Value; };
+export type OnValueChange<Value> = ({ get, set, nextValue }: OnValueChangeParams<Value>) => void;
+export type OnValueChangeAny = ({ get, set, nextValue }: { get: Getter; set: Setter; nextValue: any; }) => void;
+
+export type OnValueChangePair = {
+    onChange: OnValueChangeAny;             // debounced version
+    onChangeWoDebounce: OnValueChangeAny;   // without debounce
+}
 
 export function atomWithCallback<Value>(initialValue: Value, onValueChange: OnValueChange<Value>): WritableAtom<Value, [update: SetStateAction<Value>], void> {
     const baseAtom = atom(initialValue);
@@ -30,6 +37,10 @@ export function atomLoader(loader: (get: Getter, set: Setter) => void) {
 
 export type Atomize<T> = {
     [key in keyof T & string as `${key}Atom`]: PrimitiveAtom<T[key]>;
+};
+
+export type AtomizeWithType<T, Value> = {
+    [key in keyof T & string as `${key}Atom`]: PrimitiveAtom<Value>;
 };
 
 export type LoadingDataState<T> = {
