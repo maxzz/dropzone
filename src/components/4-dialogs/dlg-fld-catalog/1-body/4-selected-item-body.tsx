@@ -20,7 +20,7 @@ function Input({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
 function Textarea({ className, ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) {
     return (
         <textarea
-            className={classNames("p-1 w-full min-h-[3rem] text-[.65rem] leading-3 bg-primary-700 rounded", className)}
+            className={classNames("p-1 w-full min-h-12 text-[.65rem] leading-3 bg-primary-700 rounded", className)}
             rows={3}
             {...turnOffAutoComplete}
             {...rest}
@@ -57,7 +57,7 @@ export function SelectedItemBody({ selectedItemAtom }: { selectedItemAtom: Primi
 
             <div className={itemClasses}>
                 <div>Type</div>
-                <Input className="w-[3rem]" value={localType} onChange={(e) => setLocalType(e.target.value)} />
+                <Input className="w-12" value={localType} onChange={(e) => setLocalType(e.target.value)} />
             </div>
 
             <div className={itemClasses}>

@@ -17,7 +17,7 @@ export function ManiInfoTooltip({ editorData }: { editorData: ManiEditorData; })
     return (
         <UiTip trigger={Icon} arrow={true}>
             {/* Popup content */}
-            <div className="text-xs grid grid-cols-[auto,1fr] gap-x-2">
+            <div className="text-xs grid grid-cols-[auto_1fr] gap-x-2">
 
                 <div className="font-bold">Form</div>
                 <div>

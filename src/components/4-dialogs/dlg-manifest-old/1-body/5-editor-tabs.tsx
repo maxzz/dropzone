@@ -30,7 +30,7 @@ export function EditorTabs({ pageNames, stateIndicator, dialogContentBody, selec
     }
 
     return (
-        <div className="grid grid-rows-[auto,minmax(0,1fr)]">
+        <div className="grid grid-rows-[auto_minmax(0,1fr)]">
 
             {/* Tabs header */}
             <div className="px-4 pt-4 pb-2 bg-blue-900/20 flex items-center justify-between touch-none" {...captionDragBind()}>

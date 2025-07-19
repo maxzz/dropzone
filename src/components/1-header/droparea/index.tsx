@@ -21,7 +21,7 @@ export function Part1_DropzoneArea() {
         >
             {totalFiles
                 ? (
-                    <div className="relative mr-4 my-2 min-w-[6rem] uppercase text-xs flex items-center" title={`Loaded ${totalFilesText}`}>
+                    <div className="relative mr-4 my-2 min-w-24 uppercase text-xs flex items-center" title={`Loaded ${totalFilesText}`}>
                         <IconDocumentsAccepted className="size-6 ml-2 mr-1" />
                         {totalFilesText}
                         <ShowingNowCounter />

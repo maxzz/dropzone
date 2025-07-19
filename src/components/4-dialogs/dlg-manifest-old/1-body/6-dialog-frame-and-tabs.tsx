@@ -25,7 +25,7 @@ export function DialogFrameAndTabs({ footer, urlsAtom, editorData }: DialogFrame
     );
 
     return (
-        <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr),auto] bg-gray-200 rounded overflow-hidden">
+        <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr)_auto] bg-gray-200 rounded overflow-hidden">
 
             <TabsCombined urlsAtom={urlsAtom} editorData={editorData} captionDragBind={captionDragBind} />
 

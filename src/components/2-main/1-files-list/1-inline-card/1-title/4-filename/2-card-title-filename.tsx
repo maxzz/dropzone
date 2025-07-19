@@ -8,7 +8,7 @@ import { ManiFilenameParts } from "./1-mani-filename-parts";
 function PopupBody({ fileUs }: { fileUs: FileUs; }) {
     const stats = fileUs.parsedSrc.stats;
     return (
-        <div className="p-1 text-xs grid grid-cols-[auto,1fr] gap-x-1 gap-y-1">
+        <div className="p-1 text-xs grid grid-cols-[auto_1fr] gap-x-1 gap-y-1">
 
             {fileUs.fileCnt.fpath && (<>
                 <div className="font-bold">Sub-folder</div>

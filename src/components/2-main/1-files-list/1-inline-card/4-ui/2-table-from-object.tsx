@@ -25,7 +25,7 @@ export function Column2({ children, ...rest }: { children?: ReactNode; } & HTMLA
 export function UITableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
-        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto)_1fr] items-center text-xs">
             {values.map(
                 ([key, val]) => {
                     return (

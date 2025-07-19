@@ -51,11 +51,11 @@ export function TabSelector({ tabs, active, setActive }: TabSelectorPrps) {
     );
 }
 
-const indicatorClasses = "absolute bg-gray-50 border-gray-900/50 rounded border shadow z-[1]";
+const indicatorClasses = "absolute bg-gray-50 border-gray-900/50 rounded border shadow z-1";
 const indicatorShadowStyles = { filter: 'drop-shadow(#0003 0px 0px .05rem)' };
 
 const buttonClasses = "px-4 py-2.5 leading-5 text-sm font-medium text-gray-700 rounded focus:outline-none z-10";
-const buttonInactiveClasses = "text-gray-700/80 hover:bg-white/[0.2] hover:text-white/75";
+const buttonInactiveClasses = "text-gray-700/80 hover:bg-white/20 hover:text-white/75";
 const buttonStyles = { filter: 'drop-shadow(#0005 0px 0px .1rem)' };
 
 type TabSelectorPrps = {

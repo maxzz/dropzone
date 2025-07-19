@@ -23,7 +23,7 @@ export function BtnPopupPool({ names_ext }: { names_ext: string | undefined; }) 
             {/* Popup content */}
             <div className="mt-1 pl-4 pr-1 pb-1 pt-2 bg-primary-100 ring-1 ring-primary-400 rounded shadow-2xl">
                 <div className="max-w-sm max-h-[40vh] text-xs overflow-auto smallscroll">
-                    <div className="grid grid-cols-[auto,1fr] gap-x-2 ">
+                    <div className="grid grid-cols-[auto_1fr] gap-x-2 ">
 
                         {items.map(
                             (item, idx) => (
