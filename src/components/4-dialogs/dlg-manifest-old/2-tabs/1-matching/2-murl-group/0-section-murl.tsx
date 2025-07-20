@@ -7,9 +7,10 @@ import { MatchWebStateAtom } from "../0-all";
 import { MatchHow } from "./1-murl-how";
 
 export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
-    const urls = useAtomValue(editorUrlsAtom);
-    const [isOpen, setIsOpen] = useState(urls.current.o !== urls.current.m);
-    const [initialMD] = useState<Matching.RawMatchData>(Matching.parseRawMatchData(urls.current.m));
+    const editorUrls = useAtomValue(editorUrlsAtom);
+    const [isOpen, setIsOpen] = useState(editorUrls.current.o !== editorUrls.current.m);
+    
+    const [initialMD] = useState<Matching.RawMatchData>(() => Matching.parseRawMatchData(editorUrls.current.m));
 
     const stylesDropdown = useSpring({
         height: isOpen ? 'auto' : 0,
@@ -30,7 +31,7 @@ export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
                 <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
             </div>
 
-            {urls.current.o === urls.current.m && (
+            {editorUrls.current.o === editorUrls.current.m && (
                 <label className="flex items-center text-xs">
                     <div className="ml-5">
                         same as original url
