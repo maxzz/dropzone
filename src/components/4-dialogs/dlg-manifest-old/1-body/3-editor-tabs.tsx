@@ -1,8 +1,8 @@
 import { type ReactNode, useLayoutEffect, useRef } from "react";
 import { type PrimitiveAtom, useAtom } from "jotai";
 import { type ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
+import { UiSemiScrollbar } from "@ui/ui-semi-scrollbar";
 import { TabSelector } from "../3-ui-tab-selector";
-import { PagesScrollableContent } from "./5-page-scrollable-content";
 
 type EditorTabsProps = {
     pageNames: string[];
@@ -17,6 +17,12 @@ export function EditorTabs({ pageNames, pageScrollOfsAtom, stateIndicator, child
     const [selectedTabId, setSelectedTabId] = useAtom(selectedTabAtom);
     const [pageScrollOfs, setPageScrollOfs] = useAtom(pageScrollOfsAtom);
     const scrollableNodeRef = useRef<HTMLDivElement | null>(null);
+
+    useLayoutEffect(
+        () => {
+            scrollableNodeRef.current && (scrollableNodeRef.current.scrollTop = pageScrollOfs[selectedTabId]);
+        }, [selectedTabId]
+    );
 
     function onSetActive(newTabId: number) {
         setPageScrollOfs(pageScrollOfs.map((v, i) => i === selectedTabId ? scrollableNodeRef.current?.scrollTop || 0 : v));
@@ -36,9 +42,12 @@ export function EditorTabs({ pageNames, pageScrollOfsAtom, stateIndicator, child
                 {stateIndicator}
             </div>
 
-            <PagesScrollableContent pageScrollOfsAtom={pageScrollOfsAtom} selectedTabAtom={selectedTabAtom}>
-                {children}
-            </PagesScrollableContent>
+            {/* Pages scrollable content */}
+            <div className="text-sm bg-white">
+                <UiSemiScrollbar className="text-gray-500 overflow-auto w-full h-full" scrollableNodeProps={{ ref: scrollableNodeRef }} autoHide={false}>
+                    {children}
+                </UiSemiScrollbar>
+            </div>
         </div>
     );
 }
