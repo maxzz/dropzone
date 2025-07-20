@@ -6,6 +6,7 @@ import { RadioGroupTooltips } from "./2-radio-group-tooltips";
 import { MatchingCheckboxes } from "./3-matching-checkboxes";
 import { MatchUrlInput } from "./4-match-url-input";
 import { FinalMatchUrl } from "./5-final-match-url";
+import { setUrlsAtom } from "../0-all/7-set-atoms";
 
 export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
@@ -13,6 +14,8 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
 
     const [errorHint, setErrorHint] = useState(''); // 'This pattern is not valid'
     const [rawMD, setRawMD] = useState<Matching.RawMatchData>(initialMD);
+
+    const setUrls2 = useSetAtom(setUrlsAtom);
 
     useEffect(
         () => {
@@ -23,15 +26,24 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
     useEffect(
         () => {
             if (rawMD.how === Matching.How.undef) {
-                const newState = { ...urls, current: { ...urls.current, m: urls.current.o } };
-                setUrls(newState);
-                setIsChanged(areUrlsChanged(newState));
+                setUrls2({ editorUrlsAtom: urlsAtom, m: urls.current.o });
+
+                // const newState = { ...urls, current: { ...urls.current, m: urls.current.o } };
+                // setUrls(newState);
+                // setIsChanged(areUrlsChanged(newState));
             }
         }, [urls.current.o]
     );
 
     function setSelectedMatch(v: Matching.How) {
         const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, how: v, }, urls.current.o) } };
+        setUrls(newState);
+        setIsChanged(areUrlsChanged(newState));
+    }
+
+    function onCheckboxChange(checked: boolean, changedOption: Matching.Options) {
+        let opt = checked ? rawMD.opt | changedOption : rawMD.opt & ~changedOption;
+        const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, opt }, urls.current.o) } };
         setUrls(newState);
         setIsChanged(areUrlsChanged(newState));
     }
@@ -45,7 +57,7 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
             {!!initialMD.opt && (
-                <MatchingCheckboxes rawMD={rawMD} urls={urls} setUrls={setUrls} setDirty={setIsChanged} />
+                <MatchingCheckboxes rawMD={rawMD} urls={urls} onCheckboxChange={onCheckboxChange} />
             )}
         </div>
 

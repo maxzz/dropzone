@@ -1,37 +1,32 @@
 import { Matching } from "@/store/manifest";
 import { type MatchWebState, areUrlsChanged } from "../0-all";
 
-export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: Matching.RawMatchData; urls: MatchWebState; setUrls: (urls: MatchWebState) => void; setDirty: (dirty: boolean) => void; }) {
+export type OnCheckboxChange = (checked: boolean, changedOption: Matching.Options) => void;
 
-    function ischecked(option: Matching.Options) {
+export function MatchingCheckboxes({ rawMD, onCheckboxChange }: { rawMD: Matching.RawMatchData; urls: MatchWebState; onCheckboxChange: OnCheckboxChange; }) {
+
+    function isChecked(option: Matching.Options) {
         return (rawMD.opt & option) !== 0;
-    }
-
-    function onChange(checked: boolean, changedOption: Matching.Options) {
-        let opt = checked ? rawMD.opt | changedOption : rawMD.opt & ~changedOption;
-        const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, opt }, urls.current.o) } };
-        setUrls(newState);
-        setDirty(areUrlsChanged(newState));
     }
 
     return (
         <div>
             <Checkbox
                 label="Case sensitive"
-                checked={ischecked(Matching.Options.caseinsensitive)}
-                onChange={(event) => onChange(event.target.checked, Matching.Options.caseinsensitive)}
+                checked={isChecked(Matching.Options.caseinsensitive)}
+                onChange={(event) => onCheckboxChange(event.target.checked, Matching.Options.caseinsensitive)}
             />
 
             <Checkbox
                 label="Match text"
-                checked={ischecked(Matching.Options.matchtext)}
-                onChange={(event) => onChange(event.target.checked, Matching.Options.matchtext)}
+                checked={isChecked(Matching.Options.matchtext)}
+                onChange={(event) => onCheckboxChange(event.target.checked, Matching.Options.matchtext)}
             />
 
             <Checkbox
                 label="Use url query params"
-                checked={ischecked(Matching.Options.usequery)}
-                onChange={(event) => onChange(event.target.checked, Matching.Options.usequery)}
+                checked={isChecked(Matching.Options.usequery)}
+                onChange={(event) => onCheckboxChange(event.target.checked, Matching.Options.usequery)}
             />
         </div>
     );
