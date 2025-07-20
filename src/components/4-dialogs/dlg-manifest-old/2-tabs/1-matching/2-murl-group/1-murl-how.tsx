@@ -7,6 +7,7 @@ import { MatchingCheckboxes } from "./7-ui-matching-checkboxes";
 import { MatchUrlInput } from "./4-match-url-input";
 import { FinalMatchUrl } from "./5-final-match-url";
 import { setUrlsAtom } from "../0-all/7-set-atoms";
+import { MatchUrlInputLabel } from "./4-match-url-caption";
 
 export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
     const [urls, setUrls] = useAtom(urlsAtom);
@@ -52,6 +53,17 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         setIsChanged(areUrlsChanged(newState));
     }
 
+    function onUrlChange(url: string) {
+        const newState = {
+            ...urls,
+            current: {
+                ...urls.current,
+                m: Matching.stringifyRawMatchData({ ...rawMD, url }, urls.current.o),
+            }
+        };
+        setUrls(newState);
+    }
+
     const disabled = rawMD.how === Matching.How.undef;
 
     return (<>
@@ -65,7 +77,9 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
             )}
         </div>
 
-        <MatchUrlInput rawMD={rawMD} urls={urls} setUrls={setUrls} errorHint={errorHint} disabled={disabled} />
+        <MatchUrlInputLabel how={rawMD.how} disabled={disabled} />
+        <MatchUrlInput rawUrl={rawMD.url} how={rawMD.how} url={urls.current.m} onUrlChange={onUrlChange} errorHint={errorHint} disabled={disabled} />
+
         <FinalMatchUrl urls={urls} />
     </>);
 }

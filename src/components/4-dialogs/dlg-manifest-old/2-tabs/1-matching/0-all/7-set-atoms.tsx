@@ -3,7 +3,7 @@ import { type MatchWebStateAtom, areUrlsChanged } from "./9-types";
 
 export const setUrlsAtom = atom(
     null,
-    (get, set, { editorUrlsAtom, m, o, q }: { editorUrlsAtom: MatchWebStateAtom, m?: string, o?: string, q?: string; }) => {
+    (get, set, { editorUrlsAtom, m, o, q }: { editorUrlsAtom: MatchWebStateAtom, m?: string, o?: string, q?: string; }) => { //TODO: set how, opt and url
         const editorUrls = get(editorUrlsAtom);
 
         const newState = {
