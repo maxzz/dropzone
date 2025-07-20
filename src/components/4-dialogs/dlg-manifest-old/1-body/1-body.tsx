@@ -17,13 +17,13 @@ type Dialog_ManifestProps = {
 export function Dialog_Manifest({ editorData, setShow }: Dialog_ManifestProps) { // This is lazy loaded
     const fileUs = useAtomValue(editorData.fileUsAtom);
 
-    const editorUrlsAtom = useState(() => createEditorUrlsAtom(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
-
     const onChangeEditorUrls = useCallback<OnValueChange<MatchWebState>>(
         ({ get, set, nextValue }) => {
             printMatchWebState(nextValue, get);
         }, []
     );
+
+    const editorUrlsAtom = useState(() => createEditorUrlsAtom(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
 
     // Dialog caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
