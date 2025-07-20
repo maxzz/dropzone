@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { type PrimitiveAtom, atom } from "jotai";
+import { type ReactNode, useState } from "react";
+import { type PrimitiveAtom, atom, useAtomValue } from "jotai";
+import { classNames } from "@/utils";
 import { type ManiEditorData } from "@/store";
 import { type ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
 
@@ -9,7 +10,6 @@ import { Tab3_Options } from "../2-tabs/3-options";
 import { Tab4_Fields } from "../2-tabs/4-fields";
 
 import { ManiModifiedIndicator } from "./8-mani-modified-indicator";
-import { PageContentRender } from "./3-page-content-render";
 import { EditorTabs } from "./4-editor-tabs";
 
 type TabsCombinedProps = {
@@ -18,7 +18,7 @@ type TabsCombinedProps = {
     captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-export function TabsCombined({ editorUrlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
+export function TabsTopHolder({ editorUrlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
     // Pages
     const pages = {
         'Web': <Tab1_MatchWeb editorUrlsAtom={editorUrlsAtom} />,
@@ -31,7 +31,6 @@ export function TabsCombined({ editorUrlsAtom, editorData, captionDragBind }: Ta
     const pageComponents = Object.values(pages);
 
     const selectedTabAtom = useState(() => atom(0))[0];
-
     const pageScrollOfsAtom = useState(() => atom(Array(pageNames.length).fill(0)))[0];
 
     return (
@@ -39,9 +38,26 @@ export function TabsCombined({ editorUrlsAtom, editorData, captionDragBind }: Ta
             pageNames={pageNames}
             pageScrollOfsAtom={pageScrollOfsAtom}
             stateIndicator={<ManiModifiedIndicator editorUrlsAtom={editorUrlsAtom} />}
-            dialogContentBody={<PageContentRender pageComponents={pageComponents} selectedTabAtom={selectedTabAtom} />}
             selectedTabAtom={selectedTabAtom}
             captionDragBind={captionDragBind}
-        />
+        >
+            <PageContentRender
+                pageComponents={pageComponents}
+                selectedTabAtom={selectedTabAtom}
+            />
+        </EditorTabs>
     );
+}
+
+function PageContentRender({ pageComponents, selectedTabAtom }: { pageComponents: ReactNode[]; selectedTabAtom: PrimitiveAtom<number>; }) {
+    const selectedTab = useAtomValue(selectedTabAtom);
+    return (<>
+        {pageComponents.map(
+            (pageContent, idx) => (
+                <div className={classNames(selectedTab !== idx && 'hidden')} key={idx}>
+                    {pageContent}
+                </div>
+            ))
+        }
+    </>);
 }

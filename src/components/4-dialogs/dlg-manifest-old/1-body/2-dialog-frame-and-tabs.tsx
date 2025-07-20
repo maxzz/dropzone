@@ -4,7 +4,7 @@ import { useDrag } from "@use-gesture/react";
 import { a, useSpring } from "@react-spring/web";
 import { type ManiEditorData } from "@/store";
 import { type MatchWebState } from "../2-tabs/1-matching";
-import { TabsCombined } from "./4-editor-tabs-combined";
+import { TabsTopHolder } from "./3-tabs-top-holder";
 
 type DialogFrameAndTabsProps = {
     footer: ReactNode;
@@ -24,7 +24,7 @@ export function DialogFrameAndTabs({ footer, editorUrlsAtom, editorData }: Dialo
 
     return (
         <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr)_auto] bg-gray-200 rounded overflow-hidden">
-            <TabsCombined
+            <TabsTopHolder
                 editorUrlsAtom={editorUrlsAtom}
                 editorData={editorData}
                 captionDragBind={captionDragBind}
