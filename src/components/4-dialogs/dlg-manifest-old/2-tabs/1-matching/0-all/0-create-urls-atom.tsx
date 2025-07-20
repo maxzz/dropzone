@@ -18,7 +18,7 @@ export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange:
 
     return atomWithCallback<MatchWebState>(
         {
-            ...initial,
+            current: { ...initial },
             initial,
             isChangedAtom: atom<boolean>(false)
         },

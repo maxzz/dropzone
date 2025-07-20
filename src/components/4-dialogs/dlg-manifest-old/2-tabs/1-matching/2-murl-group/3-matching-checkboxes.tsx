@@ -9,7 +9,7 @@ export function MatchingCheckboxes({ rawMD, urls, setUrls, setDirty }: { rawMD: 
 
     function onChange(checked: boolean, changedOption: Matching.Options) {
         let opt = checked ? rawMD.opt | changedOption : rawMD.opt & ~changedOption;
-        const newState = { ...urls, m: Matching.stringifyRawMatchData({ ...rawMD, opt }, urls.o) };
+        const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, opt }, urls.current.o) } };
         setUrls(newState);
         setDirty(areUrlsChanged(newState));
     }

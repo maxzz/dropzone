@@ -11,7 +11,7 @@ export function FinalMatchUrl({ urls }: { urls: MatchWebState; }) {
             </div>
 
             <div className="overflow-x-auto break-all">
-                {urls.m}
+                {urls.current.m}
             </div>
         </div>
     );

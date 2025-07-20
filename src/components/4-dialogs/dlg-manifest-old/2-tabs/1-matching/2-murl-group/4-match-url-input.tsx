@@ -14,13 +14,17 @@ type MatchUrlInputProps = {
 export function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: MatchUrlInputProps) {
 
     function onChange(event: ChangeEvent<HTMLInputElement>) {
-        setUrls({
+        const newState = {
             ...urls,
-            m: Matching.stringifyRawMatchData(
-                { ...rawMD, url: event.target.value, },
-                urls.o,
-            ),
-        });
+            current: {
+                ...urls.current,
+                m: Matching.stringifyRawMatchData(
+                    { ...rawMD, url: event.target.value, },
+                    urls.current.o,
+                ),
+            }
+        };
+        setUrls(newState);
     }
 
     return (<>
@@ -33,7 +37,7 @@ export function MatchUrlInput({ rawMD, urls, setUrls, errorHint, disabled }: Mat
             {...(errorHint && { title: errorHint })}
             disabled={disabled}
             spellCheck={false}
-            title={urls.m}
+            title={urls.current.m}
             value={rawMD.url}
             onChange={onChange}
         />

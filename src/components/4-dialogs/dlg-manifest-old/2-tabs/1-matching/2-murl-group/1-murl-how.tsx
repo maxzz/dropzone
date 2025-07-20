@@ -16,22 +16,22 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
 
     useEffect(
         () => {
-            setRawMD(Matching.parseRawMatchData(urls.m));
-        }, [urls.m]
+            setRawMD(Matching.parseRawMatchData(urls.current.m));
+        }, [urls.current.m]
     );
 
     useEffect(
         () => {
             if (rawMD.how === Matching.How.undef) {
-                const newState = { ...urls, m: urls.o };
+                const newState = { ...urls, current: { ...urls.current, m: urls.current.o } };
                 setUrls(newState);
                 setIsChanged(areUrlsChanged(newState));
             }
-        }, [urls.o]
+        }, [urls.current.o]
     );
 
     function setSelectedMatch(v: Matching.How) {
-        const newState = { ...urls, m: Matching.stringifyRawMatchData({ ...rawMD, how: v, }, urls.o) };
+        const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, how: v, }, urls.current.o) } };
         setUrls(newState);
         setIsChanged(areUrlsChanged(newState));
     }

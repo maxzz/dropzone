@@ -14,10 +14,10 @@ export function Section_Ourl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
             <input
                 className="flex-1 px-2 py-1.5 w-full min-w-0 border border-gray-400 rounded shadow-inner"
                 spellCheck={false}
-                value={urls.o}
+                value={urls.current.o}
                 onChange={
                     (event) => {
-                        const newState = { ...urls, o: event.target.value };
+                        const newState = { ...urls, current: { ...urls.current, o: event.target.value } };
                         setUrls(newState);
                         setIsChanged(areUrlsChanged(newState));
                     }
