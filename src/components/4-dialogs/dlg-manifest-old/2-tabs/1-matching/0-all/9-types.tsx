@@ -1,4 +1,6 @@
 import { type PrimitiveAtom } from "jotai";
+import { type Atomize } from "@/utils";
+import { Matching } from "@/store/manifest";
 
 type UrlsState = {
     o: string;
@@ -6,11 +8,15 @@ type UrlsState = {
     q: string;
 };
 
-export type MatchWebState = Prettify<{
-    current: UrlsState;
-    initial: UrlsState;                         // Initial state of urls from file
-    isChangedAtom: PrimitiveAtom<boolean>;      // It should be not dirty but: is initial value?
-}>;
+export type MatchWebState = Prettify<
+    & {
+        current: UrlsState;
+        initial: UrlsState;                         // Initial state of urls from file
+        isChangedAtom: PrimitiveAtom<boolean>;      // It should be not dirty but: is initial value?
+    }
+    & Atomize<Matching.RawMatchData>
+    & Atomize<UrlsState>
+>;
 
 export type MatchWebStateAtom = PrimitiveAtom<MatchWebState>;
 

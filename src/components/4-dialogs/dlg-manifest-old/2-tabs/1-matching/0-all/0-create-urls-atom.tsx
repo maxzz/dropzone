@@ -2,6 +2,7 @@ import { type PrimitiveAtom, atom } from "jotai";
 import { type OnValueChange, atomWithCallback } from "@/utils/util-hooks";
 import { type FileUs, FormIdx } from "@/store";
 import { type MatchWebState } from "./9-types";
+import { Matching } from "@/store/manifest";
 
 export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<MatchWebState>): PrimitiveAtom<MatchWebState> {
 
@@ -16,11 +17,21 @@ export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange:
 
     console.log('createUrlsAtom', initial);
 
+    const { how, opt, url } = Matching.parseRawMatchData(m);
+
     return atomWithCallback<MatchWebState>(
         {
             current: { ...initial },
             initial,
-            isChangedAtom: atom<boolean>(false)
+            isChangedAtom: atom<boolean>(false),
+
+            oAtom: atom(o),
+            mAtom: atom(m),
+            qAtom: atom(q),
+            
+            howAtom: atom(how),
+            optAtom: atom(opt),
+            urlAtom: atom(url),
         },
         onChange
     );
