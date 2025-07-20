@@ -1,4 +1,4 @@
-import { type PrimitiveAtom, type WritableAtom } from "jotai";
+import { type PrimitiveAtom } from "jotai";
 
 type UrlsState = {
     o: string;
@@ -12,7 +12,7 @@ export type MatchWebState = Prettify<{
     isChangedAtom: PrimitiveAtom<boolean>;      // It should be not dirty but: is initial value?
 }>;
 
-export type MatchWebStateAtom = WritableAtom<MatchWebState, [MatchWebState], void>;
+export type MatchWebStateAtom = PrimitiveAtom<MatchWebState>;
 
 export function areUrlsChanged(urls: MatchWebState): boolean {
     return urls.current.m !== urls.initial.m || urls.current.o !== urls.initial.o || urls.current.q !== urls.initial.q;

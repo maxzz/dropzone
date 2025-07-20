@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useAtom, useSetAtom } from "jotai";
 import { Matching } from "@/store/manifest";
 import { type MatchWebStateAtom, areUrlsChanged } from "../0-all";
-import { RadioGroupTooltips } from "./2-radio-group-tooltips";
-import { MatchingCheckboxes } from "./3-matching-checkboxes";
+import { RadioGroupTooltips } from "./7-ui-radio-group-tooltips";
+import { MatchingCheckboxes } from "./7-ui-matching-checkboxes";
 import { MatchUrlInput } from "./4-match-url-input";
 import { FinalMatchUrl } from "./5-final-match-url";
 import { setUrlsAtom } from "../0-all/7-set-atoms";
@@ -35,13 +35,17 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         }, [urls.current.o]
     );
 
-    function setSelectedMatch(v: Matching.How) {
+    function onChangeHow(v: Matching.How) {
         const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, how: v, }, urls.current.o) } };
         setUrls(newState);
         setIsChanged(areUrlsChanged(newState));
     }
 
-    function onCheckboxChange(checked: boolean, changedOption: Matching.Options) {
+    function isOptionChecked(option: Matching.Options) {
+        return (rawMD.opt & option) !== 0;
+    }
+
+    function onOptionChange(checked: boolean, changedOption: Matching.Options) {
         let opt = checked ? rawMD.opt | changedOption : rawMD.opt & ~changedOption;
         const newState = { ...urls, current: { ...urls.current, m: Matching.stringifyRawMatchData({ ...rawMD, opt }, urls.current.o) } };
         setUrls(newState);
@@ -53,11 +57,11 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
     return (<>
         <div className="flex space-x-4">
             {/* How match radio buttons */}
-            <RadioGroupTooltips value={rawMD.how} setValue={setSelectedMatch} />
+            <RadioGroupTooltips value={rawMD.how} setValue={onChangeHow} />
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
             {!!initialMD.opt && (
-                <MatchingCheckboxes rawMD={rawMD} urls={urls} onCheckboxChange={onCheckboxChange} />
+                <MatchingCheckboxes isChecked={isOptionChecked} onCheckboxChange={onOptionChange} />
             )}
         </div>
 

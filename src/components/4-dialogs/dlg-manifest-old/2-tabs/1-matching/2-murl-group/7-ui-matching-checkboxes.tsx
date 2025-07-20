@@ -1,14 +1,9 @@
 import { Matching } from "@/store/manifest";
-import { type MatchWebState, areUrlsChanged } from "../0-all";
 
-export type OnCheckboxChange = (checked: boolean, changedOption: Matching.Options) => void;
+type IsChecked = (option: Matching.Options) => boolean;
+type OnCheckboxChange = (checked: boolean, changedOption: Matching.Options) => void;
 
-export function MatchingCheckboxes({ rawMD, onCheckboxChange }: { rawMD: Matching.RawMatchData; urls: MatchWebState; onCheckboxChange: OnCheckboxChange; }) {
-
-    function isChecked(option: Matching.Options) {
-        return (rawMD.opt & option) !== 0;
-    }
-
+export function MatchingCheckboxes({ isChecked, onCheckboxChange }: { isChecked: IsChecked; onCheckboxChange: OnCheckboxChange; }) {
     return (
         <div>
             <Checkbox
