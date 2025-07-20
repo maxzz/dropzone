@@ -5,17 +5,17 @@ import { type MatchWebStateAtom, areUrlsChanged } from "../0-all";
 import { RadioGroupTooltips } from "./7-ui-radio-group-tooltips";
 import { MatchingCheckboxes } from "./7-ui-matching-checkboxes";
 import { MatchUrlInput } from "./4-match-url-input";
-import { FinalMatchUrl } from "./5-final-match-url";
+import { FinalMatchUrl } from "./6-final-match-url";
 import { setUrlsAtom } from "../0-all/7-set-atoms";
-import { MatchUrlInputLabel } from "./4-match-url-caption";
+import { MatchUrlInputLabel } from "./5-match-url-caption";
 
 export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom; initialMD: Matching.RawMatchData; }) {
-    const [urls, setUrls] = useAtom(urlsAtom);
-    const setIsChanged = useSetAtom(urls.isChangedAtom);
-
     const [errorHint, setErrorHint] = useState(''); // 'This pattern is not valid'
+
     const [rawMD, setRawMD] = useState<Matching.RawMatchData>(initialMD);
 
+    const [urls, setUrls] = useAtom(urlsAtom);
+    const setIsChanged = useSetAtom(urls.isChangedAtom);
     const setUrls2 = useSetAtom(setUrlsAtom);
 
     useEffect(
@@ -80,6 +80,6 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         <MatchUrlInputLabel how={rawMD.how} disabled={disabled} />
         <MatchUrlInput rawUrl={rawMD.url} how={rawMD.how} url={urls.current.m} onUrlChange={onUrlChange} errorHint={errorHint} disabled={disabled} />
 
-        <FinalMatchUrl urls={urls} />
+        <FinalMatchUrl url={urls.current.m} />
     </>);
 }

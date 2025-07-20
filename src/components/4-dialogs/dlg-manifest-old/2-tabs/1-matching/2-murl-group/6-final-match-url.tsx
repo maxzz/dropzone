@@ -1,6 +1,4 @@
-import { MatchWebState } from "../0-all";
-
-export function FinalMatchUrl({ urls }: { urls: MatchWebState; }) {
+export function FinalMatchUrl({ url }: { url: string; }) {
     return (
         <div className="mt-3 px-2 pt-2 text-[.65rem] bg-yellow-100 border border-yellow-400 rounded-sm cursor-default" title="This is how url will be stored">
             
@@ -11,7 +9,7 @@ export function FinalMatchUrl({ urls }: { urls: MatchWebState; }) {
             </div>
 
             <div className="overflow-x-auto break-all">
-                {urls.current.m}
+                {url}
             </div>
         </div>
     );
