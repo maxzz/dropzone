@@ -3,8 +3,6 @@ import { type Getter, useAtomValue } from "jotai";
 import { type OnValueChange } from "@/utils";
 import { type ManiEditorData } from "@/store";
 import { type MatchWebState, createEditorUrlsAtom } from "../2-tabs/1-matching";
-import { ManiInfoTooltip } from "./8-mani-info-tooltip";
-import { BottomButtons } from "./5-bottom-buttons";
 import { DialogFrameAndTabs } from "./2-dialog-frame-and-tabs";
 
 type Dialog_ManifestProps = {
@@ -12,8 +10,10 @@ type Dialog_ManifestProps = {
     setShow?: (v: boolean) => void;
 };
 
-export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: Dialog_ManifestProps) { /*lazy load*/
+export function Dialog_Manifest({ editorData, setShow }: Dialog_ManifestProps) { /*lazy load*/
     const fileUs = useAtomValue(editorData.fileUsAtom);
+
+    const editorUrlsAtom = useState(() => createEditorUrlsAtom(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
 
     const onChangeEditorUrls = useCallback<OnValueChange<MatchWebState>>(
         ({ get, set, nextValue }) => {
@@ -21,31 +21,11 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
         }, []
     );
 
-    const editorUrlsAtom = useState(() => createEditorUrlsAtom(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
-
     return (
-        // <DialogFrameAndTabs>
-        //     <TabsCombined
-        //         editorUrlsAtom={editorUrlsAtom}
-        //         editorData={editorData}
-        //         captionDragBind={captionDragBind}
-        //     />
-
-        //     <div className="px-4 py-4 bg-white flex items-center justify-between">
-        //         <ManiInfoTooltip editorData={editorData} />
-        //         <BottomButtons setShow={setShow} />
-        //     </div>
-        // </DialogFrameAndTabs>
-
         <DialogFrameAndTabs
             editorUrlsAtom={editorUrlsAtom}
             editorData={editorData}
-            footer={
-                <div className="px-4 py-4 bg-white flex items-center justify-between">
-                    <ManiInfoTooltip editorData={editorData} />
-                    <BottomButtons setShow={setShow} />
-                </div>
-            }
+            setShow={setShow}
         />
     );
 }

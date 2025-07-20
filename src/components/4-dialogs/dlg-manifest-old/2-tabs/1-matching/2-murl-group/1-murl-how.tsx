@@ -4,7 +4,7 @@ import { Matching } from "@/store/manifest";
 import { type MatchWebStateAtom, areUrlsChanged } from "../0-all";
 import { RadioGroupTooltips } from "./7-ui-radio-group-tooltips";
 import { MatchingCheckboxes } from "./7-ui-matching-checkboxes";
-import { MatchUrlInput } from "./4-match-url-input";
+import { MatchUrlInput } from "./5-match-url-input";
 import { FinalMatchUrl } from "./6-final-match-url";
 import { setUrlsAtom } from "../0-all/7-set-atoms";
 import { MatchUrlInputLabel } from "./5-match-url-caption";
@@ -78,7 +78,7 @@ export function MatchHow({ urlsAtom, initialMD }: { urlsAtom: MatchWebStateAtom;
         </div>
 
         <MatchUrlInputLabel how={rawMD.how} disabled={disabled} />
-        <MatchUrlInput rawUrl={rawMD.url} how={rawMD.how} url={urls.current.m} onUrlChange={onUrlChange} errorHint={errorHint} disabled={disabled} />
+        <MatchUrlInput rawUrl={rawMD.url} title={urls.current.m} onUrlChange={onUrlChange} errorHint={errorHint} disabled={disabled} />
 
         <FinalMatchUrl url={urls.current.m} />
     </>);

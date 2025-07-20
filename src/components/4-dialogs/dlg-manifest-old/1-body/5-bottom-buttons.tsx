@@ -1,13 +1,13 @@
 // import { toastWarning } from "@ui/ui-toaster";
 
-export function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
+export function BottomButtons({ setShow }: { setShow?: (v: boolean) => void; }) {
     return (
         <div className="flex space-x-2">
             <button
                 className={buttonClasses}
                 onClick={
                     () => {
-                        setShow(false);
+                        setShow?.(false);
                         // toastWarning(
                         //     <div><div className="font-bold">Not implemented</div><div className="">yet</div></div>, { style: { backgroundColor: 'tomato' } }
                         // );
@@ -19,7 +19,7 @@ export function BottomButtons({ setShow }: { setShow: (v: boolean) => void; }) {
 
             <button
                 className={buttonClasses}
-                onClick={() => { setShow(false); }}
+                onClick={() => { setShow?.(false); }}
             >
                 Cancel
             </button>

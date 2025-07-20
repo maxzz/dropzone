@@ -5,14 +5,16 @@ import { a, useSpring } from "@react-spring/web";
 import { type ManiEditorData } from "@/store";
 import { type MatchWebState } from "../2-tabs/1-matching";
 import { TabsTopHolder } from "./3-tabs-top-holder";
+import { ManiInfoTooltip } from "./8-mani-info-tooltip";
+import { BottomButtons } from "./5-bottom-buttons";
 
 type DialogFrameAndTabsProps = {
-    footer: ReactNode;
     editorUrlsAtom: PrimitiveAtom<MatchWebState>;
     editorData: ManiEditorData;
+    setShow?: (v: boolean) => void;
 };
 
-export function DialogFrameAndTabs({ footer, editorUrlsAtom, editorData }: DialogFrameAndTabsProps) {
+export function DialogFrameAndTabs({ editorUrlsAtom, editorData, setShow }: DialogFrameAndTabsProps) {
 
     // Dialog caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
@@ -29,7 +31,10 @@ export function DialogFrameAndTabs({ footer, editorUrlsAtom, editorData }: Dialo
                 editorData={editorData}
                 captionDragBind={captionDragBind}
             />
-            {footer}
+            <div className="px-4 py-4 bg-white flex items-center justify-between">
+                <ManiInfoTooltip editorData={editorData} />
+                <BottomButtons setShow={setShow} />
+            </div>
         </a.div>
     );
 }

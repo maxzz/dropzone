@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { a, useSpring } from "@react-spring/web";
-import { Matching } from "@/store/manifest";
 import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, UIIconUpDown } from "@ui/icons";
-import { MatchWebStateAtom } from "../0-all";
+import { Matching } from "@/store/manifest";
+import { type MatchWebStateAtom } from "../0-all";
 import { MatchHow } from "./1-murl-how";
 
 export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
