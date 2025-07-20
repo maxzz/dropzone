@@ -10,7 +10,7 @@ import { Tab3_Options } from "../2-tabs/3-options";
 import { Tab4_Fields } from "../2-tabs/4-fields";
 
 import { ManiModifiedIndicator } from "./8-mani-modified-indicator";
-import { EditorTabs } from "./4-editor-tabs";
+import { EditorTabs } from "./3-editor-tabs";
 
 type TabsCombinedProps = {
     editorUrlsAtom: PrimitiveAtom<MatchWebState>;
@@ -18,7 +18,7 @@ type TabsCombinedProps = {
     captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-export function TabsTopHolder({ editorUrlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
+export function AllTabsTopHolder({ editorUrlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
     // Pages
     const pages = {
         'Web': <Tab1_MatchWeb editorUrlsAtom={editorUrlsAtom} />,
