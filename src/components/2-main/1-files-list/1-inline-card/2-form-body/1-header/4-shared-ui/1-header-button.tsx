@@ -31,7 +31,7 @@ export const HeaderButton = forwardRef<HTMLButtonElement, DropDownButtonProps>(f
 
             {disabled ?
                 <div className="list-owner size-4 pt-0.5" />
-                : <UIIconUpDown isUp={open} className="list-owner size-4 pt-0.5" />}
+                : <UIIconUpDown isOpen={open} className="list-owner size-4 pt-0.5" />}
         </button>
     );
 });

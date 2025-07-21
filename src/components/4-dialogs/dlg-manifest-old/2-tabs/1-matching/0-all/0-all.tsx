@@ -8,7 +8,6 @@ export function Tab1_MatchWeb({ urlsEditorDataAtom }: { urlsEditorDataAtom: Urls
         <div className="p-4">
             <div className="grid grid-cols-1">
                 <Section_Ourl urlsEditorDataAtom={urlsEditorDataAtom} />
-                {/* Separator */} {/* <div className="mt-2 mb-4 w-full border-t border-gray-300" /> */}
                 <Section_Murl urlsEditorDataAtom={urlsEditorDataAtom} />
                 <Section_Qurl urlsEditorDataAtom={urlsEditorDataAtom} />
             </div>

@@ -15,18 +15,18 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
 
     return (<>
         <div className="mt-4 mb-1 flex items-center">
-            <div className="font-bold text-gray-600 flex items-center gap-x-1" onClick={() => setIsOpen(!isOpen)}>
+            <div className="font-bold text-gray-600 cursor-pointer flex items-center gap-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div>
                     Matching url
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen} className="size-5 border rounded" />
+                <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
 
                 <IconCaseSame className="ml-16 p-0.5 size-5 text-slate-500 border rounded" />
                 <IconCaseRegex className="p-0.5 pt-1 size-5 text-slate-500 border rounded" />
                 <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
             </div>
 
-            <ThesameAsOriginalUrl className="ml-5" isTheSame={o === m} />
+            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={o === m} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>

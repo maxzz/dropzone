@@ -7,6 +7,8 @@ import { type OnChangeParamsWithNameScope, type UrlsEditorData, createUrlsEditor
 import { AllTabsTopHolder } from "./2-all-tabs-top-holder";
 import { ManiInfoTooltip } from "./8-mani-info-tooltip";
 import { BottomButtons } from "./4-editor-bottom-buttons";
+import { useMemoOne } from "@/utils";
+import { useEffectOnce } from "react-use";
 
 type Dialog_ManifestProps = {
     editorData: ManiEditorData;
@@ -18,11 +20,15 @@ export function Dialog_Manifest({ editorData, setShow }: Dialog_ManifestProps) {
 
     const onChangeEditorUrls = useCallback<OnChangeParamsWithNameScope>(
         ({ name, get, set, nextValue }) => {
-            printMatchWebState(name,nextValue, get);
+            printMatchWebState(name, nextValue, get);
         }, []
     );
 
     const urlsEditorData = useState(() => createUrlsEditorData(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
+    //const urlsEditorData = useMemoOne(() => createUrlsEditorData(fileUs, editorData.formIdx, onChangeEditorUrls), []);
+    //useEffectOnce(() => createUrlsEditorData(fileUs, editorData.formIdx, onChangeEditorUrls));
+
+    // const urlsEditorData = from something once???
 
     // Dialog caption dragging
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
@@ -58,3 +64,8 @@ function printMatchWebState(changeName: string, urlsEditorData: UrlsEditorData, 
 //TODO: should be only one 'Match Web': <MatchWeb /> or 'Match Windows': <MatchWindows /> (but the user should be able to switch Windows to Web?)
 
 //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
+
+//07.20.25
+//TODO: reset to initial
+//TODO: validation and hints
+//TODO: createUrlsEditorData() is called twice

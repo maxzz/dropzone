@@ -16,14 +16,14 @@ export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
 
     return (<>
         <div className="mt-4 mb-1 flex items-center">
-            <div className="font-bold text-gray-600 flex items-center gap-x-1" onClick={() => setIsOpen(!isOpen)}>
+            <div className="font-bold text-gray-600 cursor-pointer flex items-center gap-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div>
                     Quicklink url
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen} className="size-5 border rounded" />
+                <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
             </div>
 
-            <ThesameAsOriginalUrl className="ml-5" isTheSame={o === q} />
+            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={o === q} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>

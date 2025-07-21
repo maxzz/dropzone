@@ -1,10 +1,9 @@
 import { type ComponentPropsWithoutRef } from "react";
-import { classNames } from "@/utils";
 
-export function ThesameAsOriginalUrl({ isTheSame, className, ...rest }: { isTheSame: boolean; } & ComponentPropsWithoutRef<"div">) {
+export function ThesameAsOriginalUrl({ isTheSame, ...rest }: { isTheSame: boolean; } & ComponentPropsWithoutRef<"div">) {
     return (<>
         {isTheSame && (
-            <div className={classNames("text-xs", className)} {...rest}>
+            <div {...rest}>
                 same as original url
             </div>
         )}
