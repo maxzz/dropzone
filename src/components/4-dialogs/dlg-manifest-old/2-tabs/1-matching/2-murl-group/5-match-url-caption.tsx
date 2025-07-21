@@ -1,9 +1,9 @@
-import { classNames } from "@/utils";
-import { Matching } from "@/store/manifest";
+import { type ComponentPropsWithoutRef } from "react";
+import { type Matching } from "@/store/manifest";
 
-export function MatchUrlInputLabel({ how, disabled }: { how: Matching.How; disabled: boolean; }) {
+export function MatchUrlInputLabel({ how, ...rest }: { how: Matching.How; } & ComponentPropsWithoutRef<"div">) {
     return (
-        <div className={classNames('mt-1 mb-1', disabled && 'opacity-50')}>
+        <div {...rest}>
             {names[how] || 'No way'}
         </div>
     );

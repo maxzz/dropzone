@@ -10,8 +10,9 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
     const o = useAtomValue(urlsEditorData.oAtom);
     const m = useAtomValue(urlsEditorData.mAtom);
+    const isTheSame = o === m;
 
-    const [isOpen, setIsOpen] = useState(o !== m);
+    const [isOpen, setIsOpen] = useState(!isTheSame);
 
     return (<>
         <div className="mt-4 mb-1 cursor-pointer flex items-center gap-x-1 select-none" onClick={() => setIsOpen(!isOpen)}>
@@ -24,7 +25,7 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
             <IconCaseRegex className="p-0.5 pt-1 size-5 text-slate-500 border rounded" />
             <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
 
-            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={o === m} isOpen={isOpen} />
+            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={isTheSame} isOpen={isOpen} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>
