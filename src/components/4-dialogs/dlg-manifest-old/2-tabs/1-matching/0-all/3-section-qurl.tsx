@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { a, useSpring } from "@react-spring/web";
 import { UIIconUpDown } from "@ui/icons";
-import { MatchWebStateAtom, areUrlsChanged } from "./9-types";
+import { type UrlsEditorDataAtom } from "./9-types";
+import { setUrlsEditorDataAtom } from "./7-set-atoms";
 
-export function Section_Qurl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
-    const [urls, setUrls] = useAtom(editorUrlsAtom);
-    const setIsChanged = useSetAtom(urls.isChangedAtom);
+export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
+    const urlsEditorData = useAtomValue(urlsEditorDataAtom);
+    const o = useAtomValue(urlsEditorData.oAtom);
+    const q = useAtomValue(urlsEditorData.qAtom);
+    const setUrlsEditorData = useSetAtom(setUrlsEditorDataAtom);
+
     const [isOpen, setIsOpen] = useState(false);
 
     const stylesDropdown = useSpring({
@@ -24,7 +28,7 @@ export function Section_Qurl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
                 <UIIconUpDown double={true} isUp={isOpen} className="size-5 border rounded" />
             </div>
 
-            {urls.current.o === urls.current.q && (
+            {o === q && (
                 <label className="flex items-center text-xs">
                     <div className="ml-5">same as original url</div>
                 </label>
@@ -36,12 +40,8 @@ export function Section_Qurl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
                 <input
                     className="px-2 py-1.5 w-full border border-gray-400 rounded shadow-inner"
                     spellCheck={false}
-                    value={urls.current.q}
-                    onChange={(event) => {
-                        const newState = { ...urls, current: { ...urls.current, q: event.target.value } };
-                        setUrls(newState);
-                        setIsChanged(areUrlsChanged(newState));
-                    }}
+                    value={q}
+                    onChange={(event) => setUrlsEditorData({ urlsEditorDataAtom, q: event.target.value })}
                 />
             </a.div>
         )}

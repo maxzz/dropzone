@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { Matching } from "@/store/manifest";
-import { type UrlsEditorDataAtom, areUrlStates } from "../0-all";
+import { type UrlsEditorDataAtom } from "../0-all";
 import { RadioGroupTooltips } from "./7-ui-radio-group-tooltips";
 import { MatchingCheckboxes } from "./7-ui-matching-checkboxes";
 import { MatchUrlInput } from "./5-match-url-input";
@@ -9,7 +9,7 @@ import { FinalMatchUrl } from "./6-final-match-url";
 import { setUrlsEditorDataAtom } from "../0-all/7-set-atoms";
 import { MatchUrlInputLabel } from "./5-match-url-caption";
 
-export function MatchHow({ urlsEditorDataAtom, initialMD }: { urlsEditorDataAtom: UrlsEditorDataAtom; initialMD: Matching.RawMatchData; }) {
+export function MatchHow({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const [errorHint, setErrorHint] = useState(''); // 'This pattern is not valid'
 
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
@@ -24,43 +24,40 @@ export function MatchHow({ urlsEditorDataAtom, initialMD }: { urlsEditorDataAtom
     const setUrlsEditorData = useSetAtom(setUrlsEditorDataAtom);
 
 
-    const [rawMD, setRawMD] = useState<Matching.RawMatchData>(initialMD);
-
     const [urls, setUrls] = useAtom(urlsEditorDataAtom);
     const setIsChanged = useSetAtom(urls.isChangedAtom);
-
 
     function onChangeHow(v: Matching.How) {
         setUrlsEditorData({ urlsEditorDataAtom, how: v });
     }
 
     function isOptionChecked(option: Matching.Options) {
-        return (rawMD.opt & option) !== 0;
+        return (opt & option) !== 0;
     }
 
     function onOptionChange(checked: boolean, changedOption: Matching.Options) {
-        let opt = checked ? rawMD.opt | changedOption : rawMD.opt & ~changedOption;
-        setUrlsEditorData({ urlsEditorDataAtom, opt });
+        let opt2 = checked ? opt | changedOption : opt & ~changedOption;
+        setUrlsEditorData({ urlsEditorDataAtom, opt: opt2 });
     }
 
     function onUrlChange(url: string) {
         setUrlsEditorData({ urlsEditorDataAtom, url });
     }
 
-    const disabled = rawMD.how === Matching.How.undef;
+    const disabled = how === Matching.How.undef;
 
     return (<>
         <div className="flex space-x-4">
             {/* How match radio buttons */}
-            <RadioGroupTooltips value={rawMD.how} setValue={onChangeHow} />
+            <RadioGroupTooltips value={how} setValue={onChangeHow} />
 
             {/* Match case: show only for legacy manifests to allow reset this to none */}
-            {!!initialMD.opt && (
+            {!!urlsEditorData.fromFileMatchData.opt && (
                 <MatchingCheckboxes isChecked={isOptionChecked} onCheckboxChange={onOptionChange} />
             )}
         </div>
 
-        <MatchUrlInputLabel how={rawMD.how} disabled={disabled} />
+        <MatchUrlInputLabel how={how} disabled={disabled} />
         <MatchUrlInput rawUrl={url} title={m} onUrlChange={onUrlChange} errorHint={errorHint} disabled={disabled} />
 
         <FinalMatchUrl url={m} />

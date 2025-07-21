@@ -2,16 +2,16 @@ import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { a, useSpring } from "@react-spring/web";
 import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, UIIconUpDown } from "@ui/icons";
-import { Matching } from "@/store/manifest";
-import { type MatchWebStateAtom } from "../0-all";
+import { type UrlsEditorDataAtom } from "../0-all";
 import { MatchHow } from "./1-murl-how";
 
-export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
-    const editorUrls = useAtomValue(editorUrlsAtom);
-    const [isOpen, setIsOpen] = useState(editorUrls.current.o !== editorUrls.current.m);
-    
-    const [initialMD] = useState<Matching.RawMatchData>(() => Matching.parseRawMatchData(editorUrls.current.m));
+export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
+    const urlsEditorData = useAtomValue(urlsEditorDataAtom);
+    const o = useAtomValue(urlsEditorData.oAtom);
+    const m = useAtomValue(urlsEditorData.qAtom);
 
+    const [isOpen, setIsOpen] = useState(o !== m);
+    
     const stylesDropdown = useSpring({
         height: isOpen ? 'auto' : 0,
         opacity: isOpen ? 1 : 0,
@@ -31,7 +31,7 @@ export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
                 <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
             </div>
 
-            {editorUrls.current.o === editorUrls.current.m && (
+            {o === m && (
                 <label className="flex items-center text-xs">
                     <div className="ml-5">
                         same as original url
@@ -42,7 +42,7 @@ export function Section_Murl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
 
         {isOpen && (
             <a.div style={stylesDropdown}>
-                <MatchHow urlsAtom={editorUrlsAtom} initialMD={initialMD} />
+                <MatchHow urlsEditorDataAtom={urlsEditorDataAtom} />
             </a.div>
         )}
     </>);

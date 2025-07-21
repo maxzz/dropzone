@@ -1,10 +1,10 @@
 import { type PrimitiveAtom, atom } from "jotai";
 import { type OnValueChange, atomWithCallback } from "@/utils/util-hooks";
 import { type FileUs, FormIdx } from "@/store";
-import { type MatchWebState } from "./9-types";
+import { type UrlsEditorData, type UrlsEditorDataAtom } from "./9-types";
 import { Matching } from "@/store/manifest";
 
-export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<MatchWebState>): PrimitiveAtom<MatchWebState> {
+export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<UrlsEditorData>): UrlsEditorDataAtom {
 
     // Page Web Matching
     const {
@@ -17,12 +17,13 @@ export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange:
 
     console.log('createUrlsAtom', initial);
 
-    const { how, opt, url } = Matching.parseRawMatchData(m);
+    const fromFileMatchData = Matching.parseRawMatchData(m);
+    const { how, opt, url } = fromFileMatchData;
 
-    return atomWithCallback<MatchWebState>(
+    return atomWithCallback<UrlsEditorData>(
         {
-            current: { ...initial },
-            initial,
+            fromFile: initial,
+            fromFileMatchData,
             isChangedAtom: atom<boolean>(false),
 
             oAtom: atom(o),
@@ -33,6 +34,6 @@ export function createEditorUrlsAtom(fileUs: FileUs, formIdx: FormIdx, onChange:
             optAtom: atom(opt),
             urlAtom: atom(url),
         },
-        onChange
+        onChange //TODO: callback onChange is on the wrong atom (or do callback with name scope). later
     );
 }

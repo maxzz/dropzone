@@ -4,7 +4,7 @@ import { classNames } from "@/utils";
 import { type ManiEditorData } from "@/store";
 import { type ReactDOMAttributes } from "@use-gesture/react/dist/declarations/src/types";
 
-import { type MatchWebState, Tab1_MatchWeb } from "../2-tabs/1-matching";
+import { type UrlsEditorDataAtom, Tab1_MatchWeb } from "../2-tabs/1-matching";
 import { Tab2_MatchWindows } from "../2-tabs/2-match-windows";
 import { Tab3_Options } from "../2-tabs/3-options";
 import { Tab4_Fields } from "../2-tabs/4-fields";
@@ -13,15 +13,15 @@ import { ManiModifiedIndicator } from "./8-mani-modified-indicator";
 import { EditorTabs } from "./3-editor-tabs";
 
 type TabsCombinedProps = {
-    editorUrlsAtom: PrimitiveAtom<MatchWebState>;
+    urlsEditorData: UrlsEditorDataAtom;
     editorData: ManiEditorData;
     captionDragBind: (...args: any[]) => ReactDOMAttributes;
 };
 
-export function AllTabsTopHolder({ editorUrlsAtom, editorData, captionDragBind }: TabsCombinedProps) {
+export function AllTabsTopHolder({ urlsEditorData, editorData, captionDragBind }: TabsCombinedProps) {
     // Pages
     const pages = {
-        'Web': <Tab1_MatchWeb editorUrlsAtom={editorUrlsAtom} />,
+        'Web': <Tab1_MatchWeb urlsEditorDataAtom={urlsEditorData} />,
         'Win32': <Tab2_MatchWindows editorData={editorData} />,
         'Options': <Tab3_Options editorData={editorData} />,
         'Fields': <Tab4_Fields editorData={editorData} />,
@@ -37,7 +37,7 @@ export function AllTabsTopHolder({ editorUrlsAtom, editorData, captionDragBind }
         <EditorTabs
             pageNames={pageNames}
             pageScrollOfsAtom={pageScrollOfsAtom}
-            stateIndicator={<ManiModifiedIndicator editorUrlsAtom={editorUrlsAtom} />}
+            stateIndicator={<ManiModifiedIndicator editorUrlsAtom={urlsEditorData} />}
             selectedTabAtom={selectedTabAtom}
             captionDragBind={captionDragBind}
         >

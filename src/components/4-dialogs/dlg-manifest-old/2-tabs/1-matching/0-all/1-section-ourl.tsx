@@ -1,9 +1,11 @@
-import { useAtom, useSetAtom } from "jotai";
-import { MatchWebStateAtom, areUrlsChanged } from "./9-types";
+import { useAtomValue, useSetAtom } from "jotai";
+import { UrlsEditorDataAtom } from "./9-types";
+import { setUrlsEditorDataAtom } from "./7-set-atoms";
 
-export function Section_Ourl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
-    const [urls, setUrls] = useAtom(editorUrlsAtom);
-    const setIsChanged = useSetAtom(urls.isChangedAtom);
+export function Section_Ourl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
+    const urlsEditorData = useAtomValue(urlsEditorDataAtom);
+    const o = useAtomValue(urlsEditorData.oAtom);
+    const setUrlsEditorData = useSetAtom(setUrlsEditorDataAtom);
 
     return (
         <div className="mb-1 flex items-center justify-between gap-2">
@@ -14,14 +16,8 @@ export function Section_Ourl({ editorUrlsAtom }: { editorUrlsAtom: MatchWebState
             <input
                 className="flex-1 px-2 py-1.5 w-full min-w-0 border border-gray-400 rounded shadow-inner"
                 spellCheck={false}
-                value={urls.current.o}
-                onChange={
-                    (event) => {
-                        const newState = { ...urls, current: { ...urls.current, o: event.target.value } };
-                        setUrls(newState);
-                        setIsChanged(areUrlsChanged(newState));
-                    }
-                }
+                value={o}
+                onChange={(event) => setUrlsEditorData({ urlsEditorDataAtom, o: event.target.value })}
             />
         </div>
     );
