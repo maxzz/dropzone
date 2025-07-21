@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, UIIconUpDown } from "@ui/icons";
-import { type UrlsEditorDataAtom } from "../0-all";
-import { MatchHow } from "./1-murl-how";
-import { AnimatedDropdown } from "../0-all/4-animated-dropdown";
-import { ThesameAsOriginalUrl } from "../0-all/5-the-same-as-original";
-import { SectionName } from "../0-all/6-section-name";
+import { UrlsEditorDataAtom } from "./9-types";
+import { MatchHow } from "../2-murl-group";
+import { AnimatedDropdown } from "./6-animated-dropdown";
+import { ThesameAsOriginalUrl } from "./5-the-same-as-original";
+import { SectionName } from "./4-section-name";
 
 export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);

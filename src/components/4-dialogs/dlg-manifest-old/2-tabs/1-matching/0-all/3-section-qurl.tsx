@@ -4,9 +4,9 @@ import { classNames } from "@/utils";
 import { UIIconUpDown } from "@ui/icons";
 import { type UrlsEditorDataAtom } from "./9-types";
 import { setUrlsEditorDataAtom } from "./9-set-atoms";
-import { AnimatedDropdown } from "./4-animated-dropdown";
+import { AnimatedDropdown } from "./6-animated-dropdown";
 import { ThesameAsOriginalUrl } from "./5-the-same-as-original";
-import { SectionName } from "./6-section-name";
+import { SectionName } from "./4-section-name";
 
 export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const setUrlsEditorData = useSetAtom(setUrlsEditorDataAtom);
