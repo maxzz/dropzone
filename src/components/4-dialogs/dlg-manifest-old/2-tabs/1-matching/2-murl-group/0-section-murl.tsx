@@ -14,9 +14,9 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     const [isOpen, setIsOpen] = useState(o !== m);
 
     return (<>
-        <div className="mt-4 mb-1 flex items-center">
-            <div className="font-bold text-gray-600 cursor-pointer flex items-center gap-x-1" onClick={() => setIsOpen(!isOpen)}>
-                <div>
+        <div className="mt-4 mb-1 cursor-pointer flex items-center select-none" onClick={() => setIsOpen(!isOpen)}>
+            <div className="flex items-center gap-x-1">
+                <div className="font-bold text-gray-600">
                     Matching url
                 </div>
                 <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
