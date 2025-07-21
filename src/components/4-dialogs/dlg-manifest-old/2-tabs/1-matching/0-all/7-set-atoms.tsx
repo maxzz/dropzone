@@ -21,6 +21,10 @@ export const setUrlsEditorDataAtom = atom(
             if (how !== undefined) {
                 current.how = how;
                 set(urlsEditorData.howAtom, how);
+
+                if (how === Matching.How.undef) {
+                    set(urlsEditorData.urlAtom, get(urlsEditorData.oAtom));
+                }
             }
             if (opt !== undefined) {
                 current.opt = opt;
@@ -34,10 +38,8 @@ export const setUrlsEditorDataAtom = atom(
             set(urlsEditorData.mAtom, Matching.stringifyRawMatchData(current, get(urlsEditorData.oAtom)));
         }
 
-        const currentUrls = {o: get(urlsEditorData.oAtom), m: get(urlsEditorData.mAtom), q: get(urlsEditorData.qAtom)};
-
+        const currentUrls = { o: get(urlsEditorData.oAtom), m: get(urlsEditorData.mAtom), q: get(urlsEditorData.qAtom) };
         const isChanged = areUrlStates(currentUrls, urlsEditorData.fromFile);
-
         set(urlsEditorData.isChangedAtom, isChanged);
     }
 );
