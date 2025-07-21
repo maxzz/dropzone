@@ -23,7 +23,3 @@ export type UrlsEditorDataAtom = PrimitiveAtom<UrlsEditorData>; // to have callb
 export function areUrlStates(a: UrlsState, b: UrlsState): boolean {
     return a.m !== b.m || a.o !== b.o || a.q !== b.q;
 }
-
-// export function areDiffRawMatchData(a: Matching.RawMatchData, b: Matching.RawMatchData): boolean {
-//     return a.how !== b.how || a.opt !== b.opt || a.url !== b.url;
-// }

@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { type OnValueChangeParams, atomWithCallback } from "@/utils";
+import { Matching } from "@/store/manifest";
 import { type FileUs, FormIdx } from "@/store";
 import { type UrlsEditorData, type UrlsEditorDataAtom } from "./9-types";
-import { Matching } from "@/store/manifest";
 
 export type OnChangeParamsWithNameScope = (params: OnValueChangeParams & { name: string; }) => void;
 
@@ -17,7 +17,7 @@ export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange:
 
     const initial = { o, m, q, };
 
-    console.log('createUrlsAtom', initial);
+    console.log('createUrlsAtom', JSON.stringify(initial, null, 4));
 
     const fromFileMatchData = Matching.parseRawMatchData(m);
     const { how, opt, url } = fromFileMatchData;
@@ -45,6 +45,3 @@ export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange:
 
     return atom(urlsEditorData);
 }
-
-//TODO: reset to initial
-//TODO: validation and hints
