@@ -6,7 +6,7 @@ import { RadioGroupTooltips } from "./7-ui-radio-group-tooltips";
 import { MatchingCheckboxes } from "./7-ui-matching-checkboxes";
 import { MatchUrlInput } from "./5-match-url-input";
 import { FinalMatchUrl } from "./6-final-match-url";
-import { setUrlsEditorDataAtom } from "../0-all/7-set-atoms";
+import { setUrlsEditorDataAtom } from "../0-all/9-set-atoms";
 import { MatchUrlInputLabel } from "./5-match-url-caption";
 
 export function MatchHow({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {

@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { UrlsEditorDataAtom } from "./9-types";
-import { setUrlsEditorDataAtom } from "./7-set-atoms";
+import { setUrlsEditorDataAtom } from "./9-set-atoms";
 
 export function Section_Ourl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
