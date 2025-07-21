@@ -8,7 +8,7 @@ import { MatchHow } from "./1-murl-how";
 export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
     const o = useAtomValue(urlsEditorData.oAtom);
-    const m = useAtomValue(urlsEditorData.qAtom);
+    const m = useAtomValue(urlsEditorData.mAtom);
 
     const [isOpen, setIsOpen] = useState(o !== m);
     
