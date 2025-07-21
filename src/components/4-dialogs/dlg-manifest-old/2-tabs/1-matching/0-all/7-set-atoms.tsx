@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type UrlsEditorDataAtom, areDiffRawMatchData } from "./9-types";
+import { type UrlsEditorDataAtom, areUrlStates } from "./9-types";
 import { Matching } from "@/store/manifest";
 
 export const setUrlsEditorDataAtom = atom(
@@ -11,9 +11,13 @@ export const setUrlsEditorDataAtom = atom(
             set(urlsEditorData.oAtom, o);
         }
 
-        const current: Matching.RawMatchData = { how: get(urlsEditorData.howAtom), opt: get(urlsEditorData.optAtom), url: get(urlsEditorData.urlAtom) };
+        if (q !== undefined) {
+            set(urlsEditorData.qAtom, q);
+        }
 
         if (how !== undefined || opt !== undefined || url !== undefined) {
+            const current: Matching.RawMatchData = { how: get(urlsEditorData.howAtom), opt: get(urlsEditorData.optAtom), url: get(urlsEditorData.urlAtom) };
+
             if (how !== undefined) {
                 current.how = how;
                 set(urlsEditorData.howAtom, how);
@@ -30,14 +34,9 @@ export const setUrlsEditorDataAtom = atom(
             set(urlsEditorData.mAtom, Matching.stringifyRawMatchData(current, get(urlsEditorData.oAtom)));
         }
 
-        if (q !== undefined) {
-            set(urlsEditorData.qAtom, q);
-        }
+        const currentUrls = {o: get(urlsEditorData.oAtom), m: get(urlsEditorData.mAtom), q: get(urlsEditorData.qAtom)};
 
-        const isChanged =
-            q !== urlsEditorData.fromFile.q ||
-            o !== urlsEditorData.fromFile.o ||
-            areDiffRawMatchData(current, urlsEditorData.fromFileMatchData); //TODO: we can compare only current areUrlStates() instead
+        const isChanged = areUrlStates(currentUrls, urlsEditorData.fromFile);
 
         set(urlsEditorData.isChangedAtom, isChanged);
     }

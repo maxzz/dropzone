@@ -2,24 +2,28 @@ import { type PrimitiveAtom } from "jotai";
 import { type Atomize } from "@/utils";
 import { Matching } from "@/store/manifest";
 
-type UrlsState = {
+export type UrlsState = {
     o: string;
     m: string;
     q: string;
 };
 
-export type MatchWebState = Prettify<
-    & {
-        current: UrlsState;
-        initial: UrlsState;                         // Initial state of urls from file
-        isChangedAtom: PrimitiveAtom<boolean>;      // It should be not dirty but: is initial value?
-    }
+export type UrlsEditorData = Prettify<
     & Atomize<Matching.RawMatchData>
     & Atomize<UrlsState>
+    & {
+        isChangedAtom: PrimitiveAtom<boolean>;
+        fromFile: UrlsState;                        // Initial state of urls from file
+        fromFileMatchData: Matching.RawMatchData;  // Initial state of urls from file
+    }
 >;
 
-export type MatchWebStateAtom = PrimitiveAtom<MatchWebState>;
+export type UrlsEditorDataAtom = PrimitiveAtom<UrlsEditorData>; // to have callback onChange
 
-export function areUrlsChanged(urls: MatchWebState): boolean {
-    return urls.current.m !== urls.initial.m || urls.current.o !== urls.initial.o || urls.current.q !== urls.initial.q;
+export function areUrlStates(a: UrlsState, b: UrlsState): boolean {
+    return a.m !== b.m || a.o !== b.o || a.q !== b.q;
 }
+
+// export function areDiffRawMatchData(a: Matching.RawMatchData, b: Matching.RawMatchData): boolean {
+//     return a.how !== b.how || a.opt !== b.opt || a.url !== b.url;
+// }
