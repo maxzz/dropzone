@@ -14,19 +14,17 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     const [isOpen, setIsOpen] = useState(o !== m);
 
     return (<>
-        <div className="mt-4 mb-1 cursor-pointer flex items-center select-none" onClick={() => setIsOpen(!isOpen)}>
-            <div className="flex items-center gap-x-1">
-                <div className="font-bold text-gray-600">
-                    Matching url
-                </div>
-                <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
-
-                <IconCaseSame className="ml-16 p-0.5 size-5 text-slate-500 border rounded" />
-                <IconCaseRegex className="p-0.5 pt-1 size-5 text-slate-500 border rounded" />
-                <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
+        <div className="mt-4 mb-1 cursor-pointer flex items-center gap-x-1 select-none" onClick={() => setIsOpen(!isOpen)}>
+            <div className="font-bold text-gray-600">
+                Matching url
             </div>
+            <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
 
-            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={o === m} />
+            <IconCaseSame className="ml-16 p-0.5 size-5 text-slate-500 border rounded" />
+            <IconCaseRegex className="p-0.5 pt-1 size-5 text-slate-500 border rounded" />
+            <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
+
+            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={o === m} isOpen={isOpen} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>

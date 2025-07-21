@@ -15,13 +15,11 @@ export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     const [isOpen, setIsOpen] = useState(false);
 
     return (<>
-        <div className="mt-4 mb-1 cursor-pointer flex items-center select-none" onClick={() => setIsOpen(!isOpen)}>
-            <div className="flex items-center gap-x-1">
-                <div className="font-bold text-gray-600">
-                    Quicklink url
-                </div>
-                <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
+        <div className="mt-4 mb-1 cursor-pointer flex items-center gap-x-1 select-none" onClick={() => setIsOpen(!isOpen)}>
+            <div className="font-bold text-gray-600">
+                Quicklink url
             </div>
+            <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
 
             <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={o === q} />
         </div>

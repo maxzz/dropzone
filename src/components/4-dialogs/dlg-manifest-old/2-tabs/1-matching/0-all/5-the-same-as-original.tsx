@@ -1,8 +1,8 @@
 import { type ComponentPropsWithoutRef } from "react";
 
-export function ThesameAsOriginalUrl({ isTheSame, ...rest }: { isTheSame: boolean; } & ComponentPropsWithoutRef<"div">) {
+export function ThesameAsOriginalUrl({ isTheSame, isOpen = false, ...rest }: { isTheSame: boolean; isOpen?: boolean; } & ComponentPropsWithoutRef<"div">) {
     return (<>
-        {isTheSame && (
+        {isTheSame && !isOpen && (
             <div {...rest}>
                 same as original url
             </div>
