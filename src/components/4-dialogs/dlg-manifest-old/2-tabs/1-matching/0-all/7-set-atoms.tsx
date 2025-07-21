@@ -1,22 +1,36 @@
 import { atom } from "jotai";
-import { type MatchWebStateAtom, areUrlsChanged } from "./9-types";
+import { type UrlsEditorDataAtom, areDiffRawMatchData } from "./9-types";
+import { Matching } from "@/store/manifest";
 
 export const setUrlsAtom = atom(
     null,
-    (get, set, { editorUrlsAtom, m, o, q }: { editorUrlsAtom: MatchWebStateAtom, m?: string, o?: string, q?: string; }) => { //TODO: set how, opt and url
-        const editorUrls = get(editorUrlsAtom);
+    (get, set, { urlsEditorDataAtom, q, how, opt, url }: { urlsEditorDataAtom: UrlsEditorDataAtom, q?: string; how?: Matching.How; opt?: Matching.Options; url?: string; }) => {
+        const urlsEditorData = get(urlsEditorDataAtom);
 
-        const newState = {
-            ...editorUrls,
-            current: {
-                ...editorUrls.current,
-                m: m || editorUrls.current.m,
-                o: o || editorUrls.current.o,
-                q: q || editorUrls.current.q,
+        const current: Matching.RawMatchData = { how: get(urlsEditorData.howAtom), opt: get(urlsEditorData.optAtom), url: get(urlsEditorData.urlAtom) };
+
+        if (how !== undefined || opt !== undefined || url !== undefined) {
+            if (how !== undefined) {
+                current.how = how;
+                set(urlsEditorData.howAtom, how);
             }
-        };
+            if (opt !== undefined) {
+                current.opt = opt;
+                set(urlsEditorData.optAtom, opt);
+            }
+            if (url !== undefined) {
+                current.url = url;
+                set(urlsEditorData.urlAtom, url);
+            }
 
-        set(editorUrlsAtom, newState);
-        set(editorUrls.isChangedAtom, areUrlsChanged(newState));
+            set(urlsEditorData.mAtom, Matching.stringifyRawMatchData(current, urlsEditorData.fromFile.o));
+        }
+
+        if (q !== undefined) {
+            set(urlsEditorData.qAtom, q);
+        }
+
+        const isChanged = q !== urlsEditorData.fromFile.q || areDiffRawMatchData(current, urlsEditorData.fromFileMatchData);
+        set(urlsEditorData.isChangedAtom, isChanged);
     }
 );
