@@ -5,12 +5,10 @@ import { Section_Qurl } from "./3-section-qurl";
 
 export function Tab1_MatchWeb({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     return (
-        <div className="p-4">
-            <div className="grid grid-cols-1">
-                <Section_Ourl urlsEditorDataAtom={urlsEditorDataAtom} />
-                <Section_Murl urlsEditorDataAtom={urlsEditorDataAtom} />
-                <Section_Qurl urlsEditorDataAtom={urlsEditorDataAtom} />
-            </div>
+        <div className="p-4 grid">
+            <Section_Ourl urlsEditorDataAtom={urlsEditorDataAtom} />
+            <Section_Murl urlsEditorDataAtom={urlsEditorDataAtom} />
+            <Section_Qurl urlsEditorDataAtom={urlsEditorDataAtom} />
         </div>
     );
 }

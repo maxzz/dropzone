@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
+import { classNames } from "@/utils";
 import { UIIconUpDown } from "@ui/icons";
 import { type UrlsEditorDataAtom } from "./9-types";
 import { setUrlsEditorDataAtom } from "./9-set-atoms";
 import { AnimatedDropdown } from "./4-animated-dropdown";
 import { ThesameAsOriginalUrl } from "./5-the-same-as-original";
+import { SectionName } from "./6-section-name";
 
 export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const setUrlsEditorData = useSetAtom(setUrlsEditorDataAtom);
@@ -17,13 +19,10 @@ export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     const [isOpen, setIsOpen] = useState(!isTheSame);
 
     return (<>
-        <div className="mt-4 mb-1 grid grid-cols-[repeat(2,minmax(0,max-content))_auto] items-center gap-x-1 cursor-pointer select-none" onClick={() => setIsOpen(!isOpen)}>
-            <div className="w-max font-bold text-gray-600">
-                Quicklink url
-            </div>
-            <UIIconUpDown className="size-5" double={false} horizontal={true} isOpen={isOpen} />
-
-            <ThesameAsOriginalUrl className="justify-self-end ml-5 text-xs" isTheSame={isTheSame} />
+        <div className="mt-4 grid grid-cols-[repeat(2,max-content)_1fr] items-center gap-1 cursor-pointer select-none" onClick={() => setIsOpen(!isOpen)}>
+            <SectionName>Quicklink url</SectionName>
+            <UIIconUpDown className={classNames("size-5 fill-black", !isOpen && "mb-0.5")} double={false} horizontal={true} isOpen={isOpen} />
+            <ThesameAsOriginalUrl className="justify-self-end text-xs" isTheSame={isTheSame} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>
