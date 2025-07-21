@@ -37,7 +37,7 @@ export function AllTabsTopHolder({ urlsEditorData, editorData, captionDragBind }
         <EditorTabs
             pageNames={pageNames}
             pageScrollOfsAtom={pageScrollOfsAtom}
-            stateIndicator={<ManiModifiedIndicator editorUrlsAtom={urlsEditorData} />}
+            stateIndicator={<ManiModifiedIndicator urlsEditorDataAtom={urlsEditorData} />}
             selectedTabAtom={selectedTabAtom}
             captionDragBind={captionDragBind}
         >

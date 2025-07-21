@@ -1,13 +1,13 @@
 import { useAtomValue } from "jotai";
 import { SymbolAttention } from "@ui/icons";
-import { MatchWebStateAtom } from "../2-tabs/1-matching";
+import { UrlsEditorDataAtom } from "../2-tabs/1-matching";
 //import { toastWarning } from "@ui/UIToaster";
 
 const shadowStyles = { filter: 'drop-shadow(#f66b3b7a 0px 0px 0.15rem)' };
 
-export function ManiModifiedIndicator({ editorUrlsAtom }: { editorUrlsAtom: MatchWebStateAtom; }) {
-    const urls = useAtomValue(editorUrlsAtom);
-    const isChanged = useAtomValue(urls.isChangedAtom);
+export function ManiModifiedIndicator({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
+    const urlsEditorData = useAtomValue(urlsEditorDataAtom);
+    const isChanged = useAtomValue(urlsEditorData.isChangedAtom);
 
     if (!isChanged) {
         return null;
