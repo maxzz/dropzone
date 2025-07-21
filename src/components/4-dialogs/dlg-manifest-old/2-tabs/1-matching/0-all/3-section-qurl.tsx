@@ -8,7 +8,7 @@ import { ThesameAsOriginalUrl } from "./5-the-same-as-original";
 
 export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const setUrlsEditorData = useSetAtom(setUrlsEditorDataAtom);
-    
+
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
     const o = useAtomValue(urlsEditorData.oAtom);
     const q = useAtomValue(urlsEditorData.qAtom);
@@ -17,13 +17,13 @@ export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     const [isOpen, setIsOpen] = useState(!isTheSame);
 
     return (<>
-        <div className="mt-4 mb-1 cursor-pointer flex items-center gap-x-1 select-none" onClick={() => setIsOpen(!isOpen)}>
-            <div className="font-bold text-gray-600">
+        <div className="mt-4 mb-1 grid grid-cols-[repeat(2,minmax(0,max-content))_auto] items-center gap-x-1 cursor-pointer select-none" onClick={() => setIsOpen(!isOpen)}>
+            <div className="w-max font-bold text-gray-600">
                 Quicklink url
             </div>
-            <UIIconUpDown double={false} horizontal={true} isOpen={isOpen} className="size-5" />
+            <UIIconUpDown className="size-5" double={false} horizontal={true} isOpen={isOpen} />
 
-            <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={isTheSame} />
+            <ThesameAsOriginalUrl className="justify-self-end ml-5 text-xs" isTheSame={isTheSame} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>

@@ -55,7 +55,7 @@ export function MatchHow({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEdito
             )}
         </div>
 
-        <div className={classNames("mt-2 mb-0.5 flex items-center gap-x-1", disabled && 'opacity-75')}>
+        <div className={classNames("mt-2 mb-0.5 flex items-center justify-between gap-x-1", disabled && 'opacity-75')}>
             <MatchUrlInputLabel how={how} />
             <ThesameAsOriginalUrl className="ml-5 text-xs" isTheSame={isTheSame} />
         </div>
