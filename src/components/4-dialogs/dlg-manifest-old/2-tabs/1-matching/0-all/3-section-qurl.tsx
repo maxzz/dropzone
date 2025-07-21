@@ -4,6 +4,7 @@ import { UIIconUpDown } from "@ui/icons";
 import { type UrlsEditorDataAtom } from "./9-types";
 import { setUrlsEditorDataAtom } from "./9-set-atoms";
 import { AnimatedDropdown } from "./4-animated-dropdown";
+import { ThesameAsOriginalUrl } from "./5-the-same-as-original";
 
 export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
@@ -15,14 +16,14 @@ export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
 
     return (<>
         <div className="mt-4 mb-1 flex items-center">
-            <div className="w-28 font-bold text-gray-600 flex items-center space-x-1" onClick={() => setIsOpen(!isOpen)}>
+            <div className="font-bold text-gray-600 flex items-center gap-x-1" onClick={() => setIsOpen(!isOpen)}>
                 <div>
                     Quicklink url
                 </div>
                 <UIIconUpDown double={true} isUp={isOpen} className="size-5 border rounded" />
             </div>
 
-            <ThesameAsOriginalUrl isTheSame={o === q} />
+            <ThesameAsOriginalUrl className="ml-5" isTheSame={o === q} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>
@@ -33,17 +34,5 @@ export function Section_Qurl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
                 onChange={(event) => setUrlsEditorData({ urlsEditorDataAtom, q: event.target.value })}
             />
         </AnimatedDropdown>
-    </>);
-}
-
-function ThesameAsOriginalUrl({ isTheSame }: { isTheSame: boolean; }) {
-    return (<>
-        {isTheSame && (
-            <label className="flex items-center text-xs">
-                <div className="ml-5 text-xs">
-                    same as original url
-                </div>
-            </label>
-        )}
     </>);
 }

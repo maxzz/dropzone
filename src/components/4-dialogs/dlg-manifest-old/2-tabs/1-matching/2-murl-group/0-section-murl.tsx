@@ -4,6 +4,7 @@ import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, UIIconUpDown } from "@ui/
 import { type UrlsEditorDataAtom } from "../0-all";
 import { MatchHow } from "./1-murl-how";
 import { AnimatedDropdown } from "../0-all/4-animated-dropdown";
+import { ThesameAsOriginalUrl } from "../0-all/5-the-same-as-original";
 
 export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsEditorDataAtom; }) {
     const urlsEditorData = useAtomValue(urlsEditorDataAtom);
@@ -25,23 +26,11 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
                 <IconCaseSameDoc className="p-0.5 size-5 border rounded" />
             </div>
 
-            <ThesameAsOriginalUrl isTheSame={o === m} />
+            <ThesameAsOriginalUrl className="ml-5" isTheSame={o === m} />
         </div>
 
         <AnimatedDropdown isOpen={isOpen}>
             <MatchHow urlsEditorDataAtom={urlsEditorDataAtom} />
         </AnimatedDropdown>
-    </>);
-}
-
-function ThesameAsOriginalUrl({ isTheSame }: { isTheSame: boolean; }) {
-    return (<>
-        {isTheSame && (
-            <label className="flex items-center text-xs">
-                <div className="ml-5">
-                    same as original url
-                </div>
-            </label>
-        )}
     </>);
 }
