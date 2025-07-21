@@ -1,10 +1,12 @@
-import { type PrimitiveAtom, atom } from "jotai";
-import { type OnValueChange, atomWithCallback } from "@/utils/util-hooks";
+import { atom } from "jotai";
+import { type OnValueChangeParams, atomWithCallback } from "@/utils";
 import { type FileUs, FormIdx } from "@/store";
 import { type UrlsEditorData, type UrlsEditorDataAtom } from "./9-types";
 import { Matching } from "@/store/manifest";
 
-export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange: OnValueChange<UrlsEditorData>): UrlsEditorDataAtom {
+export type OnChangeParamsWithNameScope = (params: OnValueChangeParams & { name: string; }) => void;
+
+export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange: OnChangeParamsWithNameScope): UrlsEditorDataAtom {
 
     // Page Web Matching
     const {
@@ -20,20 +22,29 @@ export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange:
     const fromFileMatchData = Matching.parseRawMatchData(m);
     const { how, opt, url } = fromFileMatchData;
 
-    return atomWithCallback<UrlsEditorData>(
-        {
-            fromFile: initial,
-            fromFileMatchData,
-            isChangedAtom: atom<boolean>(false),
+    function onChangeLocal(name: string) {
+        function onChangeWithNameScope({ get, set, nextValue }: OnValueChangeParams) {
+            onChange({ name, get, set, nextValue });
+        }
+        return onChangeWithNameScope;
+    }
 
-            oAtom: atom(o),
-            mAtom: atom(m),
-            qAtom: atom(q),
-            
-            howAtom: atom(how),
-            optAtom: atom(opt),
-            urlAtom: atom(url),
-        },
-        onChange //TODO: callback onChange is on the wrong atom (or do callback with name scope). later
-    );
+    const urlsEditorData: UrlsEditorData = {
+        fromFile: initial,
+        fromFileMatchData,
+        isChangedAtom: atom<boolean>(false),
+
+        oAtom: atomWithCallback(o, onChangeLocal('o')),
+        mAtom: atomWithCallback(m, onChangeLocal('m')),
+        qAtom: atomWithCallback(q, onChangeLocal('q')),
+
+        howAtom: atomWithCallback(how, onChangeLocal('how')),
+        optAtom: atomWithCallback(opt, onChangeLocal('opt')),
+        urlAtom: atomWithCallback(url, onChangeLocal('url')),
+    };
+
+    return atom(urlsEditorData);
 }
+
+//TODO: reset to initial
+//TODO: validation and hints

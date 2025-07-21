@@ -1,10 +1,9 @@
 import { useCallback, useState } from "react";
 import { type Getter, useAtomValue } from "jotai";
-import { type OnValueChange } from "@/utils";
 import { useDrag } from "@use-gesture/react";
 import { a, useSpring } from "@react-spring/web";
 import { type ManiEditorData } from "@/store";
-import { UrlsEditorData, type UrlsEditorDataAtom, createUrlsEditorData } from "../2-tabs/1-matching";
+import { type OnChangeParamsWithNameScope, type UrlsEditorData, createUrlsEditorData } from "../2-tabs/1-matching";
 import { AllTabsTopHolder } from "./2-all-tabs-top-holder";
 import { ManiInfoTooltip } from "./8-mani-info-tooltip";
 import { BottomButtons } from "./4-editor-bottom-buttons";
@@ -17,9 +16,9 @@ type Dialog_ManifestProps = {
 export function Dialog_Manifest({ editorData, setShow }: Dialog_ManifestProps) { // This is lazy loaded
     const fileUs = useAtomValue(editorData.fileUsAtom);
 
-    const onChangeEditorUrls = useCallback<OnValueChange<UrlsEditorData>>(
-        ({ get, set, nextValue }) => {
-            printMatchWebState(nextValue, get);
+    const onChangeEditorUrls = useCallback<OnChangeParamsWithNameScope>(
+        ({ name, get, set, nextValue }) => {
+            printMatchWebState(name,nextValue, get);
         }, []
     );
 
@@ -48,8 +47,8 @@ export function Dialog_Manifest({ editorData, setShow }: Dialog_ManifestProps) {
     );
 }
 
-function printMatchWebState(urls: UrlsEditorData, get: Getter) {
-    console.log('MatchWebState', JSON.stringify(urls, null, 4));
+function printMatchWebState(changeName: string, urlsEditorData: UrlsEditorData, get: Getter) {
+    console.log(`MatchWebState changeName:"${changeName}" nextValue:`, JSON.stringify(urlsEditorData, null, 4));
 }
 
 //TODO: events onTabChange w/ ability to cancel
