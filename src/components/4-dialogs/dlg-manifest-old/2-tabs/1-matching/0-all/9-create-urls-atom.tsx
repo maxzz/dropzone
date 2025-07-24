@@ -15,7 +15,7 @@ export function createUrlsEditorData(fileUs: FileUs, formIdx: FormIdx, onChange:
         web_qurl: q = '',
     } = fileUs.parsedSrc.meta?.[formIdx]?.mani?.detection || {};
 
-    const initial = { o, m, q, };
+    const initial = { o, m, q };
 
     console.log('createUrlsAtom', JSON.stringify(initial, null, 4));
 
