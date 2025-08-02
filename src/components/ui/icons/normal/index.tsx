@@ -19,6 +19,8 @@ export * from "./icon24-docs-accepted";
 export * from "./icon25-doc";
 export * from "./icon26-folder";
 
+export * from "./icon27-not-in-use";
+
 export * from "./icon30-apps";
 export * from "./icon31-btn-form-login";
 export * from "./icon32-btn-from-change";
