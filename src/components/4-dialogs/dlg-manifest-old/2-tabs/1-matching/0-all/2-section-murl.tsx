@@ -25,9 +25,8 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
             <IconCaseRegex className="p-0.5 pt-1 size-4 text-slate-500 border rounded" />
             <IconCaseSameDoc className="p-0.5 size-4 border rounded" />
 
-            <TestStopIcons />
+            {/* <TestStopIcons /> */}
             {/* <TestMicroscopeIcons /> */}
-
             <IconNotInUse className="p-0.5 size-4 border rounded" />
             <IconMicroscope className="p-0.5 size-4 border rounded" />
 
