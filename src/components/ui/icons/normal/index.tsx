@@ -19,7 +19,10 @@ export * from "./icon24-docs-accepted";
 export * from "./icon25-doc";
 export * from "./icon26-folder";
 
+export * from "./icon27-microscope";
 export * from "./icon27-not-in-use";
+export * from "./icon27-stop-circle";
+export * from "./icon27-stop-hand";
 
 export * from "./icon30-apps";
 export * from "./icon31-btn-form-login";

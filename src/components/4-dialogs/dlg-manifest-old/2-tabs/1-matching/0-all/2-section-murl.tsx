@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
-import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, IconNotInUse, UIIconUpDown } from "@ui/icons";
+import { IconCaseRegex, IconCaseSame, IconCaseSameDoc, IconMicroscope, IconNotInUse, IconStopCircle, IconStopHand, UIIconUpDown } from "@ui/icons";
 import { UrlsEditorDataAtom } from "./9-types";
 import { MatchHow } from "../2-murl-group";
 import { AnimatedDropdown } from "./6-animated-dropdown";
@@ -24,9 +24,12 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
             <IconCaseSame className="ml-20 p-0.5 size-4 text-slate-500 border rounded" />
             <IconCaseRegex className="p-0.5 pt-1 size-4 text-slate-500 border rounded" />
             <IconCaseSameDoc className="p-0.5 size-4 border rounded" />
-            <IconNotInUse className="p-0.5 size-4 border rounded" />
 
-            <TestIcons />
+            <TestStopIcons />
+            {/* <TestMicroscopeIcons /> */}
+
+            <IconNotInUse className="p-0.5 size-4 border rounded" />
+            <IconMicroscope className="p-0.5 size-4 border rounded" />
 
             <ThesameAsOriginalUrl className="flex-auto text-end ml-4 text-xs" isTheSame={isTheSame} isOpen={isOpen} />
         </div>
@@ -37,7 +40,7 @@ export function Section_Murl({ urlsEditorDataAtom }: { urlsEditorDataAtom: UrlsE
     </>);
 }
 
-function TestIcons() {
+function TestMicroscopeIcons() {
     return (<>
         {/* https://icones.js.org/collection/all?s=microscope&icon=icon-park:microscope */}
         <svg className="p-0.5 size-4 stroke-current fill-none stroke-[4]" viewBox="0 0 48 48">
@@ -77,16 +80,43 @@ function TestIcons() {
                 <path d="M7 19a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
             </g>
         </svg>
+    </>);
+}
 
-        {/* tm favicon */}
-        <svg className="p-0.5 size-4 stroke-[8] stroke-current fill-none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 139 139">
-            <path d="M34 18h26v53H34zM34 9h26M31 71h32M47 9v9M38 72h19v11H38zM60 49c32 0 35 10 35 37" />
-            <circle cx="94.6" cy="99.7" r="13.6" />
-            <path d="M95 128v-14" />
-            <path d="M36 110h23" />
-            <path d="M47 129v-19M31 129h77" />
+function TestStopIcons() {
+    return (<>
+        {/* https://icon-sets.iconify.design/?query=stop&search-page=7 icon-[streamline-ultimate-color--road-sign-stop] */}
+        <svg className="size-10 fill-none stroke-red-500 stroke-[1.5]" viewBox="0 0 24 24">
+            <g fill="none">
+                <path fill="#fff" d="M16.16 1H7.84c-.26 0-.5.1-.68.28L1.28 7.16a.96.96 0 0 0-.28.68v8.32c0 .25.1.5.28.68l5.88 5.88c.18.18.43.28.68.28h8.32c.25 0 .5-.1.68-.28l5.88-5.88a.96.96 0 0 0 .28-.68V7.84c0-.25-.1-.5-.28-.68l-5.88-5.88a.96.96 0 0 0-.68-.28" />
+                <path fill="#ff808c" d="M15.17 3.4H8.83c-.25 0-.5.1-.68.27L3.67 8.15a.96.96 0 0 0-.28.68v6.34c0 .25.1.5.28.68l4.48 4.48c.18.18.43.28.68.28h6.34c.25 0 .5-.1.68-.28l4.48-4.48a.96.96 0 0 0 .28-.68V8.83c0-.25-.1-.5-.28-.68l-4.48-4.48a.96.96 0 0 0-.68-.28" />
+                <path fill="#ffbfc5" d="M12 3.4H8.75a.75.75 0 0 0-.53.21l-4.6 4.6a.75.75 0 0 0-.23.54v6.5a.75.75 0 0 0 .22.53l4.6 4.6a.75.75 0 0 0 .54.23H12z" />
+                <path stroke="#191919" stroke-linecap="round" stroke-linejoin="round" d="M10.56 14.39V9.61m-.95 0h1.91m5.74 4.78V9.61m0 0h.48a1.44 1.44 0 0 1 0 2.87h-.48M14.39 9.6a.96.96 0 0 0-.96.95v2.87a.96.96 0 1 0 1.92 0v-2.87a.96.96 0 0 0-.96-.95m-6.7 0h-.95a.96.96 0 0 0-.96.95C5.78 12 7.7 12 7.7 13.43a.96.96 0 0 1-.96.96h-.96" />
+                <path stroke="#191919" stroke-linecap="round" stroke-linejoin="round" d="M16.16 1H7.84c-.26 0-.5.1-.68.28L1.28 7.16a.96.96 0 0 0-.28.68v8.32c0 .25.1.5.28.68l5.88 5.88c.18.18.43.28.68.28h8.32c.25 0 .5-.1.68-.28l5.88-5.88a.96.96 0 0 0 .28-.68V7.84c0-.25-.1-.5-.28-.68l-5.88-5.88a.96.96 0 0 0-.68-.28" />
+            </g>
+        </svg>
+        <svg className="size-10 fill-none stroke-red-500 stroke-[1]" viewBox="0 0 24 24">
+            <g fill="none">
+                <path fill="#ff808c" d="M16.16 1H7.84c-.26 0-.5.1-.68.28L1.28 7.16a.96.96 0 0 0-.28.68v8.32c0 .25.1.5.28.68l5.88 5.88c.18.18.43.28.68.28h8.32c.25 0 .5-.1.68-.28l5.88-5.88a.96.96 0 0 0 .28-.68V7.84c0-.25-.1-.5-.28-.68l-5.88-5.88a.96.96 0 0 0-.68-.28" />
+                {/* <path fill="#ff808c" d="M15.17 3.4H8.83c-.25 0-.5.1-.68.27L3.67 8.15a.96.96 0 0 0-.28.68v6.34c0 .25.1.5.28.68l4.48 4.48c.18.18.43.28.68.28h6.34c.25 0 .5-.1.68-.28l4.48-4.48a.96.96 0 0 0 .28-.68V8.83c0-.25-.1-.5-.28-.68l-4.48-4.48a.96.96 0 0 0-.68-.28" /> */}
+                {/* <path fill="#ffbfc5" d="M12 3.4H8.75a.75.75 0 0 0-.53.21l-4.6 4.6a.75.75 0 0 0-.23.54v6.5a.75.75 0 0 0 .22.53l4.6 4.6a.75.75 0 0 0 .54.23H12z" /> */}
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M10.56 14.39V9.61m-.95 0h1.91m5.74 4.78V9.61m0 0h.48a1.44 1.44 0 0 1 0 2.87h-.48M14.39 9.6a.96.96 0 0 0-.96.95v2.87a.96.96 0 1 0 1.92 0v-2.87a.96.96 0 0 0-.96-.95m-6.7 0h-.95a.96.96 0 0 0-.96.95C5.78 12 7.7 12 7.7 13.43a.96.96 0 0 1-.96.96h-.96" />
+                <path stroke="#ff808c" stroke-linecap="round" stroke-linejoin="round" d="M16.16 1H7.84c-.26 0-.5.1-.68.28L1.28 7.16a.96.96 0 0 0-.28.68v8.32c0 .25.1.5.28.68l5.88 5.88c.18.18.43.28.68.28h8.32c.25 0 .5-.1.68-.28l5.88-5.88a.96.96 0 0 0 .28-.68V7.84c0-.25-.1-.5-.28-.68l-5.88-5.88a.96.96 0 0 0-.68-.28" />
+            </g>
+        </svg>
+
+        <IconStopHand className="size-6" />
+        {/* https://icones.js.org/collection/all?s=stop&icon=tabler:hand-stop */}
+        <svg className="size-6 stroke-[1.5] stroke-red-500 fill-none scale-x-[-1]" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-6.5v-2a1.5 1.5 0 1 1 3 0V12m0-6.5a1.5 1.5 0 0 1 3 0V12" />
+            <path d="M17 7.5a1.5 1.5 0 0 1 3 0V16a6 6 0 0 1-6 6h-2 .2a6 6 0 0 1-5-2.7L7 19q-.47-.72-3.29-5.73a1.5 1.5 0 0 1 .54-2.02 1.87 1.87 0 0 1 2.28.28L8 13" />
+        </svg>
+
+        <IconStopCircle className="size-6" />
+        {/* https://heroicons.com/ no-symbol */}
+        <svg className="size-6 stroke-[1.5] fill-none stroke-red-500" viewBox="0 0 24 24">
+            <path d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
         </svg>
 
     </>);
 }
-
