@@ -1,7 +1,7 @@
-import { FileContent, FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
+import { type FileContent, type FileUsStats, type ParsedSrc } from "@/store/store-types";
 import { TimeUtils } from "@/store/manifest";
 
-export function fileUsStats(fileCnt: FileContent, parsedSrc: ParsedSrc): FileUsStats {
+export function createFileUsStats(fileCnt: FileContent, parsedSrc: ParsedSrc): FileUsStats {
     const loginForm = parsedSrc.mani?.forms[0];
     const loginFormDomain = parsedSrc.meta?.[0]?.disp.domain;
     const isLoginFormWeb = !!loginFormDomain;
