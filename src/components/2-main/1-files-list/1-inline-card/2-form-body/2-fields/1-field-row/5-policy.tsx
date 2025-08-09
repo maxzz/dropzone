@@ -1,4 +1,4 @@
-import { Meta } from "@/store/manifest";
+import { type Meta } from "@/store/manifest";
 import { classNames } from "@/utils";
 
 export function part5_Policy(field: Meta.Field) {

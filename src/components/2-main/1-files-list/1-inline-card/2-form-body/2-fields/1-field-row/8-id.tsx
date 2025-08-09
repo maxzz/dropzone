@@ -1,4 +1,4 @@
-import { Meta } from "@/store/manifest";
+import { type Meta } from "@/store/manifest";
 
 export function part8_Id(field: Meta.Field) {
     const { dbname } = field.mani;
