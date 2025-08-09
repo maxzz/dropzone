@@ -1,9 +1,9 @@
-import { type PrimitiveAtom, type WritableAtom } from "jotai";
-import { type CatalogFile, type Mani, type Meta } from "../manifest";
+import { type WritableAtom } from "jotai";
+import { type Mani, type Meta, type CatalogFile } from "../manifest";
 
 export type FileUsUiState = {
-    isGroupAtom: PrimitiveAtom<boolean>;    // this fileUs selected for bulk group operation
-    isCurrentAtom: PrimitiveAtom<boolean>;  // this fileUs is current and shown in the right panel
+    isGroupAtom: PA<boolean>;           // this fileUs selected for bulk group operation
+    isCurrentAtom: PA<boolean>;         // this fileUs is current and shown in the right panel
 };
 
 export type FileUsStats = {
