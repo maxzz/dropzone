@@ -1,7 +1,7 @@
 import { type JSX } from "react";
 import { useAtom, useSetAtom } from "jotai";
-import { FileUs, SelectRowAtomsType } from "@/store";
-import { Meta } from "@/store/manifest";
+import { type FileUs, type SelectRowAtomsType } from "@/store";
+import { type Meta } from "@/store/manifest";
 import { classNames } from "@/utils";
 import { part1_UseIt } from "./1-use-it";
 import { part2_FieldType } from "./2-field-type";
