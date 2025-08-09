@@ -1,4 +1,4 @@
-import { FileUsStats, FormIdx } from "@/store/store-types";
+import { type FileUsStats, FormIdx } from "@/store/store-types";
 
 // Miscellaneous
 
