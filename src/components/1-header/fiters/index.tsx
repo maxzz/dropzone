@@ -1,11 +1,11 @@
-import React, { HTMLAttributes } from 'react';
-import { useAtomValue } from 'jotai';
-import { useSpring, a } from '@react-spring/web';
-import { hasFilesAtom, showManiAtoms, totalManiAtoms } from '@/store';
-import { FilterSearch } from './1-filter-search';
-import { FilterManiCounter } from './FilterManiCounter';
-import { classNames } from '@/utils';
-import { SimpleToogle } from './SimpleToogle';
+import React, { HTMLAttributes } from "react";
+import { useAtomValue } from "jotai";
+import { useSpring, a } from "@react-spring/web";
+import { hasFilesAtom, showManiAtoms, totalManiAtoms } from "@/store";
+import { FilterSearch } from "./1-filter-search";
+import { FilterManiCounter } from "./FilterManiCounter";
+import { classNames } from "@/utils";
+import { SimpleToogle } from "./SimpleToogle";
 
 const containerClasses = "p-2 md:p-0 flex flex-col md:flex-row items-end justify-end md:items-center space-x-2 space-y-2 md:space-y-0 text-sm text-gray-200";
 

@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useAtom } from 'jotai';
-import { ManiEditorData } from '@/store';
-import { UIIconUpDown } from '@ui/icons';
-import { DummyPlaceholder } from '../3-options';
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { ManiEditorData } from "@/store";
+import { UIIconUpDown } from "@ui/icons";
+import { DummyPlaceholder } from "../3-options";
 
 function TabFieldsScript({ editorData }: { editorData: ManiEditorData; }) {
     return (
@@ -31,7 +31,7 @@ export function Tab4_Fields({ editorData }: { editorData: ManiEditorData; }) {
                         <div className="">
                             Policy
                         </div>
-                        <UIIconUpDown double={true} isUp={isOpen1} className="size-5 border rounded" />
+                        <UIIconUpDown double={true} isOpen={isOpen1} className="size-5 border rounded" />
                     </div>
 
                     {isOpen1 && (<>

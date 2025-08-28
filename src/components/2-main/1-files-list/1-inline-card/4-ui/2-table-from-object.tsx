@@ -1,5 +1,5 @@
-import { Fragment, HTMLAttributes, ReactNode } from 'react';
-import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
+import { type JSX, Fragment, type HTMLAttributes, type ReactNode } from "react";
+import { UiSemiScrollbar } from "@ui/ui-semi-scrollbar";
 
 export function Column1({ children, ...rest }: { children?: ReactNode; } & HTMLAttributes<HTMLDivElement>): JSX.Element {
     const { className, ...attrs } = rest;
@@ -25,7 +25,7 @@ export function Column2({ children, ...rest }: { children?: ReactNode; } & HTMLA
 export function UITableFromObject({ obj = {} }: { obj?: any; }): JSX.Element {
     const values = Object.entries(obj);
     return (
-        <div className="grid grid-cols-[minmax(5rem,auto),1fr] items-center text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto)_1fr] items-center text-xs">
             {values.map(
                 ([key, val]) => {
                     return (

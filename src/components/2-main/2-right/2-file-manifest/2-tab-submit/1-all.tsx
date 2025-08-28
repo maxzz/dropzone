@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { FieldTyp, Meta, SUBMIT } from '@/store/manifest';
-import { RadioGroup } from './2-radio-group';
-import { createUiAtoms, debouncedCombinedResultFromAtoms } from './0-create-ui-atoms';
+import { useEffect, useState } from "react";
+import { FieldTyp, Meta, SUBMIT } from "@/store/manifest";
+import { RadioGroup } from "./2-radio-group";
+import { createUiAtoms, debouncedCombinedResultFromAtoms } from "./0-create-ui-atoms";
 
 export function ManiSection2_Submit({ form }: { form: Meta.Form; }) {
 

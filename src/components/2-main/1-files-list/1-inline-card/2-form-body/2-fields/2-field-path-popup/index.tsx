@@ -1,8 +1,8 @@
-import { Meta } from '@/store/manifest';
-import { PartSid } from './1-part-sid';
-import { PartStr } from './2-part-str';
-import { Part_P4 } from './3-part-p4';
-import { PartLoc } from './4-part-loc';
+import { Meta } from "@/store/manifest";
+import { PartSid } from "./1-part-sid";
+import { PartStr } from "./2-part-str";
+import { Part_P4 } from "./3-part-p4";
+import { PartLoc } from "./4-part-loc";
 
 export function FieldRowPath({ field }: { field: Meta.Field; }) {
     const { sid, did2: dd2, p4: p4_, p4a, loc, sn: sn_, } = field.path;

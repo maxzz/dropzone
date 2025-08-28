@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { Close as DialogCloseButton } from '@radix-ui/react-dialog';
+import { Close as DialogCloseButton } from "@radix-ui/react-dialog";
 import { classNames } from "@/utils";
 
 const dlgBottomButtonClasses = "\

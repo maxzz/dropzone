@@ -1,24 +1,19 @@
-import { atom } from 'jotai';
-import { FileContent, FileUs, FileUsStats, ParsedSrc } from "@/store/store-types";
-import { filesAtom } from '../0-files-atom';
-import { buildManiMetaForms, parseXMLFile } from '@/store/manifest';
-import { fileUsStats } from "@/store/store-utils/5-file-us-stats";
-import { isAnyEmpty, isAnyManual } from "pm-manifest";
+import { atom } from "jotai";
+import { type FileContent, type FileUs, type FileUsStats, type ParsedSrc } from "@/store/store-types";
+import { buildManiMetaForms, parseXMLFile } from "@/store/manifest";
+import { filesAtom } from "../0-files-atom";
+import { createFileUsStats } from "@/store/store-utils/5-create-file-us-stats";
 import { textFileReader } from "@/store/store-utils/1-text-file-reader";
-import { fldCatItemsAtom } from '../../8-field-catalog/0-all-items-atom';
-import { busyAtom, totalManiAtoms } from '../../9-ui-state';
+import { fldCatItemsAtom } from "../../8-field-catalog/0-all-items-atom";
+import { addToTotalManis, busyAtom, clearTotalManis } from "../../9-ui-state";
 
 // Cache
 
 export const doUpdateCacheAtom = atom(
     null,
-    async (get, set) => {
-        set(totalManiAtoms.normalAtom, 0);
-        set(totalManiAtoms.manualAtom, 0);
-        set(totalManiAtoms.emptyAtom, 0);
+    async (get, set): Promise<void> => {
+        clearTotalManis(set);
         set(busyAtom, 'Parsing...');
-
-        const total = { normal: 0, manual: 0, empty: 0 };
 
         const files = get(filesAtom);
 
@@ -35,16 +30,8 @@ export const doUpdateCacheAtom = atom(
                         parsedSrc: createParsedData(fileUsItem.fileCnt),
                     };
 
+                    addToTotalManis(forNewAtom, set);
                     set(fileAtom, forNewAtom);
-
-                    if (isAnyEmpty(forNewAtom.parsedSrc.meta)) {
-                        set(totalManiAtoms.emptyAtom, ++total.empty);
-                    } else if (isAnyManual(forNewAtom.parsedSrc.meta)) {
-                        set(totalManiAtoms.manualAtom, ++total.manual);
-                    } else {
-                        set(totalManiAtoms.normalAtom, ++total.normal);
-                    }
-
                     //await delay(1000);
                 }
             } catch (error) {
@@ -85,6 +72,6 @@ function createParsedData(fileCnt: FileContent): ParsedSrc {
         console.error(msg);
     }
 
-    rv.stats = fileUsStats(fileCnt, rv);
+    rv.stats = createFileUsStats(fileCnt, rv);
     return rv;
 }

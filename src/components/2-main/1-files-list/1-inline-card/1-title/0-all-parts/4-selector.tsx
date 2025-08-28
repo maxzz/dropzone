@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { FileUsAtomType, rightPanelAtoms, doSetCurrentCardAtom } from '@/store';
+import { ReactNode } from "react";
+import { useAtomValue, useSetAtom } from "jotai";
+import { FileUsAtomType, rightPanelAtoms, doSetCurrentCardAtom } from "@/store";
 
 export function CardTitleSelector({ fileUsAtom, children }: { fileUsAtom: FileUsAtomType; children: ReactNode; }) {
     const isCurrentCard = useAtomValue(useAtomValue(fileUsAtom).uiState.isCurrentAtom);

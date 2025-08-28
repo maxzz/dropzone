@@ -1,10 +1,10 @@
-import { type FC } from 'react';
-import { type FieldTyp, type Mani } from '@/store/manifest';
-import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from '@ui/icons';
+import { ReactNode, type FC } from "react";
+import { type FieldTyp, type Mani } from "@/store/manifest";
+import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from "@ui/icons";
 
 type FieldValidKeys = Exclude<keyof typeof FieldTyp, 'und'>;
 
-export const fieldIcons: Record<FieldValidKeys, FC> = {
+export const fieldIcons: Record<FieldValidKeys, (props: {}) => ReactNode> = { // remove Promise<ReactNode> from value
     edit: SymbolFieldEdt,
     psw: SymbolFieldPsw,
     check: SymbolFieldChk,

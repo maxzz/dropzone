@@ -1,7 +1,7 @@
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { allCards, rightPanelAtoms, selected4ActionAtom } from '@/store';
-import { MenuItem } from '@ui/ui-dropdown-menu';
-import toast from 'react-hot-toast';
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { allCards, rightPanelAtoms, selected4ActionAtom } from "@/store";
+import { MenuItem } from "@ui/ui-dropdown-menu";
+import toast from "react-hot-toast";
 
 export function Command_MarkSelected() {
     const [selectedAtoms, setSelectedAtoms] = useAtom(selected4ActionAtom);

@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { config, useTransition, a } from "@react-spring/web";
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from "@radix-ui/react-dialog";
 import { fldCatTriggerAtom } from "@/store";
 import { FldCatDlgBody } from "../1-body";
 

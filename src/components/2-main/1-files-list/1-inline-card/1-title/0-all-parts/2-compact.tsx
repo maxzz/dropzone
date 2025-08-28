@@ -1,10 +1,10 @@
-import { PrimitiveAtom, useAtomValue } from 'jotai';
-import { FileUsAtomType } from '@/store';
-import { CardTitleAttention } from '../1-attention';
-import { CardTitleIcon } from '../2-icon';
-import { CardCaption, CardUsername } from '../3-text';
+import { PrimitiveAtom, useAtomValue } from "jotai";
+import { FileUsAtomType } from "@/store";
+import { CardTitleAttention } from "../1-attention";
+import { CardTitleIcon } from "../2-icon";
+import { CardCaption, CardUsername } from "../3-text";
 import { CardTitleFilename } from "../4-filename";
-import { getDispArrForTwoForms } from '../../4-ui/4-form-disp-arr';
+import { getDispArrForTwoForms } from "../../4-ui/4-form-disp-arr";
 import { CardMediumButtons } from "../../3-shared/2-card-buttons-medium";
 
 export function CardTitleTextCompact({ fileUsAtom, openAtom }: { fileUsAtom: FileUsAtomType; openAtom: PrimitiveAtom<boolean>; }) {

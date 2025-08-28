@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
-import { useAtom } from 'jotai';
-import { SelectRowAtomsType } from '@/store';
-import { Meta } from '@/store/manifest';
-import { SymbolCross, SymbolPreview } from '@ui/icons';
-import { CardSvgPreview } from '../../../3-shared/2-card-svg-preview';
+import { Dispatch, SetStateAction } from "react";
+import { useAtom } from "jotai";
+import { SelectRowAtomsType } from "@/store";
+import { Meta } from "@/store/manifest";
+import { SymbolCross, SymbolPreview } from "@ui/icons";
+import { CardSvgPreview } from "../../../3-shared/2-card-svg-preview";
 
 type BtnPreviewResult = {
     form: Meta.Form;

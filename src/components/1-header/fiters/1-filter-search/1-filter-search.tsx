@@ -1,7 +1,7 @@
-import { UiTip } from '@ui/ui-tooltip';
-import { Config } from 'react-popper-tooltip';
-import { InputAndTrigger } from './2-input-and-trigger';
-import { PopupContent } from './3-popup-content';
+import { UiTip } from "@ui/ui-tooltip";
+import { Config } from "react-popper-tooltip";
+import { InputAndTrigger } from "./2-input-and-trigger";
+import { PopupContent } from "./3-popup-content";
 
 const popperOptions: Config = {
     delayShow: 700,

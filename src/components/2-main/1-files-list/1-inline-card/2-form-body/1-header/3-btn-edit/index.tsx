@@ -7,7 +7,7 @@ export function BtnEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtomType; f
     return (
         <button
             className={`px-1 h-6 card-header-btn__edit`}
-            onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
+            onClick={() => setFormEditorData({ fileUsAtom, formIdx })}
             title="Edit detection options"
         >
             <SymbolGear className="size-4 stroke-[1.2]" />

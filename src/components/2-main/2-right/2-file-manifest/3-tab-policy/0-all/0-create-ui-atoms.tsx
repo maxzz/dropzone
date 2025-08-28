@@ -1,7 +1,6 @@
-import { Getter, Setter } from 'jotai';
-import { Atomize, OnValueChangeAny, atomWithCallback } from '@/util-hooks';
-import { Meta } from '@/store/manifest';
-import { debounce } from '@/utils';
+import { type Getter, type Setter } from "jotai";
+import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from "@/utils";
+import { type Meta } from "@/store/manifest";
 
 type PolicyForAtoms = {
     policy: string;
@@ -12,8 +11,8 @@ type PolicyAtoms = Prettify<Atomize<PolicyForAtoms>>;
 
 export function createUiAtoms(form: Meta.Form | undefined, onChange: OnValueChangeAny): PolicyAtoms {
     return {
-        policyAtom: atomWithCallback('', onChange),
-        policy2Atom: atomWithCallback('', onChange),
+        policyAtom: atomWithCallback<string>('', onChange),
+        policy2Atom: atomWithCallback<string>('', onChange),
     };
 }
 

@@ -1,6 +1,6 @@
-import { useAtom, useAtomValue } from 'jotai';
-import { FormOptionsAtoms } from '../0-all/0-create-atoms';
-import { RowInput } from '../4-controls';
+import { useAtom, useAtomValue } from "jotai";
+import { FormOptionsAtoms } from "../0-all/0-create-atoms";
+import { RowInput } from "../4-controls";
 
 export function Part2ScreenDetection({ atoms }: { atoms: FormOptionsAtoms; }) {
     const [url, setUrl] = useAtom(atoms.uiPart2ScreenDetection.urlAtom);

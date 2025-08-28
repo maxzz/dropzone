@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { ManiEditorData } from '@/store';
-import { UIIconUpDown } from '@ui/icons';
+import { useState } from "react";
+import { ManiEditorData } from "@/store";
+import { UIIconUpDown } from "@ui/icons";
 
 export function DummyPlaceholder() {
     return (<>
@@ -57,7 +57,7 @@ export function Tab3_Options({ editorData }: { editorData: ManiEditorData; }) {
                 <div className="">
                     Group 1
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen1} className="size-5 border rounded" />
+                <UIIconUpDown double={true} isOpen={isOpen1} className="size-5 border rounded" />
             </div>
             {isOpen1 && (<>
                 <DummyPlaceholder />
@@ -74,7 +74,7 @@ export function Tab3_Options({ editorData }: { editorData: ManiEditorData; }) {
                 <div className="">
                     Group 2
                 </div>
-                <UIIconUpDown double={true} isUp={isOpen2} className="size-5 border rounded" />
+                <UIIconUpDown double={true} isOpen={isOpen2} className="size-5 border rounded" />
             </div>
             {isOpen2 && (<>
                 <DummyPlaceholder />

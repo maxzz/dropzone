@@ -1,7 +1,7 @@
-import { HTMLAttributes, ReactNode } from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
-import { UiArrow } from '@ui/ui-arrow';
-import { UiAccordion } from '@ui/ui-accordion';
+import { HTMLAttributes, ReactNode } from "react";
+import { PrimitiveAtom, useAtom } from "jotai";
+import { UiArrow } from "@ui/ui-arrow";
+import { UiAccordion } from "@ui/ui-accordion";
 
 export function SubSectionAccordion({ label, openAtom, children }: { label: ReactNode; openAtom: PrimitiveAtom<boolean>; } & HTMLAttributes<HTMLDivElement>) {
     const [open, setOpen] = useAtom(openAtom);

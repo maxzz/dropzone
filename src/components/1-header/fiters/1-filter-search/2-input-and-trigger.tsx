@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react';
-import { useAtom } from 'jotai';
-import { useKey } from 'react-use';
-import { searchFilterData } from '@/store';
-import { IconCaseSensitive, IconClose, IconSearch } from '@ui/icons';
-import { classNames, turnOffAutoComplete } from '@/utils';
+import { useState, useRef } from "react";
+import { useAtom } from "jotai";
+import { useKey } from "react-use";
+import { searchFilterData } from "@/store";
+import { IconCaseSensitive, IconClose, IconSearch } from "@ui/icons";
+import { classNames, turnOffAutoComplete } from "@/utils";
 
 function ToggleCaseSensitive() {
     const [cs, setCs] = useAtom(searchFilterData.caseSensitiveAtom);

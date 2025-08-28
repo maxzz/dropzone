@@ -1,5 +1,5 @@
-import { InputHTMLAttributes } from 'react';
-import { classNames } from '@/utils';
+import { InputHTMLAttributes } from "react";
+import { classNames } from "@/utils";
 
 const rowInputClasses = "\
 px-2 py-1 h-6 \

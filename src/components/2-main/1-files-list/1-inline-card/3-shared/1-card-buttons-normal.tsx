@@ -1,7 +1,7 @@
 import { PrimitiveAtom, useAtom } from "jotai";
 import { formIdxName } from "@/store";
 import { getUpToTreeIconsForForm } from "../4-ui/3-card-form-button-types";
-import { DispArrForTwoForm } from '../4-ui/4-form-disp-arr';
+import { DispArrForTwoForm } from "../4-ui/4-form-disp-arr";
 import { classNames } from "@/utils";
 
 const triggerClasses = "p-2 border-primary-700 border rounded shadow-md active:scale-[.97] select-none flex items-center";

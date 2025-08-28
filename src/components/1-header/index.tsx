@@ -1,12 +1,12 @@
-import React from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { doClearFilesAtom, hasFilesAtom, openFldCatDialogAtom } from '@/store';
-import { SymbolCatalog, SymbolMenuBurger, IconTrash } from '@ui/icons';
-import { Part0_TopMenu } from './menu';
-import { Part1_DropzoneArea } from './droparea';
-import { Part3_Filters } from './fiters';
-import { AppLogo, BusyIndicator } from './header-controls';
-//import { PopoverMenu } from '@ui/UIDropdownMenuLaag';
+import React from "react";
+import { useAtomValue, useSetAtom } from "jotai";
+import { doClearFilesAtom, hasFilesAtom, openFldCatDialogAtom } from "@/store";
+import { SymbolCatalog, SymbolMenuBurger, IconTrash } from "@ui/icons";
+import { Part0_TopMenu } from "./menu";
+import { Part1_DropzoneArea } from "./droparea";
+import { Part3_Filters } from "./fiters";
+import { AppLogo, BusyIndicator } from "./header-controls";
+//import { PopoverMenu } from "@ui/UIDropdownMenuLaag";
 
 const buttonClasses = "px-2 self-stretch border-primary-500 bg-primary-600 border-l rounded-none flex items-center justify-center";
 

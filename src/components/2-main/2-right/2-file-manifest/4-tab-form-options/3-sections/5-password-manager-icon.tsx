@@ -1,6 +1,6 @@
-import { useAtom } from 'jotai';
-import { FormOptionsAtoms } from '../0-all/0-create-atoms';
-import { RowInput } from '../4-controls';
+import { useAtom } from "jotai";
+import { FormOptionsAtoms } from "../0-all/0-create-atoms";
+import { RowInput } from "../4-controls";
 
 export function Part5PasswordManagerIcon({ atoms }: { atoms: FormOptionsAtoms; }) {
     const [id, setId] = useAtom(atoms.uiPart5PasswordManagerIcon.idAtom);

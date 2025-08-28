@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { IconAppLogoMicroscope } from "@ui/icons";
 import toast from "react-hot-toast";
 

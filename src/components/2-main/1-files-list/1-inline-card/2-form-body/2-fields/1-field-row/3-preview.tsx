@@ -1,10 +1,10 @@
-import { SetStateAction } from 'jotai';
-import { SelectRowType } from '@/store';
-import { Meta } from '@/store/manifest';
-import { CardSvgPreview } from '../../../3-shared/2-card-svg-preview';
-import { UIToggleWithPortal } from '../../../4-ui/1-toggle-with-portal';
-import { SymbolPreview } from '@ui/icons';
-import { classNames } from '@/utils';
+import { SetStateAction } from "jotai";
+import { classNames } from "@/utils";
+import { type SelectRowType } from "@/store";
+import { type Meta } from "@/store/manifest";
+import { CardSvgPreview } from "../../../3-shared/2-card-svg-preview";
+import { UIToggleWithPortal } from "../../../4-ui/1-toggle-with-portal";
+import { SymbolPreview } from "@ui/icons";
 
 export function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.Field, setSelectedRowThis: (update: SetStateAction<SelectRowType>) => void) {
     return (
@@ -20,7 +20,7 @@ export function part3_Preview(hasPreview: boolean, form: Meta.Form, field: Meta.
                     <CardSvgPreview
                         form={form}
                         small={false}
-                        selectedIdx={field.ridx} onSelectedIdx={(selected: number) => { setSelectedRowThis({ fieldIdx: selected, formType: form.type }); }}
+                        selectedIdx={field.previewIdx} onSelectedIdx={(selected: number) => { setSelectedRowThis({ fieldIdx: selected, formType: form.type }); }}
                         className="w-[calc(calc(1920px/4)-6px)] h-[calc(1200px/4)]"
                     />
 

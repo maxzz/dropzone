@@ -1,9 +1,9 @@
-import React, { HTMLAttributes, memo, useEffect, useState } from 'react';
-import { atom, useAtomValue, useSetAtom } from 'jotai';
-import { classNames } from '@/utils';
-import { allCards, FileUsAtomType } from '@/store';
-import { Card1_Title } from './1-title';
-import { Part2Card_FormBody } from './2-form-body';
+import React, { HTMLAttributes, memo, useEffect, useState } from "react";
+import { atom, useAtomValue, useSetAtom } from "jotai";
+import { classNames } from "@/utils";
+import { allCards, FileUsAtomType } from "@/store";
+import { Card1_Title } from "./1-title";
+import { Part2Card_FormBody } from "./2-form-body";
 
 function CardWoMemo({ fileUsAtom, ...props }: {fileUsAtom: FileUsAtomType;} & HTMLAttributes<HTMLDivElement>) {
     const { className, ...rest } = props;

@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { Atomize } from "@/util-hooks";
+import { Atomize } from "@/utils";
 import { PolicyUi } from "../0-all/0-create-ui-atoms";
 import { Input } from "../4-constrols";
 

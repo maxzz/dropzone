@@ -1,4 +1,4 @@
-import { SymbolOptionsLock } from '@ui/icons';
+import { SymbolOptionsLock } from "@ui/icons";
 
 export function Icon_LockFields({ lockfields }: { lockfields: string | undefined; }) {
 

@@ -1,12 +1,12 @@
-import { HTMLAttributes } from 'react';
-import { useAtomValue } from 'jotai';
-import { FileUs, FileUsAtomType, rightPanelAtoms, ViewMode } from '@/store';
-import { classNames } from '@/utils';
-import { CardTitleTextNormal } from '../../1-files-list/1-inline-card/1-title';
-import { Body_CaptionActions } from '../1-caption-actions';
-import { Body_Xml } from '../3-file-xml';
-import { Body_FieldCatalog } from '../4-file-field-catalog';
-import { Body_Manifest } from '../2-file-manifest';
+import { HTMLAttributes } from "react";
+import { useAtomValue } from "jotai";
+import { FileUs, FileUsAtomType, rightPanelAtoms, ViewMode } from "@/store";
+import { classNames } from "@/utils";
+import { CardTitleTextNormal } from "../../1-files-list/1-inline-card/1-title";
+import { Body_CaptionActions } from "../1-caption-actions";
+import { Body_Xml } from "../3-file-xml";
+import { Body_FieldCatalog } from "../4-file-field-catalog";
+import { Body_Manifest } from "../2-file-manifest";
 
 export function Panel2_Right({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     const fileUsAtom: FileUsAtomType | undefined = useAtomValue(rightPanelAtoms.panelAtom);

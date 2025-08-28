@@ -1,6 +1,6 @@
-import { Meta } from '@/store/manifest';
-import { SymbolInOut } from '@ui/icons';
-import { classNames } from '@/utils';
+import { type Meta } from "@/store/manifest";
+import { classNames } from "@/utils";
+import { SymbolInOut } from "@ui/icons";
 
 export function part7_FormCrossrefs(field: Meta.Field) {
     const { rfield, rfieldindex, rfieldform } = field.mani;

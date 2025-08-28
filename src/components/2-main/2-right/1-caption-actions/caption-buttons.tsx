@@ -15,8 +15,8 @@ export function ButtonCardEdit({ fileUsAtom, formIdx }: { fileUsAtom: FileUsAtom
             //onClick={() => setFormEditorData({ fileUsAtom, formIdx: formIdx })}
             onClick={() => setViewMode((v) => v === ViewMode.edit ? ViewMode.raw : ViewMode.edit)}
         >
-            {/* <IconGear className="size-4 stroke-[0.7] hover:stroke-[1]" /> */}
-            <SymbolPen className="w-3.5 h-3.5 stroke-[0.8] hover:stroke-[1]" />
+            {/* <IconGear className="size-4 stroke-[0.7] hover:stroke-1" /> */}
+            <SymbolPen className="w-3.5 h-3.5 stroke-[0.8] hover:stroke-1" />
         </button>
     );
 }

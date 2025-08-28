@@ -1,41 +1,60 @@
-import { useCallback, useState } from 'react';
-import { OnValueChange } from '@/util-hooks';
-import { ManiEditorData } from '@/store';
-import { createUrlsAtom } from './0-create-urls-atom';
-import { ManiInfoTooltip } from './2-mani-info-tooltip';
-import { BottomButtons } from './3-bottom-buttons';
-import { DialogFrameAndTabs } from './6-dialog-frame-and-tabs';
-import { MatchWebState } from '../2-tabs/1-matching/0-urls-dirty';
-import { useAtomValue } from 'jotai';
+import { useCallback, useState } from "react";
+import { type Getter, useAtomValue } from "jotai";
+import { useDrag } from "@use-gesture/react";
+import { a, useSpring } from "@react-spring/web";
+import { type ManiEditorData } from "@/store";
+import { type OnChangeParamsWithNameScope, type UrlsEditorData, createUrlsEditorData } from "../2-tabs/1-matching";
+import { AllTabsTopHolder } from "./2-all-tabs-top-holder";
+import { ManiInfoTooltip } from "./8-mani-info-tooltip";
+import { BottomButtons } from "./4-editor-bottom-buttons";
+import { useMemoOne } from "@/utils";
+import { useEffectOnce } from "react-use";
 
 type Dialog_ManifestProps = {
     editorData: ManiEditorData;
     setShow?: (v: boolean) => void;
 };
 
-export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: Dialog_ManifestProps) { /*lazy load*/
+export function Dialog_Manifest({ editorData, setShow }: Dialog_ManifestProps) { // This is lazy loaded
     const fileUs = useAtomValue(editorData.fileUsAtom);
 
-    const onUrlsUpdate = useCallback<OnValueChange<MatchWebState>>(
-        ({ nextValue }) => {
-            console.log('urls updated', nextValue);
+    const onChangeEditorUrls = useCallback<OnChangeParamsWithNameScope>(
+        ({ name, get, set, nextValue }) => {
+            printMatchWebState(name, nextValue, get);
         }, []
     );
 
-    const urlsAtom = useState(() => createUrlsAtom(fileUs, editorData.formIdx, onUrlsUpdate))[0];
+    const urlsEditorData = useState(() => createUrlsEditorData(fileUs, editorData.formIdx, onChangeEditorUrls))[0];
+    //const urlsEditorData = useMemoOne(() => createUrlsEditorData(fileUs, editorData.formIdx, onChangeEditorUrls), []);
+    //useEffectOnce(() => createUrlsEditorData(fileUs, editorData.formIdx, onChangeEditorUrls));
+
+    // const urlsEditorData = from something once???
+
+    // Dialog caption dragging
+    const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
+    const captionDragBind = useDrag(
+        ({ down, offset: [mx, my] }) => {
+            api.start({ x: mx, y: my, immediate: down });
+        }
+    );
 
     return (
-        <DialogFrameAndTabs
-            urlsAtom={urlsAtom}
-            editorData={editorData}
-            footer={
-                <div className="px-4 py-4 bg-white flex items-center justify-between">
-                    <ManiInfoTooltip editorData={editorData} />
-                    <BottomButtons setShow={setShow} />
-                </div>
-            }
-        />
+        <a.div style={{ x, y }} className="w-[460px] h-[640px] grid grid-rows-[minmax(0,1fr)_auto] bg-gray-200 rounded overflow-hidden">
+            <AllTabsTopHolder
+                urlsEditorData={urlsEditorData}
+                editorData={editorData}
+                captionDragBind={captionDragBind}
+            />
+            <div className="px-4 py-4 bg-white flex items-center justify-between">
+                <ManiInfoTooltip editorData={editorData} />
+                <BottomButtons setShow={setShow} />
+            </div>
+        </a.div>
     );
+}
+
+function printMatchWebState(changeName: string, urlsEditorData: UrlsEditorData, get: Getter) {
+    console.log(`MatchWebState changeName:"${changeName}" nextValue:`, JSON.stringify(urlsEditorData, null, 4));
 }
 
 //TODO: events onTabChange w/ ability to cancel
@@ -45,3 +64,8 @@ export function Dialog_Manifest({ editorData, setShow = (v: boolean) => { } }: D
 //TODO: should be only one 'Match Web': <MatchWeb /> or 'Match Windows': <MatchWindows /> (but the user should be able to switch Windows to Web?)
 
 //TODO: check if we have forms or what we have at all (i.e. we have web, win, fields, script, or exclude manifest)
+
+//07.20.25
+//TODO: reset to initial
+//TODO: validation and hints
+//TODO: createUrlsEditorData() is called twice

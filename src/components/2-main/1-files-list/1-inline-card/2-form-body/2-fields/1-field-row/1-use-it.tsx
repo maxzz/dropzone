@@ -1,5 +1,5 @@
-import { SymbolFieldUseIt0, SymbolFieldUseIt1 } from '@ui/icons';
-import { classNames } from '@/utils';
+import { SymbolFieldUseIt0, SymbolFieldUseIt1 } from "@ui/icons";
+import { classNames } from "@/utils";
 
 export function part1_UseIt(useIt: boolean | undefined, fieldIdx: number) {
     const title = `Field index: ${fieldIdx}. Marker to use or not to use this field`;

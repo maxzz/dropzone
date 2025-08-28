@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useAtomValue } from "jotai";
 import { busyAtom } from "@/store";
 import { useSpring, a } from "@react-spring/web";

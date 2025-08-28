@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { FocusGuards } from '@radix-ui/react-focus-guards';
-import { UiToaster } from '@ui/ui-toaster';
-import { Section1_Header } from './components/1-header';
-import { Section2_Main } from './components/2-main';
-import { Section4_Dialogs } from './components/4-dialogs';
-import { UISymbolDefs } from '@ui/icons';
-// import { SpySvgSymbols } from './utils/SpySvgSymbols';
+import { useEffect } from "react";
+import { FocusGuards } from "@radix-ui/react-focus-guards";
+import { UiToaster } from "@ui/ui-toaster";
+import { Section1_Header } from "./components/1-header";
+import { Section2_Main } from "./components/2-main";
+import { Section4_Dialogs } from "./components/4-dialogs";
+import { UISymbolDefs } from "@ui/icons";
+// import { SpySvgSymbols } from "./utils/SpySvgSymbols";
 
 export function App() {
     useEffect(() => {

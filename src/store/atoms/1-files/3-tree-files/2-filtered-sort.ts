@@ -1,4 +1,4 @@
-import { Getter } from 'jotai';
+import { Getter } from "jotai";
 import { FileUsAtomType, Order, SortBy } from "@/store/store-types";
 
 export function sortResult(sortBy: SortBy, order: Order, result: FileUsAtomType[], get: Getter) {

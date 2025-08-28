@@ -1,11 +1,11 @@
-import React, { HTMLAttributes } from 'react';
-import { PrimitiveAtom, useAtom } from 'jotai';
-import { styled, keyframes } from '@stitches/react';
-import { SymbolChevronRight, SymbolDot } from './icons';
-//import { PopperContentProps } from '@radix-ui/react-select';
-import * as Primitive from '@radix-ui/react-dropdown-menu';
+import React, { HTMLAttributes } from "react";
+import { PrimitiveAtom, useAtom } from "jotai";
+import { styled, keyframes } from "@stitches/react";
+import { SymbolChevronRight, SymbolDot } from "./icons";
+//import { PopperContentProps } from "@radix-ui/react-select";
+import * as Primitive from "@radix-ui/react-dropdown-menu";
 
-import * as PopperPrimitive from '@radix-ui/react-popper';
+import * as PopperPrimitive from "@radix-ui/react-popper";
 type PopperContentProps = React.ComponentPropsWithoutRef<typeof PopperPrimitive.Content>;
 
 //#region content and trigger

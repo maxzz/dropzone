@@ -1,4 +1,3 @@
-import { type PrimitiveAtom } from "jotai";
 
 // Fields selection
 
@@ -8,6 +7,6 @@ export type SelectRowType = {
 };
 
 export type SelectRowAtomsType = {
-    loginAtom: PrimitiveAtom<SelectRowType>;
-    cpassAtom: PrimitiveAtom<SelectRowType>;
+    loginAtom: PA<SelectRowType>;
+    cpassAtom: PA<SelectRowType>;
 };

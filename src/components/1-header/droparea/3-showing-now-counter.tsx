@@ -1,6 +1,6 @@
-import { useAtomValue } from 'jotai';
-import { filesAtom, filteredAtom } from '@/store';
-import { plural } from '@/utils';
+import { useAtomValue } from "jotai";
+import { filesAtom, filteredAtom } from "@/store";
+import { plural } from "@/utils";
 
 export function ShowingNowCounter() {
     const totalFiles = useAtomValue(filesAtom).length;

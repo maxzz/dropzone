@@ -1,6 +1,6 @@
-import React from 'react';
-import { classNames, withDigits } from '@/utils';
-import './SimpleSplitPane.css';
+import React from "react";
+import { classNames, withDigits } from "@/utils";
+import "./SimpleSplitPane.css";
 
 const baseStyle: React.CSSProperties = {
     flex: '1',

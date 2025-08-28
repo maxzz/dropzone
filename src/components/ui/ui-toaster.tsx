@@ -1,5 +1,4 @@
-import React from 'react';
-import toast, { Toaster as ToasterComponent } from 'react-hot-toast';
+import toast, { Toaster as ToasterComponent } from "react-hot-toast";
 
 export function UiToaster() {
     return (

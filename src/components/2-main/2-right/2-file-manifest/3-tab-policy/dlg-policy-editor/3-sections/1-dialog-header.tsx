@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { DialogTitle, Close as DialogCloseButton } from '@radix-ui/react-dialog';
+import { DialogTitle, Close as DialogCloseButton } from "@radix-ui/react-dialog";
 import { SymbolCross } from "@ui/icons";
 
 export function DialogHeader({ header, subHeader }: { header: ReactNode, subHeader?: ReactNode; }) {

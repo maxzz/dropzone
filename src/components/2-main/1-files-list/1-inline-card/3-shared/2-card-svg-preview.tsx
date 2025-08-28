@@ -1,7 +1,7 @@
-import { HTMLAttributes, MouseEvent } from 'react';
-import { FieldPath, Meta } from '@/store/manifest';
-import { css } from '@/stitches.config';
-import { classNames } from '@/utils';
+import { type JSX, type HTMLAttributes, type MouseEvent } from "react";
+import { FieldPath, type Meta } from "@/store/manifest";
+import { css } from "@/stitches.config";
+import { classNames } from "@/utils";
 
 type PreviewProps = HTMLAttributes<SVGSVGElement> & {
     small: boolean;     // show small preview: incative background and not hover effects

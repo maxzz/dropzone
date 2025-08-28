@@ -1,9 +1,9 @@
-import { CSSProperties, HTMLAttributes, useCallback } from 'react';
-import { useSetAtom } from 'jotai';
-import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
-import toast from 'react-hot-toast';
-import { nameLengthValidator } from './2-files-validator';
-import { doSetFilesAtom } from '@/store';
+import { CSSProperties, HTMLAttributes, useCallback } from "react";
+import { useSetAtom } from "jotai";
+import { DropEvent, FileRejection, useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
+import { nameLengthValidator } from "./2-files-validator";
+import { doSetFilesAtom } from "@/store";
 
 type DropzoneRootProps = HTMLAttributes<HTMLDivElement> & {
     classNameActive?: string;

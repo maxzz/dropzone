@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import { a, useSpring } from '@react-spring/web';
-import { useMeasure } from 'react-use';
-import { disableHiddenChildren } from '@/utils/disable-hidden-children';
+import React, { ReactNode, useEffect, useState } from "react";
+import { a, useSpring } from "@react-spring/web";
+import { useMeasure } from "react-use";
+import { disableHiddenChildren } from "@/utils/disable-hidden-children";
 
 export function UiAccordion({ open, children }: { open: boolean, children: ReactNode; }) {
     const [refMeasure, { height, top }] = useMeasure<HTMLDivElement>();

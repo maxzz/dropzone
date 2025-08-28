@@ -1,4 +1,4 @@
-import { CatalogItem } from '@/store/manifest';
+import { CatalogItem } from "@/store/manifest";
 
 // For debugging
 

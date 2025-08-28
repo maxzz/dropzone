@@ -1,6 +1,6 @@
 import { type FileUs } from "@/store/store-types";
-import { convertJsToXml, type Mani, prepareNewMani4Xml, showError } from 'pm-manifest';
-//import { fileDownload } from '@/utils/file-download';
+import { convertJsToXml, type Mani, prepareNewMani4Xml, showError } from "pm-manifest";
+//import { fileDownload } from "@/utils/file-download";
 
 export function convertToXml(fileUs: FileUs): { error: string; xml?: undefined; } | { xml: string; error?: undefined; } {
     if (!fileUs.fileCnt.raw) {

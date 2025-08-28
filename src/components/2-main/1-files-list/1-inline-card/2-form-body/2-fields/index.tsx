@@ -1,6 +1,6 @@
-import { useAtomValue } from 'jotai';
-import { FileUsAtomType, SelectRowAtomsType } from '@/store';
-import { FieldRow } from './1-field-row';
+import { useAtomValue } from "jotai";
+import { FileUsAtomType, SelectRowAtomsType } from "@/store";
+import { FieldRow } from "./1-field-row";
 
 type Part2_FormFieldsProps = {
     fileUsAtom: FileUsAtomType;

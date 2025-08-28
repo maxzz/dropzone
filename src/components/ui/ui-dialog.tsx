@@ -1,5 +1,5 @@
-import React, { cloneElement, HTMLAttributes, useEffect, useRef, useState } from 'react';
-import Modal from 'react-overlays/Modal';
+import { JSX, cloneElement, HTMLAttributes, useState } from "react";
+import Modal from "react-overlays/Modal";
 
 export const RenderBackdrop = (props: HTMLAttributes<HTMLDivElement>) => <div className="fixed inset-0 z-[1040] bg-black opacity-50" {...props} />;
 

@@ -1,6 +1,6 @@
-import React, { HTMLAttributes } from 'react';
-import { SyntaxHighlighterXml } from './syntax-highlighter-xml';
-import { Scroller } from '../../../ui/scroller';
+import React, { HTMLAttributes } from "react";
+import { SyntaxHighlighterXml } from "./syntax-highlighter-xml";
+import { Scroller } from "../../../ui/scroller";
 
 export function Body_Xml({ text, ...rest }: { text: string; } & HTMLAttributes<HTMLDivElement>) {
     return (<>

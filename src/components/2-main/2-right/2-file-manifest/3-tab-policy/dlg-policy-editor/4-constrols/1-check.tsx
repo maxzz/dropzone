@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { classNames } from '@/utils';
+import { classNames } from "@/utils";
 
 type CheckProps = HTMLAttributes<HTMLElement> & {
     checked: boolean;

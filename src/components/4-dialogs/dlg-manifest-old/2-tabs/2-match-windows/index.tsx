@@ -1,4 +1,4 @@
-import { ManiEditorData } from '@/store';
+import { ManiEditorData } from "@/store";
 
 export function Tab2_MatchWindows({ editorData }: { editorData: ManiEditorData; }) {
     return (

@@ -1,7 +1,6 @@
-import { Getter, Setter, atom } from 'jotai';
-import { Atomize, OnValueChangeAny, atomWithCallback } from "@/util-hooks";
-import { FileUsAtomType, FormIdx } from '@/store';
-import { debounce } from '@/utils';
+import { type Getter, type Setter } from "jotai";
+import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from "@/utils";
+import { type FileUsAtomType, FormIdx } from "@/store";
 
 type UiPart1General = {
     name: string;       // login name
@@ -46,28 +45,28 @@ export type FormOptionsAtoms = {
 export function createAtoms(v: string, onChange: OnValueChangeAny, fileUsAtom: FileUsAtomType, formIdx: FormIdx): FormOptionsAtoms {
     return {
         uiPart1General: {
-            nameAtom: atomWithCallback('', onChange),
-            descAtom: atomWithCallback('', onChange),
-            hintAtom: atomWithCallback('', onChange),
-            balloonAtom: atomWithCallback(3, onChange),
+            nameAtom: atomWithCallback<string>('', onChange),
+            descAtom: atomWithCallback<string>('', onChange),
+            hintAtom: atomWithCallback<string>('', onChange),
+            balloonAtom: atomWithCallback<number>(3, onChange),
         },
         uiPart2ScreenDetection: {
-            captionAtom: atomWithCallback('', onChange),
-            monitorAtom: atomWithCallback(false, onChange),
-            urlAtom: atomWithCallback('', onChange),
+            captionAtom: atomWithCallback<string>('', onChange),
+            monitorAtom: atomWithCallback<boolean>(false, onChange),
+            urlAtom: atomWithCallback<string>('', onChange),
         },
         uiPart3Authentication: {
-            aimAtom: atomWithCallback(false, onChange),
-            lockAtom: atomWithCallback(false, onChange),
+            aimAtom: atomWithCallback<boolean>(false, onChange),
+            lockAtom: atomWithCallback<boolean>(false, onChange),
         },
         uiPart4QL: {
-            dashboardAtom: atomWithCallback(true, onChange),
-            nameAtom: atomWithCallback('', onChange),
-            urlAtom: atomWithCallback('', onChange),
+            dashboardAtom: atomWithCallback<boolean>(true, onChange),
+            nameAtom: atomWithCallback<string>('', onChange),
+            urlAtom: atomWithCallback<string>('', onChange),
         },
         uiPart5PasswordManagerIcon: {
-            idAtom: atomWithCallback('', onChange),
-            locAtom: atomWithCallback('', onChange),
+            idAtom: atomWithCallback<string>('', onChange),
+            locAtom: atomWithCallback<string>('', onChange),
         },
 
         fileUsAtom,

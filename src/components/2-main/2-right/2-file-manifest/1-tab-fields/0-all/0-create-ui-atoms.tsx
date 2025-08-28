@@ -1,7 +1,6 @@
-import { Getter, Setter } from 'jotai';
-import { Meta, TransformValue, ValueLife } from '@/store/manifest';
-import { Atomize, OnValueChangeAny, atomWithCallback } from '@/util-hooks';
-import { debounce } from '@/utils';
+import { type Getter, type Setter } from "jotai";
+import { type Atomize, type OnValueChangeAny, atomWithCallback, debounce } from "@/utils";
+import { type Meta, type ValueLife, TransformValue } from "@/store/manifest";
 
 type TableRowForAtoms = {
     useIt: boolean;
@@ -20,11 +19,11 @@ export function createUiAtoms(field: Meta.Field, onChange: OnValueChangeAny): Ta
     return {
         useItAtom: atomWithCallback(!!useit, onChange),
         labelAtom: atomWithCallback(displayname || '', onChange),
-        typeAtom: atomWithCallback('', onChange), //TODO:
+        typeAtom: atomWithCallback<string>('', onChange), //TODO:
         valueAtom: atomWithCallback(val || '', onChange),
         valueAsAtom: atomWithCallback(val || '', onChange),
         valueLifeAtom: atomWithCallback(TransformValue.valueLife4Mani(field.mani), onChange),
-        fieldCatAtom: atomWithCallback('', onChange), //TODO:
+        fieldCatAtom: atomWithCallback<string>('', onChange), //TODO:
     };
 }
 

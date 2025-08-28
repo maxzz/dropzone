@@ -1,4 +1,4 @@
-import { SymbolOptionsQL } from '@ui/icons';
+import { SymbolOptionsQL } from "@ui/icons";
 
 export function Icon_QuickLink({ ql }: { ql: string | undefined; }) {
 

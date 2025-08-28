@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
-import { useAtomValue } from 'jotai';
-import { FileUsAtomType } from '@/store';
-import { CardCaption, CardUsername } from '../3-text';
-import { CardTitleIcon } from '../2-icon';
+import { ReactNode } from "react";
+import { useAtomValue } from "jotai";
+import { FileUsAtomType } from "@/store";
+import { CardCaption, CardUsername } from "../3-text";
+import { CardTitleIcon } from "../2-icon";
 import { CardTitleFilename } from "../4-filename";
-import { CardTitleAttention } from '../1-attention';
+import { CardTitleAttention } from "../1-attention";
 
 export function CardTitleTextNormal({ fileUsAtom, actions }: { fileUsAtom: FileUsAtomType; actions?: ReactNode; }) {
     const fileUs = useAtomValue(fileUsAtom);

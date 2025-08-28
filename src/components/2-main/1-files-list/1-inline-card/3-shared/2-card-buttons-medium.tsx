@@ -3,7 +3,7 @@ import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { FormIdx, formIdxName, UISize, uiSizeAtom } from "@/store";
 import { SymbolFormChange, SymbolFormLogin } from "@ui/icons";
 import { getUpToTreeIconsForForm } from "../4-ui/3-card-form-button-types";
-import { DispArrForTwoForm } from '../4-ui/4-form-disp-arr';
+import { DispArrForTwoForm } from "../4-ui/4-form-disp-arr";
 import { classNames } from "@/utils";
 
 const mediumTriggerClasses = "\

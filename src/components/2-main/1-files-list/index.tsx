@@ -1,9 +1,9 @@
-import { HTMLAttributes } from 'react';
-import { useAtomValue } from 'jotai';
-import { filteredAtom, UISize, uiSizeAtom } from '@/store';
-import { UiSemiScrollbar } from '@ui/ui-semi-scrollbar';
-import { classNames } from '@/utils';
-import { Card } from './1-inline-card';
+import { HTMLAttributes } from "react";
+import { useAtomValue } from "jotai";
+import { filteredAtom, UISize, uiSizeAtom } from "@/store";
+import { UiSemiScrollbar } from "@ui/ui-semi-scrollbar";
+import { classNames } from "@/utils";
+import { Card } from "./1-inline-card";
 
 export function Panel1_FilesList({ className, ...rest }: HTMLAttributes<HTMLElement>) { //TODO: add compact view
     const files = useAtomValue(filteredAtom);
