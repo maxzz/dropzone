@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@floating-ui/react": "0.27.16",
-        "@headlessui/react": "2.2.0",
+        "@headlessui/react": "2.2.7",
         "@heroicons/react": "2.2.0",
         "@popperjs/core": "2.11.8",
         "@radix-ui/colors": "3.0.0",
