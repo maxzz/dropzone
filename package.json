@@ -26,7 +26,7 @@
         "@stitches/react": "1.2.8",
         "@use-gesture/react": "10.3.1",
         "fast-xml-parser": "5.2.5",
-        "jotai": "2.12.5",
+        "jotai": "2.13.1",
         "pm-manifest": "^1.5.30",
         "pm-manifest-icons": "latest",
         "react": "19.1.0",
