@@ -64,7 +64,7 @@ importers:
         version: 1.5.30
       pm-manifest-icons:
         specifier: latest
-        version: 1.0.3(react@19.1.0)
+        version: 1.0.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -1781,10 +1781,11 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  pm-manifest-icons@1.0.3:
-    resolution: {integrity: sha512-KIYGr2leVRRohxcfi/2doprvF64c7M+8YZcvLNMTT6m8bDqs4EYiK1ZDcMM1M7jbnoigUIVfjU5bzXCndGK1xw==}
+  pm-manifest-icons@1.0.6:
+    resolution: {integrity: sha512-kRjpuvvM13GruEFd7B9DCUt8GDc/9S8XChBfPU4EscOOSkc1txok7yNOpYfiuOdmE9zjDlVEbj1aqnXncmadsg==}
     peerDependencies:
-      react: ^16.x || ^17.x || ^18.x
+      react: ^18.2.0 || ^19
+      react-dom: ^18.2.0 || ^19
 
   pm-manifest@1.5.30:
     resolution: {integrity: sha512-bNshvuU3Xe07xEg8N8BCR2e8zfiPzx2OL7fM+QjmtE1l9R3SebnqBn0ZbXDLmFXXwO4aV6HyBfMqywVBVHLTcQ==}
@@ -3776,9 +3777,10 @@ snapshots:
 
   pirates@4.0.6: {}
 
-  pm-manifest-icons@1.0.3(react@19.1.0):
+  pm-manifest-icons@1.0.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   pm-manifest@1.5.30:
     dependencies:
